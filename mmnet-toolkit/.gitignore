@@ -1,0 +1,12 @@
+# Build outputs are regenerable — never commit them
+examples/**/output/
+examples/**/reports/
+examples/**/data/
+
+# Python
+__pycache__/
+*.pyc
+*.egg-info/
+.eggs/
+build/
+dist/

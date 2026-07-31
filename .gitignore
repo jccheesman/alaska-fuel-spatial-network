@@ -1,0 +1,102 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+*.egg-info/
+*.egg
+build/
+dist/
+
+# Virtual environments
+venv/
+env/
+.venv/
+.env/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Editor/IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# OS files
+Thumbs.db
+
+# Outputs (not code)
+outputs/.checkpoint
+
+# Large data files (should be downloaded/regenerated, not committed)
+rasters/
+vectors/
+
+# Geospatial data blobs — code regenerates or downloads these (~28 GB)
+# Rasters
+*.tif
+*.tiff
+*.img
+*.vrt
+*.nc
+*.hdf
+*.hdf5
+# Shapefiles (binary components; keep code, not data)
+*.shp
+*.shx
+*.dbf
+*.sbn
+*.sbx
+*.cpg
+*.prj
+# Packaged / container geospatial formats
+*.gpkg
+*.gdb/
+# Archives (downloaded source data)
+*.zip
+
+# Bulk data directories
+inputs/
+friction_surface/friction_inputs/
+friction_surface/friction_outputs/
+friction_surface/friction_preprocessing/data/
+final_network/*/
+
+# DuckDB database (regenerated each run)
+*.duckdb
+
+# Log files
+*.log
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Public-repo additions (see EXTERNAL_DATA.md)
+# ─────────────────────────────────────────────────────────────────────────────
+# The rules above already keep inputs/ and *.zip out of git. The full inputs/
+# folder (incl. AK_Stack_150m.zip, 4.7 GB) is present ON DISK but is NOT
+# committable directly — it exceeds GitHub's 100 MB/file limit.
+# Before `git push`, choose ONE:
+#   (a) host AK_Stack_150m.zip on Zenodo/institutional storage (keep it ignored), or
+#   (b) track it with Git LFS:  git lfs track "inputs/AK_Stack_150m.zip"
+#
+# To publish the SMALL vector/tabular inputs (shapefiles, CSVs, GeoJSON, source
+# PDFs) on GitHub, opt them in explicitly, e.g.:
+#   !inputs/bulk_fuel_sites_clean.csv
+#   !inputs/sites_with_regions.csv
+#   !inputs/networks/**
+# (un-ignoring requires re-allowing each parent path — see git docs on negation)
+
+# Delivered network zips — small enough to commit (9.5 MB + 1.2 MB) and the
+# ingest step (load_final_network.py) reads them. Opt them back in past the
+# blanket *.zip rule above so a fresh clone is runnable.
+!final_network/network_joined_edges.zip
+!final_network/network_joined_nodes.zip
+
+# Guard: never commit internal-only staging if it is ever placed inside the repo
+DOE_MAS-public-internal/
+*Handoff*.pdf
+PLAN_network_friction_integration.md
+Fuel Cost Resources.pdf
+cost_derivation_resources/

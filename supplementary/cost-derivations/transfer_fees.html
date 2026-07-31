@@ -1,0 +1,423 @@
+<html><head><meta charset='utf-8'><style>
+@page { size: letter; margin: 0.9in 0.85in; }
+body { font-family: Georgia, 'Times New Roman', serif; font-size: 10.5pt;
+       line-height: 1.45; color: #1a1a1a; max-width: 100%; }
+h1 { font-size: 17pt; border-bottom: 2px solid #24435c; padding-bottom: 6px;
+     color: #24435c; margin-top: 0; }
+h2 { font-size: 13pt; color: #24435c; margin-top: 1.4em; }
+h3 { font-size: 11.5pt; color: #333; }
+table { border-collapse: collapse; width: 100%; margin: 0.8em 0;
+        font-size: 8.8pt; font-family: Helvetica, Arial, sans-serif; }
+th, td { border: 1px solid #b8c4cc; padding: 4px 7px; text-align: left;
+         vertical-align: top; }
+th { background: #e8eef2; font-weight: bold; }
+tr:nth-child(even) td { background: #f6f8fa; }
+code { font-family: Menlo, monospace; font-size: 9pt; background: #f2f2f2;
+       padding: 1px 3px; }
+blockquote { border-left: 3px solid #24435c; margin-left: 0;
+             padding-left: 12px; color: #333; }
+a { color: #24435c; word-break: break-all; }
+.chapter { page-break-before: always; }
+.chaplabel { font-family: Helvetica, Arial, sans-serif; font-size: 9pt;
+             letter-spacing: 2px; text-transform: uppercase; color: #7a8a96;
+             margin-bottom: 4px; }
+.cover { text-align: center; margin-top: 2.2in; page-break-after: always; }
+.cover h1 { border: none; font-size: 24pt; }
+.cover .sub { font-size: 13pt; color: #444; margin-top: 0.6em; }
+.cover .meta { font-size: 10.5pt; color: #666; margin-top: 2.5in;
+               font-family: Helvetica, Arial, sans-serif; line-height: 1.7; }
+</style></head><body>
+
+<div class="cover">
+  <h1>Intermodal Transfer &amp; Connection Fees:<br>Alaska Bulk Fuel Delivery</h1>
+  <div class="sub">Blind multi-method derivation with adversarial verification<br>
+  of USD per gallon modal-handoff fees, plus the storage-free<br>
+  rate-aware re-derivation and worked routing examples</div>
+  <div class="meta">
+    DOE MAS fuel-logistics routing model &mdash; cost-rate research<br>
+    Chapters 5&ndash;6, extending the four per-gallon-mile transport-rate chapters<br>
+    Blind tariff / operational / revealed-cost methods, skeptic panels,<br>
+    local-document cross-check, and end-to-end route sanity checks<br><br>
+    July 28, 2026
+  </div>
+</div>
+
+<div class='chapter'><div class='chaplabel'>Chapter 5</div><h1>05 — Intermodal Transfer Fees</h1>
+<p><strong>Tooling / provenance note (required disclosure):</strong> This chapter synthesizes a blind three-method derivation (tariff build-up / operational build-up / revealed-cost decomposition) for each of seven modal-handoff fees, each run past two independent adversarial skeptic panels and a local-document cross-check. Every load-bearing figure was verified verbatim against its primary source (Crowley Bethel rate sheet; Port of Bethel Tariff #5 with 2026 rate columns; Port of Nome Tariff 16.4/16.5; Port of Alaska Tariff 10.1/10.2; ISER 2010 <em>Components of Alaska Fuel Costs</em>; ATRI 2025 Update; AK DOL Pamphlet 600 Issue 52; AEA FY2025 PCE report; NSB FY26-27 budget book; NWAB Noatak Winter Fuel Haul System). All values are <strong>2026 dollars</strong>. Where a method was refuted by the skeptics it is discounted below; where methods diverged, the value with the strongest surviving provenance is chosen and the divergence is explained.</p>
+<p><strong>Architecture (fixed, not re-litigated here):</strong> the blended <strong>Barge</strong> per-gallon-mile rate (0.0010) already absorbs lightering + most terminal handling (revealed at $0.8-1.2/gal on Bethel-type routes), so the fee table carries <strong>no lightering entry</strong>. The <strong>Road</strong> rate (0.0007) and <strong>IceRoad</strong> rate (0.010) are carriage-only, so rack/handling/receiving fees legitimately live in the fee table. Every derivation below excludes carriage, storage rent, product cost, and taxes by construction.</p>
+<hr />
+<h2>05.1 — ("barge","storage"): barge discharge into hub tank farm (marine header fee)</h2>
+<p><strong>Event:</strong> one line-haul barge discharging diesel/heating oil across a marine header into a western-Alaska hub tank farm (Bethel/Nome/Kotzebue class). Excludes carriage, lightering, storage rental, truck rack.</p>
+<p><strong>Tariff — $0.17 (range 0.10-0.23).</strong> Two builds bracketing the event. Municipal wharfage: Port of Bethel Tariff #5 §206(D) inbound petroleum $0.06/gal (2026 column); Port of Nome 16.5 $0.048/gal (2025) → $0.049 (2026$). Terminal-operator header fee: Crowley Bethel rate sheet Marine Header $0.1500/gal (eff. 8/10/2022) × CPI 1.11 → $0.167. Cost-side floor = wharfage $0.048-0.06 + ISER-2010 shore-side offload labor $0.04-0.06 × 1.51 = $0.06-0.09 + dockage ~$0.001 → <strong>$0.11-0.15</strong>. Market build = Crowley $0.167 + wharfage where a city dock is crossed → <strong>$0.167-0.227</strong>. Point = CPI-adjusted Crowley header ($0.17).</p>
+<p><strong>Ops — $0.09 (range 0.06-0.15).</strong> 2.5M-gal event, 1,500 gpm effective, ~31.8 h. Bottom-up shore-side ops (crew + monitoring + header amortization + spill readiness) ≈ $0.032/gal + municipal wharfage $0.055 = $0.086. ISER anchors the high end ($0.15) via fully-allocated 24-h receiving labor.</p>
+<p><strong>Revealed — $0.15 (range 0.09-0.22).</strong> ISER cost-build (a) offload labor $0.04-0.06 + (b) city dock fee $0.02-0.04 (2010$), terminal-space fee $0.07-0.15 correctly excluded as storage. (a)+(b) × 1.51 = $0.09-0.15. Bethel/Nome tariff cross-checks $0.11-0.21. Point $0.15.</p>
+<p><strong>Skeptics.</strong> All three methods <strong>upheld</strong> on source integrity — every figure located verbatim, CPI arithmetic correct within ~2%. Two corrections shared by both panels: (1) the ops <strong>$0.016/gal vessel-time-on-the-clock is a double-count</strong> (port/discharge time lives in the blended barge per-mile rate) → drop it, but ops simultaneously <strong>under-counts allocated shore labor</strong> vs ISER's fully-loaded $0.06-0.09, netting to ~$0.08-0.11; (2) the revealed derivation <strong>misreads ISER's $0.10-0.15 "missing-header" differential</strong> — that is a carriage-difficulty premium for header-less communities, not a discharge fee — and its additive Bethel double-stack is probably a single levy recorded twice → drop both → ~$0.12. Panel 1 recommended <strong>$0.13 (0.09-0.18)</strong>; Panel 2 recommended <strong>$0.11 (0.07-0.17)</strong>.</p>
+<p><strong>Local cross-check.</strong> ISER is the only on-point local PDF; all cited figures verbatim. The city-dock fee ($0.02-0.04, 2010$) CPI-adjusts almost exactly onto today's Nome/Bethel wharfage — independent validation of both the inflation method and the tariff floor. Local reading <strong>confirms</strong> the skeptic corrections (missing-header differential is a transport-charge variation, not a discharge fee) and endorses <strong>~$0.11, range $0.07-0.17</strong>.</p>
+<p><strong>Convergence &amp; final.</strong> The Crowley $0.167 is a genuine market price but is the <em>third-party-throughput ceiling</em>; most hub tank farms are carrier-owned (Crowley Bethel/Kotzebue, Bonanza Nome) and pay the internal cost, not the posted margin. The verified cost build (municipal wharfage $0.05-0.06 + fully-allocated shore-side receiving $0.06-0.09) is $0.11-0.15. Weighting the two skeptic panels (0.13, 0.11) and the local ISER-anchored $0.11:</p>
+<blockquote>
+<p><strong>Final: $0.12/gal, range $0.07-0.17 (2026$), medium confidence.</strong></p>
+</blockquote>
+<hr />
+<h2>05.2 — ("storage","overland"): tank-farm loading rack onto tanker truck (truck rack fee)</h2>
+<p><strong>Event:</strong> one truck-rack loading event at a hub bulk terminal (rack use, metering, loading labor, VCU). Excludes storage rental, marine intake, carriage.</p>
+<p><strong>Tariff — $0.25 (range 0.01-0.30).</strong> Exact-match anchor: Crowley Bethel Table 2 Truck Rack $0.2500/gal (eff. 8/10/2022), rack-only by construction (storage $2.25/bbl-mo and marine header $0.15 are separate line items). CPI × 1.114 → $0.279 (2026$). ISER third-party terminal fee $0.07-0.15 (2010$) × 1.51 = $0.11-0.23 brackets just below. Urban low-end (Valero MTSA, AIAS flowage) ~$0.01. Rural-hub-dominated network → point $0.25, shaded just below the CPI-adjusted Crowley figure.</p>
+<p><strong>Ops — $0.12 (range 0.02-0.28).</strong> 50/50 urban/rural blend of an engineering build-up (rural bottom-up $0.13 vs Crowley cross-check $0.28 → rural rep ~$0.20; urban ~$0.03).</p>
+<p><strong>Revealed — $0.21 (range 0.05-0.32).</strong> Crowley $0.28 (rural) 2/3-weighted with a state-heating-oil-contract urban intercept (~$0.06) 1/3-weighted → $0.207.</p>
+<p><strong>Skeptics.</strong> Both panels <strong>upheld the tariff method</strong> (Crowley figure verbatim-verified, storage separately billed → genuinely rack-only, no carriage double-count) and <strong>refuted ops and revealed</strong>: ops' $0.12 rests on unsourced rack-capital/throughput assumptions and a 50/50 blend whose urban leg is fabricated (no observed Alaska road-system rack fee); revealed's urban intercept is an unfounded decomposition of a bundled state-contract delivered price plus a mis-scoped airport <em>flowage tax</em>. Corrected toward the sole real anchor, both collapse to ~$0.20-0.25. Shared dollar-year nit: actual June-2026 CPI-U is 327.075 (not 330-334), so CPI-correct Crowley is $0.276 not $0.282 (immaterial). Panel 1 recommended <strong>$0.22 (0.03-0.30)</strong>; Panel 2 recommended <strong>$0.24 (0.10-0.30)</strong>.</p>
+<p><strong>Local cross-check.</strong> ISER has no truck-rack-specific line — only terminal-<em>access</em> ($0.07-0.15) and terminal-<em>use</em> ($0.03), both broader than a pure rack event. CPI-corrected (× 1.500) that is $0.105-0.225 and $0.045. The derived point sits at/above the top of the access band, defensible <em>only</em> because it rests on the external Crowley rack tariff. Local recommends <strong>modest downward shading to ~$0.20</strong>, range low to ~$0.03-0.045, and strongly endorses bimodality (~$0.03-0.06 road-system racks vs ~$0.20-0.25 remote barge hubs).</p>
+<p><strong>Convergence &amp; final.</strong> One verified exact-match Alaska tariff (Crowley $0.276 CPI-2026$) anchors everything; the debate is only how far to shade for embedded sole-provider rent (ISER's cost-structure "terminal use" is ~8× lower). Panels landed 0.22-0.24; local ISER pulls to ~0.20. Splitting:</p>
+<blockquote>
+<p><strong>Final: $0.22/gal, range $0.05-0.30 (2026$), medium confidence.</strong> Strongly bimodal — if the model can key on hub class, use ~$0.05 for road-system racks and ~$0.25 for remote Western-Alaska barge hubs rather than one blended value.</p>
+</blockquote>
+<hr />
+<h2>05.3 — ("barge","overland"): direct barge-to-truck handoff at a landing</h2>
+<p>Two readings must be kept separate, because the model uses this key two ways.</p>
+<p><strong>(a) Component-sum through hub storage</strong> (the model's default construction). This key = barge→storage + storage→overland. With the retuned legs, <strong>$0.12 + $0.22 = $0.34/gal (range 0.12-0.47)</strong>.</p>
+<p><strong>(b) Genuine direct barge-to-truck at a landing</strong> (no tank transit). A dedicated derivation priced this event:</p>
+<ul>
+<li><strong>Tariff — $0.12 (0.05-0.22):</strong> landing/dock fee (Port of Alaska Item 260 fuel-transfer 1.90¢/gal 2026; Bethel §200.E $0.06/gal; ISER city-dock $0.03-0.06) ~$0.05 + shore-side offload labor (ISER $0.04-0.06 × 1.5 = $0.06-0.09) ~$0.07.</li>
+<li><strong>Ops — $0.16 (0.07-0.40)</strong> and <strong>Revealed — $0.22 (0.12-0.40):</strong> both dominated by barge-standby / "no-terminal slow-discharge premium" components.</li>
+</ul>
+<p><strong>Skeptics.</strong> Both panels <strong>refuted ops and revealed</strong> and <strong>upheld only the tariff build</strong>. The decisive fault is scope: ops re-charges ~2/3 of its number as barge standby-hours, and revealed rebuilds ISER's missing-header ($0.10-0.15) and deficiency (+$0.20) <em>delivered-price variations</em> — both are barge carriage/dwell already smeared into the 0.0010 barge per-mile rate. Panel 1 (stripping only the double-count) converged <strong>$0.12 (0.06-0.20)</strong>; Panel 2 (also noting the model already charges $0.40 here and the barge rate carries offload labor) converged <strong>$0.08 (0.04-0.14)</strong>.</p>
+<p><strong>Local cross-check.</strong> ISER substantiates both critiques verbatim: the $0.10-0.15 figure is a transportation-charge variation (p.23), the barge's own carriage is fully allocated at $0.45/gal (Table 1), and Table 4 assigns only $0.03 to discrete "terminal use." Local recommends <strong>~$0.10, range $0.05-0.15</strong> for the direct event, explicitly <em>not</em> carrying the $0.22-0.40 highs.</p>
+<p><strong>Convergence &amp; final.</strong> For the <strong>component-sum construction the model actually uses</strong>, the honest value is the sum of the two retuned legs:</p>
+<blockquote>
+<p><strong>Final (component path): $0.34/gal, range $0.12-0.47 (2026$), medium confidence.</strong>
+<strong>If this key ever fires on a true direct landing (no storage): use ~$0.10/gal, range $0.06-0.20</strong> (surviving tariff build; ops/revealed refuted for double-counting barge dwell).</p>
+</blockquote>
+<hr />
+<h2>05.4 — ("plane","overland"): air-cargo fuel offload / tarmac pumping</h2>
+<p><strong>Event:</strong> ~40-min engines-off tarmac offload of a DC-6/C-46 bulk-fuel load (2,000-4,000 gal, 3,000 divisor) into a truck or village tanks. Excludes air carriage, landing fees, avgas.</p>
+<p><strong>Tariff — $0.12 (0.05-0.25).</strong> No standalone tarmac tariff exists; Everts sells charter-bundled. Build: 3-person crew self-offload (Everts crews load/unload their own aircraft) ~$463/hr × 0.65 h ÷ 3,000 = $0.100; onboard pump/hose amortization $0.012; representative AIAS non-aviation flowage $0.01 → $0.122.</p>
+<p><strong>Ops — $0.15 (0.04-0.42).</strong> Same crew + truck standby + <strong>$350/hr aircraft ground-standby</strong> ($262.50, 59% of the mid case) + equipment → $0.149.</p>
+<p><strong>Revealed — $0.13 (0.06-0.25).</strong> Heating-oil-contract intercept allocation + bottom-up ($0.105) + marine analogues, plus a probability-weighted <strong>$0.02 flowage adder</strong>.</p>
+<p><strong>Skeptics.</strong> Both panels <strong>upheld tariff</strong> (least double-count-exposed — omits airframe standby) and <strong>refuted ops and revealed</strong>. Ops' $350/hr aircraft ground-standby is already inside the all-in air per-gal-mile rate, and the cited charter contract proves the first 2 h of load/unload standby are <em>free/bundled</em> → strip it → ops ~$0.06. Revealed's flowage adder mis-applies the DOT&amp;PF fee (it is on airport fuel <em>sales</em>/dispensing, heating fuel <em>exempt</em>, not a cargo transfer) → strip it → revealed ~$0.10; its marine terminal analogues are the wrong physical event. Both panels recommended <strong>~$0.09 (0.05-0.16)</strong>.</p>
+<p><strong>Local cross-check.</strong> ISER contains <strong>no air-tarmac figure at all</strong>; it is entirely marine/barge + trucking. Critical provenance defect flagged: the "$1.25/gal per 100 air-miles / DC-6 4,900 gal" cross-check attributed to this local PDF <strong>is not in it</strong> (it belongs to a separate 2008 ISER report). The one comparable datum — shore-side offload <em>labor</em> $0.04-0.06/gal (p.18) — sits at the low-mid of the derived range and loosely corroborates it. Local: keep <strong>~$0.09, range $0.05-0.16</strong>; remove the mis-cited air-carriage anchor.</p>
+<p><strong>Convergence &amp; final.</strong> The double-count-clean labor+equipment core is $0.06-0.11 across all three; add-ons (airframe standby, flowage) were refuted.</p>
+<blockquote>
+<p><strong>Final: $0.10/gal, range $0.05-0.16 (2026$), low confidence</strong> (~85% engineering build-up; no published tarmac tariff). If the air per-gal-mile rate is confirmed built from all-in charter pricing, the marginal billed offload trends to $0.05-0.06.</p>
+</blockquote>
+<hr />
+<h2>05.5 — ("plane","drums"): manual offload of drummed fuel from aircraft</h2>
+<p><strong>Event:</strong> manual offload of 55-gal fuel drums from a small aircraft at a village strip. Scope explicitly <strong>excludes</strong> the drum packaging as a commodity input (retail layer) and includes only handling-cycle drum attrition.</p>
+<p><strong>Tariff — $0.85 (0.45-1.50).</strong> Labor (Pamphlet 600 A0710 Material Handler $52.66/hr, 1.25 person-h ÷ 165 gal) $0.40 + equipment $0.04 + <strong>handling-cycle drum attrition</strong> (10%/cycle × ~$130 delivered) $0.24 + spill/hazmat $0.18 = $0.86.</p>
+<p><strong>Ops — $0.80 (0.45-2.00).</strong> Same structure but drum term = <strong>full new-drum capital</strong> ($110 ÷ 4 fills = $150/event = $0.545/gal, 66% of the point).</p>
+<p><strong>Revealed — $0.60 (0.35-1.10).</strong> PCE decomposition: Takotna $5.63 vs supply hub McGrath $4.96 → $0.68 gap; net air carriage &amp; origin load-out → ~$0.33 destination residual + drum amortization → ~$0.58-0.65.</p>
+<p><strong>Skeptics.</strong> The scope-decisive issue is whether new-drum capital is in-scope. <strong>Both panels refuted ops</strong> (its dominant term is full drum capital, which the model's separate commodity/retail layer carries; its own caveat concedes the correction to $0.25-0.30). <strong>Tariff and revealed upheld</strong> — both scope the drum term to attrition/loss. The two panels then diverge on the residual: <strong>Panel 1</strong> (attrition-<em>included</em> as legitimate handling damage) → <strong>$0.62 (0.40-1.10)</strong>; <strong>Panel 2</strong> (strip <em>all</em> drum capital, keep only offload-cycle damage) → <strong>$0.35 (0.20-0.65)</strong>.</p>
+<p><strong>Local cross-check.</strong> ISER has no drum figure; its closest analog (marine 24-h linehaul offload labor $0.04-0.06/gal over 250,000+ gal) is 10-20× lower purely because volume-per-event is enormous — which confirms the <em>premise</em> (per-gallon handling explodes at 110-275-gal loads) without independently pinning magnitude. Its spill/admin benchmark ($0.05-0.10/gal, volume-spread) modestly favors the stricter Panel 2's lean spill line over the tariff's $0.18. Local leans toward <strong>~$0.35 (0.20-0.65)</strong> but calls it a lean, not a mandate.</p>
+<p><strong>Convergence &amp; final.</strong> The two scope-clean skeptic centers straddle $0.35 (drum-capital-excluded) and $0.62 (attrition-included). The current $0.50 placeholder sits squarely between them and inside both ranges; with real provenance now behind it, it is a defensible single value pending a model decision on the drum-commodity layer.</p>
+<blockquote>
+<p><strong>Final: $0.50/gal, range $0.20-1.10 (2026$), low confidence.</strong> Conditional guidance: if the model prices drums in a separate commodity layer, use <strong>~$0.35</strong>; if this fee is meant to carry drum replacement, use <strong>~$0.62</strong>. Per-gallon cost scales inversely with shipment size (single-drum C207 loads push toward the high end).</p>
+</blockquote>
+<hr />
+<h2>05.6 — ("overland","ice_road"): highway tanker to ice-road truck via hub storage</h2>
+<p><strong>Event:</strong> offload a highway tanker into Dalton/Deadhorse hub storage + reload a ~3,000-gal ice-road tanker (two passes). Excludes highway and ice-road carriage.</p>
+<p><strong>Tariff — $0.16 (0.10-0.25).</strong> ISER item-3 third-party terminal (through-)fee $0.07-0.15 (2010$) × 1.50 = $0.105-0.225, midpoint $0.165; small-lot reload uplift and truck-cheaper-than-marine-intake offsets net ~0. POA Item 260 1.90¢/gal and Nome wharfage bracket.</p>
+<p><strong>Ops — $0.10 (0.05-0.20).</strong> Bottom-up: Pamphlet 600 A2101 (incl. "Fueler/Oil Distributor Truck") $84.34/hr fully-loaded + ATRI standby $20.17/hr + pump rates → Step A (8,500-gal offload) $0.035 + Step B (3,000-gal reload) $0.067 = $0.102.</p>
+<p><strong>Revealed — $0.30 (0.16-0.45).</strong> Anchors on Crowley Bethel in+out ($0.15 marine header + $0.25 rack) × CPI → $0.28-0.45, picking $0.30 on a "sole-provider high-cost like Bethel" premium.</p>
+<p><strong>Skeptics.</strong> Both panels <strong>refuted revealed</strong>: its intake leg is a <strong>marine header</strong> applied to a <strong>highway-tanker</strong> intake (double-prices offload the road rate already covers), and its monopoly premium is wrong for a road-connected hub with multiple operators (Colville, Crowley, Inlet) — its own bottom-up cross-check lands $0.14-0.19. <strong>Tariff upheld</strong> but leans slightly high (stacks a small-lot uplift on a range that already prices full terminal use) → ~$0.14. <strong>Ops upheld</strong> as the cleanest build (best-sourced labor) but is a marginal-<em>cost</em> floor missing O&amp;M/capital/margin → grossed up ~$0.14. Panel 1 recommended <strong>$0.12 (0.08-0.20)</strong>; Panel 2 recommended <strong>$0.17 (0.10-0.30)</strong>.</p>
+<p><strong>Local cross-check.</strong> NSB FY26-27 budget confirms a real in-house Deadhorse/North-Slope hub operator (FNG division, NSB-owned tank farms, Deadhorse HBTC) — supporting the <em>cost-basis</em> framing over the monopoly-margin marine tariff, i.e. favoring the downward correction of revealed. Noatak PDF confirms the store-then-reload chain and 3,000-5,000-gal parcel. No per-gallon rate in any local doc, so no numeric move.</p>
+<p><strong>Convergence &amp; final.</strong> Corrected estimates converge $0.09 (ops) / $0.14 (tariff) / $0.18 (revealed-adjusted); panels centered 0.12-0.17.</p>
+<blockquote>
+<p><strong>Final: $0.14/gal, range $0.08-0.25 (2026$), medium confidence.</strong> High end accommodates a genuine Deadhorse camp/per-diem premium + small-lot reload; low end removes any hub-O&amp;M carried elsewhere in the model.</p>
+</blockquote>
+<hr />
+<h2>05.7 — ("ice_road","storage"): ice-road truck discharge into village tank farm</h2>
+<p><strong>Event:</strong> single discharge of an ice-road tanker/cat-train (3,000-5,000 gal) into a village tank farm — one pass. Excludes ice-road carriage, tank-farm O&amp;M.</p>
+<p><strong>Tariff — $0.22 (0.10-0.35).</strong> Nome wharfage $0.049 + 2-person × 2.0-h receiving labor (Nome $115/$180 blended $156/hr) $0.156 + equipment $0.011 = $0.216. Crowley rack $0.28 as upper anchor.</p>
+<p><strong>Ops — $0.07 (0.04-0.16).</strong> Bottom-up: 1.75-h event, cold-derated pump, driver-operator + village operator + ATRI equipment standing → $279/event ÷ 4,000 gal = $0.070.</p>
+<p><strong>Revealed — $0.15 (0.08-0.25).</strong> PCE: Atqasuk $7.41 vs four barge-direct NSB comparators mean $5.71 → $1.70 winter-haul premium; net terminal + carriage, time-proportional discharge share (8.2%) → $0.111 + village receiving $0.034 = $0.144.</p>
+<p><strong>Skeptics.</strong> Both panels <strong>refuted the tariff method</strong>: its anchors (Crowley $0.25 rack, Nome wharfage) are the wrong unit of service — a monopoly terminal-throughput fee + a marine wharfage applied by assumed symmetry to a truck event — and ISER Table-4 "terminal use" ($0.03/gal) makes a $0.22 bare-discharge handoff implausibly large; its 2-person × 2.0-h labor is the unsupported 71%-of-total driver. <strong>Ops upheld</strong> ($0.07, verified inputs). <strong>Revealed upheld</strong> but biased high by un-stripped storage/admin → nudge to ~$0.10. Both panels stress the <strong>delivering crew/rig time is already inside the 0.010 ice-road carriage rate</strong> (which per <code>blind_derivations/04_ice_road.md</code> includes a +20% load/unload adder over the full round-trip cycle); <strong>only village-side receiving labor is additive.</strong> Panel 1 recommended <strong>$0.08 (0.05-0.15)</strong>; Panel 2 (pure carriage-scope lens) recommended <strong>$0.05 (0.03-0.09)</strong>.</p>
+<p><strong>Local cross-check.</strong> No local doc prices the discharge event. Two citation corrections: NWFHLS capital is <strong>$425,000</strong> (not the $350,000 both ops/revealed cited — a $75k sub-line error, immaterial to their soft cross-check); and the "200 trips / 350-400k gal" figures the second skeptic panel called fabricated <strong>are in fact present on Noatak p.10</strong> — that skeptic point is itself inaccurate. NSB village Fuel cost centers (Atqasuk 6108.FUEL $472,913; Nuiqsut 6110.FUEL $569,184) are in-house staffing with no per-gallon line, supporting the ops cost-basis framing. No numeric move.</p>
+<p><strong>Convergence &amp; final.</strong> Ops ($0.07) and revealed ($0.10, biased high) converge once the tariff outlier is corrected down; the binding architectural fact is that delivering-side handling is already in the ice-road per-mile rate, leaving only village receiving.</p>
+<blockquote>
+<p><strong>Final: $0.08/gal, range $0.04-0.15 (2026$), medium confidence.</strong> Dominant sensitivities: load size (3,000 vs 5,000 gal) and whether a dedicated village receiving operator is required (driver self-discharge → floor).</p>
+</blockquote>
+<hr />
+<h2>05.8 — ("barge","ice_road"): never-traversed placeholder edge</h2>
+<p><strong>Status (verified 2026-07-23):</strong> a same-month barge↔ice-road handoff is temporally impossible (ice roads Jan-Mar, barges May-Oct; zero month-overlap at all 8 North Slope sites), so monthly Dijkstra routing <strong>never traverses this edge</strong>. It exists only to satisfy the no-costless-edge rule. The real flow is inter-temporal through hub storage: barge→storage in summer, storage→ice-road in winter.</p>
+<p><strong>Composition.</strong> Mirror the two true component legs with their retuned values: barge→storage <strong>$0.12</strong> (summer intake) + a storage-side ice-road <strong>loading</strong> leg (the winter half of the store-then-reload chain, ~$0.08-0.14 per §05.7's one-pass framing) → component sum <strong>~$0.20</strong>.</p>
+<blockquote>
+<p><strong>Final: $0.20/gal, range $0.11-0.32 (2026$), low confidence.</strong> Because the edge is never exercised, the exact value is immaterial to results; it is set to the honest component sum rather than the stale $0.40. Keep the <code>marine_header_fee</code> + loading sub-key structure so a future inventory-dynamics phase (Phase 6) can decompose it into the two temporal legs.</p>
+</blockquote>
+<hr />
+<h2>Summary table</h2>
+<table>
+<thead>
+<tr>
+<th>Fee key</th>
+<th>Current</th>
+<th><strong>Final (2026$)</strong></th>
+<th>Range</th>
+<th>Confidence</th>
+<th>Change</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>("barge","storage")</td>
+<td>0.15</td>
+<td><strong>0.12</strong></td>
+<td>0.07-0.17</td>
+<td>medium</td>
+<td>lower — Crowley 0.15 is a third-party price w/ margin; carrier-owned hubs pay the cost</td>
+</tr>
+<tr>
+<td>("storage","overland")</td>
+<td>0.25</td>
+<td><strong>0.22</strong></td>
+<td>0.05-0.30</td>
+<td>medium</td>
+<td>lower — sole-provider rack tariff shaded for monopoly rent; bimodal by hub class</td>
+</tr>
+<tr>
+<td>("barge","overland")</td>
+<td>0.40</td>
+<td><strong>0.34</strong></td>
+<td>0.12-0.47</td>
+<td>medium</td>
+<td>lower — mechanical sum of the two retuned legs (0.12+0.22)</td>
+</tr>
+<tr>
+<td>("plane","overland")</td>
+<td>0.157</td>
+<td><strong>0.10</strong></td>
+<td>0.05-0.16</td>
+<td>low</td>
+<td>lower — standby/flowage add-ons refuted; labor+equipment core ~0.09</td>
+</tr>
+<tr>
+<td>("plane","drums")</td>
+<td>0.50</td>
+<td><strong>0.50</strong></td>
+<td>0.20-1.10</td>
+<td>low</td>
+<td>keep — placeholder now provenance-backed; sits between the two scope readings (0.35/0.62)</td>
+</tr>
+<tr>
+<td>("overland","ice_road")</td>
+<td>0.25</td>
+<td><strong>0.14</strong></td>
+<td>0.08-0.25</td>
+<td>medium</td>
+<td>lower — 0.25 was a borrowed rack analog; two-pass truck handoff costs less</td>
+</tr>
+<tr>
+<td>("ice_road","storage")</td>
+<td>0.25</td>
+<td><strong>0.08</strong></td>
+<td>0.04-0.15</td>
+<td>medium</td>
+<td>lower — one pass, not two; delivering-side time already in ice-road per-mile rate</td>
+</tr>
+<tr>
+<td>("barge","ice_road")</td>
+<td>0.40</td>
+<td><strong>0.20</strong></td>
+<td>0.11-0.32</td>
+<td>low</td>
+<td>lower — never traversed; honest component sum of two retuned legs</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>Carry-forward limitations (values still resting on placeholder- or thin-grade evidence)</h2>
+<ol>
+<li>
+<p><strong>("plane","drums") — scope-unresolved (low).</strong> The point value depends on a model decision not yet made: whether new-drum capital lives in a separate commodity/retail layer (→ ~$0.35) or is folded into this fee (→ ~$0.62). $0.50 is a compromise. The two dominant quantities (drum fills-before-loss; per-gallon handling time on 110-275-gal loads) have <strong>no documented Alaska value</strong>. Resolve by (a) fixing the drum-commodity-layer convention in the model and (b) obtaining an Everts/Ryan drum-handling or deposit figure.</p>
+</li>
+<li>
+<p><strong>("plane","overland") — ~85% engineering build-up (low).</strong> No carrier or airport publishes a standalone tarmac fuel-offload tariff; the point rests on crew-time and pump-rate estimates. <strong>Provenance fix required:</strong> the ISER "$1.25/gal/100mi air-carriage" cross-check is mis-cited to the local ISER 2010 PDF — that figure is not in that document (belongs to the separate 2008 ISER <em>Components of Delivered Fuel Prices</em> report). Re-attribute or drop. Firm up with an awarded bid schedule under state Air Cargo contract 240000071 (Everts Additional Standby Time $/hr).</p>
+</li>
+<li>
+<p><strong>("ice_road","storage") and ("overland","ice_road") — no published Deadhorse/North-Slope tariff (medium).</strong> North Slope hub terminals (Colville, Brice, Crowley Deadhorse) are private and publish no throughput fees; both values are bottom-up builds transposed from ISER marine-hub and Bethel commercial rates, cross-checked against Pamphlet 600 labor and ATRI equipment. A single confirmed operator invoice for either handoff would collapse the range. The ice_road→storage value also depends on the still-implicit assumption (from <code>04_ice_road.md</code>) that the 0.010 per-mile rate fully absorbs delivering-side discharge dwell — if that rate is ever recalibrated without the load/unload adder, this fee must rise to re-capture delivering-side time.</p>
+</li>
+<li>
+<p><strong>("barge","ice_road") — never exercised (low, but immaterial).</strong> Correct only up to the accuracy of its two mirrored legs; harmless because Dijkstra cannot traverse it. Revisit only when Phase 6 inventory dynamics make the inter-temporal barge→storage→ice_road path explicit.</p>
+</li>
+<li>
+<p><strong>All values — CPI to mid-2026 (minor).</strong> Several derivations used a projected mid-2026 CPI-U of ~326-334; the actual June-2026 index is 327.075. The discrepancy moves any point estimate by &lt;$0.006/gal and is below the rounding of every final value here. ISER 2010 figures (the backbone of the marine-hub and receiving-labor anchors) are 16 years old; CPI-U plausibly <em>understates</em> rural-Alaska labor/insurance/spill-compliance escalation, biasing the ISER-anchored floors slightly low.</p>
+</li>
+<li>
+<p><strong>Bimodality not yet keyed (("storage","overland")).</strong> The single blended $0.22 mis-prices both ends of a genuinely bimodal fee (~$0.05 road-system racks vs ~$0.25 remote barge hubs). If the network can distinguish hub class, split this fee rather than carry one value.</p>
+</li>
+</ol></div>
+<div class='chapter'><div class='chaplabel'>Chapter 6</div><h1>06 — Storage-Free Modal Connection Costs</h1>
+<p>All figures in 2026 dollars. This chapter re-derives the four modal-boundary fuel CONNECTION costs after the storage pseudo-mode was removed from the fee table. Under the option-(a) architecture each fee is now a single atomic modal-boundary crossing cost — no intake+storage-rest+outbound chain. The per-mile Barge/Plane/IceRoad rates are ALL-IN (each carries its own side's handling); the Road rate is CARRIAGE-ONLY (ATRI Tables 8/9 verified: no rack/terminal/loading line). Each fee therefore prices ONLY handling that has no home in a per-mile rate — in practice the road-carriage-side out-loading/receiving, or (where no road mode is incident) a thin facility-interface residual.</p>
+<p>Two blind derivations were produced per boundary (ops_direct operational build-up; rate_residual rate-aware residual), then an adversarial skeptic hunted for double-counts and drop-counts. Final values are weighted by what survived the skeptic: strip any double-count, restore any drop-count.</p>
+<hr />
+<h2>6.1 — Barge &lt;-&gt; Road tanker-truck connection (<code>("barge","overland")</code>, 205 Transfer edges)</h2>
+<p><strong>Method 1 — ops_direct ($0.025/gal, range $0.015-0.045).</strong> Bottom-up marginal build on a 3,500-gal local hub load: 0.75-hr occupancy (14-min pump at 250 gpm + 30-min setup/teardown) x 1.5 crew x ~$55/hr fully-loaded Alaska labor + $20/hr standby equipment + consumables = ~$82/load = $0.023/gal. ISER cross-check ($0.04-0.06/gal 2010 shore-side offload, CPI x1.53, road-slice ~1/3-1/2) brackets it. A pure marginal FLOOR; omits rack metering/capital/overhead.</p>
+<p><strong>Method 2 — rate_residual ($0.28/gal, range $0.18-0.33).</strong> Crowley Bethel Terminal tariff (eff. 8/10/2022): Marine Header $0.15 + Truck Rack $0.25 = $0.40 two-sided. Barge all-in rate already carries the $0.15 marine header -&gt; SUBTRACT (anti-double-count); road carriage-only carries none of the $0.25 rack -&gt; KEEP (anti-drop-count). Residual = $0.25 x CPI 1.10 = $0.28/gal.</p>
+<p><strong>Skeptic outcome.</strong> Both derivations UPHELD; neither commits the double-count. The DEPLOYED $0.40 total does — its $0.15 marine header is already in the all-in barge rate (0.0010) and must be stripped. No drop-count: road-side rack handling correctly retained (ATRI has no rack line, so it has no other home). rate_residual is the stronger construction (exact-match Alaska tariff); ops_direct's $0.025 is a floor ~10x below every posted anchor. Point shaded from $0.28 toward low-$0.20s for embedded sole-provider margin.</p>
+<ul>
+<li><strong>Counted:</strong> road-carriage-side out-loading only (positioning, connect/bond, pumped transfer into truck, gauge/meter/paperwork, disconnect, shore attendant).</li>
+<li><strong>Excluded:</strong> barge-side marine header/lightering/tank-farm intake (in all-in barge rate); ISER $0.20 deficiency adder; storage rest.</li>
+<li><strong>Final value: $0.24/gal, range $0.15-0.30, high confidence.</strong> Change: $0.40 -&gt; $0.24 by stripping the double-counted $0.15 marine header and lightly shading the $0.25 rack.</li>
+</ul>
+<hr />
+<h2>6.2 — Barge &lt;-&gt; Ice-road truck connection (<code>("barge","ice_road")</code>, 8 Transfer edges, North Slope)</h2>
+<p><strong>Method 1 — ops_direct ($0.011/gal, range $0.00-0.021).</strong> Full pump-through build = ~$0.054/gal (0.94 hr x 2 crew x $84.34/hr NSB fully-loaded + $60/hr equipment / 4,000-gal parcel). Architecture gate: barge intake is in the all-in barge rate; ice-road load dwell is in the ice_road +20% adder — EXCLUDE both physical legs -&gt; strict floor $0.00. Thin genuinely-uncounted residual = cross-modal changeover coordination (0.5 operator-hr / 4,000 gal) = $0.011/gal.</p>
+<p><strong>Method 2 — rate_residual ($0.010/gal, range $0.005-0.019).</strong> Full both-sides physical stack ~$0.08-0.12/gal is dominated by barge intake ($0.061-0.092 CPI-adjusted ISER) and ice-road load ($0.02-0.03) — BOTH already in their all-in rates, subtract them, netting near-zero. Only defensible residual = the standalone vessel&lt;-&gt;land-tanker facility interface: Port of Alaska Item 260 (pipeline transfer 0.145 c/gal floor to vessel&lt;-&gt;truck fuel 1.90 c/gal ceiling), mid ~$0.010/gal.</p>
+<p><strong>Skeptic outcome.</strong> Both UPHELD, clean — no double-count, no drop-count. Dominant finding: this is a boundary where BOTH incident modes are all-in and there is NO carriage-only road mode, so the drop-count trap cannot occur and both physical legs are correctly excluded. All sources verified exactly (NSB $105,047 + 67% burden; ISER $0.04-0.06; Noatak 3,000-5,000 gal; POA Tariff 10.1 2026 column). Converged $0.011/gal.</p>
+<ul>
+<li><strong>Counted:</strong> thin cross-modal changeover / facility interface handling only (gauging, sampling, bond/ground verification, pump-tender supervision).</li>
+<li><strong>Excluded:</strong> barge intake (all-in barge rate); ice-road load/unload dwell (+20% adder); storage rest. No road rack leg exists here.</li>
+<li><strong>Final value: $0.011/gal, range $0.00-0.02, low confidence.</strong> Change: $0.40 placeholder -&gt; $0.011. The old $0.40 was inherited from the barge&lt;-&gt;overland row and double-counted both all-in legs. Completeness-only edge — never traversed same-month (barge May-Oct vs ice road Jan-Mar); near-zero routing impact.</li>
+</ul>
+<hr />
+<h2>6.3 — Road tanker &lt;-&gt; Ice-road truck connection (<code>("overland","ice_road")</code>, latent boundary)</h2>
+<p><strong>Method 1 — ops_direct ($0.022/gal, range $0.013-0.034).</strong> Continuous truck-to-truck pumped transfer of a 3,000-gal batch: ~$112.50 both-sides operation (1.0 boundary labor-hr x $90/hr fully-loaded North Slope + $30/hr transfer equipment). Bill only the road (carriage-only) side ~0.55 share = $61.9/3,000 gal = $0.021 (2024$) x CPI 1.05 = $0.022/gal. Drops the ice-road-side pump-in dwell (in the +20% adder).</p>
+<p><strong>Method 2 — rate_residual ($0.03/gal, range $0.02-0.045).</strong> Top-down: ISER $0.04-0.06/gal (2010) x1.47 CPI, halved to one side = $0.03-0.044. Bottom-up check: ATRI $90.89/hr -&gt; ~$97/hr 2026 x ~0.5 hr dwell + FERC terminal $0.006/gal ≈ $0.02/gal. Point $0.03.</p>
+<p><strong>Skeptic outcome.</strong> ops_direct UPHELD (cleaner). rate_residual NOT UPHELD: its top-down ISER $0.04-0.06/gal anchor is a MARINE BARGE 24-hr linehaul offload into a tank farm — barge intake handling already in the all-in barge rate, and a storage-node cost — mis-applied as a truck-to-truck header analog and inflated. Halving it does not transmute a barge cost into a road cost. STRIP the top-down; rate_residual's own clean bottom-up (~$0.02) then agrees with ops_direct. The $0.03 point survived only by two offsetting errors canceling. Converged on ~$0.022.</p>
+<ul>
+<li><strong>Counted:</strong> road-carriage-side share of the metered PTO pump-out + connect/disconnect, bond/ground, cold-weather transfer equipment (not the carriage truck).</li>
+<li><strong>Excluded:</strong> ice-road-side load/unload dwell (+20% adder); both trucks' carriage economics; storage rest (the atomic crossing, not truck-&gt;tank-&gt;truck).</li>
+<li><strong>Final value: $0.022/gal, range $0.014-0.032, medium confidence.</strong> Change: $0.25 -&gt; $0.022. The old $0.25 was an explicit storage/tank-rack analog (two-leg chain, TODO seed); removing the storage rest and stripping the double-counted ISER marine anchor lands the atomic fee at ~$0.02. Latent Dalton-corridor boundary.</li>
+</ul>
+<hr />
+<h2>6.4 — Air-cargo fuel &lt;-&gt; Road tanker connection (<code>("plane","overland")</code>, latent boundary)</h2>
+<p><strong>Method 1 — ops_direct ($0.03/gal, range $0.015-0.10).</strong> Tarmac hose transfer of a 3,000-gal parcel: road-side receiver labor 0.83 hr x $60/hr fully-loaded Alaska tanker CDL = $50 + road-side equipment (receiving tanker standby, PTO pump, hoses, grounding) ~$37 = $87/3,000 gal = $0.029/gal. Excludes the aircraft's own onboard pump, crew, and ground standby (all in the all-in charter rate).</p>
+<p><strong>Method 2 — rate_residual ($0.038/gal, range $0.03-0.05).</strong> ISER $0.04-0.06/gal (2010) as full both-sides handling; subtract ~50% aircraft side (in charter rate); road residual $0.02-0.03 x CPI 1.53 = $0.038/gal.</p>
+<p><strong>Skeptic outcome.</strong> ops_direct UPHELD. rate_residual NOT UPHELD: its ISER anchor is a barge linehaul offload INTO A TANK FARM — barge intake (already in the all-in barge rate) plus storage-node receiving labor — imported into an air&lt;-&gt;truck fee; the 50% subtraction avoids the plane double-count but the residual still inherits the barge/tank-farm basis, over-stating road-only handling. Shaded down. ops_direct's road-side PTO-pump equipment leg is also softly over-attributed because Everts DC-6/C-46 carry their own onboard offload pumps (pumping already in the charter rate); trim the equipment leg. Converged on ~$0.025.</p>
+<ul>
+<li><strong>Counted:</strong> road/ground-side receiving handling only — receiver/driver connect-monitor-disconnect labor (bond/ground, camlock, pump watch, breakaway) + modest fittings/grounding-gear charge (NOT an independent pumping engine).</li>
+<li><strong>Excluded:</strong> aircraft onboard pump, flight crew, aircraft ground standby/positioning (all in the all-in plane charter rate 0.025); storage rest.</li>
+<li><strong>Final value: $0.025/gal, range $0.015-0.045, medium confidence.</strong> Change: $0.157 -&gt; $0.025 by removing aircraft-side handling (already in the plane rate) and the storage rest, and shading the barge/tank-farm-proxy anchor. Latent/low-frequency (air fuel economical only &lt;~5,000 gal within a few hundred air-miles of a refinery).</li>
+</ul>
+<hr />
+<h2>6.5 — Summary table (2026$)</h2>
+<table>
+<thead>
+<tr>
+<th>Boundary</th>
+<th>Old through-storage</th>
+<th>New storage-free fee</th>
+<th>Range</th>
+<th>Confidence</th>
+<th>Counts</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>("barge","overland")</code></td>
+<td>0.40</td>
+<td><strong>0.24</strong></td>
+<td>0.15-0.30</td>
+<td>high</td>
+<td>road-carriage-side rack out-loading only</td>
+</tr>
+<tr>
+<td><code>("barge","ice_road")</code></td>
+<td>0.40</td>
+<td><strong>0.011</strong></td>
+<td>0.00-0.02</td>
+<td>low</td>
+<td>thin cross-modal changeover / facility interface only (no road mode incident)</td>
+</tr>
+<tr>
+<td><code>("overland","ice_road")</code></td>
+<td>0.25</td>
+<td><strong>0.022</strong></td>
+<td>0.014-0.032</td>
+<td>medium</td>
+<td>road-carriage-side share of truck-to-truck transfer</td>
+</tr>
+<tr>
+<td><code>("plane","overland")</code></td>
+<td>0.157</td>
+<td><strong>0.025</strong></td>
+<td>0.015-0.045</td>
+<td>medium</td>
+<td>road/ground-side receiving handling only</td>
+</tr>
+</tbody>
+</table>
+<p>Recurring construction rule: bill ONLY handling with no home in a per-mile rate. Because Road is carriage-only, that is the road-carriage side of every crossing; the all-in side (barge intake, aircraft pump/crew, ice-road +20% dwell) is excluded to prevent double-counting; storage rest is excluded entirely. Where no road mode is incident (barge&lt;-&gt;ice_road), only a thin facility-interface residual remains, so the fee collapses near zero.</p>
+<hr />
+<h2>6.6 — Coupling to per-mile rates</h2>
+<p>The four per-gallon-mile transport rates and their includes-basis are UNCHANGED by removing the storage leg. The rates remain:</p>
+<ul>
+<li><strong>Barge 0.0010 — all-in.</strong> Carries vessel-to-shore lightering, marine header, and marine-terminal/tank-farm intake handling.</li>
+<li><strong>Plane 0.025 — all-in charter.</strong> Carries the aircraft's onboard offload pump, flight/ground crew during offload, and aircraft positioning/standby.</li>
+<li><strong>IceRoad 0.010 — all-in.</strong> Carries an explicit +20% load/unload adder over the round-trip cycle (both origin fill and destination discharge dwell).</li>
+<li><strong>Road 0.0007 — carriage-only.</strong> Fuel, tractor/trailer, R&amp;M, tires, insurance, permits, driver wages over running miles. ATRI Tables 8/9 verified: NO rack/terminal/loading/unloading line.</li>
+</ul>
+<p>The storage pseudo-mode that was deleted never lived inside any per-mile rate — it was an artifact of the old through-storage fee construction (intake + storage-rest + outbound). Re-scoping the fees to the atomic crossing moves nothing into or out of a per-mile rate; the change is confined to the fee table. Consequently:</p>
+<ul>
+<li><strong>All-in-side handling stays home in its all-in rate.</strong> Marine intake in Barge; aircraft handling in Plane; ice-road load/unload dwell in IceRoad. This is exactly why those legs are EXCLUDED from the connection fees (double-count guard). The deployed $0.40 barge&lt;-&gt;overland total violated this by re-billing the $0.15 marine header — corrected here to $0.24.</li>
+<li><strong>Road-carriage-side handling is the only genuinely-homeless handling, and it correctly lives in the connection fees.</strong> Because Road is carriage-only, into-truck pumping, connect/disconnect, bond/ground, gauging/metering, and receiver dwell have no home in the Road rate. Every fee is scoped to exactly this (drop-count guard).</li>
+<li><strong>Hub storage is priced nowhere</strong> — not in a per-mile rate, not in a boundary fee. It was never a node; if delivered-cost storage is later needed it must be added as a separate component, never folded into a rate or a crossing fee.</li>
+</ul>
+<h2>Net: no per-mile rate changes, no orphaned handling under option (a). The all-in side handling sits in its all-in rate; the road-carriage-side handling sits in the connection fee; storage is intentionally out of scope.</h2>
+<h2>6.7 — Worked routing examples (sanity check)</h2>
+<p>To confirm the storage-free fees do not distort mode choice, six illustrative routes were priced end to end. <strong>Distances are hypothetical but Alaska-plausible</strong>; the point is the <em>ranking</em> between modes, not the exact dollar value. Route cost ($/gal) = Σ(leg miles × per-mile rate) + Σ(connection fee at each mode change), using the per-mile rates from Chapter 6.6 and the new connection fees from the summary table above.</p>
+<table>
+<thead>
+<tr>
+<th>Route</th>
+<th align="right">Carriage</th>
+<th align="right">Handoff</th>
+<th align="right"><strong>Total</strong></th>
+<th align="right">(old fees)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>A1</strong> — Barge to a river village (1320 mi barge + 40 mi truck)</td>
+<td align="right">1.348</td>
+<td align="right">0.240</td>
+<td align="right"><strong>1.588</strong></td>
+<td align="right">1.748</td>
+</tr>
+<tr>
+<td><strong>A2</strong> — Fly that same village instead (400 mi plane + 5 mi truck)</td>
+<td align="right">10.004</td>
+<td align="right">0.025</td>
+<td align="right"><strong>10.029</strong></td>
+<td align="right">10.161</td>
+</tr>
+<tr>
+<td><strong>B1</strong> — Winter ice road to a North Slope village (500 mi truck + 68 mi ice road)</td>
+<td align="right">1.030</td>
+<td align="right">0.022</td>
+<td align="right"><strong>1.052</strong></td>
+<td align="right">1.280</td>
+</tr>
+<tr>
+<td><strong>B2</strong> — Fly that village in winter instead (300 mi plane + 3 mi truck)</td>
+<td align="right">7.502</td>
+<td align="right">0.025</td>
+<td align="right"><strong>7.527</strong></td>
+<td align="right">7.659</td>
+</tr>
+<tr>
+<td><strong>C1</strong> — Straight road delivery, no handoff (600 mi truck)</td>
+<td align="right">0.420</td>
+<td align="right">0.000</td>
+<td align="right"><strong>0.420</strong></td>
+<td align="right">0.420</td>
+</tr>
+<tr>
+<td><strong>C2</strong> — Same town by barge + short truck (1100 mi barge + 15 mi truck)</td>
+<td align="right">1.111</td>
+<td align="right">0.240</td>
+<td align="right"><strong>1.351</strong></td>
+<td align="right">1.510</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Three checks, all pass:</strong></p>
+<ol>
+<li>
+<p><strong>The cheap-to-expensive order held.</strong> In every head-to-head the expected mode still wins, and by a wide margin: barge beats plane ~6× (A1 vs A2), ice road beats plane ~7× (B1 vs B2), and road beats barge where a road exists (C1 vs C2, $0.42 vs $1.35). Plane remains the last resort; road remains cheapest.</p>
+</li>
+<li>
+<p><strong>The lowered handoffs do not over-promote plane or ice road.</strong> A plane costs $0.025 <em>per mile</em>, so even a short flight dwarfs its now-$0.025 handoff. The per-mile rates are far enough apart (plane 25×, ice road 14×, barge 1.4× the road rate) that shaving a connection fee never flips a mode choice over any realistic distance.</p>
+</li>
+<li>
+<p><strong>The handoff fee matters only where it should.</strong> On barge routes it is a real slice (~15% of the A1 total), because loading fuel off a barge onto a truck at a hub is genuine work. On the long, expensive plane and ice-road hauls it is a 2–3% rounding error. Correct shape.</p>
+</li>
+</ol>
+<p><strong>Net effect of the re-derivation:</strong> every total fell modestly versus the old through-storage fees (right column), but <strong>no ranking flipped</strong> — old and new agree on which mode wins every comparison. The correction adjusted the <em>level</em> of cost without changing any <em>decision</em>, which is the expected signature of a fix that only removed double-charging. The one value that looks anomalous in isolation — <code>barge↔ice_road</code> at ~$0.01 — never appears in a real route, since barges (May–Oct) and ice roads (Jan–Mar) never share a month.</p></div>
+</body></html>

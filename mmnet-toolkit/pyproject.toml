@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mmnet"
+version = "0.1.0"
+description = "Self-contained multimodal spatial-network builder (Python orchestration + bundled R/sfnetworks build)."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "geopandas",
+    "shapely",
+    "networkx",
+    "matplotlib",
+    "pandas",
+    "numpy",
+    "scipy",
+    "pydantic>=2",
+    "pyyaml",
+]
+
+[project.optional-dependencies]
+dev = ["pytest"]
+
+[tool.setuptools]
+packages = ["mmnet", "mmnet.steps"]
+
+[tool.setuptools.package-data]
+mmnet = ["r_oracle/*.R", "r_oracle/*.md"]

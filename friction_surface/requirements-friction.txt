@@ -1,0 +1,28 @@
+# Minimal dependencies for BUILDING the friction surface stack
+# (friction_surface.write_friction_stack and the config/costs/paths library).
+#
+# This is the self-contained part. Pins mirror the repo-root requirements.txt
+# where they overlap. Install with:
+#     pip install -r friction_surface/requirements-friction.txt
+#
+# NOTE: `python -m friction_surface.run_friction_pipeline` builds the friction
+# rasters and needs only the packages below. Ingesting the network and weighting
+# edges additionally need `duckdb` and `networkx`, so the repo-root
+# requirements.txt remains the source of truth for the end-to-end pipeline. The
+# preprocessing scripts under friction_preprocessing/ need `arcpy` (Windows/
+# ArcGIS Pro only) and/or `earthengine-api`, which are intentionally excluded here.
+
+# --- core runtime (surface build) ---
+numpy>=1.24.0
+rasterio>=1.3.0
+geopandas==1.1.1
+pandas==2.2.2
+shapely>=2.0.0
+pyproj>=3.6.0
+scipy>=1.10.0          # cKDTree in friction_surface.extend_ice_nearest (river-ice nearest-fill)
+
+# --- viz (viz/*, optional) ---
+matplotlib==3.10.0
+
+# --- dev / test (optional) ---
+pytest>=7.1.1

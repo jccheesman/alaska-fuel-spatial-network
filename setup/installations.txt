@@ -1,0 +1,10 @@
+# Supplementary install notes.
+#
+# requirements.txt (repo root) is the authoritative dependency list for the
+# friction + network-ingest + edge-weighting pipeline:
+#
+#     pip install -r requirements.txt
+#
+# It covers the full geospatial stack (geopandas, rasterio, shapely, pyproj,
+# duckdb, networkx, numpy, pandas, matplotlib). No additional packages are
+# required to run the three stages.
