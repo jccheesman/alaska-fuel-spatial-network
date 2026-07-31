@@ -1,9 +1,8 @@
 """assemble_weighted_graph.py
 
-Phase 3 of PLAN_network_friction_integration.md: turn the ingested network
-(network_nodes / network_edges, Phase 1) and the sampled friction weights
-(edge_month_weights, Phase 2) into per-month edge costs and a queryable
-weighted graph.
+Turn the ingested network (network_nodes / network_edges, Phase 1) 
+and the sampled friction weights (edge_month_weights, Phase 2) into 
+per-month edge costs and a queryable weighted graph.
 
 Cost model (friction-vs-cost separation preserved — rasters stay
 environmental, every dollar comes from friction_costs):
