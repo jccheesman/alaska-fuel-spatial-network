@@ -1,4 +1,4 @@
-# DOE_MAS — Alaska fuel-delivery friction surface & weighted network
+# Alaska fuel-delivery friction surface & weighted network
 
 Companion code and data for the Data-in-Brief spatial-network paper. It covers three
 things, in order:
