@@ -1,4 +1,4 @@
-# Jetstream2 VM Setup Guide — DOE MAS (friction + network)
+# Jetstream2 VM Setup Guide — (friction + network)
 
 Optional guide for running the friction-surface build, network ingest, and
 edge weighting on a Jetstream2 VM. The pipeline is CPU-only (numpy / rasterio /
