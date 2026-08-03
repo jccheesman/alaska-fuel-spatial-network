@@ -10,6 +10,9 @@ things, in order:
 3. **Edge weighting** — sampling the friction stack along every network edge and assembling
    per-month, per-mode edge costs into a weighted graph.
 
+   <img width="2246" height="2839" alt="friction_grid_schema_public" src="https://github.com/user-attachments/assets/b29e8a45-3571-4854-a633-51b2b16ac65d" />
+
+
 The friction surface encodes *environmental* traversability only (baseline 1.0); per-mode operational
 cost rates live separately in `friction_surface/friction_costs.py`. 
 
