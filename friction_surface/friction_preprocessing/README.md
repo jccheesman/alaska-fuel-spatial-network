@@ -15,7 +15,7 @@ the broader preprocessing flow.
 |---|---|---|
 | `river_ice_full_pipeline.py` | ArcGIS Pro (`arcpy`) | End-to-end river-ice pipeline. Reads Brown et al. 2026 reach points + Brown polygon/flowline masks, produces 12 monthly p_ice rasters at 150 m EPSG:3338. Canonical. |
 | `build_brown_polygon_mask.py` | Local Python (`geopandas`) | One-time preprocessor. Filters statewide NHDArea + NHDFlowline to the 30 Brown rivers and writes `brown_river_polygons.shp` + `brown_river_flowlines.shp`. Re-run only if NHD or the Brown reach set changes. |
-| `align_permafrost.py` | Local Python (`rasterio`) | Snaps the GEE-exported `permafrost.tif` to the lulc canonical grid (EPSG:3338, 150 m, full statewide extent). The Pastick AOI is smaller than the lulc footprint, so the raw GEE export is pixel-aligned but extent-clipped — this script bilinear-reprojects it onto lulc's transform/shape so `friction_preflight` reports `OK`. Run after every GEE permafrost re-export. |
+| `align_permafrost.py` | Local Python (`rasterio`) | Snaps the GEE-exported `permafrost.tif` to the lulc canonical grid (EPSG:3338, 150 m, full statewide extent). The Pastick et al. (2015) AOI is smaller than the lulc footprint, so the raw GEE export is pixel-aligned but extent-clipped — this script bilinear-reprojects it onto lulc's transform/shape so `friction_preflight` reports `OK`. Run after every GEE permafrost re-export. |
 | `bulk_fuel_delivery_methods.js` | GEE Code Editor | Visualizes Alaska bulk fuel sites colored by delivery method. Requires uploading `inputs/Utilities_Bulk_Fuel_Inventory.csv` as a GEE asset first (instructions in the script header). |
 
 ### Source data (in `data/`)
