@@ -10,9 +10,8 @@ things, in order:
 3. **Edge weighting** — sampling the friction stack along every network edge and assembling
    per-month, per-mode edge costs into a weighted graph.
 
-Friction encodes *environmental* traversability only (baseline 1.0); per-mode operational
-cost rates live separately in `friction_surface/friction_costs.py`. The two are never mixed
-(see `friction_surface/README_friction.md`).
+The friction surface encodes *environmental* traversability only (baseline 1.0); per-mode operational
+cost rates live separately in `friction_surface/friction_costs.py`. 
 
 > The multi-agent routing / TSP-optimization layer is **not** part of this release; it is
 > the subject of separate work.
@@ -22,17 +21,17 @@ cost rates live separately in `friction_surface/friction_costs.py`. The two are 
 **Friction stack** (`friction_surface/` — see `friction_surface/README_friction.md`)
 - `run_friction_pipeline.py` — entry point: validate inputs, build surfaces, compute edge costs
 - `friction_config.py` — single source of truth (CRS, thresholds, seasons, LULC multipliers)
-- `friction_costs.py` — per-mode operational cost rates (kept separate from friction)
-- `friction_surface.py`, `friction_io.py`, `friction_preflight.py`, `friction_paths.py`
+- `friction_costs.py` — per-mode operational cost rates (kept separate from environmental friction)
+- `friction_surface.py`, `friction_io.py`, `friction_preflight.py`, `friction_paths.py` - constants and paths to develop friction surface
 - `friction_preprocessing/` — GEE Code Editor + ArcGIS Pro input-generation scripts
-- `tests/`, `qa/`, `viz_scripts/`
+- `tests/`, `qa/`, `viz_scripts/` - development test, quality checks, and visaulization scripts
 
 **Network ingest + edge weighting** (repo root)
 - `load_final_network.py` — ingest `final_network/*` shapefiles → `network_nodes` / `network_edges`
 - `weight_network_edges.py` — sample friction rasters along each edge → `edge_month_weights`
 - `assemble_weighted_graph.py` — per-month, per-mode edge costs → `edge_costs` + weighted graph
 - `build_corridor_masks.py` — rasterize transport corridors onto the friction grid
-- `pipeline.py` — shared infra helpers (logging + input-raster path resolution)
+- `pipeline.py` — shared helpers (logging + input-raster path resolution)
 
 **Inspection / viz**
 - `make_network_plots.py` — plot the network and weighted edges
@@ -114,7 +113,7 @@ The canonical export script is
 | `lulc.tif` | Dynamic World v1 modal |
 | `slope.tif`, `dem.tif` | FABDEM |
 | `permafrost.tif` | Pastick et al. 2015 (uploaded user asset) |
-| `sea_ice/*.tif` | NSIDC sea-ice concentration (CDR), 12 monthly medians |
+| `sea_ice/*.tif` | UAF SNAP Historical Sea Ice Atlas (uploaded user asset), 12 monthly medians |
 
 Exports land in Google Drive at 150 m EPSG:3338, aligned to the LULC reference grid.
 
