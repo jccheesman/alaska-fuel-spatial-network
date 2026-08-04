@@ -59,7 +59,10 @@ vectors/
 *.zip
 
 # Bulk data directories
-inputs/
+# NOTE: `inputs/*` (not `inputs/`) so git still descends into the folder and the
+# three small input zips can be re-included below. `inputs/gee_exports/` (the
+# 4.7 GB AK_Stack_150m.zip) stays ignored via this rule — regenerate it in GEE.
+inputs/*
 friction_surface/friction_inputs/
 friction_surface/friction_outputs/
 friction_surface/friction_preprocessing/data/
@@ -74,19 +77,19 @@ final_network/*/
 # ─────────────────────────────────────────────────────────────────────────────
 # Public-repo additions (see EXTERNAL_DATA.md)
 # ─────────────────────────────────────────────────────────────────────────────
-# The rules above already keep inputs/ and *.zip out of git. The full inputs/
-# folder (incl. AK_Stack_150m.zip, 4.7 GB) is present ON DISK but is NOT
-# committable directly — it exceeds GitHub's 100 MB/file limit.
-# Before `git push`, choose ONE:
-#   (a) host AK_Stack_150m.zip on Zenodo/institutional storage (keep it ignored), or
-#   (b) track it with Git LFS:  git lfs track "inputs/AK_Stack_150m.zip"
-#
-# To publish the SMALL vector/tabular inputs (shapefiles, CSVs, GeoJSON, source
-# PDFs) on GitHub, opt them in explicitly, e.g.:
-#   !inputs/bulk_fuel_sites_clean.csv
-#   !inputs/sites_with_regions.csv
-#   !inputs/networks/**
-# (un-ignoring requires re-allowing each parent path — see git docs on negation)
+# The rules above keep inputs/* and *.zip out of git. The 4.7 GB
+# inputs/gee_exports/AK_Stack_150m.zip is present ON DISK but is NOT committed —
+# it exceeds GitHub's 100 MB/file limit. It is fully regenerable from the GEE
+# script documented in README.md ("Preprocessing friction inputs") and
+# EXTERNAL_DATA.md, so it is intentionally left ignored (no external host needed).
+
+# Small vector/tabular input zips (~40 MB total, all < 100 MB) — committed so a
+# fresh clone can run network ingest without re-running GEE. Re-included past the
+# blanket `inputs/*` and `*.zip` rules above.
+!inputs/data_for_network_build.zip
+!inputs/region_and_census_data.zip
+!inputs/bulk_fuel_data.zip
+!inputs/README.md
 
 # Delivered network zips — small enough to commit (9.5 MB + 1.2 MB) and the
 # ingest step (load_final_network.py) reads them. Opt them back in past the

@@ -113,10 +113,10 @@ The canonical export script is
 
 | Input | Source dataset |
 |---|---|
-| `lulc.tif` | Dynamic World v1 modal |
-| `slope.tif`, `dem.tif` | FABDEM |
-| `permafrost.tif` | Pastick et al. 2015 (uploaded user asset) |
-| `sea_ice/*.tif` | UAF SNAP Historical Sea Ice Atlas (uploaded user asset), 12 monthly medians |
+| `lulc.tif` | [Dynamic World v1](https://developers.google.com/earth-engine/datasets/catalog/GOOGLE_DYNAMICWORLD_V1) modal |
+| `slope.tif`, `dem.tif` | [FABDEM V1](https://gee-community-catalog.org/projects/fabdem/) (GEE community catalog) |
+| `permafrost.tif` | [Pastick et al. 2015](https://www.usgs.gov/publications/distribution-near-surface-permafrost-alaska-estimates-present-and-future-conditions) ([paper](https://www.sciencedirect.com/science/article/pii/S0034425715300778?via%3Dihub); uploaded user asset) |
+| `sea_ice/*.tif` | [UAF SNAP Historical Sea Ice Atlas](https://catalog.snap.uaf.edu/geonetwork/srv/eng/catalog.search#/metadata/047e91c7-35c6-410a-a1ef-95539c1ee328) (uploaded user asset), 12 monthly medians |
 
 Exports land in Google Drive at 150 m EPSG:3338, aligned to the LULC reference grid.
 

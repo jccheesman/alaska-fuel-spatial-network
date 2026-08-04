@@ -8,9 +8,9 @@ excluded, and how to obtain or regenerate anything not committed.
 
 | Path | Size | Why | Action before `git push` |
 |------|------|-----|---------------------------|
-| `inputs/AK_Stack_150m.zip` | 4.7 GB | Friction-surface raster bundle (FABDEM, slope, permafrost, 12 monthly sea-ice medians). Exceeds GitHub's 100 MB/file limit. | Regenerate with `friction_surface/friction_preprocessing/gee_friction_layer_mutli_data_processing.js` in Google Earth Engine. Kept out of git by `.gitignore`. |
+| `inputs/gee_exports/AK_Stack_150m.zip` | 4.7 GB | Friction-surface raster bundle (FABDEM, slope, permafrost, 12 monthly sea-ice medians). Exceeds GitHub's 100 MB/file limit. | Regenerate with `friction_surface/friction_preprocessing/gee_friction_layer_mutli_data_processing.js` in Google Earth Engine (see README.md → "Preprocessing friction inputs"). Kept out of git by `.gitignore`. |
 | `friction_surface/friction_inputs/` | ~7 GB | Aligned friction-input rasters the pipeline reads directly: `lulc.tif`, `slope.tif` (324 MB), `permafrost.tif`, and the monthly `sea_ice/` + `river_ice/` stacks (plus raw `sea_ice/gee_export/` medians up to ~700 MB each). Several files exceed GitHub's 100 MB limit. | **Already ignored** by `.gitignore` (`friction_surface/friction_inputs/` and `*.tif`), so it will not be committed. Regenerate by unpacking `inputs/AK_Stack_150m.zip` and aligning to the `lulc.tif` grid. |
-| `inputs/` (remainder, ~200 MB) | ~200 MB | Network shapefiles, facility CSVs, boundary polygons, market/fiscal/policy source PDFs. | Small enough for GitHub |
+| `inputs/data_for_network_build.zip` (33 MB), `inputs/region_and_census_data.zip` (6.7 MB), `inputs/bulk_fuel_data.zip` (0.4 MB) | ~40 MB | Network shapefiles (roads, ice roads, flight paths, waterways), facility CSVs/GeoJSON, AEA + TIGER boundary polygons. | **Committed to git** (each < 100 MB; opted in via `.gitignore` negation). A fresh clone can run network ingest without regenerating anything. |
 
 ## Excluded from this copy (regenerable — not on disk here)
 
@@ -26,3 +26,25 @@ excluded, and how to obtain or regenerate anything not committed.
 - **Friction surface:** `python -m friction_surface.run_friction_pipeline` (needs the aligned rasters above).
 - **Network ingest:** `python load_final_network.py` (reads `final_network/*.zip` → `fuel_network.duckdb`).
 - **Weighted graph:** `python weight_network_edges.py` → `python assemble_weighted_graph.py`.
+
+## Original data sources
+
+Every input derives from an open/public dataset. Use these to reconstruct the
+inputs independently of the committed zips. (Per-file mapping is in
+`inputs/README.md`; friction-raster regeneration is in `README.md`.)
+
+| Dataset | Used for | Source |
+|---|---|---|
+| AEA Utilities Bulk Fuel Inventory | Fuel facilities | [State of Alaska Geoportal](https://gis.data.alaska.gov/maps/DCCED::utilities-bulk-fuel-inventory/about) · [REST service](https://maps.commerce.alaska.gov/server/rest/services/Services/Utilities_Bulk_Fuel_Inventory_with_Attachments/MapServer) |
+| AEA / DCRA Fuel Delivery Method | Per-community delivery mode | [Fuel Delivery Method](https://gis.data.alaska.gov/datasets/DCCED::fuel-delivery-method/about) |
+| AEA regional boundaries | Region assignment | [Alaska Energy Authority Regions](https://hub.arcgis.com/datasets/DCCED::alaska-energy-authority-regions/explore) |
+| AKDOT&PF Roads | Road network | [Roads AKDOT](https://gis.data.alaska.gov/datasets/AKDOT::roads-akdot) |
+| GRIP4 global roads | Road network merge | [GLOBIO GRIP download](https://www.globio.info/download-grip-dataset) |
+| National Waterway Network (USACE) | Waterway network | [USACE GeoSpatial](https://geospatial-usace.opendata.arcgis.com/maps/ace7645d305647448a84492a3b909d48) · [BTS/NTAD](https://geodata.bts.gov/datasets/national-waterway-network-lines) |
+| North Slope ice roads | Overland ice roads | [UAA ACCS](https://accscatalog.uaa.alaska.edu/dataset/anthropogenic-datasets-north-slope/resource/5d898316-507e-4535-8bf0-b0608d3ca83a) · [AKDOT](https://www.arcgis.com/home/item.html?id=820ebeed349b484eab23ffaa685b64ef) · [SIRA](https://www.arcgis.com/home/item.html?id=ef4056f5fb0545698b5c4318821c8237) |
+| OurAirports | Airports | [ourairports.com/data](https://ourairports.com/data/) |
+| US Census TIGER/Line (2023) | State boundary | [TIGER/Line Shapefiles](https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html) |
+| FABDEM V1 | Slope / DEM | [GEE community catalog](https://gee-community-catalog.org/projects/fabdem/) |
+| Pastick et al. 2015 | Permafrost | [USGS publication](https://www.usgs.gov/publications/distribution-near-surface-permafrost-alaska-estimates-present-and-future-conditions) · [paper](https://www.sciencedirect.com/science/article/pii/S0034425715300778?via%3Dihub) |
+| Dynamic World v1 | Land cover | [GEE catalog](https://developers.google.com/earth-engine/datasets/catalog/GOOGLE_DYNAMICWORLD_V1) |
+| UAF SNAP Historical Sea Ice Atlas | Sea ice | [SNAP catalog](https://catalog.snap.uaf.edu/geonetwork/srv/eng/catalog.search#/metadata/047e91c7-35c6-410a-a1ef-95539c1ee328) |
