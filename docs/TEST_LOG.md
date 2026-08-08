@@ -129,3 +129,78 @@ must not change which edges get welded), tolerance gating on welds and
 giant-joins, shore-landing vs weld labelling (stage 03 maps those onto cost
 rates), hub supplier/receiver classification, the NetworkTables↔networkx
 round-trip, and that the shipped `profile.yaml` still validates.
+
+## 2026-08-08 — release packaging (T2–T4b of the work brief)
+
+All edits below are documentation, metadata, test config, and a new
+cross-platform driver; no pipeline stage was re-run (the cheap verification
+tier gates every change: 32 tests green, ruff clean, `bash -n` on all five
+drivers, dry-run ingest, validation queries, and the two `final_network`
+zip sha256s unchanged against the CI pins).
+
+### Publication metadata (T2)
+
+- `CITATION.cff` added (CFF 1.2.0): authors Julia Cheesman and Diego Arias
+  Arana (LICENSE order), MIT, type software, repository-code
+  `github.com/jccheesman/alaska-fuel-spatial-network`; commented
+  `preferred-citation` placeholder for the future Data-in-Brief DOI (not
+  invented). `CONTRIBUTING.md` added: reproduce via README Quickstart +
+  EXTERNAL_DATA.md; the frozen network-of-record and the cost/friction
+  constants change only by owner decision.
+
+### Known code smells closed (T3)
+
+- Stale `friction_inputs` prose (the pre-merge name of
+  `inputs/friction_rasters/`) fixed in docstrings/comments across
+  `friction_preprocessing/{__init__,align_permafrost,pad_river_ice_to_grid,
+  pad_sea_ice_to_grid}.py`, `check_grid_exports.py`, and
+  `qa/qa_river_ice_thresholds.py`. Prose only — no logic touched. Three
+  LIVE-CODE constants still name the old layout and were deliberately left
+  for an owner decision: `workflows/01_friction_build/viz/plot_sea_ice_padding.py:32`,
+  `src/friction_surface/qa/compare_lulc_grids.py:28`,
+  `src/friction_surface/qa/qa_river_ice_thresholds.py:40`.
+- The 37 "Setting the shape on a NumPy array" DeprecationWarnings DID
+  reproduce under the current lock (Python 3.13.3 / NumPy 2.5.1).
+  `-W error::DeprecationWarning` traced them to rasterio's
+  `DatasetReader.read()` (`rasterio/_io.pyx`), not repo code. One
+  message-anchored `filterwarnings` entry added under
+  `[tool.pytest.ini_options]` (no module qualifier — NumPy's stacklevel
+  attributes the warning to the *calling* module, so only the exact message
+  can target it). Suite warnings dropped 51 → 14; the shape warning is gone.
+
+### Notebook narration (T4)
+
+- CLAUDE.md's staleness warning for `tools/build_notebooks.py` was mostly
+  outdated: the old flat-repo tokens are gone. What remained was a root-level
+  `profile.yaml` narration (now points at
+  `workflows/02_network_build/profile.yaml`) and the legacy `NETWEAVE_*` env
+  names in the SETUP cell (now canonical `MMNET_*`; config.py keeps the old
+  names as fallback). `output/` narration left alone — `mmnet.io_writers`
+  genuinely writes `project_root()/"output"`. CLAUDE.md caution row updated.
+
+### Cross-platform driver + CI matrix (T4b)
+
+- `run_all.py` added at the repo root: pure-stdlib Windows twin of
+  `run_all.sh`, mirroring `_lib.sh`'s three contracts (venv-first interpreter
+  resolution incl. `Scripts\python.exe`; `run_step` with merged/buffered
+  output, stage-02 noise filter, and verbatim exit-status propagation;
+  `GATE_EXIT=3` skip-vs-fail summary, byte-identical wording). Supports
+  `--only <stage>` and `--profile`. The bash drivers are untouched.
+- Portability audit: `shell=True|os.system|/tmp` grep over
+  src/workflows/tools is clean; the one fix was `src/mmnet/build.py`
+  resolving `Rscript` via `shutil.which` with a clear install message when
+  absent (the R oracle is a documented every-OS requirement, not a Windows
+  bug).
+- CI split into a 3-OS matrix (`ubuntu/macos/windows`: install, ruff, pytest,
+  profile validation, extract+dry-run smoke, network-of-record hash) and an
+  ubuntu-only `bash-contracts` job (shell syntax, run-script contract, and a
+  new **driver parity** step: both drivers run in pristine clones and must
+  report the same summary and exit code).
+- **Local parity verified 2026-08-08 (Linux)**: two fresh clones of this
+  repo; `bash run_all.sh` and `python run_all.py` both reported
+  `skipped: 01_friction_build 02_network_build 03_multimodal_join`,
+  `failed: none`, exit 0 (stage 04's validation queries pass on the partial
+  ingest-only duckdb). Full logs differ only in the clone path and one
+  child script's nondeterministic dict-print ordering. **Windows/macOS proof
+  is the first CI matrix run on the new remote** — if a lane fails, fix
+  forward; do not delete the matrix.

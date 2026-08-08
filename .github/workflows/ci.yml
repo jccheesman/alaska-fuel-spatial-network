@@ -6,8 +6,18 @@ on:
   pull_request:
 
 jobs:
+  # Cross-platform lane: everything that must hold on any contributor's OS.
+  # Windows runs the drivers via run_all.py; `shell: bash` (Git Bash on the
+  # Windows runner) keeps the step scripts themselves portable.
   test:
-    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
     steps:
       - uses: actions/checkout@v4
 
@@ -24,31 +34,8 @@ jobs:
       - name: Ruff
         run: uv run ruff check src workflows tools tests .claude
 
-      # The run_all drivers are load-bearing: they decide what runs and what a
-      # failure means. A syntax error in one is a broken pipeline.
-      - name: Shell syntax — run_all drivers
-        run: |
-          for f in run_all.sh workflows/_lib.sh workflows/*/run_all.sh; do
-            bash -n "$f" && echo "OK  $f"
-          done
-
       - name: Pytest
         run: uv run pytest tests/ -v
-
-      # Guards the exit-code contract the top-level run_all.sh depends on:
-      # GATE_EXIT (3) means "input absent, skip"; anything else is a failure.
-      # If run_step ever stops propagating exit codes, the pipeline goes back to
-      # reporting success on a failed build.
-      - name: Run-script contract — failures propagate, gates are distinguishable
-        run: |
-          set -e
-          ROOT="$PWD"; . "$ROOT/workflows/_lib.sh"
-          resolve_python
-          rc=0
-          ( run_step "should-fail" "$PY" -c "import sys; sys.exit(7)" ) || rc=$?
-          test "$rc" -eq 7 || { echo "run_step swallowed exit code (got $rc)"; exit 1; }
-          test "$GATE_EXIT" -eq 3 || { echo "GATE_EXIT changed; update run_all.sh"; exit 1; }
-          echo "run-script contract: PASS"
 
       - name: Validate the network profile
         run: |
@@ -64,6 +51,8 @@ jobs:
 
       # The frozen handoff defines edge_id for every DuckDB table. If a commit
       # changes these bytes, every edge_id-keyed number silently shifts meaning.
+      # Run per-OS: it also certifies checkout delivers the zips byte-identical
+      # on every platform the release claims to support.
       - name: Network-of-record is byte-identical
         run: |
           uv run python - <<'PY'
@@ -90,3 +79,62 @@ jobs:
               sys.exit(1)
           print("network-of-record: unchanged")
           PY
+
+  # Linux-only lane: the bash drivers' own contracts, plus proof that the
+  # cross-platform run_all.py twin reports exactly what run_all.sh reports.
+  bash-contracts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v4
+
+      - name: Install
+        run: |
+          uv venv
+          uv sync --extra dev
+          uv pip install -e .
+
+      # The run_all drivers are load-bearing: they decide what runs and what a
+      # failure means. A syntax error in one is a broken pipeline.
+      - name: Shell syntax — run_all drivers
+        run: |
+          for f in run_all.sh workflows/_lib.sh workflows/*/run_all.sh; do
+            bash -n "$f" && echo "OK  $f"
+          done
+
+      # Guards the exit-code contract the top-level run_all.sh depends on:
+      # GATE_EXIT (3) means "input absent, skip"; anything else is a failure.
+      # If run_step ever stops propagating exit codes, the pipeline goes back to
+      # reporting success on a failed build.
+      - name: Run-script contract — failures propagate, gates are distinguishable
+        run: |
+          set -e
+          ROOT="$PWD"; . "$ROOT/workflows/_lib.sh"
+          resolve_python
+          rc=0
+          ( run_step "should-fail" "$PY" -c "import sys; sys.exit(7)" ) || rc=$?
+          test "$rc" -eq 7 || { echo "run_step swallowed exit code (got $rc)"; exit 1; }
+          test "$GATE_EXIT" -eq 3 || { echo "GATE_EXIT changed; update run_all.sh"; exit 1; }
+          echo "run-script contract: PASS"
+
+      # run_all.py is the Windows twin of run_all.sh. Each driver runs in its
+      # own pristine clone (a first run's stage 03 writes a partial duckdb,
+      # which would flip stage 04's gate for a second run in the same tree);
+      # both must report the same skipped/failed summary and exit code.
+      - name: Driver parity — run_all.py matches run_all.sh
+        run: |
+          set -u
+          git clone --quiet "$PWD" /tmp/parity_sh
+          git clone --quiet "$PWD" /tmp/parity_py
+          export VIRTUAL_ENV="$PWD/.venv"
+          rc_sh=0; rc_py=0
+          ( cd /tmp/parity_sh && bash run_all.sh )                      > /tmp/out_sh.txt 2>&1 || rc_sh=$?
+          ( cd /tmp/parity_py && "$VIRTUAL_ENV/bin/python" run_all.py ) > /tmp/out_py.txt 2>&1 || rc_py=$?
+          for f in sh py; do
+            awk '/^================ summary ================$/{p=1} p' "/tmp/out_$f.txt" > "/tmp/sum_$f.txt"
+          done
+          diff -u /tmp/sum_sh.txt /tmp/sum_py.txt || { echo "driver parity: SUMMARY MISMATCH"; exit 1; }
+          test "$rc_sh" -eq "$rc_py" || { echo "driver parity: exit codes differ (sh=$rc_sh py=$rc_py)"; exit 1; }
+          echo "driver parity: PASS (exit $rc_sh)"
+          cat /tmp/sum_sh.txt

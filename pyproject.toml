@@ -76,3 +76,12 @@ ignore = ["E702", "E402", "E741", "E731"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+filterwarnings = [
+    # rasterio's DatasetReader.read() hits a NumPy 2.5 shape-assignment
+    # deprecation internally (rasterio/_io.pyx) on read(). Not our code —
+    # the only repo-side ".shape =" is an unrelated dataclass field in
+    # friction_preflight.py. No module qualifier: NumPy's stacklevel
+    # attributes the warning to whichever module called ds.read(), so only
+    # the exact message + category can target it.
+    "ignore:Setting the shape on a NumPy array has been deprecated in NumPy 2\\.5\\.:DeprecationWarning",
+]

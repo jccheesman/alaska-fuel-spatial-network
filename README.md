@@ -69,6 +69,22 @@ EXPORT_FINAL_NETWORK=1 bash workflows/02_network_build/run_all.sh
 The R noding oracle in act (b) additionally needs `Rscript` +
 sf/sfnetworks/tidygraph/dplyr on PATH. Everything is CPU-only.
 
+### Windows & macOS
+
+The install is identical on every OS (`uv venv && uv sync && uv pip install
+-e .` — all geospatial dependencies ship wheels). The bash drivers above are
+the Linux/macOS path; on Windows run their cross-platform twin instead:
+
+```bash
+python run_all.py                 # same stages, gates, and exit codes as run_all.sh
+python run_all.py --only 03       # one stage (name or numeric prefix)
+```
+
+(or use WSL/Git Bash and the bash drivers, if you prefer). CI asserts both
+drivers report the same skipped/failed summary. The R oracle is required on
+every OS for stage (b): install R, then
+`install.packages(c("sf", "sfnetworks", "tidygraph", "dplyr"))`.
+
 ## The handoff that holds it together
 
 `final_network/` is the frozen network-of-record: the joined multimodal

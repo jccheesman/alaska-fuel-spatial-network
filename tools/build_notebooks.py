@@ -31,8 +31,8 @@ import pandas as pd
 import networkx as nx
 
 PROJECT = "{ROOT}"
-os.environ["NETWEAVE_PROFILE"] = f"{{PROJECT}}/profile.yaml"   # selects the Alaska region profile
-os.environ["NETWEAVE_PROJECT"] = PROJECT                       # output/ lands HERE
+os.environ["MMNET_PROFILE"] = f"{{PROJECT}}/workflows/02_network_build/profile.yaml"   # selects the Alaska region profile
+os.environ["MMNET_PROJECT"] = PROJECT                       # output/ lands HERE
 os.chdir(PROJECT); sys.path.insert(0, PROJECT)
 warnings.filterwarnings("ignore")
 
@@ -81,11 +81,13 @@ INTRO = '''\
 
 This notebook runs **one step** of the `mmnet` pipeline on Alaska bulk-fuel logistics.
 The full chain is `consolidate → tag → hubs → build → join`; the methodology is identical to
-the toy gold-standard project, only the region profile (`profile.yaml`) and data differ.
+the toy gold-standard project, only the region profile
+(`workflows/02_network_build/profile.yaml`) and data differ.
 
 Each step reads the previous step's artifact from `output/` and writes its own, so the
 notebooks are modular — run them in order, or re-run one after changing a parameter in
-`profile.yaml`. The `check(...)` calls are a visible PASS/FAIL harness on each result.
+`workflows/02_network_build/profile.yaml`. The `check(...)` calls are a visible PASS/FAIL
+harness on each result.
 
 **Run setup first**, then the step below.
 '''
@@ -251,7 +253,7 @@ RUN_ALL = '''\
 # the canonical 03 network. This is the function a future agent would call. It reproduces the same
 # result the step notebooks build (output/03_network__{nodes,edges}.gpkg), and — when the profile's
 # join_components.max_dist > 0 — also writes the Stage-04 output/04_network_joined__{nodes,edges}.gpkg.
-net = mmnet.run_pipeline("profile.yaml")
+net = mmnet.run_pipeline("workflows/02_network_build/profile.yaml")
 s = net.summary()
 print("run_pipeline summary:", s, "| edge types:", net.edges["type"].value_counts().to_dict())
 

@@ -13,7 +13,7 @@ Fill = the source NoData sentinel (-9999), matching the existing off-river conve
 with literal 0 — 0 means "river present, ice-free this month", a different thing.
 
 Reference grid is taken from lulc.tif (the canonical reference). Writes
-friction_inputs/river_ice/river_ice_{01..12}.tif. The old rasters stay in small_grid/
+inputs/friction_rasters/river_ice/river_ice_{01..12}.tif. The old rasters stay in small_grid/
 as the archive (nothing is moved or deleted).
 """
 from __future__ import annotations

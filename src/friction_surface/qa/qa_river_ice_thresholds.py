@@ -2,7 +2,7 @@
 
 One-shot diagnostic to inform RIVER_ICE_THRESHOLD selection.
 
-Loads the 12 monthly river_ice_MM.tif rasters from friction_inputs and
+Loads the 12 monthly river_ice_MM.tif rasters from inputs/friction_rasters and
 reports, for each month and overall:
 
   * how many valid (in-river-mask) pixels exist

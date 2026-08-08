@@ -17,6 +17,7 @@ The oracle is decoupled from any fixed R project — it reads only a self-contai
 from __future__ import annotations
 
 import json
+import shutil
 import subprocess
 import tempfile
 import warnings
@@ -186,11 +187,20 @@ def node_layers_via_r(layers: list[str], timeout_s: int = 1800) -> gpd.GeoDataFr
     spec_by_name = {s.name: s for s in cfg.layers}
     modes = sorted({spec_by_name[l].mode for l in layers if l in spec_by_name})
 
+    rscript = shutil.which("Rscript")
+    if rscript is None:
+        raise RuntimeError(
+            "Rscript not found on PATH. The R noding oracle is a documented requirement of "
+            "stage 02 on every OS: install R, then "
+            'install.packages(c("sf", "sfnetworks", "tidygraph", "dplyr")). '
+            "See README.md (Quickstart) and workflows/02_network_build/README.md."
+        )
+
     with tempfile.TemporaryDirectory(prefix="mmnet_node_") as tmp:
         workdir = Path(tmp)
         _write_node_contract(workdir, layers, cfg, params)
         out_prefix = workdir / "noded"
-        cmd = ["Rscript", str(R_ORACLE), "--workdir", str(workdir), "--out", str(out_prefix),
+        cmd = [rscript, str(R_ORACLE), "--workdir", str(workdir), "--out", str(out_prefix),
                "--modes", ",".join(modes), "--node-only"]
         proc = subprocess.run(cmd, capture_output=True, text=True, timeout=timeout_s)
         if proc.returncode != 0:

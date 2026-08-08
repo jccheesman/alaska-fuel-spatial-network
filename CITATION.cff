@@ -1,0 +1,21 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "Alaska bulk-fuel multimodal network"
+type: software
+license: MIT
+authors:
+  - family-names: Cheesman
+    given-names: Julia
+  - family-names: Arias Arana
+    given-names: Diego
+repository-code: https://github.com/jccheesman/alaska-fuel-spatial-network
+
+# preferred-citation:
+#   type: article
+#   doi: "fill in when the DOI exists"
+#   title: "Alaska bulk-fuel multimodal network: Data-in-Brief article"
+#   authors:
+#     - family-names: Cheesman
+#       given-names: Julia
+#     - family-names: Arias Arana
+#       given-names: Diego

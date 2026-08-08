@@ -23,7 +23,7 @@ Run from the project root with the friction-surface Python env active:
 
 Or pass explicit paths:
     python -m friction_surface.friction_preprocessing.align_permafrost \\
-        --src /path/to/raw_permafrost.tif --out friction_inputs/permafrost.tif
+        --src /path/to/raw_permafrost.tif --out inputs/friction_rasters/permafrost.tif
 """
 
 from __future__ import annotations
@@ -43,7 +43,7 @@ logger = logging.getLogger(__name__)
 # Default I/O. SRC_DEFAULT points at the same path the friction pipeline
 # already reads — running with defaults aligns the file in place. Pass --src
 # if your unaligned source lives elsewhere (e.g., a vendor delivery folder
-# outside friction_inputs).
+# outside inputs/friction_rasters).
 SRC_DEFAULT = Path(RASTER_FILES["permafrost"])
 OUT_DEFAULT = Path(RASTER_FILES["permafrost"])
 TEMPLATE_DEFAULT = Path(RASTER_DIR) / "lulc.tif"

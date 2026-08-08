@@ -69,8 +69,12 @@ replaces the network-of-record.
   passable edge-months). See docs/TEST_LOG.md. Fresh clones still need the
   rasters copied/regenerated (EXTERNAL_DATA.md).
 - **`tools/build_notebooks.py`** regenerates the per-stage walkthrough
-  notebooks; its cell text still narrates the OLD flat-repo layout in places
-  — regenerate + review before committing any notebooks.
+  notebooks; its stale flat-repo strings (root-level `profile.yaml`) were
+  fixed 2026-08-08 to point at `workflows/02_network_build/profile.yaml`.
+  Remaining honest caveats: the SETUP cell reads the untracked `data/` tree,
+  so a fresh clone needs inputs extracted (or `network_raw`) before a
+  notebook will actually run, and generated notebooks (`notebooks/` dir)
+  are not committed — still regenerate + review before committing any.
 - **`research/` and `diagnostics/` were removed on 2026-08-07** (build-only
   scope). They survive in git history at commit `3aa5eab`; docstrings in
   `src/mmnet/connect_extras.py`, `src/mmnet/inspect.py` and

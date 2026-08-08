@@ -3,7 +3,7 @@
 Verify re-exported friction inputs align to the intended full-Alaska grid.
 
 Pass/fail gate for the grid-fix step: after the GEE re-export (EXPORT_REGION widened
-to the Albers-metres full-Alaska footprint), every raster dropped into friction_inputs/
+to the Albers-metres full-Alaska footprint), every raster dropped into inputs/friction_rasters/
 must sit on ONE identical grid that covers the whole transport network.
 
 Target grid (must match the GEE EXPORT_REGION / EXPORT_TRANSFORM):
@@ -15,7 +15,7 @@ Cheap by design: reads raster METADATA only for the grid check, a tiny window fo
 per-hub NoData check, and a decimated read for value sanity — never the full 464 M-pixel array.
 
 Usage:
-    python3 friction_surface/check_grid_exports.py                 # check friction_inputs/
+    python3 friction_surface/check_grid_exports.py                 # check inputs/friction_rasters/
     python3 friction_surface/check_grid_exports.py --inputs-dir X  # check another dir
     python3 friction_surface/check_grid_exports.py --plot          # + western-edge PNG
 """

@@ -10,9 +10,9 @@ east to reach the reference width.
 Reference grid is taken from FABDEM_slope_150m_EPSG3338.tif (already the confirmed
 full grid), so this does NOT wait on lulc.tif.
 
-Writes the padded, full-grid friction_inputs/sea_ice/sea_ice_{01..12}.tif (the files
+Writes the padded, full-grid inputs/friction_rasters/sea_ice/sea_ice_{01..12}.tif (the files
 the pipeline consumes) and moves the raw GEE-named sources into
-friction_inputs/sea_ice/gee_export/ (ignored by check_grid_exports.py).
+inputs/friction_rasters/sea_ice/gee_export/ (ignored by check_grid_exports.py).
 """
 from __future__ import annotations
 import glob
