@@ -43,6 +43,13 @@ tripwire). Steps (a) and (b) need regenerable-only inputs — each stage's
 `run_all.sh` gates on what is missing and prints exactly how to regenerate it
 (`EXTERNAL_DATA.md` is the honest inventory of what exists where).
 
+The run scripts find the project interpreter themselves (active `$VIRTUAL_ENV`,
+then `.venv/bin/python`, then `python3` with a warning), so no activation step
+is needed. They also distinguish two kinds of non-zero exit: **3** means a
+documented input is absent and the stage was *skipped*; anything else is a real
+failure, and the top-level `run_all.sh` exits non-zero when one occurs. Shared
+helpers live in `workflows/_lib.sh`.
+
 Per-stage runs:
 
 ```bash
@@ -50,6 +57,14 @@ bash workflows/01_friction_build/run_all.sh    # needs inputs/friction_rasters (
 bash workflows/02_network_build/run_all.sh     # needs data/raw (inputs/network_raw.zip — pending)
 bash workflows/03_multimodal_join/run_all.sh   # stages 01-02 run from committed data
 bash workflows/04_duckdb_export/run_all.sh
+```
+
+Stage (b) does **not** re-export the frozen handoff by default — that would
+replace the network-of-record and invalidate every `edge_id`-keyed table. Opt in
+deliberately, after reading `final_network/README.md`:
+
+```bash
+EXPORT_FINAL_NETWORK=1 bash workflows/02_network_build/run_all.sh
 ```
 
 The R noding oracle in act (b) additionally needs `Rscript` +

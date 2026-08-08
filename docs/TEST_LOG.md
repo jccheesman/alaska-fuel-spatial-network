@@ -94,3 +94,38 @@ number now. Freeze-vs-rebuild remains an open owner decision.
 - That same script's **step 7 overwrites `final_network/`**. To test the
   build without touching the network-of-record, run `04_build_network.py`
   and `05_verify_north_slope.py` directly, as this run did.
+
+### 2026-08-07 (same day) — the three operational notes above are now fixed
+
+The gotchas recorded in the previous entry were defects, not facts of life.
+All three are closed:
+
+- **Bare `python3`** — the four stage drivers and the root `run_all.sh` now
+  source `workflows/_lib.sh` and call `resolve_python`, which prefers an
+  active `$VIRTUAL_ENV`, then `.venv/bin/python`, and only then falls back to
+  `python3` *with a warning*. No stage can silently run against system Python.
+- **`|| true` masking failures** — stage 02's eleven `| grep … || true` steps
+  are replaced by `run_step`, which filters the same noise but preserves the
+  real exit status and aborts the stage on failure. Verified by injecting a
+  step that exits 7: the driver now exits 7 instead of 0.
+- **Step 7 overwriting the network-of-record** — the export is now opt-in
+  (`EXPORT_FINAL_NETWORK=1`). The default run prints what a re-export would
+  invalidate and skips it.
+
+Two contracts were added on top:
+
+- A stage that is missing a documented input exits `GATE_EXIT` (3) and the
+  top-level `run_all.sh` reports it as *skipped*; any other non-zero exit is
+  reported as *failed* and makes `run_all.sh` itself exit non-zero. Missing
+  data and a broken build no longer look identical.
+- CI hashes `final_network/*.zip` against the expected sha256 on every run, so
+  an accidental re-export of the network-of-record fails the build rather than
+  quietly redefining `edge_id`.
+
+**`tests/test_mmnet.py` added — 16 tests, suite now 32.** `mmnet` (3,280
+lines) previously had none. The new tests pin the engine's own documented
+promises: connector determinism under row permutation (shapefile read order
+must not change which edges get welded), tolerance gating on welds and
+giant-joins, shore-landing vs weld labelling (stage 03 maps those onto cost
+rates), hub supplier/receiver classification, the NetworkTables↔networkx
+round-trip, and that the shipped `profile.yaml` still validates.

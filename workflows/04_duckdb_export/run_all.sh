@@ -5,11 +5,13 @@ set -e
 HERE="$(cd "$(dirname "$0")" && pwd)"
 ROOT="$(cd "$HERE/../.." && pwd)"
 cd "$ROOT"
+. "$HERE/../_lib.sh"
+resolve_python
 
 if [ ! -f outputs/fuel_network.duckdb ]; then
-  echo "GATE: outputs/fuel_network.duckdb missing — run workflow 03 first."
-  exit 1
+  gate "outputs/fuel_network.duckdb missing." \
+       "Run workflow 03 first: bash workflows/03_multimodal_join/run_all.sh"
 fi
-python3 "$HERE/01_run_validation_queries.py"
-python3 "$HERE/02_inspect_schema.py"
+run_step "01_run_validation_queries" "$PY" "$HERE/01_run_validation_queries.py"
+run_step "02_inspect_schema"         "$PY" "$HERE/02_inspect_schema.py"
 echo "Done."

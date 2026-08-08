@@ -7,6 +7,24 @@ asking; move-only commits separate from edit commits; every dollar lives in
 `data/`, `outputs/01_*`, `outputs/02_*`, extracted `final_network/*/` are
 regenerable working trees — never hand-edit them.
 
+## Run-script conventions
+
+All five drivers (`run_all.sh` + the four stage ones) source
+`workflows/_lib.sh`. Three rules, and they are contracts CI checks:
+
+- **`resolve_python`** picks the interpreter — active `$VIRTUAL_ENV`, then
+  `.venv/bin/python`, then `python3` with a warning. Never call bare `python3`
+  in a driver again.
+- **`run_step LABEL CMD…`** filters known-noisy output but preserves the exit
+  status and aborts the stage on failure. Never `cmd | grep … || true`; that is
+  the bug this replaced.
+- **`gate MSG…`** exits `GATE_EXIT` (3) = "documented input absent, skip".
+  Any other non-zero exit means a real failure. The top-level `run_all.sh`
+  reports the two separately and exits non-zero only for the second.
+
+Stage 02's export step is opt-in (`EXPORT_FINAL_NETWORK=1`) because it
+replaces the network-of-record.
+
 ## Pipeline table
 
 | Script | Does | Outputs | Knobs | Finding |

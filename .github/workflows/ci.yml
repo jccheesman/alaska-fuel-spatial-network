@@ -21,11 +21,36 @@ jobs:
           uv sync --extra dev
           uv pip install -e .
 
+      # .claude/skills ships runnable scripts (the build playbooks), so they are
+      # linted like the rest of the tree rather than drifting unchecked.
       - name: Ruff
-        run: uv run ruff check src workflows tools tests
+        run: uv run ruff check src workflows tools tests .claude
+
+      # The run_all drivers are load-bearing: they decide what runs and what a
+      # failure means. A syntax error in one is a broken pipeline.
+      - name: Shell syntax — run_all drivers
+        run: |
+          for f in run_all.sh workflows/_lib.sh workflows/*/run_all.sh; do
+            bash -n "$f" && echo "OK  $f"
+          done
 
       - name: Pytest
         run: uv run pytest tests/ -v
+
+      # Guards the exit-code contract the top-level run_all.sh depends on:
+      # GATE_EXIT (3) means "input absent, skip"; anything else is a failure.
+      # If run_step ever stops propagating exit codes, the pipeline goes back to
+      # reporting success on a failed build.
+      - name: Run-script contract — failures propagate, gates are distinguishable
+        run: |
+          set -e
+          ROOT="$PWD"; . "$ROOT/workflows/_lib.sh"
+          resolve_python
+          rc=0
+          ( run_step "should-fail" "$PY" -c "import sys; sys.exit(7)" ) || rc=$?
+          test "$rc" -eq 7 || { echo "run_step swallowed exit code (got $rc)"; exit 1; }
+          test "$GATE_EXIT" -eq 3 || { echo "GATE_EXIT changed; update run_all.sh"; exit 1; }
+          echo "run-script contract: PASS"
 
       - name: Validate the network profile
         run: |
@@ -38,3 +63,32 @@ jobs:
         run: |
           uv run python workflows/03_multimodal_join/01_extract_network_handoff.py
           uv run python workflows/03_multimodal_join/02_load_final_network.py --dry-run
+
+      # The frozen handoff defines edge_id for every DuckDB table. If a commit
+      # changes these bytes, every edge_id-keyed number silently shifts meaning.
+      - name: Network-of-record is byte-identical
+        run: |
+          uv run python - <<'PY'
+          import hashlib, pathlib, sys
+          EXPECTED = {
+            "network_joined_edges.zip":
+              "4b1ffe008b07049cd2fe0d4d5311a4831693290cb01a08dd5f747c1a167fda20",
+            "network_joined_nodes.zip":
+              "3f50dfb80b034f252cd2d84ee3a4d1bf19a2c1d93ff518bd10c9edf9e6d3bc75",
+          }
+          bad = []
+          for name, want in EXPECTED.items():
+              p = pathlib.Path("final_network") / name
+              got = hashlib.sha256(p.read_bytes()).hexdigest()
+              print(f"{name}: {got}")
+              if got != want:
+                  bad.append(f"{name}\n  expected {want}\n  got      {got}")
+          if bad:
+              print("\nNETWORK-OF-RECORD CHANGED:\n" + "\n".join(bad))
+              print("\nA re-export is a NEW network-of-record. If deliberate, regenerate")
+              print("together: these zips, the EXPECTED dict in 02_load_final_network.py,")
+              print("edge_month_weights, edge_costs — then update these hashes.")
+              print("See final_network/README.md.")
+              sys.exit(1)
+          print("network-of-record: unchanged")
+          PY
