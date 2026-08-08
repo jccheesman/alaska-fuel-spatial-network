@@ -24,7 +24,7 @@ workflow 03's extract + ingest stages and workflow 04 end-to-end.
 |---|---|---|---|
 | `inputs/gee_exports/AK_Stack_150m.zip` | ~5 GB | **Located (2026-08-06): Julia's machine** — the June narrow-grid export generation, kept as provenance. The CANONICAL wide-grid layers live in her `friction_rasters` working set. | To regenerate from nothing: run `src/friction_surface/friction_preprocessing/gee_friction_layer_multi_data_processing.js` in the GEE Code Editor (use the 28,001-column extended grid). |
 | `inputs/friction_rasters/` | ~1.5 GB (wide-grid, well-compressed) | **Located (2026-08-06): Julia's machine** — the aligned canonical set (wide lulc/slope/aligned permafrost, padded sea ice + river ice) that passed preflight and drove the verified end-to-end run (docs/TEST_LOG.md). Not committed (size); copy between machines or regenerate. | Regeneration path unchanged: GEE stack -> pad/align steps -> preflight gate. |
-| `data/raw/**` (workflow 02 raw GIS) | ~200 MB | On the network repo's build machine only, pending `inputs/network_raw.zip` (license check — MIGRATION_SPEC §6.2). | Copy from the original `alaska_network_mmnet` tree, or re-download per `inputs/README.md` and re-run `00_normalize_raw.py`. |
+| `data/raw/**` (workflow 02 raw GIS) | ~200 MB | On the network repo's build machine only, pending `inputs/network_raw.zip` (license check). | Copy from the original `alaska_network_mmnet` tree, or re-download per `inputs/README.md` and re-run `00_normalize_raw.py`. |
 
 **Status (2026-08-06):** with the located rasters, acts (a), (c), (d) were run
 end-to-end and all gates passed (docs/TEST_LOG.md). A machine WITHOUT the

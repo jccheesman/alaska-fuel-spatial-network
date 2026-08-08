@@ -39,7 +39,7 @@ regenerable working trees — never hand-edit them.
 - **The network-of-record is PRE-FIX.** `final_network/*.zip` was built by the
   old engine before `src/mmnet`'s four bugfixes (notably the reset_index
   mis-snap fix). The engine and the deliverable deliberately disagree until
-  the owners decide freeze-vs-rebuild (MIGRATION_SPEC §6.4). Do not "helpfully"
+  the owners decide freeze-vs-rebuild. Do not "helpfully"
   rebuild and commit.
 - **Strict NoData rule.** One NoData sample makes an edge impassable for the
   month. This is a design decision (auditable via nodata_frac), not a bug.
@@ -53,5 +53,8 @@ regenerable working trees — never hand-edit them.
 - **`tools/build_notebooks.py`** regenerates the per-stage walkthrough
   notebooks; its cell text still narrates the OLD flat-repo layout in places
   — regenerate + review before committing any notebooks.
-- **`research/waterway_network/README.md`** still describes the superseded
-  facility-bbox clip; the FINDINGS.md files are the accurate decision records.
+- **`research/` and `diagnostics/` were removed on 2026-08-07** (build-only
+  scope). They survive in git history at commit `3aa5eab`; docstrings in
+  `src/mmnet/connect_extras.py`, `src/mmnet/inspect.py` and
+  `workflows/02_network_build/01_prep_waterway.py` now name the prototypes
+  without pointing at paths.

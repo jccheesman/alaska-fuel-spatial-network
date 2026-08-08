@@ -35,8 +35,7 @@ fixes now carried by `src/mmnet` (most relevantly the `assemble.py`
   with the fixed engine may change hub snapping, hence counts, hence the
   edge-type inventory and every edge_id-keyed table.
 - The frozen network stays the network-of-record for the paper **until the
-  owners deliberately decide to rebuild** (open decision — MIGRATION_SPEC
-  §6.4). A rebuild must regenerate, together: these zips, the `EXPECTED`
+  owners deliberately decide to rebuild** (open decision). A rebuild must regenerate, together: these zips, the `EXPECTED`
   inventory in `02_load_final_network.py`, `edge_month_weights`, and
   `edge_costs` — and re-quantify the mis-snap fix's real impact.
 

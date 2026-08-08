@@ -250,8 +250,8 @@ def connectivity_report(nodes, edges, mode_types: list | None = None,
 
     Returns `{n_nodes, n_edges, n_components, giant_frac, giant_nodes, per_mode, hubs_total,
     hubs_reachable, hubs_pct}` where `per_mode[type] = {nodes, in_giant, pct}` for each transport mode
-    (edge `type`s other than Transfer/Bridge). Prints a compact block. Generalises
-    research/multimodal_network/01_multimodal_network.py.
+    (edge `type`s other than Transfer/Bridge). Prints a compact block. Generalises the
+    multimodal-network research prototype.
     """
     import networkx as nx
 
@@ -301,7 +301,7 @@ def mode_contribution(nodes, edges, mode: str, hub_col: str = "is_hub") -> dict:
     "Without" drops that mode's edges AND the transfers that touch its nodes (e.g. air + airport
     transfers), then recomputes the giant. Returns `{mode, with, without, only_via_nodes, only_via_hubs}`
     where `with`/`without` = `{components, giant, hubs}` and `only_via_*` count the nodes/hubs that reach
-    the giant ONLY because of this mode. Generalises research/multimodal_network/02_air_role.py.
+    the giant ONLY because of this mode. Generalises the air-role research prototype.
     """
     import networkx as nx
 

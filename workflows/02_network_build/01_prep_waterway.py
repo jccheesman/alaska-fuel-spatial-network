@@ -8,9 +8,8 @@ Inlet, Bering Sea, Arctic Ocean spines) and writes it as the `waterways` layer t
 so the Stage-03 assembler can connect road + ice to the giant BY SEA (ports + barge hubs) and join
 the North Slope at its coastal barge landing.
 
-The AK-only filter (lat/lon bounds on the raw 4269 geometries) mirrors the validated research step
-`research/waterway_network/01_ak_waterway.py`. Output is one connected marine network (~316 lines,
-~31,903 km) in EPSG:3338.
+The AK-only filter (lat/lon bounds on the raw 4269 geometries) mirrors the validated waterway
+research step. Output is one connected marine network (~316 lines, ~31,903 km) in EPSG:3338.
 
 Outputs (regenerable; data/interim is gitignored):
     data/interim/ak_waterway.gpkg   — full Alaska waterway lines (EPSG:3338)
@@ -37,8 +36,8 @@ NODE_TOL = 50.0          # vertex-rounding tolerance for the component check (ma
 def ak_only(raw: gpd.GeoDataFrame) -> gpd.GeoDataFrame:
     """The Alaska marine network: lat > 50 N and west of -125 deg (or the antimeridian Aleutians).
 
-    Ported verbatim from research/waterway_network/01_ak_waterway.py:31-39 — a bounds filter on the
-    raw 4269 geometries, then reprojected to the target CRS.
+    Ported verbatim from the waterway research prototype — a bounds filter on the raw 4269
+    geometries, then reprojected to the target CRS.
     """
     b = raw.bounds                       # in 4269 (lon/lat)
     lat = (b.miny + b.maxy) / 2

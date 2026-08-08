@@ -17,8 +17,8 @@ logistics do — short noding-gap welds, mode-to-mode bridges, and coastal barge
 Pure (numpy / scipy / networkx); operates on a node-coordinate array ``xy`` and an edge table with
 integer ``from``/``to`` + a ``type`` column. The algorithms are deterministic (components and
 candidate nodes sorted by id before each arg-min) so ties resolve identically across runs. Ported
-verbatim from the validated research prototype (``research/road_ice_connect/bridge_core.py`` +
-``research/waterway_network/02_connect_via_ports.py``) so the engine reproduces that result exactly.
+verbatim from the validated road-ice / connect-via-ports research prototypes so the engine
+reproduces that result exactly.
 """
 from __future__ import annotations
 

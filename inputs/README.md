@@ -20,7 +20,7 @@ AEA bulk-fuel facilities and per-community delivery mode.
 
 | File | Source | Purpose |
 |---|---|---|
-| `raw/Utilities_Bulk_Fuel_Inventory.csv` | Alaska Energy Authority — [State of Alaska Geoportal](https://gis.data.alaska.gov/maps/DCCED::utilities-bulk-fuel-inventory/about) | AEA bulk fuel tank-farm inventory (facility metadata + lat/lon). One snapshot, 1,901 facilities × 61 columns, normalized to UTF-8/LF (the two line-ending variants that used to live in the two repos parsed identically — see `diagnostics/06_critic_gap_fills.md` gap 4). |
+| `raw/Utilities_Bulk_Fuel_Inventory.csv` | Alaska Energy Authority — [State of Alaska Geoportal](https://gis.data.alaska.gov/maps/DCCED::utilities-bulk-fuel-inventory/about) | AEA bulk fuel tank-farm inventory (facility metadata + lat/lon). One snapshot, 1,901 facilities × 61 columns, normalized to UTF-8/LF. |
 | `raw/Fuel_Delivery_Method.zip` | AEA / DCRA — [Alaska Fuel Delivery Method (Fuel Survey)](https://gis.data.alaska.gov/datasets/DCCED::fuel-delivery-method/about) | Per-community delivery-mode shapefile (`Delivery_Methods`: barge / road / ice road). Canonical source for how each community is served; read by `friction_costs.load_ice_road_communities`. |
 | `processed/bulk_fuel_sites.geojson`, `processed/bulk_fuel_sites_clean.csv` | derived from the inventory CSV | Cleaned facility set used by the graph build. |
 | `processed/sites_with_regions.csv` | derived | Per-site AEA region assignment. |
@@ -64,7 +64,7 @@ The network build's raw GIS data (AKDOT roads + GRIP4 Canada, USACE NWN
 waterways, Ice_Roads, TIGER places / county subdivisions / boroughs,
 Ports_and_Harbors, AEA facilities CSV, Fuel_Delivery_Method.geojson)
 is **not yet committed**: bundling it here is gated on the
-data-redistribution decision (MIGRATION_SPEC §6.2), and the files
+data-redistribution decision, and the files
 currently live on the network repo's build machine.
 
 Until it lands, populate `data/raw/` by either:

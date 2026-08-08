@@ -171,7 +171,7 @@ def main() -> int:
         if code != 0:
             failures.append(label)
             if not args.keep_going:
-                print(f"\nStopping at first failure (use --keep-going to run the rest).")
+                print("\nStopping at first failure (use --keep-going to run the rest).")
                 break
 
     print(f"\n{'=' * 68}")

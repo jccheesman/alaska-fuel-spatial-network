@@ -77,13 +77,11 @@ rebuild is an open owner decision. Full provenance: `final_network/README.md`.
 | `workflows/01..04_*/` | The four steps: thin numbered drivers, per-stage READMEs, run orders |
 | `inputs/` | Every input dataset, one home (`inputs/README.md` = provenance + URLs; `MANIFEST.md` = sha256s) |
 | `final_network/` | The frozen act-(b)→(c) handoff (zips + field dictionary + checksums) |
-| `outputs/` | Gitignored regenerables + committed publication figures/tables/analysis |
+| `outputs/` | Gitignored regenerables + committed tables/analysis + the DuckDB deliverable |
 | `docs/` | `ARCHITECTURE.md` (engine design), `DATA_CONTRACTS.md` (every inter-stage contract), `API.md` |
-| `research/` | Eight tracked decision-record sandboxes behind the engine's rules (see `research/README.md`) |
 | `supplementary/` | Blind cost-rate derivations + verification backing every number in `friction_costs.py` |
 | `tests/` | pytest suite (run by CI) |
 | `.claude/skills/` | Six procedural playbooks (friction, costs, network profile/build) |
-| `diagnostics/` | The 2026-08 two-repo merge evidence base (audits + adopted proposal) |
 
 ## Old → new commands
 
@@ -129,4 +127,3 @@ snaps any new raster onto the reference grid.
 - `EXTERNAL_DATA.md` — what exists where (committed / regenerable / absent)
 - `CLAUDE.md` — the lab notebook: one row per numbered script, with findings
 - `supplementary/` — cost-rate derivations and verification
-- `CITATION.cff` — how to cite (paper metadata pending — see MIGRATION_SPEC §6)
