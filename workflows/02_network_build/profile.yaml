@@ -1,0 +1,191 @@
+# =============================================================================
+# mmnet Region Profile — ALASKA bulk-fuel multimodal transport graph.
+# -----------------------------------------------------------------------------
+# The single source of truth for the Alaska build. Everything the engine treats
+# as DATA lives here; the mmnet package code stays region-agnostic. To improve
+# the model over time you edit THIS file (paths, modes, tolerances) — adding the
+# seasonal Ice Road mode below, for example, was one new `layers:` entry with no
+# engine change, because the build derives its modes from this registry.
+#
+# Methodology (identical to the toy gold standard): consolidate -> tag -> hubs ->
+# build -> join. The build nodes each mode's lines via the bundled R/sfnetworks
+# oracle, then the Python assembler connects them: hubs snap to the road, airports
+# SNAP onto the road (a shared node, no transfer edge), barge transfers at ports +
+# coastal hubs; Stage 04 then optionally JOINS any leftover components to the giant
+# by distance (join_components.max_dist), writing a separate output/04_network_joined.
+#
+# All paths are relative to this profile's own directory (self-contained).
+# Distances are METERS in EPSG:3338 (Alaska Albers).
+# =============================================================================
+
+schema_version: 1
+title: "Alaska bulk-fuel multimodal transport graph"
+
+crs:
+  target: 3338      # NAD83 / Alaska Albers, meters
+  input: 4326       # raw lon/lat (inventory + most sources)
+threshold_units: meters
+
+# The profile lives at workflows/02_network_build/ but the data working tree
+# stays at the repo root — the 'data' root below rewrites every 'data/...'
+# path reference against it (resolved relative to this file's directory).
+roots:
+  data: ../../data
+
+# Facility inventory — the normalized table (00_normalize_raw.py), canonical column names.
+inventory:
+  path: data/interim/facilities.csv
+  id:              id
+  community:       community
+  delivery_method: delivery_method          # Road / Barge / Plane / "Plane or Barge" / "Plane or Road"
+  capacity:        total_capacity
+  lon:             longitude
+  lat:             latitude
+  entity:          entity
+  extra_capacity:                            # merged with max() into the per-facility capacity view
+    - gasoline_capacity
+    - diesel_capacity
+    - av_gas_capacity
+    - jet_fuel_capacity
+    - other_fuel_capacity
+  # Recover facilities with a blank delivery_method from the community-level layer:
+  # match by community name, else nearest marker within max_dist_m. Keeps Ice Road as Ice Road.
+  delivery_method_fallback:
+    path: data/interim/fuel_delivery_method.gpkg
+    community_col: community
+    method_col: delivery_method
+    max_dist_m: 5000
+
+# Alaska land outline (dissolved boroughs), built by scripts/prep_airways.py.
+# Used for the road border-stitch (GRIP4 Canada segments that leave the region)
+# and the map basemap.
+boundary:
+  type: file
+  path: data/boundary.geojson
+
+# Transport modes. Atoms parsed out of the inventory delivery_method must match
+# these names exactly. "Ice Road" is a NEW seasonal mode with no inventory
+# delivery rows — it enters purely as a transport layer (welded to the road).
+modes:
+  - { name: Road,     routable: true }
+  - { name: Barge,    routable: true }
+  - { name: Plane,    routable: true }
+  - { name: Ice Road, routable: true }
+
+# Two-tier community/region tagging: facility -> TIGER place, else borough/census area.
+# Normalized inputs (scripts/normalize_raw.py) with canonical column names.
+tagging:
+  enabled: true
+  places:
+    path: data/interim/tiger_places.gpkg
+    name_col: place_name
+    id_col:   place_geoid
+  regions:
+    path: data/interim/boroughs.gpkg
+    name_col:   region_name          # borough / census-area name
+    region_col: economic_region      # economic region
+
+# Transport line layers. Each declares its own mode + edge_label, so the build
+# picks them up generically (no engine edit to add a mode).
+layers:
+  - name: roads
+    mode: Road
+    edge_label: Road
+    kind: line
+    loader: load_roads
+    source:       { type: file, path: data/interim/roads_akdot.gpkg }
+    extra_source: { type: file, path: data/interim/roads_grip4.gpkg }
+    snap_target: true        # hubs may land on the road surface
+
+  - name: waterways
+    mode: Barge
+    edge_label: Waterway
+    kind: line
+    loader: load_waterways
+    # Full Alaska marine network (scripts/prep_waterway.py) — NOT the old facility-bbox clip.
+    # Stage 03 nodes it in Python by 50 m vertex-rounding (not R) and connects road + ice to it
+    # by sea at ports + barge hubs, so coastal/Arctic communities join the giant.
+    source: { type: file, path: data/interim/ak_waterway.gpkg }
+
+  - name: airways
+    mode: Plane
+    edge_label: Air
+    kind: line
+    loader: load_airways
+    # Official air-cargo network: data/raw/connectivity/air/flight_paths_combined.csv (AK DOT&PF-matched)
+    # → normalize_raw → interim → prep_airways → this geojson.
+    source: { type: file, path: data/processed/airways.geojson }   # built by scripts/prep_airways.py
+
+  - name: ice_roads
+    mode: Ice Road
+    edge_label: IceRoad
+    kind: line
+    loader: load_lines                                             # generic line reader
+    source: { type: file, path: data/interim/ice_roads.gpkg }
+    snap_target: true        # hubs may land on the seasonal ice-road surface too
+
+# Intermodal connection (Python assembler, mmnet.assemble.connect_multimodal):
+# R nodes road/ice/air; Python nodes the waterway, snaps hubs, and connects the modes in three
+# passes — (1) anchor TRANSFERS at PORTS, BARGE_HUBS and AIRPORTS; (2) proximity BRIDGES (the
+# before-policies: road↔road / ice↔ice welds + ice↔road bridge); (3) a CONNECT_TO_GIANT shore-landing
+# pass that joins every still-disconnected piece to the giant where it is within reach.
+#
+# `barge_hubs` is a VIRTUAL anchor resolved from the Stage-02 hubs (those whose delivery_method
+# contains "Barge"), not a file — so it needs no `anchors:` entry.
+anchors:
+  ports:    { type: file, path: data/interim/ports.gpkg }
+  airports: { type: file, path: data/processed/air_nodes.geojson }   # built by scripts/prep_airways.py
+
+# A transfer edge is added where the anchor sits within max_dist (m) of BOTH a from-mode and a
+# to-mode node. Barge connects to BOTH road and ice, at ports AND barge hubs (coastal demand).
+# (Air is NOT a transfer — airports SNAP onto the road; see `snaps:` below.)
+transfers:
+  - { from_mode: Road,     to_mode: Barge, anchor: ports,      max_dist: 5000 }
+  - { from_mode: Ice Road, to_mode: Barge, anchor: ports,      max_dist: 5000 }
+  - { from_mode: Road,     to_mode: Barge, anchor: barge_hubs, max_dist: 5000 }
+  - { from_mode: Ice Road, to_mode: Barge, anchor: barge_hubs, max_dist: 5000 }
+
+# Snap-to-node connections (mmnet.build._snap_airways_to_road): the from-mode's leg endpoint at each
+# anchor is moved ONTO the nearest to-mode node — a SHARED node, not a transfer edge. Airports snap to
+# the road: each air-leg airport endpoint lands on its nearest road node within max_dist (m); airports
+# with no road in reach stay air-only (reached through the air network via a snapped hub).
+snaps:
+  - { from_mode: Plane, to_mode: Road, anchor: airports, max_dist: 2000 }
+
+# Proximity before-policies (mmnet.connect_extras): from_mode==to_mode is a within-mode WELD,
+# distinct modes a cross-mode BRIDGE. A connector is added only when the real gap <= max_dist.
+bridges:
+  # edge_type names the emitted connector type. The ice-road rules emit
+  # "IceRoadConnector" so the confusing legacy "Bridge" label (an mmnet weld,
+  # NOT a water crossing) disappears at the source on the next rebuild; the
+  # ingest derives the same name from the FROZEN network's provenance, so the
+  # vocabulary is identical either way.
+  - { from_mode: Road,     to_mode: Road,     max_dist: 3000 }   # road↔road weld (legacy type: Bridge)
+  - { from_mode: Ice Road, to_mode: Ice Road, max_dist: 3000, edge_type: IceRoadConnector }   # ice↔ice weld
+  - { from_mode: Ice Road, to_mode: Road,     max_dist: 3000, edge_type: IceRoadConnector }   # ice↔road connection
+
+# Final shore-landing pass: join every still-disconnected piece to the giant within this distance
+# (a coastal barge landing where road meets sea — the North-Slope fix). 0 disables.
+connect_to_giant:
+  max_dist: 2000
+
+# Stage 04 — join every still-disconnected component to the giant when its nearest node is within
+# this distance (meters) of a giant node. A synthetic connector per component (type "Join"),
+# iterated until stable, over the ALL-mode component structure. 0 disables the step.
+# This does NOT change 03_network; it writes a separate output/04_network_joined.
+join_components:
+  max_dist: 20000
+
+hubs:
+  threshold_method: percentile
+  percentile: 0.90
+  abs_threshold: 500000
+  buffer_dist: 5000
+  dedup_tol_m: 50
+  group_by: [community, city, region]   # one hub per place; delivery methods unioned (multimodal)
+
+# The only noding knob the gold pipeline consumes: the R planar-cleaning precision (meters).
+topology:
+  precision: 1
+
+seed: 1234

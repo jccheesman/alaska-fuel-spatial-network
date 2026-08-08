@@ -1,0 +1,40 @@
+name: CI
+
+on:
+  push:
+    branches: [main, merge-restructure]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: true
+
+      - uses: astral-sh/setup-uv@v4
+
+      - name: Install
+        run: |
+          uv venv
+          uv sync --extra dev
+          uv pip install -e .
+
+      - name: Ruff
+        run: uv run ruff check src workflows tools tests
+
+      - name: Pytest
+        run: uv run pytest tests/ -v
+
+      - name: Validate the network profile
+        run: |
+          uv run python -c "
+          from mmnet.config import validate_profile
+          prof, warns = validate_profile('workflows/02_network_build/profile.yaml')
+          print('validate_profile: PASS'); [print(' warn:', w) for w in warns]"
+
+      - name: Data-backed smoke — extract + dry-run ingest from committed zips
+        run: |
+          uv run python workflows/03_multimodal_join/01_extract_network_handoff.py
+          uv run python workflows/03_multimodal_join/02_load_final_network.py --dry-run

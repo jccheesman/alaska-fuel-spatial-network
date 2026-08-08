@@ -1,0 +1,78 @@
+# One environment spec for the merged repo (replaces: requirements.txt,
+# friction_surface/requirements-friction.txt, both vendored toolkit pyprojects,
+# and the network repo's pyproject.toml).
+#
+#   uv venv && uv sync && uv pip install -e .
+#
+# The R noding oracle additionally needs Rscript + sf/sfnetworks/tidygraph/
+# dplyr on PATH (workflow 02 only). arcpy (river-ice preprocessing) is
+# Windows/ArcGIS-Pro-only and intentionally NOT declared here.
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "alaska-fuel-multimodal-network"
+version = "1.0.0"
+description = "Alaska bulk-fuel multimodal network: friction surfaces, mmnet network build, weighted multimodal join, DuckDB deliverable."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    # geo core (pins carried over from the friction repo's requirements.txt)
+    "geopandas==1.1.1",
+    "pandas==2.2.2",
+    "numpy>=1.24.0",
+    "shapely>=2.0.0",
+    "pyproj>=3.6.0",
+    "rasterio>=1.3.0",
+    "pyogrio",                    # vector IO engine for geopandas
+    # network + storage
+    "networkx>=3.2",
+    "duckdb>=1.1.3,<=1.3.1",
+    "scipy>=1.10.0",              # cKDTree river-ice nearest-fill + verify gates
+    # engine config
+    "pydantic>=2",
+    "pyyaml",
+    # figures + docs builds
+    "matplotlib==3.10.0",
+    "pypdf>=4.0.0",
+    "nbformat",                   # tools/build_notebooks.py
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.1.1", "ruff"]
+gee = ["earthengine-api>=0.1.390"]   # only for re-exporting the GEE stack
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+packages = [
+    "mmnet",
+    "mmnet.steps",
+    "friction_surface",
+    "friction_surface.friction_preprocessing",
+    "friction_surface.qa",
+]
+
+[tool.setuptools.package-data]
+mmnet = ["r_oracle/*.R", "r_oracle/*.md"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+# Match the codebase as merged: keep the rule set pragmatic. The ignores
+# codify existing house style rather than churn moved-as-is files:
+# E702 (compact semicolon pairs in viz scripts), E402 (deliberate
+# bottom-of-module re-exports + matplotlib.use before pyplot),
+# E741/E731 (short math-style names + small lambdas in plot code).
+select = ["E4", "E7", "E9", "F"]
+ignore = ["E702", "E402", "E741", "E731"]
+
+[tool.ruff.lint.per-file-ignores]
+# pre-existing harmless locals kept as-is in the moved viz script
+"workflows/02_network_build/viz/export_qgis_components.py" = ["F841"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

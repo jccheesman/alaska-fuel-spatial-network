@@ -1,0 +1,587 @@
+9c413aa 2026-08-06 Record the 2026-08-06 verified end-to-end run; retire stale caveats
+7b18c9f 2026-08-06 Preflight driver: don't gate on absent GEE-named exports; fix stale default path
+ddf326c 2026-08-06 extract_inputs: handle network_raw.zip rooted at data/raw/ (Julia's bundle)
+709d50e 2026-08-06 Fix SPEC: air CSVs read from their tracked home (inputs/air/)
+d2c95fc 2026-08-06 Fail-fast policy: missing waterway mask is now a HARD error in the stack build
+583d432 2026-08-06 Rename ice-road connectors: 'Bridge'/IceRoadWeld -> IceRoadConnector end-to-end
+c8c1c83 2026-08-06 Phase 8: last sweep fixes (historical analysis doc paths, preprocessing README)
+9ae00df 2026-08-06 Phase 8 fixes surfaced by the verification gates
+a4dc601 2026-08-06 Phase 7: docs, governance, skills, CI
+34e78ba 2026-08-06 Phase 6: data layer — clean repacks, checksums, one env spec
+400c97d 2026-08-06 Phase 5: the enumerated code edits — everything else moved as-is
+a14dbc2 2026-08-06 Phase 4b: B-side moves — network build into workflows/02 (git mv only)
+b212d2f 2026-08-06 Phase 4a: A-side moves — src/ + workflows/ layout (git mv only)
+817b265 2026-08-06 Add .gitattributes: LFS tracking for committed data zips
+1de97b4 2026-08-06 Merge alaska_network_mmnet (filtered) — both histories, unrelated
+663334e 2026-08-06 Snapshot: jccheesman/alaska-fuel-spatial-network @ main (zip download 2026-08-05)
+7fc1907 2026-08-06 Snapshot: d13705/alaska_network_mmnet @ main, filtered (zip download ~2026-07-20)
+
+=== 9c413aa Record the 2026-08-06 verified end-to-end run; retire stale caveats ===
+
+ CLAUDE.md                                          | 10 ++--
+ EXTERNAL_DATA.md                                   | 12 ++---
+ docs/TEST_LOG.md                                   | 56 ++++++++++++++++++++++
+ .../pad_river_ice_to_grid.py                       |  7 +--
+ .../friction_preprocessing/pad_sea_ice_to_grid.py  |  5 +-
+ 5 files changed, 76 insertions(+), 14 deletions(-)
+
+=== 7b18c9f Preflight driver: don't gate on absent GEE-named exports; fix stale default path ===
+
+ src/friction_surface/check_grid_exports.py         | 9 ++++++---
+ workflows/01_friction_build/00_preflight_inputs.py | 8 +++++++-
+ 2 files changed, 13 insertions(+), 4 deletions(-)
+
+=== ddf326c extract_inputs: handle network_raw.zip rooted at data/raw/ (Julia's bundle) ===
+
+ tools/extract_inputs.py | 25 ++++++++++++++++++++-----
+ 1 file changed, 20 insertions(+), 5 deletions(-)
+
+=== 709d50e Fix SPEC: air CSVs read from their tracked home (inputs/air/) ===
+
+ workflows/02_network_build/00_normalize_raw.py | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
+
+=== d2c95fc Fail-fast policy: missing waterway mask is now a HARD error in the stack build ===
+
+ CLAUDE.md                                     |  2 +-
+ docs/DATA_CONTRACTS.md                        |  6 +++--
+ src/friction_surface/friction_surface.py      | 37 ++++++++++++++++++++++++---
+ src/friction_surface/run_friction_pipeline.py | 14 ++++++++--
+ tests/test_friction_surface.py                | 32 ++++++++++++++++++++---
+ workflows/01_friction_build/README.md         | 10 +++++---
+ 6 files changed, 86 insertions(+), 15 deletions(-)
+
+=== 583d432 Rename ice-road connectors: 'Bridge'/IceRoadWeld -> IceRoadConnector end-to-end ===
+
+ CLAUDE.md                                           |  2 +-
+ docs/DATA_CONTRACTS.md                              | 13 ++++++++-----
+ final_network/README.md                             |  2 +-
+ src/friction_surface/friction_costs.py              |  3 ++-
+ src/mmnet/assemble.py                               |  5 +++--
+ src/mmnet/build.py                                  |  2 +-
+ src/mmnet/config.py                                 |  5 ++++-
+ workflows/02_network_build/profile.yaml             | 11 ++++++++---
+ .../03_multimodal_join/02_load_final_network.py     | 21 +++++++++++++--------
+ .../03_multimodal_join/03_weight_network_edges.py   | 11 ++++++++---
+ .../04_assemble_weighted_graph.py                   |  2 +-
+ workflows/03_multimodal_join/README.md              |  3 +++
+ 12 files changed, 53 insertions(+), 27 deletions(-)
+
+=== c8c1c83 Phase 8: last sweep fixes (historical analysis doc paths, preprocessing README) ===
+
+ outputs/analysis/lulc_sensitivity_test.md             | 6 +++---
+ pyproject.toml                                        | 2 +-
+ src/friction_surface/friction_preprocessing/README.md | 2 +-
+ 3 files changed, 5 insertions(+), 5 deletions(-)
+
+=== 9ae00df Phase 8 fixes surfaced by the verification gates ===
+
+ pyproject.toml                                         | 11 ++++++++++-
+ src/friction_surface/friction_config.py                | 10 +++++-----
+ src/friction_surface/friction_costs.py                 |  3 +++
+ .../friction_preprocessing/build_brown_polygon_mask.py |  2 +-
+ .../friction_preprocessing/pad_river_ice_to_grid.py    |  1 -
+ src/friction_surface/qa/qa_friction_stack.py           |  1 -
+ tests/test_friction_surface.py                         | 18 +++++++++++-------
+ tools/extract_inputs.py                                | 10 ++++++++++
+ .../viz/generate_grid_schema_public.py                 |  8 ++++----
+ .../01_friction_build/viz/plot_combined_friction.py    |  1 -
+ .../01_friction_build/viz/plot_sea_ice_padding.py      |  2 +-
+ workflows/02_network_build/00_normalize_raw.py         |  1 -
+ .../02_network_build/viz/export_qgis_components.py     |  2 --
+ workflows/02_network_build/viz/plot_components.py      |  1 -
+ workflows/02_network_build/viz/plot_join.py            |  2 --
+ .../03_multimodal_join/04_assemble_weighted_graph.py   |  1 -
+ workflows/03_multimodal_join/viz/make_network_plots.py |  1 -
+ 17 files changed, 45 insertions(+), 30 deletions(-)
+
+=== a4dc601 Phase 7: docs, governance, skills, CI ===
+
+ .claude/skills/align-to-ak-stack/SKILL.md          |  10 +-
+ .claude/skills/assign-friction-values/SKILL.md     |   6 +-
+ .claude/skills/derive-fuel-costs/SKILL.md          |  25 ++-
+ .../scripts/check_cost_invariants.py               |  10 +-
+ .claude/skills/run-friction-pipeline/SKILL.md      |  24 +-
+ .../scripts/validate_friction_stack.py             |  11 +-
+ .github/workflows/ci.yml                           |  40 ++++
+ CITATION.cff                                       |  26 +++
+ CLAUDE.md                                          |  53 +++++
+ EXTERNAL_DATA.md                                   |  70 +++---
+ LICENSE                                            |  26 +++
+ README.md                                          | 245 +++++++++------------
+ docs/ARCHITECTURE.md                               |  32 ++-
+ docs/DATA_CONTRACTS.md                             | 122 ++++++++++
+ docs/JETSTREAM_SETUP.md                            |  10 +-
+ final_network/README.md                            |  93 ++++++--
+ outputs/README.md                                  |  56 ++---
+ research/README.md                                 |  17 ++
+ src/friction_surface/README.md                     | 114 +++++-----
+ .../friction_preprocessing/README.md               |  14 +-
+ src/mmnet/README.md                                |  12 +-
+ workflows/01_friction_build/README.md              |  36 +++
+ workflows/02_network_build/README.md               |  41 ++++
+ workflows/02_network_build/profile.yaml            |   8 +-
+ workflows/03_multimodal_join/README.md             |  33 +++
+ workflows/04_duckdb_export/README.md               |  28 +++
+ 26 files changed, 813 insertions(+), 349 deletions(-)
+
+=== 34e78ba Phase 6: data layer — clean repacks, checksums, one env spec ===
+
+ final_network/network_joined_edges.zip         |  Bin 9538676 -> 132 bytes
+ final_network/network_joined_nodes.zip         |  Bin 1201389 -> 132 bytes
+ inputs/MANIFEST.md                             |   47 +
+ inputs/README.md                               |  111 +-
+ inputs/bulk_fuel_data.zip                      |  Bin 458027 -> 131 bytes
+ inputs/data_for_network_build.zip              |  Bin 34687501 -> 133 bytes
+ inputs/region_and_census_data.zip              |  Bin 6990152 -> 132 bytes
+ pyproject.toml                                 |   63 +-
+ requirements.txt                               |   11 -
+ src/friction_surface/requirements-friction.txt |   28 -
+ uv.lock                                        | 2799 ++++++++++++++++++++++++
+ 11 files changed, 2977 insertions(+), 82 deletions(-)
+
+=== 400c97d Phase 5: the enumerated code edits — everything else moved as-is ===
+
+ outputs/figures/scripts/plot_reference_grid.py     | 11 ++-
+ outputs/figures/scripts/plot_weighted_network.py   |  4 +-
+ run_all.sh                                         | 20 +++++
+ src/friction_surface/friction_costs.py             | 34 +++++++--
+ src/friction_surface/friction_paths.py             | 59 +++++++--------
+ src/friction_surface/pipeline_utils.py             | 21 +++++-
+ src/friction_surface/run_friction_pipeline.py      |  8 +-
+ src/mmnet/build.py                                 |  2 +-
+ src/mmnet/io_readers.py                            |  2 +-
+ tests/test_friction_paths.py                       | 85 ++++++++++++++++++++++
+ tools/build_notebooks.py                           |  2 +-
+ tools/extract_inputs.py                            | 53 ++++++++++++++
+ tools/gen_api_docs.py                              |  4 +-
+ workflows/01_friction_build/00_preflight_inputs.py | 31 ++++++++
+ .../01_friction_build/01_build_corridor_masks.py   |  2 +-
+ .../01_friction_build/02_build_friction_stack.py   | 17 +++++
+ .../01_friction_build/03_qa_friction_stack.py      | 15 ++++
+ workflows/01_friction_build/run_all.sh             | 28 +++++++
+ .../viz/generate_pipeline_diagram.py               | 13 ++--
+ workflows/02_network_build/00_normalize_raw.py     |  9 +--
+ workflows/02_network_build/01_prep_waterway.py     |  4 +-
+ workflows/02_network_build/02_prep_airways.py      | 15 ++--
+ workflows/02_network_build/03_fetch_basemap.py     |  6 +-
+ workflows/02_network_build/04_build_network.py     | 38 ++++++++++
+ .../02_network_build/05_verify_north_slope.py      | 11 +--
+ .../02_network_build/06_export_final_network.py    | 82 +++++++++++++++------
+ workflows/02_network_build/run_all.sh              | 74 +++++++++++--------
+ workflows/02_network_build/viz/export_qgis.py      |  7 +-
+ .../02_network_build/viz/export_qgis_components.py |  8 +-
+ workflows/02_network_build/viz/plot_components.py  | 12 +--
+ workflows/02_network_build/viz/plot_join.py        | 12 +--
+ workflows/02_network_build/viz/plot_network.py     |  9 ++-
+ .../02_network_build/viz/plot_paper_network.py     | 13 ++--
+ .../01_extract_network_handoff.py                  | 37 ++++++++++
+ .../03_multimodal_join/02_load_final_network.py    |  8 +-
+ .../03_multimodal_join/03_weight_network_edges.py  | 74 +++++++++++++++----
+ .../04_assemble_weighted_graph.py                  | 81 +++------------------
+ workflows/03_multimodal_join/run_all.sh            | 24 ++++++
+ .../03_multimodal_join/viz/make_network_plots.py   |  2 +-
+ .../04_duckdb_export/01_run_validation_queries.py  |  6 +-
+ workflows/04_duckdb_export/02_inspect_schema.py    |  6 +-
+ workflows/04_duckdb_export/run_all.sh              | 15 ++++
+ 42 files changed, 709 insertions(+), 255 deletions(-)
+
+=== a14dbc2 Phase 4b: B-side moves — network build into workflows/02 (git mv only) ===
+
+ .../provenance}/Alaska_Fuel_Hubs_Transport_Network.md       |   0
+ {data/raw/connectivity => inputs}/air/airports_ak_dotpf.csv |   0
+ .../air/Flight Paths.xlsx => inputs/air/flight_paths.xlsx   | Bin
+ .../connectivity => inputs}/air/flight_paths_combined.csv   |   0
+ {scripts => tools}/build_notebooks.py                       |   0
+ {scripts => tools}/gen_api_docs.py                          |   0
+ .../02_network_build/00_normalize_raw.py                    |   0
+ .../02_network_build/01_prep_waterway.py                    |   0
+ .../02_network_build/02_prep_airways.py                     |   0
+ .../02_network_build/03_fetch_basemap.py                    |   0
+ .../02_network_build/05_verify_north_slope.py               |   0
+ .../02_network_build/06_export_final_network.py             |   0
+ .../02_network_build/preprocessing/build_flight_map.py      |   0
+ profile.yaml => workflows/02_network_build/profile.yaml     |   0
+ {scripts => workflows/02_network_build}/run_all.sh          |   0
+ {scripts => workflows/02_network_build/viz}/export_qgis.py  |   0
+ .../02_network_build/viz}/export_qgis_components.py         |   0
+ .../02_network_build/viz}/plot_components.py                |   0
+ {scripts => workflows/02_network_build/viz}/plot_join.py    |   0
+ {scripts => workflows/02_network_build/viz}/plot_network.py |   0
+ .../02_network_build/viz}/plot_paper_network.py             |   0
+ 21 files changed, 0 insertions(+), 0 deletions(-)
+
+=== b212d2f Phase 4a: A-side moves — src/ + workflows/ layout (git mv only) ===
+
+ .../skills/build-and-verify-network/SKILL.md       |    0
+ .../skills/define-network-profile/SKILL.md         |    0
+ STRUCTURE.md                                       |   77 -
+ .../JETSTREAM_SETUP.md                             |    0
+ friction_surface/viz_scripts/__init__.py           |    0
+ mmnet-toolkit/.gitignore                           |   12 -
+ mmnet-toolkit/examples/alaska/README.md            |   48 -
+ mmnet-toolkit/examples/alaska/profile.yaml         |  182 --
+ .../examples/alaska/verify_north_slope.py          |  118 --
+ mmnet-toolkit/mmnet/steps/__init__.py              |    0
+ mmnet-toolkit/pyproject.toml                       |   30 -
+ mmnet/__init__.py                                  |   38 -
+ mmnet/assemble.py                                  |  364 ----
+ mmnet/build.py                                     |  322 ----
+ mmnet/config.py                                    |  589 ------
+ mmnet/connect_extras.py                            |  148 --
+ mmnet/inspect.py                                   |  378 ----
+ mmnet/io_readers.py                                |  193 --
+ mmnet/io_writers.py                                |   27 -
+ mmnet/network.py                                   |   87 -
+ mmnet/pipeline.py                                  |   85 -
+ mmnet/r_oracle/CONTRACT.md                         |   77 -
+ mmnet/r_oracle/build_network.R                     |   74 -
+ mmnet/r_oracle/lib.R                               |   54 -
+ mmnet/steps/__init__.py                            |    0
+ mmnet/steps/consolidate.py                         |  192 --
+ mmnet/steps/hubs.py                                |  261 ---
+ mmnet/steps/tag.py                                 |  126 --
+ mmnet/viz.py                                       |  439 -----
+ .../analysis}/lulc_fast_vs_exact_disagreement.png  |  Bin
+ .../figures}/friction_pipeline_diagram.pdf         |  Bin
+ .../figures}/sea_ice_padding_vs_data_03_Mar.png    |  Bin
+ setup/installations.txt                            |   10 -
+ .../friction_surface/README.md                     |    0
+ .../friction_surface}/__init__.py                  |    0
+ .../friction_surface}/check_grid_exports.py        |    0
+ .../friction_surface}/friction_config.py           |    0
+ .../friction_surface}/friction_costs.py            |    0
+ .../friction_surface}/friction_io.py               |    0
+ .../friction_surface}/friction_paths.py            |    0
+ .../friction_surface}/friction_preflight.py        |    0
+ .../friction_preprocessing/README.md               |    0
+ .../friction_preprocessing/__init__.py             |    0
+ .../friction_preprocessing/align_permafrost.py     |    0
+ .../build_brown_polygon_mask.py                    |    0
+ .../gee_friction_layer_multi_data_processing.js    |    0
+ .../pad_river_ice_to_grid.py                       |    0
+ .../friction_preprocessing/pad_sea_ice_to_grid.py  |    0
+ .../plot_river_ice_provenance.py                   |    0
+ .../river_ice_full_pipeline.py                     |    0
+ .../friction_surface}/friction_surface.py          |    0
+ .../friction_surface/pipeline_utils.py             |    0
+ .../friction_surface}/qa/__init__.py               |    0
+ .../friction_surface}/qa/compare_lulc_grids.py     |    0
+ .../friction_surface}/qa/qa_friction_stack.py      |    0
+ .../qa/qa_river_ice_thresholds.py                  |    0
+ .../friction_surface}/requirements-friction.txt    |    0
+ .../friction_surface}/run_friction_pipeline.py     |    0
+ {mmnet-toolkit => src/mmnet}/README.md             |    0
+ {mmnet-toolkit => src}/mmnet/__init__.py           |    0
+ {mmnet-toolkit => src}/mmnet/assemble.py           |    0
+ {mmnet-toolkit => src}/mmnet/build.py              |    0
+ {mmnet-toolkit => src}/mmnet/config.py             |    0
+ {mmnet-toolkit => src}/mmnet/connect_extras.py     |    0
+ {mmnet-toolkit => src}/mmnet/inspect.py            |    0
+ {mmnet-toolkit => src}/mmnet/io_readers.py         |    0
+ {mmnet-toolkit => src}/mmnet/io_writers.py         |    0
+ {mmnet-toolkit => src}/mmnet/network.py            |    0
+ {mmnet-toolkit => src}/mmnet/pipeline.py           |    0
+ {mmnet-toolkit => src}/mmnet/r_oracle/CONTRACT.md  |    0
+ .../mmnet/r_oracle/build_network.R                 |    0
+ {mmnet-toolkit => src}/mmnet/r_oracle/lib.R        |    0
+ .../tests => src/mmnet/steps}/__init__.py          |    0
+ {mmnet-toolkit => src}/mmnet/steps/consolidate.py  |    0
+ {mmnet-toolkit => src}/mmnet/steps/hubs.py         |    0
+ {mmnet-toolkit => src}/mmnet/steps/tag.py          |    0
+ {mmnet-toolkit => src}/mmnet/viz.py                |    0
+ supplementary/cost-derivations/combined.html       | 1942 --------------------
+ supplementary/cost-derivations/transfer_fees.html  |  423 -----
+ ... Verification.md => derivation_verification.md} |    0
+ ...vations.pdf => fuel_cost_blind_derivations.pdf} |  Bin
+ .../tests => tests}/test_friction_surface.py       |    0
+ .../01_friction_build/01_build_corridor_masks.py   |    0
+ .../01_friction_build/viz}/generate_grid_schema.py |    0
+ .../viz}/generate_grid_schema_public.py            |    0
+ .../viz}/generate_pipeline_diagram.py              |    0
+ .../viz}/plot_combined_friction.py                 |    0
+ .../01_friction_build/viz}/plot_friction_stack.py  |    0
+ .../01_friction_build/viz}/plot_sea_ice_padding.py |    0
+ .../03_multimodal_join/02_load_final_network.py    |    0
+ .../03_multimodal_join/03_weight_network_edges.py  |    0
+ .../04_assemble_weighted_graph.py                  |    0
+ .../03_multimodal_join/viz/make_network_plots.py   |    0
+ .../04_duckdb_export/01_run_validation_queries.py  |    0
+ .../04_duckdb_export/02_inspect_schema.py          |    0
+ 95 files changed, 6296 deletions(-)
+
+=== 817b265 Add .gitattributes: LFS tracking for committed data zips ===
+
+ .gitattributes | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+=== 1de97b4 Merge alaska_network_mmnet (filtered) — both histories, unrelated ===
+
+=== 663334e Snapshot: jccheesman/alaska-fuel-spatial-network @ main (zip download 2026-08-05) ===
+
+ .claude/skills/align-to-ak-stack/SKILL.md          |   96 +
+ .../align-to-ak-stack/scripts/align_raster.py      |  250 +++
+ .claude/skills/assign-friction-values/SKILL.md     |  156 ++
+ .claude/skills/derive-fuel-costs/SKILL.md          |  220 +++
+ .../scripts/check_cost_invariants.py               |  209 +++
+ .../scripts/cost_derivation_tools.py               |  269 +++
+ .claude/skills/run-friction-pipeline/SKILL.md      |  156 ++
+ .../scripts/validate_friction_stack.py             |  187 ++
+ .gitignore                                         |  105 ++
+ EXTERNAL_DATA.md                                   |   50 +
+ MIGRATION_SPEC.md                                  |  299 +++
+ README.md                                          |  167 ++
+ STRUCTURE.md                                       |   77 +
+ assemble_weighted_graph.py                         |  402 ++++
+ build_corridor_masks.py                            |  177 ++
+ diagnostics/00_IMPLEMENTATION_PLAYBOOK.md          |  169 ++
+ diagnostics/01_diagnostic_friction_repo.md         |  111 ++
+ diagnostics/02_diagnostic_network_repo.md          |  102 +
+ diagnostics/03_data_inventory.md                   |   35 +
+ diagnostics/04_cross_repo_coupling.md              |   29 +
+ diagnostics/05_best_practices_audit.md             |   47 +
+ diagnostics/06_critic_gap_fills.md                 |   50 +
+ diagnostics/10_proposal_minimal_move.md            |  215 +++
+ diagnostics/11_proposal_pipeline_first.md          |  298 +++
+ .../12_proposal_library_workflows_ADOPTED.md       |  267 +++
+ diagnostics/README.md                              |   49 +
+ diagnostics/raw/critic.json                        |   19 +
+ diagnostics/raw/diag_bestPractices.json            |   41 +
+ diagnostics/raw/diag_coupling.json                 |   23 +
+ diagnostics/raw/diag_dataInv.json                  |   29 +
+ diagnostics/raw/diag_frictionDiag.json             |   97 +
+ diagnostics/raw/diag_networkDiag.json              |   88 +
+ .../proposal_0_alaska-fuel-spatial-network_(m.json |  110 ++
+ .../proposal_1_alaska-fuel-multimodal-network.json |  151 ++
+ .../proposal_2_alaska-fuel-multimodal-network.json |  144 ++
+ final_network/README.md                            |   60 +
+ final_network/network_joined_edges.zip             |  Bin 0 -> 9538676 bytes
+ final_network/network_joined_nodes.zip             |  Bin 0 -> 1201389 bytes
+ friction_surface/README_friction.md                |  361 ++++
+ friction_surface/__init__.py                       |   79 +
+ friction_surface/check_grid_exports.py             |  268 +++
+ friction_surface/friction_config.py                |  262 +++
+ friction_surface/friction_costs.py                 |  442 +++++
+ friction_surface/friction_io.py                    |   45 +
+ friction_surface/friction_paths.py                 |  154 ++
+ friction_surface/friction_preflight.py             |  232 +++
+ friction_surface/friction_preprocessing/README.md  |   59 +
+ .../friction_preprocessing/__init__.py             |    7 +
+ .../friction_preprocessing/align_permafrost.py     |  155 ++
+ .../build_brown_polygon_mask.py                    |  231 +++
+ .../gee_friction_layer_mutli_data_processing.js    |  428 +++++
+ .../pad_river_ice_to_grid.py                       |   92 +
+ .../friction_preprocessing/pad_sea_ice_to_grid.py  |   96 +
+ .../plot_river_ice_provenance.py                   |  271 +++
+ .../river_ice_full_pipeline.py                     |  714 +++++++
+ friction_surface/friction_surface.py               |  733 ++++++++
+ friction_surface/qa/__init__.py                    |    0
+ friction_surface/qa/compare_lulc_grids.py          |  161 ++
+ .../qa/lulc_fast_vs_exact_disagreement.png         |  Bin 0 -> 60781 bytes
+ friction_surface/qa/qa_friction_stack.py           |  251 +++
+ friction_surface/qa/qa_river_ice_thresholds.py     |  257 +++
+ friction_surface/requirements-friction.txt         |   28 +
+ friction_surface/run_friction_pipeline.py          |   82 +
+ friction_surface/tests/__init__.py                 |    0
+ friction_surface/tests/test_friction_surface.py    |  348 ++++
+ friction_surface/viz_scripts/__init__.py           |    0
+ .../viz_scripts/friction_pipeline_diagram.pdf      |  Bin 0 -> 99744 bytes
+ .../viz_scripts/generate_grid_schema.py            |  469 +++++
+ .../viz_scripts/generate_grid_schema_public.py     |  453 +++++
+ .../viz_scripts/generate_pipeline_diagram.py       |  412 +++++
+ .../viz_scripts/plot_combined_friction.py          |  271 +++
+ .../viz_scripts/plot_friction_stack.py             |  378 ++++
+ .../viz_scripts/plot_sea_ice_padding.py            |  158 ++
+ .../viz_scripts/sea_ice_padding_vs_data_03_Mar.png |  Bin 0 -> 205726 bytes
+ inputs/README.md                                   |   71 +
+ inputs/bulk_fuel_data.zip                          |  Bin 0 -> 458027 bytes
+ inputs/data_for_network_build.zip                  |  Bin 0 -> 34687501 bytes
+ inputs/region_and_census_data.zip                  |  Bin 0 -> 6990152 bytes
+ load_final_network.py                              |  259 +++
+ make_network_plots.py                              |  265 +++
+ mmnet-toolkit/.gitignore                           |   12 +
+ mmnet-toolkit/README.md                            |   74 +
+ mmnet-toolkit/examples/alaska/README.md            |   48 +
+ mmnet-toolkit/examples/alaska/profile.yaml         |  182 ++
+ .../examples/alaska/verify_north_slope.py          |  118 ++
+ mmnet-toolkit/mmnet/__init__.py                    |   38 +
+ mmnet-toolkit/mmnet/assemble.py                    |  367 ++++
+ mmnet-toolkit/mmnet/build.py                       |  326 ++++
+ mmnet-toolkit/mmnet/config.py                      |  604 ++++++
+ mmnet-toolkit/mmnet/connect_extras.py              |  148 ++
+ mmnet-toolkit/mmnet/inspect.py                     |  378 ++++
+ mmnet-toolkit/mmnet/io_readers.py                  |  198 ++
+ mmnet-toolkit/mmnet/io_writers.py                  |   27 +
+ mmnet-toolkit/mmnet/network.py                     |   87 +
+ mmnet-toolkit/mmnet/pipeline.py                    |   85 +
+ mmnet-toolkit/mmnet/r_oracle/CONTRACT.md           |   77 +
+ mmnet-toolkit/mmnet/r_oracle/build_network.R       |   74 +
+ mmnet-toolkit/mmnet/r_oracle/lib.R                 |   54 +
+ mmnet-toolkit/mmnet/steps/__init__.py              |    0
+ mmnet-toolkit/mmnet/steps/consolidate.py           |  192 ++
+ mmnet-toolkit/mmnet/steps/hubs.py                  |  261 +++
+ mmnet-toolkit/mmnet/steps/tag.py                   |  126 ++
+ mmnet-toolkit/mmnet/viz.py                         |  439 +++++
+ mmnet-toolkit/pyproject.toml                       |   30 +
+ .../skills/build-and-verify-network/SKILL.md       |   75 +
+ .../skills/define-network-profile/SKILL.md         |   84 +
+ outputs/README.md                                  |   39 +
+ outputs/analysis/_lulc_edge_sensitivity.json       |  102 +
+ outputs/analysis/_lulc_sensitivity_buffer.json     |   48 +
+ outputs/analysis/_lulc_sensitivity_results.json    |  104 ++
+ outputs/analysis/_road_grade_distribution.json     |   81 +
+ outputs/analysis/lulc_sensitivity_test.md          |  403 ++++
+ outputs/analysis/road_grade_distribution.md        |  219 +++
+ outputs/figures/ak_stack_150m_reference_grid.pdf   |  Bin 0 -> 1006282 bytes
+ outputs/figures/ak_stack_150m_reference_grid.png   |  Bin 0 -> 578662 bytes
+ outputs/figures/idw_overview.png                   |  Bin 0 -> 490747 bytes
+ outputs/figures/idw_per_month_jan_apr_oct.png      |  Bin 0 -> 663828 bytes
+ outputs/figures/regions.png                        |  Bin 0 -> 141873 bytes
+ outputs/figures/scripts/plot_hub_network.py        |  196 ++
+ outputs/figures/scripts/plot_reference_grid.py     |  191 ++
+ outputs/figures/scripts/plot_weighted_network.py   |  295 +++
+ outputs/figures/weighted_network_monthly.pdf       |  Bin 0 -> 2607389 bytes
+ outputs/figures/weighted_network_monthly.png       |  Bin 0 -> 3425663 bytes
+ outputs/figures/weighted_network_monthly_dark.pdf  |  Bin 0 -> 2619849 bytes
+ outputs/figures/weighted_network_monthly_dark.png  |  Bin 0 -> 3329507 bytes
+ .../figures/weighted_network_monthly_portrait.pdf  |  Bin 0 -> 3095763 bytes
+ .../figures/weighted_network_monthly_portrait.png  |  Bin 0 -> 4649763 bytes
+ .../weighted_network_monthly_portrait_dark.pdf     |  Bin 0 -> 3110138 bytes
+ .../weighted_network_monthly_portrait_dark.png     |  Bin 0 -> 4511562 bytes
+ .../final_network_plots/01_statewide_overview.png  |  Bin 0 -> 699025 bytes
+ .../final_network_plots/02_connectors_detail.png   |  Bin 0 -> 1105050 bytes
+ outputs/final_network_plots/03_hubs.png            |  Bin 0 -> 863676 bytes
+ outputs/tables/build_combined_friction_tables.py   |  609 ++++++
+ outputs/tables/build_input_datasets_xlsx.py        |  158 ++
+ outputs/tables/combined_friction_tables.xlsx       |  Bin 0 -> 15288 bytes
+ outputs/tables/friction_config.xlsx                |  Bin 0 -> 19822 bytes
+ outputs/tables/input_datasets.xlsx                 |  Bin 0 -> 6473 bytes
+ pipeline.py                                        |   34 +
+ query_duckdb.py                                    |   32 +
+ requirements.txt                                   |   11 +
+ run_validation_query.py                            |   26 +
+ setup/JETSTREAM_SETUP_GUIDE.md                     |  109 ++
+ setup/installations.txt                            |   10 +
+ .../cost-derivations/00_executive_summary.md       |   54 +
+ supplementary/cost-derivations/01_road.md          |  157 ++
+ supplementary/cost-derivations/02_barge.md         |  246 +++
+ supplementary/cost-derivations/03_plane.md         |  219 +++
+ supplementary/cost-derivations/04_ice_road.md      |  187 ++
+ supplementary/cost-derivations/05_transfer_fees.md |  188 ++
+ .../cost-derivations/06_connection_costs.md        |  117 ++
+ supplementary/cost-derivations/build_pdf.py        |   69 +
+ .../cost-derivations/build_transfer_pdf.py         |   45 +
+ supplementary/cost-derivations/combined.html       | 1942 ++++++++++++++++++++
+ supplementary/cost-derivations/transfer_fees.html  |  423 +++++
+ supplementary/cost-derivations/transfer_fees.pdf   |  Bin 0 -> 388344 bytes
+ .../Fuel Cost Blind Derivations.pdf                |  Bin 0 -> 1328330 bytes
+ .../Fuel Cost Derivation Verification.md           |  268 +++
+ weight_network_edges.py                            |  423 +++++
+ 158 files changed, 24555 insertions(+)
+
+=== 7fc1907 Snapshot: d13705/alaska_network_mmnet @ main, filtered (zip download ~2026-07-20) ===
+
+ .gitignore                                         |  82 +++
+ README.md                                          | 234 ++++++++
+ .../_archive/Alaska_Fuel_Hubs_Transport_Network.md | 282 ++++++++++
+ data/raw/connectivity/air/Flight Paths.xlsx        | Bin 0 -> 9529 bytes
+ data/raw/connectivity/air/airports_ak_dotpf.csv    | 286 ++++++++++
+ data/raw/connectivity/air/build_map.py             | 358 +++++++++++++
+ .../raw/connectivity/air/flight_paths_combined.csv |  99 ++++
+ docs/API.md                                        | 516 ++++++++++++++++++
+ docs/ARCHITECTURE.md                               | 143 +++++
+ explain/verify_north_slope.py                      | 116 ++++
+ final_network/README.md                            |  60 +++
+ mmnet/__init__.py                                  |  38 ++
+ mmnet/assemble.py                                  | 364 +++++++++++++
+ mmnet/build.py                                     | 322 +++++++++++
+ mmnet/config.py                                    | 589 +++++++++++++++++++++
+ mmnet/connect_extras.py                            | 148 ++++++
+ mmnet/inspect.py                                   | 378 +++++++++++++
+ mmnet/io_readers.py                                | 193 +++++++
+ mmnet/io_writers.py                                |  27 +
+ mmnet/network.py                                   |  87 +++
+ mmnet/pipeline.py                                  |  85 +++
+ mmnet/r_oracle/CONTRACT.md                         |  77 +++
+ mmnet/r_oracle/build_network.R                     |  74 +++
+ mmnet/r_oracle/lib.R                               |  54 ++
+ mmnet/steps/__init__.py                            |   0
+ mmnet/steps/consolidate.py                         | 192 +++++++
+ mmnet/steps/hubs.py                                | 261 +++++++++
+ mmnet/steps/tag.py                                 | 126 +++++
+ mmnet/viz.py                                       | 439 +++++++++++++++
+ profile.yaml                                       | 182 +++++++
+ pyproject.toml                                     |  30 ++
+ .../airport_connection/01_airport_connection.py    | 143 +++++
+ research/airport_connection/02_zoom.py             | 104 ++++
+ research/airport_connection/FINDINGS.md            |  61 +++
+ research/airport_connection/README.md              |  19 +
+ research/airport_connection/_trace.py              |  62 +++
+ research/flights_network/01_air_network.py         | 155 ++++++
+ research/flights_network/02_structure.py           | 106 ++++
+ research/flights_network/DATA_COMPARISON.md        |  56 ++
+ research/flights_network/FINDINGS.md               |  49 ++
+ research/flights_network/README.md                 |  27 +
+ research/flights_network/_trace.py                 |  62 +++
+ research/ice_ice_connect/01_ice_ice.py             |  97 ++++
+ research/ice_ice_connect/02_final_network.py       | 143 +++++
+ research/ice_ice_connect/FINAL_NETWORK.md          |  48 ++
+ research/ice_ice_connect/FINDINGS.md               |  49 ++
+ research/ice_ice_connect/README.md                 |  26 +
+ research/ice_ice_connect/_trace.py                 |  76 +++
+ research/ice_ice_connect/ii_core.py                |  72 +++
+ .../multimodal_network/01_multimodal_network.py    | 126 +++++
+ research/multimodal_network/02_air_role.py         | 104 ++++
+ research/multimodal_network/FINDINGS.md            |  51 ++
+ research/multimodal_network/README.md              |  25 +
+ research/multimodal_network/_trace.py              |  62 +++
+ research/param_check/01_param_plausibility.py      |  90 ++++
+ research/param_check/PARAM_EVALUATION.md           |  89 ++++
+ research/param_check/README.md                     |  25 +
+ research/param_check/_trace.py                     |  62 +++
+ research/road_ice_connect/01_gaps.py               |  86 +++
+ research/road_ice_connect/02_candidates_map.py     |  96 ++++
+ research/road_ice_connect/03_sensitivity.py        |  90 ++++
+ research/road_ice_connect/04_deadhorse_gap.py      |  91 ++++
+ research/road_ice_connect/05_northern_ice.py       |  76 +++
+ research/road_ice_connect/06_reachability.py       |  70 +++
+ .../road_ice_connect/07_north_slope_options.py     | 158 ++++++
+ research/road_ice_connect/METHOD.md                |  71 +++
+ research/road_ice_connect/NORTH_SLOPE_FINDINGS.md  |  44 ++
+ research/road_ice_connect/OPTIONS.md               |  51 ++
+ research/road_ice_connect/README.md                |  36 ++
+ research/road_ice_connect/_trace.py                |  91 ++++
+ research/road_ice_connect/bridge_core.py           | 179 +++++++
+ research/road_ice_connect/run_all.sh               |   8 +
+ research/road_road_connect/01_fragmentation.py     | 159 ++++++
+ research/road_road_connect/02_candidates_map.py    |  86 +++
+ research/road_road_connect/03_sensitivity.py       |  95 ++++
+ research/road_road_connect/04_optimize.py          | 116 ++++
+ research/road_road_connect/FINDINGS.md             |  93 ++++
+ research/road_road_connect/README.md               |  33 ++
+ research/road_road_connect/_trace.py               |  76 +++
+ research/road_road_connect/rr_core.py              |  86 +++
+ research/waterway_network/01_ak_waterway.py        | 138 +++++
+ research/waterway_network/02_connect_via_ports.py  | 274 ++++++++++
+ research/waterway_network/03_zoom_summary.py       | 301 +++++++++++
+ research/waterway_network/04_qgis_connected.py     | 137 +++++
+ research/waterway_network/CONNECT_FINDINGS.md      |  46 ++
+ research/waterway_network/FINDINGS.md              |  48 ++
+ research/waterway_network/README.md                |  30 ++
+ research/waterway_network/ZOOM_SUMMARY.md          |  41 ++
+ research/waterway_network/_trace.py                |  62 +++
+ scripts/build_notebooks.py                         | 321 +++++++++++
+ scripts/export_final_shapefile.py                  |  56 ++
+ scripts/export_qgis.py                             | 264 +++++++++
+ scripts/export_qgis_components.py                  | 268 ++++++++++
+ scripts/fetch_basemap.py                           |  58 ++
+ scripts/gen_api_docs.py                            | 122 +++++
+ scripts/normalize_raw.py                           | 171 ++++++
+ scripts/plot_components.py                         | 100 ++++
+ scripts/plot_join.py                               |  99 ++++
+ scripts/plot_network.py                            |  70 +++
+ scripts/plot_paper_network.py                      | 264 +++++++++
+ scripts/prep_airways.py                            | 112 ++++
+ scripts/prep_waterway.py                           |  89 ++++
+ scripts/run_all.sh                                 |  44 ++
+ 103 files changed, 12837 insertions(+)
