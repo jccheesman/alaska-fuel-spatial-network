@@ -73,11 +73,12 @@ example_skills/
 inputs/*
 !inputs/README.md
 !inputs/MANIFEST.md
-# Small committed data zips (each < 100 MB, LFS-tracked) so a fresh clone can run acts (c)-(d)
+# Small committed data zips (each < 50 MB, plain git blobs) so a fresh clone can run acts (c)-(d)
 !inputs/bulk_fuel_data.zip
 !inputs/data_for_network_build.zip
 !inputs/region_and_census_data.zip
-!inputs/network_raw.zip
+# network_raw.zip is deliberately NOT negated: it stays LOCAL-ONLY (license-gated,
+# see inputs/README.md) and was purged from git history on 2026-08-08.
 # Small tracked air CSVs (diffable plain text)
 !inputs/air/
 inputs/air/*

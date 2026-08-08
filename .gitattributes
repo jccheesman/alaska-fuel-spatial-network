@@ -1,4 +1,26 @@
-# Git LFS: every committed data zip (inputs + the frozen network-of-record).
-# Set up BEFORE the first push; `git lfs migrate import` handles history if needed.
-inputs/**/*.zip filter=lfs diff=lfs merge=lfs -text
-final_network/*.zip filter=lfs diff=lfs merge=lfs -text
+# No Git LFS — deliberate. After purging the license-gated network_raw.zip
+# (92 MB) from history, every tracked file is < 50 MB, which GitHub accepts
+# as plain blobs. Plain blobs mean: no `git lfs` install/pull step for users,
+# no LFS bandwidth quota breaking clones, and the data zips are actually
+# INCLUDED when Zenodo archives the repo for the paper DOI (Zenodo's GitHub
+# integration does not fetch LFS objects). Revisit only if a future artifact
+# exceeds 100 MB and must be tracked.
+
+# Text normalization (repo verified CRLF-free on 2026-08-08).
+* text=auto
+*.sh text eol=lf
+*.R text eol=lf
+
+# Binary artifacts — never diff, merge, or normalize.
+*.zip binary
+*.tif binary
+*.gpkg binary
+*.duckdb binary
+*.pdf binary
+*.png binary
+*.xlsx binary
+*.shp binary
+*.shx binary
+*.dbf binary
+*.sbn binary
+*.sbx binary

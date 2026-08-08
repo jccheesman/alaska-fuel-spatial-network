@@ -30,7 +30,6 @@ throughout.
 
 ```bash
 git clone <this-repo> && cd <this-repo>
-git lfs pull                      # committed data zips are LFS objects
 uv venv && uv sync && uv pip install -e .
 
 python tools/extract_inputs.py    # unzip the committed inputs

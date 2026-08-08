@@ -10,10 +10,10 @@ DCRA, AKDOT&PF, USACE, US Census TIGER, GRIP4 CC-BY, OurAirports). Each table
 below names the original license holder; cite the originals when reusing the
 data outside this project.
 
-After cloning (with Git LFS): `python tools/extract_inputs.py` unzips the
+After cloning: `python tools/extract_inputs.py` unzips the
 bundles into their gitignored working directories.
 
-## Committed zips (LFS)
+## Committed zips
 
 ### `bulk_fuel_data.zip` (~0.4 MB)
 AEA bulk-fuel facilities and per-community delivery mode.
@@ -63,9 +63,9 @@ Small, diffable CSVs consumed by workflow 02's `00_normalize_raw.py`
 The network build's raw GIS data (AKDOT roads + GRIP4 Canada, USACE NWN
 waterways, Ice_Roads, TIGER places / county subdivisions / boroughs,
 Ports_and_Harbors, AEA facilities CSV, Fuel_Delivery_Method.geojson)
-is **not yet committed**: bundling it here is gated on the
-data-redistribution decision, and the files
-currently live on the network repo's build machine.
+is **kept local-only** (the assembled zip exists on this build machine but
+is gitignored and was purged from git history on 2026-08-08): committing it
+is gated on the data-redistribution decision.
 
 Until it lands, populate `data/raw/` by either:
 1. copying `data/raw/**` from the original `alaska_network_mmnet` working
@@ -76,7 +76,7 @@ Until it lands, populate `data/raw/` by either:
    documents the expected file-by-file layout.
 
 Once the license check clears: build the zip from `data/raw/**` (junk
-excluded, `Flight Paths.xlsx` renamed `flight_paths.xlsx`), commit via LFS,
+excluded, `Flight Paths.xlsx` renamed `flight_paths.xlsx`), un-ignore and commit it,
 and record its sha256 in `MANIFEST.md` — `tools/extract_inputs.py` already
 knows how to unpack it.
 
