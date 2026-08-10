@@ -33,7 +33,7 @@ filtered view, and `hub_to_hub_costs()` runs per-month Dijkstra between
 hub nodes.
 
 The backfill of mode_specific_edges / connects_to (plan Phase 3, last step)
-is STUBBED pending the hub<->facility map (Julia's) — see
+is STUBBED pending the hub<->facility map (owner-provided) — see
 backfill_facility_edges().
 
 Usage:
@@ -262,7 +262,7 @@ def hub_to_hub_costs(
 def backfill_facility_edges(*args, **kwargs):
     """Backfill mode_specific_edges / connects_to from hub shortest paths.
 
-    BLOCKED on the hub_facility_map(hub_id, facility_id) table (Julia's
+    BLOCKED on the hub_facility_map(hub_id, facility_id) table (owner
     Phase 1 step 4). Once it exists: hub_to_hub_costs() per (mode-chain,
     month) -> join hub_ids to facility_ids -> write in the existing
     mode_specific_edges / connects_to schemas so multimodal_router.py and
@@ -270,7 +270,7 @@ def backfill_facility_edges(*args, **kwargs):
     """
     raise NotImplementedError(
         "Blocked on hub_facility_map — see PLAN_network_friction_integration.md "
-        "Phase 1 step 4 (Julia writes the 384-hub <-> 1,838-facility mapping)."
+        "Phase 1 step 4 (the owner provides the 384-hub <-> 1,838-facility mapping)."
     )
 
 

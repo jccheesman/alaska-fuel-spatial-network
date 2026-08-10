@@ -1,13 +1,13 @@
 # TEST LOG — end-to-end verification runs
 
-## 2026-08-06 — mode-A end-to-end (Julia's machine, conda `akful`, macOS)
+## 2026-08-06 — mode-A end-to-end (owner's machine, conda `akful`, macOS)
 
 First full run of the merged repo on real data. Mode A = everything rebuilt
 fresh EXCEPT the frozen network-of-record stays the ingest source.
 
 ### Data staging
 
-- Canonical wide-grid rasters located on Julia's machine (the audit's
+- Canonical wide-grid rasters located on the owner's machine (the audit's
   "exists nowhere" concern is resolved): wide `lulc`/`slope`, aligned
   `permafrost`, padded `sea_ice` + `river_ice` → `inputs/friction_rasters/`.
   The June narrow-grid GEE export is archived (`gee_exports/` zip +
@@ -55,7 +55,7 @@ X₀=−1,120,050) missed the far-western Aleutians; (3) the canonical extended
 grid (28,001 cols, X₀=−2,130,150) fixed that — the Adak/Atka coverage check
 in preflight exists to catch generation-2 data masquerading as canonical.
 
-## 2026-08-07 — full four-stage run on Diego's machine (Linux, Python 3.13)
+## 2026-08-07 — full four-stage run on a second machine (Linux, Python 3.13)
 
 First end-to-end verification of **all four** workflows on one machine, and
 the first verification of workflow 02 (the 2026-08-06 run could not: the R

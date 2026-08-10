@@ -61,7 +61,7 @@ replaces the network-of-record.
   rebuild and commit.
 - **Strict NoData rule.** One NoData sample makes an edge impassable for the
   month. This is a design decision (auditable via nodata_frac), not a bug.
-- **The friction half WAS verified end-to-end on 2026-08-06** on Julia's
+- **The friction half WAS verified end-to-end on 2026-08-06** on the owner's
   machine (canonical wide-grid rasters + padded river ice located there):
   preflight all-green, mask -> stack -> QA passed, full weighting + costing
   reproduced the documented QA envelope (Road friction within [1.0, 2.625],

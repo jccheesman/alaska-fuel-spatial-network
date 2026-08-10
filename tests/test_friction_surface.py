@@ -358,7 +358,7 @@ def test_missing_waterway_mask_is_a_hard_error_by_default(tmp_path, monkeypatch)
 
     Building without the waterway corridor mask silently severs ~18% of
     final_network waterway edges, so write_friction_stack must refuse by
-    default when the mask is absent (Julia's call, 2026-08-06). The escape
+    default when the mask is absent (owner decision, 2026-08-06). The escape
     hatch is exercised by the end-to-end test above.
     """
     from friction_surface.friction_surface import write_friction_stack
