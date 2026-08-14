@@ -52,4 +52,4 @@ the committed zips via:
 | Pastick et al. 2015 | Permafrost | [USGS publication](https://www.usgs.gov/publications/distribution-near-surface-permafrost-alaska-estimates-present-and-future-conditions) · [paper](https://www.sciencedirect.com/science/article/pii/S0034425715300778) |
 | Dynamic World v1 | Land cover | [GEE catalog](https://developers.google.com/earth-engine/datasets/catalog/GOOGLE_DYNAMICWORLD_V1) |
 | UAF SNAP Historical Sea Ice Atlas | Sea ice | [SNAP catalog](https://catalog.snap.uaf.edu/geonetwork/srv/eng/catalog.search#/metadata/047e91c7-35c6-410a-a1ef-95539c1ee328) |
-| Brown et al. 2026 river-ice phenology | River ice | via the arcpy pipeline (`river_ice_full_pipeline.py` header) |
+| Brown et al. 2026 river-ice phenology | River ice | Regenerable via the arcpy pipeline (`river_ice_full_pipeline.py` header) with raw data from https://arcticdata.io/catalog/view/doi:10.18739/A2SB3X15X |
