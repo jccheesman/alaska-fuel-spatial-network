@@ -1,9 +1,7 @@
-# Friction-surface pipeline (agent-free)
+# Friction-surface pipeline 
 
 Deterministic, reproducible construction of mode-specific monthly friction
 surfaces and cost-distance edges for the Alaska bulk-fuel logistics graph.
-
-This stage is **agent-free**: no CrewAI, no LLM calls.
 
 ## Inputs
 
