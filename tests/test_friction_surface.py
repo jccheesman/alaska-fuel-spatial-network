@@ -9,7 +9,7 @@ import numpy as np
 import pytest
 import rasterio
 from rasterio.transform import from_origin
-from friction_surface.friction_surface import (  # installed package (src layout)
+from friction_surface.friction_surface import (  # installed package (source_scripts layout)
     _load_ice,
     build_mode_friction,
     load_permafrost_base,

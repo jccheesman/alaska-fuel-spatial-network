@@ -43,9 +43,9 @@ Consumer: `03_weight_network_edges.py`. QA gate: `03_qa_friction_stack.py`
 `params.json` + `registry.json` — and runs `r_oracle/build_network.R
 --node-only` (st_union → st_node → subdivision → smooth, per mode: road /
 ice / air only; the waterway is noded in Python at 50 m rounding).
-`CONTRACT_VERSION` in `src/mmnet/build.py` must equal the version in
-`src/mmnet/r_oracle/build_network.R`; full spec in
-`src/mmnet/r_oracle/CONTRACT.md`. Drift ⇒ hard error at build.
+`CONTRACT_VERSION` in `source_scripts/mmnet/build.py` must equal the version in
+`source_scripts/mmnet/r_oracle/build_network.R`; full spec in
+`source_scripts/mmnet/r_oracle/CONTRACT.md`. Drift ⇒ hard error at build.
 
 ## 4. The final_network handoff (workflow 02 → workflow 03)
 
@@ -120,8 +120,8 @@ or source data exists in this repository (see
 | Surface | Owns |
 |---|---|
 | `workflows/02_network_build/profile.yaml` | Every region-specific network choice (modes, layers, anchors, transfer/snap/bridge tolerances, hub rules, join cap, seed) — THE single copy |
-| `src/friction_surface/friction_config.py` | Every friction constant (grid, thresholds, seasons, multipliers) |
-| `src/friction_surface/friction_costs.py` | Every dollar (rates, fees, fee inference) — audited by the `derive-fuel-costs` skill |
+| `source_scripts/friction_surface/friction_config.py` | Every friction constant (grid, thresholds, seasons, multipliers) |
+| `source_scripts/friction_surface/friction_costs.py` | Every dollar (rates, fees, fee inference) — audited by the `derive-fuel-costs` skill |
 
 They are deliberately not merged: network topology knobs and friction
 constants serve different stages.

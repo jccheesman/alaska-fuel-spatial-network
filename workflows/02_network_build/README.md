@@ -1,7 +1,7 @@
 # Workflow 02 — spatial-network build (act b)
 
 Builds the connected multimodal transport graph (road + barge + air +
-seasonal ice road) with the region-agnostic `src/mmnet` engine. Every
+seasonal ice road) with the region-agnostic `source_scripts/mmnet` engine. Every
 region-specific choice is DATA in `profile.yaml` (this directory) — improve
 the model by editing the profile, not the code.
 
@@ -38,4 +38,4 @@ engine provenance).
 ## Engine docs
 
 `docs/ARCHITECTURE.md` (stage chain, R↔Python seam, extend-by-profile
-recipes) · `docs/API.md` (generated) · `src/mmnet/r_oracle/CONTRACT.md`.
+recipes) · `docs/API.md` (generated) · `source_scripts/mmnet/r_oracle/CONTRACT.md`.

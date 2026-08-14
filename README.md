@@ -16,10 +16,10 @@ folder under `workflows/`. Each is described below:
 | (c) | `workflows/03_multimodal_join/` | Sample friction along every edge, join $-rates, assemble the weighted graph | `edge_month_weights`, `edge_costs` in DuckDB |
 | (d) | `workflows/04_duckdb_export/` | Validate and document the deliverable | `outputs/fuel_network.duckdb` (4 tables) |
 
-Reusable library code lives in `src/` (installable: the `mmnet` network engine
+Reusable library code lives in `source_scripts/` (installable: the `mmnet` network engine
 and the `friction_surface` builders/config/costs). The friction surface encodes
 *environmental* traversability only (baseline 1.0); every dollar lives in
-`src/friction_surface/friction_costs.py` — that separation is enforced
+`source_scripts/friction_surface/friction_costs.py` — that separation is enforced
 throughout.
 
 > The multi-agent routing / TSP-optimization layer is **not** part of this
@@ -94,7 +94,7 @@ defines `edge_id`** for every DuckDB table, so the committed zips are
 checksummed (`inputs/MANIFEST.md`) and preserved byte-identical.
 
 **Caution:** the delivered network was built with the pre-bugfix mmnet engine;
-`src/mmnet` carries four later fixes. Rebuilding act (b) therefore produces a
+`source_scripts/mmnet` carries four later fixes. Rebuilding act (b) therefore produces a
 *different* network and invalidates every edge_id-keyed table — freeze vs
 rebuild is an open owner decision. Full provenance: `final_network/README.md`.
 
@@ -102,8 +102,8 @@ rebuild is an open owner decision. Full provenance: `final_network/README.md`.
 
 | Path | What |
 |---|---|
-| `src/mmnet/` | The region-agnostic network engine (R noding oracle included) — the single canonical copy |
-| `src/friction_surface/` | Friction builders + `friction_config.py` (all knobs) + `friction_costs.py` (all dollars) |
+| `source_scripts/mmnet/` | The region-agnostic network engine (R noding oracle included) — the single canonical copy |
+| `source_scripts/friction_surface/` | Friction builders + `friction_config.py` (all knobs) + `friction_costs.py` (all dollars) |
 | `workflows/01..04_*/` | The four steps: thin numbered drivers, per-stage READMEs, run orders |
 | `inputs/` | Every input dataset, one home (`inputs/README.md` = provenance + URLs; `MANIFEST.md` = sha256s) |
 | `final_network/` | The frozen act-(b)→(c) handoff (zips + field dictionary + checksums) |
@@ -141,7 +141,7 @@ The friction stack expects grid-aligned rasters (land cover, slope, permafrost,
 12× sea ice, 12× river ice) snapped to the canonical `lulc.tif` grid
 (EPSG:3338, 150 m, 28,000 × 16,567). They are regenerable-only (~12 GB):
 
-- **GEE** (terrain, land cover, sea ice): `src/friction_surface/friction_preprocessing/gee_friction_layer_multi_data_processing.js` in the Earth Engine Code Editor → `inputs/gee_exports/AK_Stack_150m.zip` → unzip into `inputs/friction_rasters/`.
+- **GEE** (terrain, land cover, sea ice): `source_scripts/friction_surface/friction_preprocessing/gee_friction_layer_multi_data_processing.js` in the Earth Engine Code Editor → `inputs/gee_exports/AK_Stack_150m.zip` → unzip into `inputs/friction_rasters/`.
 - **ArcGIS Pro** (river ice): `river_ice_full_pipeline.py` (edit its Configuration block; arcpy, no CLI).
 - **Alignment:** `python -m friction_surface.friction_preprocessing.align_permafrost`, then gate with `python workflows/01_friction_build/00_preflight_inputs.py`.
 

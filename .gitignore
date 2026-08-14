@@ -67,7 +67,7 @@ example_skills/
 
 # --- inputs/: the single home for every dataset (blanket-ignored, committed files opted in) ---
 # inputs/gee_exports/    — 4.7 GB AK_Stack_150m.zip: exceeds GitHub's 100 MB limit; regenerate
-#                          via src/friction_surface/friction_preprocessing GEE script
+#                          via source_scripts/friction_surface/friction_preprocessing GEE script
 # inputs/friction_rasters/ — ~7 GB slope/lulc/permafrost + sea_ice/ + river_ice/: regenerable
 #                          from gee_exports + the arcpy river-ice pipeline
 inputs/*

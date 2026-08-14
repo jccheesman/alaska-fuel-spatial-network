@@ -122,7 +122,7 @@ def stage_01_friction_build(py: str) -> None:
         gate(
             "inputs/friction_rasters/lulc.tif missing.",
             "The ~7 GB friction rasters are not committed (regenerable only).",
-            "Regenerate via src/friction_surface/friction_preprocessing/ (GEE + arcpy),",
+            "Regenerate via source_scripts/friction_surface/friction_preprocessing/ (GEE + arcpy),",
             "then re-run. See EXTERNAL_DATA.md.",
         )
     if not (ROOT / "inputs/data_for_network_build").is_dir():

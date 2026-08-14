@@ -1,6 +1,6 @@
 """Path-resolution tests for friction_surface.friction_paths.
 
-The merge moved the package to src/ and removed the import-time os.chdir;
+The merge moved the package to source_scripts/ and removed the import-time os.chdir;
 these tests pin the contract: defaults are absolute, anchored to the repo
 root, independent of the caller's CWD — and importing the module never
 changes the CWD.

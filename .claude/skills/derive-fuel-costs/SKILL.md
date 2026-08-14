@@ -3,7 +3,7 @@ name: derive-fuel-costs
 description: Procedure and toolkit for deriving, updating, and verifying the
   per-modality fuel-delivery cost rates (BASELINE_RATES_PER_GALLON_MILE) and
   intermodal transfer fees (INTERMODAL_TRANSFER_FEES) in
-  src/friction_surface/friction_costs.py. Use when the user wants to change a
+  source_scripts/friction_surface/friction_costs.py. Use when the user wants to change a
   cost rate or transfer fee, re-derive a rate from new source documents, add
   a fee for a new modal boundary, or audit cost-model consistency. Enforces
   the three-round blind-derivation evidence standard, gallon-mile
@@ -24,7 +24,7 @@ If a proposed change would break any of these, stop and surface the conflict
 before proceeding.
 
 1. **Single source of truth.** All rates, fees, ranges, and mode metadata
-   live in `src/friction_surface/friction_costs.py`. Downstream consumers
+   live in `source_scripts/friction_surface/friction_costs.py`. Downstream consumers
    (`workflows/03_multimodal_join/04_assemble_weighted_graph.py`, `outputs/tables/make_modality_cost_table.py`)
    import from it — never redefine a rate in a script, table builder, or notebook.
 
@@ -76,7 +76,7 @@ before proceeding.
 
 ## Where the canonical values live
 
-- `src/friction_surface/friction_costs.py`
+- `source_scripts/friction_surface/friction_costs.py`
   - `BASELINE_RATES_PER_GALLON_MILE` + `BASELINE_RATE_RANGES` — the four
     modality rates and their documented bands
   - `INTERMODAL_TRANSFER_FEES` — one entry per modal boundary

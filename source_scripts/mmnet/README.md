@@ -1,8 +1,8 @@
-<!-- Package doc for src/mmnet — THE single canonical copy of the engine
+<!-- Package doc for source_scripts/mmnet — THE single canonical copy of the engine
      (the two other historical copies were deleted in the 2026-08 two-repo
      merge; this one carries the 4 bugfixes: assemble reset_index mis-snap
      fix, scoped warnings, py<3.10 typing, nullable-string names).
-     Installed via the repo-root pyproject (src layout). -->
+     Installed via the repo-root pyproject (source_scripts layout). -->
 
 # mmnet — the multimodal network engine (package doc)
 
@@ -19,7 +19,7 @@ has **no region-specific code** — everything region-specific is DATA in the pr
 ## What's in here
 
 ```
-src/mmnet/
+source_scripts/mmnet/
 ├── mmnet/                    # the engine (pip-installable Python package + bundled R oracle)
 ├── skills/                   # how to USE it (Claude-Code SKILL.md files)
 │   ├── define-network-profile/     # author/extend the profile.yaml (the judgment)
@@ -31,7 +31,7 @@ src/mmnet/
 ## Install
 
 ```bash
-uv pip install -e .   # from the repo root (src layout)          # Python deps: geopandas, shapely, networkx, matplotlib, pandas, numpy, scipy, pydantic, pyyaml
+uv pip install -e .   # from the repo root (source_scripts layout)          # Python deps: geopandas, shapely, networkx, matplotlib, pandas, numpy, scipy, pydantic, pyyaml
 ```
 
 The **build step also needs R** on the PATH with `sf`, `sfnetworks`, `tidygraph`, `dplyr` (R does the

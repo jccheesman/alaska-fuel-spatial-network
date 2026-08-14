@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """check_cost_invariants.py — mechanical audit of the fuel-cost model.
 
-Run after ANY change to src/friction_surface/friction_costs.py rates, fees, or
+Run after ANY change to source_scripts/friction_surface/friction_costs.py rates, fees, or
 mode metadata:
 
     python .claude/skills/derive-fuel-costs/scripts/check_cost_invariants.py
@@ -35,7 +35,7 @@ import sys
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[4]
-sys.path.insert(0, str(REPO_ROOT / "src"))  # src layout
+sys.path.insert(0, str(REPO_ROOT / "source_scripts"))  # source_scripts layout
 
 from friction_surface import friction_costs as fc  # noqa: E402
 

@@ -130,7 +130,7 @@ def _tagged_for_contract() -> gpd.GeoDataFrame:
     """Read the native output/01b_tagged.gpkg as-is for the contract workdir.
 
     The engine writes its own region column name; the R oracle (build_network.R) maps it to the name
-    its grouping logic expects. Keeping that bridge on the R side keeps src/ region-neutral. See CONTRACT.md.
+    its grouping logic expects. Keeping that bridge on the R side keeps source_scripts/ region-neutral. See CONTRACT.md.
     """
     return gpd.read_file(out_path("01b_tagged.gpkg"))
 

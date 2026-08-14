@@ -55,7 +55,7 @@ replaces the network-of-record.
 ## Caution rows
 
 - **The network-of-record is PRE-FIX.** `final_network/*.zip` was built by the
-  old engine before `src/mmnet`'s four bugfixes (notably the reset_index
+  old engine before `source_scripts/mmnet`'s four bugfixes (notably the reset_index
   mis-snap fix). The engine and the deliverable deliberately disagree until
   the owners decide freeze-vs-rebuild. Do not "helpfully"
   rebuild and commit.
@@ -77,6 +77,6 @@ replaces the network-of-record.
   are not committed — still regenerate + review before committing any.
 - **`research/` and `diagnostics/` were removed on 2026-08-07** (build-only
   scope). They survive in git history at commit `3aa5eab`; docstrings in
-  `src/mmnet/connect_extras.py`, `src/mmnet/inspect.py` and
+  `source_scripts/mmnet/connect_extras.py`, `source_scripts/mmnet/inspect.py` and
   `workflows/02_network_build/01_prep_waterway.py` now name the prototypes
   without pointing at paths.

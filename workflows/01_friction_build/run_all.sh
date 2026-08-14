@@ -14,7 +14,7 @@ resolve_python
 if [ ! -f inputs/friction_rasters/lulc.tif ]; then
   gate "inputs/friction_rasters/lulc.tif missing." \
        "The ~7 GB friction rasters are not committed (regenerable only)." \
-       "Regenerate via src/friction_surface/friction_preprocessing/ (GEE + arcpy)," \
+       "Regenerate via source_scripts/friction_surface/friction_preprocessing/ (GEE + arcpy)," \
        "then re-run. See EXTERNAL_DATA.md."
 fi
 if [ ! -d inputs/data_for_network_build ]; then
