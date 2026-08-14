@@ -15,16 +15,6 @@ bundles into their gitignored working directories.
 
 ## Committed zips
 
-### `bulk_fuel_data.zip` (~0.4 MB)
-AEA bulk-fuel facilities and per-community delivery mode.
-
-| File | Source | Purpose |
-|---|---|---|
-| `raw/Utilities_Bulk_Fuel_Inventory.csv` | Alaska Energy Authority — [State of Alaska Geoportal](https://gis.data.alaska.gov/maps/DCCED::utilities-bulk-fuel-inventory/about) | AEA bulk fuel tank-farm inventory (facility metadata + lat/lon). One snapshot, 1,901 facilities × 61 columns, normalized to UTF-8/LF. |
-| `raw/Fuel_Delivery_Method.zip` | AEA / DCRA — [Alaska Fuel Delivery Method (Fuel Survey)](https://gis.data.alaska.gov/datasets/DCCED::fuel-delivery-method/about) | Per-community delivery-mode shapefile (`Delivery_Methods`: barge / road / ice road). Canonical source for how each community is served; read by `friction_costs.load_ice_road_communities`. |
-| `processed/bulk_fuel_sites.geojson`, `processed/bulk_fuel_sites_clean.csv` | derived from the inventory CSV | Cleaned facility set used by the graph build. |
-| `processed/sites_with_regions.csv` | derived | Per-site AEA region assignment. |
-
 ### `data_for_network_build.zip` (~33 MB)
 Multi-modal network shapefiles in EPSG:3338 (NAD83 Alaska Albers), curated in
 ArcGIS Pro. Feeds the corridor mask (workflow 01) and provenance.
@@ -36,27 +26,6 @@ ArcGIS Pro. Feeds the corridor mask (workflow 01) and provenance.
 | `ice_roads_150m_3338/Ice_Roads.shp` | Overland packed-snow tundra routes; manually edited in ArcGIS Pro. North Slope ice roads: [UAA](https://accscatalog.uaa.alaska.edu/dataset/anthropogenic-datasets-north-slope/resource/5d898316-507e-4535-8bf0-b0608d3ca83a), [AK DOT](https://www.arcgis.com/home/item.html?id=820ebeed349b484eab23ffaa685b64ef#overview), [SIRA](https://www.arcgis.com/home/item.html?id=ef4056f5fb0545698b5c4318821c8237#overview) |
 | `Flights/Airports.csv` | [OurAirports](https://ourairports.com/data/), filtered to Alaska |
 | `Flights/flight_paths_combined.csv`, `Flights/Flight Paths.xlsx` | Derived from multiple flight service websites in Alaska, manually digitized |
-
-### `region_and_census_data.zip` (~6.7 MB)
-Administrative / boundary polygons.
-
-| File | Source | Purpose |
-|---|---|---|
-| `Alaska_Energy_Authority_Library.zip` | AEA — [Alaska Energy Authority ArcGIS Hub](https://hub.arcgis.com/datasets/DCCED::alaska-energy-authority-regions/explore) | AEA regional boundary polygons. |
-| `tiger/cb_2023_us_state_500k.*` | US Census Bureau — [TIGER/Line Shapefiles](https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html) | State boundary (Alaska clip). |
-
-## Tracked plain files
-
-### `air/` — official Alaska air-mode inputs (AK DOT&PF)
-Small, diffable CSVs consumed by workflow 02's `00_normalize_raw.py`
-(they land in the interim layer under the legacy names
-`air_flight_paths_od.csv` / `airports.csv`):
-
-| File | Source | Purpose |
-|---|---|---|
-| `air/airports_ak_dotpf.csv` | [AK DOT&PF airport registry](https://gis.data.alaska.gov/) | Airport coordinates + FAA/ICAO ids. |
-| `air/flight_paths_combined.csv` | Flight-service schedules, matched to the registry by `preprocessing/build_flight_map.py` | Origin–destination flight legs. |
-| `air/flight_paths.xlsx` | source workbook for the above | Slated to move inside `network_raw.zip` once that bundle lands. |
 
 ## Pending: `network_raw.zip` (workflow 02's raw sources, ~60 MB)
 
