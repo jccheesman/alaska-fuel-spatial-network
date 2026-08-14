@@ -1,10 +1,5 @@
 # outputs/
 
-Split personality, on purpose: **committed deliverables** (publication
-figures, tables, analysis writeups) live beside **gitignored regenerables**
-(the friction stack, the network build tree, the DuckDB). This table is the
-contract for what belongs where.
-
 | Path | Tracked? | Producer | Contents |
 |---|---|---|---|
 | `figures/` | yes | `figures/scripts/*` + `workflows/01_friction_build/viz/*` | Publication figures (weighted-network monthly grids, reference grid, IDW overviews, regions, pipeline diagram, sea-ice padding) |
