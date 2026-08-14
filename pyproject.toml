@@ -45,7 +45,7 @@ dev = ["pytest>=7.1.1", "ruff"]
 gee = ["earthengine-api>=0.1.390"]   # only for re-exporting the GEE stack
 
 [tool.setuptools]
-package-dir = {"" = "src"}
+package-dir = {"" = "source_scripts"}
 packages = [
     "mmnet",
     "mmnet.steps",

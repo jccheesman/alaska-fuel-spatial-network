@@ -9,7 +9,7 @@ re-export shim in friction_config keeps existing call sites working.
 
 Path resolution does not depend on the process working directory: the
 default paths below are anchored to PROJECT_ROOT (the repository root, two
-levels above the src/friction_surface package) as absolute paths.
+levels above the source_scripts/friction_surface package) as absolute paths.
 Environment overrides are used verbatim, so a relative override is still
 resolved against the CWD.
 
@@ -24,7 +24,7 @@ import os
 # ---------------------------------------------------------------------------
 # Project root
 # ---------------------------------------------------------------------------
-# friction_paths.py lives at src/friction_surface/friction_paths.py; the
+# friction_paths.py lives at source_scripts/friction_surface/friction_paths.py; the
 # repository root is two levels up from the package directory.
 PROJECT_ROOT = os.path.dirname(
     os.path.dirname(os.path.dirname(os.path.abspath(__file__)))

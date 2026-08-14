@@ -90,7 +90,7 @@ def resolve_target(inputs_dir: Path) -> TargetGrid:
             source="target = lulc.tif (canonical reference grid)",
         )
 
-# Repo root is two levels above src/friction_surface/ (src layout).
+# Repo root is two levels above source_scripts/friction_surface/ (source_scripts layout).
 REPO = Path(__file__).resolve().parents[2]
 # Default to the pipeline's raster home (env-overridable via RASTER_DIR).
 from .friction_paths import RASTER_DIR as _RASTER_DIR  # noqa: E402

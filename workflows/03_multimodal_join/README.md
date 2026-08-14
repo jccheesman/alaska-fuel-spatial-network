@@ -32,5 +32,5 @@ python 04_assemble_weighted_graph.py   # $-rates + fees -> edge_costs (+ --smoke
 ```
 
 Stages 01–02 run from committed data alone — that pair is the CI smoke test.
-Dollars enter ONLY at stage 04, from `src/friction_surface/friction_costs.py`.
+Dollars enter ONLY at stage 04, from `source_scripts/friction_surface/friction_costs.py`.
 Figures: `viz/make_network_plots.py`.

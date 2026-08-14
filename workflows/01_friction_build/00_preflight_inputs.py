@@ -3,7 +3,7 @@
 
 Runs the cheap metadata-only grid check (check_grid_exports) followed by the
 full preflight (friction_preflight) against RASTER_DIR
-(default inputs/friction_rasters — see src/friction_surface/friction_paths.py).
+(default inputs/friction_rasters — see source_scripts/friction_surface/friction_paths.py).
 
 Run:  python workflows/01_friction_build/00_preflight_inputs.py [input_dir]
 """

@@ -85,7 +85,7 @@ knows how to unpack it.
 ### `gee_exports/AK_Stack_150m.zip` (4.7 GB)
 GEE export bundle — mirror of the friction-input rasters at 150 m /
 EPSG:3338. Exceeds GitHub's file limit; regenerate with
-`src/friction_surface/friction_preprocessing/gee_friction_layer_multi_data_processing.js`
+`source_scripts/friction_surface/friction_preprocessing/gee_friction_layer_multi_data_processing.js`
 in the Earth Engine Code Editor.
 
 | Layer | Source dataset |
@@ -99,7 +99,7 @@ in the Earth Engine Code Editor.
 `slope.tif`, `lulc.tif`, `permafrost.tif`, `sea_ice/sea_ice_{01..12}.tif`,
 `river_ice/river_ice_{01..12}.tif` — unzip the GEE stack here, then run the
 arcpy river-ice pipeline + `align_permafrost`
-(`src/friction_surface/friction_preprocessing/`). See `../EXTERNAL_DATA.md`
+(`source_scripts/friction_surface/friction_preprocessing/`). See `../EXTERNAL_DATA.md`
 for the honest inventory of what exists where.
 
 ## Regeneration / refresh

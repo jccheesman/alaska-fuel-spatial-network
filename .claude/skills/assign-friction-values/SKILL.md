@@ -17,7 +17,7 @@ These rules are non-negotiable. If a proposed change would break any of them,
 stop and surface the conflict to the user before proceeding.
 
 1. **Single source of truth.** All friction multipliers and thresholds live in
-   `src/friction_surface/friction_config.py`. Never hardcode a friction value in a
+   `source_scripts/friction_surface/friction_config.py`. Never hardcode a friction value in a
    script, notebook, or new module — import it from `friction_config`.
 
 2. **Friction is environmental only, baseline 1.0.** Friction values represent
@@ -58,7 +58,7 @@ Do NOT trigger for:
 
 ## Where the canonical values live
 
-- `src/friction_surface/friction_config.py` — all multipliers, thresholds, constants
+- `source_scripts/friction_surface/friction_config.py` — all multipliers, thresholds, constants
   - `LULC_FRICTION` — Dynamic World class → multiplier
   - `PERMAFROST_ZONE_BREAKS` + `PERMAFROST_ZONE_MULTIPLIERS` — binned modifier
   - `SEA_ICE_THRESHOLD`, `RIVER_ICE_THRESHOLD` — ice gating cutoffs

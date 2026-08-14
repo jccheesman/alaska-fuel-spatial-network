@@ -28,10 +28,10 @@ checksummed below and must stay **byte-identical**.
 
 This network was exported on **2026-07-20** by the *original* vendored mmnet
 copy in `alaska_network_mmnet` — an engine version that predates the four
-fixes now carried by `src/mmnet` (most relevantly the `assemble.py`
+fixes now carried by `source_scripts/mmnet` (most relevantly the `assemble.py`
 `roads.reset_index(drop=True)` mis-snap fix). Consequences:
 
-- `src/mmnet` can **no longer reproduce these files bit-for-bit**. A rebuild
+- `source_scripts/mmnet` can **no longer reproduce these files bit-for-bit**. A rebuild
   with the fixed engine may change hub snapping, hence counts, hence the
   edge-type inventory and every edge_id-keyed table.
 - The frozen network stays the network-of-record for the paper **until the

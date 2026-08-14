@@ -78,7 +78,7 @@ whole run — the network-of-record was never touched.
 
 ### Confirmed: the engine/deliverable divergence is real and measurable
 
-Rebuilding stage 02 with the fixed `src/mmnet` yields **90,876 edges** against
+Rebuilding stage 02 with the fixed `source_scripts/mmnet` yields **90,876 edges** against
 the frozen deliverable's **90,921** — a 45-edge gap. The pre-fix/post-fix
 disagreement documented in `CLAUDE.md` is therefore not hypothetical; it has a
 number now. Freeze-vs-rebuild remains an open owner decision.
@@ -157,8 +157,8 @@ zip sha256s unchanged against the CI pins).
   `qa/qa_river_ice_thresholds.py`. Prose only — no logic touched. Three
   LIVE-CODE constants still name the old layout and were deliberately left
   for an owner decision: `workflows/01_friction_build/viz/plot_sea_ice_padding.py:32`,
-  `src/friction_surface/qa/compare_lulc_grids.py:28`,
-  `src/friction_surface/qa/qa_river_ice_thresholds.py:40`.
+  `source_scripts/friction_surface/qa/compare_lulc_grids.py:28`,
+  `source_scripts/friction_surface/qa/qa_river_ice_thresholds.py:40`.
 - The 37 "Setting the shape on a NumPy array" DeprecationWarnings DID
   reproduce under the current lock (Python 3.13.3 / NumPy 2.5.1).
   `-W error::DeprecationWarning` traced them to rasterio's
@@ -187,7 +187,7 @@ zip sha256s unchanged against the CI pins).
   `GATE_EXIT=3` skip-vs-fail summary, byte-identical wording). Supports
   `--only <stage>` and `--profile`. The bash drivers are untouched.
 - Portability audit: `shell=True|os.system|/tmp` grep over
-  src/workflows/tools is clean; the one fix was `src/mmnet/build.py`
+  source_scripts/workflows/tools is clean; the one fix was `source_scripts/mmnet/build.py`
   resolving `Rscript` via `shutil.which` with a clear install message when
   absent (the R oracle is a documented every-OS requirement, not a Windows
   bug).

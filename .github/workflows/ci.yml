@@ -32,7 +32,7 @@ jobs:
       # .claude/skills ships runnable scripts (the build playbooks), so they are
       # linted like the rest of the tree rather than drifting unchecked.
       - name: Ruff
-        run: uv run ruff check src workflows tools tests .claude
+        run: uv run ruff check source_scripts workflows tools tests .claude
 
       - name: Pytest
         run: uv run pytest tests/ -v

@@ -30,11 +30,11 @@ slope, lulc, permafrost, sea_ice/{01..12}, river_ice/{01..12}, all snapped to
 
 External preprocessing (before this workflow can run at all): the GEE export
 script + arcpy river-ice pipeline + `align_permafrost` under
-`src/friction_surface/friction_preprocessing/`.
+`source_scripts/friction_surface/friction_preprocessing/`.
 
 ## Outputs
 
 `outputs/01_friction_build/`: `waterway_mask_150m.tif` +
 `friction_stack/{overland.tif, road_base.tif, barge_01..12.tif}` — consumed by
-workflow 03's weighting stage. Knobs: `src/friction_surface/friction_config.py`
+workflow 03's weighting stage. Knobs: `source_scripts/friction_surface/friction_config.py`
 (single source of truth). Figure generators: `viz/`.
