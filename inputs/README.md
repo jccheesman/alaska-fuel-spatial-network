@@ -1,4 +1,4 @@
-# inputs/ — every input dataset, one home
+# inputs/ 
 
 Source data for all four workflows. Anything too large for git is
 regenerable; the "Source" columns point at the originals so every input can
@@ -63,6 +63,14 @@ in the Earth Engine Code Editor.
 | permafrost | [Pastick et al. 2015](https://www.sciencedirect.com/science/article/pii/S0034425715300778) ([USGS](https://www.usgs.gov/publications/distribution-near-surface-permafrost-alaska-estimates-present-and-future-conditions)) |
 | land cover | [Dynamic World V1](https://developers.google.com/earth-engine/datasets/catalog/GOOGLE_DYNAMICWORLD_V1) (GEE) |
 | sea ice (12 monthly medians) | [UAF SNAP Historical Sea Ice Atlas](https://catalog.snap.uaf.edu/geonetwork/srv/eng/catalog.search#/metadata/047e91c7-35c6-410a-a1ef-95539c1ee328) |
+
+**The final layers are alos hosted on GEE. Final friction stack TIF files are hosted on Google Earth Engine at:**
+
+Barge_monthly Image Collection: https://code.earthengine.google.com/?asset=projects/gee-friction-layer-processing/assets/friction_stack_final/barge_monthly
+
+Overland Friction: https://code.earthengine.google.com/?asset=projects/gee-friction-layer-processing/assets/friction_stack_final/overland_base
+
+Road_base Friction: https://code.earthengine.google.com/?asset=projects/gee-friction-layer-processing/assets/friction_stack_final/road_base
 
 ### `friction_rasters/` (~7 GB)
 `slope.tif`, `lulc.tif`, `permafrost.tif`, `sea_ice/sea_ice_{01..12}.tif`,
