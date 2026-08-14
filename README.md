@@ -37,9 +37,9 @@ Steps (a) and (b) need regenerable-only inputs — each stage's
 `run_all.sh` gates on what is missing and prints exactly how to regenerate it
 (`EXTERNAL_DATA.md` is the honest inventory of what exists where).
 
-Final friction stack TIF files are hosted on Google Earth Engine at:
+**Final friction stack TIF files are hosted on Google Earth Engine at:**
+Barge_monthly Image Collection: https://code.earthengine.google.com/?asset=projects/gee-friction-layer-processing/assets/friction_stack_final/barge_monthly  
 
-Barge_monthly Image Collection: https://code.earthengine.google.com/?asset=projects/gee-friction-layer-processing/assets/friction_stack_final/barge_monthly 
 Overland Friction: https://code.earthengine.google.com/?asset=projects/gee-friction-layer-processing/assets/friction_stack_final/overland_base
 Road_base Friction: https://code.earthengine.google.com/?asset=projects/gee-friction-layer-processing/assets/friction_stack_final/road_base
 
