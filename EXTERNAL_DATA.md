@@ -45,7 +45,7 @@ the committed zips via:
 | GRIP4 global roads (CC-BY) | Road network merge (Canada stitch) | [GLOBIO GRIP download](https://www.globio.info/download-grip-dataset) |
 | National Waterway Network (USACE) | Waterway network | [USACE GeoSpatial](https://geospatial-usace.opendata.arcgis.com/maps/ace7645d305647448a84492a3b909d48) · [BTS/NTAD](https://geodata.bts.gov/datasets/national-waterway-network-lines) |
 | North Slope ice roads | Overland ice roads | [UAA ACCS](https://accscatalog.uaa.alaska.edu/dataset/anthropogenic-datasets-north-slope/resource/5d898316-507e-4535-8bf0-b0608d3ca83a) · [AKDOT](https://www.arcgis.com/home/item.html?id=820ebeed349b484eab23ffaa685b64ef) · [SIRA](https://www.arcgis.com/home/item.html?id=ef4056f5fb0545698b5c4318821c8237) |
-| AK DOT&PF airport registry + flight schedules | Air mode | tracked at `inputs/air/` |
+| AK DOT&PF airport registry + flight schedules | Air mode | located with inputs/data_for_network_build.zip/Flights |
 | OurAirports | Airports (legacy provenance) | [ourairports.com/data](https://ourairports.com/data/) |
 | US Census TIGER/Line (2022/2023) | Places, boroughs, state boundary | [TIGER/Line Shapefiles](https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html) |
 | FABDEM V1 | Slope / DEM | [GEE community catalog](https://gee-community-catalog.org/projects/fabdem/) |
