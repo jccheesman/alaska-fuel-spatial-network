@@ -38,9 +38,10 @@ Steps (a) and (b) need regenerable-only inputs — each stage's
 (`EXTERNAL_DATA.md` is the honest inventory of what exists where).
 
 Final friction stack TIF files are hosted on Google Earth Engine at:
-Barge_monthly Image Collection:
-Overland Friction: 
-Road_base Friction:
+
+Barge_monthly Image Collection: https://code.earthengine.google.com/?asset=projects/gee-friction-layer-processing/assets/friction_stack_final/barge_monthly 
+Overland Friction: https://code.earthengine.google.com/?asset=projects/gee-friction-layer-processing/assets/friction_stack_final/overland_base
+Road_base Friction: https://code.earthengine.google.com/?asset=projects/gee-friction-layer-processing/assets/friction_stack_final/road_base
 
 The run scripts find the project interpreter themselves (active `$VIRTUAL_ENV`,
 then `.venv/bin/python`, then `python3` with a warning), so no activation step
