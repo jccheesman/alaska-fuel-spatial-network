@@ -21,7 +21,7 @@ requires-python = ">=3.10"
 dependencies = [
     # geo core (pins carried over from the friction repo's requirements.txt)
     "geopandas==1.1.1",
-    "pandas==2.2.2",
+    "pandas==2.2.3",  # 2.2.2 has no cp313 wheels; its sdist build segfaults on Python 3.13 (pyogrio datetime parse)
     "numpy>=1.24.0",
     "shapely>=2.0.0",
     "pyproj>=3.6.0",
@@ -37,7 +37,6 @@ dependencies = [
     # figures + docs builds
     "matplotlib==3.10.0",
     "pypdf>=4.0.0",
-    "nbformat",                   # tools/build_notebooks.py
 ]
 
 [project.optional-dependencies]
