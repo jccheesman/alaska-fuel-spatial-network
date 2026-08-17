@@ -39,6 +39,16 @@ fixes now carried by `source_scripts/mmnet` (most relevantly the `assemble.py`
   inventory in `02_load_final_network.py`, `edge_month_weights`, and
   `edge_costs` — and re-quantify the mis-snap fix's real impact.
 
+**Impact quantified (2026-08-17).** A full stage-02 rebuild with the fixed
+engine reproduced this network exactly: identical 82,300 nodes / 90,921 edges,
+all 384 hub snap positions identical (max displacement 0.00 m), node-coordinate
+and edge-length multisets identical at 0.1 m rounding (91,610.5 km both). The
+`reset_index` mis-snap bug never fired on the Alaska data. The single
+difference is labeling: the fixed engine tags 36 ice-involved `Bridge` edges
+as `IceRoadConnector` directly — exactly the `Weld`(1,331)/`IceRoadConnector`(36)
+split workflow 03 already derives at ingest. The freeze is therefore
+evidence-backed: bytes differ from a rebuild only in labels, not geometry.
+
 ## Checksums (sha256; also in `inputs/MANIFEST.md`)
 
 | Zip | sha256 |

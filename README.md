@@ -111,8 +111,7 @@ rebuild is an open owner decision. Full provenance: `final_network/README.md`.
 | `inputs/` | Available input datasets located here, open-source dataset information provided |
 | `final_network/` | The frozen act-(b)→(c) handoff; this step is regenrable with source scripts |
 | `outputs/` | Gitignored regenerables + committed tables/analysis + the DuckDB deliverable |
-| `docs/` | `ARCHITECTURE.md` (engine design), `DATA_CONTRACTS.md` (every inter-stage contract), `API.md` |
-| `supplementary/` | Blind cost-rate derivations + verification backing every number in `friction_costs.py` |
+| `docs/` | `ARCHITECTURE.md` (engine design), `DATA_CONTRACTS.md` (every inter-stage contract) |
 | `tests/` | pytest suite (run by CI) |
 | `.claude/skills/` | Six procedural playbooks (friction, costs, network profile/build) |
 

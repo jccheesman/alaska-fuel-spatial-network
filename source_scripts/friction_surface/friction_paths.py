@@ -20,6 +20,9 @@ absolutely, so scripts can run from any working directory.)
 
 from __future__ import annotations
 import os
+import sys
+import logging
+from datetime import datetime
 
 # ---------------------------------------------------------------------------
 # Project root
@@ -147,3 +150,28 @@ def get_network_path(key: str) -> str:
             f"Unknown network key {key!r}; expected one of {sorted(NETWORK_FILES)}"
         )
     return NETWORK_FILES[key]
+
+
+def setup_logging(log_dir=None):
+    """Configure logging to both console and a timestamped log file.
+
+    Args:
+        log_dir: Directory for the log file. Defaults to <repo root>/outputs,
+            anchored absolutely so callers work from any CWD.
+    """
+    if log_dir is None:
+        log_dir = os.path.join(PROJECT_ROOT, "outputs")
+    os.makedirs(log_dir, exist_ok=True)
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    log_file = os.path.join(log_dir, f"pipeline_{timestamp}.log")
+
+    logging.basicConfig(
+        level=logging.INFO,
+        format="%(asctime)s [%(levelname)s] %(message)s",
+        handlers=[
+            logging.FileHandler(log_file),
+            logging.StreamHandler(sys.stdout),
+        ],
+    )
+    print(f"Logging to: {log_file}")
+    return log_file
