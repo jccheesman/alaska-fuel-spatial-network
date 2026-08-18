@@ -11,7 +11,7 @@ Outputs of the workflow are managed in this folder.
 | `01_friction_build/` | **no** | workflow 01 | Waterway corridor mask + the 14-file friction stack (~288 MB, regenerable) |
 | `02_network_build/` | **no** | workflow 02 | The mmnet project dir: `output/` gpkg stages + QGIS projects, `reports/` |
 | `fuel_network.duckdb` | **no** | workflows 03–04 | The 4-table weighted-network database (~30 MB, regenerable) |
-| `pipeline_*.log` | **no** | `pipeline_utils.setup_logging` | Timestamped run logs |
+| `pipeline_*.log` | **no** | `friction_paths.setup_logging` | Timestamped run logs |
 
 
 ## Related docs

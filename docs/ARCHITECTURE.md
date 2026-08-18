@@ -4,7 +4,7 @@
 transport layers. It is **region-agnostic**: every region-specific value is DATA in one
 `profile.yaml`; the package code never hard-codes a region, mode, path, or tolerance.
 
-For the per-function reference see [`API.md`](API.md) (auto-generated). For the Python↔R file
+For the Python↔R file
 contract see [`../mmnet/r_oracle/CONTRACT.md`](../mmnet/r_oracle/CONTRACT.md).
 
 ## The three pieces
@@ -140,8 +140,7 @@ Python owns every connection. There is no other R path.
 required before the build), `02_prep_airways.py` (geocode OD → airways/air_nodes + boundary),
 `04_build_network.py` (validate + run_pipeline), `05_verify_north_slope.py` (assertion gate),
 `06_export_final_network.py` (the frozen handoff), `viz/plot_network.py` (static PNG),
-`viz/export_qgis.py` (styled `.qgz` + GeoPackage); plus `tools/build_notebooks.py` (per-step
-notebooks) and `tools/gen_api_docs.py` (this doc set's `API.md`). Typical order:
+`viz/export_qgis.py` (styled `.qgz` + GeoPackage). Typical order:
 `00 → 01 → 02 → 04 → 05 → 06`.
 
 ### Air data (the official sources)

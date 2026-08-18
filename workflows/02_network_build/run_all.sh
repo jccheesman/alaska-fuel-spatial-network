@@ -32,7 +32,9 @@ if [ ! -d data/raw ] || [ -z "$(ls -A data/raw 2>/dev/null)" ]; then
        "$PY tools/extract_inputs.py   (needs inputs/network_raw.zip — see inputs/README.md)"
 fi
 
-if [ ! -d data/interim ] || [ -z "$(ls -A data/interim 2>/dev/null)" ]; then
+# Gate on the MANIFEST 00_normalize_raw writes LAST, not on mere non-emptiness:
+# a crashed prep leaves a partial data/interim that would otherwise skip prep.
+if [ ! -f data/interim/MANIFEST.md ]; then
   echo "######## 0-2. prep: normalize_raw -> prep_waterway -> prep_airways ########"
   run_step "00_normalize_raw" "$PY" "$HERE/00_normalize_raw.py"
   run_step "01_prep_waterway" "$PY" "$HERE/01_prep_waterway.py"

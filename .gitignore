@@ -19,7 +19,7 @@ venv/
 env/
 .env/
 
-# --- Notebooks: checkpoints + executed copies are regenerable (tools/build_notebooks.py) ---
+# --- Notebook junk ---
 .ipynb_checkpoints/
 *.executed.ipynb
 
@@ -113,7 +113,7 @@ research/**/out/
 research/**/*.html
 research/**/*_files/
 
-# --- Logs (timestamped, written by pipeline_utils.setup_logging) ---
+# --- Logs (timestamped, written by friction_paths.setup_logging) ---
 *.log
 
 # --- Guards: internal-only staging that must never land in the public repo ---

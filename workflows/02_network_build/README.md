@@ -38,4 +38,4 @@ engine provenance).
 ## Engine docs
 
 `docs/ARCHITECTURE.md` (stage chain, R↔Python seam, extend-by-profile
-recipes) · `docs/API.md` (generated) · `source_scripts/mmnet/r_oracle/CONTRACT.md`.
+recipes) · `source_scripts/mmnet/r_oracle/CONTRACT.md`.

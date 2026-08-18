@@ -6,7 +6,7 @@ with `mmnet.viz.plot_network`: edges colored by mode, hubs sized by capacity, po
 anchors. The view is clipped to the Alaska bounding box so a handful of off-map outliers (a few
 air OD endpoints whose codes geocoded to non-Alaska airports) don't squash the state into a dot.
 
-Writes `reports/figs/03_alaska_network.png`.
+Writes `outputs/02_network_build/reports/figs/03_alaska_network.png`.
 
 Usage:
     python workflows/02_network_build/viz/plot_network.py
@@ -27,7 +27,7 @@ import geopandas as gpd
 ROOT = Path(__file__).resolve().parents[3]  # repo root
 PROJ = ROOT / "outputs" / "02_network_build"  # mmnet project dir: engine writes PROJ/output + PROJ/reports
 sys.path.insert(0, str(ROOT))                      # make the vendored mmnet importable
-os.environ.setdefault("NETWEAVE_PROFILE", str(ROOT / "profile.yaml"))
+os.environ.setdefault("NETWEAVE_PROFILE", str(ROOT / "workflows" / "02_network_build" / "profile.yaml"))
 os.environ.setdefault("NETWEAVE_PROJECT", str(ROOT))
 
 from mmnet import viz as mv  # noqa: E402
@@ -63,6 +63,7 @@ def main() -> None:
         point_overlays={"ports": ports.cx[minx:maxx, miny:maxy],
                         "airports": air.cx[minx:maxx, miny:maxy]},
         dpi=240,
+        out_dir=PROJ / "reports" / "figs",
     )
     print(f"WROTE: {Path(png).relative_to(ROOT)}")
 

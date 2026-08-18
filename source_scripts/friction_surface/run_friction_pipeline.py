@@ -17,7 +17,7 @@ import logging
 import time
 from pathlib import Path
 from .friction_surface import write_friction_stack
-from .pipeline_utils import setup_logging
+from .friction_paths import setup_logging
 logger = logging.getLogger(__name__)
 
 REQUIRED_STATIC = ("slope.tif", "lulc.tif", "permafrost.tif")
