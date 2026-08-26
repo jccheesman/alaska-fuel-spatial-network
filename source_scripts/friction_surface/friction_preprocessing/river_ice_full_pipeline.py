@@ -7,7 +7,9 @@ to 12 monthly river-ice probability rasters at 150 m EPSG:3338.
 3 periods (early/middle/late) per reach.
 
 - Spatial fill: per-polygon median (wide rivers) + IDW (narrow rivers / gaps),
-masked to NHDArea polygons union 200 m buffered NHDFlowline.
+masked to NHDArea polygons union 200 m buffered NHDFlowline. Cells with no
+source at all are left NoData for the friction build to fill under its own
+distance cap -- see the note in process_data_month.
 
 Run with Pro's Python environment:
     "C:\\Program Files\\ArcGIS\\Pro\\bin\\Python\\scripts\\propy.bat" river_ice_full_pipeline.py
@@ -21,7 +23,6 @@ import os
 import arcpy
 from arcpy.sa import (
     Idw, ZonalStatisticsAsTable, Con, IsNull, Raster, RadiusVariable,
-    EucAllocation,
 )
 
 
@@ -400,15 +401,23 @@ def process_data_month(m, SCRATCH_GDB, MASK_DIR,
     combined = Con(IsNull(poly_r), idw_masked, poly_r)
     clamped  = Con(combined < 0, 0, Con(combined > 1, 1, combined))
 
-    # Fill NoData gaps inside the river mask using nearest-neighbor
-    # allocation: each unobserved cell inherits the value of the closest
-    # observed cell. This is season-aware (winter gaps inherit iced
-    # values, summer gaps inherit open values) without needing
-    # month-specific defaults. Cells outside the river mask stay NoData,
-    # so the output is clipped exactly to the river network.
-    mask_r  = Raster(river_mask_ras)
-    nn_fill = EucAllocation(clamped)
-    final   = Con(~IsNull(mask_r), Con(IsNull(clamped), nn_fill, clamped))
+    # Gaps inside the river mask are deliberately left as NoData.
+    #
+    # This used to be EucAllocation(clamped). That was wrong: EucAllocation
+    # treats its input as a ZONE raster, so a float p_ice in [0, 1] is
+    # truncated to an integer before allocation. Every gap cell inherited 0
+    # (or 1, for a source cell at exactly 1.0) rather than its neighbour's
+    # actual value. Measured on the Jan 2026 output: 73,526 gap cells held
+    # only 85 distinct values, 84% of them exactly 0.0 -- i.e. "open water"
+    # -- of which 4,894 sit on the NWN river corridor and were read
+    # downstream as navigable in January. See docs/TEST_LOG.md.
+    #
+    # Leaving them NoData hands the gap-filling to the friction build's own
+    # cascade (friction_surface.extend_ice_nearest -> fill_by_nearest_median),
+    # which is distance-capped at RIVER_ICE_FILL_MAX_KM and clipped to the
+    # river mask. One fill policy instead of two, and the capped one.
+    mask_r = Raster(river_mask_ras)
+    final  = Con(~IsNull(mask_r), clamped)
 
     final_gdb = os.path.join(SCRATCH_GDB, "final_{}".format(mm))
     final.save(final_gdb)
@@ -425,9 +434,10 @@ def process_data_month(m, SCRATCH_GDB, MASK_DIR,
     )
     print("  -> {}".format(out_tif))
 
-    # Per-pixel provenance: 1=polygon-median, 2=IDW, 3=NN-fallback. NoData
-    # outside the river mask. Lets downstream code distinguish which fill
-    # stage produced each cell (the value raster alone does not carry this).
+    # Per-pixel provenance: 1=polygon-median, 2=IDW, 3=no source here, left
+    # NoData for the friction build's capped cascade to fill. NoData outside
+    # the river mask. Lets downstream code distinguish which stage produced
+    # each cell (the value raster alone does not carry this).
     prov = Con(~IsNull(mask_r),
                Con(~IsNull(poly_r), 1,
                    Con(~IsNull(idw_masked), 2, 3)))

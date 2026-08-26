@@ -33,8 +33,16 @@ Design principles
    runner. With road_base.tif that is 14 files on disk backing the 24
    logical entries. Barge navigability is (LULC water | rasterized waterway
    network) & ~ice — the waterway mask recovers rivers narrower than a
-   150 m pixel, and river ice is nearest-filled onto network cells the
+   150 m pixel, and river ice is nearest-filled onto river-network cells the
    IDW product does not cover so they stay seasonally gated.
+5. The two ice products have DISJOINT domains and are not interchangeable.
+   Sea ice gates salt water; river ice gates the freshwater-river subset of
+   the waterway network (waterway_river_mask_150m.tif) and nothing else.
+   Both the nearest-fill target and the river-ice gate are clipped to that
+   subset. Letting river ice reach salt water closes the Gulf of Alaska,
+   the Inside Passage and Kodiak every winter, which is false — those routes
+   carry year-round commercial barge service. The real seasonal window is
+   Bering/Beaufort and the sea-ice climatology already produces it.
 
 """
 
@@ -55,6 +63,8 @@ from .friction_config import (
     MODES,
     PERMAFROST_ZONE_BREAKS,
     PERMAFROST_ZONE_MULTIPLIERS,
+    RIVER_ICE_FALLBACK_K,
+    RIVER_ICE_FILL_MAX_KM,
     RIVER_ICE_THRESHOLD,
     ROAD_FRICTION,
     SEA_ICE_THRESHOLD,
@@ -62,7 +72,7 @@ from .friction_config import (
     SLOPE_THRESHOLDS,
     WATER_FRICTION_BARGE,
 )
-from .friction_paths import WATERWAY_MASK_TIF
+from .friction_paths import WATERWAY_MASK_TIF, WATERWAY_RIVER_MASK_TIF
 
 logger = logging.getLogger(__name__)
 
@@ -340,54 +350,139 @@ def _load_ice(
     return arr
 
 
+def fill_by_nearest_median(
+    ice: np.ndarray,
+    coverage: np.ndarray,
+    target_mask: np.ndarray,
+    k: int = RIVER_ICE_FALLBACK_K,
+) -> np.ndarray:
+    """Give unfillable river cells the median p_ice of their k nearest neighbours.
+
+    Third and last tier of the river-ice gate, for cells the IDW does not
+    cover AND that have no covered cell within RIVER_ICE_FILL_MAX_KM. Those
+    are regionally clustered — Egegik, Naknek and Ugashik have no coverage at
+    all — so leaving them at p_ice = 0 would open the whole of Bristol Bay in
+    midwinter, and borrowing the single nearest covered cell is what the cap
+    exists to forbid.
+
+    A k-nearest MEDIAN keeps the reach statistical rather than pointwise while
+    letting geography bound it on both axes. An earlier version of this
+    function used a latitude band instead and shipped a real defect: Egegik's
+    band contained only Taku, Stikine and the mislabelled "Porcupine" polygon
+    — all Southeast Alaska rainforest rivers 1,200-1,400 km east — because
+    Kvichak and Nushagak sit just above its ceiling. Egegik came out navigable
+    in January. Alaska's freeze gradient is not north-south enough for a band
+    to be safe. See RIVER_ICE_FALLBACK_K.
+
+    Cells keep their existing value if there is no coverage at all.
+    """
+    if not target_mask.any() or not coverage.any():
+        return ice
+    from scipy.spatial import cKDTree  # local import; scipy only needed here
+
+    src_rc = np.argwhere(coverage)
+    src_val = ice[coverage]
+    kk = int(min(k, len(src_rc)))
+    tgt_rc = np.argwhere(target_mask)
+    _, idx = cKDTree(src_rc).query(tgt_rc, k=kk, workers=-1)
+    if kk == 1:
+        idx = idx[:, None]
+    out = ice.copy()
+    out[tgt_rc[:, 0], tgt_rc[:, 1]] = np.median(src_val[idx], axis=1)
+    logger.info(
+        "river-ice fallback: %d cell(s) set to the median of their %d "
+        "nearest covered cells", len(tgt_rc), kk,
+    )
+    return out
+
+
 def extend_ice_nearest(
     ice: np.ndarray,
     coverage: np.ndarray,
     target_mask: np.ndarray,
     cache: dict,
-) -> np.ndarray:
+    max_distance_px: float | None = None,
+) -> tuple[np.ndarray, np.ndarray]:
     """Fill ice values onto uncovered target cells from the nearest covered cell.
 
-    The river-ice IDW product covers the main-stem rivers only (~13% of the
-    waterway-network corridor). Cells under target_mask (the rasterized
-    waterway network) that lack coverage borrow the p_ice of the nearest
-    covered cell — tributaries freeze with their trunk stream — preserving
-    the north-south freeze gradient that a blanket seasonal window would
-    lose. This is an interim measure: the proper fix (re-running the ArcGIS
-    IDW over the full waterway network) supersedes it when that pipeline is
-    next touched.
+    The river-ice IDW product covers the main-stem rivers only. Cells under
+    target_mask that lack coverage borrow the p_ice of the nearest covered
+    cell — tributaries freeze with their trunk stream — preserving the
+    north-south freeze gradient that a blanket seasonal window would lose.
+    This is an interim measure: the proper fix (re-running the ArcGIS IDW
+    over the full river network) supersedes it when that pipeline is next
+    touched.
 
-    The nearest-source index map depends only on (coverage, target_mask).
-    The river-ice footprint is MOSTLY month-invariant (months 1, 4-11
-    share one footprint; 2, 3 and 12 differ slightly), so the map is
-    memoized in `cache` keyed on the coverage/target sums and recomputed
-    only when the footprint actually changes (5 computes per 12-month
-    run, ~seconds each).
+    target_mask MUST be the FRESHWATER-RIVER corridor, not the full waterway
+    corridor. The query below is an unbounded nearest-neighbour lookup: hand
+    it a saltwater cell and it will cheerfully return the ice probability of
+    an interior river hundreds of kilometres away. Passing the full waterway
+    mask (the pre-2026-08 behaviour) closed the entire Alaskan marine network
+    Nov-Apr — February had 0 of 501,684 waterway cells navigable, Gulf of
+    Alaska, Inside Passage and Kodiak included, against year-round
+    twice-weekly commercial barge service on those exact routes. Salt water is
+    gated by the sea-ice climatology, which already closes the Bering and
+    Beaufort correctly and leaves the Gulf open.
 
-    Returns a copy of `ice` with the target cells filled.
+    max_distance_px bounds the reach. Unbounded, this borrows across
+    watersheds: measured against the shipped stack, Egegik cells reach a
+    median 90.7 km, Ugashik 149.6 km and "Dahl Creek" 227.5 km for their
+    p_ice, while Yukon and Tanana cells reach 1.5 km and 0.8 km. The first
+    kind is interpolation, the second is fabrication, and only a distance
+    bound separates them. See RIVER_ICE_FILL_MAX_KM.
+
+    The nearest-source index map depends only on (coverage, target_mask,
+    max_distance_px). The river-ice footprint is MOSTLY month-invariant
+    (months 1, 4-11 share one footprint; 2, 3 and 12 differ slightly), so the
+    map is memoized in `cache` keyed on those and recomputed only when the
+    footprint actually changes (5 computes per 12-month run, ~seconds each).
+
+    Returns (filled_ice, unfilled_mask). unfilled_mask marks target cells
+    with no covered cell inside the bound — the caller is expected to hand
+    them to fill_by_nearest_median rather than leave them at zero, which would
+    read as "never freezes".
     """
     from scipy.spatial import cKDTree  # local import; scipy only needed here
 
-    key = (int(coverage.sum()), int(target_mask.sum()))
+    bound = np.inf if max_distance_px is None else float(max_distance_px)
+    key = (int(coverage.sum()), int(target_mask.sum()), bound)
     if cache.get("key") != key:
         src_rc = np.argwhere(coverage)
         tgt_rc = np.argwhere(target_mask & ~coverage)
-        _, nearest = cKDTree(src_rc).query(tgt_rc, k=1, workers=-1)
-        cache.update(
-            key=key,
-            tgt_rows=tgt_rc[:, 0], tgt_cols=tgt_rc[:, 1],
-            src_rows=src_rc[nearest, 0], src_cols=src_rc[nearest, 1],
-        )
-        logger.info(
-            "river-ice nearest-fill map: %d covered cells -> %d target cells",
-            len(src_rc), len(tgt_rc),
-        )
+        if len(src_rc) == 0 or len(tgt_rc) == 0:
+            empty = np.empty(0, dtype=np.intp)
+            cache.update(key=key, tgt_rows=empty, tgt_cols=empty,
+                         src_rows=empty, src_cols=empty,
+                         un_rows=tgt_rc[:, 0] if len(tgt_rc) else empty,
+                         un_cols=tgt_rc[:, 1] if len(tgt_rc) else empty)
+        else:
+            # Misses come back as dist=inf, index=len(src_rc).
+            dist, nearest = cKDTree(src_rc).query(
+                tgt_rc, k=1, distance_upper_bound=bound, workers=-1)
+            ok = np.isfinite(dist)
+            cache.update(
+                key=key,
+                tgt_rows=tgt_rc[ok, 0], tgt_cols=tgt_rc[ok, 1],
+                src_rows=src_rc[nearest[ok], 0], src_cols=src_rc[nearest[ok], 1],
+                un_rows=tgt_rc[~ok, 0], un_cols=tgt_rc[~ok, 1],
+            )
+            filled = int(ok.sum())
+            logger.info(
+                "river-ice nearest-fill map: %d covered cells -> %d target "
+                "cells; %d filled within %.0f km, %d beyond the cap "
+                "(handed to the k-nearest-median fallback)",
+                len(src_rc), len(tgt_rc), filled,
+                bound * 0.15 if np.isfinite(bound) else float("inf"),
+                len(tgt_rc) - filled,
+            )
 
     out = ice.copy()
     out[cache["tgt_rows"], cache["tgt_cols"]] = ice[
         cache["src_rows"], cache["src_cols"]
     ]
-    return out
+    unfilled = np.zeros(ice.shape, dtype=bool)
+    unfilled[cache["un_rows"], cache["un_cols"]] = True
+    return out, unfilled
 
 
 def build_mode_friction(
@@ -398,6 +493,7 @@ def build_mode_friction(
     river_ice_present: np.ndarray,
     mode: str,
     waterway_mask: np.ndarray | None = None,
+    river_domain: np.ndarray | None = None,
 ) -> np.ndarray:
     """Produce a mode-specific monthly friction surface.
 
@@ -426,6 +522,15 @@ def build_mode_friction(
             pair this with the nearest-filled river ice (see
             extend_ice_nearest) so recovered tributaries stay seasonally
             gated. Overland is unaffected — its water_mask is unchanged.
+        river_domain: optional boolean mask of cells where river ice is
+            PHYSICALLY POSSIBLE — the rasterized freshwater-river subset of
+            the waterway network (waterway_river_mask_150m.tif). River-ice
+            blocking is restricted to these cells; everywhere else on the
+            water only sea ice can close a pixel. This is a second, cheap
+            line of defence behind the target-mask restriction in
+            extend_ice_nearest: even a river_ice raster with stray values
+            over salt water cannot then freeze the Gulf of Alaska. When None,
+            river ice gates everywhere (legacy behaviour) — the driver warns.
     """
     if mode not in MODES:
         raise ValueError(f"mode must be one of {MODES}, got {mode!r}")
@@ -447,7 +552,12 @@ def build_mode_friction(
         nav_water = water_mask
         if waterway_mask is not None:
             nav_water = water_mask | (waterway_mask == 1)
-        navigable = nav_water & ~(sea_ice_present | river_ice_present)
+        # River ice can only close a cell that is actually a river. Salt
+        # water is sea-ice territory; see the river_domain arg above.
+        river_blocked = river_ice_present
+        if river_domain is not None:
+            river_blocked = river_blocked & river_domain
+        navigable = nav_water & ~(sea_ice_present | river_blocked)
         out[navigable] = WATER_FRICTION_BARGE
         return out
 
@@ -617,6 +727,62 @@ def write_friction_stack(
                 e,
             )
 
+    # Freshwater-river subset of the waterway corridor. Bounds BOTH the
+    # nearest-fill target (so river ice is never copied onto salt water) and
+    # the river-ice gate itself. REQUIRED whenever the waterway mask is in
+    # play: without it the unbounded nearest-neighbour fill closes the Gulf of
+    # Alaska, the Inside Passage and Kodiak every winter. Same opt-out switch
+    # as the waterway mask, for synthetic runs only.
+    river_domain: np.ndarray | None = None
+    if waterway_mask is not None:
+        try:
+            river_domain = _load_corridor_mask(
+                WATERWAY_RIVER_MASK_TIF,
+                static_base.shape,
+                build_hint=(
+                    "Run `python workflows/01_friction_build/"
+                    "01_build_corridor_masks.py` — it writes "
+                    "waterway_river_mask_150m.tif alongside "
+                    "waterway_mask_150m.tif from the same shapefile."
+                ),
+            ) == 1
+        except FileNotFoundError as e:
+            if not allow_missing:
+                raise FileNotFoundError(
+                    f"{e}\n\nThe freshwater-river mask is REQUIRED whenever "
+                    "the waterway mask is used: it is what stops the "
+                    "river-ice nearest-fill from smearing interior ice onto "
+                    "the marine network. Without it every waterway cell in "
+                    "Alaska — Gulf, Inside Passage, Kodiak — reads as frozen "
+                    "Nov-Apr. Re-run the mask step (workflow 01, stage 01). "
+                    "To build without it anyway (synthetic/research runs "
+                    "only), pass require_waterway_mask=False or set "
+                    "FRICTION_ALLOW_MISSING_WATERWAY_MASK=1."
+                ) from e
+            logger.warning(
+                "River mask not found (%s) — river ice will gate the FULL "
+                "waterway network including salt water, which closes the "
+                "Gulf of Alaska and SE Alaska in winter. Proceeding because "
+                "the caller explicitly allowed it.",
+                e,
+            )
+        else:
+            n_river = int(river_domain.sum())
+            n_way = int((waterway_mask == 1).sum())
+            if not np.all(waterway_mask[river_domain] == 1):
+                raise ValueError(
+                    "waterway_river_mask_150m.tif is not a subset of "
+                    "waterway_mask_150m.tif — the two masks are out of sync. "
+                    "Rebuild both with 01_build_corridor_masks.py."
+                )
+            logger.info(
+                "river/marine split: %d of %d waterway cells (%.1f%%) are "
+                "freshwater river and river-ice gated; the other %d are salt "
+                "water and sea-ice gated",
+                n_river, n_way, 100.0 * n_river / max(n_way, 1),
+                n_way - n_river,
+            )
+
     permafrost_base = load_permafrost_base(
         permafrost_path,
         reference_profile=profile,
@@ -669,6 +835,11 @@ def write_friction_stack(
     # (the river-ice footprint is month-invariant).
     ice_fill_cache: dict = {}
 
+    # Cap expressed in cells. The grid is 150 m in EPSG:3338, so index
+    # distance x 150 m is ground distance and the KD-tree bound is exact.
+    pixel_m = abs(profile["transform"].a)
+    fill_max_px = RIVER_ICE_FILL_MAX_KM * 1000.0 / pixel_m
+
     for month in months if monthly_modes else ():
         sea_ice_path = _resolve_path(input_dir, f"sea_ice/sea_ice_{month:02d}.tif")
         river_ice_path = _resolve_path(input_dir, f"river_ice/river_ice_{month:02d}.tif")
@@ -676,13 +847,33 @@ def write_friction_stack(
         river_ice, river_ice_cov = _load_ice(
             river_ice_path, reference_profile=profile, return_coverage=True
         )
-        if waterway_mask is not None:
-            # Tributaries recovered by the waterway mask need an ice gate:
-            # borrow p_ice from the nearest IDW-covered river cell so they
-            # freeze with their trunk stream instead of reading as open
-            # water year-round ("no coverage" would otherwise map to 0).
-            river_ice = extend_ice_nearest(
-                river_ice, river_ice_cov, waterway_mask == 1, ice_fill_cache
+        if river_domain is not None:
+            # Three tiers, in order, all confined to the freshwater-river
+            # corridor (never the full waterway corridor — see
+            # extend_ice_nearest's docstring for what the unbounded version
+            # does to the Gulf of Alaska):
+            #
+            #   1. IDW value where the Brown product covers the cell.
+            #   2. nearest covered cell, but only within RIVER_ICE_FILL_MAX_KM
+            #      — tributaries freeze with their trunk stream.
+            #   3. k-nearest median for what is left, so regionally
+            #      uncovered rivers (all of Bristol Bay) are not silently
+            #      read as never freezing.
+            river_ice, beyond_cap = extend_ice_nearest(
+                river_ice, river_ice_cov, river_domain, ice_fill_cache,
+                max_distance_px=fill_max_px,
+            )
+            if beyond_cap.any():
+                river_ice = fill_by_nearest_median(
+                    river_ice, river_ice_cov, beyond_cap,
+                )
+            logger.info(
+                "month %02d river ice: %d IDW / %d nearest-filled / %d "
+                "k-nearest-median",
+                month,
+                int((river_domain & river_ice_cov).sum()),
+                int((river_domain & ~river_ice_cov).sum()) - int(beyond_cap.sum()),
+                int(beyond_cap.sum()),
             )
 
         sea_ice_present = sea_ice > SEA_ICE_THRESHOLD
@@ -697,6 +888,7 @@ def write_friction_stack(
                 river_ice_present=river_ice_present,
                 mode=mode,
                 waterway_mask=waterway_mask if mode == "barge" else None,
+                river_domain=river_domain if mode == "barge" else None,
             )
             out_path = output_dir / f"{mode}_{month:02d}.tif"
             with rasterio.open(out_path, "w", **out_profile) as dst:

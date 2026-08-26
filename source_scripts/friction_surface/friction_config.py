@@ -196,6 +196,190 @@ ICEROAD_TIME_PENALTY = 2.0
 CORRIDOR_BUFFER_M = 75.0            # half-pixel buffer on corridor LineStrings (ice_road, road, waterway) for 150 m grid connectivity
 
 # ---------------------------------------------------------------------------
+# Freshwater vs. salt water on the waterway network
+# ---------------------------------------------------------------------------
+# River ice is a RIVER phenomenon. The Brown et al. river-ice product covers
+# main-stem Alaskan rivers only, and friction_surface.extend_ice_nearest fills
+# its p_ice onto uncovered waterway cells from the nearest covered cell. That
+# fill has no business reaching salt water: run unrestricted it hands Chatham
+# Strait the ice probability of whatever interior river happens to be nearest,
+# which closes the entire marine network Nov-Apr (February: 0 of 501,684
+# waterway cells navigable, Gulf/SE included). Ground truth is the opposite —
+# Alaska Marine Lines runs year-round twice-weekly to Juneau, Ketchikan,
+# Petersburg, Sitka, Haines, Skagway and Wrangell, and Southcentral is
+# ice-free year-round. The genuine seasonal window is Bering/Beaufort, and
+# that is already handled per-pixel by the sea-ice climatology.
+#
+# So: a waterway segment is river-ice-gated only if it is a genuine Alaskan
+# freshwater watercourse. The NWN's own attributes get close but no single
+# column is trustworthy on its own, so the domain is a REVIEWED ALLOWLIST of
+# KEY_ID values, with a heuristic kept alongside purely as a drift detector.
+#
+# Why not a live predicate. Every attribute considered has counterexamples in
+# this 320-row table:
+#
+#   GEO_CLASS == "I"    The NWN files sheltered salt water as "inland": Cook
+#                       Inlet, Chatham Strait, Lynn Canal, Prince William
+#                       Sound, the whole Inside Passage. 144 marine features
+#                       / 108,862 cells carry GEO_CLASS "I".
+#   WTWY_TYPE == 6      Carries saltwater Cook Inlet, Norton Sound, Kotzebue
+#                       Sound and Bering Sea Access segments; and UGASHIK
+#                       RIVER is filed as type 1.
+#   RIVERNAME           Misses 451 km of the LOWER YUKON, which is filed
+#                       under RIVERNAME "NORTON SOUND" (its LINKNAME is
+#                       "YUKON RIVER, AK"). Sea-ice gating that stretch would
+#                       leave the lower Yukon open all winter.
+#   LINKNAME            Misses CHENA RIVER (FAIRBANKS) and INNOKO RIVER, AK
+#                       (JCT YUKON RIVER) under an end-anchored match, and
+#                       admits DRIFT RIVER PLATFORMS, AK — a Cook Inlet oil
+#                       terminal, not a river.
+#
+# The table also carries plain spelling noise ("ARCTRIC OCEAN", "KOZEBUL
+# SOUND", "METROFANIA BAY" for Mitrofania), which is another reason not to
+# trust a string predicate at build time.
+#
+# The allowlist below is the union heuristic (STATE == "AK" AND RIVER|CREEK
+# as a whole word in either RIVERNAME or LINKNAME) after a feature-by-feature
+# review of all 28 candidates. Four were rejected — see RIVER_SEGMENT_REJECTED.
+# Result: 24 features / 5,764 km / 86,789 grid cells (17.3% of the waterway
+# mask). The other 414,895 cells are salt water and are sea-ice gated.
+#
+# KEY_ID is unique across all 28 candidates (317 distinct values over 320
+# features overall), which is why it is the join key rather than WTWY_UNIQ
+# (311 distinct) or row order.
+RIVER_SEGMENT_KEY_IDS = frozenset({
+    "827700_4899-R5-1",      # Ambler River
+    "825100_4890-R5-1",      # Black River
+    "824900_4843-R5-1",      # Chena River (Fairbanks)
+    "829100_4545-R5-1000",   # Dahl Creek
+    "821800_4872-R5-1000",   # Egegik River
+    "889600_4996-R5-1",      # Innoko River (jct Yukon)
+    "827800_4895-R5-1",      # Kobuk River, lower
+    "827600_4895-R5-2",      # Kobuk River, upper
+    "824500_4867-R5-1",      # Koyukuk River
+    "824300_4819-R5-1",      # Kuskokwim River
+    "822200_4880-R5-1",      # Kvichak River
+    "822000_4828-R5-1",      # Naknek River
+    "827900_4892-R5-1",      # Noatak River
+    "822400_4879-R5-1",      # Nushagak River
+    "803400_4874-R5-1",      # Stikine River
+    "814600_4851-R5-1",      # Susitna River
+    "824800_4891-R5-1",      # Tanana River, lower
+    "824700_4891-R5-1",      # Tanana River, upper
+    "821600_4881-R5-1",      # Ugashik Bay and River
+    "889700_4860-R5-1",      # Yukon River, Holy Cross - Koyukuk jct
+    "825200_4860-R5-1",      # Yukon River, RIVERNAME reads "NORTON SOUND"
+    "825000_4860-R5-1",      # Yukon River, Koyukuk jct - Tanana jct
+    "824600_4860-R5-1",      # Yukon River, Tanana jct - Fort Yukon
+    "824400_4860-R5-1",      # Yukon River, Fort Yukon - Eagle
+})
+
+# Candidates the heuristic proposes that a human review rejected. Kept as data
+# so the drift check can tell "a new segment appeared" from "a known
+# rejection reappeared", and so the reasoning is not lost.
+RIVER_SEGMENT_REJECTED = {
+    "814000_4849-R5-1000":
+        "DRIFT RIVER PLATFORMS, AK — Cook Inlet oil terminal, salt water",
+    "824200_9270-R5-1000":
+        "YUKON RIVER, AK ACCESS — offshore approach across Norton Sound",
+    "827200_9294-R5-1000":
+        "BUCKLAND RIVER, AK ACCESS — marine approach, GEO_CLASS O",
+    "827300_4894-R5-1000":
+        "BUCKLAND RIVER, AK — NWN geometry sits mid-Kotzebue Sound (67.12N "
+        "164.60W), ~120 km from the real river mouth; GEO_CLASS O. Sea-ice "
+        "gated either way there, so the choice is not load-bearing",
+}
+
+# Drift detector only — NOT the selection. 01_build_corridor_masks.py runs
+# this against the shapefile and hard-errors if the candidate set stops
+# matching ALLOWLIST | REJECTED, which means the NWN changed and the review
+# above needs redoing.
+RIVER_SEGMENT_STATE = "AK"
+RIVER_SEGMENT_NAME_RE = r"\b(?:RIVER|CREEK)\b"   # non-capturing: pandas .str.contains warns on groups
+RIVER_SEGMENT_NAME_FIELDS = ("RIVERNAME", "LINKNAME")
+
+# ---------------------------------------------------------------------------
+# River-ice fill: how far a cell may borrow, and what happens when it cannot
+# ---------------------------------------------------------------------------
+# The Brown IDW covers 77,657 of the 86,789 river-domain cells (89.5%), once
+# the four marine NHDArea polygons are excluded from its mask (see
+# build_brown_polygon_mask.py). The other 9,132 have no interpolated value,
+# and friction_surface fills them from the nearest covered cell.
+#
+# The distance figures below were measured against the FLOWLINE-ONLY footprint
+# (200 m buffer of brown_river_flowlines, 68,311 cells), i.e. before the
+# NHDArea polygons were available. They therefore OVERSTATE the borrow
+# distances that the full mask produces — with polygons included the tier-2
+# median is 1.17 km. They are kept because the shape of the distribution is
+# what justifies the cap, and that shape is unchanged: the two regimes are
+# still same-river metres versus cross-watershed hundreds of kilometres.
+#
+#     median 18.5 km · p75 52.2 · p90 99.3 · p99 239.3 · max 251.0
+#     44% borrow from >25 km away, 26% from >50 km
+#
+# That single number hides two completely different behaviours:
+#
+#   Yukon    median  1.5 km   Tanana  0.8 km   Chena   0.1 km
+#   Black    median  1.7 km   Innoko  1.8 km   Noatak  2.7 km
+#       -> a covered cell just downstream on the SAME river. Genuine
+#          interpolation, exactly what the fill was written for.
+#
+#   Egegik   median 90.7 km   Ugashik 149.6 km   "Dahl Creek" 227.5 km
+#       -> a DIFFERENT WATERSHED. Not interpolation but fabrication — the
+#          same mechanism as the marine leak, undetected only because the
+#          result stayed on land and looked plausible.
+#
+# So the fill is capped. 25 km keeps every short-range case intact (every
+# river listed above sits far inside it) and cuts the cross-watershed ones.
+# At this cap the river domain splits three ways:
+#
+#     77,657  interpolated (Brown IDW)                    89.5%
+#      4,734  nearest-filled, within the cap (median 1.17 km)   5.5%
+#      4,398  beyond the cap -> latitude-band fallback below    5.1%
+#
+# The cap does NOT replace the river-domain restriction and cannot. An
+# unbounded fill with a 25 km cap would still have leaked into the Gulf,
+# because Chatham Strait has frozen interior cells well within 25 km. The
+# river/marine split stops leakage into salt water; the cap stops fabrication
+# across watersheds. Both are load-bearing and they guard different failures.
+RIVER_ICE_FILL_MAX_KM = 25.0
+
+# Beyond the cap, p_ice is the MEDIAN OF THE K NEAREST COVERED CELLS.
+#
+# Zero was rejected: it means "never freezes", and the uncovered cells are
+# regionally clustered rather than scattered — Egegik, Naknek and Ugashik have
+# no coverage at all — so zero would open all of Bristol Bay to February barge
+# traffic and manufacture cheap winter deliveries to exactly the high-cost
+# communities this model exists to study.
+#
+# A LATITUDE BAND was tried first and FAILED in the field. The reasoning was
+# that Alaska's freeze gradient is north-south, so a +/-0.75 deg band would
+# preserve it. It is not: the maritime/continental gradient is at least as
+# strong. Measured against the real flowlines, Egegik's band (57.35-58.85N)
+# contained only Taku (1,339 km east), the mislabelled "Porcupine" polygon in
+# Chatham Strait (1,182 km) and Stikine (1,431 km) — every one a Southeast
+# Alaska rainforest river — because Kvichak (58.88N) and Nushagak (59.0N) sit
+# just above the band ceiling. Ugashik was worse: Stikine and "Porcupine"
+# only. The build that resulted had Egegik navigable in January, November and
+# December and Ugashik navigable in January and November.
+#
+# The irony is instructive: a fallback introduced to stop 227 km borrowing
+# reached 1,400 km instead. It merely did so as a median rather than a copy.
+#
+# K-nearest is bounded by geography on BOTH axes with no band to fall out of.
+# Verified source selection on the same data: Egegik now draws 100% from
+# Nushagak/Kvichak (median neighbour 89 km, same Bristol Bay regime), Ugashik
+# 100% from Nushagak/Kvichak (149 km), Naknek 100% from Kvichak (29 km), and
+# "Dahl Creek" 85% from Buckland River (228 km — the nearest real watercourse
+# to Port Clarence, and the right regime).
+#
+# K = 200 covered cells is ~4.5 km2 of river surface: large enough that one
+# anomalous reach cannot swing the median, small enough to stay inside one
+# drainage in every case measured. It is a statistical reach, not a spatial
+# one — that is the whole point of the tier.
+RIVER_ICE_FALLBACK_K = 200
+
+# ---------------------------------------------------------------------------
 # Hard seasonal windows
 # ---------------------------------------------------------------------------
 # Ice roads: per Alaska Fuel Delivery Cost Analysis, viable Jan-Mar only.
@@ -213,6 +397,13 @@ CORRIDOR_BUFFER_M = 75.0            # half-pixel buffer on corridor LineStrings 
 # early June (KYUK, 4 Jun 2026). For Beaufort coastal deliveries the
 # sea-ice raster does the real gating.
 ICE_ROAD_SEASON_MONTHS = {1, 2, 3}
+# CAUTION: currently UNUSED (no consumer in the codebase as of this commit),
+# and it must stay that way unless it is applied REGIONALLY. The Jun-Oct
+# envelope describes western and northern Alaska. Applied as a blanket gate it
+# would close Southeast and Southcentral Alaska for seven months of the year —
+# the same false winter closure the RIVER_SEGMENT_* classification above
+# exists to prevent, arriving by a different route. Gulf/SE marine linehaul is
+# year-round; let the sea-ice raster do the gating.
 MARINE_LINEHAUL_SEASON_MONTHS = {6, 7, 8, 9, 10}
 
 # ---------------------------------------------------------------------------

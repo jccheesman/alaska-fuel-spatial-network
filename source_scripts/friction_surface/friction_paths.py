@@ -103,6 +103,20 @@ ICE_ROADS_SHP = os.path.join(NETWORK_DIR, "ice_roads_150m_3338",
 WATERWAY_MASK_TIF = os.path.join(OUTPUTS_DIR, "01_friction_build",
                                  "waterway_mask_150m.tif")
 
+# Freshwater-river SUBSET of the waterway corridor mask, built by the same
+# script from the NWN attribute classification in friction_config
+# (RIVER_SEGMENT_*). This is the ONLY domain in which river ice is allowed to
+# gate a barge pixel; everything else on the waterway network is salt water
+# and is gated by the sea-ice climatology alone.
+#
+# Without it, the nearest-covered-cell fill in
+# friction_surface.extend_ice_nearest smears interior river ice onto the
+# marine network and closes the Gulf of Alaska, SE Alaska and Kodiak in
+# winter — 414,895 of the 501,684 waterway cells (82.7%) are salt water. See
+# the QA gate qa_friction_stack.check_year_round_ports.
+WATERWAY_RIVER_MASK_TIF = os.path.join(OUTPUTS_DIR, "01_friction_build",
+                                       "waterway_river_mask_150m.tif")
+
 
 # ---------------------------------------------------------------------------
 # Accessors

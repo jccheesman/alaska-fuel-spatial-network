@@ -55,6 +55,109 @@ BROWN_RIVER_NAMES = [
 # inside a lake polygon rather than a stream polygon).
 NHDAREA_KEEP_FTYPES = [460, 364]
 
+# ---------------------------------------------------------------------------
+# Marine exclusion
+# ---------------------------------------------------------------------------
+# A polygon is admitted WHOLE if any part of it comes within --point-buffer-m
+# of a reach point or --flowline-buffer-m of a flowline. One graze at a river
+# mouth therefore drags an entire adjoining waterbody into the mask, and four
+# of them are salt water:
+#
+#   Stikine River    ftype 364  225.1 km2  Dry Strait / Stikine delta front,
+#                                          on the Petersburg approach
+#   Porcupine River  ftype 364  141.0 km2  Cross Sound / Chatham Strait,
+#                                          ~1,100 km from the Porcupine. The
+#                                          label is a first-match artifact,
+#                                          not a location.
+#   Kenai River      ftype 364    4.8 km2  Kenai River mouth, Cook Inlet
+#   Kuparuk River    ftype 364    0.5 km2  Beaufort coast
+#
+# Between them they place 396 cells of the MARINE waterway network inside the
+# river-ice mask, so the IDW writes p_ice over Dry Strait and Cross Sound and
+# barges freeze out of Southeast Alaska in winter. All four are ftype 364; no
+# ftype 460 polygon touches salt water.
+#
+# Dropping them costs 371 km2 (3.7% of the polygon mask) and 315 cells of
+# river-network coverage: 89.8% -> 89.5%. Two alternatives were measured and
+# are worse:
+#
+#   drop ftype 364 entirely     loses 1,130 km2 and the in-line lakes that
+#                               364 was included for (Skilak on the Kenai)
+#   clip polygons by the        removes only 11 of the 396 cells — at 150 m
+#   marine network              with all_touched rasterization the clipped
+#                               edge still shares pixels with the network line
+#
+# Pass --no-marine-clip to reproduce the pre-fix mask.
+MARINE_CLIP_DEFAULT_WATERWAY = (
+    "../../../inputs/data_for_network_build/water_networks/"
+    "waterways_network_ak_albers.shp"
+)
+
+
+def drop_marine_polygons(polys, waterway_shp, verbose=True):
+    """Remove NHDArea polygons that intersect a MARINE waterway segment.
+
+    "Marine" means an NWN segment whose KEY_ID is not in
+    friction_config.RIVER_SEGMENT_KEY_IDS — the same reviewed river/marine
+    split the friction surface uses, so the two cannot disagree about which
+    segments are salt water.
+
+    Returns (kept, dropped). The friction_config import is deferred and
+    optional so this script still runs standalone from its own directory;
+    when it is unavailable the clip is skipped LOUDLY rather than silently.
+    """
+    try:
+        from friction_surface.friction_config import RIVER_SEGMENT_KEY_IDS
+    except ImportError:
+        print(
+            "  WARNING: friction_surface.friction_config is not importable, "
+            "so the marine clip cannot run and the mask will include salt "
+            "water (Dry Strait, Cross Sound). Run from the repo root, or with "
+            "PYTHONPATH=source_scripts, or pass --no-marine-clip to accept "
+            "the unclipped mask deliberately."
+        )
+        return polys, polys.iloc[0:0]
+
+    way = gpd.read_file(waterway_shp).to_crs(polys.crs)
+    key = (way["KEY_ID"].fillna("").astype(str)
+           .str.strip().str.strip("'").str.strip())
+    marine = way[~key.isin(RIVER_SEGMENT_KEY_IDS)]
+    if marine.empty:
+        raise RuntimeError(
+            f"{waterway_shp}: 0 of {len(way)} segments classified marine. The "
+            "KEY_ID join failed; refusing to skip the marine clip silently."
+        )
+    geom = marine.geometry
+    merged = geom.union_all() if hasattr(geom, "union_all") else geom.unary_union
+
+    # NHDArea contains topologically invalid polygons (self-intersections);
+    # older GEOS raises "TopologyException: side location conflict" on
+    # intersects() instead of tolerating them. Repair ONLY for the test --
+    # kept/dropped rows still carry the original geometry, and the arcpy
+    # pipeline runs its own RepairGeometry downstream.
+    test_geom = polys.geometry
+    invalid = ~test_geom.is_valid
+    if invalid.any():
+        print(f"  Marine clip: repairing {int(invalid.sum())} invalid "
+              "polygon(s) for the intersects test only")
+        try:
+            from shapely.validation import make_valid as _make_valid
+            repaired = test_geom[invalid].apply(_make_valid)
+        except ImportError:                      # very old shapely
+            repaired = test_geom[invalid].buffer(0)
+        test_geom = test_geom.copy()
+        test_geom[invalid] = repaired
+    hits = test_geom.intersects(merged)
+    kept, dropped = polys[~hits], polys[hits]
+    if verbose:
+        print(f"  Marine clip: {len(marine):,} marine NWN segments")
+        print(f"    dropped {len(dropped)} polygon(s), "
+              f"{dropped['areasqkm'].sum():.1f} km2")
+        for _, r in dropped.sort_values("areasqkm", ascending=False).iterrows():
+            print(f"      {r['gnis_name']:<26} ftype {int(r['ftype'])} "
+                  f"{r['areasqkm']:>8.1f} km2")
+    return kept, dropped
+
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
@@ -95,7 +198,35 @@ def main():
             "polygons too and increases overall coverage substantially."
         ),
     )
+    parser.add_argument(
+        "--waterway", default=MARINE_CLIP_DEFAULT_WATERWAY,
+        help=(
+            "NWN waterway shapefile used to identify marine segments for the "
+            "post-join marine clip (default resolves to "
+            "inputs/data_for_network_build/water_networks/ from this "
+            "script's directory)."
+        ),
+    )
+    parser.add_argument(
+        "--no-marine-clip", dest="marine_clip", action="store_false",
+        help=(
+            "Skip the marine clip and reproduce the pre-fix mask, which puts "
+            "396 marine waterway cells inside the river-ice domain."
+        ),
+    )
+    parser.set_defaults(marine_clip=True)
     args = parser.parse_args()
+
+    if args.marine_clip and not Path(args.waterway).exists():
+        alt = Path(__file__).resolve().parent / MARINE_CLIP_DEFAULT_WATERWAY
+        if alt.exists():
+            args.waterway = str(alt)
+        else:
+            sys.exit(
+                f"ERROR: waterway shapefile not found at {args.waterway}. "
+                "Pass --waterway, or --no-marine-clip to build without it "
+                "(which reinstates the salt-water leak)."
+            )
 
     nhd_dir = Path(args.nhd_dir)
     if not nhd_dir.exists():
@@ -189,6 +320,18 @@ def main():
     out = candidates.set_index("_poly_idx").loc[poly_label.index].copy()
     out["gnis_name"] = poly_label
     out = out[["gnis_name", "ftype", "areasqkm", "geometry"]].reset_index(drop=True)
+
+    # 4b. Marine clip. Must run AFTER the union join, because the whole point
+    #     is that the join admits polygons wholesale — see the comment block
+    #     on drop_marine_polygons.
+    if args.marine_clip:
+        before = len(out)
+        out, dropped = drop_marine_polygons(out, args.waterway, verbose=True)
+        out = out.reset_index(drop=True)
+        print(f"  Polygons after marine clip:  {len(out):,} (was {before:,})")
+    else:
+        print("  Marine clip DISABLED (--no-marine-clip): the mask will "
+              "include salt water at Dry Strait and Cross Sound.")
 
     # 5. Sanity-check coverage.
     print(f"Output polygons:               {len(out):,}")
