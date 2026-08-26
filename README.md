@@ -7,7 +7,7 @@ costs, per gallon and per month, to move bulk fuel along every edge of Alaska's
 multimodal transport network (road + barge + air + seasonal ice road).
 
 The repository is one pipeline across four steps, which are found in the numbered
-folder under `workflows/`. Each is described below:
+folders under `workflows/`. Each is described below:
 
 | Step | Workflow | What it does | Key output |
 |---|---|---|---|
@@ -28,14 +28,22 @@ throughout.
 git clone <this-repo> && cd <this-repo>
 uv venv && uv sync && uv pip install -e .
 
-python tools/extract_inputs.py    # unzip the committed inputs
+python tools/extract_inputs.py    # unzip the committed inputs/*.zip bundles
 bash run_all.sh                   # run as far as the data on disk allows
 ```
-A fresh clone runs steps **(c)–(d)** end-to-end from committed data alone
-(the frozen network + ingest with its 82,300-node / 90,921-edge). 
-Steps (a) and (b) need regenerable-only inputs — each stage's
-`run_all.sh` gates on what is missing and prints exactly how to regenerate it
-(`EXTERNAL_DATA.md` is the honest inventory of what exists where).
+A fresh clone runs the ingest half of step **(c)** (extract the frozen
+network, load its 82,300 nodes / 90,921 edges into DuckDB) and all of step
+**(d)** from committed data alone. The weighting and costing stages of (c)
+additionally need the friction stack from (a), and the costing stage reads
+`inputs/bulk_fuel_data/raw/Fuel_Delivery_Method.shp` (no longer shipped as a
+committed zip — see `EXTERNAL_DATA.md` for the source). Steps (a) and (b)
+need regenerable-only inputs — each stage's `run_all.sh` gates on what is
+missing and prints exactly how to regenerate it (`EXTERNAL_DATA.md` is the
+honest inventory of what exists where).
+
+To run the test suite and linter, install the dev extra
+(`uv sync --extra dev`, then `uv run pytest tests/` and `uv run ruff check`),
+which is what CI does.
 
 **Final friction stack TIF files are hosted on Google Earth Engine at:**
 
@@ -56,8 +64,8 @@ Per-stage runs:
 
 ```bash
 bash workflows/01_friction_build/run_all.sh    # needs inputs/friction_rasters (~7 GB, regenerable)
-bash workflows/02_network_build/run_all.sh     # needs data/raw (inputs/network_raw.zip — pending)
-bash workflows/03_multimodal_join/run_all.sh   # stages 01-02 run from committed data
+bash workflows/02_network_build/run_all.sh     # needs data/raw (inputs/network_raw.zip — local-only, license-gated)
+bash workflows/03_multimodal_join/run_all.sh   # stages 01-02 run from committed data; 03-04 need the friction stack
 bash workflows/04_duckdb_export/run_all.sh
 ```
 
@@ -109,7 +117,7 @@ rebuild is an open owner decision. Full provenance: `final_network/README.md`.
 | `source_scripts/friction_surface/` | Friction builders + `friction_config.py` + `friction_costs.py` (all USD $) |
 | `workflows/01..04_*/` | The four steps: thin numbered drivers, per-stage READMEs, run orders |
 | `inputs/` | Available input datasets located here, open-source dataset information provided |
-| `final_network/` | The frozen act-(b)→(c) handoff; this step is regenrable with source scripts |
+| `final_network/` | The frozen act-(b)→(c) handoff; this step is regenerable with source scripts |
 | `outputs/` | Gitignored regenerables + committed tables/analysis + the DuckDB deliverable |
 | `docs/` | `ARCHITECTURE.md` (engine design), `DATA_CONTRACTS.md` (every inter-stage contract) |
 | `tests/` | pytest suite (run by CI) |
@@ -120,7 +128,6 @@ rebuild is an open owner decision. Full provenance: `final_network/README.md`.
 The friction stack expects grid-aligned rasters (land cover, slope, permafrost,
 12× sea ice, 12× river ice) snapped to the canonical `lulc.tif` grid
 (EPSG:3338, 150 m, 28,000 × 16,567). They are regenerable-only (~12 GB):
-
 - **GEE** (terrain, land cover, sea ice): `source_scripts/friction_surface/friction_preprocessing/gee_friction_layer_multi_data_processing.js` in the Earth Engine Code Editor
 - **ArcGIS Pro** (river ice): `river_ice_full_pipeline.py` (edit its Configuration block; arcpy, no CLI).
 - **Alignment:** `python -m friction_surface.friction_preprocessing.align_permafrost`, then gate with `python workflows/01_friction_build/00_preflight_inputs.py`.
@@ -134,6 +141,7 @@ snaps any new raster onto the reference grid.
   contract, the R WORKDIR contract, the handoff schema, the edge_id rule, the
   DuckDB schema — every inter-stage contract on one page
 - `docs/ARCHITECTURE.md` — the mmnet engine: profile-as-data, stage chain, R↔Python seam
+- `docs/TEST_LOG.md` — the verified end-to-end friction → weighting → costing run
 - `EXTERNAL_DATA.md` — what exists where (committed / regenerable / absent)
 - `CLAUDE.md` — the lab notebook: one row per numbered script, with findings
 - `supplementary/` — cost-rate derivations and verification
