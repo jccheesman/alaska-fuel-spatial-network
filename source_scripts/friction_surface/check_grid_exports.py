@@ -14,10 +14,10 @@ Target grid (must match the GEE EXPORT_REGION / EXPORT_TRANSFORM):
 Cheap by design: reads raster METADATA only for the grid check, a tiny window for the
 per-hub NoData check, and a decimated read for value sanity — never the full 464 M-pixel array.
 
-Usage:
-    python3 friction_surface/check_grid_exports.py                 # check inputs/friction_rasters/
-    python3 friction_surface/check_grid_exports.py --inputs-dir X  # check another dir
-    python3 friction_surface/check_grid_exports.py --plot          # + western-edge PNG
+Usage (from the repo root, PYTHONPATH=source_scripts):
+    python -m friction_surface.check_grid_exports                  # check inputs/friction_rasters/
+    python -m friction_surface.check_grid_exports --inputs-dir X   # check another dir
+    python -m friction_surface.check_grid_exports --plot           # + western-edge PNG
 """
 from __future__ import annotations
 import argparse
@@ -90,7 +90,8 @@ def resolve_target(inputs_dir: Path) -> TargetGrid:
             source="target = lulc.tif (canonical reference grid)",
         )
 
-# Repo root is two levels above source_scripts/friction_surface/ (source_scripts layout).
+# This file lives at source_scripts/friction_surface/check_grid_exports.py,
+# so the repo root is three levels up (source_scripts layout).
 REPO = Path(__file__).resolve().parents[2]
 # Default to the pipeline's raster home (env-overridable via RASTER_DIR).
 from .friction_paths import RASTER_DIR as _RASTER_DIR  # noqa: E402
@@ -172,6 +173,7 @@ def main() -> int:
     # sea-ice exports: the live inputs are the padded full-grid sea_ice_MM.tif.
     tifs = [p for p in all_tifs
             if not any(part in ("small_grid", "_v1_backup", "provenance", "gee_export")
+                       or ".bak" in part
                        for part in p.parts)]
     # river_ice is on a separate (ArcGIS) track re-aligned in the rebuild step, NOT this
     # GEE re-export — report it informationally, don't let it gate the grid fix.
