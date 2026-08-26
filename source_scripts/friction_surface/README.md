@@ -87,7 +87,8 @@ barge travel, so the barge mode ignores the modifier.
 
 Impassable pixels are stored as `-9999` (the raster's nodata value), not as
 a sentinel high number (`999`/`9999`). WhiteboxTools `CostDistance` treats
-NoData as non-traversible and routes around it.
+NoData as non-traversible and routes around it. Although WhiteboxTools is not 
+used in this workflow, this was formatted to be able to in the future.
 
 Applied uniformly:
 
@@ -107,12 +108,15 @@ Applied uniformly:
   `SEA_ICE_THRESHOLD = 0.15` / `RIVER_ICE_THRESHOLD = 0.15` — the NSIDC
   ice-edge convention; see the rationale block in `friction_config.py`)
   → NoData.
-  River ice is **nearest-filled** onto waterway-network cells the IDW
-  product does not cover (~87% of the corridor): uncovered cells borrow
-  the p_ice of the nearest covered river cell (`extend_ice_nearest`), so
-  recovered tributaries freeze with their trunk stream instead of
-  reading as open water year-round. Interim until the ArcGIS IDW is
-  re-run over the full waterway network.
+  River ice is **nearest-filled** onto waterway-network cells; in ArcGIS Pro, 'river_ice_full_pipeline.py'
+  is run with 'LULC.tif' as the canonical grid and 'waterFilledMaedians2000_2023.geoJSON as
+  the data source. River flowlines and polygons are buffered to construct the complete
+  inland waterway network. Zonal statistics fill in river segments that contain Brown river reach points.
+  Following, IDW is used (50km, 12 points) to interpolate surrounding  data. Outside of ArcGIS Pro,
+  Nearest-Neighbor interpolation uses a gate of 25km to fill in NoData gaps. Lastly, the remaining NoData
+  river pixels are filled in with K-nearest river reach data points (k=20).
+  This helps to prevent data leakage across latitudes. 
+
 
 A raster represents only what the mode can actually traverse. Numeric
 friction values are reserved for traversible pixels.
@@ -189,17 +193,14 @@ ice thickness per UAF/INE 2023 [*Design and Operation of Ice Roads*][uaf-ine]
 highway baseline of ~50 mph. We use the 25 mph point rather than the
 strict 15 mph floating-ice limit because the AK ice roads serving Atqasuk
 and Nuiqsut are overland packed-snow tundra routes, not floating ice over
-deep water. The Tibbitt-to-Contwoyto Winter Road (NWT) corroborates with
-a loaded limit of 25 km/h. The 15 mph floating-ice number is itself a
-physics constraint — above ~70% of the critical wave speed in the ice
-cover, deflection becomes asymmetric and the ice cracks.
+deep water. 
 
 The friction surface intentionally stays **environmental-only**. The
 operational cost premium of ice-road delivery (driver wage premium, narrow
 Jan–Mar window) is applied separately via
 `friction_costs.BASELINE_RATES_PER_GALLON_MILE` (`IceRoad` =
 $0.010/gal-mi vs `Road` = $0.0007/gal-mi; verified 2026-07-17). Under the
-network-overlay design the per-mode rate is applied per **edge**, not per
+network-overlay design, the per-mode rate is applied per **edge**, not per
 pixel: final_network edges carry a `type` (Road / IceRoad / …), so
 `weight_network_edges.py` samples the friction and Phase 3 applies the
 matching rate — the per-pixel `surface_type` lookup that was previously
@@ -232,12 +233,7 @@ top of the per-pixel environmental rasters:
   (Jun–Oct, ~180-day window per Crowley/Vitus schedules) and Beaufort
   (~6–8 weeks, ~Jul to mid-Sep, per Foss/Lynden Arctic schedules) is
   handled per-pixel by the monthly sea-ice climatology raster against
-  `SEA_ICE_THRESHOLD`. May was previously included but no operator runs
-  in May — the 2026 Bethel first-arrival was early June (KYUK,
-  4 Jun 2026). Communities on the Beaufort coast (Utqiagvik, Wainwright,
-  Kaktovik) rely entirely on the sea-ice raster for their narrower window.
-
-[blm-npra]: https://www.blm.gov/programs/energy-and-minerals/oil-and-gas/about/alaska/NPR-A/NPR-A-weekly-weather-and-tundra-travel-report
+  `SEA_ICE_THRESHOLD`.[blm-npra]: https://www.blm.gov/programs/energy-and-minerals/oil-and-gas/about/alaska/NPR-A/NPR-A-weekly-weather-and-tundra-travel-report
 
 ### Multi-modal composition (implicit-hub model)
 
