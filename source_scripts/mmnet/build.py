@@ -67,6 +67,80 @@ def _load_line_layer(spec: LayerSpec, cfg: PipelineConfig, params: Params,
     return _read_lines(paths[0], cfg.crs.target)
 
 
+# A non-base Barge (e.g. manual) route endpoint within this distance of the marine spine is treated as
+# a LANDING and welded onto it; farther endpoints (on-land hub ends) are left as drawn. Must stay well
+# below the gap between a landing and its hub end so the two are never confused.
+MARINE_LANDING_TOL = 100.0
+# Must match assemble.connect_multimodal's waterway vertex-rounding, so an inserted landing vertex and
+# the snapped route endpoint round to the same node.
+WATERWAY_NODE_TOL = 50.0
+
+
+def _insert_vertices(line, pts):
+    """Return `line` with each shapely Point in `pts` inserted at its projected position along it."""
+    from shapely.geometry import LineString, Point
+
+    coords = [(x, y) for x, y, *_ in line.coords]
+    ordered = sorted(((line.project(pt), (pt.x, pt.y)) for pt in pts), key=lambda t: t[0])
+    out, cum, pi = [coords[0]], 0.0, 0
+    for i in range(1, len(coords)):
+        seg_end = cum + Point(coords[i - 1]).distance(Point(coords[i]))
+        while pi < len(ordered) and ordered[pi][0] <= seg_end + 1e-6:
+            if ordered[pi][0] >= cum - 1e-6 and ordered[pi][1] not in (out[-1], coords[i]):
+                out.append(ordered[pi][1])
+            pi += 1
+        out.append(coords[i])
+        cum = seg_end
+    return LineString(out)
+
+
+def _weld_barge_landings(base: gpd.GeoDataFrame, extra: gpd.GeoDataFrame,
+                         landing_tol: float, node_tol: float):
+    """Weld manual/extra barge routes that LAND mid-edge on the base marine spine.
+
+    For each `extra` line endpoint within `landing_tol` of a base waterway line, snap the endpoint onto
+    that line and insert the projected point as a shared vertex on the base line (unless a base vertex is
+    already within `node_tol`). After the assembler's vertex-rounding this yields a shared node, so the
+    route welds into the marine network instead of forming an isolated segment. Endpoints beyond
+    `landing_tol` (on-land hub ends) are left untouched. Returns (base, extra, n_welded)."""
+    from shapely.geometry import LineString, Point
+
+    base = base.reset_index(drop=True)
+    base_geoms = list(base.geometry)
+    sindex = base.sindex
+    inserts: dict[int, list] = {}
+    new_extra_geoms = []
+    n_welded = 0
+
+    for eg in extra.geometry:
+        if eg is None or eg.is_empty or eg.geom_type != "LineString":
+            new_extra_geoms.append(eg)
+            continue
+        cs = [(x, y) for x, y, *_ in eg.coords]
+        for idx in (0, len(cs) - 1):
+            p = Point(cs[idx])
+            best = None
+            for j in sindex.query(p.buffer(landing_tol)):
+                d = base_geoms[j].distance(p)
+                if best is None or d < best[0]:
+                    best = (d, int(j))
+            if best is None or best[0] > landing_tol:
+                continue
+            j = best[1]
+            bg = base_geoms[j]
+            proj = bg.interpolate(bg.project(p))
+            cs[idx] = (proj.x, proj.y)                    # snap the route endpoint onto the spine
+            if min(Point(v).distance(proj) for v in bg.coords) > node_tol:
+                inserts.setdefault(j, []).append(proj)    # needs a new shared vertex on the spine
+            n_welded += 1
+        new_extra_geoms.append(LineString(cs))
+
+    for j, pts in inserts.items():
+        base_geoms[j] = _insert_vertices(base_geoms[j], pts)
+
+    return base.assign(geometry=base_geoms), extra.assign(geometry=new_extra_geoms), n_welded
+
+
 def _first_col(df, candidates: tuple[str, ...]) -> str | None:
     """First matching column name (case-insensitive) from a list of candidates."""
     low = {c.lower(): c for c in df.columns}
@@ -286,24 +360,38 @@ def build_network(layers: list[str], out_prefix: str | Path, hubs: gpd.GeoDataFr
     r_edges = node_layers_via_r(r_layers, timeout_s=timeout_s)
 
     # 1b. the full waterway, loaded un-clipped (Python nodes it in connect_multimodal). ALL Barge-mode
-    #     layers are concatenated — the marine spine plus any user-authored manual barge routes — so a
-    #     second Barge layer is not silently dropped (symmetric with the R side, which already nodes N
-    #     layers per land mode). They share one edge_label (Waterway) and are noded together.
+    #     layers are concatenated — the base marine spine plus any user-authored manual barge routes —
+    #     so a second Barge layer is not silently dropped (symmetric with the R side, which already
+    #     nodes N layers per land mode). A manual route often LANDS mid-edge on a long open-water spine
+    #     segment; since the waterway is noded by vertex-rounding (not planar), that landing would not
+    #     weld, so we insert it as a shared vertex on the spine first (_weld_barge_landings). On-land
+    #     route ends (far from the spine) are left as drawn — they ride into the giant via the landing.
     waterway = None
     waterway_label = ww_specs[0].edge_label if ww_specs else "Waterway"
     if ww_specs:
         params = load_params()
         facilities = _tagged_for_contract()
-        ww_parts = []
+        base_parts, extra_parts = [], []
         for s in ww_specs:
             g = _load_line_layer(s, cfg, params, facilities)
-            if g is not None and not g.empty:
-                ww_parts.append(g[["geometry"]])
-        if ww_parts:
-            waterway = gpd.GeoDataFrame(
-                pd.concat(ww_parts, ignore_index=True), geometry="geometry", crs=ww_parts[0].crs)
+            if g is None or g.empty:
+                continue
+            (base_parts if s.name == "waterways" else extra_parts).append(g[["geometry"]])
+        base = (gpd.GeoDataFrame(pd.concat(base_parts, ignore_index=True), geometry="geometry",
+                                 crs=base_parts[0].crs) if base_parts else None)
+        extra = (gpd.GeoDataFrame(pd.concat(extra_parts, ignore_index=True), geometry="geometry",
+                                  crs=extra_parts[0].crs) if extra_parts else None)
+        if base is not None and extra is not None and len(extra):
+            base, extra, n_weld = _weld_barge_landings(
+                base, extra, MARINE_LANDING_TOL, WATERWAY_NODE_TOL)
+            print(f"[build] welded {n_weld} manual-barge endpoint(s) onto the marine spine "
+                  f"(≤ {MARINE_LANDING_TOL:.0f} m; inserted a shared vertex at each landing)")
+        combined = [df for df in (base, extra) if df is not None and len(df)]
+        if combined:
+            waterway = gpd.GeoDataFrame(pd.concat(combined, ignore_index=True),
+                                        geometry="geometry", crs=combined[0].crs)
         if len(ww_specs) > 1:
-            print(f"[build] waterway = {len(ww_specs)} Barge layer(s) concatenated "
+            print(f"[build] waterway = {len(ww_specs)} Barge layer(s) "
                   f"({', '.join(s.name for s in ww_specs)}) -> "
                   f"{0 if waterway is None else len(waterway):,} lines")
 
