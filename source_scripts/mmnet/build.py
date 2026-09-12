@@ -227,18 +227,32 @@ def _write_node_contract(workdir: Path, layers: list[str],
         facilities = _tagged_for_contract()                   # waterway clip bbox only (not written)
         spec_by_name = {s.name: s for s in cfg.layers}
 
-        mode_rows = []
+        # Group layers by MODE and node each mode's lines TOGETHER (one st_node call per mode), keyed by
+        # the mode's first (base) layer. Same-mode layers — e.g. airways + user-authored manual flight
+        # paths — then share airport/junction vertices. Noded in isolation instead, two manual legs that
+        # meet at a shared off-network endpoint get linemerged into one through-edge and detach from the
+        # base network (the airport node is dissolved). Same-mode layers share one edge_label (the build
+        # keys connections by mode), so the merged layer is tagged by the base layer's label.
+        mode_specs: dict[str, list] = {}
         for ln in layers:
             spec = spec_by_name.get(ln)
-            if spec is None:
-                continue
-            mode_rows.append({"mode": spec.mode, "layer": spec.name,
-                              "edge_label": spec.edge_label,
-                              "blend_param": _BLEND_PARAM.get(ln, f"{ln}_blend_tolerance")})
-            g = _load_line_layer(spec, cfg, params, facilities)
-            if g is None or len(g) == 0:
-                raise RuntimeError(f"layer {ln!r} produced no features (missing artifact?)")
-            g[["geometry"]].to_file(workdir / "layers" / f"{ln}.gpkg", driver="GPKG")
+            if spec is not None:
+                mode_specs.setdefault(spec.mode, []).append(spec)
+
+        mode_rows = []
+        for mode, specs in mode_specs.items():
+            base = specs[0]
+            parts = []
+            for spec in specs:
+                g = _load_line_layer(spec, cfg, params, facilities)
+                if g is None or len(g) == 0:
+                    raise RuntimeError(f"layer {spec.name!r} produced no features (missing artifact?)")
+                parts.append(g[["geometry"]])
+            combined = gpd.GeoDataFrame(pd.concat(parts, ignore_index=True),
+                                        geometry="geometry", crs=parts[0].crs)
+            combined.to_file(workdir / "layers" / f"{base.name}.gpkg", driver="GPKG")
+            mode_rows.append({"mode": mode, "layer": base.name, "edge_label": base.edge_label,
+                              "blend_param": _BLEND_PARAM.get(base.name, f"{base.name}_blend_tolerance")})
 
         (workdir / "registry.json").write_text(
             json.dumps({"modes": mode_rows, "transfers": []}, indent=2))
