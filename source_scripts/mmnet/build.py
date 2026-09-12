@@ -24,6 +24,7 @@ import warnings
 from pathlib import Path
 
 import geopandas as gpd
+import pandas as pd
 
 from .config import LayerSpec, PipelineConfig, Params, load_config, load_params
 from .io_readers import load_airways, load_boundary, load_roads, load_waterways
@@ -284,14 +285,27 @@ def build_network(layers: list[str], out_prefix: str | Path, hubs: gpd.GeoDataFr
     # 1a. R / sfnetworks noding (node-only) for the land modes — noded edges tagged by `type`.
     r_edges = node_layers_via_r(r_layers, timeout_s=timeout_s)
 
-    # 1b. the full waterway, loaded un-clipped (Python nodes it in connect_multimodal).
+    # 1b. the full waterway, loaded un-clipped (Python nodes it in connect_multimodal). ALL Barge-mode
+    #     layers are concatenated — the marine spine plus any user-authored manual barge routes — so a
+    #     second Barge layer is not silently dropped (symmetric with the R side, which already nodes N
+    #     layers per land mode). They share one edge_label (Waterway) and are noded together.
     waterway = None
-    waterway_label = "Waterway"
+    waterway_label = ww_specs[0].edge_label if ww_specs else "Waterway"
     if ww_specs:
         params = load_params()
         facilities = _tagged_for_contract()
-        waterway = _load_line_layer(ww_specs[0], cfg, params, facilities)
-        waterway_label = ww_specs[0].edge_label
+        ww_parts = []
+        for s in ww_specs:
+            g = _load_line_layer(s, cfg, params, facilities)
+            if g is not None and not g.empty:
+                ww_parts.append(g[["geometry"]])
+        if ww_parts:
+            waterway = gpd.GeoDataFrame(
+                pd.concat(ww_parts, ignore_index=True), geometry="geometry", crs=ww_parts[0].crs)
+        if len(ww_specs) > 1:
+            print(f"[build] waterway = {len(ww_specs)} Barge layer(s) concatenated "
+                  f"({', '.join(s.name for s in ww_specs)}) -> "
+                  f"{0 if waterway is None else len(waterway):,} lines")
 
     # 2. resolve the connection inputs from the profile (data-driven).
     label_by_mode = {s.mode: s.edge_label for s in line_specs}
