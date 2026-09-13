@@ -62,19 +62,20 @@ DB_PATH = ROOT / "outputs" / "fuel_network.duckdb"
 # Expected inventory per final_network/README.md — a changed export should
 # fail loudly here, not flow silently into the weighted graph.
 EXPECTED = {
-    "n_nodes": 82_300,
-    "n_edges": 90_921,
+    "n_nodes": 82_412,
+    "n_edges": 91_087,
     "n_hubs": 384,
-    "n_components": 21,
-    "giant_share": 0.9965,
+    "n_components": 6,
+    "giant_share": 0.9998,
     "edge_types": {
         "Road": 53_795,
-        "Waterway": 34_099,
-        "Bridge": 1_367,
+        "Waterway": 34_178,
+        "Bridge": 1_330,
         "IceRoad": 1_248,
-        "Transfer": 213,
-        "Air": 154,
-        "Join": 45,
+        "IceRoadConnector": 36,
+        "Transfer": 226,
+        "Air": 226,
+        "Join": 48,
     },
 }
 

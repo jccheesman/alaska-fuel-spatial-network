@@ -13,10 +13,10 @@ python 02_inspect_schema.py            # schema + row counts
 
 | Table | Rows | Purpose |
 |---|---|---|
-| `network_nodes` | 82,300 | node attributes + hub flags + coordinates |
-| `network_edges` | 90,921 | topology + type + edge_class + derived length_m |
-| `edge_month_weights` | 1,091,052 | environmental friction per (edge, month), strict passability |
-| `edge_costs` | 1,091,052 | $/gallon per (edge, month) from friction × rates (+ transfer fees) |
+| `network_nodes` | 82,412 | node attributes + hub flags + coordinates |
+| `network_edges` | 91,087 | topology + type + edge_class + derived length_m |
+| `edge_month_weights` | 1,093,044 | environmental friction per (edge, month), strict passability |
+| `edge_costs` | 1,093,044 | $/gallon per (edge, month) from friction × rates (+ transfer fees) |
 
 ## hub_facility_map — documented future work
 

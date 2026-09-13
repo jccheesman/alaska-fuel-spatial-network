@@ -59,10 +59,10 @@ Waterway, Air, IceRoad, Transfer, Bridge, Join}, source, join_gap_m;
 LineString, EPSG:3338). `length_m` is DERIVED by the consumer
 (geometry.length — EPSG:3338 is meters).
 
-Frozen inventory (the ingest's hard tripwire, `EXPECTED` in
-`02_load_final_network.py`): 82,300 nodes / 90,921 edges / 384 hubs / 21
-components / giant 0.9965 / Road 53,795 · Waterway 34,099 · Bridge 1,367 ·
-IceRoad 1,248 · Transfer 213 · Air 154 · Join 45.
+Inventory (the ingest's hard tripwire, `EXPECTED` in
+`02_load_final_network.py`): 82,412 nodes / 91,087 edges / 384 hubs / 6
+components / giant 0.9998 / Road 53,795 · Waterway 34,178 · Bridge 1,330 ·
+IceRoad 1,248 · IceRoadConnector 36 · Transfer 226 · Air 226 · Join 48.
 
 ## 5. THE edge_id RULE (the contract everything hangs on)
 
@@ -105,10 +105,10 @@ ambiguity = hard error).
 
 | Table | Rows | Columns | Writer |
 |---|---|---|---|
-| `network_nodes` | 82,300 | node_id PK, is_hub, hub_id, deliv_meth, hub_type, hub_cap, snap_surf, component, is_giant, x, y | 03/02_load |
-| `network_edges` | 90,921 | edge_id PK, from_node, to_node, type, edge_class, source, join_gap_m, length_m | 03/02_load |
-| `edge_month_weights` | 1,091,052 | edge_id, month, mode, avg_friction, nodata_frac, passable | 03/03_weight |
-| `edge_costs` | 1,091,052 | edge_id, month, cost_per_gallon, passable | 03/04_assemble |
+| `network_nodes` | 82,412 | node_id PK, is_hub, hub_id, deliv_meth, hub_type, hub_cap, snap_surf, component, is_giant, x, y | 03/02_load |
+| `network_edges` | 91,087 | edge_id PK, from_node, to_node, type, edge_class, source, join_gap_m, length_m | 03/02_load |
+| `edge_month_weights` | 1,093,044 | edge_id, month, mode, avg_friction, nodata_frac, passable | 03/03_weight |
+| `edge_costs` | 1,093,044 | edge_id, month, cost_per_gallon, passable | 03/04_assemble |
 
 `hub_facility_map` (hub_id ↔ facility_id) is **documented future work**: the
 routing layer's `backfill_facility_edges` stub depends on it, and no writer

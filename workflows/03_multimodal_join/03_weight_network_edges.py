@@ -2,7 +2,7 @@
 
 Sample the friction rasters along every final_network edge geometry and write per-(edge, month) weights.
 
-The final_network topology is fixed (90,921 edges with real geometries), so
+The final_network topology is fixed (91,087 edges with real geometries), so
 instead of raster-routing (least-cost cost-distance over the surface), friction
 flows the other way: each edge's LineString is densified and the friction surface
 is read at the sample points, giving a length-weighted mean friction per edge.
@@ -23,7 +23,7 @@ plan for rationale):
 TERMINOLOGY CAVEAT (2026-07-23): the colleague's `Bridge` type means an
 mmnet topology WELD (gap-closing stitch, median ~112 m), not a physical
 road-over-water bridge. Provenance (`source`) splits it: `weld:Road` /
-`weld:to-giant` (1,331 edges) behave like the table row above, but
+`weld:to-giant` (1,330 edges) behave like the table row above, but
 `weld:IceRoad` + `bridge:IceRoad->Road` (36 edges) belong to the ICE-ROAD
 system and are re-typed here to IceRoad treatment — the edge_class (and,
 in rebuilt exports, the type itself) is `IceRoadConnector` (road_base
@@ -53,7 +53,7 @@ Output table in fuel_network.duckdb:
 
     edge_month_weights(edge_id, month, mode, avg_friction, nodata_frac, passable)
 
-90,921 edges x 12 months = 1,091,052 rows.
+91,087 edges x 12 months = 1,093,044 rows.
 
 Friction-vs-cost separation: this module writes environmental multipliers
 only. Every dollar (BASELINE_RATES_PER_GALLON_MILE, INTERMODAL_TRANSFER_FEES)
