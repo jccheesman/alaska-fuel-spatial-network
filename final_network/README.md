@@ -7,9 +7,9 @@ network. This folder contains a **frozen handoff**: workflow 02
 (`01_extract_network_handoff.py` → `02_load_final_network.py`) extracts and
 ingests it.
 
-- **Nodes:** `network_joined_nodes.zip` → `network_joined_nodes/…shp` — 82,412 points
-- **Edges:** `network_joined_edges.zip` → `network_joined_edges/…shp` — 91,087 lines (incl. 48 `Join` distance-connectors)
-- **Components:** 6 · **giant:** 99.98% of nodes · **fuel hubs:** 384
+- **Nodes:** `network_joined_nodes.zip` → `network_joined_nodes/…shp` — 84,089 points
+- **Edges:** `network_joined_edges.zip` → `network_joined_edges/…shp` — 92,978 lines (incl. 49 `Join` distance-connectors)
+- **Components:** 5 · **giant:** 99.99% of nodes · **fuel hubs:** 385
 - **CRS:** EPSG:3338 — NAD83 / Alaska Albers (meters). The `.prj` reads as `NAD_1983_Alaska_Albers`.
 
 The zips are committed; the extracted shapefiles are gitignored
@@ -24,51 +24,52 @@ to these bytes — a re-export, a repack that re-orders rows, even a
 `edge_month_weights`, and `edge_costs` together. That is why the members are
 checksummed below and must stay **byte-identical**.
 
-## PROVENANCE — rebuilt 2026-09-12 with the fixed engine + manual connections
+## PROVENANCE — rebuilt 2026-09-15 with AK-DOT-only roads
 
-This network was re-exported on **2026-09-12** by `06_export_final_network.py`
-from a full stage-02 rebuild with `source_scripts/mmnet` (the current, fixed
-engine) against a `profile.yaml` that includes the **user-authored
-manual-connections layer** (`inputs/mannual_connections/` — 7 barge, 6 plane,
-1 road hand-drawn lines). It **supersedes** the 2026-07-20 pre-fix frozen
-export (82,300 nodes / 90,921 edges), which is preserved in git history.
+This network was re-exported on **2026-09-15** by `06_export_final_network.py`
+from a full stage-02 rebuild whose ONLY road source is the **2026-09 AK DOT&PF
+Roads download** (26,650 features): the GRIP4 Canada `extra_source` and its
+border-stitch were removed (transnational roads are not fuel-delivery routes).
+The profile still includes the user-authored manual-connections layer
+(`inputs/mannual_connections/` — 7 barge, 6 plane, 1 road hand-drawn lines).
+It **supersedes** the 2026-09-12 manual-connections export (82,412 nodes /
+91,087 edges / 6 components, preserved in git history), which itself
+superseded the 2026-07-20 pre-fix freeze (82,300 / 90,921).
 
-- This is a genuinely different network-of-record: the manual connections add
-  geometry, so counts, the edge-type inventory, and every edge_id-keyed table
-  moved. It is not the label-only delta the pre-fix freeze had.
+- The road swap moved every road-derived quantity: +1,739 Road edges (newer,
+  denser AK DOT data), +152 Bridge welds, one more fuel hub (385 — a snap/dedup
+  outcome shifted with the new geometry), one fewer Transfer (225), and the
+  join now closes the network to 5 components / 99.99% giant. Every
+  edge_id-keyed table moved with it.
 - Any future re-export must regenerate, together: these zips, the `EXPECTED`
   inventory in `02_load_final_network.py`, the checksums here +
   `inputs/MANIFEST.md` + `.github/workflows/ci.yml`, and the downstream
   `edge_month_weights` / `edge_costs` tables (rerun workflow 03 in full).
 
-**On the pre-fix→fixed engine change (verified 2026-08-17, still true).** The
-`assemble.py` `roads.reset_index(drop=True)` mis-snap fix is a no-op on the
-Alaska data: a fixed-engine rebuild of the *old* profile reproduced the frozen
-network's geometry exactly (all 384 hub snaps identical, max displacement
-0.00 m). So every count change in this export is attributable to the manual
-connections, not the engine fix. The fixed engine also tags ice-involved welds
-as `IceRoadConnector` directly (its own `type`, 36 edges) rather than leaving
-them as `Bridge` for workflow 03 to reclassify — the frozen and rebuilt
-`edge_class` vocabularies stay identical.
+**Gates at export (2026-09-15 rebuild):** `05_verify_north_slope.py` PASS —
+North Slope road + ice in giant, waterway 100% connected, road ≥95% in giant
+(98.3% full-network), barge transfers ~201. The engine still tags ice-involved
+welds as `IceRoadConnector` directly (its own `type`, 36 edges) — the frozen
+and rebuilt `edge_class` vocabularies stay identical.
 
 ## Checksums (sha256; also in `inputs/MANIFEST.md`)
 
 | Zip | sha256 |
 |---|---|
-| `network_joined_nodes.zip` | `30808a7f0f6bf470` … (full value in `inputs/MANIFEST.md`) |
-| `network_joined_edges.zip` | `558dfa5b88ad93b9` … (full value in `inputs/MANIFEST.md`) |
+| `network_joined_nodes.zip` | `b03ba3202ae9a4b2` … (full value in `inputs/MANIFEST.md`) |
+| `network_joined_edges.zip` | `56c802470378a39b` … (full value in `inputs/MANIFEST.md`) |
 
 Members (md5; full sha256 per member in `final_network/MANIFEST.sha256` and
 `inputs/MANIFEST.md`):
 
 | Member | md5 |
 |---|---|
-| `network_joined_nodes/network_joined_nodes.shp` | `c733dd3f46a0d8479eddb8baea44e730` |
-| `network_joined_nodes/network_joined_nodes.dbf` | `0e218ad115b212ba5acf1df4ea5844ce` |
-| `network_joined_nodes/network_joined_nodes.shx` | `4e1e656539362d2a2e726508c628edb4` |
-| `network_joined_edges/network_joined_edges.shp` | `fb5bc7fb0c01e8f0261171bfbd4b55da` |
-| `network_joined_edges/network_joined_edges.dbf` | `2925c9dc50c10a748ba57d1879c6f483` |
-| `network_joined_edges/network_joined_edges.shx` | `22886ce47addb5e4b2c72af80c24db86` |
+| `network_joined_nodes/network_joined_nodes.shp` | `9685481d30377442f7a455a9de3286d0` |
+| `network_joined_nodes/network_joined_nodes.dbf` | `0b5cc825c4db635cf8d35203704ede44` |
+| `network_joined_nodes/network_joined_nodes.shx` | `acd6a82a15dae827837537aaf2df724d` |
+| `network_joined_edges/network_joined_edges.shp` | `7fac5ddd0283696294daa15f2fc8d56c` |
+| `network_joined_edges/network_joined_edges.dbf` | `fd23b1bc213c67871ec01a68124ae1bd` |
+| `network_joined_edges/network_joined_edges.shx` | `2e49a99b450e317b001f33fb6044f335` |
 
 ## Field names (Shapefile 10-character limit)
 
@@ -98,8 +99,8 @@ shortened on export. Full mapping:
 | `source`     | provenance (e.g. `Road`, `ports`, `barge_hubs`, `weld:*`, `bridge:*`, `shore:*`, `join:to-giant`) |
 | `join_gap_m` | for `Join` edges, the straight-line gap (m) that was closed; NULL/0 otherwise |
 
-Edge-type inventory (the ingest's hard tripwire): Road 53,795 · Waterway
-34,178 · Bridge 1,330 · IceRoad 1,248 · IceRoadConnector 36 · Transfer 226 · Air 226 · Join 48.
+Edge-type inventory (the ingest's hard tripwire): Road 55,534 · Waterway
+34,178 · Bridge 1,482 · IceRoad 1,248 · IceRoadConnector 36 · Transfer 225 · Air 226 · Join 49.
 Note `Bridge` here means an mmnet topology *weld*, not a road-over-water
 bridge — workflow 03 derives the disambiguated `edge_class` column
 (`Weld` / `IceRoadConnector`).

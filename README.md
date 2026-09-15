@@ -32,7 +32,7 @@ python tools/extract_inputs.py    # unzip the committed inputs/*.zip bundles
 bash run_all.sh                   # run as far as the data on disk allows
 ```
 A fresh clone runs the ingest half of step **(c)** (extract the frozen
-network, load its 82,412 nodes / 91,087 edges into DuckDB) and all of step
+network, load its 84,089 nodes / 92,978 edges into DuckDB) and all of step
 **(d)** from committed data alone. The weighting and costing stages of (c)
 additionally need the friction stack from (a), and the costing stage reads
 `inputs/bulk_fuel_data/raw/Fuel_Delivery_Method.shp` (no longer shipped as a
@@ -99,15 +99,17 @@ every OS for stage (b): install R, then
 ## The handoff that holds it together
 
 `final_network/` is the network-of-record: the joined multimodal
-network (82,412 nodes / 91,087 edges / 384 fuel hubs / 6 components / 99.98%
+network (84,089 nodes / 92,978 edges / 385 fuel hubs / 5 components / 99.99%
 giant) exported by act (b) and ingested by act (c). Its shapefile **row order
 defines `edge_id`** for every DuckDB table, so the committed zips are
 checksummed (`inputs/MANIFEST.md`) and preserved byte-identical.
 
-**Provenance:** re-exported 2026-09-12 from a rebuild with the fixed
-`source_scripts/mmnet` engine that includes the user-authored
-manual-connections layer; it supersedes the 2026-07-20 pre-fix frozen export
-(preserved in git history). A re-export is a *new* network-of-record and
+**Provenance:** re-exported 2026-09-15 from a rebuild whose only road source
+is the 2026-09 AK DOT&PF Roads download (the GRIP4 Canada border-stitch was
+removed — transnational roads are not fuel-delivery routes); still includes
+the user-authored manual-connections layer. It supersedes the 2026-09-12
+manual-connections export and the 2026-07-20 pre-fix freeze (both preserved
+in git history). A re-export is a *new* network-of-record and
 invalidates every edge_id-keyed table, so the zips, checksums, the `EXPECTED`
 tripwire and the downstream tables must be regenerated together. Full
 provenance: `final_network/README.md`.
