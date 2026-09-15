@@ -124,6 +124,33 @@ layers:
     source: { type: file, path: data/interim/ice_roads.gpkg }
     snap_target: true        # hubs may land on the seasonal ice-road surface too
 
+  # User-authored MANUAL connections — the one editable file for growing the network by hand.
+  # 03_prep_manual_connections.py splits inputs/.../mannual_connections.shp by its `Mode` tag into
+  # these per-mode interim layers (the engine assigns one mode per layer, so a mixed-mode file must
+  # be split). Each REUSES its mode's existing edge_label, so costing and edge types are unchanged.
+  # No connection rule is needed: endpoints snapped to existing nodes weld automatically (1 m tol).
+  # To extend the network, add a line to the shapefile, tag its Mode, and rebuild stage 02.
+  - name: manual_air
+    mode: Plane
+    edge_label: Air
+    kind: line
+    loader: load_lines
+    source: { type: file, path: data/interim/manual_plane.gpkg }
+
+  - name: manual_barge
+    mode: Barge
+    edge_label: Waterway
+    kind: line
+    loader: load_lines
+    source: { type: file, path: data/interim/manual_barge.gpkg }
+
+  - name: manual_road
+    mode: Road
+    edge_label: Road
+    kind: line
+    loader: load_lines
+    source: { type: file, path: data/interim/manual_road.gpkg }
+
 # Intermodal connection (Python assembler, mmnet.assemble.connect_multimodal):
 # R nodes road/ice/air; Python nodes the waterway, snaps hubs, and connects the modes in three
 # passes — (1) anchor TRANSFERS at PORTS, BARGE_HUBS and AIRPORTS; (2) proximity BRIDGES (the

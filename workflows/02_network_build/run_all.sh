@@ -41,6 +41,17 @@ if [ ! -f data/interim/MANIFEST.md ]; then
   run_step "02_prep_airways"  "$PY" "$HERE/02_prep_airways.py"
 fi
 
+# Manual connections: user-authored line layer(s) that stitch disconnected hubs into the
+# network. Re-split EVERY build (outside the prep gate above) so edits to the shapefile take
+# effect. Optional — skipped cleanly when the authored shapefile is absent.
+MANUAL_SHP="inputs/mannual_connections/mannual_connections.shp"
+if [ -f "$MANUAL_SHP" ]; then
+  echo; echo "######## 3. prep manual connections (split by mode) ########"
+  run_step "03_prep_manual_connections" "$PY" "$HERE/03_prep_manual_connections.py"
+else
+  echo "SKIP 03_prep_manual_connections: no $MANUAL_SHP (optional user layer)."
+fi
+
 echo; echo "######## 3-4. validate + build (mmnet 01->04 + reports) ########"
 run_step "04_build_network" "$PY" "$HERE/04_build_network.py" "$PROFILE"
 

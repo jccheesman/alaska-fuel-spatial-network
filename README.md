@@ -32,7 +32,7 @@ python tools/extract_inputs.py    # unzip the committed inputs/*.zip bundles
 bash run_all.sh                   # run as far as the data on disk allows
 ```
 A fresh clone runs the ingest half of step **(c)** (extract the frozen
-network, load its 82,300 nodes / 90,921 edges into DuckDB) and all of step
+network, load its 82,412 nodes / 91,087 edges into DuckDB) and all of step
 **(d)** from committed data alone. The weighting and costing stages of (c)
 additionally need the friction stack from (a), and the costing stage reads
 `inputs/bulk_fuel_data/raw/Fuel_Delivery_Method.shp` (no longer shipped as a
@@ -98,16 +98,19 @@ every OS for stage (b): install R, then
 
 ## The handoff that holds it together
 
-`final_network/` is the frozen network-of-record: the joined multimodal
-network (82,300 nodes / 90,921 edges / 384 fuel hubs / 21 components / 99.65%
+`final_network/` is the network-of-record: the joined multimodal
+network (82,412 nodes / 91,087 edges / 384 fuel hubs / 6 components / 99.98%
 giant) exported by act (b) and ingested by act (c). Its shapefile **row order
 defines `edge_id`** for every DuckDB table, so the committed zips are
 checksummed (`inputs/MANIFEST.md`) and preserved byte-identical.
 
-**Caution:** the delivered network was built with the pre-bugfix mmnet engine;
-`source_scripts/mmnet` carries four later fixes. Rebuilding act (b) therefore produces a
-*different* network and invalidates every edge_id-keyed table — freeze vs
-rebuild is an open owner decision. Full provenance: `final_network/README.md`.
+**Provenance:** re-exported 2026-09-12 from a rebuild with the fixed
+`source_scripts/mmnet` engine that includes the user-authored
+manual-connections layer; it supersedes the 2026-07-20 pre-fix frozen export
+(preserved in git history). A re-export is a *new* network-of-record and
+invalidates every edge_id-keyed table, so the zips, checksums, the `EXPECTED`
+tripwire and the downstream tables must be regenerated together. Full
+provenance: `final_network/README.md`.
 
 ## Where things are
 
