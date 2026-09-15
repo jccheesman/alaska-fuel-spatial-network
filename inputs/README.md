@@ -21,7 +21,7 @@ ArcGIS Pro. Feeds the corridor mask (workflow 01) and provenance.
 
 | Layer | Source |
 |---|---|
-| `roads_networks/ak_albers_roads_merge.shp` | [AKDOT&PF Roads](https://gis.data.alaska.gov/datasets/AKDOT::roads-akdot) + [GRIP4 global roads](https://www.globio.info/download-grip-dataset) statewide merge |
+| `roads_networks/ak_albers_roads_merge.shp` | [AKDOT&PF Roads](https://gis.data.alaska.gov/datasets/AKDOT::roads-akdot) + [GRIP4 global roads](https://www.globio.info/download-grip-dataset) statewide merge — LEGACY visualization/provenance artifact only; since 2026-09-15 the network build's road source is the AK DOT&PF download alone (GRIP4 transnational roads are not fuel-delivery routes) |
 | `water_networks/…` | [National Waterway Network Lines](https://geospatial-usace.opendata.arcgis.com/maps/ace7645d305647448a84492a3b909d48) (USACE) |
 | `ice_roads_150m_3338/Ice_Roads.shp` | Overland packed-snow tundra routes; manually edited in ArcGIS Pro. North Slope ice roads: [UAA](https://accscatalog.uaa.alaska.edu/dataset/anthropogenic-datasets-north-slope/resource/5d898316-507e-4535-8bf0-b0608d3ca83a), [AK DOT](https://www.arcgis.com/home/item.html?id=820ebeed349b484eab23ffaa685b64ef#overview), [SIRA](https://www.arcgis.com/home/item.html?id=ef4056f5fb0545698b5c4318821c8237#overview) |
 | `Flights/Airports.csv` | [OurAirports](https://ourairports.com/data/), filtered to Alaska |
@@ -29,8 +29,9 @@ ArcGIS Pro. Feeds the corridor mask (workflow 01) and provenance.
 
 ## Pending: `network_raw.zip` (workflow 02's raw sources, ~60 MB)
 
-The network build's raw GIS data (AKDOT roads + GRIP4 Canada, USACE NWN
-waterways, Ice_Roads, TIGER places / county subdivisions / boroughs,
+The network build's raw GIS data (AKDOT roads — 2026-09 download, the sole
+road source since the GRIP4 Canada border-stitch was removed 2026-09-15 —
+USACE NWN waterways, Ice_Roads, TIGER places / county subdivisions / boroughs,
 Ports_and_Harbors, AEA facilities CSV, Fuel_Delivery_Method.geojson)
 is **kept local-only** (the assembled zip exists on this build machine but
 is gitignored and was purged from git history on 2026-08-08): committing it
@@ -39,7 +40,7 @@ is gated on the data-redistribution decision.
 Until it lands, populate `data/raw/` by either:
 1. copying `data/raw/**` from the original `alaska_network_mmnet` working
    tree into this repo's `data/raw/`, or
-2. re-downloading from the sources in the tables above (AKDOT&PF, GRIP4,
+2. re-downloading from the sources in the tables above (AKDOT&PF,
    USACE NWN, TIGER 2022 place/cousub/boroughs, AEA Geoportal) and running
    `workflows/02_network_build/00_normalize_raw.py`, whose SPEC table
    documents the expected file-by-file layout.

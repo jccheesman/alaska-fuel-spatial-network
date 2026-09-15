@@ -7,8 +7,8 @@ reads these uniform inputs (the profile points at `data/interim/`); the loaders'
 as an idempotent safety net.
 
 Scope = file-local standardization only (reproject + clean geometry + select/rename + write).
-Pipeline-coupled transforms stay where they belong: waterways bbox-clip and the GRIP4 border-stitch
-(the loaders), and the airways geocoding + boundary dissolve (`workflows/02_network_build/02_prep_airways.py`).
+Pipeline-coupled transforms stay where they belong: the waterways bbox-clip (the loaders), and the
+airways geocoding + boundary dissolve (`workflows/02_network_build/02_prep_airways.py`).
 
 Writes `data/interim/<name>.{gpkg,csv}` + `data/interim/MANIFEST.md`.
 
@@ -47,12 +47,12 @@ SPEC = [
                 "Other_Fuel_Capacity": "other_fuel_capacity", "EntityName": "entity",
                 "ASTFacilityLongitude": "longitude", "ASTFacilityLatitude": "latitude"}},
     # --- transport lines ---
+    # The ONLY road source (2026-09-07 AK DOT&PF download, 26,650 features).
+    # The GRIP4 Canada extra/border-stitch layer was removed 2026-09-15:
+    # transnational roads are not fuel-delivery routes.
     {"name": "roads_akdot", "kind": "line", "status": "used (roads)",
      "src": RAW / "connectivity" / "road" / "Roads_AKDOT" / "Roads_AKDOT.shp",
      "rename": {"Route_ID": "route_id", "Route_Name": "route_name"}},
-    {"name": "roads_grip4", "kind": "line", "status": "used (roads extra / border-stitch)",
-     "src": RAW / "connectivity" / "road" / "GRIP4_canada" / "Export_Alaska_Roads_grip4.shp",
-     "rename": {}},
     {"name": "waterways", "kind": "line", "status": "used (barge)",
      "src": RAW / "connectivity" / "barge" / "NWN_Waterway_Network_Lines" / "Waterway_Network.shp",
      "rename": {"WATERWAY": "waterway_id", "LINKNAME": "name"}},

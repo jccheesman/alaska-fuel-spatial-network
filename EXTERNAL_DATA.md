@@ -41,8 +41,8 @@ the committed zips via:
 | AEA Utilities Bulk Fuel Inventory | Fuel facilities | [State of Alaska Geoportal](https://gis.data.alaska.gov/maps/DCCED::utilities-bulk-fuel-inventory/about) · [REST service](https://maps.commerce.alaska.gov/server/rest/services/Services/Utilities_Bulk_Fuel_Inventory_with_Attachments/MapServer) |
 | AEA / DCRA Fuel Delivery Method | Per-community delivery mode | [Fuel Delivery Method](https://gis.data.alaska.gov/datasets/DCCED::fuel-delivery-method/about) |
 | AEA regional boundaries | Region assignment | [Alaska Energy Authority Regions](https://hub.arcgis.com/datasets/DCCED::alaska-energy-authority-regions/explore) |
-| AKDOT&PF Roads | Road network | [Roads AKDOT](https://gis.data.alaska.gov/datasets/AKDOT::roads-akdot) |
-| GRIP4 global roads (CC-BY) | Road network merge (Canada stitch) | [GLOBIO GRIP download](https://www.globio.info/download-grip-dataset) |
+| AKDOT&PF Roads | Road network (SOLE road source since 2026-09-15; 2026-09 download) | [Roads AKDOT](https://gis.data.alaska.gov/datasets/AKDOT::roads-akdot) |
+| GRIP4 global roads (CC-BY) | REMOVED from the network build 2026-09-15 (transnational roads are not fuel-delivery routes); survives only in the legacy `ak_albers_roads_merge.shp` visualization artifact | [GLOBIO GRIP download](https://www.globio.info/download-grip-dataset) |
 | National Waterway Network (USACE) | Waterway network | [USACE GeoSpatial](https://geospatial-usace.opendata.arcgis.com/maps/ace7645d305647448a84492a3b909d48) · [BTS/NTAD](https://geodata.bts.gov/datasets/national-waterway-network-lines) |
 | North Slope ice roads | Overland ice roads | [UAA ACCS](https://accscatalog.uaa.alaska.edu/dataset/anthropogenic-datasets-north-slope/resource/5d898316-507e-4535-8bf0-b0608d3ca83a) · [AKDOT](https://www.arcgis.com/home/item.html?id=820ebeed349b484eab23ffaa685b64ef) · [SIRA](https://www.arcgis.com/home/item.html?id=ef4056f5fb0545698b5c4318821c8237) |
 | AK DOT&PF airport registry + flight schedules | Air mode | located with inputs/data_for_network_build.zip/Flights |

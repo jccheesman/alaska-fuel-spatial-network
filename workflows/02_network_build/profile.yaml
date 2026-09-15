@@ -57,8 +57,7 @@ inventory:
     max_dist_m: 5000
 
 # Alaska land outline (dissolved boroughs), built by scripts/prep_airways.py.
-# Used for the road border-stitch (GRIP4 Canada segments that leave the region)
-# and the map basemap.
+# Used for the map basemap.
 boundary:
   type: file
   path: data/boundary.geojson
@@ -93,8 +92,9 @@ layers:
     edge_label: Road
     kind: line
     loader: load_roads
-    source:       { type: file, path: data/interim/roads_akdot.gpkg }
-    extra_source: { type: file, path: data/interim/roads_grip4.gpkg }
+    # AK DOT&PF roads (2026-09 download) are the ONLY road source; the GRIP4
+    # Canada extra_source (transnational border-stitch) was removed 2026-09-15.
+    source: { type: file, path: data/interim/roads_akdot.gpkg }
     snap_target: true        # hubs may land on the road surface
 
   - name: waterways
