@@ -15,8 +15,23 @@ from __future__ import annotations
 import os
 from pathlib import Path
 
+from .assemble import classify_connectors
 from .build import build_network
 from .config import load_config, load_params
+
+# Synthetic-connector naming vocabulary (mirrored in friction_costs.py). The
+# carrier word per line layer defaults to its transport MODE; the air layer uses
+# "Air" (its edge_label) rather than the mode word "Plane". `_TOKEN_ORDER` fixes a
+# deterministic order for a two-mode pair so it yields ONE canonical name
+# (BargeRoadTransfer, not RoadBargeTransfer).
+_CARRIER_ALIAS = {"Plane": "Air"}
+_TOKEN_ORDER = {"Barge": 0, "IceRoad": 1, "Air": 2, "Road": 3}
+
+
+def _connector_tokens(cfg) -> dict:
+    """edge_label -> carrier word used in synthetic-connector type names."""
+    line_specs = [s for s in cfg.layers if s.kind == "line"]
+    return {s.edge_label: _CARRIER_ALIAS.get(s.mode, s.mode) for s in line_specs}
 from .io_writers import output_dir, write_gdf
 from .network import NetworkTables
 from .steps.consolidate import consolidate_facilities
@@ -59,6 +74,13 @@ def run_pipeline(profile_path: str | Path, project_dir: str | Path | None = None
     layer_list = [s.name for s in cfg.layers if s.kind == "line"]
     net = build_network(layer_list, output_dir() / "03_network", hubs)
 
+    # 03b — re-type synthetic connectors by the modes they join (same-mode ->
+    # {Mode}Connector, two modes -> per-pair Transfer). Rewrites 03_network so the
+    # report + stage 04 + export all speak one mode-based vocabulary.
+    tokens = _connector_tokens(cfg)
+    net = NetworkTables.from_parts(net.nodes, classify_connectors(net.edges, tokens, _TOKEN_ORDER))
+    net.to_gpkg(output_dir() / "03_network")
+
     # connectivity report — per-mode + fuel-hub reachability (and, where an Air mode exists, its marginal
     # contribution). Prints a headline and writes reports/03_network.md.
     from . import inspect as _inspect
@@ -73,6 +95,9 @@ def run_pipeline(profile_path: str | Path, project_dir: str | Path | None = None
     if jc > 0:
         from .assemble import join_components_to_giant
         jn, je, jsum = join_components_to_giant(net.nodes, net.edges, jc)
+        # the stage-04 join edges are raw "Join" — classify them (and re-confirm
+        # the rest) so cross-mode joins become the right per-pair Transfer.
+        je = classify_connectors(je, tokens, _TOKEN_ORDER)
         joined = NetworkTables.from_parts(jn, je)
         joined.to_gpkg(output_dir() / "04_network_joined")
         print(f"[04] joined {jsum['n_joined']} components (≤ {jc:.0f} m) in {jsum['rounds']} round(s); "

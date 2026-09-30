@@ -33,9 +33,20 @@ _OVERLAY_STYLES = [
 ]
 
 _HUB_SHAPES = ["o", "s", "^", "D", "v", "P", "X", "*"]
+# Line-haul modes + the mode-based synthetic connectors: {Mode}Connector (welds)
+# and per-pair {A}{B}Transfer (intermodal handoffs). Legacy Transfer/Bridge kept
+# so older exports still render.
 _EDGE_TYPE_COLORS = {"Road": "#6b6b6b", "Waterway": "#1f77b4", "Air": "#9467bd",
-                     "IceRoad": "#17becf", "Transfer": "#d62728", "Bridge": "#ff7f0e"}
-_EDGE_TYPE_ORDER = ["Road", "Waterway", "Air", "IceRoad", "Transfer", "Bridge"]
+                     "IceRoad": "#17becf",
+                     "RoadConnector": "#ff7f0e", "IceRoadConnector": "#bcbd22",
+                     "BargeRoadTransfer": "#d62728", "BargeIceRoadTransfer": "#e377c2",
+                     "IceRoadRoadTransfer": "#ff9896", "AirRoadTransfer": "#c49c94",
+                     "Transfer": "#d62728", "Bridge": "#ff7f0e"}
+_EDGE_TYPE_ORDER = ["Road", "Waterway", "Air", "IceRoad",
+                    "RoadConnector", "IceRoadConnector",
+                    "BargeRoadTransfer", "BargeIceRoadTransfer",
+                    "IceRoadRoadTransfer", "AirRoadTransfer",
+                    "Transfer", "Bridge"]
 
 
 def _project() -> Path:
@@ -387,8 +398,9 @@ def plot_network(nodes, edges, title: str = "", slug: str = "03_build",
     for t in types_present:
         grp = ed[ed[type_col] == t]
         col = _EDGE_TYPE_COLORS.get(t, "#333")
-        grp.plot(ax=ax, color=col, linewidth=1.6 if t == "Transfer" else 2.4,
-                 linestyle="--" if t == "Transfer" else "-", zorder=3)
+        is_xfer = str(t).endswith("Transfer")
+        grp.plot(ax=ax, color=col, linewidth=1.6 if is_xfer else 2.4,
+                 linestyle="--" if is_xfer else "-", zorder=3)
     nd.plot(ax=ax, color="#444", markersize=14, zorder=4)   # all nodes
     for i, (name, g) in enumerate(pt_overlays.items()):
         st = _OVERLAY_STYLES[i % len(_OVERLAY_STYLES)]
@@ -418,7 +430,7 @@ def plot_network(nodes, edges, title: str = "", slug: str = "03_build",
                              markeredgecolor="black", markersize=11, label=dm) for dm in dms]
 
     edge_handles = [Line2D([0], [0], color=_EDGE_TYPE_COLORS.get(t, "#333"),
-                           lw=2.4, linestyle="--" if t == "Transfer" else "-", label=t)
+                           lw=2.4, linestyle="--" if str(t).endswith("Transfer") else "-", label=t)
                     for t in types_present]
     edge_handles += [Line2D([0], [0], marker="o", color="w", markerfacecolor="#444",
                             markeredgecolor="white", markersize=7, label="node")]

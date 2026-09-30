@@ -55,14 +55,17 @@ Producer: `06_export_final_network.py` (zips + sha256 manifest). Consumers:
 Schema (DBF-safe field names): see `final_network/README.md` — nodes
 (node_id, is_hub, hub_id, deliv_meth, hub_type, hub_cap, snap_surf,
 component, is_giant; Point, EPSG:3338), edges (from, to, type ∈ {Road,
-Waterway, Air, IceRoad, Transfer, Bridge, Join}, source, join_gap_m;
+Waterway, Air, IceRoad, RoadConnector, IceRoadConnector, BargeRoadTransfer,
+BargeIceRoadTransfer, IceRoadRoadTransfer, AirRoadTransfer}, source, join_gap_m;
 LineString, EPSG:3338). `length_m` is DERIVED by the consumer
 (geometry.length — EPSG:3338 is meters).
 
 Inventory (the ingest's hard tripwire, `EXPECTED` in
 `02_load_final_network.py`): 84,089 nodes / 92,978 edges / 385 hubs / 5
-components / giant 0.9999 / Road 55,534 · Waterway 34,178 · Bridge 1,482 ·
-IceRoad 1,248 · IceRoadConnector 36 · Transfer 225 · Air 226 · Join 49.
+components / giant 0.9999 / Road 55,534 · Waterway 34,178 · Air 226 ·
+IceRoad 1,248 · RoadConnector 1,498 · IceRoadConnector 35 ·
+BargeRoadTransfer 234 · BargeIceRoadTransfer 11 · IceRoadRoadTransfer 12 ·
+AirRoadTransfer 2.
 
 ## 5. THE edge_id RULE (the contract everything hangs on)
 
@@ -77,29 +80,28 @@ shapefile bytes are therefore checksummed (`inputs/MANIFEST.md`,
 ingest verifies the id *range* of any pre-existing `edge_month_weights`, not
 content — so never mix tables from different exports.
 
-## 6. edge_class (derived once, stage 02 of workflow 03)
+## 6. Connector vocabulary + edge_class (stage 02 of workflow 03)
 
-The exporter's `Bridge` type means an mmnet topology **weld**, not a
-road-over-water bridge. `derive_edge_class` splits it by provenance:
-`weld:IceRoad` / `bridge:IceRoad->Road` → `IceRoadConnector` (seasonal,
-IceRoad treatment: road_base sampling × 2.0 penalty, Jan–Mar gate); other
-`Bridge` → `Weld` (flat 1.0, Road rate); all other types pass through.
-Persisted on `network_edges`; **no other code may re-derive this rule.**
-Rebuilds emit `IceRoadConnector` as the `type` itself (the profile's
-ice-road bridge rules carry `edge_type: IceRoadConnector`), so the frozen
-and rebuilt vocabularies are identical.
+Synthetic connectors are named by the modes they join
+(`pipeline.classify_connectors`): within-mode welds → `{Mode}Connector`
+(RoadConnector, IceRoadConnector); cross-mode handoffs → per-pair
+`{A}{B}Transfer` (BargeRoadTransfer, BargeIceRoadTransfer, IceRoadRoadTransfer,
+AirRoadTransfer). `edge_class` is a pass-through of this `type`; it only diverges
+for a LEGACY frozen network, mapping generic `Bridge` welds into the vocabulary
+(ice-road provenance → IceRoadConnector, else → RoadConnector). Persisted on
+`network_edges`; **no other code may re-derive this rule.**
 
 ## 7. Weighting semantics (workflow 03, stage 03)
 
 75 m densification; length-weighted mean friction over valid samples;
 **strict rule: ANY NoData sample ⇒ impassable that month** (nodata_frac
 logged); IceRoad (and IceRoadConnector) hard-gated to months {1,2,3} with the
-×2.0 time penalty; Bridge/Air/Transfer unsampled at flat 1.0.
+×2.0 time penalty; RoadConnector / *Transfer / Air unsampled at flat 1.0.
 Friction-vs-cost separation: this stage writes environmental multipliers
 only — dollars enter exclusively in stage 04 via
 `friction_surface.friction_costs` (BASELINE_RATES_PER_GALLON_MILE,
-INTERMODAL_TRANSFER_FEES; Transfer edges priced by incident-mode inference,
-ambiguity = hard error).
+INTERMODAL_TRANSFER_FEES; each per-pair `*Transfer` maps straight to its fee
+via `TRANSFER_TYPE_TO_MODES`).
 
 ## 8. The DuckDB deliverable (`outputs/fuel_network.duckdb`)
 

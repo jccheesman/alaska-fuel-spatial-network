@@ -58,7 +58,7 @@ labels the noded geometry.
   "modes": [
     {"mode": "Road",  "layer": "roads",     "edge_label": "Road",    "blend_param": "road_blend_tolerance"},
     {"mode": "Plane", "layer": "airways",   "edge_label": "Air",     "blend_param": "air_blend_tolerance"},
-    {"mode": "Ice Road", "layer": "ice_roads", "edge_label": "IceRoad", "blend_param": "ice_roads_blend_tolerance"}
+    {"mode": "IceRoad", "layer": "ice_roads", "edge_label": "IceRoad", "blend_param": "ice_roads_blend_tolerance"}
   ],
   "transfers": []
 }

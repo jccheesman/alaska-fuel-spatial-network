@@ -96,14 +96,16 @@ class TransferSpec(_Strict):
 class BridgeSpec(_Strict):
     """A proximity connection policy (mmnet.connect_extras). `from_mode == to_mode` is a within-mode
     WELD (road↔road, ice↔ice); distinct modes are a cross-mode BRIDGE (ice↔road). A connector is
-    added only when the real gap ≤ `max_dist` (meters). `edge_type` sets the emitted edge `type`
-    label (default "Bridge") — region profiles can give a policy's connectors a self-describing
-    name (e.g. Alaska's ice-road rules emit "IceRoadConnector")."""
+    added only when the real gap ≤ `max_dist` (meters).
+
+    `edge_type` is now only the assembler's INTERMEDIATE label: `pipeline.classify_connectors`
+    re-types every synthetic connector from the modes it actually joins (same-mode -> {Mode}Connector,
+    two modes -> per-pair {A}{B}Transfer), so a profile no longer needs to name connector types."""
 
     from_mode: str
     to_mode: str
     max_dist: float
-    edge_type: str = "Bridge"   # emitted edge `type` label for this policy's connectors
+    edge_type: str = "Bridge"   # intermediate only — classify_connectors sets the final `type`
 
 
 class ConnectToGiantSpec(_Strict):

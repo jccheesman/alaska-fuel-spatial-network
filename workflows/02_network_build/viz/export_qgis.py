@@ -37,11 +37,14 @@ GPKG_OUT = OUT / "alaska_network_qgis.gpkg"
 QGZ_OUT = OUT / "alaska_network.qgz"
 TARGET_CRS = 3338
 
-# Mode colors (match mmnet.viz); IceRoad = cyan, Bridge = orange (welds / cross-mode bridges).
+# Mode colors (match mmnet.viz). Connectors: {Mode}Connector welds + per-pair
+# *Transfer handoffs; legacy Bridge/Join/Transfer kept for older exports.
 EDGE_COLORS = {
-    "Road": "#6b6b6b", "Waterway": "#1f77b4", "Air": "#9467bd",
-    "IceRoad": "#17becf", "Transfer": "#d62728", "Bridge": "#ff7f0e",
-    "Join": "#000000",   # Stage-04 component→giant joins (04_network_joined)
+    "Road": "#6b6b6b", "Waterway": "#1f77b4", "Air": "#9467bd", "IceRoad": "#17becf",
+    "RoadConnector": "#ff7f0e", "IceRoadConnector": "#bcbd22",
+    "BargeRoadTransfer": "#d62728", "BargeIceRoadTransfer": "#e377c2",
+    "IceRoadRoadTransfer": "#ff9896", "AirRoadTransfer": "#c49c94",
+    "Transfer": "#d62728", "Bridge": "#ff7f0e", "Join": "#000000",
 }
 HUB_COLORS = {  # by delivery_method (incl. multimodal mixes)
     "Road": "#2ca02c", "Barge": "#1f77b4", "Plane": "#9467bd",
@@ -67,11 +70,11 @@ def build_gpkg() -> dict:
     layers = {
         "boundary": _to_crs(gpd.read_file(BOUNDARY)) if BOUNDARY.exists() else None,
         "edges": edges[["type", "source", "length_m", "from", "to", "geometry"]],
-        "transfers": edges.loc[edges["type"] == "Transfer",
+        "transfers": edges.loc[edges["type"].astype(str).str.endswith("Transfer"),
                                ["type", "source", "length_m", "geometry"]].reset_index(drop=True),
-        # every intermodal connection — transfers (port/hub/airport + shore landings) AND the bridges
-        # (road↔road / ice↔ice welds, ice↔road bridge, weld-to-giant), distinguishable by `source`.
-        "connectors": edges.loc[edges["type"].isin(["Transfer", "Bridge"]),
+        # every synthetic connection — per-pair *Transfer handoffs AND the {Mode}Connector
+        # welds (road↔road, ice↔ice, weld-to-giant), distinguishable by `type`/`source`.
+        "connectors": edges.loc[edges["type"].astype(str).str.endswith(("Connector", "Transfer")),
                                 ["type", "source", "length_m", "geometry"]].reset_index(drop=True),
         "nodes": nodes[["node_id", "is_hub", "component", "is_giant", "geometry"]],
         "hubs": nodes.loc[is_hub, [c for c in ("hub_id", "delivery_method", "hub_type",
@@ -163,7 +166,9 @@ def build_qgz() -> bool:
 
         edges = load("edges", "Network edges (by mode)")
         if edges:
-            order = ["Road", "Waterway", "IceRoad", "Air", "Bridge", "Transfer"]
+            order = ["Road", "Waterway", "IceRoad", "Air", "RoadConnector",
+                     "IceRoadConnector", "BargeRoadTransfer", "BargeIceRoadTransfer",
+                     "IceRoadRoadTransfer", "AirRoadTransfer"]
             edges.setRenderer(categorized(
                 "type", {k: EDGE_COLORS[k] for k in order},
                 lambda c: line_sym(c, width=0.5 if c == EDGE_COLORS["Transfer"] else 0.26,

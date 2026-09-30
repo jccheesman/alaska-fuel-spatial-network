@@ -100,11 +100,11 @@ VEHICLE_MILE_RATES_REFERENCE = {
 # ===========================================================================
 # Intermodal transfer fees (USD per gallon)
 # ===========================================================================
-# Structured to mirror the routing graph. Every Transfer edge joins exactly
-# two line-haul modes, so every key here is one (mode_a, mode_b) modal
-# boundary in the FEE_MODE vocabulary that infer_transfer_fees (below) derives
-# from edge_class — {overland, barge, ice_road, plane}. One entry == one kind
-# of modal handoff, the same way the graph has one Transfer edge per handoff.
+# Structured to mirror the routing graph. Every transfer edge joins exactly
+# two line-haul modes, so every key here is one (mode_a, mode_b) modal boundary
+# in the {overland, barge, ice_road, plane} vocabulary. A per-pair transfer type
+# maps straight to its pair via TRANSFER_TYPE_TO_MODES (infer_transfer_fees,
+# below). One entry == one kind of modal handoff.
 # Routing reads only "total"; the "counts" sub-key records which handling the
 # fee actually pays for (provenance, not separately charged); the "range"
 # sub-key is the documented uncertainty band from the blind re-derivation,
@@ -131,10 +131,11 @@ VEHICLE_MILE_RATES_REFERENCE = {
 # explicit node. Fees are direction-insensitive (a graph edge is traversed
 # both ways), so _lookup_fee tries either key ordering.
 #
-# Live in the current network: ("barge","overland") keys 205 Transfer edges,
-# ("barge","ice_road") keys 8. The other pairs are latent modal boundaries
-# kept so a future edge (or a plane connector) is priced
-# rather than hard-erroring in _lookup_fee (below).
+# Live in the current network (per-pair transfer types, refine-synthetic-connectors):
+# ("barge","overland") keys BargeRoadTransfer (234), ("barge","ice_road") keys
+# BargeIceRoadTransfer (11), ("overland","ice_road") keys IceRoadRoadTransfer (12),
+# ("plane","overland") keys AirRoadTransfer (2). infer_transfer_fees maps each
+# transfer type straight to its pair via TRANSFER_TYPE_TO_MODES.
 INTERMODAL_TRANSFER_FEES = {
     ("barge", "overland"): {
         # 205 graph Transfer edges (Waterway <-> Road). Bills the road-side
@@ -172,7 +173,8 @@ INTERMODAL_TRANSFER_FEES = {
         "range": (0.015, 0.045),
     },
     ("overland", "ice_road"): {
-        # Latent modal boundary (Dalton/North Slope). Bills the road-carriage
+        # Keys IceRoadRoadTransfer (12 edges, Dalton/North Slope ice↔road hand-
+        # offs). Bills the road-carriage
         # side of a single continuous truck->ice-road-truck pumped changeover
         # (metered PTO pump-out labor + transfer equipment). The ice-road-side
         # pump-in dwell is EXCLUDED — already in the 0.010 rate's +20% load/
@@ -198,12 +200,24 @@ INTERMODAL_TRANSFER_FEES = {
 FEE_MODE = {
     "Waterway": "barge",
     "Road": "overland",
-    "Weld": "overland",
-    "Join": "overland",
+    "RoadConnector": "overland",
     "IceRoad": "ice_road",
     "IceRoadConnector": "ice_road",
-    "IceRoadWeld": "ice_road",   # legacy alias (pre-rename DuckDBs)
     "Air": "plane",
+    # legacy edge_class aliases (pre-rename DuckDBs)
+    "Weld": "overland",
+    "Join": "overland",
+    "IceRoadWeld": "ice_road",
+}
+
+# Per-pair transfer type -> the two fee-modes it joins. A transfer's type NAMES
+# the modes it bridges (classify_connectors), so its fee is a direct lookup — no
+# incident-mode inference, no ambiguity. Keys are the edge_class/type values.
+TRANSFER_TYPE_TO_MODES = {
+    "BargeRoadTransfer":    ("barge", "overland"),
+    "BargeIceRoadTransfer": ("barge", "ice_road"),
+    "IceRoadRoadTransfer":  ("overland", "ice_road"),
+    "AirRoadTransfer":      ("overland", "plane"),
 }
 
 
@@ -225,44 +239,45 @@ def _lookup_fee(mode_a: str, mode_b: str) -> float:
 
 
 def infer_transfer_fees(edges):
-    """Per-gallon fee for each Transfer edge, keyed by incident modes.
+    """Per-gallon fee for each transfer edge, from its per-pair type.
 
-    For each endpoint of a Transfer edge, collect the fee-modes of its
-    incident line-haul edges; the handoff pair is (mode at from-side,
-    mode at to-side). Endpoints with several incident modes or with no
-    line-haul edge at all are hard errors — with 213 Transfer edges these
-    are hand-reviewable, and guessing would misprice the mode switch.
+    A transfer's `edge_class` names the two modes it joins
+    (``BargeRoadTransfer`` -> barge<->overland), so the fee is a direct
+    `TRANSFER_TYPE_TO_MODES` -> `_lookup_fee` — no incident-mode inference and no
+    ambiguity. A LEGACY export whose transfers are the generic `Transfer` type
+    falls back to the incident-mode inference so old DuckDBs still price.
 
     Args:
         edges: DataFrame with columns edge_id, from_node, to_node, edge_class.
 
     Returns:
-        A pandas Series of fees indexed like the Transfer subset of `edges`.
+        A pandas Series of fees indexed by edge_id for every transfer edge.
     """
     import pandas as pd
 
-    line_haul = edges[edges["edge_class"] != "Transfer"]
-    incident = pd.concat([
-        pd.DataFrame({"node": line_haul["from_node"],
-                      "mode": line_haul["edge_class"].map(FEE_MODE)}),
-        pd.DataFrame({"node": line_haul["to_node"],
-                      "mode": line_haul["edge_class"].map(FEE_MODE)}),
-    ])
-    node_modes = incident.groupby("node")["mode"].agg(set)
-
-    transfers = edges[edges["edge_class"] == "Transfer"]
     fees = {}
-    for edge_id, u, v in transfers[["edge_id", "from_node", "to_node"]].itertuples(
-        index=False
-    ):
-        side_u = node_modes.get(u, set())
-        side_v = node_modes.get(v, set())
-        if len(side_u) != 1 or len(side_v) != 1:
-            raise ValueError(
-                f"Transfer edge {edge_id}: ambiguous incident modes "
-                f"({sorted(side_u)} x {sorted(side_v)}) — review by hand."
-            )
-        fees[edge_id] = _lookup_fee(next(iter(side_u)), next(iter(side_v)))
+    typed = edges[edges["edge_class"].isin(TRANSFER_TYPE_TO_MODES)]
+    for edge_id, ec in typed[["edge_id", "edge_class"]].itertuples(index=False):
+        fees[edge_id] = _lookup_fee(*TRANSFER_TYPE_TO_MODES[ec])
+
+    legacy = edges[edges["edge_class"] == "Transfer"]
+    if len(legacy):                       # old export: infer the pair from neighbours
+        line_haul = edges[edges["edge_class"] != "Transfer"]
+        incident = pd.concat([
+            pd.DataFrame({"node": line_haul["from_node"],
+                          "mode": line_haul["edge_class"].map(FEE_MODE)}),
+            pd.DataFrame({"node": line_haul["to_node"],
+                          "mode": line_haul["edge_class"].map(FEE_MODE)}),
+        ])
+        node_modes = incident.groupby("node")["mode"].agg(set)
+        for edge_id, u, v in legacy[["edge_id", "from_node", "to_node"]].itertuples(index=False):
+            side_u, side_v = node_modes.get(u, set()), node_modes.get(v, set())
+            if len(side_u) != 1 or len(side_v) != 1:
+                raise ValueError(
+                    f"Transfer edge {edge_id}: ambiguous incident modes "
+                    f"({sorted(side_u)} x {sorted(side_v)}) — review by hand."
+                )
+            fees[edge_id] = _lookup_fee(next(iter(side_u)), next(iter(side_v)))
     return pd.Series(fees, name="fee")
 
 

@@ -267,6 +267,84 @@ def connect_multimodal(r_edges: gpd.GeoDataFrame, hubs: gpd.GeoDataFrame, road_t
     return nodes_gdf, edges_gdf, summary
 
 
+def classify_connectors(edges: gpd.GeoDataFrame, token_by_label: dict,
+                        order: dict | None = None) -> gpd.GeoDataFrame:
+    """Re-type every synthetic connector by the modes it actually joins.
+
+    A **line-haul** edge kept its mode's edge_label as its `source` (see
+    `connect_multimodal`: ``"source": etype``), so ``source == type`` identifies
+    it; everything else (``weld:*``, ``bridge:*``, ``shore:*``, ``join:*``, anchor
+    transfers) is a **synthetic connector** whose label should describe its
+    endpoints, not how the assembler happened to create it. For each connector:
+
+      * the modes at an endpoint are the edge_labels of the line-haul edges
+        incident to it (a node where road + ice meet carries both);
+      * a connector joining ONE mode is a ``{Token}Connector`` (RoadConnector,
+        IceRoadConnector); two modes is a per-pair ``{A}{B}Transfer``
+        (BargeRoadTransfer, …), where the fee layer prices it by that pair;
+      * `token_by_label` maps an edge_label to the carrier word used in the name
+        (Road→Road, Waterway→Barge, Air→Air, IceRoad→IceRoad); `order` gives the
+        canonical token order so a pair yields ONE deterministic name.
+
+    A rare junction can put 3+ modes at a connector's endpoints (e.g. an ice↔road
+    bridge landing where an air leg also lands). The connector's own rule declares
+    its two modes in `source` (``bridge:IceRoad→Road``), so we parse those to break
+    the tie; absent a declaration we take the two highest-precedence tokens.
+
+    Idempotent: a re-typed connector still has ``source != type`` and reclassifies
+    to the same name. Returns a copy with `type` rewritten (line-haul untouched).
+    """
+    import re
+
+    order = order or {}
+    from_id = edges["from"].astype(int).tolist()
+    to_id = edges["to"].astype(int).tolist()
+    etype = edges["type"].tolist()
+    esrc = edges["source"].astype(str).tolist()
+
+    is_linehaul = [s == t for s, t in zip(esrc, etype)]
+    known_labels = {t for t, lh in zip(etype, is_linehaul) if lh}
+
+    node_labels: dict = {}
+    for f, t, typ, lh in zip(from_id, to_id, etype, is_linehaul):
+        if lh:
+            node_labels.setdefault(f, set()).add(typ)
+            node_labels.setdefault(t, set()).add(typ)
+
+    def _tok(label: str) -> str:
+        return token_by_label.get(label, label)
+
+    def _order_key(token: str) -> int:
+        return order.get(token, len(order) + 1)
+
+    def _declared_labels(src: str) -> list:
+        # bridge:IceRoad→Road / weld:IceRoad — the rule states its own modes as
+        # edge_labels; return those that are real line-haul labels.
+        body = src.split(":", 1)[1] if ":" in src else src
+        parts = [p for p in re.split(r"[→↔]", body)]
+        return [p for p in parts if p in known_labels]
+
+    new_type = list(etype)
+    for i in range(len(etype)):
+        if is_linehaul[i]:
+            continue
+        labels = node_labels.get(from_id[i], set()) | node_labels.get(to_id[i], set())
+        tokens = sorted({_tok(l) for l in labels}, key=_order_key)
+        if len(tokens) >= 3:                       # 3-mode junction — use the rule's declared pair
+            decl = sorted({_tok(l) for l in _declared_labels(esrc[i])}, key=_order_key)
+            tokens = decl if len(decl) == 2 else tokens[:2]
+        if not tokens:                             # no line-haul neighbour — leave as-is
+            continue
+        if len(tokens) == 1:
+            new_type[i] = f"{tokens[0]}Connector"
+        else:
+            new_type[i] = f"{tokens[0]}{tokens[1]}Transfer"
+
+    out = edges.copy()
+    out["type"] = new_type
+    return out
+
+
 def _label_components(nodes, edges):
     """Recompute `component` (1-based, size-ranked) + `is_giant` on `nodes` from `edges`.
 

@@ -161,6 +161,55 @@ def test_cross_mode_is_deterministic_under_row_permutation():
 
 
 # --------------------------------------------------------------------------
+# classify_connectors — mode-based connector/transfer naming
+# --------------------------------------------------------------------------
+def _classify(rows):
+    import geopandas as gpd
+    from shapely.geometry import LineString
+
+    from mmnet.assemble import classify_connectors
+
+    g = gpd.GeoDataFrame(
+        [{"from": f, "to": t, "type": ty, "source": s} for f, t, ty, s in rows],
+        geometry=[LineString([(0, 0), (1, 1)])] * len(rows), crs=3338,
+    )
+    tokens = {"Road": "Road", "IceRoad": "IceRoad", "Waterway": "Barge", "Air": "Air"}
+    order = {"Barge": 0, "IceRoad": 1, "Air": 2, "Road": 3}
+    return list(classify_connectors(g, tokens, order)["type"])
+
+
+def test_classify_connectors_same_and_cross_mode():
+    # line-haul (source == type) fixes the modes at each node; connectors follow.
+    rows = [
+        (0, 1, "Road", "Road"), (1, 6, "Road", "Road"),
+        (2, 3, "IceRoad", "IceRoad"),
+        (4, 5, "Waterway", "Waterway"),
+        (0, 6, "Bridge", "weld:Road"),                 # same-mode road weld
+        (2, 3, "IceRoadConnector", "weld:IceRoad"),    # same-mode ice weld
+        (1, 4, "Transfer", "ports"),                   # road<->barge handoff
+        (0, 5, "Join", "join:to-giant"),               # inferred road<->barge
+    ]
+    out = _classify(rows)
+    assert out[:4] == ["Road", "Road", "IceRoad", "Waterway"], "line-haul untouched"
+    assert out[4] == "RoadConnector"
+    assert out[5] == "IceRoadConnector"
+    assert out[6] == "BargeRoadTransfer"
+    assert out[7] == "BargeRoadTransfer"
+
+
+def test_classify_connectors_three_mode_uses_declared_pair():
+    # node 1 touches road+air; the ice<->road bridge must ignore the incidental
+    # air leg and use its declared pair (IceRoad, Road).
+    rows = [
+        (0, 1, "Road", "Road"),
+        (1, 9, "Air", "Air"),
+        (2, 3, "IceRoad", "IceRoad"),
+        (1, 2, "IceRoadConnector", "bridge:IceRoad→Road"),
+    ]
+    assert _classify(rows)[-1] == "IceRoadRoadTransfer"
+
+
+# --------------------------------------------------------------------------
 # connect_to_giant — shore landings vs welds
 # --------------------------------------------------------------------------
 def test_connect_to_giant_labels_waterway_landings_and_land_welds():

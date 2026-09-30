@@ -99,7 +99,7 @@ def build_edge_costs(db_path: str | Path = DB_PATH) -> pd.DataFrame:
         (df["length_m"] / METERS_PER_MILE) * df["avg_friction"] * rates
     )
 
-    is_transfer = df["edge_class"] == "Transfer"
+    is_transfer = df["edge_class"].str.endswith("Transfer")
     fee_by_edge = infer_transfer_fees(edges)
     df.loc[is_transfer, "cost_per_gallon"] = (
         df.loc[is_transfer, "edge_id"].map(fee_by_edge)

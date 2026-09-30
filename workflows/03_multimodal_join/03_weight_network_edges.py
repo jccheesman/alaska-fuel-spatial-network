@@ -11,31 +11,24 @@ Edge type -> friction source -> rate mode (the central design table; see the
 plan for rationale):
 
     Road      road_base.tif sampled           Road      months 1-12
-    Join      road_base.tif sampled           Road      months 1-12
+    RoadConnector   not sampled, friction 1.0 Road      months 1-12
     IceRoad   road_base.tif x ICEROAD_TIME_PENALTY
                                               IceRoad   hard-gated to
                                                         ICE_ROAD_SEASON_MONTHS
     Waterway  barge_MM.tif sampled per month  Barge     passable iff no NoData
-    Bridge    not sampled, friction 1.0       Road      months 1-12
+    IceRoadConnector road_base x ICEROAD_TIME_PENALTY, IceRoad rate, Jan-Mar gated
+    *Transfer not sampled, friction 1.0       Transfer  fees priced in Phase 3
     Air       not sampled, friction 1.0       Plane     months 1-12
-    Transfer  not sampled, friction 1.0       Transfer  fees priced in Phase 3
 
-TERMINOLOGY CAVEAT (2026-07-23): the colleague's `Bridge` type means an
-mmnet topology WELD (gap-closing stitch, median ~112 m), not a physical
-road-over-water bridge. Provenance (`source`) splits it: `weld:Road` /
-`weld:to-giant` (1,482 edges) behave like the table row above, but
-`weld:IceRoad` + `bridge:IceRoad->Road` (36 edges) belong to the ICE-ROAD
-system and are re-typed here to IceRoad treatment — the edge_class (and,
-in rebuilt exports, the type itself) is `IceRoadConnector` (road_base
-sampled x ICEROAD_TIME_PENALTY, IceRoad rate, hard-gated to
-ICE_ROAD_SEASON_MONTHS)
-so they cannot provide phantom Apr-Dec connectivity into the ice-road
-subnetwork. In this project "bridge" (unqualified) means the raster
-burn-in concept: road pixels over water. The weld/bridge distinction is
-derived ONCE, by stage 02 (02_load_final_network.py), as the
-`edge_class` column of network_edges; this script CONSUMES that column
-from the DB rather than re-deriving the rule, so the two stages cannot
-silently diverge. Run stage 02 first.
+CONNECTOR VOCABULARY: synthetic connectors are named by the modes they join
+(pipeline.classify_connectors): within-mode welds are `{Mode}Connector`
+(RoadConnector year-round flat; IceRoadConnector road_base x ICEROAD_TIME_PENALTY,
+hard-gated to ICE_ROAD_SEASON_MONTHS so it cannot give phantom Apr-Dec
+connectivity into the ice-road subnetwork); cross-mode handoffs are per-pair
+`{A}{B}Transfer` (unsampled, priced by INTERMODAL_TRANSFER_FEES in Phase 3).
+`edge_class` mirrors `type` and is derived ONCE by stage 02
+(02_load_final_network.py); this script CONSUMES that column from the DB rather
+than re-deriving, so the two stages cannot silently diverge. Run stage 02 first.
 
 road_base is NoData-free by construction (see friction_surface.compute_road_base)
 so a land edge can never be accidentally severed; barge_MM keeps its NoData so
@@ -101,15 +94,24 @@ DB_PATH = ROOT / "outputs" / "fuel_network.duckdb"
 # friction_costs.BASELINE_RATES_PER_GALLON_MILE so Phase 3's cost join is a
 # straight lookup ("Transfer" is priced by INTERMODAL_TRANSFER_FEES instead).
 EDGE_TYPE_MAP: dict[str, tuple[str | None, str]] = {
+    # line-haul modes
     "Road":     ("road_base", "Road"),
-    "Join":     ("road_base", "Road"),
     "IceRoad":  ("road_base", "IceRoad"),
     "Waterway": ("barge",     "Barge"),
-    "Bridge":   (None,        "Road"),
-    # Modern name for ice-involved welds/bridges (profile bridge rules emit it
-    # directly on rebuilds; the frozen network reaches it via edge_class):
-    "IceRoadConnector": ("road_base", "IceRoad"),
     "Air":      (None,        "Plane"),
+    # mode-based synthetic connectors. Within-mode welds are flat 1.0 (a fabricated
+    # straight stitch, not a real surface) except IceRoadConnector, which rides the
+    # road_base surface so it inherits the ice time-penalty + Jan-Mar gate.
+    "RoadConnector":    (None,        "Road"),
+    "IceRoadConnector": ("road_base", "IceRoad"),
+    # per-pair intermodal transfers — unsampled; priced by INTERMODAL_TRANSFER_FEES.
+    "BargeRoadTransfer":    (None, "Transfer"),
+    "BargeIceRoadTransfer": (None, "Transfer"),
+    "IceRoadRoadTransfer":  (None, "Transfer"),
+    "AirRoadTransfer":      (None, "Transfer"),
+    # legacy types (older frozen exports / DuckDBs) kept so this map never KeyErrors.
+    "Join":     ("road_base", "Road"),
+    "Bridge":   (None,        "Road"),
     "Transfer": (None,        "Transfer"),
 }
 
@@ -273,13 +275,12 @@ def compute_edge_month_weights(
 ) -> pd.DataFrame:
     """Compute the full edge_month_weights frame (one row per edge-month).
 
-    Land edges (Road/Join/IceRoad) sample the static road_base.tif once —
-    their friction is month-invariant. Waterway edges sample each month's
-    barge_MM.tif. Bridge/Air/Transfer are assigned friction 1.0 unsampled.
+    Land edges (Road/IceRoad/IceRoadConnector) sample the static road_base.tif
+    once — their friction is month-invariant. Waterway edges sample each month's
+    barge_MM.tif. RoadConnector/*Transfer/Air are friction 1.0 unsampled.
 
-    Requires stage 02 to have run: the Bridge/IceRoad weld disambiguation
-    comes from network_edges.edge_class in the DB, not from re-deriving
-    provenance strings here.
+    Requires stage 02 to have run: the IceRoadConnector marking comes from
+    network_edges.edge_class in the DB, not from re-deriving provenance here.
     """
     friction_dir = Path(friction_dir)
     months = sorted(months)
@@ -301,31 +302,30 @@ def compute_edge_month_weights(
     source = np.array([EDGE_TYPE_MAP[t][0] or "" for t in edge_type])
     rate_mode = np.array([EDGE_TYPE_MAP[t][1] for t in edge_type])
 
-    # Bridge disambiguation (see TERMINOLOGY CAVEAT in the module
-    # docstring): `Bridge` edges whose provenance is ice-road-related are
-    # welds within / into the ice-road system, not water crossings —
-    # re-type them to IceRoad treatment so they inherit the sampling, the
-    # x2.0 penalty, and the Jan-Mar gate. The classification comes from
-    # stage 02's persisted edge_class column (single source of truth).
+    # IceRoadConnector welds ride the ice-road system, so they take IceRoad
+    # treatment (road_base sampling, x2.0 penalty, Jan-Mar gate) rather than a
+    # flat connector. EDGE_TYPE_MAP already maps the IceRoadConnector *type* this
+    # way; this also covers a LEGACY export where the type is generic Bridge and
+    # only stage 02's persisted edge_class marks it IceRoadConnector.
     edge_class = load_edge_class(db_path, n_edges)
     ice_bridge = edge_class == "IceRoadConnector"
     if ice_bridge.any():
         source[ice_bridge] = "road_base"
         rate_mode[ice_bridge] = "IceRoad"
         logger.info(
-            "re-typed %d Bridge edges with ice-road provenance to IceRoad "
-            "treatment", int(ice_bridge.sum()),
+            "typed %d IceRoadConnector edges to IceRoad treatment",
+            int(ice_bridge.sum()),
         )
 
     # Month-invariant friction, filled per sampling group. Unsampled types
-    # (Bridge/Air/Transfer) are flat 1.0 by design — bridges are engineered
-    # crossings and Air is unaffected by terrain.
+    # (RoadConnector/*Transfer/Air) are flat 1.0 by design — a synthetic weld is
+    # a fabricated stitch and Air is unaffected by terrain.
     static_avg = np.full(n_edges, 1.0, dtype=np.float64)
     static_ndf = np.zeros(n_edges, dtype=np.float64)
 
     # --- land edges: one static road_base sample -------------------------
     land_idx = np.flatnonzero(source == "road_base")
-    logger.info("densifying %d land edges (Road/Join/IceRoad) ...", len(land_idx))
+    logger.info("densifying %d land edges (Road/IceRoad/IceRoadConnector) ...", len(land_idx))
     xy, seg_len, owner = build_sample_arrays(
         edges.geometry.iloc[land_idx], land_idx
     )
@@ -336,7 +336,7 @@ def compute_edge_month_weights(
     static_ndf[land_idx] = ndf[land_idx]
     # IceRoad rides the same surface with the seasonal time penalty. This is
     # a travel-time multiplier (environmental axis), NOT the IceRoad $ rate.
-    # ice-road-provenance Bridge welds (re-typed above) are included.
+    # IceRoadConnector welds (typed above) are included.
     ice_mask = (edge_type == "IceRoad") | ice_bridge
     static_avg[ice_mask] *= ICEROAD_TIME_PENALTY
 
@@ -409,12 +409,13 @@ def qa_report(df: pd.DataFrame, edge_type: np.ndarray) -> None:
     logger.info("QA Waterway passable fraction by month:\n%s",
                 by_month.to_string(float_format="%.3f"))
 
-    join = one_month[typ.reindex(one_month["edge_id"]).to_numpy() == "Join"]
+    type_col = typ.reindex(one_month["edge_id"]).to_numpy().astype(str)
+    xfer = one_month[np.char.endswith(type_col, "Transfer")]
     logger.info(
-        "QA Join (%d edges, hand-reviewable): avg_friction min=%.3f max=%.3f, "
+        "QA Transfer (%d edges, fee-priced): avg_friction min=%.3f max=%.3f, "
         "impassable=%d",
-        len(join), join["avg_friction"].min(), join["avg_friction"].max(),
-        (~join["passable"]).sum(),
+        len(xfer), xfer["avg_friction"].min(), xfer["avg_friction"].max(),
+        (~xfer["passable"]).sum(),
     )
 
 

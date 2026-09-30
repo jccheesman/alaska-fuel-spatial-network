@@ -4,7 +4,7 @@
 # The single source of truth for the Alaska build. Everything the engine treats
 # as DATA lives here; the mmnet package code stays region-agnostic. To improve
 # the model over time you edit THIS file (paths, modes, tolerances) — adding the
-# seasonal Ice Road mode below, for example, was one new `layers:` entry with no
+# seasonal IceRoad mode below, for example, was one new `layers:` entry with no
 # engine change, because the build derives its modes from this registry.
 #
 # Methodology (identical to the toy gold standard): consolidate -> tag -> hubs ->
@@ -63,13 +63,13 @@ boundary:
   path: data/boundary.geojson
 
 # Transport modes. Atoms parsed out of the inventory delivery_method must match
-# these names exactly. "Ice Road" is a NEW seasonal mode with no inventory
+# these names exactly. "IceRoad" is a NEW seasonal mode with no inventory
 # delivery rows — it enters purely as a transport layer (welded to the road).
 modes:
   - { name: Road,     routable: true }
   - { name: Barge,    routable: true }
   - { name: Plane,    routable: true }
-  - { name: Ice Road, routable: true }
+  - { name: IceRoad, routable: true }
 
 # Two-tier community/region tagging: facility -> TIGER place, else borough/census area.
 # Normalized inputs (scripts/normalize_raw.py) with canonical column names.
@@ -117,7 +117,7 @@ layers:
     source: { type: file, path: data/processed/airways.geojson }   # built by scripts/prep_airways.py
 
   - name: ice_roads
-    mode: Ice Road
+    mode: IceRoad
     edge_label: IceRoad
     kind: line
     loader: load_lines                                             # generic line reader
@@ -168,9 +168,9 @@ anchors:
 # (Air is NOT a transfer — airports SNAP onto the road; see `snaps:` below.)
 transfers:
   - { from_mode: Road,     to_mode: Barge, anchor: ports,      max_dist: 5000 }
-  - { from_mode: Ice Road, to_mode: Barge, anchor: ports,      max_dist: 5000 }
+  - { from_mode: IceRoad,  to_mode: Barge, anchor: ports,      max_dist: 5000 }
   - { from_mode: Road,     to_mode: Barge, anchor: barge_hubs, max_dist: 5000 }
-  - { from_mode: Ice Road, to_mode: Barge, anchor: barge_hubs, max_dist: 5000 }
+  - { from_mode: IceRoad,  to_mode: Barge, anchor: barge_hubs, max_dist: 5000 }
 
 # Snap-to-node connections (mmnet.build._snap_airways_to_road): the from-mode's leg endpoint at each
 # anchor is moved ONTO the nearest to-mode node — a SHARED node, not a transfer edge. Airports snap to
@@ -182,14 +182,13 @@ snaps:
 # Proximity before-policies (mmnet.connect_extras): from_mode==to_mode is a within-mode WELD,
 # distinct modes a cross-mode BRIDGE. A connector is added only when the real gap <= max_dist.
 bridges:
-  # edge_type names the emitted connector type. The ice-road rules emit
-  # "IceRoadConnector" so the confusing legacy "Bridge" label (an mmnet weld,
-  # NOT a water crossing) disappears at the source on the next rebuild; the
-  # ingest derives the same name from the FROZEN network's provenance, so the
-  # vocabulary is identical either way.
-  - { from_mode: Road,     to_mode: Road,     max_dist: 3000 }   # road↔road weld (legacy type: Bridge)
-  - { from_mode: Ice Road, to_mode: Ice Road, max_dist: 3000, edge_type: IceRoadConnector }   # ice↔ice weld
-  - { from_mode: Ice Road, to_mode: Road,     max_dist: 3000, edge_type: IceRoadConnector }   # ice↔road connection
+  # These rules define WHERE proximity connectors form; `pipeline.classify_connectors`
+  # then names each by the modes it joins — same-mode -> {Mode}Connector, two modes ->
+  # per-pair {A}{B}Transfer — so no `edge_type` override is needed here. (road↔road ->
+  # RoadConnector, ice↔ice -> IceRoadConnector, ice↔road -> IceRoadRoadTransfer.)
+  - { from_mode: Road,    to_mode: Road,    max_dist: 3000 }   # road↔road weld -> RoadConnector
+  - { from_mode: IceRoad, to_mode: IceRoad, max_dist: 3000 }   # ice↔ice weld  -> IceRoadConnector
+  - { from_mode: IceRoad, to_mode: Road,    max_dist: 3000 }   # ice↔road      -> IceRoadRoadTransfer
 
 # Final shore-landing pass: join every still-disconnected piece to the giant within this distance
 # (a coastal barge landing where road meets sea — the North-Slope fix). 0 disables.
@@ -197,8 +196,8 @@ connect_to_giant:
   max_dist: 2000
 
 # Stage 04 — join every still-disconnected component to the giant when its nearest node is within
-# this distance (meters) of a giant node. A synthetic connector per component (type "Join"),
-# iterated until stable, over the ALL-mode component structure. 0 disables the step.
+# this distance (meters) of a giant node. A synthetic connector per component (then mode-typed by
+# classify_connectors), iterated until stable, over the ALL-mode component structure. 0 disables it.
 # This does NOT change 03_network; it writes a separate output/04_network_joined.
 join_components:
   max_dist: 20000
