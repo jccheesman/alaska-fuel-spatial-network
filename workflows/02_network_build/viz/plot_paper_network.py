@@ -13,6 +13,8 @@ vector PDF + 600-dpi PNG.
 
 Prereq: run `python3 workflows/02_network_build/03_fetch_basemap.py` once (auto-invoked here if data/basemap is missing).
 Run:    python3 workflows/02_network_build/viz/plot_paper_network.py   ->  outputs/02_network_build/reports/figs/network_facets.{pdf,png}
+        PAPER_SOURCE=final  reads the released network-of-record (final_network/network_joined_*.shp,
+        incl. Join edges) instead of the local stage-03 gpkg — use this for the paper figure.
 """
 from __future__ import annotations
 
@@ -36,6 +38,7 @@ warnings.filterwarnings("ignore")
 CRS = 3338
 FIGS = PROJ / "reports" / "figs"
 DPI = int(os.environ.get("PAPER_DPI", "600"))       # set PAPER_DPI=150 for fast previews
+SOURCE = os.environ.get("PAPER_SOURCE", "stage03")  # "stage03" (local build) | "final" (released shapefiles)
 SIMPLIFY_M = 250.0                                   # geometry simplification for plotting (state scale)
 
 # ── palette (Okabe-Ito, colourblind-safe; distinct in grayscale) ──────────────
@@ -46,6 +49,8 @@ COL = {
     "IceRoad":  "#56B4E9",   # sky blue
     "Transfer": "#D55E00",   # vermillion
     "Bridge":   "#E69F00",   # orange
+    "IceRoadConnector": "#009E73",   # bluish green (ice-road welds / ice-to-road links)
+    "Join":     "#F0E442",   # yellow (component-join connectors, released network only)
 }
 CONTEXT = "#B9BBBD"          # de-emphasised "other modes"
 SEA = "#EAF3F8"              # very light blue (axes background)
@@ -156,10 +161,26 @@ def _basemap(ax, land, border, grat, extent):
     ax.set_rasterization_zorder(4)
 
 
+def _load_final():
+    """The released, joined network-of-record (shapefile field names are DBF-truncated)."""
+    fn = ROOT / "final_network"
+    nd = gpd.read_file(fn / "network_joined_nodes" / "network_joined_nodes.shp").rename(columns={
+        "deliv_meth": "delivery_method", "hub_cap": "total_hub_capacity", "snap_surf": "snap_surface"})
+    nd["is_hub"] = nd["is_hub"].fillna(False).astype(bool)
+    nd["total_hub_capacity"] = pd.to_numeric(nd["total_hub_capacity"], errors="coerce")
+    e = gpd.read_file(fn / "network_joined_edges" / "network_joined_edges.shp")
+    return nd, e
+
+
 def main() -> None:
-    nt = NetworkTables.from_gpkg(PROJ / "output" / "03_network")
-    nd = nt.nodes.copy(); nd["node_id"] = nd["node_id"].astype(int)
-    e = nt.edges.copy(); e["from"] = e["from"].astype(int); e["to"] = e["to"].astype(int)
+    if SOURCE == "final":
+        nd, e = _load_final()
+    else:
+        nt = NetworkTables.from_gpkg(PROJ / "output" / "03_network")
+        nd, e = nt.nodes.copy(), nt.edges.copy()
+    nd["node_id"] = nd["node_id"].astype(int)
+    e["from"] = e["from"].astype(int); e["to"] = e["to"].astype(int)
+    print(f"source={SOURCE}: {len(nd):,} nodes / {len(e):,} edges / {int(nd['is_hub'].fillna(False).astype(bool).sum())} hubs")
     hubs = nd[nd["is_hub"].fillna(False).astype(bool)].copy()
     dm = hubs["delivery_method"].astype(str)
     ss = hubs["snap_surface"].astype(str)
@@ -221,8 +242,10 @@ def main() -> None:
     ax = axes[4]; _basemap(ax, land, border, grat, extent)
     for t in ("Waterway", "IceRoad", "Road", "Air"):
         etype(t).plot(ax=ax, color=COL[t], linewidth=0.35, zorder=2, alpha=0.9, rasterized=True)
-    for t in ("Transfer", "Bridge"):
-        etype(t).plot(ax=ax, color=COL[t], linewidth=0.5, zorder=3, rasterized=True)
+    for t in ("Transfer", "Bridge", "IceRoadConnector", "Join"):
+        sub = etype(t)
+        if len(sub):
+            sub.plot(ax=ax, color=COL[t], linewidth=0.5, zorder=3, rasterized=True)
     sz = _hub_sizes(hubs["total_hub_capacity"])
     ax.scatter(hubs.geometry.x, hubs.geometry.y, s=sz * 0.5, marker="o", facecolor="white",
                edgecolor="black", linewidth=0.4, alpha=0.9, zorder=5)
@@ -234,7 +257,9 @@ def main() -> None:
     lax = axes[5]; lax.axis("off")
     modes_h = [Line2D([0], [0], color=COL[m], lw=2.6, label=lbl) for m, lbl in
                [("Road", "Road"), ("Waterway", "Waterway (barge)"), ("Air", "Air (plane)"),
-                ("IceRoad", "Ice road"), ("Transfer", "Transfer edge"), ("Bridge", "Bridge / weld")]]
+                ("IceRoad", "Ice road"), ("Transfer", "Transfer edge"), ("Bridge", "Bridge / weld"),
+                ("IceRoadConnector", "Ice-road connector"), ("Join", "Component join")]
+               if m not in ("IceRoadConnector", "Join") or len(etype(m))]
     ctx_h = [Line2D([0], [0], color=CONTEXT, lw=2.6, alpha=0.7, label="other modes (context)")]
     hub_h = [
         Line2D([0], [0], marker="o", color="w", markerfacecolor="#555", markeredgecolor="k",
