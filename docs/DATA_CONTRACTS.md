@@ -1,6 +1,6 @@
 # DATA CONTRACTS — every inter-stage agreement on one page
 
-The pipeline is four workflows connected by data artifacts. Each contract
+The pipeline is four workflows connected by intermediate data artifacts. Each contract
 below names its producer, its consumer(s), and what breaks if it drifts.
 
 ## 1. The canonical 150 m grid (all rasters)
@@ -25,7 +25,7 @@ logical (mode, month) surfaces**:
 | File(s) | Semantics |
 |---|---|
 | `overland.tif` | Static terrain surface: slope-class × LULC × permafrost; water = NoData |
-| `road_base.tif` | Static, **NoData-free** land-edge surface: max(1.0, slope friction) × permafrost — a land edge can never be accidentally severed |
+| `road_base.tif` | Static, **NoData-free** land-edge surface: max(1.0, slope friction) × permafrost |
 | `barge_01..12.tif` | Monthly barge navigability: `(lulc_water ∨ waterway_mask) ∧ ¬(sea_ice>0.15 ∨ river_ice>0.15)`; friction 1.0, blocked = NoData |
 
 Precondition: the waterway corridor mask
@@ -37,7 +37,7 @@ edges; the explicit synthetic-run opt-out is `require_waterway_mask=False`
 Consumer: `03_weight_network_edges.py`. QA gate: `03_qa_friction_stack.py`
 (14-file contract, ice-gating direction, value floor).
 
-## 3. The R WORKDIR contract (inside workflow 02, contract_version "2")
+## 3. The R WORKDIR contract (inside workflow 02)
 
 `mmnet.build.node_layers_via_r` writes a temp WORKDIR — `layers/*.gpkg` +
 `params.json` + `registry.json` — and runs `r_oracle/build_network.R
