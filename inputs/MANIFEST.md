@@ -13,8 +13,8 @@ DuckDB table is keyed by (see final_network/README.md).
 | `inputs/bulk_fuel_data.zip` | `184181c0c89d486ae92feb1ab4015b7aef2d986e549b412061136ad7d761102d` |
 | `inputs/data_for_network_build.zip` | `c11708c68da39b76a66511b735fa7983bfebac3d4167fde0fdf3c7ce5df0babf` |
 | `inputs/region_and_census_data.zip` | `e8c36f6329804b0378277a8c449de984c553ca4bba5bdfb4cbae68684d8e2eb3` |
-| `final_network/network_joined_nodes.zip` | `b03ba3202ae9a4b23e5bdbf35f7d8c8c17e57ae5c403d3e37724d89297e56da2` |
-| `final_network/network_joined_edges.zip` | `56c802470378a39bd4696a8a3000dbc76317c29a9ecc1e21a23a3764c55f52b2` |
+| `final_network/network_joined_nodes.zip` | `1bcfdb5e21213e60a30ec0e3554885a175d6fa3a902a1586297008cc9af28090` |
+| `final_network/network_joined_edges.zip` | `302bf150b690e760b15a2a7e78090d5196304ded014d8120ea1fa4d2b46fc0c5` |
 
 | Pending | note |
 |---|---|
@@ -33,12 +33,12 @@ over unchanged.
 | Member | sha256 | md5 |
 |---|---|---|
 | `final_network/network_joined_nodes.zip::network_joined_nodes/network_joined_nodes.cpg` | `3ad3031f5503a4404af825262ee8232cc04d4ea6683d42c5dd0a2f2a27ac9824` | `ae3b3df9970b49b6523e608759bc957d` |
-| `final_network/network_joined_nodes.zip::network_joined_nodes/network_joined_nodes.dbf` | `34cb74e1c45ff8b8abcb402dbc99f529d0e8dbdeea2d8c67f5419ea9fc377c59` | `0b5cc825c4db635cf8d35203704ede44` |
+| `final_network/network_joined_nodes.zip::network_joined_nodes/network_joined_nodes.dbf` | `81ee16f3f1fc99777ca840276c2c73657e93298c24d69d201c1f41ed74a0eb4c` | `16f7250db6fd4f25ede85c4ef283af66` |
 | `final_network/network_joined_nodes.zip::network_joined_nodes/network_joined_nodes.prj` | `b98ae059b6efe2c3d70a2fe5776e3394ae78ebee1754b2fed102dcf63e25916a` | `91cd91099bd22160267bfb88b8a3e4bf` |
 | `final_network/network_joined_nodes.zip::network_joined_nodes/network_joined_nodes.shp` | `7c0ca164709c5c9a4749fdf0e30257abf5ce966955d778e4795304730d1fe0be` | `9685481d30377442f7a455a9de3286d0` |
 | `final_network/network_joined_nodes.zip::network_joined_nodes/network_joined_nodes.shx` | `3166471db4fecb778949b29db975bba8bb95816922eecb063dcc5bab091c6719` | `acd6a82a15dae827837537aaf2df724d` |
 | `final_network/network_joined_edges.zip::network_joined_edges/network_joined_edges.cpg` | `3ad3031f5503a4404af825262ee8232cc04d4ea6683d42c5dd0a2f2a27ac9824` | `ae3b3df9970b49b6523e608759bc957d` |
-| `final_network/network_joined_edges.zip::network_joined_edges/network_joined_edges.dbf` | `7fb928dc99412a27e34def0f6afe63ee6cfb1b39a2d619598a15d8e133f3caca` | `fd23b1bc213c67871ec01a68124ae1bd` |
+| `final_network/network_joined_edges.zip::network_joined_edges/network_joined_edges.dbf` | `b0aeb3b8435595ad6a70fbfd69b303058c2ee003c59acc40527a80a8cca9e0a0` | `bc08f67529928103e253b89119a12494` |
 | `final_network/network_joined_edges.zip::network_joined_edges/network_joined_edges.prj` | `b98ae059b6efe2c3d70a2fe5776e3394ae78ebee1754b2fed102dcf63e25916a` | `91cd91099bd22160267bfb88b8a3e4bf` |
 | `final_network/network_joined_edges.zip::network_joined_edges/network_joined_edges.shp` | `b67f8e1df5ccb8378fea8c71b6dc81bfa4b9d946e50286c0a8f3f2c8d4d9d226` | `7fac5ddd0283696294daa15f2fc8d56c` |
 | `final_network/network_joined_edges.zip::network_joined_edges/network_joined_edges.shx` | `2563340860b0392f6723ac2d10ae84213a0030be0493e57cfdbdaeedbd496f67` | `2e49a99b450e317b001f33fb6044f335` |

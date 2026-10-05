@@ -18,10 +18,11 @@ try:
         print("\nIceRoad passability by month:")
         print(con.execute("SELECT month, avg(case when passable then 1.0 else 0.0 end) as passable_frac, count(*) as cnt FROM edge_month_weights WHERE mode='IceRoad' GROUP BY month ORDER BY month").df())
 
-        # NOTE: mode='Road' aggregates Road + Join + Bridge edges (all map to
+        # NOTE: mode='Road' aggregates Road + RoadConnector edges (both map to
         # the 'Road' rate-mode in EDGE_TYPE_MAP), so this row is overland, not
-        # Road-only. 'Plane' covers Air edges.
-        print("\nOverland(Road/Join/Bridge)/Plane/Transfer passability by mode:")
+        # Road-only. 'Plane' covers Air edges; 'Transfer' covers every per-pair
+        # {A}{B}Transfer handoff.
+        print("\nOverland(Road/RoadConnector)/Plane/Transfer passability by mode:")
         print(con.execute("SELECT mode, avg(case when passable then 1.0 else 0.0 end) as passable_frac FROM edge_month_weights WHERE mode IN ('Plane', 'Transfer') OR mode='Road' GROUP BY mode").df())
 
 except Exception as e:

@@ -55,7 +55,7 @@ contract see [`../mmnet/r_oracle/CONTRACT.md`](../mmnet/r_oracle/CONTRACT.md).
 | **01b tag** | `steps.tag.assign_community_region` (or `passthrough_tag`) | facilities → `01b_tagged.gpkg` | two-tier spatial join: facility → TIGER place, else borough/census area; inventory community is authoritative, then reconciled against the polygon into **`name_match`** (`agree` after canonical spelling normalization · `neighbor` same-borough mismatch kept · `conflict` cross-borough → **dropped** as a data error) |
 | **02 hubs** | `steps.hubs.aggregate_hubs` | tagged → `02_hubs.gpkg` | one hub per `(community, city, region)` at the member centroid — **delivery methods unioned**, capacity summed (set `group_by` to add `delivery_method` for per-mode hubs); coincident centroids still merged; classify Supplier/Receiver |
 | **03 build** | `build.build_network` | hubs + layers → `03_network__{nodes,edges}.gpkg` | **R nodes** road/ice/air; **Python nodes the waterway** + **connects** (snap hubs, anchor transfers, proximity bridges, connect-to-giant) |
-| **04 join** (optional) | `assemble.join_components_to_giant` | `03_network` → `04_network_joined__{nodes,edges}.gpkg` | join every still-disconnected component to the giant by a straight `Join` connector when its nearest node is within `join_components.max_dist` (m), iterated until stable. Runs only when `max_dist > 0`; **does not change 03** |
+| **04 join** (optional) | `assemble.join_components_to_giant` | `03_network` → `04_network_joined__{nodes,edges}.gpkg` | join every still-disconnected component to the giant by a straight connector when its nearest node is within `join_components.max_dist` (m), iterated until stable, then `classify_connectors` mode-types it (`{Mode}Connector` or per-pair `*Transfer`). Runs only when `max_dist > 0`; **does not change 03** |
 
 `pipeline.run_pipeline(profile)` runs stages 01–03 (and 04 when enabled), then emits a **connectivity
 report** via `inspect.connectivity_report` (per-mode + fuel-hub reachability) +
@@ -89,7 +89,10 @@ R and Python each do their half once:
      (`shore:Barge↔*`) where it meets the waterway, else a noding weld (`weld:to-giant`). This is what
      joins the North Slope at its ~210 m barge landing;
    - label connected components. A piece beyond every policy's reach stays isolated rather than joined
-     by a fabricated long edge.
+     by a fabricated long edge;
+   - **classify connectors** (`pipeline.classify_connectors`): re-type every synthetic connector by the
+     modes it joins — within-mode weld → `{Mode}Connector`, cross-mode handoff → per-pair
+     `{A}{B}Transfer` — so the `type` vocabulary is mode-based, not creation-mechanism-based.
 
 R's whole job is the node-only noder (`build_network.R --node-only` → `lib.R::clean_subnetwork`);
 Python owns every connection. There is no other R path.

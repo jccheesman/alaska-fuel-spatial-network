@@ -3,7 +3,7 @@
 
 Each facet highlights ONE mode — its edges + its hubs (sized by fuel capacity) + its nodes — in an
 Okabe-Ito colourblind-safe colour, over a GREY, transparent context of the rest of the network, on a
-sea / land / Canada basemap. Six facets: Road, Waterway (barge), Air (plane), Ice Road, the intermodal
+sea / land / Canada basemap. Six facets: Road, Waterway (barge), Air (plane), IceRoad, the intermodal
 connectors, and a full-network overview.
 
 Best practices baked in: equal-area EPSG:3338; colourblind-safe + grayscale-distinct palette; shared
@@ -44,9 +44,14 @@ COL = {
     "Waterway": "#0072B2",   # blue (barge)
     "Air":      "#CC79A7",   # reddish purple
     "IceRoad":  "#56B4E9",   # sky blue
-    "Transfer": "#D55E00",   # vermillion
-    "Bridge":   "#E69F00",   # orange
+    # synthetic connectors (mode-based vocabulary)
+    "RoadConnector":    "#E69F00",   # orange (within-mode weld)
+    "IceRoadConnector": "#009E73",   # green  (ice weld)
+    "Transfer":         "#D55E00",   # vermillion — all *Transfer handoffs
 }
+# every per-pair transfer type shares the transfer colour
+for _t in ("BargeRoadTransfer", "BargeIceRoadTransfer", "IceRoadRoadTransfer", "AirRoadTransfer"):
+    COL[_t] = COL["Transfer"]
 CONTEXT = "#B9BBBD"          # de-emphasised "other modes"
 SEA = "#EAF3F8"              # very light blue (axes background)
 LAND = "#F1EAD9"            # tan
@@ -181,7 +186,7 @@ def main() -> None:
         ("a", "Road",             etype("Road"),     dm.str.contains("Road"),  COL["Road"]),
         ("b", "Waterway (barge)", etype("Waterway"), dm.str.contains("Barge"), COL["Waterway"]),
         ("c", "Air (plane)",      etype("Air"),      dm.str.contains("Plane"), COL["Air"]),
-        ("d", "Ice road",         etype("IceRoad"),  ss.eq("IceRoad"),         COL["IceRoad"]),
+        ("d", "IceRoad",          etype("IceRoad"),  ss.eq("IceRoad"),         COL["IceRoad"]),
     ]
 
     # 3 rows × 2 cols suits the wide full-Alaska panels (a page-shaped figure, larger panels)
@@ -221,8 +226,10 @@ def main() -> None:
     ax = axes[4]; _basemap(ax, land, border, grat, extent)
     for t in ("Waterway", "IceRoad", "Road", "Air"):
         etype(t).plot(ax=ax, color=COL[t], linewidth=0.35, zorder=2, alpha=0.9, rasterized=True)
-    for t in ("Transfer", "Bridge"):
-        etype(t).plot(ax=ax, color=COL[t], linewidth=0.5, zorder=3, rasterized=True)
+    conn = e_plot[e_plot["type"].str.endswith(("Connector", "Transfer"))]
+    if len(conn):
+        conn.plot(ax=ax, color=[COL.get(t, "#D55E00") for t in conn["type"]],
+                  linewidth=0.5, zorder=3, rasterized=True)
     sz = _hub_sizes(hubs["total_hub_capacity"])
     ax.scatter(hubs.geometry.x, hubs.geometry.y, s=sz * 0.5, marker="o", facecolor="white",
                edgecolor="black", linewidth=0.4, alpha=0.9, zorder=5)
@@ -234,7 +241,8 @@ def main() -> None:
     lax = axes[5]; lax.axis("off")
     modes_h = [Line2D([0], [0], color=COL[m], lw=2.6, label=lbl) for m, lbl in
                [("Road", "Road"), ("Waterway", "Waterway (barge)"), ("Air", "Air (plane)"),
-                ("IceRoad", "Ice road"), ("Transfer", "Transfer edge"), ("Bridge", "Bridge / weld")]]
+                ("IceRoad", "IceRoad"), ("Transfer", "Transfer (intermodal)"),
+                ("RoadConnector", "Connector (weld)")]]
     ctx_h = [Line2D([0], [0], color=CONTEXT, lw=2.6, alpha=0.7, label="other modes (context)")]
     hub_h = [
         Line2D([0], [0], marker="o", color="w", markerfacecolor="#555", markeredgecolor="k",

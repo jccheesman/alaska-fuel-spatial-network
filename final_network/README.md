@@ -8,7 +8,7 @@ network. This folder contains a **frozen handoff**: workflow 02
 ingests it.
 
 - **Nodes:** `network_joined_nodes.zip` → `network_joined_nodes/…shp` — 84,089 points
-- **Edges:** `network_joined_edges.zip` → `network_joined_edges/…shp` — 92,978 lines (incl. 49 `Join` distance-connectors)
+- **Edges:** `network_joined_edges.zip` → `network_joined_edges/…shp` — 92,978 lines (synthetic connectors are mode-typed: `{Mode}Connector` welds + per-pair `*Transfer` handoffs)
 - **Components:** 5 · **giant:** 99.99% of nodes · **fuel hubs:** 385
 - **CRS:** EPSG:3338 — NAD83 / Alaska Albers (meters). The `.prj` reads as `NAD_1983_Alaska_Albers`.
 
@@ -46,18 +46,18 @@ superseded the 2026-07-20 pre-fix freeze (82,300 / 90,921).
   `inputs/MANIFEST.md` + `.github/workflows/ci.yml`, and the downstream
   `edge_month_weights` / `edge_costs` tables (rerun workflow 03 in full).
 
-**Gates at export (2026-09-15 rebuild):** `05_verify_north_slope.py` PASS —
-North Slope road + ice in giant, waterway 100% connected, road ≥95% in giant
-(98.3% full-network), barge transfers ~201. The engine still tags ice-involved
-welds as `IceRoadConnector` directly (its own `type`, 36 edges) — the frozen
-and rebuilt `edge_class` vocabularies stay identical.
+**Gates at export (refine-synthetic-connectors rebuild):** `05_verify_north_slope.py`
+PASS — North Slope road + ice in giant, waterway 100% connected, road ≥95% in giant
+(98.3% full-network), barge transfers ~201. Synthetic connectors are mode-typed by
+`pipeline.classify_connectors`: within-mode welds → `{Mode}Connector`, cross-mode
+handoffs → per-pair `{A}{B}Transfer`; `edge_class` mirrors `type`.
 
 ## Checksums (sha256; also in `inputs/MANIFEST.md`)
 
 | Zip | sha256 |
 |---|---|
-| `network_joined_nodes.zip` | `b03ba3202ae9a4b2` … (full value in `inputs/MANIFEST.md`) |
-| `network_joined_edges.zip` | `56c802470378a39b` … (full value in `inputs/MANIFEST.md`) |
+| `network_joined_nodes.zip` | `1bcfdb5e21213e60` … (full value in `inputs/MANIFEST.md`) |
+| `network_joined_edges.zip` | `302bf150b690e760` … (full value in `inputs/MANIFEST.md`) |
 
 Members (md5; full sha256 per member in `final_network/MANIFEST.sha256` and
 `inputs/MANIFEST.md`):
@@ -95,15 +95,16 @@ shortened on export. Full mapping:
 | shapefile field | meaning |
 |---|---|
 | `from`, `to` | endpoint `node_id`s |
-| `type`       | Road · Waterway · Air · IceRoad · Transfer · Bridge · **Join** |
+| `type`       | Road · Waterway · Air · IceRoad · RoadConnector · IceRoadConnector · BargeRoadTransfer · BargeIceRoadTransfer · IceRoadRoadTransfer · AirRoadTransfer |
 | `source`     | provenance (e.g. `Road`, `ports`, `barge_hubs`, `weld:*`, `bridge:*`, `shore:*`, `join:to-giant`) |
-| `join_gap_m` | for `Join` edges, the straight-line gap (m) that was closed; NULL/0 otherwise |
+| `join_gap_m` | for stage-04 join connectors, the straight-line gap (m) that was closed; NULL/0 otherwise |
 
 Edge-type inventory (the ingest's hard tripwire): Road 55,534 · Waterway
-34,178 · Bridge 1,482 · IceRoad 1,248 · IceRoadConnector 36 · Transfer 225 · Air 226 · Join 49.
-Note `Bridge` here means an mmnet topology *weld*, not a road-over-water
-bridge — workflow 03 derives the disambiguated `edge_class` column
-(`Weld` / `IceRoadConnector`).
+34,178 · Air 226 · IceRoad 1,248 · RoadConnector 1,498 · IceRoadConnector 35 ·
+BargeRoadTransfer 234 · BargeIceRoadTransfer 11 · IceRoadRoadTransfer 12 ·
+AirRoadTransfer 2. Synthetic connectors are named by the modes they join
+(`{Mode}Connector` welds, per-pair `{A}{B}Transfer` handoffs); `edge_class`
+mirrors `type`.
 
 ## Regenerate (deliberately)
 

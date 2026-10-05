@@ -88,13 +88,13 @@ def fig_overview(nodes, edges, coords):
     fig, ax = plt.subplots(figsize=(15, 13))
     plot_faint_base(ax, edges)
 
-    bridges = edges[edges["type"] == "Bridge"]
-    b_weld = bridges[bridges["source"].str.startswith("weld")]
-    b_cross = bridges[bridges["source"] == "bridge:IceRoad->Road"]
-    if not len(b_cross):  # unicode arrow variant safety
-        b_cross = bridges[bridges["source"].str.startswith("bridge")]
-    transfers = edges[edges["type"] == "Transfer"]
-    joins = edges[edges["type"] == "Join"]
+    # Group synthetic connectors by how they were CREATED — this lives in
+    # `source` and is unchanged by the mode-based type renaming.
+    src = edges["source"].astype(str)
+    b_weld = edges[src.str.startswith("weld")]
+    b_cross = edges[src.str.startswith("bridge")]
+    transfers = edges[src.str.startswith(("ports", "barge_hubs", "shore"))]
+    joins = edges[src.str.startswith("join")]
 
     b_weld.plot(ax=ax, color=CONN["Bridge_weld"][0], linewidth=0.8, alpha=0.8, zorder=4)
     transfers.plot(ax=ax, color=CONN["Transfer_barge"][0], linewidth=1.4, alpha=0.9, zorder=5)
@@ -136,14 +136,15 @@ def fig_connectors(nodes, edges, coords):
     fig, axes = plt.subplots(2, 2, figsize=(18, 16))
     axA, axB, axC, axD = axes.ravel()
 
-    bridges = edges[edges["type"] == "Bridge"]
-    b_weld = bridges[bridges["source"].str.startswith("weld")]
-    b_cross = bridges[bridges["source"].str.startswith("bridge")]
-    transfers = edges[edges["type"] == "Transfer"]
-    t_port = transfers[transfers["source"] == "ports"]
-    t_barge = transfers[transfers["source"] == "barge_hubs"]
-    t_shore = transfers[transfers["source"].str.startswith("shore")]
-    joins = edges[edges["type"] == "Join"]
+    # grouped by creation mechanism (`source`), unchanged by the type renaming.
+    src = edges["source"].astype(str)
+    b_weld = edges[src.str.startswith("weld")]
+    b_cross = edges[src.str.startswith("bridge")]
+    t_port = edges[src == "ports"]
+    t_barge = edges[src == "barge_hubs"]
+    t_shore = edges[src.str.startswith("shore")]
+    joins = edges[src.str.startswith("join")]
+    bridges = pd.concat([b_weld, b_cross])
 
     # Panel A - Bridges
     plot_faint_base(axA, edges, alpha_mult=0.6)

@@ -224,7 +224,15 @@ def write_step_report(step_no, step_name: str, inputs, output_spec: dict,
 # --------------------------------------------------------------------------- connectivity / reachability
 # The multimodal network's "is it connected, and what does each mode reach" layer. Pure (networkx); reads
 # the `is_giant` / `component` / `is_hub` columns that `assemble.connect_multimodal` writes onto the nodes.
-_CONNECTORS = {"Transfer", "Bridge"}      # edge types that are links between modes, not modes themselves
+def _is_connector(t: str) -> bool:
+    """True for synthetic connector/transfer edge types (links, not modes).
+
+    Post-classify types end in ``Connector`` (RoadConnector, IceRoadConnector) or
+    ``Transfer`` (per-pair, e.g. BargeRoadTransfer); the legacy names are kept so
+    old exports still classify correctly."""
+    t = str(t)
+    return (t.endswith("Connector") or t.endswith("Transfer")
+            or t in {"Bridge", "Join", "Weld"})
 
 
 def _node_ids(nodes) -> "pd.Series":
@@ -265,7 +273,7 @@ def connectivity_report(nodes, edges, mode_types: list | None = None,
         n_comp = nx.number_connected_components(g)
 
     et = edges["type"]
-    modes = mode_types or [t for t in et.dropna().unique() if t not in _CONNECTORS]
+    modes = mode_types or [t for t in et.dropna().unique() if not _is_connector(t)]
     per_mode = {}
     for m in modes:
         s = edges[et == m]
@@ -317,7 +325,7 @@ def mode_contribution(nodes, edges, mode: str, hub_col: str = "is_hub") -> dict:
         comps = sorted(nx.connected_components(g), key=len, reverse=True)
         return (set(comps[0]) if comps else set()), len(comps)
 
-    drop = (et == mode) | ((et == "Transfer") & (fr.isin(mode_nodes) | to.isin(mode_nodes)))
+    drop = (et == mode) | (et.astype(str).str.endswith("Transfer") & (fr.isin(mode_nodes) | to.isin(mode_nodes)))
     g_with, nc_with = _giant(pd.Series(True, index=edges.index))
     g_without, nc_without = _giant(~drop)
     only = g_with - g_without

@@ -79,8 +79,9 @@ def main() -> None:
     print(f"   road {pct(rid,Gfull):.1f}%   ice {pct(iid,Gfull):.1f}%   waterway {pct(wid,Gfull):.1f}%   in giant")
 
     # research view: road + ice + waterway BY SEA (no air) — reproduces 02_connect_via_ports.py
-    by_sea = (et.isin(["Road", "IceRoad", "Waterway", "Bridge"])
-              | ((et == "Transfer") & sr.isin(["ports", "barge_hubs"])) | sr.str.startswith("shore")) \
+    by_sea = (et.isin(["Road", "IceRoad", "Waterway"]) | et.str.endswith("Connector")
+              | (et.str.endswith("Transfer") & sr.isin(["ports", "barge_hubs"]))
+              | sr.str.startswith("shore")) \
         & ~(et == "Air") & ~(sr == "airports")
     Gsea, ncS = giant(e, by_sea)
     print("\n by-sea view (road + ice + waterway only — the research metric)")
@@ -102,7 +103,7 @@ def main() -> None:
         "waterway 100% connected": abs(pct(wid, Gfull) - 100.0) < 0.05,
         "road >= 95% in giant": pct(rid, Gfull) >= 95.0,
         "ice  >= 95% in giant": pct(iid, Gfull) >= 95.0,
-        "barge transfers ~201 (ports+hubs)": 180 <= cnt((et == "Transfer") & sr.isin(["ports", "barge_hubs"])) <= 220,
+        "barge transfers ~201 (ports+hubs)": 180 <= cnt(et.str.endswith("Transfer") & sr.isin(["ports", "barge_hubs"])) <= 220,
     }
     print("\n checks")
     for label, ok in checks.items():

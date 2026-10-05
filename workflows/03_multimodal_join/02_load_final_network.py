@@ -17,14 +17,14 @@ Tables written (CREATE OR REPLACE):
     network_edges(edge_id PK, from_node, to_node, type, edge_class,
                   source, join_gap_m, length_m)
 
-`edge_class` disambiguates the legacy `Bridge` type (an mmnet topology
-weld, NOT a road-over-water bridge — see bridge-edge-terminology note in
-weight_network_edges.py): `weld:IceRoad` / `bridge:IceRoad->Road` provenance
-becomes `IceRoadConnector` (seasonal, Jan-Mar), remaining Bridge edges become
-`Weld`, every other type maps through unchanged. Networks rebuilt with the
-current profile emit `IceRoadConnector` as the `type` itself (the profile's
-bridge rules carry `edge_type`), so old and new exports converge on one
-vocabulary.
+Current exports carry a mode-based `type` vocabulary set by
+`pipeline.classify_connectors`: within-mode welds are `{Mode}Connector`
+(RoadConnector, IceRoadConnector), cross-mode handoffs are per-pair
+`{A}{B}Transfer` (BargeRoadTransfer, IceRoadRoadTransfer, …). `edge_class`
+is a pass-through of that `type`; it only diverges for a LEGACY frozen network,
+whose generic `Bridge` welds it maps into the new vocabulary (ice-road
+provenance -> IceRoadConnector, else -> RoadConnector) so old and new exports
+converge on one vocabulary.
 
 Integrity checks (hard errors, run before any write):
   - CRS is EPSG:3338 on both layers
@@ -67,33 +67,38 @@ EXPECTED = {
     "n_hubs": 385,
     "n_components": 5,
     "giant_share": 0.9999,
+    # Mode-based connector vocabulary (refine-synthetic-connectors, 2026-09):
+    # welds -> {Mode}Connector, cross-mode handoffs -> per-pair {A}{B}Transfer.
     "edge_types": {
         "Road": 55_534,
         "Waterway": 34_178,
-        "Bridge": 1_482,
-        "IceRoad": 1_248,
-        "IceRoadConnector": 36,
-        "Transfer": 225,
         "Air": 226,
-        "Join": 49,
+        "IceRoad": 1_248,
+        "RoadConnector": 1_498,
+        "IceRoadConnector": 35,
+        "BargeRoadTransfer": 234,
+        "BargeIceRoadTransfer": 11,
+        "IceRoadRoadTransfer": 12,
+        "AirRoadTransfer": 2,
     },
 }
 
 
 def derive_edge_class(edge_type: pd.Series, source: pd.Series) -> pd.Series:
-    """Disambiguated edge class (legacy `Bridge` = topology weld).
+    """Edge class in the mode-based vocabulary.
 
-    Legacy Bridge + ice-road provenance -> IceRoadConnector (seasonal,
-    treated as IceRoad by the weighting); other Bridge -> Weld (year-round
-    stitch); every other type — including the modern IceRoadConnector type
-    emitted directly by rebuilds — passes through unchanged, so frozen and
-    rebuilt exports share one vocabulary.
+    Current exports already carry mode-based `type` values (RoadConnector,
+    IceRoadConnector, per-pair *Transfer), so `edge_class` is a pass-through.
+    A legacy frozen network's `Bridge` welds are mapped into the new vocabulary
+    for back-compat: ice-road provenance -> IceRoadConnector (seasonal, treated
+    as IceRoad by the weighting), otherwise -> RoadConnector.
     """
     edge_class = edge_type.copy()
     is_bridge = edge_type == "Bridge"
-    ice_weld = is_bridge & source.astype(str).str.contains("IceRoad", na=False)
-    edge_class[is_bridge] = "Weld"
-    edge_class[ice_weld] = "IceRoadConnector"
+    if is_bridge.any():
+        ice_weld = is_bridge & source.astype(str).str.contains("IceRoad", na=False)
+        edge_class[is_bridge] = "RoadConnector"
+        edge_class[ice_weld] = "IceRoadConnector"
     return edge_class
 
 
