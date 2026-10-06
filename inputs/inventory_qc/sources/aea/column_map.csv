@@ -1,0 +1,62 @@
+source_column,schema_column,type,unit,keep,fold_into,reason
+GlobalID,record_id,string,,yes,,Stable AEA key on every row; corrections are keyed on it
+OBJECTID,object_id,int,,yes,,Row id in AEA's map service
+ASTFacilityID,ast_facility_id,int,,yes,,AEA facility id (61% of rows); harness facility_id
+AEA_ID,aea_id,string,,yes,,AEA facility number
+USCG_ID,uscg_id,string,,yes,,Coast Guard id
+Tank_Farm_ID,tank_farm_id,int,,yes,,Shared-farm-id check
+Tank_Farm_Evaluation_ID,tank_farm_evaluation_id,int,,yes,,Links record to its farm assessment
+CommunityID,community_id,string,,yes,,DCRA community GUID; matches City_Boundaries
+CommunityName,community_name,string,,yes,,Community label
+EntityName,entity_name,string,,yes,,Facility / organisation name (owner decision 2026-10-06: keep)
+ASTFacilityStreetAddress,street_address,string,,yes,,Facility address used for verification (owner decision 2026-10-06: keep)
+ASTPostalCode,postal_code,zip,,yes,,Facility ZIP (owner decision 2026-10-06: keep)
+ASTFacilityLatitude,latitude,float,degrees N,yes,,Position used by both pipelines
+ASTFacilityLongitude,longitude,float,degrees E,yes,,Position used by both pipelines
+X,map_x,float,m EPSG:3338,yes,,AEA map point; AEA's 2025 fixes changed only this
+Y,map_y,float,m EPSG:3338,yes,,AEA map point
+Delivery_method,delivery_method,string,,yes,,Delivery mode(s); filled from Delivery_Methods when blank
+Delivery_Methods,,string,,fold,delivery_method,Secondary delivery field; fills delivery_method when blank
+Total_Capacity,total_capacity,float,gallons,yes,,Tank-farm / facility total
+Gasoline_Capacity,gasoline_capacity,float,gallons,yes,,
+Diesel_Capacity,diesel_capacity,float,gallons,yes,,
+Jet_Fuel_Capacity,jet_fuel_capacity,float,gallons,yes,,
+Other_Fuel_Capacity,other_fuel_capacity,float,gallons,yes,,
+Number_of_Tanks,number_of_tanks,int,,yes,,
+Data_Source,source,string,,yes,,AEA / DEC / USCG
+Report,report,string,,yes,,Assessment name
+InspectedByUSCG,inspected_by_uscg,bool,,yes,,Y/N
+Date_Last_Inspected,last_inspected,date,,yes,,
+last_edited_date,last_edited,datetime,,yes,,Shows which records AEA changed between releases
+AV_Gas_Capacity,,float,gallons,no,,Empty in 2022 and 2025 releases
+EntityId,,,,no,,Empty
+Last_Visited_Surveyed,,,,no,,Empty
+ASTFacilityState,,,,no,,Constant (AK)
+Date_Last_Modified,,,,no,,Redundant with last_edited_date
+created_date,,,,no,,Sparse and redundant
+Data_Source_Link,,,,no,,Constant program URL
+FacilityLocated,,,,no,,Constant flag
+CommunityLocated,,,,no,,Sparse flag
+Tank_Category,,,,no,,Not used
+Distance_to_Barge_Mooring,,,,no,,Sparse; not used
+Fuel_Supplier,,,,no,,Not used
+Comments,,,,no,,Free text that may contain personal names
+Description_of_Tank,,,,no,,Free text that may contain personal names
+Location_of_Tanks,,,,no,,Free text that may contain personal names
+Recommendations_by_AEA,,,,no,,Free text
+PrimaryFacilityRepresentative,,,,never,,Personal contact field
+PrimaryFacilityRep_PhoneNumber,,,,never,,Personal contact field
+PrimaryFacilityRep_Email,,,,never,,Personal contact field
+LandOwner,,,,never,,Personal contact field
+LandOwner_PhoneNumber,,,,never,,Personal contact field
+LandOwner_Email,,,,never,,Personal contact field
+FacilityOwner,,,,never,,Personal contact field
+FacilityOwner_Phone,,,,never,,Personal contact field
+FacilityOwner_Email,,,,never,,Personal contact field
+Operator,,,,never,,Personal contact field
+Operator_PhoneNumber,,,,never,,Personal contact field
+Operator_Email,,,,never,,Personal contact field
+Tank_Operator_Info,,,,never,,Personal contact field
+Evaluator,,,,never,,Personal name
+created_user,,,,never,,Account name
+last_edited_user,,,,never,,Account name

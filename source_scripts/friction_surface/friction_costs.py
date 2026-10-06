@@ -344,7 +344,7 @@ RATE_KEY_BY_MODE = {m: meta["rate_key"] for m, meta in MODE_METADATA.items()}
 # ===========================================================================
 # Authoritative ice-road-served communities
 # ===========================================================================
-# Reads Fuel_Delivery_Method.shp (ships in inputs/bulk_fuel_data.zip; path in
+# Reads Fuel_Delivery_Method.shp (ships in inputs/raw_facility_data/2022/bulk_fuel_data.zip; path in
 # friction_paths.FUEL_DELIVERY_METHOD_SHP, extract with tools/extract_inputs.py),
 # the authoritative per-community fuel-delivery-method source for the "which
 # communities are ice-road served" question. The current authoritative set
@@ -437,7 +437,7 @@ def load_ice_road_communities(
     """Return the set of community names served by ice road as of a given date.
 
     Reads Fuel_Delivery_Method.shp (attribute table only; ships in
-    inputs/bulk_fuel_data.zip — run tools/extract_inputs.py first), groups by
+    inputs/raw_facility_data/2022/bulk_fuel_data.zip — run tools/extract_inputs.py first), groups by
     CommunityName, takes the most recent AsOfDate <= as_of per community, and
     filters to rows where Fuel_Delivery_Method == 'Ice Road'.
 
@@ -461,7 +461,7 @@ def load_ice_road_communities(
 
         if not os.path.exists(src):
             raise FileNotFoundError(
-                f"{src} not found. It ships inside inputs/bulk_fuel_data.zip — "
+                f"{src} not found. It ships inside inputs/raw_facility_data/2022/bulk_fuel_data.zip — "
                 "run `python tools/extract_inputs.py` first."
             )
         df = pd.DataFrame(gpd.read_file(src).drop(columns="geometry"))

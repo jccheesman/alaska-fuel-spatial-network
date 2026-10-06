@@ -13,6 +13,18 @@ data outside this project.
 After cloning: `python tools/extract_inputs.py` unzips the
 bundles into their gitignored working directories.
 
+## Facility-inventory releases: `raw_facility_data/<release>/`
+
+One folder per AEA/DCRA bulk-fuel inventory release (`2022/`, `2025/`), each
+holding a safe-column snapshot CSV, its manifest, a `SOURCE.md` with the full
+raw file's sha256, and a generated diff against the previous release. The 2022
+bundle `bulk_fuel_data.zip` (also carrying the processed files and
+`Fuel_Delivery_Method.zip` that `tools/extract_inputs.py` unpacks) lives in
+`2022/`. Later raw files are checksummed, never tracked (contact fields).
+Ingest a new release with `python workflows/00_inventory_qc/01_ingest.py RAW.csv
+--release <label>`; the schema, source adapters, corrections and thresholds are
+in `inventory_qc/`. Design: `docs/INVENTORY_QC_PLAN.md`.
+
 ## Committed zips
 
 ### `data_for_network_build.zip` (~33 MB)

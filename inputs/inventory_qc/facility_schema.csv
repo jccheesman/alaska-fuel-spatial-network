@@ -1,0 +1,30 @@
+name,type,unit,required,description
+source_row,int,,yes,Line number of the record in the raw release file (header = line 1)
+record_id,string,,yes,Stable per-source record id (AEA GlobalID); key for corrections and release diffs
+object_id,int,,no,Row id in the publisher's map service
+ast_facility_id,int,,no,AEA facility id (present on ~60% of rows); the harness facility_id
+aea_id,string,,no,AEA facility number
+uscg_id,string,,no,US Coast Guard id
+tank_farm_id,int,,no,AEA tank-farm id; drives the shared-farm-id detector
+tank_farm_evaluation_id,int,,no,AEA tank-farm assessment id
+community_id,string,,no,DCRA community GUID; matches City_Boundaries.CommunityI
+community_name,string,,no,Community label as published (corrected by corrections.csv; normalised by aliases.csv)
+entity_name,string,,no,Facility / organisation name (kept by owner decision 2026-10-06)
+street_address,string,,no,Facility street address (kept by owner decision 2026-10-06)
+postal_code,zip,,no,Facility ZIP code
+latitude,float,degrees N,yes,Position used by both pipelines (EPSG:4326)
+longitude,float,degrees E,yes,Position used by both pipelines (EPSG:4326)
+map_x,float,m,no,Publisher map point easting (EPSG:3338); AEA's 2025 fixes changed only this
+map_y,float,m,no,Publisher map point northing (EPSG:3338)
+delivery_method,string,,no,Delivery mode(s): Road / Barge / Plane / "Plane or Barge" / "Plane or Road"
+total_capacity,float,gallons,no,Tank-farm or facility total capacity
+gasoline_capacity,float,gallons,no,
+diesel_capacity,float,gallons,no,
+jet_fuel_capacity,float,gallons,no,
+other_fuel_capacity,float,gallons,no,
+number_of_tanks,int,,no,
+source,string,,no,Originating program: AEA / DEC / USCG
+report,string,,no,Assessment or report name
+inspected_by_uscg,bool,,no,
+last_inspected,date,,no,
+last_edited,datetime,,no,Publisher edit timestamp; shows which records changed between releases

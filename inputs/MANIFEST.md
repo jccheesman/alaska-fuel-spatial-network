@@ -10,7 +10,16 @@ DuckDB table is keyed by (see final_network/README.md).
 
 | File | sha256 |
 |---|---|
-| `inputs/bulk_fuel_data.zip` | `184181c0c89d486ae92feb1ab4015b7aef2d986e549b412061136ad7d761102d` |
+| `inputs/raw_facility_data/2022/bulk_fuel_data.zip` | `184181c0c89d486ae92feb1ab4015b7aef2d986e549b412061136ad7d761102d` |
+| `inputs/raw_facility_data/2022/aea_inventory_2022.csv` | see `2022/snapshot_manifest.json` (`snapshot_csv_sha256`) |
+| `inputs/raw_facility_data/2025/aea_inventory_2025.csv` | see `2025/snapshot_manifest.json` (`snapshot_csv_sha256`) |
+
+Raw inventory files (NOT tracked after 2022; contact fields). Verify a local copy:
+
+| Release | raw `Utilities_Bulk_Fuel_Inventory.csv` sha256 |
+|---|---|
+| 2022 (inside the zip above) | `132338fe0722bb9338e8c96e53531be2761a1a0497a0dae734d009ba7e1fb5e1` |
+| 2025 | `3fbee569c63dccf813d6fa53e608820d53b92e415feb2c7f20556fc0bb0c30b0` |
 | `inputs/data_for_network_build.zip` | `c11708c68da39b76a66511b735fa7983bfebac3d4167fde0fdf3c7ce5df0babf` |
 | `inputs/region_and_census_data.zip` | `e8c36f6329804b0378277a8c449de984c553ca4bba5bdfb4cbae68684d8e2eb3` |
 | `final_network/network_joined_nodes.zip` | `1bcfdb5e21213e60a30ec0e3554885a175d6fa3a902a1586297008cc9af28090` |

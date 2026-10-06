@@ -74,7 +74,11 @@ inputs/*
 !inputs/README.md
 !inputs/MANIFEST.md
 # Small committed data zips (each < 50 MB, plain git blobs) so a fresh clone can run acts (c)-(d)
-!inputs/bulk_fuel_data.zip
+# Facility-inventory releases: safe-column snapshots + manifests + diffs are tracked; the
+# full raw AEA CSV (personal contact fields) is NEVER tracked. The 2022 bundle zip stays.
+!inputs/raw_facility_data/
+inputs/raw_facility_data/**/Utilities_Bulk_Fuel_Inventory*.csv
+!inputs/inventory_qc/
 !inputs/data_for_network_build.zip
 !inputs/region_and_census_data.zip
 # network_raw.zip is deliberately NOT negated: it stays LOCAL-ONLY (license-gated,
