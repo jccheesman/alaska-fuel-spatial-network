@@ -53,7 +53,7 @@ workflows/00_inventory_qc/
   04_detect.py            detector registry (see below)
   05_boundary_check.py    label vs boundary, mismatches only
   06_review_queue.py      review.xlsx for the owner
-  07_publish.py           facilities_clean.parquet + qc_report.md + publish checks
+  07_publish.py           facilities_clean.csv + qc_report.md + publish checks
 inputs/inventory_qc/
   facility_schema.csv     the canonical schema
   sources/<dataset>/column_map.csv   one adapter per source
@@ -102,7 +102,7 @@ Order matters: corrections are keyed by `record_id` and must be applied **before
 | 4 | **Detect** | structural checks | any detector finds a record not already covered by an approved correction or exception |
 | 5 | **Boundary check** | label/position agreement | a labelled record sits inside another community's boundary, or >20 km outside its own; communities without a boundary produce no rows |
 | 6 | **Review queue** | — | writes `review.xlsx`; never fails |
-| 7 | **Publish** | output contract | any publish check below fails |
+| 7 | **Publish** | output contract | any publish check below fails. Output: `outputs/00_inventory_qc/<release>/` — `facilities_clean.csv` (tracked; CSV so it diffs), `qc_report.md`, `corrections_log.csv`, `excluded.csv`, `name_report.csv` |
 
 **Publish checks** (also run by CI in `--check` mode):
 - row reconciliation: raw rows = published rows + excluded rows, every exclusion with a reason;
@@ -155,10 +155,11 @@ Each `SKILL.md` follows the house sections: core invariants · when to use / do 
 | Phase | Work | Owner approves |
 |---|---|---|
 | **0 (done)** | investigation, decision log, boundary prototype, draft column map, stage-1 prototype (scratch) | this plan |
-| **1** | schema + AEA adapter(s) + stages 1, 2, 7; `raw_facility_data/2022/` and `2025/` committed; `corrections.csv` seeded from the ready decisions; `MANIFEST.md`; tests | the seeded `corrections.csv`; the clean-table diff vs today's harness `facilities` |
+| **1a (done 2026-10-06)** | schema + AEA adapter(s) + stage 1; `raw_facility_data/2022/` and `2025/` committed; `corrections.csv` seeded from the ready decisions; `MANIFEST.md`; tests | the seeded `corrections.csv` |
+| **1b** | stages 2, 3, 7 + `aliases.csv` + `run_all.sh` driver + tests; first published `facilities_clean.csv` for release 2025 | the published table and its QC report |
 | **2** | stages 3–6: aliases, detector registry, boundary check, review queue; `remote_sites.csv` seeded from the owner's review of the 49 new flags; `thresholds.csv`; tests with today's cases as fixtures | thresholds; first full review workbook |
 | **3** | the three skills + orchestrator script; `build-and-verify-network` prerequisite; the five bug notes; CI `--check` job | skill text |
-| **4** | downstream wiring: data repo `consolidate`/`tag` read `facilities_clean.parquet` and write `site_members`; harness `build_facility_tables.py` reads the same table; `mmnet-toolkit` re-snapshotted | before/after comparison of facilities, hubs and labels |
+| **4** | downstream wiring: data repo `consolidate`/`tag` read `outputs/00_inventory_qc/<release>/facilities_clean.csv` and write `site_members`; harness `build_facility_tables.py` reads the same table; `mmnet-toolkit` re-snapshotted | before/after comparison of facilities, hubs and labels |
 | **5** | hub-builder fixes (report-don't-drop conflicts; group by corrected label, not city/CDP; cannot-link in the 50 m merge; snap-collision detection + snap cap; `hub_members` export), then **one** rebuild of the network of record | the rebuild and re-export (zips, checksums, `EXPECTED`, edge-keyed tables) |
 
 Phases 1–4 change no network output. The network of record changes only in phase 5, once.
