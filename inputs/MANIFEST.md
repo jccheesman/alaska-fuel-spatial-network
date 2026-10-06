@@ -13,6 +13,8 @@ DuckDB table is keyed by (see final_network/README.md).
 | `inputs/raw_facility_data/2022/bulk_fuel_data.zip` | `184181c0c89d486ae92feb1ab4015b7aef2d986e549b412061136ad7d761102d` |
 | `inputs/raw_facility_data/2022/aea_inventory_2022.csv` | see `2022/snapshot_manifest.json` (`snapshot_csv_sha256`) |
 | `inputs/raw_facility_data/2025/aea_inventory_2025.csv` | see `2025/snapshot_manifest.json` (`snapshot_csv_sha256`) |
+| `inputs/inventory_qc/boundaries/City_Boundaries.zip` | `f767c70907ab1c1abb168b43907ed91e6a8ea108bdef69ee64a4f39e9fbfe4c4` |
+| `inputs/inventory_qc/boundaries/Census_Designated_Place_Boundaries.zip` | `baf88dd448b3883b25f5184ee82103c2e2b16ece713090a2107b21086aadef9f` |
 
 Raw inventory files (NOT tracked after 2022; contact fields). Verify a local copy:
 
