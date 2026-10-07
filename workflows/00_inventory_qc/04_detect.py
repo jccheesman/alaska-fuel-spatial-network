@@ -24,7 +24,7 @@ import numpy as np
 import pandas as pd
 from pyproj import Transformer
 
-from _qc import OUT, QC, RELEASES, canon, corrections, latest_release, read_csv, release_manifest, thresholds, write_csv
+from _qc import OUT, QC, RELEASES, corrections, latest_release, read_csv, release_manifest, thresholds, write_csv
 
 TO_3338 = Transformer.from_crs("EPSG:4326", "EPSG:3338", always_xy=True)
 REGISTRY: list[tuple[str, tuple[str, ...], object]] = []     # (name, needs, fn)
@@ -168,6 +168,8 @@ def map_point_disagrees(f: pd.DataFrame, th: dict) -> list[dict]:
     geometry without updating lat/lon — the map point is usually the corrected one)."""
     out = []
     g = f.dropna(subset=["map_x", "map_y", "latitude", "longitude"])
+    if "corrections_applied" in g.columns:   # a reviewed lat/lon correction supersedes the publisher's stale map point
+        g = g[~g["corrections_applied"].fillna("").str.contains("latitude|longitude")]
     x, y = _xy(g)
     d = np.hypot(x - g["map_x"].astype(float), y - g["map_y"].astype(float))
     inv = Transformer.from_crs("EPSG:3338", "EPSG:4326", always_xy=True)

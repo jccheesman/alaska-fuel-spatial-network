@@ -21,9 +21,8 @@ import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
-import pandas as pd
 
-from _qc import DERIVED, OUT, RELEASES, corrections, latest_release, read_csv, release_manifest, schema, sha256, write_csv
+from _qc import DERIVED, OUT, RELEASES, corrections, latest_release, read_csv, release_manifest, schema, write_csv
 
 CONTACT_WORDS = ("representative", "phone", "email", "landowner", "facilityowner", "operator", "evaluator", "_user")
 

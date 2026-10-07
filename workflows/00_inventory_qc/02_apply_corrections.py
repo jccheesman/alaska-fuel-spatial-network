@@ -26,7 +26,7 @@ import sys
 import numpy as np
 import pandas as pd
 
-from _qc import OUT, canon, corrections, latest_release, read_release, write_csv
+from _qc import OUT, corrections, latest_release, read_release, write_csv
 
 COORD_FIELDS = {"latitude", "longitude"}
 

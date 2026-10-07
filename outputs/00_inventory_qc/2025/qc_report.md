@@ -1,6 +1,6 @@
 # Inventory QC report — release 2025
 
-Generated 2026-10-06T21:53:08+00:00 by workflows/00_inventory_qc/07_publish.py
+Generated 2026-10-07T01:02:17+00:00 by workflows/00_inventory_qc/07_publish.py
 
 - raw release: `Utilities_Bulk_Fuel_Inventory.csv` sha256 `3fbee569c63dccf813d6fa53e608820d53b92e415feb2c7f20556fc0bb0c30b0` (1830 rows, 1767 located)
 - clean table: `facilities_clean.csv` sha256 `0326fd124dcee2b36250971851461613a9893e79cb7a2df70d6d9349b0801e67` (1830 rows, 1767 located)

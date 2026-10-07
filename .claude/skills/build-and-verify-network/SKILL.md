@@ -39,6 +39,10 @@ reading/verifying the result.
 
 ## Procedure
 
+0. **The facility inventory must be green first.** Run `validate-facility-inventory` (read-only
+   `python .claude/skills/validate-facility-inventory/scripts/validate_inventory.py`) and require exit 0:
+   the hub build consumes the facility table, and a stale or failing inventory chain means the hubs
+   inherit uncorrected labels/positions. Do not build on a red inventory.
 1. **Check prerequisites.** `python -c "import mmnet"` imports; `Rscript --version` works and
    sf/sfnetworks/tidygraph/dplyr are installed. Confirm the profile validates
    (`define-network-profile` step 5).
@@ -69,6 +73,8 @@ reading/verifying the result.
 - Do NOT hand-edit the built GeoPackages; change the `profile.yaml` and rebuild.
 
 ## Related
+
+- `validate-facility-inventory` — the inventory gate this build depends on (step 0).
 
 - `define-network-profile` — author/extend the profile that this build consumes.
 - `mmnet/r_oracle/CONTRACT.md` — the R↔Python file contract (WORKDIR, params/registry, node-only mode).

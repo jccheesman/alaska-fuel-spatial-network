@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 import re
 from pathlib import Path
 
@@ -16,7 +17,7 @@ import pandas as pd
 ROOT = Path(__file__).resolve().parents[2]
 QC = ROOT / "inputs" / "inventory_qc"
 RELEASES = ROOT / "inputs" / "raw_facility_data"
-OUT = ROOT / "outputs" / "00_inventory_qc"
+OUT = Path(os.environ["INVENTORY_QC_OUT"]) if os.environ.get("INVENTORY_QC_OUT") else ROOT / "outputs" / "00_inventory_qc"
 SCHEMA = QC / "facility_schema.csv"
 CORRECTIONS = QC / "corrections.csv"
 ALIASES = QC / "aliases.csv"

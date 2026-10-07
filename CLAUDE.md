@@ -5,7 +5,9 @@ asking; move-only commits separate from edit commits; every dollar lives in
 `friction_costs.py` and every friction constant in `friction_config.py`;
 `final_network` zip members stay byte-identical (edge_id contract);
 `data/`, `outputs/01_*`, `outputs/02_*`, extracted `final_network/*/` are
-regenerable working trees — never hand-edit them.
+regenerable working trees — never hand-edit them; `outputs/00_inventory_qc/*/facilities_clean.csv`
+is tracked but regenerated only by workflow 00 (edit `inputs/inventory_qc/corrections.csv`, never
+the table); the raw AEA inventory CSV (contact fields) is never committed.
 
 ## Run-script conventions
 
@@ -30,6 +32,14 @@ replaces the network-of-record.
 | Script | Does | Outputs | Knobs | Finding |
 |---|---|---|---|---|
 | `tools/extract_inputs.py` | Unzips committed inputs (incl. `inputs/raw_facility_data/2022/bulk_fuel_data.zip`) into gitignored working dirs | `inputs/{bulk_fuel_data,data_for_network_build,region_and_census_data}/`, `data/raw/` | — | One gate for workflows 01–02; fixes the fresh-clone story both old repos lacked |
+| **00_inventory_qc** | | | | |
+| `01_ingest.py` | Raw AEA release → clean-schema snapshot under `inputs/raw_facility_data/<release>/` + diff vs previous release | release folder (tracked; raw CSV never) | `inputs/inventory_qc/facility_schema.csv`, `sources/<src>/column_map.csv` | Contact columns are never read; `--check` re-derives committed snapshots. 2025 release = base |
+| `02_apply_corrections.py` | Owner-approved rows of `corrections.csv`, `old_value`-guarded | `outputs/00_inventory_qc/<rel>/facilities_corrected.csv`, `excluded.csv`, `corrections_log.csv` | `inputs/inventory_qc/corrections.csv` | Only `approved` rows apply; an exclusion carries a reason; a stale row fails the stage (retire it, don't force it) |
+| `03_normalise.py` | community_key (canonical + `aliases.csv`), delivery flags | `facilities_normalised.csv`, `name_report.csv` | `inputs/inventory_qc/aliases.csv` | Runs AFTER corrections so an alias can never move a correction's target |
+| `04_detect.py` | Detector registry (shared farm ids, copies, shared points, typos, map point vs lat/lon, …) | `flags_structural.csv`, `detectors_run.csv` | `inputs/inventory_qc/thresholds.csv` | Each detector declares its needed columns and skips itself otherwise; see `docs/inventory_notes/` |
+| `05_boundary_check.py` | Label vs DCRA city + CDP boundary — verify only | `flags_boundary.csv`, `boundary_summary.csv` | `thresholds.csv`, `remote_sites.csv`, `inputs/inventory_qc/boundaries/` | Never relabels; communities without a boundary are untested and kept (no borough layer, owner 2026-10-06) |
+| `06_review_queue.py` | Open flags → owner review sheet | `review_queue.csv` (+`.xlsx`) | — | Decisions come back through `record-facility-corrections` |
+| `07_publish.py` | The clean facility table + QC report, after the output-contract checks | `facilities_clean.csv` (tracked), `qc_report.md` | — | Row reconciliation, reviewer+date, schema-only columns, regression fixtures, determinism — never loosen one |
 | **01_friction_build** | | | | |
 | `00_preflight_inputs.py` | Grid + range gates on the friction rasters | pass/fail report | RASTER_DIR env | Every input must match `lulc.tif`'s 28,000×16,567 grid exactly |
 | `01_build_corridor_masks.py` | Rasterizes the waterway network (75 m buffer, all_touched) | `outputs/01_friction_build/waterway_mask_150m.tif` | `CORRIDOR_BUFFER_M` | **REQUIRED before stage 02** — a missing mask is a hard error in the stack build (maskless = ~18% of waterway edges severed; explicit opt-out for synthetic runs only) |

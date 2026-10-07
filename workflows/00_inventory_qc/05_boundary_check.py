@@ -31,7 +31,6 @@ import zipfile
 from pathlib import Path
 
 import geopandas as gpd
-import numpy as np
 import pandas as pd
 
 from _qc import OUT, QC, canon, corrections, latest_release, read_csv, thresholds, write_csv
@@ -72,8 +71,6 @@ def check(label: str) -> tuple[pd.DataFrame, pd.DataFrame]:
     G = gpd.GeoDataFrame(loc, geometry=gpd.points_from_xy(loc["longitude"].astype(float), loc["latitude"].astype(float)), crs=4326).to_crs(3338)
     inside = gpd.sjoin(G[["record_id", "geometry"]], B[["bname", "bkey", "guid", "geometry"]], how="left", predicate="within")
     inside_names = inside.groupby("record_id")["bname"].agg(lambda s: sorted(set(s.dropna())))
-    inside_keys = inside.groupby("record_id")["bkey"].agg(lambda s: set(s.dropna()))
-    inside_guid = inside.groupby("record_id")["guid"].agg(lambda s: set(s.dropna()))
 
     corr = corrections()
     cstat = corr.groupby("record_id")["status"].agg(lambda s: "approved" if "approved" in set(s) else ("pending" if "pending" in set(s) else "rejected"))

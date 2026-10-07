@@ -4,12 +4,6 @@ record_id,detector,severity,detail,suggested_field,suggested_value,group_key,cov
 {405CC19C-36AB-4808-8AB1-CDE994AED352},map_point_disagrees,high,"map point is 16.0 km from lat/lon; map point = 61.57312, -159.24902",latitude;longitude,61.573120;-159.249023,,
 {41F25397-8168-4A24-BE43-C7E6935BB5AB},map_point_disagrees,high,"map point is 30.8 km from lat/lon; map point = 66.83289, -161.04431",latitude;longitude,66.832886;-161.044312,,
 {5283F15A-66DA-4487-8444-EC1A2C43934D},map_point_disagrees,high,"map point is 583.8 km from lat/lon; map point = 61.52991, -166.10370",latitude;longitude,61.529907;-166.103699,,
-{621FCC2F-3A90-426E-A211-00250864F71E},map_point_disagrees,high,"map point is 1166.2 km from lat/lon; map point = 53.88287, -166.55072",latitude;longitude,53.882874;-166.550720,,correction:approved
-{6D4B4A33-4BA6-4F24-B682-8F598BC19947},map_point_disagrees,high,"map point is 1604.2 km from lat/lon; map point = 66.54932, -152.63269",latitude;longitude,66.549316;-152.632690,,correction:approved
-{835A9532-B50F-4307-8766-44E644F988D9},map_point_disagrees,high,"map point is 501.0 km from lat/lon; map point = 64.85608, -147.80261",latitude;longitude,64.856079;-147.802612,,correction:approved
-{8D408F52-5CE0-4A95-A586-79D54041D7C7},map_point_disagrees,high,"map point is 780.5 km from lat/lon; map point = 67.79572, -161.76111",latitude;longitude,67.795715;-161.761108,,correction:approved
-{978F2CF3-F873-42E9-A4F4-4744D455FBA9},map_point_disagrees,high,"map point is 113.0 km from lat/lon; map point = 59.45709, -159.37482",latitude;longitude,59.457092;-159.374817,,correction:approved
-{A5E8D42A-4A72-4380-B9D4-5CC0084B55D2},map_point_disagrees,high,"map point is 1166.2 km from lat/lon; map point = 63.89209, -160.68420",latitude;longitude,63.892090;-160.684204,,correction:approved
 {A6656A06-FB6E-44F6-8DEB-0A79C30970C9},map_point_disagrees,high,"map point is 16.0 km from lat/lon; map point = 61.57312, -159.24902",latitude;longitude,61.573120;-159.249023,,
 {32574618-B703-4A8E-85F9-35EC4E4EA4A9},one_digit_typo,high,31 km from the PILOT POINT cluster; editing one digit of longitude to -157.5539 lands within 3 km,longitude,-157.553900,,
 {3EDD2A9C-65E1-4B69-95C6-B86EF44C2A59},shared_farm_id,high,"farm 108 sits in ANIAK but this record is labelled Lower Kalskag; position + total_capacity are the farm's, not Lower Kalskag's. farm's own record exists ({EE90D296-0F4B-47F2-A7ED-8AAE074E53AD})",latitude;longitude,,farm:108,

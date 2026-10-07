@@ -4,7 +4,6 @@ import importlib.util
 import sys
 from pathlib import Path
 
-import pandas as pd
 import pytest
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -65,8 +64,7 @@ def test_corrected_errors_are_no_longer_flagged(run):
 
 
 def test_detector_skips_when_column_missing(run):
-    n = run["nfac"].drop(columns=["tank_farm_id"]); n.attrs["release"] = LABEL
-    th = qc.thresholds()
+    n = run["nfac"].drop(columns=["tank_farm_id"])
     for name, needs, fn in det_mod.REGISTRY:
         if "tank_farm_id" in needs:
             assert any(c not in n.columns for c in needs)

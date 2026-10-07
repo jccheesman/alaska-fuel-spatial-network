@@ -1,5 +1,7 @@
 """Committed facility-inventory releases are self-consistent and contact-free."""
-import hashlib, json, csv
+import hashlib
+import json
+import csv
 from pathlib import Path
 import importlib.util
 import pytest
