@@ -33,9 +33,14 @@ roots:
   data: ../../data
 
 # Facility inventory — the normalized table (00_normalize_raw.py), canonical column names.
+# Since 2026-10 the source is workflow 00's published, owner-corrected table
+# (outputs/00_inventory_qc/<release>/facilities_clean.csv), not the raw AEA CSV; see
+# docs/INVENTORY_QC_PLAN.md. `record_id` carries each raw record through the 50 m
+# consolidation as the site-member trail (output/01_site_members.csv).
 inventory:
   path: data/interim/facilities.csv
   id:              id
+  record_id:       record_id
   community:       community
   delivery_method: delivery_method          # Road / Barge / Plane / "Plane or Barge" / "Plane or Road"
   capacity:        total_capacity
@@ -45,7 +50,6 @@ inventory:
   extra_capacity:                            # merged with max() into the per-facility capacity view
     - gasoline_capacity
     - diesel_capacity
-    - av_gas_capacity
     - jet_fuel_capacity
     - other_fuel_capacity
   # Recover facilities with a blank delivery_method from the community-level layer:

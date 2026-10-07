@@ -112,6 +112,9 @@ def consolidate_facilities(
     projection). `config` is required in practice; the bare fallbacks below only support trivial
     smoke tests and assume nothing region-specific.
 
+    When the profile maps `inventory.record_id`, each site also carries `member_record_ids`
+    (';'-joined) and `n_members`, so the 50 m merge is auditable record by record.
+
     A facility is kept when it has a routable delivery_method and a total_capacity; a blank inventory
     ASTFacilityID is NOT a reason to drop it — those rows get a deterministic synthetic id
     ("SYN-<cluster_id>"). When `config.delivery_fallback` is set, blank delivery methods are first
@@ -168,6 +171,11 @@ def consolidate_facilities(
         for opt in ("community_name", "entity_name"):
             if opt in grp.columns:
                 rec[opt] = _first_notna(grp[opt])
+        # Site-member trail: which raw records merged into this site (profile `inventory.record_id`).
+        # Nothing disappears silently — every raw record is accounted for in 01_site_members.
+        if "record_id" in grp.columns:
+            rec["member_record_ids"] = ";".join(sorted(grp["record_id"].dropna().astype(str)))
+            rec["n_members"] = int(len(grp))
         for col in cap_cols:
             rec[col] = _max_or_nan(grp[col]) if col in grp.columns else np.nan
         rows.append(rec)

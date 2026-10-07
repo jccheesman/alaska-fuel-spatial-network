@@ -33,19 +33,32 @@ from mmnet.io_readers import _read_lines  # reuse the pipeline's line cleaning
 TARGET_CRS = 3338
 RAW = ROOT / "data" / "raw"
 INTERIM = ROOT / "data" / "interim"
+QC_OUT = ROOT / "outputs" / "00_inventory_qc"
+
+
+FACILITIES_HINT = ("no published facility table under outputs/00_inventory_qc/<release>/ — "
+                   "run workflows/00_inventory_qc/run_all.sh (skill: validate-facility-inventory)")
+
+
+def _published_facilities() -> Path:
+    """Latest published clean facility table (workflow 00): the highest release label that has one.
+    When none exists the returned path does not exist, so the entry reports MISSING + FACILITIES_HINT."""
+    rels = sorted(p.name for p in QC_OUT.glob("*") if (p / "facilities_clean.csv").exists()) if QC_OUT.exists() else []
+    return QC_OUT / (rels[-1] if rels else "latest") / "facilities_clean.csv"
 
 # One entry per raw file. kind: line | point | polygon | table. rename: raw -> canonical.
 # `keep` (tables) limits/order columns; `filter` (tables) is an optional (col, value) row filter.
 SPEC = [
     # --- facilities inventory (table) ---
-    {"name": "facilities", "kind": "table", "status": "used (inventory)",
-     "src": RAW / "facilities" / "Utilities_Bulk_Fuel_Inventory.csv",
-     "rename": {"ASTFacilityID": "id", "CommunityName": "community",
-                "Delivery_method": "delivery_method", "Total_Capacity": "total_capacity",
-                "Gasoline_Capacity": "gasoline_capacity", "Diesel_Capacity": "diesel_capacity",
-                "AV_Gas_Capacity": "av_gas_capacity", "Jet_Fuel_Capacity": "jet_fuel_capacity",
-                "Other_Fuel_Capacity": "other_fuel_capacity", "EntityName": "entity",
-                "ASTFacilityLongitude": "longitude", "ASTFacilityLatitude": "latitude"}},
+    # The facility inventory comes from workflow 00 (inventory QC): the owner-corrected,
+    # normalised, published table for the latest release — never the raw AEA CSV directly.
+    # Column names are already the clean schema; only the profile's logical names are renamed.
+    {"name": "facilities", "kind": "table", "status": "used (inventory) — from workflow 00",
+     "src": _published_facilities(),
+     "rename": {"ast_facility_id": "id", "community_name": "community", "entity_name": "entity"},
+     "keep": ["id", "record_id", "community", "community_key", "entity", "delivery_method",
+              "total_capacity", "gasoline_capacity", "diesel_capacity", "jet_fuel_capacity",
+              "other_fuel_capacity", "latitude", "longitude", "corrections_applied", "qc_release"]},
     # --- transport lines ---
     # The ONLY road source (2026-09-07 AK DOT&PF download, 26,650 features).
     # The GRIP4 Canada extra/border-stitch layer was removed 2026-09-15:
@@ -150,6 +163,8 @@ def main() -> None:
         flag = "·" if r["out"] else "MISSING"
         print(f"  {flag} {r['name']:<28} {r['rows']:>6} rows  {r['src_crs']:<14} -> "
               f"{(r['out'].name if r['out'] else '—')}")
+        if r["name"] == "facilities" and not r["out"]:
+            print(f"    ! {FACILITIES_HINT}")
         rows.append(r)
 
     lines = ["# data/interim — normalized inputs (MANIFEST)", "",

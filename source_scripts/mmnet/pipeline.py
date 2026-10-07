@@ -39,6 +39,20 @@ from .steps.hubs import aggregate_hubs
 from .steps.tag import assign_community_region, passthrough_tag
 
 
+def write_site_members(fac) -> Path:
+    """Long-form trail of the consolidation merge: one row per (site, raw record).
+
+    Written beside 01_facilities.gpkg as 01_site_members.csv so a hub can be traced back to the
+    inventory records it aggregates (site -> hub membership is then recoverable from 02_hubs).
+    """
+    import pandas as pd
+    rows = [(sid, rid) for sid, ids in zip(fac["ast_facility_id"], fac["member_record_ids"].fillna(""))
+            for rid in ids.split(";") if rid]
+    out = output_dir() / "01_site_members.csv"
+    pd.DataFrame(rows, columns=["ast_facility_id", "record_id"]).to_csv(out, index=False, lineterminator="\n")
+    return out
+
+
 def run_pipeline(profile_path: str | Path, project_dir: str | Path | None = None) -> NetworkTables:
     """Run the full pipeline and return the final network (also written to <project>/output/).
 
@@ -55,6 +69,8 @@ def run_pipeline(profile_path: str | Path, project_dir: str | Path | None = None
     fac = consolidate_facilities(cfg.raw_path("facilities"), params,
                                  input_crs=cfg.crs.input, target_crs=cfg.crs.target, config=cfg)
     write_gdf(fac, "01_facilities.gpkg")
+    if "member_record_ids" in fac.columns:
+        write_site_members(fac)
 
     # 01b — tag (community/region; passthrough when tagging is off)
     if not cfg.tagging_enabled or cfg.place_tagging is None:

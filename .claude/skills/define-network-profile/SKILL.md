@@ -41,7 +41,8 @@ If a proposed change would break any of these, stop and surface the conflict bef
 
 ## Where the canonical values live
 
-- `profile.yaml` — the file you edit: `crs`, `inventory`, `modes`, `tagging`, `layers`, `transfers`,
+- `profile.yaml` — the file you edit: `crs`, `inventory` (incl. the optional `record_id` key that
+  makes consolidation write `01_site_members.csv`), `modes`, `tagging`, `layers`, `transfers`,
   `snaps`, `bridges`, `connect_to_giant`, `join_components`, `anchors`, `hubs`, `topology`.
 - `mmnet/config.py` — the strict schema (pydantic `extra="forbid"`): `RegionProfile` and the specs
   `ProfileLayerSource`, `TransferSpec`, `SnapSpec`, `BridgeSpec`, `ConnectToGiantSpec`,

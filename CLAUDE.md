@@ -46,7 +46,7 @@ replaces the network-of-record.
 | `02_build_friction_stack.py` | overland + road_base + barge_01..12 | `outputs/01_friction_build/friction_stack/` (14 TIFs / 24 logical surfaces) | `friction_config.py` | road_base is NoData-free by construction so land edges can't be accidentally severed |
 | `03_qa_friction_stack.py` | Hard post-build gates | exit code | — | Checks the 14-file contract, Jul>Jan barge pixels (ice gating direction), value floor |
 | **02_network_build** | | | | |
-| `00_normalize_raw.py` | data/raw → uniform EPSG:3338 interim layer + MANIFEST | `data/interim/` | its SPEC table | The SPEC table is de-facto config: one entry per raw file, incl. the official air-data swap |
+| `00_normalize_raw.py` | data/raw → uniform EPSG:3338 interim layer + MANIFEST; the **facilities** entry reads workflow 00's published `facilities_clean.csv` (latest release), never the raw AEA CSV | `data/interim/` | its SPEC table | The SPEC table is de-facto config: one entry per raw file, incl. the official air-data swap. `inventory.record_id` in the profile makes consolidation write `output/01_site_members.csv` (site ↔ raw record) |
 | `01_prep_waterway.py` | Full-Alaska NWN extraction | `data/interim/ak_waterway.gpkg` | `NODE_TOL=50` (matches assembler rounding) | Replaced the old facility-bbox clip — ~316 lines / ~31,903 km marine network |
 | `02_prep_airways.py` | Geocode OD legs | `data/processed/{airways,air_nodes}.geojson`, `data/boundary.geojson` | — | Interim files keep legacy names (`air_flight_paths_od.csv`) though sources are the official AK DOT&PF data — don't "fix" one without the other |
 | `03_fetch_basemap.py` | Natural Earth downloads | `data/basemap/` | — | Figures only |

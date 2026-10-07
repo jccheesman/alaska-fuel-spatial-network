@@ -277,6 +277,7 @@ class InventorySpec(_Strict):
     name: Optional[str] = None
     entity: Optional[str] = None
     type: Optional[str] = None
+    record_id: Optional[str] = None      # stable per-record id; carried through consolidation as the site-member trail
     extra_capacity: list[str] = Field(default_factory=list)
     delivery_method_fallback: Optional[DeliveryFallback] = None   # fill blank modes from a community layer
 
@@ -387,6 +388,8 @@ class RegionProfile(_Strict):
         }
         if inv.entity:
             facility_columns[inv.entity] = "entity_name"
+        if inv.record_id:
+            facility_columns[inv.record_id] = "record_id"
         capacity_columns = ["total_capacity"]
         for extra in inv.extra_capacity:
             internal = _snake(extra)
