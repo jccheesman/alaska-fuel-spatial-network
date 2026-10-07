@@ -50,7 +50,7 @@ def connect_multimodal(r_edges: gpd.GeoDataFrame, hubs: gpd.GeoDataFrame, road_t
                        snap_types: set | None = None, node_tol: float = 1.0,
                        waterway: gpd.GeoDataFrame | None = None, waterway_label: str = "Waterway",
                        waterway_node_tol: float = 50.0, bridges: list | None = None,
-                       connect_max_dist: float = 0.0):
+                       connect_max_dist: float = 0.0, max_snap_dist: float = 0.0):
     """Connect R's noded edges into one multimodal network — fast, spatial-indexed, once.
 
     This is the no-redundancy connector: R has already noded each mode's lines, so we DERIVE the
@@ -153,21 +153,56 @@ def connect_multimodal(r_edges: gpd.GeoDataFrame, hubs: gpd.GeoDataFrame, road_t
     snap_nodes = _nodes_subset(snap_ids)
 
     # 2. snap hubs to nearest GROUND node (road ∪ ice road), recording which surface they land on.
-    for col in ("is_hub", "hub_id", "delivery_method", "hub_type", "total_hub_capacity", "snap_surface"):
+    #    Every hub is accounted for in summary["hub_snaps"]: placed / unplaced:beyond_cap /
+    #    merged:<hub already on that node>. Two hubs picking the same node are MERGED into one node
+    #    record (hub_ids joined with '+', capacities summed, modes unioned) — never overwritten.
+    for col in ("is_hub", "hub_id", "delivery_method", "hub_type", "total_hub_capacity",
+                "snap_surface", "snap_dist_m"):
         nodes_gdf[col] = False if col == "is_hub" else None
     hub_attr_cols = [c for c in ("hub_id", "delivery_method", "hub_type", "total_hub_capacity")
                      if hubs is not None and c in hubs.columns]
+    hub_snaps: list[dict] = []
     if hubs is not None and len(hubs) and len(snap_nodes):
-        h = hubs[["geometry", *hub_attr_cols]].copy()
-        j = gpd.sjoin_nearest(h, snap_nodes, how="left")
+        h = hubs[["geometry", *hub_attr_cols]].copy().reset_index(drop=True)
+        j = gpd.sjoin_nearest(h, snap_nodes, how="left", distance_col="_d")
         j = j[~j.index.duplicated(keep="first")]
+        placed_at: dict = {}
         for _, row in j.iterrows():
-            ni = int(row["node_id"])
+            ni, d = int(row["node_id"]), float(row["_d"])
+            hid = row.get("hub_id")
+            surfaces = "+".join(t for t in sorted(snap_types) if ni in ids_by_type.get(t, set())) or None
+            rec = {"hub_id": hid, "node_id": ni, "snap_dist_m": round(d, 1), "snap_surface": surfaces}
+            if max_snap_dist and d > max_snap_dist:
+                rec.update(node_id=None, status="unplaced:beyond_cap")
+                hub_snaps.append(rec)
+                continue
+            if ni in placed_at:                      # collision: merge, never overwrite
+                nodes_gdf.loc[ni, "hub_id"] = f"{nodes_gdf.at[ni, 'hub_id']}+{hid}"
+                if "total_hub_capacity" in hub_attr_cols:
+                    nodes_gdf.loc[ni, "total_hub_capacity"] = (
+                        float(nodes_gdf.at[ni, "total_hub_capacity"] or 0)
+                        + float(row.get("total_hub_capacity") or 0))
+                if "delivery_method" in hub_attr_cols:
+                    nodes_gdf.loc[ni, "delivery_method"] = _union_modes(
+                        nodes_gdf.at[ni, "delivery_method"], row.get("delivery_method"))
+                if "hub_type" in hub_attr_cols and "Supplier" in {nodes_gdf.at[ni, "hub_type"], row.get("hub_type")}:
+                    nodes_gdf.loc[ni, "hub_type"] = "Supplier"
+                rec["status"] = f"merged:{placed_at[ni]}"
+                hub_snaps.append(rec)
+                continue
+            placed_at[ni] = hid
             nodes_gdf.loc[ni, "is_hub"] = True
             for c in hub_attr_cols:
                 nodes_gdf.loc[ni, c] = row.get(c)
-            surfaces = [t for t in sorted(snap_types) if ni in ids_by_type.get(t, set())]
-            nodes_gdf.loc[ni, "snap_surface"] = "+".join(surfaces) or None
+            nodes_gdf.loc[ni, "snap_surface"] = surfaces
+            nodes_gdf.loc[ni, "snap_dist_m"] = round(d, 1)
+            rec["status"] = "placed"
+            hub_snaps.append(rec)
+        n_un = sum(r["status"] == "unplaced:beyond_cap" for r in hub_snaps)
+        n_mg = sum(r["status"].startswith("merged") for r in hub_snaps)
+        if n_un or n_mg:
+            print(f"[connect] hubs: {n_un} unplaced (> {max_snap_dist:.0f} m from the ground surface), "
+                  f"{n_mg} merged into a hub already on the same node (see 02_hub_snaps.csv)")
 
     # 3. anchor transfers (ports/barge-hubs → barge↔road & barge↔ice). Airports snap to road upstream.
     transfer_rows = []
@@ -263,8 +298,18 @@ def connect_multimodal(r_edges: gpd.GeoDataFrame, hubs: gpd.GeoDataFrame, road_t
         "n_waterway": sum(1 for e in edge_rows if e["type"] == waterway_label),
         "n_bridges": len(bridge_rows), "n_shore": len(shore_rows),
         "n_hubs": int(nodes_gdf["is_hub"].fillna(False).astype(bool).sum()),
+        "hub_snaps": pd.DataFrame(hub_snaps, columns=["hub_id", "node_id", "snap_dist_m", "snap_surface", "status"]),
     }
     return nodes_gdf, edges_gdf, summary
+
+
+def _union_modes(a, b) -> str:
+    atoms: set[str] = set()
+    for v in (a, b):
+        if v is None or (isinstance(v, float) and v != v):
+            continue
+        atoms.update(x.strip() for x in str(v).replace(" and ", " or ").split(" or ") if x.strip())
+    return " or ".join(sorted(atoms))
 
 
 def classify_connectors(edges: gpd.GeoDataFrame, token_by_label: dict,

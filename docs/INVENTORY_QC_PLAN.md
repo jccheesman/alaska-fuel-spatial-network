@@ -160,9 +160,11 @@ Each `SKILL.md` follows the house sections: core invariants · when to use / do 
 | **2 (built 2026-10-06)** | stages 4–6: detector registry, boundary check (city + CDP boundaries tracked under `inputs/inventory_qc/boundaries/`), review queue; `remote_sites.csv` (empty until the owner reviews the queue); tests with the audit's cases as fixtures | the first review queue (`outputs/00_inventory_qc/2025/review_queue.csv`) |
 | **3** | the three skills + orchestrator script; `build-and-verify-network` prerequisite; the five bug notes; CI `--check` job | skill text |
 | **4 (built 2026-10-07)** | data repo: `00_normalize_raw.py` reads the latest published `outputs/00_inventory_qc/<release>/facilities_clean.csv`; `inventory.record_id` in the profile carries each record through consolidation; `consolidate` emits `member_record_ids`/`n_members` and the pipeline writes `output/01_site_members.csv`. Harness `build_facility_tables.py` wiring and the `mmnet-toolkit` re-snapshot are deferred (owner 2026-10-06: data repo only; final network extracted manually) | before/after comparison of sites; no network rebuild until phase 5 |
-| **5** | hub-builder fixes (report-don't-drop conflicts; group by corrected label, not city/CDP; cannot-link in the 50 m merge; snap-collision detection + snap cap; `hub_members` export), then **one** rebuild of the network of record | the rebuild and re-export (zips, checksums, `EXPECTED`, edge-keyed tables) |
+| **5 (code built 2026-10-07; rebuild pending)** | hub-builder fixes, all profile-driven: `tag` tests every labelled facility and keeps + reports conflicts (`01b_conflicts.csv`); hubs group by the canonical corrected label (`group_by: [community]`, `inventory.community_key`), unlabelled sites outside places by `buffer_dist` blob; `cannot_link_across_community` in the 50 m merge; `max_snap_dist_m: 25000` + snap-collision merge (`02_hub_snaps.csv`); `02_hub_members.csv`. Tests: `tests/test_hub_builder.py`. **Still to do: one rebuild of the network of record on the owner's machine** (needs `data/raw`, R + the friction rasters) and its re-export | the rebuild and re-export (zips, checksums, `EXPECTED`, edge-keyed tables) |
 
-Phases 1–4 change no network output. The network of record changes only in phase 5, once.
+Phases 1–4 change no network output. The network of record changes only in phase 5, once — that
+rebuild has not happened yet (the container has no `data/raw`, R or rasters); until it does, the
+committed `final_network/` and the stage-03 `EXPECTED` tripwire describe the 2026-09-15 build.
 
 ## Phase-1a commit plan (approved 2026-10-06; executed on `claude/hub-audit-investigation-dukz8z`)
 

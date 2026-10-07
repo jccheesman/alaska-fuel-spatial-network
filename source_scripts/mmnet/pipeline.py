@@ -35,7 +35,7 @@ def _connector_tokens(cfg) -> dict:
 from .io_writers import output_dir, write_gdf
 from .network import NetworkTables
 from .steps.consolidate import consolidate_facilities
-from .steps.hubs import aggregate_hubs
+from .steps.hubs import aggregate_hubs, hub_members
 from .steps.tag import assign_community_region, passthrough_tag
 
 
@@ -50,6 +50,19 @@ def write_site_members(fac) -> Path:
             for rid in ids.split(";") if rid]
     out = output_dir() / "01_site_members.csv"
     pd.DataFrame(rows, columns=["ast_facility_id", "record_id"]).to_csv(out, index=False, lineterminator="\n")
+    return out
+
+
+def write_conflicts(tagged) -> Path:
+    """Labelled facilities whose label's borough differs from their coordinates' borough
+    (tag step name_match='conflict'). Kept in the build; listed here for the inventory corrections."""
+    cols = [c for c in ("ast_facility_id", "member_record_ids", "community_name", "place_name",
+                        "region_name", "label_borough", "delivery_method", "total_capacity")
+            if c in tagged.columns]
+    c = tagged.loc[tagged["name_match"] == "conflict", cols].copy()
+    c["x"], c["y"] = tagged.loc[c.index].geometry.x.round(1), tagged.loc[c.index].geometry.y.round(1)
+    out = output_dir() / "01b_conflicts.csv"
+    c.to_csv(out, index=False, lineterminator="\n")
     return out
 
 
@@ -81,14 +94,18 @@ def run_pipeline(profile_path: str | Path, project_dir: str | Path | None = None
         regions = load_regions(cfg.region_path(), cfg.crs.target, cfg.regions_cols)
         tagged = assign_community_region(fac, places, regions)
     write_gdf(tagged, "01b_tagged.gpkg")          # the R build reads this
+    if "name_match" in tagged.columns:
+        write_conflicts(tagged)
 
     # 02 — hubs (aggregate centroids; the Python assembler snaps them to the road)
     hubs = aggregate_hubs(tagged, params)
     write_gdf(hubs, "02_hubs.gpkg")
+    hub_members(hubs).to_csv(output_dir() / "02_hub_members.csv", index=False, lineterminator="\n")
 
     # 03 — build the multimodal network: R nodes, Python connects (gold procedure)
     layer_list = [s.name for s in cfg.layers if s.kind == "line"]
-    net = build_network(layer_list, output_dir() / "03_network", hubs)
+    net = build_network(layer_list, output_dir() / "03_network", hubs,
+                        max_snap_dist=float(params.max_snap_dist_m))
 
     # 03b — re-type synthetic connectors by the modes they join (same-mode ->
     # {Mode}Connector, two modes -> per-pair Transfer). Rewrites 03_network so the

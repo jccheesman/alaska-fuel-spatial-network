@@ -3,7 +3,9 @@
 R: aggregate_hubs_logic / classify_hub_type, network_preprocessing.R:266-419. Facilities are grouped
 by (community, delivery_method) into one hub per community-mode pair; the hub point is the plain
 centroid of its members; capacity sums; each hub is classified Supplier/Receiver within its mode,
-then snapped onto the relevant network layer(s), dropping hubs displaced beyond max_snap_dist_m.
+then snapped onto the relevant network layer(s) by the assembler, which leaves a hub unplaced
+(reported in 02_hub_snaps.csv) when the displacement exceeds params.max_snap_dist_m (0 = no cap).
+Every hub carries `member_site_ids`; `hub_members()` unrolls it to one row per site.
 
 Buffer-union path (mirrors R lib.R:142-167): when community tags are absent or "community" is not
 in params.group_by, buffer facilities by params.buffer_dist, dissolve overlapping buffers per
@@ -81,6 +83,9 @@ def _dedup_colocated(hubs: gpd.GeoDataFrame, tol: float) -> gpd.GeoDataFrame:
             "num_facilities": int(g["num_facilities"].sum()),
             "total_hub_capacity": float(g["total_hub_capacity"].sum(skipna=True)),
             "hub_community": g["hub_community"].iloc[0],
+            "hub_key": g["hub_key"].iloc[0] if "hub_key" in g else None,
+            "member_site_ids": (";".join(s for s in g["member_site_ids"].dropna().astype(str) if s)
+                                if "member_site_ids" in g else None),
             "hub_city": g["hub_city"].iloc[0] if "hub_city" in g else None,
             "hub_region": g["hub_region"].iloc[0],
             "delivery_method": _union_methods(g["delivery_method"]),
@@ -91,6 +96,32 @@ def _dedup_colocated(hubs: gpd.GeoDataFrame, tol: float) -> gpd.GeoDataFrame:
         geometry=gpd.points_from_xy([x for x, _ in geoms], [y for _, y in geoms]),
         crs=hubs.crs,
     )
+
+
+def _canon_series(s: pd.Series) -> pd.Series:
+    from .tag import _canon
+    return _canon(s)
+
+
+def _blob_keys(fac: gpd.GeoDataFrame, buffer_dist: float) -> list:
+    """Spatial group keys for unlabelled sites outside every place: buffer each by `buffer_dist`,
+    dissolve overlaps, and key each site by its blob ('blob:<n>'). Deterministic: blobs are
+    numbered by their minimum x then y."""
+    if not len(fac):
+        return []
+    merged = unary_union(fac.geometry.buffer(buffer_dist))
+    blobs = sorted(getattr(merged, "geoms", [merged]), key=lambda p: (p.bounds[0], p.bounds[1]))
+    bl = gpd.GeoDataFrame({"blob": [f"blob:{i + 1}" for i in range(len(blobs))]}, geometry=blobs, crs=fac.crs)
+    j = gpd.sjoin(fac[["geometry"]], bl, how="left", predicate="intersects")
+    j = j[~j.index.duplicated(keep="first")]
+    return j.loc[fac.index, "blob"].tolist()
+
+
+def hub_members(hubs: gpd.GeoDataFrame) -> pd.DataFrame:
+    """Long-form hub -> site trail from `member_site_ids`: one row per (hub_id, ast_facility_id)."""
+    ids = hubs["member_site_ids"] if "member_site_ids" in hubs.columns else pd.Series("", index=hubs.index)
+    rows = [(h, s) for h, v in zip(hubs["hub_id"], ids.fillna("")) for s in str(v).split(";") if s]
+    return pd.DataFrame(rows, columns=["hub_id", "ast_facility_id"])
 
 
 def _use_buffer_union(group_by: list[str], tagging_enabled: bool) -> bool:
@@ -203,12 +234,23 @@ def aggregate_hubs(facilities: gpd.GeoDataFrame, params: Params) -> gpd.GeoDataF
     if _use_buffer_union(group_by, params.tagging_enabled):
         hubs = _buffer_union_hubs(fac, params)
     else:
-        # Tagged path: coalesce community tiers (mirrors R lib.R:127-141).
-        grp = fac.get("assigned_community").where(
-            fac.get("assigned_community").notna(), fac.get("geo_label")
-        )
-        grp = grp.where(grp.notna(), fac.get("region_name"))
-        fac["_community"] = grp
+        # Tagged path. The grouping key is the CANONICAL community label (workflow 00's
+        # community_key when mapped, else the canonical form of the inventory name), so spelling
+        # variants never split a place. Unlabelled sites inside a place take the place name;
+        # unlabelled sites outside every place are grouped by the buffer-union blob they fall in
+        # (params.buffer_dist), never by borough — a borough-wide "hub" is not a hub.
+        from .consolidate import _label_key
+        key = _label_key(fac)
+        in_place = fac["place_name"] if "place_name" in fac.columns else pd.Series(pd.NA, index=fac.index)
+        key = key.where(key.notna(), _canon_series(in_place))
+        unplaced = key.isna()
+        if unplaced.any():
+            key = key.astype(object)
+            key[unplaced] = _blob_keys(fac[unplaced], float(params.buffer_dist))
+        fac["_community"] = key
+        # display label: the first inventory spelling of the group (falls back to the key itself)
+        disp = fac["assigned_community"] if "assigned_community" in fac.columns else fac["_community"]
+        fac["_community_label"] = disp.where(disp.notna(), fac["_community"])
 
         # Group by exactly the profile's keys, mapped to columns. When `delivery_method` is a key,
         # hubs are per-mode; when it is NOT (e.g. group_by = [community, city, region]), each place
@@ -225,7 +267,9 @@ def aggregate_hubs(facilities: gpd.GeoDataFrame, params: Params) -> gpd.GeoDataF
             recs.append({
                 "num_facilities": len(g),
                 "total_hub_capacity": float(g["total_capacity"].sum(skipna=True)),
-                "hub_community": g["_community"].iloc[0],
+                "hub_community": g["_community_label"].iloc[0],
+                "hub_key": g["_community"].iloc[0],
+                "member_site_ids": ";".join(g["ast_facility_id"].astype(str)) if "ast_facility_id" in g else None,
                 "hub_city": g["place_name"].iloc[0] if "place_name" in g else None,
                 "hub_region": (g["region_name"].iloc[0] if region_is_key
                                else (_dominant(g["region_name"], g["total_capacity"])

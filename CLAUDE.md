@@ -51,7 +51,7 @@ replaces the network-of-record.
 | `02_prep_airways.py` | Geocode OD legs | `data/processed/{airways,air_nodes}.geojson`, `data/boundary.geojson` | — | Interim files keep legacy names (`air_flight_paths_od.csv`) though sources are the official AK DOT&PF data — don't "fix" one without the other |
 | `03_fetch_basemap.py` | Natural Earth downloads | `data/basemap/` | — | Figures only |
 | `03_prep_manual_connections.py` | Split the user-authored `mannual_connections.shp` by its `Mode` tag | `data/interim/manual_<mode>.gpkg` | source shp under `inputs/mannual_connections/` (opted-in like `inputs/air/`) | User-extensible layer: hand-draw a line, tag its Mode, rebuild. One mode per layer (engine drops per-feature attrs), so a mixed-mode file must be split; each split reuses the mode's existing edge_label so costing is unchanged. Endpoints snapped to existing nodes weld automatically (1 m) — no connection rule needed |
-| `04_build_network.py` | validate_profile + mmnet stages 01→04 | `outputs/02_network_build/{output,reports}` | `profile.yaml` (THE config surface) | Region-as-data: improve the model by editing the profile, not the engine. **Same-mode line layers are R-noded TOGETHER** (one `st_node` per mode, keyed by the base layer) so manual flight paths share airport nodes with `airways` — noded in isolation, two manual legs meeting at a shared off-network endpoint linemerge and detach. **All Barge-mode layers are concatenated** into the waterway (was single-layer), so `manual_barge` isn't dropped; a manual-barge endpoint that lands mid-edge on the marine spine is welded in (`_weld_barge_landings` inserts a shared vertex), since waterway noding is vertex-rounding not planar |
+| `04_build_network.py` | validate_profile + mmnet stages 01→04 | `outputs/02_network_build/{output,reports}` (+ trails `01_site_members`, `01b_conflicts`, `02_hub_members`, `02_hub_snaps` .csv) | `profile.yaml` (THE config surface) | Region-as-data: improve the model by editing the profile, not the engine. **Hub builder, phase 5 (2026-10-07):** hubs group by the canonical corrected label (`group_by: [community]`, not city/borough); `cannot_link_across_community` keeps a 50 m stack of several villages apart; a label-vs-borough conflict is kept + reported, never dropped; unlabelled sites outside places group by `buffer_dist` blob; `max_snap_dist_m` leaves far hubs unplaced and a snap collision merges instead of overwriting. **Same-mode line layers are R-noded TOGETHER** (one `st_node` per mode, keyed by the base layer) so manual flight paths share airport nodes with `airways` — noded in isolation, two manual legs meeting at a shared off-network endpoint linemerge and detach. **All Barge-mode layers are concatenated** into the waterway (was single-layer), so `manual_barge` isn't dropped; a manual-barge endpoint that lands mid-edge on the marine spine is welded in (`_weld_barge_landings` inserts a shared vertex), since waterway noding is vertex-rounding not planar |
 | `05_verify_north_slope.py` | Connectivity assertion gate | exit code | — | Rescued from the old repo's "disposable" explain/ folder that run_all depended on |
 | `06_export_final_network.py` | Stage-04 gpkg → final_network/ + zips + sha256 manifest | `final_network/` | NODE_RENAME | **CAUTION**: a re-export is a NEW network-of-record — see final_network/README.md before committing one |
 | **03_multimodal_join** | | | | |
@@ -82,8 +82,10 @@ replaces the network-of-record.
   fuel-delivery routes) and the road source updated to the 2026-09 AK DOT&PF
   download. It supersedes the 2026-09-12 manual-connections export and the
   2026-07-20 pre-fix freeze (both preserved in git history); the
-  manual-connections layer is still included. A re-export is a NEW
-  network-of-record: regenerate the zips, the checksums
+  manual-connections layer is still included. **The phase-5 hub-builder fixes
+  (2026-10-07) are in the code and profile but NOT yet in the network-of-record:
+  the next rebuild on the owner's machine is the one rebuild the plan allows.**
+  A re-export is a NEW network-of-record: regenerate the zips, the checksums
   (`inputs/MANIFEST.md`, `final_network/README.md`, `.github/workflows/ci.yml`),
   the `EXPECTED` tripwire, and the edge_id-keyed tables together. Do not
   re-export and commit without the owner asking.

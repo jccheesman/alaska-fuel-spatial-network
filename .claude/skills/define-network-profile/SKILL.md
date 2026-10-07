@@ -33,7 +33,16 @@ If a proposed change would break any of these, stop and surface the conflict bef
      into the giant within `max_dist` (this is what joins coastal/North-Slope pieces by sea).
    - `join_components:` → the optional Stage-04 distance join: link every remaining non-giant component
      to the giant within `max_dist`, iterated. `max_dist: 0` disables it (03 stays canonical).
-3. **`snap_target: true`** marks the surfaces hubs may land on (Road ∪ Ice Road). Hubs snap only there.
+3. **`snap_target: true`** marks the surfaces hubs may land on (Road ∪ Ice Road). Hubs snap only there,
+   and only within `hubs.max_snap_dist_m` (0 = no cap); a farther hub is left unplaced and listed in
+   `output/02_hub_snaps.csv` — widen the cap or fix the inventory, never move the hub by hand.
+4. **`hubs.group_by: [community]`** — one hub per canonical corrected community label. Adding `city`
+   or `region` splits a community along TIGER place / borough lines (the pre-2026-10 behaviour that
+   gave Fairbanks 11 hubs); add `delivery_method` only for per-mode hubs.
+   `hubs.cannot_link_across_community: true` keeps records with different labels apart inside the
+   `dedup_tol_m` merge. `inventory.community_key` / `inventory.record_id` map workflow 00's
+   canonical label and stable record id so the member trails (`01_site_members`, `02_hub_members`)
+   are written.
 4. **Units.** Distances are METERS in the profile's projected `crs.target` (e.g. EPSG:3338 Alaska
    Albers). Meter thresholds require a projected CRS — `validate_profile` rejects meters on a geographic
    (degree) CRS.

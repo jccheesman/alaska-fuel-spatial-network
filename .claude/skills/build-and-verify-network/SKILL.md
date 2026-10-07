@@ -62,7 +62,14 @@ reading/verifying the result.
      the profile (`define-network-profile`); or
    - a tolerance genuinely too tight for the geography (a real gap) → report the gap distance and
      propose a justified `max_dist`/rule change, then re-run.
-6. **Report** the final numbers (nodes/edges/components/giant %/hubs reachable) + the proof result.
+6. **Read the hub trails** in `output/`: `01b_conflicts.csv` (labelled facilities whose label's
+   borough differs from their coordinates' — each is an inventory correction to record, not a build
+   fix), `02_hub_snaps.csv` (`status` = placed / `unplaced:beyond_cap` / `merged:<hub>`; an unplaced
+   hub is a village with no ground surface within `hubs.max_snap_dist_m` — report it, do not raise
+   the cap to hide it), and `02_hub_members.csv` + `01_site_members.csv` (hub → site → inventory
+   record, so every hub's capacity is traceable to AEA records).
+7. **Report** the final numbers (nodes/edges/components/giant %/hubs placed, unplaced, merged,
+   conflicts) + the proof result.
 
 ## What NOT to do
 

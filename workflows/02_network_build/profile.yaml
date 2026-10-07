@@ -41,6 +41,7 @@ inventory:
   path: data/interim/facilities.csv
   id:              id
   record_id:       record_id
+  community_key:   community_key            # canonical label (aliases folded) from workflow 00
   community:       community
   delivery_method: delivery_method          # Road / Barge / Plane / "Plane or Barge" / "Plane or Road"
   capacity:        total_capacity
@@ -212,7 +213,13 @@ hubs:
   abs_threshold: 500000
   buffer_dist: 5000
   dedup_tol_m: 50
-  group_by: [community, city, region]   # one hub per place; delivery methods unioned (multimodal)
+  # Phase 5 (2026-10, docs/INVENTORY_QC_PLAN.md): one hub per CORRECTED community label.
+  # `city`/`region` are no longer keys — a TIGER place polygon or a borough line must not split
+  # one community into several hubs (Fairbanks was 11). Unlabelled sites inside a place take the
+  # place name; outside every place they group by a buffer_dist blob, never by borough.
+  group_by: [community]                 # delivery methods unioned (multimodal hubs)
+  cannot_link_across_community: true    # a 50 m stack of several villages stays several sites
+  max_snap_dist_m: 25000                # a hub farther than this from any road/ice-road node is left unplaced + reported
 
 # The only noding knob the gold pipeline consumes: the R planar-cleaning precision (meters).
 topology:
