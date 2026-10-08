@@ -8,3 +8,4 @@ located_in_place,05_boundary_check,string,"The city/CDP polygon(s) the point phy
 community_relation,05_boundary_check,string,"inside | adjacent (neighbouring place <= boundary_review_km, same town) | remote (no boundary) | elsewhere (another community's boundary > review km) | untested"
 corrections_applied,02_apply_corrections,string,;-joined fields an approved correction changed on this record
 qc_release,07_publish,string,Release label the table was published from
+qc_status,07_publish,string,"clean | pending_review (the record has an open item in review_queue.csv). The build withholds pending_review records from hub aggregation when the profile's hubs.withhold_pending_review is on"

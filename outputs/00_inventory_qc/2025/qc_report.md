@@ -1,12 +1,13 @@
 # Inventory QC report — release 2025
 
-Generated 2026-10-08T22:07:07+00:00 by workflows/00_inventory_qc/07_publish.py
+Generated 2026-10-08T22:15:25+00:00 by workflows/00_inventory_qc/07_publish.py
 
 - raw release: `Utilities_Bulk_Fuel_Inventory.csv` sha256 `3fbee569c63dccf813d6fa53e608820d53b92e415feb2c7f20556fc0bb0c30b0` (1830 rows, 1767 located)
-- clean table: `facilities_clean.csv` sha256 `d96181319b1ef7372b7df599bbe0e40b6e45bb5c8941d765407c55c02660d5ed` (1803 rows, 1740 located)
+- clean table: `facilities_clean.csv` sha256 `bddfaabf00edf1a95bf57c315bb196204df26a977744998ac7cedc7addba6a81` (1803 rows, 1740 located)
 - excluded: 27 (see `excluded.csv`)
 - corrections: 80 applied · 8 pending · 0 rejected · 0 skipped
 - community keys: 272 · unlabelled records: 97
+- qc_status: 1768 clean · 35 pending_review (withheld from hubs by the build)
 
 ## Checks
 
@@ -24,7 +25,7 @@ Generated 2026-10-08T22:07:07+00:00 by workflows/00_inventory_qc/07_publish.py
 | fixture: no Kodiak-labelled record is in the open Pacific (lat < 56) | PASS |  |
 | fixture: no Coldfoot-labelled record is in Yukon, Canada (lon > -141) | PASS |  |
 | fixture: spelling variants resolved (no 'Saint Marys', 'Clarks Point', 'Dutch Harbor' labels) | PASS |  |
-| deterministic output | PASS | d96181319b1e |
+| deterministic output | PASS | bddfaabf00ed |
 
 ## Corrections applied
 

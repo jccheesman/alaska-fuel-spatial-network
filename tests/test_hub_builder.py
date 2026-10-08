@@ -165,3 +165,22 @@ def test_remote_site_rule_off_by_default_and_without_distance():
     assert len(aggregate_hubs(g, Params(group_by=["community"]))) == 1
     g2 = _tagged([(0, 0), (300_000, 0)], community_name=["Prudhoe Bay"] * 2)
     assert len(aggregate_hubs(g2, Params(group_by=["community"], remote_site_km=20))) == 1
+
+
+# ----------------------------------------------------------------------------- withhold pending review
+def test_withhold_pending_review_is_an_on_off_flag(tmp_path):
+    from mmnet.config import PipelineConfig
+    from mmnet.steps.consolidate import consolidate_facilities
+    cols = {"id": "ast_facility_id", "community": "community_name", "delivery_method": "delivery_method",
+            "total_capacity": "total_capacity", "longitude": "longitude", "latitude": "latitude",
+            "record_id": "record_id", "qc_status": "qc_status"}
+    cfg = PipelineConfig(roots={}, layers=[], raw={}, facility_columns=cols, capacity_columns=["total_capacity"],
+                         routable_modes=["Road"])
+    df = pd.DataFrame({"id": ["A", "B"], "record_id": ["{a}", "{b}"], "community": ["X", "Y"], "delivery_method": ["Road"] * 2,
+                       "total_capacity": [100, 200], "longitude": [-150.0, -150.5], "latitude": [61.0, 61.0],
+                       "qc_status": ["clean", "pending_review"]})
+    p = tmp_path / "f.csv"; df.to_csv(p, index=False)
+    on = consolidate_facilities(p, Params(withhold_pending_review=True), 4326, 3338, cfg)
+    assert list(on["ast_facility_id"]) == ["A"] and list(on.attrs["withheld"]["record_id"]) == ["{b}"]
+    off = consolidate_facilities(p, Params(withhold_pending_review=False), 4326, 3338, cfg)
+    assert len(off) == 2 and len(off.attrs["withheld"]) == 0

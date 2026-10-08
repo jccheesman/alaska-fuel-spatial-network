@@ -84,6 +84,9 @@ def run_pipeline(profile_path: str | Path, project_dir: str | Path | None = None
     write_gdf(fac, "01_facilities.gpkg")
     if "member_record_ids" in fac.columns:
         write_site_members(fac)
+    wh = fac.attrs.get("withheld")
+    if wh is not None:
+        wh.to_csv(output_dir() / "01_withheld.csv", index=False, lineterminator="\n")
 
     # 01b — tag (community/region; passthrough when tagging is off)
     if not cfg.tagging_enabled or cfg.place_tagging is None:

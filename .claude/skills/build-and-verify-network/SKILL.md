@@ -62,7 +62,9 @@ reading/verifying the result.
      the profile (`define-network-profile`); or
    - a tolerance genuinely too tight for the geography (a real gap) → report the gap distance and
      propose a justified `max_dist`/rule change, then re-run.
-6. **Read the hub trails** in `output/`: `01b_conflicts.csv` (labelled facilities whose label's
+6. **Read the hub trails** in `output/`: `01_withheld.csv` (records with an open owner review item,
+   kept out of hubs while `hubs.withhold_pending_review` is on — their capacity is absent from the
+   network on purpose; report the count), `01b_conflicts.csv` (labelled facilities whose label's
    borough differs from their coordinates' — each is an inventory correction to record, not a build
    fix), `02_hub_snaps.csv` (`status` = placed / `unplaced:beyond_cap` / `merged:<hub>`; an unplaced
    hub is a village with no ground surface within `hubs.max_snap_dist_m` — report it, do not raise

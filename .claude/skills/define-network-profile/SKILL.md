@@ -42,7 +42,9 @@ If a proposed change would break any of these, stop and surface the conflict bef
    `hubs.cannot_link_across_community: true` keeps records with different labels apart inside the
    `dedup_tol_m` merge. `hubs.remote_site_km` (needs `inventory.community_distance`) turns a site
    farther than that from its labelled community into its own `remote_site` hub — the label stays,
-   the town's centroid stops moving; 0 switches it off. `inventory.community_key` / `inventory.record_id` map workflow 00's
+   the town's centroid stops moving; 0 switches it off. `hubs.withhold_pending_review: true`
+   (needs `inventory.qc_status`) keeps every record with an open owner review item out of
+   consolidation and hubs, listed in `output/01_withheld.csv`; the build catches, never fixes. `inventory.community_key` / `inventory.record_id` map workflow 00's
    canonical label and stable record id so the member trails (`01_site_members`, `02_hub_members`)
    are written.
 4. **Units.** Distances are METERS in the profile's projected `crs.target` (e.g. EPSG:3338 Alaska

@@ -252,6 +252,7 @@ class Params(_Strict):
     cannot_link_across_community: bool = False
     max_snap_dist_m: float = 0.0
     remote_site_km: float = 0.0
+    withhold_pending_review: bool = False
 
 
 # --------------------------------------------------------------------------- RegionProfile
@@ -283,6 +284,7 @@ class InventorySpec(_Strict):
     record_id: Optional[str] = None      # stable per-record id; carried through consolidation as the site-member trail
     community_key: Optional[str] = None  # canonical community key (aliases folded); hub grouping + cannot-link use it
     community_distance: Optional[str] = None  # km from the record to its labelled community (workflow 00); remote-site rule
+    qc_status: Optional[str] = None      # workflow 00 qc_status column; pending_review records can be withheld from hubs
     extra_capacity: list[str] = Field(default_factory=list)
     delivery_method_fallback: Optional[DeliveryFallback] = None   # fill blank modes from a community layer
 
@@ -336,6 +338,11 @@ class HubParams(_Strict):
     # becomes its OWN hub (hub_kind=remote_site) instead of pulling the town's hub centroid.
     # 0 = off. Remote repeaters, mines, camps and hatcheries keep their home-town label.
     remote_site_km: float = 0.0
+    # ON/OFF: records whose qc_status is pending_review (an open owner review item) are kept OUT
+    # of consolidation and hubs, listed in output/01_withheld.csv. The build catches, never fixes:
+    # a label or position the owner cannot vouch for must not become a hub. Needs
+    # inventory.qc_status.
+    withhold_pending_review: bool = False
 
 
 class TopologyParams(_Strict):
@@ -410,6 +417,8 @@ class RegionProfile(_Strict):
             facility_columns[inv.community_key] = "community_key"
         if inv.community_distance:
             facility_columns[inv.community_distance] = "community_distance_km"
+        if inv.qc_status:
+            facility_columns[inv.qc_status] = "qc_status"
         capacity_columns = ["total_capacity"]
         for extra in inv.extra_capacity:
             internal = _snake(extra)
@@ -469,6 +478,7 @@ class RegionProfile(_Strict):
             cannot_link_across_community=h.cannot_link_across_community,
             max_snap_dist_m=h.max_snap_dist_m,
             remote_site_km=h.remote_site_km,
+            withhold_pending_review=h.withhold_pending_review,
         )
 
 

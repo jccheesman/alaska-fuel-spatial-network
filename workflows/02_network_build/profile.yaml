@@ -43,6 +43,7 @@ inventory:
   record_id:       record_id
   community_key:   community_key            # canonical label (aliases folded) from workflow 00
   community_distance: community_distance_km # km to the labelled community's boundary (workflow 00)
+  qc_status:       qc_status                 # clean | pending_review (open owner review item)
   community:       community
   delivery_method: delivery_method          # Road / Barge / Plane / "Plane or Barge" / "Plane or Road"
   capacity:        total_capacity
@@ -222,6 +223,7 @@ hubs:
   cannot_link_across_community: true    # a 50 m stack of several villages stays several sites
   max_snap_dist_m: 25000                # a hub farther than this from any road/ice-road node is left unplaced + reported
   remote_site_km: 20                    # a site farther than this from its community is its own hub (keeps its label); 0 = off
+  withhold_pending_review: true         # ON/OFF: records with an open owner review item take no part in hubs (output/01_withheld.csv)
 
 # The only noding knob the gold pipeline consumes: the R planar-cleaning precision (meters).
 topology:

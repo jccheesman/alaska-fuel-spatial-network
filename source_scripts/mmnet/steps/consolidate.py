@@ -177,6 +177,17 @@ def consolidate_facilities(
               f"{stats['by_name']} by name + {stats['by_nearest']} by nearest "
               f"(<= {fb.max_dist_m:.0f} m); {stats['remaining']} still blank")
 
+    # Withhold records under owner review (profile hubs.withhold_pending_review + inventory.qc_status):
+    # they take no part in clustering or hubs, and are listed so nothing disappears silently.
+    withheld = gdf.iloc[:0]
+    if getattr(params, "withhold_pending_review", False) and "qc_status" in gdf.columns:
+        mask = gdf["qc_status"].astype(str).str.lower().eq("pending_review")
+        withheld = gdf[mask].copy()
+        gdf = gdf[~mask].reset_index(drop=True)
+        if len(withheld):
+            print(f"[consolidate] withheld {len(withheld)} record(s) with qc_status=pending_review "
+                  f"(open owner review); see 01_withheld.csv")
+
     # Scope to routable modes BEFORE clustering (drops Unknown/blank atoms).
     gdf["delivery_method"] = gdf["delivery_method"].map(lambda v: filter_to_modes(v, modes))
     gdf = gdf[gdf["delivery_method"] != ""].reset_index(drop=True)
@@ -245,4 +256,9 @@ def consolidate_facilities(
         geometry=gpd.points_from_xy(out["x"], out["y"]),
         crs=target_crs,
     )
-    return gout.sort_values("ast_facility_id", kind="stable").reset_index(drop=True)
+    gout = gout.sort_values("ast_facility_id", kind="stable").reset_index(drop=True)
+    cols = [c for c in ("record_id", "ast_facility_id", "community_name", "delivery_method", "total_capacity", "qc_status")
+            if c in withheld.columns]
+    gout.attrs["withheld"] = pd.DataFrame(withheld[cols]).assign(
+        x=withheld.geometry.x.round(1).values, y=withheld.geometry.y.round(1).values) if len(withheld) else pd.DataFrame(columns=cols + ["x", "y"])
+    return gout

@@ -60,6 +60,11 @@ def publish(label: str) -> tuple[Path, list[tuple[str, bool, str]]]:
     fac["community_distance_km"] = fac["record_id"].map(D["own_boundary_km"])
     fac["located_in_place"] = fac["record_id"].map(D["located_in_place"])
     fac["community_relation"] = fac["record_id"].map(D["community_relation"]).fillna("untested")
+    # qc_status: pending_review while the record has an open review-queue item (06). The hub
+    # builder withholds such records (profile hubs.withhold_pending_review) — it catches, never fixes.
+    rq = out / "review_queue.csv"
+    open_ids = set(read_csv(rq)["record_id"]) if rq.exists() else set()
+    fac["qc_status"] = fac["record_id"].map(lambda i: "pending_review" if i in open_ids else "clean")
     fac["qc_release"] = label
     allowed = list(schema()["name"]) + DERIVED
     extra_before = [c for c in fac.columns if c not in allowed]
@@ -107,6 +112,7 @@ def publish(label: str) -> tuple[Path, list[tuple[str, bool, str]]]:
              f"{int((log['outcome']=='rejected').sum()) if len(log) else 0} rejected · "
              f"{int(log['outcome'].str.startswith('skipped').sum()) if len(log) else 0} skipped",
              f"- community keys: {fac['community_key'].nunique()} · unlabelled records: {int(fac['community_name'].isna().sum())}",
+             f"- qc_status: {int((fac['qc_status'] == 'clean').sum())} clean · {int((fac['qc_status'] == 'pending_review').sum())} pending_review (withheld from hubs by the build)",
              "", "## Checks", "", "| check | result | detail |", "|---|---|---|"]
     for name, ok, detail in checks:
         lines.append(f"| {name} | {'PASS' if ok else 'FAIL'} | {detail} |")
