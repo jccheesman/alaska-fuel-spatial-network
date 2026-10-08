@@ -23,10 +23,18 @@ CORRECTIONS = QC / "corrections.csv"
 ALIASES = QC / "aliases.csv"
 THRESHOLDS = QC / "thresholds.csv"
 
-# Columns the published table adds to the schema (derived at normalise/publish time).
-DERIVED = ["community_key", "delivery_barge", "delivery_plane", "delivery_road",
-           "community_distance_km", "located_in_place", "community_relation",
-           "corrections_applied", "qc_release"]
+DERIVED_COLUMNS = QC / "derived_columns.csv"
+
+
+def derived() -> pd.DataFrame:
+    """Columns the published table adds to the schema, declared in inputs/inventory_qc/derived_columns.csv
+    (name, produced_by, type, description). Adding a derived variable = add a row here + produce it
+    in the named stage; the publish step fails if a declared column is missing or an undeclared one appears."""
+    return pd.read_csv(DERIVED_COLUMNS, dtype=str).fillna("")
+
+
+# Back-compat name used by the stages.
+DERIVED = list(derived()["name"])
 
 
 def sha256(path: Path) -> str:

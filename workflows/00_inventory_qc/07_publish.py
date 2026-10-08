@@ -62,8 +62,11 @@ def publish(label: str) -> tuple[Path, list[tuple[str, bool, str]]]:
     fac["community_relation"] = fac["record_id"].map(D["community_relation"]).fillna("untested")
     fac["qc_release"] = label
     allowed = list(schema()["name"]) + DERIVED
+    extra_before = [c for c in fac.columns if c not in allowed]
     fac = fac[[c for c in allowed if c in fac.columns]]
     checks: list[tuple[str, bool, str]] = []
+    checks.append(("no undeclared derived column was produced by a stage", not extra_before,
+                   f"undeclared={extra_before} (declare it in inputs/inventory_qc/derived_columns.csv)"))
 
     ok = len(rel) == len(fac) + len(excl)
     checks.append(("row reconciliation", ok, f"{len(rel)} release = {len(fac)} clean + {len(excl)} excluded"))
@@ -75,6 +78,8 @@ def publish(label: str) -> tuple[Path, list[tuple[str, bool, str]]]:
     extra = [c for c in fac.columns if c not in allowed]
     contact = [c for c in fac.columns if any(w in c.lower() for w in CONTACT_WORDS)]
     checks.append(("only schema + derived columns; no contact columns", not extra and not contact, f"extra={extra} contact={contact}"))
+    missing_derived = [c for c in DERIVED if c not in fac.columns]
+    checks.append(("every declared derived column is present (derived_columns.csv)", not missing_derived, f"missing={missing_derived}"))
     located = fac.dropna(subset=["latitude", "longitude"])
     for desc, pred in FIXTURES:
         try:

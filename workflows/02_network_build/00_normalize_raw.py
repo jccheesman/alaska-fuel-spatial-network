@@ -34,6 +34,13 @@ TARGET_CRS = 3338
 RAW = ROOT / "data" / "raw"
 INTERIM = ROOT / "data" / "interim"
 QC_OUT = ROOT / "outputs" / "00_inventory_qc"
+QC_DERIVED = ROOT / "inputs" / "inventory_qc" / "derived_columns.csv"
+
+
+def _derived_columns() -> list[str]:
+    """Every derived column workflow 00 declares (inputs/inventory_qc/derived_columns.csv) rides into
+    the interim facilities table, so a new QC variable reaches the build without an edit here."""
+    return list(pd.read_csv(QC_DERIVED, dtype=str)["name"]) if QC_DERIVED.exists() else []
 
 
 FACILITIES_HINT = ("no published facility table under outputs/00_inventory_qc/<release>/ — "
@@ -56,10 +63,9 @@ SPEC = [
     {"name": "facilities", "kind": "table", "status": "used (inventory) — from workflow 00",
      "src": _published_facilities(),
      "rename": {"ast_facility_id": "id", "community_name": "community", "entity_name": "entity"},
-     "keep": ["id", "record_id", "community", "community_key", "entity", "delivery_method",
+     "keep": ["id", "record_id", "community", "entity", "delivery_method",
               "total_capacity", "gasoline_capacity", "diesel_capacity", "jet_fuel_capacity",
-              "other_fuel_capacity", "latitude", "longitude", "community_distance_km",
-              "located_in_place", "community_relation", "corrections_applied", "qc_release"]},
+              "other_fuel_capacity", "latitude", "longitude", *_derived_columns()]},
     # --- transport lines ---
     # The ONLY road source (2026-09-07 AK DOT&PF download, 26,650 features).
     # The GRIP4 Canada extra/border-stitch layer was removed 2026-09-15:

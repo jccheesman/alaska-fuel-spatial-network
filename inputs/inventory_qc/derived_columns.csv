@@ -1,0 +1,10 @@
+name,produced_by,type,description
+community_key,03_normalise,string,"Canonical community key: upper-case, punctuation stripped, aliases.csv folded. The hub builder groups on it"
+delivery_barge,03_normalise,bool,delivery_method mentions Barge
+delivery_plane,03_normalise,bool,delivery_method mentions Plane
+delivery_road,03_normalise,bool,delivery_method mentions Road
+community_distance_km,05_boundary_check,float,"km from the point to its labelled community's city/CDP boundary (0-ish = inside; blank = untested). Hub builder remote_site_km reads it"
+located_in_place,05_boundary_check,string,"The city/CDP polygon(s) the point physically sits in, as the boundary file names it; blank = none. The label (community_name) is the service community and is never changed"
+community_relation,05_boundary_check,string,"inside | adjacent (neighbouring place <= boundary_review_km, same town) | remote (no boundary) | elsewhere (another community's boundary > review km) | untested"
+corrections_applied,02_apply_corrections,string,;-joined fields an approved correction changed on this record
+qc_release,07_publish,string,Release label the table was published from

@@ -47,6 +47,23 @@ may alter a facility's label, position or inclusion.
   approved by the owner like a correction.
 - `outputs/00_inventory_qc/<release>/review_queue.csv|xlsx` — what the owner fills in.
 
+## The script
+
+`scripts/record_corrections.py REVIEW.xlsx` does the mechanical part of the procedure below and
+nothing more: it maps each filled `decision` to a row, reads `old_value` from the base release,
+validates values and dates, refuses to overwrite a (record_id, field) already decided, and prints
+every ambiguity as a QUESTION for the owner instead of guessing. Dry run by default; `--write`
+appends. Exit 2 = questions remain. Then run `validate-facility-inventory --publish`.
+
+```
+python .claude/skills/record-facility-corrections/scripts/record_corrections.py REVIEW.xlsx          # dry run
+python .claude/skills/record-facility-corrections/scripts/record_corrections.py REVIEW.xlsx --write  # append
+```
+
+Rule-based decisions the owner states in chat (a stack rule, a class of remote sites) are written
+by the agent as rows whose `evidence` names the rule and date, guarded where a guard exists
+(`old_value=column=value` for an exclusion).
+
 ## Procedure: a returned review queue
 
 1. **Read the decisions** (`decision`, `your_value`, `notes`, `reviewed_by`, `reviewed_on`).

@@ -57,6 +57,15 @@ python .claude/skills/validate-facility-inventory/scripts/validate_inventory.py 
 
 Exit 0 = every gating step passed. CI runs the read-only form.
 
+## Adding a derived variable (repeatable)
+
+Every column the published table adds beyond `facility_schema.csv` is declared in
+`inputs/inventory_qc/derived_columns.csv` (name, produced_by, type, description). To add one:
+(1) add its row there; (2) produce it in the named stage; (3) `--publish`. The publish step fails
+if a declared column is missing or a stage emits an undeclared one, and the network build's
+`00_normalize_raw.py` carries every declared column into the interim facilities table without an
+edit. Nothing in the chain hard-codes a derived column name.
+
 ## The chain (what each step gates)
 
 1. **`01_ingest.py --check`** — every committed release snapshot matches its manifest and (when the

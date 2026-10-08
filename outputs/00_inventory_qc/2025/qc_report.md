@@ -1,6 +1,6 @@
 # Inventory QC report — release 2025
 
-Generated 2026-10-08T22:01:31+00:00 by workflows/00_inventory_qc/07_publish.py
+Generated 2026-10-08T22:07:07+00:00 by workflows/00_inventory_qc/07_publish.py
 
 - raw release: `Utilities_Bulk_Fuel_Inventory.csv` sha256 `3fbee569c63dccf813d6fa53e608820d53b92e415feb2c7f20556fc0bb0c30b0` (1830 rows, 1767 located)
 - clean table: `facilities_clean.csv` sha256 `d96181319b1ef7372b7df599bbe0e40b6e45bb5c8941d765407c55c02660d5ed` (1803 rows, 1740 located)
@@ -12,10 +12,12 @@ Generated 2026-10-08T22:01:31+00:00 by workflows/00_inventory_qc/07_publish.py
 
 | check | result | detail |
 |---|---|---|
+| no undeclared derived column was produced by a stage | PASS | undeclared=[] (declare it in inputs/inventory_qc/derived_columns.csv) |
 | row reconciliation | PASS | 1830 release = 1803 clean + 27 excluded |
 | every exclusion has a reason | PASS | 27 excluded |
 | every applied correction has reviewer + date | PASS | 80 applied |
 | only schema + derived columns; no contact columns | PASS | extra=[] contact=[] |
+| every declared derived column is present (derived_columns.csv) | PASS | missing=[] |
 | fixture: Bethel record f000283 is not above 66°N | PASS |  |
 | fixture: no Unalaska-labelled record sits on Norton Sound (lat > 60) | PASS |  |
 | fixture: no Unalakleet-labelled record sits in the Aleutians (lat < 60) | PASS |  |
