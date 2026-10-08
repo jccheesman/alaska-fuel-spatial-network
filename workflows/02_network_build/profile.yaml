@@ -113,11 +113,13 @@ layers:
     # Stage 03 nodes it in Python by 50 m vertex-rounding (not R) and connects road + ice to it
     # by sea at ports + barge hubs, so coastal/Arctic communities join the giant.
     source: { type: file, path: data/interim/ak_waterway.gpkg }
+    snap_fallback: true      # a Barge hub with NO road/ice node within max_snap_dist_m lands here (Diomede, Port Moller)
 
   - name: airways
     mode: Plane
     edge_label: Air
     kind: line
+    snap_fallback: true      # a Plane hub with NO road/ice node within max_snap_dist_m lands on its airport node
     loader: load_airways
     # Official air-cargo network: data/raw/connectivity/air/flight_paths_combined.csv (AK DOT&PF-matched)
     # → normalize_raw → interim → prep_airways → this geojson.
@@ -221,7 +223,8 @@ hubs:
   # place name; outside every place they group by a buffer_dist blob, never by borough.
   group_by: [community]                 # delivery methods unioned (multimodal hubs)
   cannot_link_across_community: true    # a 50 m stack of several villages stays several sites
-  max_snap_dist_m: 25000                # a hub farther than this from any road/ice-road node is left unplaced + reported
+  max_snap_dist_m: 25000                # road-first: a hub farther than this from any road/ice node tries its own-mode
+                                        # snap_fallback layers (Barge -> waterway, Plane -> air), else is left unplaced + reported
   remote_site_km: 20                    # a site farther than this from its community is its own hub (keeps its label); 0 = off
   withhold_pending_review: true         # ON/OFF: records with an open owner review item take no part in hubs (output/01_withheld.csv)
 

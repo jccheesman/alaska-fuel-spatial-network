@@ -184,3 +184,43 @@ def test_withhold_pending_review_is_an_on_off_flag(tmp_path):
     assert list(on["ast_facility_id"]) == ["A"] and list(on.attrs["withheld"]["record_id"]) == ["{b}"]
     off = consolidate_facilities(p, Params(withhold_pending_review=False), 4326, 3338, cfg)
     assert len(off) == 2 and len(off.attrs["withheld"]) == 0
+
+
+# ----------------------------------------------------------------------------- road-first + own-mode fallback
+def _road_and_water():
+    road = gpd.GeoDataFrame({"type": ["Road"]}, geometry=[LineString([(0, 0), (1000, 0)])], crs=CRS)
+    water = gpd.GeoDataFrame({"type": ["Waterway"]}, geometry=[LineString([(0, 90_000), (1000, 90_000)])], crs=CRS)
+    return road, water
+
+
+def test_fallback_lands_barge_hub_on_waterway_only_when_no_road_within_cap():
+    road, water = _road_and_water()
+    hubs = _pts([(0, 10), (0, 89_500)], hub_id=["Hub_1", "Hub_2"], delivery_method=["Barge", "Barge"],
+                hub_type=["Receiver"] * 2, total_hub_capacity=[1.0, 1.0])
+    kw = dict(snap_types={"Road"}, waterway=water, waterway_label="Waterway", max_snap_dist=25_000,
+              snap_modes={"Road": "Road", "Waterway": "Barge"}, snap_fallback_types={"Waterway"})
+    _, _, s = connect_multimodal(road, hubs, {"Road"}, [], {}, **kw)
+    hs = s["hub_snaps"].set_index("hub_id")
+    assert hs.loc["Hub_1", "snap_surface"] == "Road", "a road within the cap always wins (road-first)"
+    assert hs.loc["Hub_2", "status"] == "placed" and hs.loc["Hub_2", "snap_surface"] == "Waterway"
+    assert hs.loc["Hub_2", "snap_dist_m"] == 500.0
+
+
+def test_fallback_respects_mode_and_cap():
+    road, water = _road_and_water()
+    hubs = _pts([(500, 89_500), (500, 200_000)], hub_id=["Hub_1", "Hub_2"], delivery_method=["Plane", "Barge"],
+                hub_type=["Receiver"] * 2, total_hub_capacity=[1.0, 1.0])
+    kw = dict(snap_types={"Road"}, waterway=water, waterway_label="Waterway", max_snap_dist=25_000,
+              snap_modes={"Road": "Road", "Waterway": "Barge"}, snap_fallback_types={"Waterway"})
+    _, _, s = connect_multimodal(road, hubs, {"Road"}, [], {}, **kw)
+    hs = s["hub_snaps"].set_index("hub_id")
+    assert hs.loc["Hub_1", "status"] == "unplaced:beyond_cap", "a Plane hub may not land on the waterway"
+    assert hs.loc["Hub_2", "status"] == "unplaced:beyond_cap", "the fallback is capped too"
+
+
+def test_no_fallback_types_is_legacy_behaviour():
+    road, water = _road_and_water()
+    hubs = _pts([(500, 89_500)], hub_id=["Hub_1"], delivery_method=["Barge"], hub_type=["Receiver"], total_hub_capacity=[1.0])
+    _, _, s = connect_multimodal(road, hubs, {"Road"}, [], {}, snap_types={"Road"}, waterway=water,
+                                 waterway_label="Waterway", max_snap_dist=25_000)
+    assert s["hub_snaps"].loc[0, "status"] == "unplaced:beyond_cap"

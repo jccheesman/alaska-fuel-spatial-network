@@ -84,6 +84,7 @@ class LayerSpec(_Strict):
     paths: list[str] = Field(default_factory=list)
     extra_paths: list[str] = Field(default_factory=list)
     snap_target: bool = False   # hubs snap onto this layer's nodes (the ground surface)
+    snap_fallback: bool = False  # a hub with no ground node within the cap may land here if served by this layer's mode
 
 
 class TransferSpec(_Strict):
@@ -318,6 +319,7 @@ class ProfileLayerSource(_Strict):
     source: Optional[FileSource] = None
     extra_source: Optional[FileSource] = None
     snap_target: bool = False   # hubs snap onto this layer's nodes (the ground surface)
+    snap_fallback: bool = False  # a hub with no ground node within the cap may land here if served by this layer's mode
 
 
 class HubParams(_Strict):
@@ -396,7 +398,7 @@ class RegionProfile(_Strict):
             layers.append(LayerSpec(
                 name=ls.name, mode=ls.mode, edge_label=ls.edge_label, kind=ls.kind,
                 loader=ls.loader or "load_lines", paths=paths, extra_paths=extra,
-                snap_target=ls.snap_target,
+                snap_target=ls.snap_target, snap_fallback=ls.snap_fallback,
             ))
 
         # internal facility column map (raw header -> internal snake_case) the readers expect.

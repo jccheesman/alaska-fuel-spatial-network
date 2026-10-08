@@ -415,6 +415,10 @@ def build_network(layers: list[str], out_prefix: str | Path, hubs: gpd.GeoDataFr
     road_types = {s.edge_label for s in line_specs if s.mode == "Road"}
     # ground surface(s) hubs may snap onto (profile snap_target flag); default to road.
     snap_types = {s.edge_label for s in line_specs if getattr(s, "snap_target", False)} or road_types
+    # own-mode fallback surfaces (profile snap_fallback flag) for hubs with no ground node within the
+    # cap: edge_label -> mode decides which fallback a hub may use (Barge -> waterway, Plane -> air).
+    snap_fallback = {s.edge_label for s in line_specs if getattr(s, "snap_fallback", False)}
+    snap_modes = {s.edge_label: s.mode for s in line_specs}
 
     # 2a. airport snap-to-road: move each air-leg airport endpoint onto its nearest road node (a SHARED
     #     node, no transfer edge) before the connect.
@@ -447,7 +451,8 @@ def build_network(layers: list[str], out_prefix: str | Path, hubs: gpd.GeoDataFr
                                                snap_types=snap_types, waterway=waterway,
                                                waterway_label=waterway_label, bridges=bridges,
                                                connect_max_dist=connect_max_dist,
-                                               max_snap_dist=max_snap_dist)
+                                               max_snap_dist=max_snap_dist, snap_modes=snap_modes,
+                                               snap_fallback_types=snap_fallback)
     # hub placement trail: every Stage-02 hub -> node (or why not), beside the network files.
     hs = summary.get("hub_snaps")
     if hs is not None:

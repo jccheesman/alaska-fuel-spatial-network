@@ -50,7 +50,8 @@ def connect_multimodal(r_edges: gpd.GeoDataFrame, hubs: gpd.GeoDataFrame, road_t
                        snap_types: set | None = None, node_tol: float = 1.0,
                        waterway: gpd.GeoDataFrame | None = None, waterway_label: str = "Waterway",
                        waterway_node_tol: float = 50.0, bridges: list | None = None,
-                       connect_max_dist: float = 0.0, max_snap_dist: float = 0.0):
+                       connect_max_dist: float = 0.0, max_snap_dist: float = 0.0,
+                       snap_modes: dict | None = None, snap_fallback_types: set | None = None):
     """Connect R's noded edges into one multimodal network — fast, spatial-indexed, once.
 
     This is the no-redundancy connector: R has already noded each mode's lines, so we DERIVE the
@@ -152,6 +153,23 @@ def connect_multimodal(r_edges: gpd.GeoDataFrame, hubs: gpd.GeoDataFrame, road_t
 
     snap_nodes = _nodes_subset(snap_ids)
 
+    # Road-first landing with an own-mode fallback. Every hub first tries the ground surface
+    # (`snap_types`, road ∪ ice): the AK DOT layer carries most village streets, and the last leg
+    # of any delivery is a truck. A hub with NO ground node within `max_snap_dist` then tries the
+    # `snap_fallback_types` whose mode (`snap_modes` = {edge_label: mode}) it is served by — a
+    # Barge village lands on the waterway, a fly-in village on its airport — else stays unplaced.
+    def _hub_modes(dm) -> set:
+        if dm is None or (isinstance(dm, float) and np.isnan(dm)):
+            return set()
+        return {a.strip() for a in str(dm).replace(" and ", " or ").split(" or ") if a.strip()}
+
+    fallback_types = set(snap_fallback_types or ())
+
+    def _fallback_for(dm) -> frozenset:
+        if not fallback_types or not snap_modes:
+            return frozenset()
+        return frozenset(t for t in fallback_types if snap_modes.get(t) in _hub_modes(dm))
+
     # 2. snap hubs to nearest GROUND node (road ∪ ice road), recording which surface they land on.
     #    Every hub is accounted for in summary["hub_snaps"]: placed / unplaced:beyond_cap /
     #    merged:<hub already on that node>. Two hubs picking the same node are MERGED into one node
@@ -166,11 +184,27 @@ def connect_multimodal(r_edges: gpd.GeoDataFrame, hubs: gpd.GeoDataFrame, road_t
         h = hubs[["geometry", *hub_attr_cols]].copy().reset_index(drop=True)
         j = gpd.sjoin_nearest(h, snap_nodes, how="left", distance_col="_d")
         j = j[~j.index.duplicated(keep="first")]
+        # fallback tier: hubs beyond the cap on the ground retry on their own-mode surfaces
+        if max_snap_dist and fallback_types:
+            far = j[j["_d"] > max_snap_dist]
+            hf = h.loc[far.index].copy()
+            hf["_fb"] = [_fallback_for(dm) for dm in (hf["delivery_method"] if "delivery_method" in hf else [None] * len(hf))]
+            parts = []
+            for fb, hg in hf[hf["_fb"].map(len) > 0].groupby("_fb", sort=False):
+                sub_nodes = _nodes_subset(set().union(*[ids_by_type.get(t, set()) for t in fb]))
+                if not len(sub_nodes):
+                    continue
+                jj = gpd.sjoin_nearest(hg.drop(columns="_fb"), sub_nodes, how="left", distance_col="_d")
+                parts.append(jj[~jj.index.duplicated(keep="first")])
+            if parts:
+                fbj = pd.concat(parts)
+                better = fbj[fbj["_d"] <= max_snap_dist]
+                j = pd.concat([j.drop(index=better.index), better]).sort_index()
         placed_at: dict = {}
         for _, row in j.iterrows():
             ni, d = int(row["node_id"]), float(row["_d"])
             hid = row.get("hub_id")
-            surfaces = "+".join(t for t in sorted(snap_types) if ni in ids_by_type.get(t, set())) or None
+            surfaces = "+".join(t for t in sorted(snap_types | fallback_types) if ni in ids_by_type.get(t, set())) or None
             rec = {"hub_id": hid, "node_id": ni, "snap_dist_m": round(d, 1), "snap_surface": surfaces}
             if max_snap_dist and d > max_snap_dist:
                 rec.update(node_id=None, status="unplaced:beyond_cap")
