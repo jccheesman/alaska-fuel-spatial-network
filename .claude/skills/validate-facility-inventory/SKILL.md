@@ -85,7 +85,9 @@ Exit 0 = every gating step passed. CI runs the read-only form.
 - `boundary_summary.csv` "info: outside every boundary (remote site, not reviewed)" — labelled
   sites inside NO boundary (repeaters, mines, camps, hatcheries with a home-town label). Owner
   decision 2026-10-08: never a review item; the hub builder's `remote_site_km` rule keeps a far one
-  out of the town's hub. Only `mismatch` (inside another community's boundary) is reviewed.
+  out of the town's hub. Only a `mismatch` (inside another community's boundary) farther than
+  `boundary_review_km` is reviewed; a nearer one is a neighbouring Census place of the same town
+  (Badger/North Pole, Nikiski/Kenai, Fritz Creek/Homer) and is info, never reviewed (owner 2026-10-08).
 - `review_queue.csv` has open items — that is the owner's work, not a failure. Hand the file over.
 
 ## Procedure

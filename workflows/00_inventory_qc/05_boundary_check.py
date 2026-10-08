@@ -14,7 +14,9 @@ Outcome per labelled record with coordinates:
     mismatch      inside a DIFFERENT community's boundary
     outside       inside no boundary at all, but its own boundary exists elsewhere
 Priority: review  if mismatch AND > boundary_review_km from its own boundary
-          low     mismatch nearer than that (usually a neighbouring place)
+          info    mismatch nearer than that (owner 2026-10-08): a neighbouring Census place that
+                  is part of the same town (Badger/North Pole, Nikiski/Kenai, Fritz Creek/Homer);
+                  the label and coordinates are both right — reported, never reviewed
           info    outside — NEVER reviewed (owner 2026-10-08): a labelled site outside every
                   boundary is the normal shape of a remote Alaskan facility (repeater, mine, camp,
                   hatchery) carrying its home-town label. It is reported here and its distance is
@@ -106,21 +108,24 @@ def check(label: str) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
         outcome = "mismatch" if ins else "outside"
         counts[outcome] += 1
         dist.append(dict(record_id=r.record_id, outcome=outcome, own_boundary_km=round(km, 2)))
-        priority = "info" if outcome == "outside" else ("review" if km > review_km else "low")
+        priority = "review" if (outcome == "mismatch" and km > review_km) else "info"
         covered = (f"correction:{cstat[r.record_id]}" if r.record_id in cstat.index
                    else ("exception:remote_site" if r.record_id in exc_ids else ""))
         rows.append(dict(record_id=r.record_id, community_name=r.community_name, outcome=outcome, priority=priority,
                          inside_boundary_of=", ".join(ins), own_boundary_km=round(km, 2),
                          latitude=r.latitude, longitude=r.longitude, covered_by=covered,
-                         note=("inside a neighbouring place" if outcome == "mismatch" and km <= review_km else "")))
+                         note=("inside a neighbouring place (same town)" if outcome == "mismatch" and km <= review_km
+                               else ("remote site, outside every boundary" if outcome == "outside" else ""))))
     F = pd.DataFrame(rows, columns=["record_id", "community_name", "outcome", "priority", "inside_boundary_of", "own_boundary_km",
                                     "latitude", "longitude", "covered_by", "note"])
     F = F.sort_values(["priority", "own_boundary_km"], ascending=[True, False]).reset_index(drop=True)
     S = pd.DataFrame([{"outcome": k, "records": v} for k, v in counts.items()] +
                      [{"outcome": "flagged: review", "records": int((F["priority"] == "review").sum())},
                       {"outcome": "flagged: review, not yet covered by a decision", "records": int(((F["priority"] == "review") & (F["covered_by"] == "")).sum())},
-                      {"outcome": "flagged: low", "records": int((F["priority"] == "low").sum())},
-                      {"outcome": "info: outside every boundary (remote site, not reviewed)", "records": int((F["priority"] == "info").sum())}])
+                      {"outcome": "info: inside a neighbouring place <= review km (same town, not reviewed)",
+                       "records": int(((F["priority"] == "info") & (F["outcome"] == "mismatch")).sum())},
+                      {"outcome": "info: outside every boundary (remote site, not reviewed)",
+                       "records": int(((F["priority"] == "info") & (F["outcome"] == "outside")).sum())}])
     D = pd.DataFrame(dist, columns=["record_id", "outcome", "own_boundary_km"]).sort_values("record_id").reset_index(drop=True)
     return F, S, D
 

@@ -6,5 +6,5 @@ mismatch,76
 outside,75
 flagged: review,35
 "flagged: review, not yet covered by a decision",25
-flagged: low,41
+"info: inside a neighbouring place <= review km (same town, not reviewed)",41
 "info: outside every boundary (remote site, not reviewed)",75

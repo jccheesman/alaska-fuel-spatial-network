@@ -1,6 +1,6 @@
 name,value,unit,used_by,reason,decided_on
 boundary_buffer_m,2000,m,05_boundary_check,"A record this close outside its own community boundary still counts as a match (tanks at airstrips / barge landings). 61 records match only via the buffer; none is a known error.",2026-10-06
-boundary_review_km,20,km,05_boundary_check,"A mismatch farther than this from its own boundary is 'review'; nearer is 'low' (neighbouring place). Catches 72 of 74 known errors with 121 flags (10 km: 140 flags, same catch).",2026-10-06
+boundary_review_km,20,km,05_boundary_check,"A mismatch farther than this from its own boundary is 'review'; nearer is info (a neighbouring Census place that is part of the same town, e.g. Badger/North Pole; never reviewed, owner 2026-10-08). Catches 72 of 74 known errors with 121 flags (10 km: 140 flags, same catch).",2026-10-06
 typo_match_km,3,km,04_detect.one_digit_typo,"A one-digit coordinate edit landing this close to the label's cluster is a typo candidate. The 3 confirmed typos land < 1 km; the 4 false positives matched at 4-8 km.",2026-10-06
 shared_point_m,1,m,04_detect.shared_point_labels,"Coordinates equal within this are the same point. The 51 stacked records share points to the metre.",2026-10-06
 dedup_tol_m,50,m,mmnet consolidate (existing),"Rows closer than this merge into one site. 32 cross-community merges at 50 m vs 23 at 1 m: the cannot-link rule (plan phase 5) matters more than the distance.",2026-10-06
