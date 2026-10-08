@@ -40,6 +40,9 @@ may alter a facility's label, position or inclusion.
   reviewed_on` (owner-accepted sites that sit inside ANOTHER community's boundary but are
   correctly labelled; suppresses the boundary flag only. Sites outside every boundary need no
   entry — they are never reviewed, owner 2026-10-08).
+- The clean table's `located_in_place` / `community_relation` describe where a record physically
+  sits versus its label; they are derived, never corrected. A correction changes `community_name`
+  or the coordinates; the relation re-derives on the next run.
 - `inputs/inventory_qc/thresholds.csv` — a threshold change is a config change with a reason row,
   approved by the owner like a correction.
 - `outputs/00_inventory_qc/<release>/review_queue.csv|xlsx` — what the owner fills in.

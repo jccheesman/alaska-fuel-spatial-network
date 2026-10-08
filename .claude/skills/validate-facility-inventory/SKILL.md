@@ -68,8 +68,10 @@ Exit 0 = every gating step passed. CI runs the read-only form.
 3. **`03_normalise.py`** — community keys + delivery flags; reports new spellings in `name_report.csv`.
 4. **`04_detect.py`** — the detector registry (`detectors_run.csv` says which ran / were skipped).
 5. **`05_boundary_check.py`** — labels vs city/CDP boundaries; `boundary_summary.csv`,
-   `boundary_distance.csv` (every tested record's km to its own boundary → published as
-   `community_distance_km`).
+   `boundary_distance.csv` (every located record: km to its own boundary, the polygon it sits in,
+   and the relation → published as `community_distance_km`, `located_in_place`,
+   `community_relation` = inside / adjacent / remote / elsewhere / untested). `community_name` is
+   the service community (never changed); `located_in_place` is where the point physically is.
 6. **`06_review_queue.py`** — open flags only, for the owner.
 7. **`07_publish.py`** — row reconciliation, reviewer+date on every applied correction, schema-only
    columns, regression fixtures, determinism. Fail → see the orchestrator's message; the fix is in

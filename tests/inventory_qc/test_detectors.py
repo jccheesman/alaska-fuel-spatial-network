@@ -113,8 +113,17 @@ def test_outside_is_reported_but_never_reviewed(run):
     assert len(near) and (near["priority"] == "info").all(), "a neighbouring Census place is the same town"
     assert not set(Q.loc[Q["detector"] == "boundary_mismatch", "record_id"]) & set(near["record_id"])
     assert set(Q.loc[Q["detector"] == "boundary_mismatch", "priority"]) == {"review"}
-    assert set(Bd["outcome"]) == {"match", "mismatch", "outside"}
-    assert Bd["own_boundary_km"].astype(float).ge(0).all() and Bd["record_id"].is_unique
+    assert set(Bd["outcome"]) == {"match", "mismatch", "outside", "untested"}
+    assert Bd["record_id"].is_unique and len(Bd) == run["nfac"]["latitude"].notna().sum()
+    assert set(Bd["community_relation"]) == {"inside", "adjacent", "remote", "elsewhere", "untested"}
+    rel = Bd.set_index("record_id")["community_relation"]
+    assert (rel[out["record_id"]] == "remote").all()
+    far = Bf[(Bf["outcome"] == "mismatch") & (Bf["priority"] == "review")]["record_id"]
+    assert (rel[far] == "elsewhere").all()
+    # located_in_place is where the point physically sits; the label is untouched
+    n = run["nfac"].set_index("record_id")
+    kenai = Bd[(Bd["located_in_place"] == "Nikiski") & (n.loc[Bd["record_id"], "community_name"].values == "Kenai")]
+    assert len(kenai) and set(kenai["community_relation"]) == {"adjacent"}
 
 
 def test_review_queue_excludes_decided_records(run):

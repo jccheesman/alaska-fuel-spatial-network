@@ -8,7 +8,7 @@ uscg_id,string,,no,US Coast Guard id
 tank_farm_id,int,,no,AEA tank-farm id; drives the shared-farm-id detector
 tank_farm_evaluation_id,int,,no,AEA tank-farm assessment id
 community_id,string,,no,DCRA community GUID; matches City_Boundaries.CommunityI
-community_name,string,,no,Community label as published (corrected by corrections.csv; normalised by aliases.csv)
+community_name,string,,no,"Community label as published = the SERVICE community (corrected by corrections.csv; normalised by aliases.csv). Where the point physically sits is the derived located_in_place; community_relation summarises the two"
 entity_name,string,,no,Facility / organisation name (kept by owner decision 2026-10-06)
 street_address,string,,no,Facility street address (kept by owner decision 2026-10-06)
 postal_code,zip,,no,Facility ZIP code

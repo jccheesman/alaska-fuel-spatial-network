@@ -27,8 +27,19 @@ Records listed in inputs/inventory_qc/remote_sites.csv (owner-accepted remote si
 records with a pending/approved correction are reported as covered, not re-raised.
 
 Writes outputs/00_inventory_qc/<release>/flags_boundary.csv (flagged records only),
-boundary_distance.csv (EVERY tested record: outcome + km to its own boundary; the publish step
-carries the km into the clean table) and boundary_summary.csv (counts per outcome, incl. untested).
+boundary_distance.csv (EVERY located record: outcome, km to its own boundary, the city/CDP polygon
+the point physically sits in, and the derived relation — the publish step carries the last three
+into the clean table as `community_distance_km`, `located_in_place`, `community_relation`) and
+boundary_summary.csv (counts per outcome, incl. untested).
+
+The published pair `community_name` (the labelled = service community, what the hub builder groups
+on) vs `located_in_place` (where the point physically is) records the difference instead of
+resolving it. `community_relation` summarises it per record:
+    inside     in, or within boundary_buffer_m of, its own community's boundary
+    adjacent   inside a neighbouring place <= boundary_review_km away (same town; Badger/North Pole)
+    remote     inside no boundary at all (a remote site with its home-town label)
+    elsewhere  inside another community's boundary > boundary_review_km away (one of the two is wrong)
+    untested   no label, or the labelled community has no boundary in the files
 
 Run:  python workflows/00_inventory_qc/05_boundary_check.py [--release 2025]
 """
@@ -91,23 +102,27 @@ def check(label: str) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
     counts = {"untested: no label": 0, "untested: no boundary for this community": 0, "match": 0, "mismatch": 0, "outside": 0}
     for r in G.itertuples():
         key = r.community_key
+        ins = inside_names.get(r.record_id, [])
+        located = ", ".join(ins)                    # the city/CDP polygon(s) the point physically sits in
         if not isinstance(key, str):
             counts["untested: no label"] += 1
+            dist.append(dict(record_id=r.record_id, outcome="untested", own_boundary_km="", located_in_place=located, community_relation="untested"))
             continue
         own = by_guid.get(r.community_id) if isinstance(r.community_id, str) and r.community_id in by_guid else by_key.get(key)
         if own is None:
             counts["untested: no boundary for this community"] += 1
+            dist.append(dict(record_id=r.record_id, outcome="untested", own_boundary_km="", located_in_place=located, community_relation="untested"))
             continue
         d = own.distance(r.geometry)
         km = d / 1000
         if d <= buf_m:
             counts["match"] += 1
-            dist.append(dict(record_id=r.record_id, outcome="match", own_boundary_km=round(km, 2)))
+            dist.append(dict(record_id=r.record_id, outcome="match", own_boundary_km=round(km, 2), located_in_place=located, community_relation="inside"))
             continue
-        ins = inside_names.get(r.record_id, [])
         outcome = "mismatch" if ins else "outside"
         counts[outcome] += 1
-        dist.append(dict(record_id=r.record_id, outcome=outcome, own_boundary_km=round(km, 2)))
+        relation = "remote" if outcome == "outside" else ("adjacent" if km <= review_km else "elsewhere")
+        dist.append(dict(record_id=r.record_id, outcome=outcome, own_boundary_km=round(km, 2), located_in_place=located, community_relation=relation))
         priority = "review" if (outcome == "mismatch" and km > review_km) else "info"
         covered = (f"correction:{cstat[r.record_id]}" if r.record_id in cstat.index
                    else ("exception:remote_site" if r.record_id in exc_ids else ""))
@@ -126,7 +141,7 @@ def check(label: str) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
                        "records": int(((F["priority"] == "info") & (F["outcome"] == "mismatch")).sum())},
                       {"outcome": "info: outside every boundary (remote site, not reviewed)",
                        "records": int(((F["priority"] == "info") & (F["outcome"] == "outside")).sum())}])
-    D = pd.DataFrame(dist, columns=["record_id", "outcome", "own_boundary_km"]).sort_values("record_id").reset_index(drop=True)
+    D = pd.DataFrame(dist, columns=["record_id", "outcome", "own_boundary_km", "located_in_place", "community_relation"]).sort_values("record_id").reset_index(drop=True)
     return F, S, D
 
 

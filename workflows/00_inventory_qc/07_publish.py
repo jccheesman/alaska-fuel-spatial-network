@@ -53,9 +53,13 @@ def publish(label: str) -> tuple[Path, list[tuple[str, bool, str]]]:
     log = read_csv(out / "corrections_log.csv")
     # km from the record to its own community's boundary (05_boundary_check): 0-ish = inside,
     # blank = untested (no label / no boundary). The hub builder's remote-site rule reads it.
+    # `located_in_place` = the city/CDP polygon the point physically sits in; `community_relation`
+    # = inside / adjacent / remote / elsewhere / untested (see 05). The label is never changed.
     bd = out / "boundary_distance.csv"
-    dist = read_csv(bd).set_index("record_id")["own_boundary_km"] if bd.exists() else pd.Series(dtype=str)
-    fac["community_distance_km"] = fac["record_id"].map(dist)
+    D = read_csv(bd).set_index("record_id") if bd.exists() else pd.DataFrame(columns=["own_boundary_km", "located_in_place", "community_relation"])
+    fac["community_distance_km"] = fac["record_id"].map(D["own_boundary_km"])
+    fac["located_in_place"] = fac["record_id"].map(D["located_in_place"])
+    fac["community_relation"] = fac["record_id"].map(D["community_relation"]).fillna("untested")
     fac["qc_release"] = label
     allowed = list(schema()["name"]) + DERIVED
     fac = fac[[c for c in allowed if c in fac.columns]]
