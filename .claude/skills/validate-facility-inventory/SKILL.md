@@ -67,7 +67,9 @@ Exit 0 = every gating step passed. CI runs the read-only form.
    via `record-facility-corrections`.
 3. **`03_normalise.py`** — community keys + delivery flags; reports new spellings in `name_report.csv`.
 4. **`04_detect.py`** — the detector registry (`detectors_run.csv` says which ran / were skipped).
-5. **`05_boundary_check.py`** — labels vs city/CDP boundaries; `boundary_summary.csv`.
+5. **`05_boundary_check.py`** — labels vs city/CDP boundaries; `boundary_summary.csv`,
+   `boundary_distance.csv` (every tested record's km to its own boundary → published as
+   `community_distance_km`).
 6. **`06_review_queue.py`** — open flags only, for the owner.
 7. **`07_publish.py`** — row reconciliation, reviewer+date on every applied correction, schema-only
    columns, regression fixtures, determinism. Fail → see the orchestrator's message; the fix is in
@@ -80,6 +82,10 @@ Exit 0 = every gating step passed. CI runs the read-only form.
 - `boundary_summary.csv` "untested: no boundary for this community" — Anchorage, Juneau, Sitka,
   Wrangell, military bases, unincorporated places without a CDP. Kept as labelled by owner decision
   (2026-10-06); not a defect.
+- `boundary_summary.csv` "info: outside every boundary (remote site, not reviewed)" — labelled
+  sites inside NO boundary (repeaters, mines, camps, hatcheries with a home-town label). Owner
+  decision 2026-10-08: never a review item; the hub builder's `remote_site_km` rule keeps a far one
+  out of the town's hub. Only `mismatch` (inside another community's boundary) is reviewed.
 - `review_queue.csv` has open items — that is the owner's work, not a failure. Hand the file over.
 
 ## Procedure

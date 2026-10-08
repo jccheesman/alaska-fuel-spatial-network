@@ -37,8 +37,9 @@ may alter a facility's label, position or inclusion.
 - `inputs/inventory_qc/aliases.csv` — `variant, canonical, basis, decided_on` (name normalisation
   for a community spelled several ways; applied AFTER corrections).
 - `inputs/inventory_qc/remote_sites.csv` — `record_id, community_name, reason, reviewer,
-  reviewed_on` (owner-accepted sites far outside their community's boundary; suppresses the
-  boundary flag only).
+  reviewed_on` (owner-accepted sites that sit inside ANOTHER community's boundary but are
+  correctly labelled; suppresses the boundary flag only. Sites outside every boundary need no
+  entry — they are never reviewed, owner 2026-10-08).
 - `inputs/inventory_qc/thresholds.csv` — a threshold change is a config change with a reason row,
   approved by the owner like a correction.
 - `outputs/00_inventory_qc/<release>/review_queue.csv|xlsx` — what the owner fills in.

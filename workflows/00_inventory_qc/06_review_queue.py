@@ -33,6 +33,7 @@ def build(label: str) -> pd.DataFrame:
     S = S.assign(source="structural", priority=S["severity"],
                  suggestion=np.where(S["suggested_value"].notna(), S["suggested_field"].fillna("") + " -> " + S["suggested_value"].fillna(""), ""))
     B = read_csv(out / "flags_boundary.csv")
+    B = B[B["priority"] != "info"]                 # 'outside' is a remote site, never a review item
     B = B.assign(source="boundary", detector="boundary_" + B["outcome"], priority=B["priority"],
                  detail=("inside " + B["inside_boundary_of"].fillna("no boundary") + "; " + B["own_boundary_km"].astype(str) + " km from own boundary"),
                  group_key="", suggestion="")

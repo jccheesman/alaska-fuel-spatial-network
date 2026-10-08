@@ -36,9 +36,9 @@ def run(tmp_path_factory):
     qc.write_csv(fac, tmp / LABEL / "facilities_corrected.csv"); qc.write_csv(excl, tmp / LABEL / "excluded.csv"); qc.write_csv(log, tmp / LABEL / "corrections_log.csv")
     nfac, _ = norm_mod.normalise(LABEL); qc.write_csv(nfac, tmp / LABEL / "facilities_normalised.csv")
     F, ran = det_mod.run(LABEL); qc.write_csv(F, tmp / LABEL / "flags_structural.csv")
-    Bf, Bs = bnd_mod.check(LABEL); qc.write_csv(Bf, tmp / LABEL / "flags_boundary.csv")
+    Bf, Bs, Bd = bnd_mod.check(LABEL); qc.write_csv(Bf, tmp / LABEL / "flags_boundary.csv"); qc.write_csv(Bd, tmp / LABEL / "boundary_distance.csv")
     Q = rq_mod.build(LABEL)
-    return dict(nfac=nfac, F=F, ran=ran, Bf=Bf, Bs=Bs, Q=Q)
+    return dict(nfac=nfac, F=F, ran=ran, Bf=Bf, Bs=Bs, Bd=Bd, Q=Q)
 
 
 def test_every_detector_ran(run):
@@ -84,6 +84,18 @@ def test_boundary_review_flags_catch_known_pending_cases(run):
     Bf = run["Bf"]
     craig = Bf[Bf["community_name"] == "Craig"]
     assert len(craig) and (craig["covered_by"] == "correction:pending").any()
+
+
+def test_outside_is_reported_but_never_reviewed(run):
+    """Owner 2026-10-08: a labelled site outside every boundary is a remote site, not a review item.
+    It stays in the flags (priority info) and its distance is published for the hub builder."""
+    Bf, Bd, Q = run["Bf"], run["Bd"], run["Q"]
+    out = Bf[Bf["outcome"] == "outside"]
+    assert len(out) and (out["priority"] == "info").all()
+    assert not (Q["detector"] == "boundary_outside").any()
+    assert (Q["detector"] == "boundary_mismatch").any(), "mismatches (inside another community) are still reviewed"
+    assert set(Bd["outcome"]) == {"match", "mismatch", "outside"}
+    assert Bd["own_boundary_km"].astype(float).ge(0).all() and Bd["record_id"].is_unique
 
 
 def test_review_queue_excludes_decided_records(run):

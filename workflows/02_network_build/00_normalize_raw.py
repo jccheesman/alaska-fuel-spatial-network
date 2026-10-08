@@ -58,7 +58,8 @@ SPEC = [
      "rename": {"ast_facility_id": "id", "community_name": "community", "entity_name": "entity"},
      "keep": ["id", "record_id", "community", "community_key", "entity", "delivery_method",
               "total_capacity", "gasoline_capacity", "diesel_capacity", "jet_fuel_capacity",
-              "other_fuel_capacity", "latitude", "longitude", "corrections_applied", "qc_release"]},
+              "other_fuel_capacity", "latitude", "longitude", "community_distance_km",
+              "corrections_applied", "qc_release"]},
     # --- transport lines ---
     # The ONLY road source (2026-09-07 AK DOT&PF download, 26,650 features).
     # The GRIP4 Canada extra/border-stitch layer was removed 2026-09-15:

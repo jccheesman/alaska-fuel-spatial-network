@@ -42,6 +42,7 @@ inventory:
   id:              id
   record_id:       record_id
   community_key:   community_key            # canonical label (aliases folded) from workflow 00
+  community_distance: community_distance_km # km to the labelled community's boundary (workflow 00)
   community:       community
   delivery_method: delivery_method          # Road / Barge / Plane / "Plane or Barge" / "Plane or Road"
   capacity:        total_capacity
@@ -220,6 +221,7 @@ hubs:
   group_by: [community]                 # delivery methods unioned (multimodal hubs)
   cannot_link_across_community: true    # a 50 m stack of several villages stays several sites
   max_snap_dist_m: 25000                # a hub farther than this from any road/ice-road node is left unplaced + reported
+  remote_site_km: 20                    # a site farther than this from its community is its own hub (keeps its label); 0 = off
 
 # The only noding knob the gold pipeline consumes: the R planar-cleaning precision (meters).
 topology:

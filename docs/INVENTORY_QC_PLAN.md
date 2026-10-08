@@ -100,7 +100,7 @@ Order matters: corrections are keyed by `record_id` and must be applied **before
 | 2 | **Apply corrections** | correction integrity | an `approved` row's `old_value` no longer matches (AEA fixed it, or the key moved) → reported, not applied; a `pending`/`rejected` row is never applied |
 | 3 | **Normalise** | label coverage | a label maps to nothing in `aliases.csv` or the boundary names → reported as "new community name" |
 | 4 | **Detect** | structural checks | any detector finds a record not already covered by an approved correction or exception |
-| 5 | **Boundary check** | label/position agreement | a labelled record sits inside another community's boundary, or >20 km outside its own; communities without a boundary produce no rows |
+| 5 | **Boundary check** | label/position agreement | a labelled record sits inside another community's boundary (`mismatch`, reviewable); one inside no boundary at all (`outside`) is info only — a remote site with its home-town label (owner 2026-10-08) — and its km is published as `community_distance_km`; communities without a boundary produce no rows |
 | 6 | **Review queue** | — | writes `review.xlsx`; never fails |
 | 7 | **Publish** | output contract | any publish check below fails. Output: `outputs/00_inventory_qc/<release>/` — `facilities_clean.csv` (tracked; CSV so it diffs), `qc_report.md`, `corrections_log.csv`, `excluded.csv`, `name_report.csv` |
 
@@ -196,6 +196,7 @@ Not touched: `inputs/bulk_fuel_data/` extraction target, `data/`, the network of
 2. **Gateway file (ACEP `public_bulk_fuel`): evidence only** for now. Its rows are used by the `external_disagrees` detector and the `public_says` column, never merged into the facility table. Whether to adopt its 295 AEA-2024 assessment rows is a later, separate decision (they lack ids and may duplicate older farm rows).
 3. **Review decisions:** the owner's `corrections_decisions.xlsx` (2026-10-06) seeded `inputs/inventory_qc/corrections.csv`: 53 approved rows (37 labels, 8 coordinate pairs), 2 rejected, 8 pending (7 open questions + the Delta Junction→Healy Lake confirm).
 4. **Borough boundaries: not used.** Communities without a city or CDP boundary are skipped by the check and kept as labelled.
+6. **Outside every boundary is not a review item (2026-10-08).** Of 76 `outside` rows only one was a copied coordinate (caught anyway by `shared_point_labels`); the rest are repeaters, radar sites, mines, camps and hatcheries correctly labelled with the nearest town. They leave the queue (268 → 195 rows). What matters for them is hub membership, not the label, so the hub builder's `remote_site_km` (20 km, profile) gives a far site its own hub instead of dragging the town's centroid; the 61 `mismatch` rows beyond 20 km stay in the queue and are isolated the same way until decided.
 5. **Thresholds: approved** as in the table below (typo radius lowered to 3 km); each lives in `inputs/inventory_qc/thresholds.csv` with its reason, and changing one is a config change reviewed like a correction.
 
 ### Thresholds

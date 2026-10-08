@@ -13,13 +13,20 @@ Outcome per labelled record with coordinates:
     match         inside, or within boundary_buffer_m of, its own community's boundary -> no flag
     mismatch      inside a DIFFERENT community's boundary
     outside       inside no boundary at all, but its own boundary exists elsewhere
-Priority: review  if mismatch/outside AND > boundary_review_km from its own boundary
-          low     otherwise (usually a neighbouring place)
+Priority: review  if mismatch AND > boundary_review_km from its own boundary
+          low     mismatch nearer than that (usually a neighbouring place)
+          info    outside — NEVER reviewed (owner 2026-10-08): a labelled site outside every
+                  boundary is the normal shape of a remote Alaskan facility (repeater, mine, camp,
+                  hatchery) carrying its home-town label. It is reported here and its distance is
+                  published as `community_distance_km` so the hub builder can keep a far site out of
+                  the town's hub centroid (profile `hubs.remote_site_km`). The copied-coordinate
+                  error that can hide in this class is caught by the shared_point detector.
 Records listed in inputs/inventory_qc/remote_sites.csv (owner-accepted remote sites) and
 records with a pending/approved correction are reported as covered, not re-raised.
 
-Writes outputs/00_inventory_qc/<release>/flags_boundary.csv (flagged records only) and
-boundary_summary.csv (counts per outcome, incl. untested).
+Writes outputs/00_inventory_qc/<release>/flags_boundary.csv (flagged records only),
+boundary_distance.csv (EVERY tested record: outcome + km to its own boundary; the publish step
+carries the km into the clean table) and boundary_summary.csv (counts per outcome, incl. untested).
 
 Run:  python workflows/00_inventory_qc/05_boundary_check.py [--release 2025]
 """
@@ -55,7 +62,8 @@ def load_boundaries() -> gpd.GeoDataFrame:
     return b
 
 
-def check(label: str) -> tuple[pd.DataFrame, pd.DataFrame]:
+def check(label: str) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
+    """Returns (flags, summary, distance) — see the module docstring."""
     th = thresholds()
     buf_m, review_km = th["boundary_buffer_m"], th["boundary_review_km"]
     fac = read_csv(OUT / label / "facilities_normalised.csv")
@@ -77,7 +85,8 @@ def check(label: str) -> tuple[pd.DataFrame, pd.DataFrame]:
     exc = pd.read_csv(QC / "remote_sites.csv", dtype=str, keep_default_na=False) if (QC / "remote_sites.csv").exists() else pd.DataFrame(columns=["record_id"])
     exc_ids = set(exc["record_id"])
 
-    rows, counts = [], {"untested: no label": 0, "untested: no boundary for this community": 0, "match": 0, "mismatch": 0, "outside": 0}
+    rows, dist = [], []
+    counts = {"untested: no label": 0, "untested: no boundary for this community": 0, "match": 0, "mismatch": 0, "outside": 0}
     for r in G.itertuples():
         key = r.community_key
         if not isinstance(key, str):
@@ -87,15 +96,17 @@ def check(label: str) -> tuple[pd.DataFrame, pd.DataFrame]:
         if own is None:
             counts["untested: no boundary for this community"] += 1
             continue
-        dist = own.distance(r.geometry)
-        if dist <= buf_m:
+        d = own.distance(r.geometry)
+        km = d / 1000
+        if d <= buf_m:
             counts["match"] += 1
+            dist.append(dict(record_id=r.record_id, outcome="match", own_boundary_km=round(km, 2)))
             continue
         ins = inside_names.get(r.record_id, [])
         outcome = "mismatch" if ins else "outside"
         counts[outcome] += 1
-        km = dist / 1000
-        priority = "review" if km > review_km else "low"
+        dist.append(dict(record_id=r.record_id, outcome=outcome, own_boundary_km=round(km, 2)))
+        priority = "info" if outcome == "outside" else ("review" if km > review_km else "low")
         covered = (f"correction:{cstat[r.record_id]}" if r.record_id in cstat.index
                    else ("exception:remote_site" if r.record_id in exc_ids else ""))
         rows.append(dict(record_id=r.record_id, community_name=r.community_name, outcome=outcome, priority=priority,
@@ -108,8 +119,10 @@ def check(label: str) -> tuple[pd.DataFrame, pd.DataFrame]:
     S = pd.DataFrame([{"outcome": k, "records": v} for k, v in counts.items()] +
                      [{"outcome": "flagged: review", "records": int((F["priority"] == "review").sum())},
                       {"outcome": "flagged: review, not yet covered by a decision", "records": int(((F["priority"] == "review") & (F["covered_by"] == "")).sum())},
-                      {"outcome": "flagged: low", "records": int((F["priority"] == "low").sum())}])
-    return F, S
+                      {"outcome": "flagged: low", "records": int((F["priority"] == "low").sum())},
+                      {"outcome": "info: outside every boundary (remote site, not reviewed)", "records": int((F["priority"] == "info").sum())}])
+    D = pd.DataFrame(dist, columns=["record_id", "outcome", "own_boundary_km"]).sort_values("record_id").reset_index(drop=True)
+    return F, S, D
 
 
 def main(argv=None) -> int:
@@ -117,9 +130,10 @@ def main(argv=None) -> int:
     ap.add_argument("--release", default=None)
     a = ap.parse_args(argv)
     label = a.release or latest_release()
-    F, S = check(label)
+    F, S, D = check(label)
     write_csv(F, OUT / label / "flags_boundary.csv")
     write_csv(S, OUT / label / "boundary_summary.csv")
+    write_csv(D, OUT / label / "boundary_distance.csv")
     for r in S.itertuples():
         print(f"  {r.outcome:52s} {r.records:5d}")
     return 0

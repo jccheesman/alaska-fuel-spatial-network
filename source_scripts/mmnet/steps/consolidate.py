@@ -224,6 +224,8 @@ def consolidate_facilities(
             rec["n_members"] = int(len(grp))
         for col in cap_cols:
             rec[col] = _max_or_nan(grp[col]) if col in grp.columns else np.nan
+        if "community_distance_km" in grp.columns:
+            rec["community_distance_km"] = _max_or_nan(pd.to_numeric(grp["community_distance_km"], errors="coerce"))
         rows.append(rec)
 
     out = pd.DataFrame(rows)

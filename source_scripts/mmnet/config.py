@@ -251,6 +251,7 @@ class Params(_Strict):
     tagging_enabled: bool = True
     cannot_link_across_community: bool = False
     max_snap_dist_m: float = 0.0
+    remote_site_km: float = 0.0
 
 
 # --------------------------------------------------------------------------- RegionProfile
@@ -281,6 +282,7 @@ class InventorySpec(_Strict):
     type: Optional[str] = None
     record_id: Optional[str] = None      # stable per-record id; carried through consolidation as the site-member trail
     community_key: Optional[str] = None  # canonical community key (aliases folded); hub grouping + cannot-link use it
+    community_distance: Optional[str] = None  # km from the record to its labelled community (workflow 00); remote-site rule
     extra_capacity: list[str] = Field(default_factory=list)
     delivery_method_fallback: Optional[DeliveryFallback] = None   # fill blank modes from a community layer
 
@@ -330,6 +332,10 @@ class HubParams(_Strict):
     # Hubs displaced farther than this when snapped onto the ground surface are NOT placed
     # (reported in output/02_hub_snaps.csv). 0 = no cap (legacy behaviour).
     max_snap_dist_m: float = 0.0
+    # A site farther than this (km, `inventory.community_distance`) from its labelled community
+    # becomes its OWN hub (hub_kind=remote_site) instead of pulling the town's hub centroid.
+    # 0 = off. Remote repeaters, mines, camps and hatcheries keep their home-town label.
+    remote_site_km: float = 0.0
 
 
 class TopologyParams(_Strict):
@@ -402,6 +408,8 @@ class RegionProfile(_Strict):
             facility_columns[inv.record_id] = "record_id"
         if inv.community_key:
             facility_columns[inv.community_key] = "community_key"
+        if inv.community_distance:
+            facility_columns[inv.community_distance] = "community_distance_km"
         capacity_columns = ["total_capacity"]
         for extra in inv.extra_capacity:
             internal = _snake(extra)
@@ -460,6 +468,7 @@ class RegionProfile(_Strict):
             tagging_enabled=self.tagging.enabled,
             cannot_link_across_community=h.cannot_link_across_community,
             max_snap_dist_m=h.max_snap_dist_m,
+            remote_site_km=h.remote_site_km,
         )
 
 

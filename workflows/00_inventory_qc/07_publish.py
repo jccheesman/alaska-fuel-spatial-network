@@ -21,6 +21,7 @@ import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
+import pandas as pd
 
 from _qc import DERIVED, OUT, RELEASES, corrections, latest_release, read_csv, release_manifest, schema, write_csv
 
@@ -50,6 +51,11 @@ def publish(label: str) -> tuple[Path, list[tuple[str, bool, str]]]:
     fac = read_csv(out / "facilities_normalised.csv")
     excl = read_csv(out / "excluded.csv")
     log = read_csv(out / "corrections_log.csv")
+    # km from the record to its own community's boundary (05_boundary_check): 0-ish = inside,
+    # blank = untested (no label / no boundary). The hub builder's remote-site rule reads it.
+    bd = out / "boundary_distance.csv"
+    dist = read_csv(bd).set_index("record_id")["own_boundary_km"] if bd.exists() else pd.Series(dtype=str)
+    fac["community_distance_km"] = fac["record_id"].map(dist)
     fac["qc_release"] = label
     allowed = list(schema()["name"]) + DERIVED
     fac = fac[[c for c in allowed if c in fac.columns]]

@@ -146,3 +146,22 @@ def test_two_hubs_on_one_node_merge_instead_of_overwriting():
     assert n0["hub_id"] == "Hub_1+Hub_2" and n0["total_hub_capacity"] == 30.0
     assert n0["delivery_method"] == "Barge or Road" and n0["hub_type"] == "Supplier"
     assert s["n_hubs"] == 2 and len(hs) == 3, "every hub is accounted for"
+
+
+# ----------------------------------------------------------------------------- remote-site rule
+def test_remote_site_forms_its_own_hub_but_keeps_its_label():
+    g = _tagged([(0, 0), (100, 0), (300_000, 0)], community_name=["Prudhoe Bay"] * 3,
+                community_distance_km=[0.0, 0.0, 1078.2])
+    hubs = aggregate_hubs(g, Params(group_by=["community"], remote_site_km=20))
+    assert len(hubs) == 2
+    by = hubs.set_index("hub_key")
+    assert by.loc["PRUDHOE BAY", "num_facilities"] == 2 and by.loc["PRUDHOE BAY", "hub_kind"] == "community"
+    assert by.loc["remote:2", "hub_kind"] == "remote_site" and by.loc["remote:2", "hub_community"] == "Prudhoe Bay"
+    assert abs(by.loc["PRUDHOE BAY"].geometry.x - 50) < 1e-6, "the town hub no longer drags toward the remote site"
+
+
+def test_remote_site_rule_off_by_default_and_without_distance():
+    g = _tagged([(0, 0), (300_000, 0)], community_name=["Prudhoe Bay"] * 2, community_distance_km=[0.0, 1078.2])
+    assert len(aggregate_hubs(g, Params(group_by=["community"]))) == 1
+    g2 = _tagged([(0, 0), (300_000, 0)], community_name=["Prudhoe Bay"] * 2)
+    assert len(aggregate_hubs(g2, Params(group_by=["community"], remote_site_km=20))) == 1

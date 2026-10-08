@@ -84,6 +84,7 @@ def _dedup_colocated(hubs: gpd.GeoDataFrame, tol: float) -> gpd.GeoDataFrame:
             "total_hub_capacity": float(g["total_hub_capacity"].sum(skipna=True)),
             "hub_community": g["hub_community"].iloc[0],
             "hub_key": g["hub_key"].iloc[0] if "hub_key" in g else None,
+            "hub_kind": g["hub_kind"].iloc[0] if "hub_kind" in g else None,
             "member_site_ids": (";".join(s for s in g["member_site_ids"].dropna().astype(str) if s)
                                 if "member_site_ids" in g else None),
             "hub_city": g["hub_city"].iloc[0] if "hub_city" in g else None,
@@ -244,10 +245,23 @@ def aggregate_hubs(facilities: gpd.GeoDataFrame, params: Params) -> gpd.GeoDataF
         in_place = fac["place_name"] if "place_name" in fac.columns else pd.Series(pd.NA, index=fac.index)
         key = key.where(key.notna(), _canon_series(in_place))
         unplaced = key.isna()
+        kind = pd.Series(np.where(unplaced, "blob", "community"), index=fac.index, dtype=object)
+        key = key.astype(object)
         if unplaced.any():
-            key = key.astype(object)
             key[unplaced] = _blob_keys(fac[unplaced], float(params.buffer_dist))
+        # Remote-site rule (params.remote_site_km, 0 = off): a labelled site farther than this from
+        # its community (workflow 00's community_distance_km) is its OWN hub. It keeps its label
+        # (hub_community) but no longer drags the town's hub centroid hundreds of km.
+        rk = float(getattr(params, "remote_site_km", 0) or 0)
+        if rk > 0 and "community_distance_km" in fac.columns:
+            far = pd.to_numeric(fac["community_distance_km"], errors="coerce") > rk
+            far &= ~unplaced
+            if far.any():
+                key[far] = "remote:" + fac.loc[far, "ast_facility_id"].astype(str)
+                kind[far] = "remote_site"
+                print(f"[hubs] {int(far.sum())} remote site(s) > {rk:.0f} km from their community form their own hub")
         fac["_community"] = key
+        fac["_hub_kind"] = kind
         # display label: the first inventory spelling of the group (falls back to the key itself)
         disp = fac["assigned_community"] if "assigned_community" in fac.columns else fac["_community"]
         fac["_community_label"] = disp.where(disp.notna(), fac["_community"])
@@ -269,6 +283,7 @@ def aggregate_hubs(facilities: gpd.GeoDataFrame, params: Params) -> gpd.GeoDataF
                 "total_hub_capacity": float(g["total_capacity"].sum(skipna=True)),
                 "hub_community": g["_community_label"].iloc[0],
                 "hub_key": g["_community"].iloc[0],
+                "hub_kind": g["_hub_kind"].iloc[0],
                 "member_site_ids": ";".join(g["ast_facility_id"].astype(str)) if "ast_facility_id" in g else None,
                 "hub_city": g["place_name"].iloc[0] if "place_name" in g else None,
                 "hub_region": (g["region_name"].iloc[0] if region_is_key

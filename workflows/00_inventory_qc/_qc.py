@@ -25,7 +25,7 @@ THRESHOLDS = QC / "thresholds.csv"
 
 # Columns the published table adds to the schema (derived at normalise/publish time).
 DERIVED = ["community_key", "delivery_barge", "delivery_plane", "delivery_road",
-           "corrections_applied", "qc_release"]
+           "community_distance_km", "corrections_applied", "qc_release"]
 
 
 def sha256(path: Path) -> str:
