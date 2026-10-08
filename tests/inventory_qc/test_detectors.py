@@ -46,11 +46,26 @@ def test_every_detector_ran(run):
 
 
 def test_shared_farm_ids_found_with_own_record_named(run):
-    F = run["F"]; s = F[F["detector"] == "shared_farm_id"]
+    """Stack rule (owner 2026-10-08): a farm with a matching own record keeps that row and its
+    same-capacity copies are excluded, so farms 108 (Aniak) and 377 (Brevig Mission) no longer
+    stack; the four orphan farms (no matching row) stay flagged for the decision queue."""
+    F, n = run["F"], run["nfac"]
+    s = F[F["detector"] == "shared_farm_id"]
     farms = set(s["group_key"])
-    assert {"farm:710", "farm:108", "farm:377"} <= farms           # Atmautluak, Aniak, Brevig Mission stacks
-    assert (s[s["group_key"] == "farm:108"]["severity"] == "info").sum() == 1   # Aniak's own record
+    assert {"farm:710", "farm:179", "farm:415", "farm:694"} <= farms          # orphan farms, undecided
+    assert not {"farm:108", "farm:377"} & farms                                 # resolved by exclusion
+    assert (n["tank_farm_id"] == "108").sum() == 1 and n[n["tank_farm_id"] == "108"]["community_name"].iloc[0] == "Aniak"
     assert "NO record labelled" in " ".join(s[s["group_key"] == "farm:710"]["detail"])
+    assert (s["severity"] == "info").sum() == 0, "no orphan farm has an own record"
+
+
+def test_guarded_exclusion_retires_when_farm_id_changes(run):
+    """An exclude row with old_value 'tank_farm_id=N' is skipped (not applied) once upstream changes N."""
+    corr = qc.corrections()
+    ex = corr[(corr["field"] == "exclude") & corr["old_value"].str.startswith("tank_farm_id=")]
+    assert len(ex) == 27
+    fac = qc.read_release(LABEL).set_index("record_id")
+    assert all(str(fac.at[r.record_id, "tank_farm_id"]) == r.old_value.split("=")[1] for r in ex.itertuples())
 
 
 def test_corrected_errors_are_no_longer_flagged(run):

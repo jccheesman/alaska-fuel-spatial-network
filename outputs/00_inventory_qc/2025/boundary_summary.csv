@@ -2,9 +2,9 @@ outcome,records
 untested: no label,97
 untested: no boundary for this community,146
 match,1346
-mismatch,102
-outside,76
-flagged: review,61
-"flagged: review, not yet covered by a decision",49
+mismatch,76
+outside,75
+flagged: review,35
+"flagged: review, not yet covered by a decision",25
 flagged: low,41
-"info: outside every boundary (remote site, not reviewed)",76
+"info: outside every boundary (remote site, not reviewed)",75

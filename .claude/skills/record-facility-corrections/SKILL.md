@@ -71,7 +71,9 @@ may alter a facility's label, position or inclusion.
 
 - Do NOT infer a decision from a note, a map, or your own judgement.
 - Do NOT edit `facilities_clean.csv`, a snapshot, or a flags file.
-- Do NOT drop a record: use `field=exclude` with a reason.
+- Do NOT drop a record: use `field=exclude` with a reason. Guard a rule-based exclusion with
+  `old_value=column=value` (e.g. `tank_farm_id=377`) so an upstream fix retires it; an
+  unguarded exclusion (owner's one-off) has an empty old_value.
 - Do NOT relabel by rule, bulk-approve a detector's suggestions, or change a threshold without an
   owner-approved reason row.
 

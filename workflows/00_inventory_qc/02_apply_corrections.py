@@ -5,7 +5,8 @@ Reads inputs/raw_facility_data/<release>/ and inputs/inventory_qc/corrections.cs
 Only rows with status=approved are applied, and only when the record's CURRENT value
 still equals the row's old_value (the guard that lets an upstream fix retire a
 correction instead of being applied twice). Nothing is dropped: a `field=exclude`
-correction moves the record to excluded.csv with its reason.
+correction moves the record to excluded.csv with its reason; its old_value may carry a
+`column=value` guard (e.g. `tank_farm_id=377`) that must still hold for the drop to apply.
 
 Writes outputs/00_inventory_qc/<release>/
     facilities_corrected.csv   the snapshot with approved corrections applied
@@ -56,6 +57,17 @@ def apply(label: str) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
             log.append(entry)
             continue
         if r.field == "exclude":
+            # An exclusion may be guarded: old_value "column=value" must still hold (e.g.
+            # "tank_farm_id=377" for a copy row) so an upstream fix retires the drop.
+            if r.old_value and "=" in r.old_value:
+                gcol, gval = r.old_value.split("=", 1)
+                cur = fac.at[r.record_id, gcol] if gcol in fac.columns else None
+                cur_s = "" if (cur is None or (isinstance(cur, float) and np.isnan(cur))) else str(cur)
+                if cur_s != gval and not _close(cur_s, gval):
+                    entry["outcome"] = "skipped-old-value-mismatch"
+                    entry["note"] = f"{gcol} is now {cur_s!r}, exclusion expected {gval!r} — upstream changed it; review then retire/update"
+                    log.append(entry)
+                    continue
             excluded_ids[r.record_id] = r.evidence if "evidence" in corr.columns else r.reason
             entry["outcome"] = "applied"
             log.append(entry)

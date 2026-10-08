@@ -1,9 +1,9 @@
 detector,status,records_flagged,note
-shared_farm_id,ran,55,
+shared_farm_id,ran,12,
 within_farm_copies,ran,1,
-shared_point_labels,ran,59,
+shared_point_labels,ran,16,
 one_digit_typo,ran,1,
-map_point_disagrees,ran,6,
+map_point_disagrees,ran,0,
 missing_fields,ran,265,
 spelling_variants,ran,14,
 release_diff,ran,0,

@@ -1,20 +1,20 @@
 # Inventory QC report — release 2025
 
-Generated 2026-10-08T05:08:43+00:00 by workflows/00_inventory_qc/07_publish.py
+Generated 2026-10-08T05:38:46+00:00 by workflows/00_inventory_qc/07_publish.py
 
 - raw release: `Utilities_Bulk_Fuel_Inventory.csv` sha256 `3fbee569c63dccf813d6fa53e608820d53b92e415feb2c7f20556fc0bb0c30b0` (1830 rows, 1767 located)
-- clean table: `facilities_clean.csv` sha256 `915f2121f09617b108970a24d6dfed18ae3944ca2cc9d9b4aa2fbc7849c80a65` (1830 rows, 1767 located)
-- excluded: 0 (see `excluded.csv`)
-- corrections: 53 applied · 8 pending · 2 rejected · 0 skipped
+- clean table: `facilities_clean.csv` sha256 `07a818c0d3f29e1d67a470fdaf8767ee21f5f5ee6f7bc39d91ef2e28eee173bd` (1803 rows, 1740 located)
+- excluded: 27 (see `excluded.csv`)
+- corrections: 80 applied · 8 pending · 0 rejected · 0 skipped
 - community keys: 272 · unlabelled records: 97
 
 ## Checks
 
 | check | result | detail |
 |---|---|---|
-| row reconciliation | PASS | 1830 release = 1830 clean + 0 excluded |
-| every exclusion has a reason | PASS | 0 excluded |
-| every applied correction has reviewer + date | PASS | 53 applied |
+| row reconciliation | PASS | 1830 release = 1803 clean + 27 excluded |
+| every exclusion has a reason | PASS | 27 excluded |
+| every applied correction has reviewer + date | PASS | 80 applied |
 | only schema + derived columns; no contact columns | PASS | extra=[] contact=[] |
 | fixture: Bethel record f000283 is not above 66°N | PASS |  |
 | fixture: no Unalaska-labelled record sits on Norton Sound (lat > 60) | PASS |  |
@@ -22,7 +22,7 @@ Generated 2026-10-08T05:08:43+00:00 by workflows/00_inventory_qc/07_publish.py
 | fixture: no Kodiak-labelled record is in the open Pacific (lat < 56) | PASS |  |
 | fixture: no Coldfoot-labelled record is in Yukon, Canada (lon > -141) | PASS |  |
 | fixture: spelling variants resolved (no 'Saint Marys', 'Clarks Point', 'Dutch Harbor' labels) | PASS |  |
-| deterministic output | PASS | 915f2121f096 |
+| deterministic output | PASS | 07a818c0d3f2 |
 
 ## Corrections applied
 
@@ -81,3 +81,30 @@ Generated 2026-10-08T05:08:43+00:00 by workflows/00_inventory_qc/07_publish.py
 | `{F1376769-3624-43A5-9248-CADA5B67B566}` | community_name | Dutch Harbor | Unalaska | JC | nan |
 | `{39943186-EB34-4A7C-B510-E1F60F6E5B77}` | community_name | Nightmute | Iliamna | JC | 2026-10-06 |
 | `{E8C7FE98-2833-47DB-A566-8D25750D48D2}` | community_name | Napakiak | Kwethluk | JC | 2026-10-06 |
+| `{3EDD2A9C-65E1-4B69-95C6-B86EF44C2A59}` | exclude | tank_farm_id=108 | true | JC | 2026-10-08 |
+| `{405CC19C-36AB-4808-8AB1-CDE994AED352}` | exclude | tank_farm_id=108 | true | JC | 2026-10-08 |
+| `{A6656A06-FB6E-44F6-8DEB-0A79C30970C9}` | exclude | tank_farm_id=108 | true | JC | 2026-10-08 |
+| `{29A9858B-A138-476A-942F-BA787BE7179B}` | exclude | tank_farm_id=1087 | true | JC | 2026-10-08 |
+| `{32E46B3B-A68A-4AED-A995-44AABFBA609D}` | exclude | tank_farm_id=1087 | true | JC | 2026-10-08 |
+| `{678A81B7-2420-44FE-AABF-C45E6E48CC82}` | exclude | tank_farm_id=1095 | true | JC | 2026-10-08 |
+| `{EE035FC2-70D9-42A6-B940-D1F97F642616}` | exclude | tank_farm_id=1095 | true | JC | 2026-10-08 |
+| `{D16B7CA0-CE7A-4D65-864E-5B2599DECFA6}` | exclude | tank_farm_id=158 | true | JC | 2026-10-08 |
+| `{5283F15A-66DA-4487-8444-EC1A2C43934D}` | exclude | tank_farm_id=171 | true | JC | 2026-10-08 |
+| `{4EB90598-665E-44BF-BABD-1D75C638BCF2}` | exclude | tank_farm_id=219 | true | JC | 2026-10-08 |
+| `{60EDEA84-04E5-4ED4-912D-1CDA85E970A2}` | exclude | tank_farm_id=377 | true | JC | 2026-10-08 |
+| `{6EF0C04D-FA10-46F4-A9C4-91EC73504366}` | exclude | tank_farm_id=377 | true | JC | 2026-10-08 |
+| `{743459E3-FCB1-4860-9E07-61BE3B6A04B3}` | exclude | tank_farm_id=377 | true | JC | 2026-10-08 |
+| `{C558007A-A0AB-4C4D-A836-9CA4EA3BD493}` | exclude | tank_farm_id=377 | true | JC | 2026-10-08 |
+| `{F3C6E0AA-DC43-46B0-9BBD-B22D1A9461DF}` | exclude | tank_farm_id=377 | true | JC | 2026-10-08 |
+| `{5966569A-E364-492E-AF3E-4EE7DCE3828B}` | exclude | tank_farm_id=385 | true | JC | 2026-10-08 |
+| `{63C660C1-0960-4011-81E0-33F443CB730D}` | exclude | tank_farm_id=385 | true | JC | 2026-10-08 |
+| `{BA9A56A1-5224-45F0-B0DD-070DBFFB2559}` | exclude | tank_farm_id=385 | true | JC | 2026-10-08 |
+| `{D87C846D-981B-4E88-AB27-A2DDBF25E98C}` | exclude | tank_farm_id=385 | true | JC | 2026-10-08 |
+| `{11C61E2B-C979-4D51-A901-5BDF8ABBF907}` | exclude | tank_farm_id=397 | true | JC | 2026-10-08 |
+| `{52EA8B6C-5DEE-4586-9B19-043A22000B12}` | exclude | tank_farm_id=403 | true | JC | 2026-10-08 |
+| `{41F25397-8168-4A24-BE43-C7E6935BB5AB}` | exclude | tank_farm_id=408 | true | JC | 2026-10-08 |
+| `{2A288E05-E61D-4E46-AE4D-C7D9102802EA}` | exclude | tank_farm_id=410 | true | JC | 2026-10-08 |
+| `{C8EC9D39-F5C7-4B8E-94A5-4B7BE891EF44}` | exclude | tank_farm_id=565 | true | JC | 2026-10-08 |
+| `{4533136B-B178-4EEB-8F4E-1BBF21C03ABE}` | exclude | tank_farm_id=621 | true | JC | 2026-10-08 |
+| `{3758A00D-FA89-45EA-85FB-DE30F19E5DBC}` | exclude | tank_farm_id=706 | true | JC | 2026-10-08 |
+| `{83F3B425-DC65-4A0B-94B5-14D3D08E5901}` | exclude | tank_farm_id=830 | true | JC | 2026-10-08 |
