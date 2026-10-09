@@ -7,7 +7,8 @@ asking; move-only commits separate from edit commits; every dollar lives in
 `data/`, `outputs/01_*`, `outputs/02_*`, extracted `final_network/*/` are
 regenerable working trees — never hand-edit them; `outputs/00_inventory_qc/*/facilities_clean.csv`
 is tracked but regenerated only by workflow 00 (edit `inputs/inventory_qc/corrections.csv`, never
-the table); the raw AEA inventory CSV (contact fields) is never committed.
+the table); the raw AEA inventory CSV (contact fields) is never committed; `docs/data_audit/` is the archived
+2026-10 investigation (report, review workbooks, maps, diagrams) — history, not config.
 
 ## Run-script conventions
 
