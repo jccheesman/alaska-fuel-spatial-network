@@ -102,6 +102,44 @@ def fill_delivery_method(gdf: gpd.GeoDataFrame, fallback: gpd.GeoDataFrame,
     return out, stats
 
 
+def _label_key(gdf: gpd.GeoDataFrame) -> pd.Series:
+    """The community label used for cannot-link + grouping: `community_key` (workflow 00, aliases
+    folded) when the profile maps it, else the canonical form of `community_name`."""
+    from .tag import _canon
+    if "community_key" in gdf.columns and gdf["community_key"].notna().any():
+        return gdf["community_key"].astype("string")
+    if "community_name" in gdf.columns:
+        return _canon(gdf["community_name"])
+    return pd.Series(pd.NA, index=gdf.index, dtype="string")
+
+
+def split_clusters_by_label(gdf: gpd.GeoDataFrame, clusters: np.ndarray) -> tuple[np.ndarray, int]:
+    """Split every distance cluster that mixes >1 distinct community label into one sub-cluster per
+    label. Unlabelled rows join the label of their nearest labelled row in the cluster. Cluster ids
+    are re-numbered densely in (original cluster, label) order, so the result is deterministic and
+    `SYN-<cluster_id>` ids stay stable for an unchanged input. Returns (new_ids, n_clusters_split)."""
+    labels = _label_key(gdf)
+    xy = np.c_[gdf.geometry.x.to_numpy(), gdf.geometry.y.to_numpy()]
+    new = np.zeros(len(gdf), dtype=int)
+    nxt, n_split = 1, 0
+    for cid in np.unique(clusters):
+        idx = np.flatnonzero(clusters == cid)
+        lab = labels.iloc[idx]
+        distinct = sorted(set(lab.dropna()))
+        if len(distinct) <= 1:
+            new[idx] = nxt; nxt += 1
+            continue
+        n_split += 1
+        lab = lab.copy()
+        labelled = idx[lab.notna().to_numpy()]
+        for i in idx[lab.isna().to_numpy()]:
+            d = np.hypot(*(xy[labelled] - xy[i]).T)
+            lab.loc[gdf.index[i]] = labels.iloc[labelled[int(np.argmin(d))]]
+        for key in distinct:
+            new[idx[(lab == key).to_numpy()]] = nxt; nxt += 1
+    return new, n_split
+
+
 def consolidate_facilities(
     raw_path: str | Path, params: Params, input_crs: int = 4326, target_crs: int = 3857,
     config: PipelineConfig | None = None,
@@ -111,6 +149,9 @@ def consolidate_facilities(
     Column map, routable modes, and capacity columns come from `config` (the RegionProfile
     projection). `config` is required in practice; the bare fallbacks below only support trivial
     smoke tests and assume nothing region-specific.
+
+    When the profile maps `inventory.record_id`, each site also carries `member_record_ids`
+    (';'-joined) and `n_members`, so the 50 m merge is auditable record by record.
 
     A facility is kept when it has a routable delivery_method and a total_capacity; a blank inventory
     ASTFacilityID is NOT a reason to drop it — those rows get a deterministic synthetic id
@@ -136,6 +177,17 @@ def consolidate_facilities(
               f"{stats['by_name']} by name + {stats['by_nearest']} by nearest "
               f"(<= {fb.max_dist_m:.0f} m); {stats['remaining']} still blank")
 
+    # Withhold records under owner review (profile hubs.withhold_pending_review + inventory.qc_status):
+    # they take no part in clustering or hubs, and are listed so nothing disappears silently.
+    withheld = gdf.iloc[:0]
+    if getattr(params, "withhold_pending_review", False) and "qc_status" in gdf.columns:
+        mask = gdf["qc_status"].astype(str).str.lower().eq("pending_review")
+        withheld = gdf[mask].copy()
+        gdf = gdf[~mask].reset_index(drop=True)
+        if len(withheld):
+            print(f"[consolidate] withheld {len(withheld)} record(s) with qc_status=pending_review "
+                  f"(open owner review); see 01_withheld.csv")
+
     # Scope to routable modes BEFORE clustering (drops Unknown/blank atoms).
     gdf["delivery_method"] = gdf["delivery_method"].map(lambda v: filter_to_modes(v, modes))
     gdf = gdf[gdf["delivery_method"] != ""].reset_index(drop=True)
@@ -152,6 +204,14 @@ def consolidate_facilities(
         clusters = fcluster(Z, t=float(params.dedup_tol_m), criterion="distance")
     else:
         clusters = np.array([1])
+    # Cannot-link (profile hubs.cannot_link_across_community): a cluster holding records with
+    # different community labels is split per label, so a copied-coordinate stack of several
+    # villages never collapses into one site carrying the first row's label. Unlabelled records
+    # follow the nearest labelled record of their cluster (or stay together if none is labelled).
+    if getattr(params, "cannot_link_across_community", False):
+        clusters, n_split = split_clusters_by_label(gdf, clusters)
+        if n_split:
+            print(f"[consolidate] cannot-link: split {n_split} cluster(s) that mixed community labels")
     gdf["cluster_id"] = clusters
 
     # Merge clusters: union delivery atoms, max() capacities, first non-NA text, centroid location.
@@ -165,11 +225,18 @@ def consolidate_facilities(
             "y": float(grp.geometry.y.mean()),
         }
         # Optional descriptive columns: present only when the profile maps them.
-        for opt in ("community_name", "entity_name"):
+        for opt in ("community_name", "entity_name", "community_key"):
             if opt in grp.columns:
                 rec[opt] = _first_notna(grp[opt])
+        # Site-member trail: which raw records merged into this site (profile `inventory.record_id`).
+        # Nothing disappears silently — every raw record is accounted for in 01_site_members.
+        if "record_id" in grp.columns:
+            rec["member_record_ids"] = ";".join(sorted(grp["record_id"].dropna().astype(str)))
+            rec["n_members"] = int(len(grp))
         for col in cap_cols:
             rec[col] = _max_or_nan(grp[col]) if col in grp.columns else np.nan
+        if "community_distance_km" in grp.columns:
+            rec["community_distance_km"] = _max_or_nan(pd.to_numeric(grp["community_distance_km"], errors="coerce"))
         rows.append(rec)
 
     out = pd.DataFrame(rows)
@@ -189,4 +256,9 @@ def consolidate_facilities(
         geometry=gpd.points_from_xy(out["x"], out["y"]),
         crs=target_crs,
     )
-    return gout.sort_values("ast_facility_id", kind="stable").reset_index(drop=True)
+    gout = gout.sort_values("ast_facility_id", kind="stable").reset_index(drop=True)
+    cols = [c for c in ("record_id", "ast_facility_id", "community_name", "delivery_method", "total_capacity", "qc_status")
+            if c in withheld.columns]
+    gout.attrs["withheld"] = pd.DataFrame(withheld[cols]).assign(
+        x=withheld.geometry.x.round(1).values, y=withheld.geometry.y.round(1).values) if len(withheld) else pd.DataFrame(columns=cols + ["x", "y"])
+    return gout

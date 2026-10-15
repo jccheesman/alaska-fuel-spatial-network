@@ -33,9 +33,17 @@ roots:
   data: ../../data
 
 # Facility inventory — the normalized table (00_normalize_raw.py), canonical column names.
+# Since 2026-10 the source is workflow 00's published, owner-corrected table
+# (outputs/00_inventory_qc/<release>/facilities_clean.csv), not the raw AEA CSV; see
+# docs/INVENTORY_QC_PLAN.md. `record_id` carries each raw record through the 50 m
+# consolidation as the site-member trail (output/01_site_members.csv).
 inventory:
   path: data/interim/facilities.csv
   id:              id
+  record_id:       record_id
+  community_key:   community_key            # canonical label (aliases folded) from workflow 00
+  community_distance: community_distance_km # km to the labelled community's boundary (workflow 00)
+  qc_status:       qc_status                 # clean | pending_review (open owner review item)
   community:       community
   delivery_method: delivery_method          # Road / Barge / Plane / "Plane or Barge" / "Plane or Road"
   capacity:        total_capacity
@@ -45,7 +53,6 @@ inventory:
   extra_capacity:                            # merged with max() into the per-facility capacity view
     - gasoline_capacity
     - diesel_capacity
-    - av_gas_capacity
     - jet_fuel_capacity
     - other_fuel_capacity
   # Recover facilities with a blank delivery_method from the community-level layer:
@@ -106,11 +113,13 @@ layers:
     # Stage 03 nodes it in Python by 50 m vertex-rounding (not R) and connects road + ice to it
     # by sea at ports + barge hubs, so coastal/Arctic communities join the giant.
     source: { type: file, path: data/interim/ak_waterway.gpkg }
+    snap_fallback: true      # a Barge hub with NO road/ice node within max_snap_dist_m lands here (Diomede, Port Moller)
 
   - name: airways
     mode: Plane
     edge_label: Air
     kind: line
+    snap_fallback: true      # a Plane hub with NO road/ice node within max_snap_dist_m lands on its airport node
     loader: load_airways
     # Official air-cargo network: data/raw/connectivity/air/flight_paths_combined.csv (AK DOT&PF-matched)
     # → normalize_raw → interim → prep_airways → this geojson.
@@ -208,7 +217,16 @@ hubs:
   abs_threshold: 500000
   buffer_dist: 5000
   dedup_tol_m: 50
-  group_by: [community, city, region]   # one hub per place; delivery methods unioned (multimodal)
+  # Phase 5 (2026-10, docs/INVENTORY_QC_PLAN.md): one hub per CORRECTED community label.
+  # `city`/`region` are no longer keys — a TIGER place polygon or a borough line must not split
+  # one community into several hubs (Fairbanks was 11). Unlabelled sites inside a place take the
+  # place name; outside every place they group by a buffer_dist blob, never by borough.
+  group_by: [community]                 # delivery methods unioned (multimodal hubs)
+  cannot_link_across_community: true    # a 50 m stack of several villages stays several sites
+  max_snap_dist_m: 25000                # road-first: a hub farther than this from any road/ice node tries its own-mode
+                                        # snap_fallback layers (Barge -> waterway, Plane -> air), else is left unplaced + reported
+  remote_site_km: 20                    # a site farther than this from its community is its own hub (keeps its label); 0 = off
+  withhold_pending_review: true         # ON/OFF: records with an open owner review item take no part in hubs (output/01_withheld.csv)
 
 # The only noding knob the gold pipeline consumes: the R planar-cleaning precision (meters).
 topology:

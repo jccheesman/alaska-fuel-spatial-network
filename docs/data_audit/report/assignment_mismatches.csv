@@ -1,0 +1,122 @@
+facility_pid,facility_id,community_name,build_site_id,aggregated_hub_id,membership_confidence,hub_facility_map_hub,distance_m,last_mile,mode_aware_nearest_hub
+f000027,42,,42,Hub_71,high,Hub_280,103601.8,remote,Hub_280
+f001780,63,,63,Hub_71,high,Hub_226,62610.4,remote,Hub_223
+f000399,75,,75,Hub_10,high,Hub_286,11278.7,local,Hub_286
+f000322,114,,114,Hub_10,high,Hub_273,21648.4,local,Hub_170
+f001014,157,,157,Hub_153,high,Hub_234,36564.3,remote,Hub_234
+f000258,196,,196,Hub_80,high,Hub_190,84866.2,remote,Hub_206
+f000680,266,,266,Hub_52,high,Hub_341,285.0,local,Hub_341
+f000948,371,,371,Hub_52,high,Hub_296,2297.0,local,Hub_296
+f001190,619,,619,Hub_71,high,Hub_280,43315.3,remote,Hub_280
+f001511,627,,627,Hub_310,high,Hub_49,7221.3,local,Hub_299
+f000458,628,,628,Hub_310,high,Hub_142,58334.0,remote,Hub_349
+f000323,648,,648,Hub_52,high,Hub_145,11899.2,local,Hub_349
+f000499,719,,719,Hub_153,high,Hub_237,30204.7,remote,Hub_237
+f000110,839,,839,Hub_107,high,Hub_129,56398.4,remote,Hub_129
+f001727,840,,840,Hub_153,high,Hub_120,50168.1,remote,Hub_120
+f001480,854,,854,Hub_58,high,Hub_345,13953.0,local,Hub_345
+f000878,855,,855,Hub_78,high,Hub_98,19482.3,local,Hub_78
+f001135,1008,,1008,Hub_10,high,Hub_273,28598.1,remote,Hub_170
+f001238,1078,,1078,Hub_52,high,Hub_246,118108.4,remote,Hub_246
+f000033,1080,,1080,Hub_153,high,Hub_246,119051.6,remote,Hub_246
+f000997,1081,,1080,Hub_153,high,Hub_246,119051.6,remote,Hub_246
+f000401,1082,,1080,Hub_153,high,Hub_246,119051.6,remote,Hub_246
+f000983,1083,,1080,Hub_153,high,Hub_246,119051.6,remote,Hub_246
+f001136,1084,,1080,Hub_153,high,Hub_246,119051.6,remote,Hub_246
+f001505,1120,,1120,Hub_78,high,Hub_369,16873.8,local,Hub_108
+f001817,1123,,1123,Hub_83,high,Hub_307,38601.9,remote,Hub_55
+f000047,1124,,1124,Hub_80,high,Hub_207,4495.5,local,Hub_9
+f001706,1128,,1128,Hub_78,high,Hub_77,35193.0,remote,Hub_72
+f001450,1129,,1129,Hub_83,high,Hub_302,49150.0,remote,Hub_83
+f001125,1130,,1130,Hub_80,high,Hub_198,27933.5,remote,Hub_80
+f001769,1131,,1131,Hub_83,high,Hub_178,32103.0,remote,Hub_178
+f000117,1132,,1132,Hub_83,high,Hub_178,57896.4,remote,Hub_178
+f000714,1133,,1133,Hub_80,high,Hub_198,35586.1,remote,Hub_80
+f000809,1137,,1137,Hub_80,high,Hub_189,65246.8,remote,Hub_189
+f001174,1241,,1241,Hub_71,high,Hub_164,44789.3,remote,Hub_164
+f000760,1247,,1247,Hub_153,high,Hub_237,38206.0,remote,Hub_237
+f000926,1290,Anaktuvuk Pass,SYN-424,Hub_277,high,Hub_381,343.5,local,Hub_381
+f000841,1295,Anaktuvuk Pass,SYN-431,Hub_277,high,Hub_381,88.4,local,Hub_381
+f000305,1297,Anaktuvuk Pass,SYN-429,Hub_277,high,Hub_381,268.0,local,Hub_381
+f001341,1302,Anaktuvuk Pass,SYN-431,Hub_277,high,Hub_381,88.4,local,Hub_381
+f000441,1303,Anaktuvuk Pass,SYN-429,Hub_277,high,Hub_381,268.0,local,Hub_381
+f000193,1306,Anaktuvuk Pass,SYN-424,Hub_277,high,Hub_381,343.5,local,Hub_381
+f001114,986,Anderson,986,Hub_366,high,Hub_208,3303.7,local,Hub_208
+f000955,1324,Arctic Village,SYN-365,Hub_361,high,Hub_378,289.4,local,Hub_361
+f000155,1326,Arctic Village,SYN-364,Hub_361,high,Hub_378,117.5,local,Hub_361
+f001213,1327,Arctic Village,SYN-362,Hub_361,high,Hub_378,47.3,local,Hub_361
+f000087,1349,Bettles,SYN-354,Hub_377,high,Hub_23,69.3,local,Hub_377
+f000466,1350,Bettles,SYN-356,Hub_377,high,Hub_103,84.2,local,Hub_103
+f000762,1351,Bettles,SYN-359,Hub_377,high,Hub_103,138.3,local,Hub_103
+f001170,328,Buckland,328,Hub_178,high,Hub_83,79.5,local,Hub_83
+f000382,307,Chicken,307,Hub_237,high,Hub_194,16.7,local,Hub_237
+f000934,624,Coffman Cove,624,Hub_139,high,Hub_388,238.3,local,Hub_139
+f000175,24,Cordova,24,Hub_38,high,Hub_241,458.4,local,Hub_38
+f000856,881,Cordova,881,Hub_42,high,Hub_117,43273.6,remote,Hub_246
+f001528,884,Cordova,884,Hub_42,high,Hub_117,32703.8,remote,Hub_42
+f000675,1054,Cordova,1054,Hub_38,high,Hub_241,646.5,local,Hub_241
+f000051,1062,Cordova,1062,Hub_42,high,Hub_52,38746.9,remote,Hub_52
+f001361,1063,Cordova,1062,Hub_42,high,Hub_52,38746.9,remote,Hub_52
+f001084,550,Delta Junction,550,Hub_300,high,Hub_120,51407.4,remote,Hub_120
+f001263,773,Delta Junction,773,Hub_300,high,Hub_285,38901.8,remote,Hub_354
+f000277,582,Eagle River,582,Hub_303,high,Hub_293,4612.8,local,Hub_293
+f001005,220,Eielson Afb,220,Hub_193,high,Hub_216,36586.9,remote,Hub_193
+f001663,214,Eielson Afb,214,Hub_192,high,Hub_354,65928.8,remote,Hub_354
+f000425,215,Eielson Afb,215,Hub_192,high,Hub_250,87471.1,remote,Hub_192
+f001278,99,Fairbanks,99,Hub_25,high,Hub_292,1313.7,local,Hub_292
+f001274,543,Fairbanks,543,Hub_25,high,Hub_292,3324.3,local,Hub_292
+f000118,761,Fairbanks,761,Hub_341,high,Hub_71,32519.0,remote,Hub_71
+f001303,777,Fairbanks,777,Hub_25,high,Hub_3,1106.8,local,Hub_3
+f001680,1009,Fairbanks,1009,Hub_4,high,Hub_40,1773.4,local,Hub_40
+f000064,1056,Fairbanks,1056,Hub_25,high,Hub_3,4923.9,local,Hub_3
+f001474,1150,Fairbanks,1150,Hub_25,high,Hub_292,1873.0,local,Hub_292
+f000882,123,Gustavus,123,Hub_105,high,Hub_345,3951.7,local,Hub_345
+f001204,1489,Gustavus,SYN-171,Hub_105,high,Hub_345,3805.1,local,Hub_345
+f001549,20,Homer,20,Hub_7,high,Hub_247,15924.0,local,Hub_247
+f000208,1005,Homer,1005,Hub_7,high,Hub_330,18043.7,local,Hub_7
+f001803,1051,Homer,1051,Hub_36,high,Hub_322,6534.0,local,Hub_322
+f000045,1515,Hydaburg,SYN-13,Hub_312,high,Hub_368,454.7,local,Hub_368
+f000314,1549,Kaktovik,SYN-396,Hub_279,high,Hub_380,155.0,local,Hub_380
+f001701,1550,Kaktovik,SYN-392,Hub_279,high,Hub_380,276.8,local,Hub_380
+f000226,1551,Kaktovik,SYN-392,Hub_279,high,Hub_380,246.2,local,Hub_380
+f000431,59,Kenai,59,Hub_8,high,Hub_305,3723.8,local,Hub_305
+f000874,701,Kenai,701,Hub_44,high,Hub_94,1362.7,local,Hub_94
+f001372,2,Ketchikan,2,Hub_185,high,Hub_69,2243.5,local,Hub_69
+f000555,432,Ketchikan,432,Hub_69,high,Hub_185,1793.4,local,Hub_185
+f000527,89,Kiana,89,Hub_86,high,Hub_394,274.0,local,Hub_394
+f000938,1575,Kiana,SYN-911,Hub_86,high,Hub_394,243.1,local,Hub_394
+f000731,1576,Kiana,SYN-911,Hub_86,high,Hub_394,249.9,local,Hub_394
+f000227,1578,Kiana,328,Hub_178,high,Hub_83,76.8,local,Hub_178
+f000669,1070,King Salmon,1070,Hub_46,high,Hub_138,1772.6,local,Hub_138
+f001360,1171,King Salmon,1171,Hub_46,high,Hub_138,1058.8,local,Hub_138
+f001370,1594,Klawock,SYN-20,Hub_272,high,Hub_313,1600.1,local,Hub_313
+f000551,501,Kodiak,501,Hub_173,high,Hub_289,1888.7,local,Hub_289
+f001051,747,Kodiak,747,Hub_173,high,Hub_289,1616.1,local,Hub_289
+f000949,671,Kwethluk,671,Hub_199,high,Hub_386,229.2,local,Hub_386
+f001458,672,Kwethluk,671,Hub_199,high,Hub_386,229.2,local,Hub_386
+f001534,674,Kwethluk,674,Hub_199,high,Hub_386,380.3,local,Hub_386
+f000094,517,Nelson Lagoon,517,Hub_291,high,Hub_158,645.4,local,Hub_158
+f000844,169,North Pole,169,Hub_74,high,Hub_27,3623.1,local,Hub_27
+f001460,14,Palmer,14,Hub_161,high,Hub_294,9066.1,local,Hub_294
+f000616,814,Petersburg,814,Hub_299,high,Hub_314,12699.1,local,Hub_314
+f001306,492,Ruby,492,Hub_227,high,Hub_85,249.3,local,Hub_85
+f001832,763,Saint Marys,763,Hub_60,high,Hub_392,428.1,local,Hub_392
+f000726,1262,Saint Marys,1262,Hub_60,high,Hub_392,169.0,local,Hub_392
+f000966,1817,Saint Paul,SYN-456,Hub_382,high,Hub_57,2791.1,local,Hub_57
+f000109,1820,Saint Paul,SYN-456,Hub_382,high,Hub_57,2777.2,local,Hub_57
+f000002,459,Saint Paul Island,SYN-456,Hub_382,high,Hub_57,2803.3,local,Hub_57
+f001566,890,Saint Paul Island,890,Hub_57,high,Hub_382,1480.5,local,Hub_57
+f001560,998,Saint Paul Island,998,Hub_57,high,Hub_382,1692.1,local,Hub_382
+f001320,957,Scammon Bay,957,Hub_267,high,Hub_328,279.4,local,Hub_328
+f000090,1838,Selawik,328,Hub_178,high,Hub_83,76.8,local,Hub_178
+f000720,535,Seward,535,Hub_222,high,Hub_31,296.4,local,Hub_31
+f001565,682,Seward,682,Hub_222,high,Hub_31,298.3,local,Hub_31
+f001353,683,Seward,683,Hub_222,high,Hub_31,751.1,local,Hub_31
+f001754,684,Seward,684,Hub_222,high,Hub_31,606.6,local,Hub_31
+f001546,1187,Skagway,1187,Hub_115,high,Hub_41,1671.5,local,Hub_41
+f000556,748,Soldotna,748,Hub_332,high,Hub_116,1524.8,local,Hub_116
+f000687,113,Togiak,113,Hub_84,high,Hub_81,1600.3,local,Hub_84
+f001830,152,Twin Hills,152,Hub_77,high,Hub_84,2874.2,local,Hub_84
+f001049,1928,Upper Kalskag,SYN-626,Hub_390,high,Hub_99,374.5,local,Hub_99
+f001519,832,Valdez,832,Hub_240,high,Hub_358,30620.1,remote,Hub_358
+f000386,622,Wrangell,622,Hub_118,high,Hub_388,29407.4,remote,Hub_118

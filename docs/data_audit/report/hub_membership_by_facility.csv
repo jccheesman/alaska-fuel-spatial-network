@@ -1,0 +1,1839 @@
+facility_pid,facility_id,community_name,build_site_id,aggregated_hub_id,membership_confidence,hub_facility_map_hub,distance_m,last_mile,mode_aware_nearest_hub
+f001688,229,,229,Hub_85,membership unresolved,Hub_304,1832.5,local,Hub_304
+f001659,245,,245,Hub_201,high,Hub_201,14903.1,local,Hub_201
+f000588,25,,25,Hub_82,hub lost in snapping,Hub_52,49773.0,remote,Hub_52
+f000717,30,,30,Hub_75,high,Hub_75,11275.1,local,Hub_75
+f000253,31,,31,Hub_238,high,Hub_238,15198.3,local,Hub_238
+f000159,212,,212,Hub_191,high,Hub_191,27977.7,remote,Hub_191
+f000027,42,,42,Hub_71,high,Hub_280,103601.8,remote,Hub_280
+f001780,63,,63,Hub_71,high,Hub_226,62610.4,remote,Hub_223
+f000399,75,,75,Hub_10,high,Hub_286,11278.7,local,Hub_286
+f000935,78,,78,Hub_82,hub lost in snapping,Hub_58,11671.4,local,Hub_58
+f000322,114,,114,Hub_10,high,Hub_273,21648.4,local,Hub_170
+f001014,157,,157,Hub_153,high,Hub_234,36564.3,remote,Hub_234
+f001402,179,,179,Hub_10,high,Hub_10,19386.1,local,Hub_10
+f000258,196,,196,Hub_80,high,Hub_190,84866.2,remote,Hub_206
+f001655,213,,213,Hub_167,high,Hub_167,10986.5,local,Hub_167
+f000680,266,,266,Hub_52,high,Hub_341,285.0,local,Hub_341
+f000296,269,,269,Hub_82,hub lost in snapping,Hub_23,38525.7,remote,Hub_23
+f000805,274,,274,Hub_82,hub lost in snapping,Hub_71,658.5,local,Hub_71
+f001815,275,,275,Hub_82,hub lost in snapping,Hub_350,115.2,local,Hub_79
+f000749,279,,279,Hub_215,high,Hub_215,149.7,local,Hub_215
+f001831,281,,281,Hub_216,high,Hub_216,9125.0,local,Hub_216
+f000212,301,,301,Hub_82,hub lost in snapping,Hub_347,29855.2,remote,Hub_347
+f001552,312,,312,Hub_342,membership unresolved,Hub_237,36848.2,remote,Hub_237
+f000599,318,,318,Hub_82,hub lost in snapping,Hub_354,24557.3,local,Hub_234
+f000948,371,,371,Hub_52,high,Hub_296,2297.0,local,Hub_296
+f000666,382,,382,Hub_250,high,Hub_250,279.5,local,Hub_250
+f001574,442,,425,Hub_63,"capacity-exact, geography doubtful",Hub_287,12267.0,local,Hub_287
+f000777,510,,510,Hub_82,hub lost in snapping,Hub_224,52328.5,remote,Hub_224
+f000232,531,,531,Hub_294,high,Hub_294,23714.6,local,Hub_294
+f000910,533,,533,Hub_296,high,Hub_296,16415.9,local,Hub_296
+f001012,548,,548,Hub_342,membership unresolved,Hub_1,52245.9,remote,Hub_1
+f000829,549,,549,Hub_166,high,Hub_166,924.7,local,Hub_166
+f001083,618,,618,Hub_154,high,Hub_154,1711.3,local,Hub_154
+f001190,619,,619,Hub_71,high,Hub_280,43315.3,remote,Hub_280
+f001511,627,,627,Hub_310,high,Hub_49,7221.3,local,Hub_299
+f000458,628,,628,Hub_310,high,Hub_142,58334.0,remote,Hub_349
+f000331,630,,630,Hub_58,high,Hub_58,42185.5,remote,Hub_58
+f001759,644,,644,Hub_82,hub lost in snapping,Hub_301,4348.8,local,Hub_185
+f000279,645,,645,Hub_82,hub lost in snapping,Hub_1,41690.0,remote,Hub_1
+f000323,648,,648,Hub_52,high,Hub_145,11899.2,local,Hub_349
+f001229,676,,676,Hub_329,high,Hub_329,245.9,local,Hub_329
+f000499,719,,719,Hub_153,high,Hub_237,30204.7,remote,Hub_237
+f001249,819,,819,Hub_341,high,Hub_341,4643.7,local,Hub_341
+f000813,825,,825,Hub_71,high,Hub_71,39374.3,remote,Hub_71
+f001454,826,,826,Hub_342,membership unresolved,Hub_71,42958.4,remote,Hub_71
+f000557,827,,827,Hub_71,high,Hub_71,7685.1,local,Hub_71
+f000145,835,,835,Hub_325,high,Hub_325,63.5,local,Hub_325
+f000110,839,,839,Hub_107,high,Hub_129,56398.4,remote,Hub_129
+f001727,840,,840,Hub_153,high,Hub_120,50168.1,remote,Hub_120
+f001480,854,,854,Hub_58,high,Hub_345,13953.0,local,Hub_345
+f000878,855,,855,Hub_78,high,Hub_98,19482.3,local,Hub_78
+f001747,983,,,,not built (no mode/capacity),Hub_385,17229.6,local,Hub_385
+f001135,1008,,1008,Hub_10,high,Hub_273,28598.1,remote,Hub_170
+f001181,1038,,1038,Hub_30,high,Hub_30,25053.0,remote,Hub_30
+f000576,1039,,1038,Hub_30,high,Hub_30,25053.0,remote,Hub_30
+f000733,1040,,1038,Hub_30,high,Hub_30,25053.0,remote,Hub_30
+f001476,1041,,1038,Hub_30,high,Hub_30,25053.0,remote,Hub_30
+f000023,1042,,1038,Hub_30,high,Hub_30,25053.0,remote,Hub_30
+f001238,1078,,1078,Hub_52,high,Hub_246,118108.4,remote,Hub_246
+f001683,1079,,1079,Hub_52,high,Hub_52,117842.6,remote,Hub_52
+f000033,1080,,1080,Hub_153,high,Hub_246,119051.6,remote,Hub_246
+f000997,1081,,1080,Hub_153,high,Hub_246,119051.6,remote,Hub_246
+f000401,1082,,1080,Hub_153,high,Hub_246,119051.6,remote,Hub_246
+f000983,1083,,1080,Hub_153,high,Hub_246,119051.6,remote,Hub_246
+f001136,1084,,1080,Hub_153,high,Hub_246,119051.6,remote,Hub_246
+f001497,1089,,1089,Hub_82,hub lost in snapping,Hub_66,13087.8,local,Hub_66
+f000673,1090,,1089,Hub_82,hub lost in snapping,Hub_66,13092.5,local,Hub_66
+f001452,1091,,1089,Hub_82,hub lost in snapping,Hub_66,13092.5,local,Hub_66
+f000549,1092,,1089,Hub_82,hub lost in snapping,Hub_66,13092.5,local,Hub_66
+f000029,1108,,1108,Hub_342,membership unresolved,Hub_341,871.2,local,Hub_341
+f000937,1109,,1109,Hub_342,membership unresolved,Hub_355,71874.2,remote,Hub_71
+f001233,1110,,1110,Hub_342,membership unresolved,Hub_71,9451.4,local,Hub_71
+f001505,1120,,1120,Hub_78,high,Hub_369,16873.8,local,Hub_108
+f001817,1123,,1123,Hub_83,high,Hub_307,38601.9,remote,Hub_55
+f000047,1124,,1124,Hub_80,high,Hub_207,4495.5,local,Hub_9
+f001478,1126,,1126,Hub_82,hub lost in snapping,Hub_260,28320.1,remote,Hub_90
+f000725,1127,,1127,Hub_82,hub lost in snapping,Hub_73,27951.2,remote,Hub_72
+f001706,1128,,1128,Hub_78,high,Hub_77,35193.0,remote,Hub_72
+f001450,1129,,1129,Hub_83,high,Hub_302,49150.0,remote,Hub_83
+f001125,1130,,1130,Hub_80,high,Hub_198,27933.5,remote,Hub_80
+f001769,1131,,1131,Hub_83,high,Hub_178,32103.0,remote,Hub_178
+f000117,1132,,1132,Hub_83,high,Hub_178,57896.4,remote,Hub_178
+f000714,1133,,1133,Hub_80,high,Hub_198,35586.1,remote,Hub_80
+f000713,1134,,1134,Hub_342,membership unresolved,Hub_85,74604.2,remote,Hub_85
+f001121,1135,,1135,Hub_82,hub lost in snapping,Hub_229,32084.2,remote,Hub_229
+f000526,1136,,1136,Hub_85,membership unresolved,Hub_85,16472.0,local,Hub_85
+f000809,1137,,1137,Hub_80,high,Hub_189,65246.8,remote,Hub_189
+f000204,1138,,1138,Hub_85,membership unresolved,Hub_110,36378.3,remote,Hub_68
+f000933,1140,,1140,Hub_82,hub lost in snapping,Hub_189,9898.1,local,Hub_189
+f001612,1143,,1143,Hub_88,high,Hub_88,55696.9,remote,Hub_88
+f000975,1152,,1152,Hub_92,high,Hub_92,262.0,local,Hub_92
+f001266,1170,,1170,Hub_107,high,Hub_107,41190.1,remote,Hub_107
+f000814,1185,,,,not built (no mode/capacity),Hub_58,53004.9,remote,Hub_58
+f000778,1225,,1225,Hub_82,hub lost in snapping,Hub_87,63444.1,remote,Hub_87
+f001174,1241,,1241,Hub_71,high,Hub_164,44789.3,remote,Hub_164
+f000760,1247,,1247,Hub_153,high,Hub_237,38206.0,remote,Hub_237
+f001490,1260,,1260,Hub_82,hub lost in snapping,Hub_280,52230.8,remote,Hub_280
+f001419,102,Adak,102,Hub_21,high,Hub_21,2517.6,local,Hub_21
+f000758,461,Adak,,,not built (no mode/capacity),Hub_21,283.6,local,Hub_21
+f000144,1228,Adak,1228,Hub_21,high,Hub_21,2895.6,local,Hub_21
+f001037,498,Akhiok,498,Hub_286,high,Hub_286,597.4,local,Hub_286
+f000511,721,Akhiok,721,Hub_286,high,Hub_286,2038.6,local,Hub_286
+f000173,390,Akiachak,390,Hub_255,high,Hub_255,122.4,local,Hub_255
+f001092,722,Akiachak,722,Hub_337,high,Hub_337,318.3,local,Hub_337
+f001591,723,Akiachak,722,Hub_337,high,Hub_337,318.6,local,Hub_337
+f000028,724,Akiachak,722,Hub_337,high,Hub_337,318.8,local,Hub_337
+f000237,391,Akiak,391,Hub_256,high,Hub_256,477.0,local,Hub_256
+f000887,725,Akiak,725,Hub_256,high,Hub_256,407.6,local,Hub_256
+f001211,1263,Akiak,SYN-560,Hub_256,high,Hub_256,546.0,local,Hub_256
+f001354,1264,Akiak,SYN-558,Hub_256,high,Hub_256,197.8,local,Hub_256
+f001496,1265,Akiak,SYN-559,Hub_256,high,Hub_256,144.6,local,Hub_256
+f000652,1266,Akiak,SYN-561,Hub_256,high,Hub_256,420.0,local,Hub_256
+f000606,1267,Akiak,SYN-560,Hub_256,high,Hub_256,548.6,local,Hub_256
+f001447,138,Akutan,138,Hub_167,high,Hub_167,311.2,local,Hub_167
+f001003,194,Akutan,194,Hub_167,high,Hub_167,121.9,local,Hub_167
+f001168,457,Akutan,457,Hub_167,high,Hub_167,11340.5,local,Hub_167
+f000723,1268,Akutan,SYN-483,Hub_167,high,Hub_167,669.3,local,Hub_167
+f000095,660,Alakanuk,660,Hub_323,high,Hub_323,1959.1,local,Hub_323
+f000833,1269,Alakanuk,SYN-740,Hub_323,high,Hub_323,996.9,local,Hub_323
+f000186,1270,Alakanuk,SYN-739,Hub_323,high,Hub_323,1288.2,local,Hub_323
+f000665,1271,Alakanuk,SYN-740,Hub_323,high,Hub_323,1007.2,local,Hub_323
+f001601,1272,Alakanuk,SYN-739,Hub_323,high,Hub_323,1289.3,local,Hub_323
+f001262,1273,Alatna,SYN-808,Hub_393,high,Hub_393,28.3,local,Hub_393
+f000538,109,Aleknagik,109,Hub_59,high,Hub_59,328.9,local,Hub_59
+f001327,1111,Aleknagik,1111,Hub_73,high,Hub_73,19120.6,local,Hub_73
+f000668,1274,Aleknagik,SYN-1414,Hub_59,high,Hub_59,500.1,local,Hub_59
+f000375,1275,Aleknagik,SYN-1413,Hub_59,high,Hub_59,171.0,local,Hub_59
+f000240,1276,Aleknagik,SYN-1415,Hub_59,high,Hub_59,1160.7,local,Hub_59
+f001712,282,Allakaket,282,Hub_217,high,Hub_217,1014.0,local,Hub_217
+f000242,479,Allakaket,479,Hub_217,high,Hub_217,1183.7,local,Hub_217
+f001296,480,Allakaket,480,Hub_217,high,Hub_217,1077.7,local,Hub_217
+f000411,481,Allakaket,481,Hub_217,high,Hub_217,747.6,local,Hub_217
+f001140,879,Allakaket,879,Hub_217,high,Hub_217,947.1,local,Hub_217
+f000295,1277,Allakaket,SYN-802,Hub_217,high,Hub_217,591.2,local,Hub_217
+f001315,1278,Allakaket,481,Hub_217,high,Hub_217,762.2,local,Hub_217
+f001176,1279,Allakaket,481,Hub_217,high,Hub_217,785.6,local,Hub_217
+f001801,1280,Allakaket,SYN-802,Hub_217,high,Hub_217,584.4,local,Hub_217
+f000536,1281,Allakaket,SYN-802,Hub_217,high,Hub_217,602.2,local,Hub_217
+f001648,1282,Allakaket,480,Hub_217,high,Hub_217,1089.8,local,Hub_217
+f000828,1283,Allakaket,481,Hub_217,high,Hub_217,762.2,local,Hub_217
+f000342,324,Ambler,324,Hub_149,high,Hub_149,1214.9,local,Hub_149
+f001807,905,Ambler,SYN-792,,dropped/unresolved in hub build,Hub_149,202.6,local,Hub_149
+f001718,1233,Ambler,1233,Hub_149,high,Hub_149,369.9,local,Hub_149
+f001082,1284,Ambler,SYN-791,Hub_149,high,Hub_149,344.2,local,Hub_149
+f000383,1285,Ambler,324,Hub_149,high,Hub_149,1206.2,local,Hub_149
+f001737,1286,Ambler,1233,Hub_149,high,Hub_149,348.6,local,Hub_149
+f000128,1287,Ambler,SYN-793,Hub_149,high,Hub_149,335.2,local,Hub_149
+f000312,467,Anaktuvuk Pass,467,Hub_277,high,Hub_277,62.3,local,Hub_277
+f000977,1288,Anaktuvuk Pass,467,Hub_277,high,Hub_277,50.5,local,Hub_277
+f000542,1289,Anaktuvuk Pass,SYN-426,Hub_381,high,Hub_381,538.8,local,Hub_381
+f000926,1290,Anaktuvuk Pass,SYN-424,Hub_277,high,Hub_381,343.5,local,Hub_381
+f000589,1291,Anaktuvuk Pass,SYN-425,Hub_277,high,Hub_277,359.9,local,Hub_277
+f000567,1292,Anaktuvuk Pass,SYN-427,Hub_381,high,Hub_381,686.7,local,Hub_381
+f001031,1293,Anaktuvuk Pass,SYN-430,Hub_277,high,Hub_277,322.4,local,Hub_277
+f000876,1294,Anaktuvuk Pass,SYN-428,Hub_277,high,Hub_277,201.4,local,Hub_277
+f000841,1295,Anaktuvuk Pass,SYN-431,Hub_277,high,Hub_381,88.4,local,Hub_381
+f001036,1296,Anaktuvuk Pass,SYN-426,Hub_381,high,Hub_381,514.8,local,Hub_381
+f000305,1297,Anaktuvuk Pass,SYN-429,Hub_277,high,Hub_381,268.0,local,Hub_381
+f001023,1298,Anaktuvuk Pass,SYN-430,Hub_277,high,Hub_277,318.2,local,Hub_277
+f001357,1299,Anaktuvuk Pass,SYN-425,Hub_277,high,Hub_277,369.2,local,Hub_277
+f001806,1300,Anaktuvuk Pass,467,Hub_277,high,Hub_277,50.5,local,Hub_277
+f000187,1301,Anaktuvuk Pass,SYN-428,Hub_277,high,Hub_277,201.4,local,Hub_277
+f001341,1302,Anaktuvuk Pass,SYN-431,Hub_277,high,Hub_381,88.4,local,Hub_381
+f000441,1303,Anaktuvuk Pass,SYN-429,Hub_277,high,Hub_381,268.0,local,Hub_381
+f001423,1304,Anaktuvuk Pass,SYN-430,Hub_277,high,Hub_277,318.2,local,Hub_277
+f000034,1305,Anaktuvuk Pass,SYN-426,Hub_381,high,Hub_381,538.8,local,Hub_381
+f000193,1306,Anaktuvuk Pass,SYN-424,Hub_277,high,Hub_381,343.5,local,Hub_381
+f001441,81,Anchor Point,81,Hub_112,high,Hub_112,5520.9,local,Hub_112
+f000902,1180,Anchor Point,1180,Hub_112,high,Hub_112,5928.3,local,Hub_112
+f000601,34,Anchorage,34,Hub_11,unresolved,Hub_11,1348.6,local,Hub_11
+f001743,38,Anchorage,38,Hub_11,unresolved,Hub_11,8181.1,local,Hub_11
+f001470,55,Anchorage,55,Hub_11,unresolved,Hub_11,5355.7,local,Hub_11
+f001653,56,Anchorage,56,Hub_302,high,Hub_302,34875.7,remote,Hub_302
+f000751,67,Anchorage,67,Hub_11,unresolved,Hub_11,1582.8,local,Hub_11
+f001418,84,Anchorage,84,Hub_11,unresolved,Hub_11,3550.1,local,Hub_11
+f000995,91,Anchorage,91,Hub_11,unresolved,Hub_11,4885.2,local,Hub_11
+f001285,93,Anchorage,93,Hub_11,unresolved,Hub_11,5241.8,local,Hub_11
+f000317,153,Anchorage,153,Hub_11,unresolved,Hub_11,6939.7,local,Hub_11
+f001230,154,Anchorage,154,Hub_11,unresolved,Hub_11,10065.0,local,Hub_11
+f001147,155,Anchorage,154,Hub_11,unresolved,Hub_11,10065.0,local,Hub_11
+f000585,156,Anchorage,154,Hub_11,unresolved,Hub_11,10065.0,local,Hub_11
+f000612,168,Anchorage,168,Hub_11,unresolved,Hub_11,1362.3,local,Hub_11
+f001638,171,Anchorage,153,Hub_11,unresolved,Hub_11,6939.7,local,Hub_11
+f000907,367,Anchorage,367,Hub_11,unresolved,Hub_11,815.4,local,Hub_11
+f000660,526,Anchorage,526,Hub_11,unresolved,Hub_11,5704.0,local,Hub_11
+f001406,539,Anchorage,539,Hub_11,unresolved,Hub_11,6065.9,local,Hub_11
+f000392,557,Anchorage,557,Hub_11,unresolved,Hub_11,7970.3,local,Hub_11
+f000782,558,Anchorage,558,Hub_11,unresolved,Hub_11,4861.7,local,Hub_11
+f000355,561,Anchorage,561,Hub_11,unresolved,Hub_11,11729.7,local,Hub_11
+f000818,562,Anchorage,562,Hub_11,unresolved,Hub_11,6354.4,local,Hub_11
+f000211,564,Anchorage,564,Hub_11,unresolved,Hub_11,5401.4,local,Hub_11
+f001352,566,Anchorage,566,Hub_11,unresolved,Hub_11,7152.5,local,Hub_11
+f001193,567,Anchorage,567,Hub_11,unresolved,Hub_11,6879.3,local,Hub_11
+f001260,568,Anchorage,,,not built (no mode/capacity),Hub_11,4073.7,local,Hub_11
+f000013,569,Anchorage,,,not built (no mode/capacity),Hub_11,3829.4,local,Hub_11
+f000053,570,Anchorage,570,Hub_11,unresolved,Hub_11,5732.1,local,Hub_11
+f000727,571,Anchorage,571,Hub_11,unresolved,Hub_11,8953.6,local,Hub_11
+f000072,572,Anchorage,572,Hub_11,unresolved,Hub_11,7269.7,local,Hub_11
+f001731,573,Anchorage,573,Hub_11,unresolved,Hub_11,2275.8,local,Hub_11
+f000273,574,Anchorage,574,Hub_11,unresolved,Hub_11,5437.0,local,Hub_11
+f000192,575,Anchorage,575,Hub_11,unresolved,Hub_11,5788.9,local,Hub_11
+f000614,576,Anchorage,576,Hub_11,unresolved,Hub_304,994.8,local,Hub_304
+f000160,577,Anchorage,577,Hub_11,unresolved,Hub_11,3681.7,local,Hub_11
+f001253,578,Anchorage,578,Hub_11,unresolved,Hub_11,2043.8,local,Hub_11
+f001252,580,Anchorage,580,Hub_11,unresolved,Hub_304,4648.8,local,Hub_304
+f000702,581,Anchorage,581,Hub_11,unresolved,Hub_11,6815.4,local,Hub_11
+f001224,583,Anchorage,583,Hub_11,unresolved,Hub_11,5548.4,local,Hub_11
+f001343,584,Anchorage,584,Hub_11,unresolved,Hub_11,5770.4,local,Hub_11
+f000363,586,Anchorage,586,Hub_11,unresolved,Hub_11,3568.1,local,Hub_11
+f000402,594,Anchorage,594,Hub_11,unresolved,Hub_11,4640.5,local,Hub_11
+f001102,602,Anchorage,602,Hub_11,unresolved,Hub_11,6383.7,local,Hub_11
+f001144,607,Anchorage,607,Hub_11,unresolved,Hub_11,6792.8,local,Hub_11
+f000075,675,Anchorage,675,Hub_11,unresolved,Hub_11,3264.0,local,Hub_11
+f000210,678,Anchorage,,,not built (no mode/capacity),Hub_11,5299.2,local,Hub_11
+f000583,746,Anchorage,746,Hub_11,unresolved,Hub_11,2636.0,local,Hub_11
+f000633,1010,Anchorage,1010,Hub_11,unresolved,Hub_11,6284.1,local,Hub_11
+f000398,1021,Anchorage,1021,Hub_11,unresolved,Hub_11,5105.6,local,Hub_11
+f000288,1031,Anchorage,153,Hub_11,unresolved,Hub_11,6940.8,local,Hub_11
+f000477,1032,Anchorage,1032,Hub_11,unresolved,Hub_11,7435.0,local,Hub_11
+f001017,1033,Anchorage,1033,Hub_11,unresolved,Hub_11,8788.3,local,Hub_11
+f000484,1034,Anchorage,1034,Hub_11,unresolved,Hub_11,12196.4,local,Hub_11
+f001503,1112,Anchorage,1112,Hub_11,unresolved,Hub_11,4819.9,local,Hub_11
+f000265,1115,Anchorage,1115,Hub_11,unresolved,Hub_11,2928.8,local,Hub_11
+f000220,1116,Anchorage,1116,Hub_11,unresolved,Hub_11,2018.9,local,Hub_11
+f000682,1147,Anchorage,1147,Hub_11,unresolved,Hub_304,5449.7,local,Hub_304
+f000748,1148,Anchorage,1148,Hub_11,unresolved,Hub_11,6270.6,local,Hub_11
+f000365,1149,Anchorage,1149,Hub_11,unresolved,Hub_11,1532.5,local,Hub_11
+f001551,1159,Anchorage,1159,Hub_11,unresolved,Hub_11,7127.5,local,Hub_11
+f001755,1178,Anchorage,1178,Hub_11,unresolved,Hub_11,4584.2,local,Hub_11
+f001018,1179,Anchorage,1179,Hub_11,unresolved,Hub_11,1942.5,local,Hub_11
+f000313,1216,Anchorage,1216,Hub_11,unresolved,Hub_11,7985.5,local,Hub_11
+f000547,1226,Anchorage,1226,Hub_11,unresolved,Hub_11,4439.6,local,Hub_11
+f001495,1239,Anchorage,1239,Hub_11,unresolved,Hub_11,4866.6,local,Hub_11
+f000644,1248,Anchorage,1248,Hub_11,unresolved,Hub_11,7571.1,local,Hub_11
+f001535,1258,Anchorage,1258,Hub_11,unresolved,Hub_11,7115.6,local,Hub_11
+f001114,986,Anderson,986,Hub_366,high,Hub_208,3303.7,local,Hub_208
+f000235,987,Anderson,987,Hub_366,high,Hub_366,4357.4,local,Hub_366
+f000006,122,Angoon,122,Hub_142,high,Hub_142,275.9,local,Hub_142
+f000973,871,Angoon,871,Hub_142,high,Hub_142,411.7,local,Hub_142
+f001425,1307,Angoon,871,Hub_142,high,Hub_142,403.5,local,Hub_142
+f000898,1308,Angoon,SYN-94,Hub_142,high,Hub_142,886.9,local,Hub_142
+f001356,444,Aniak,444,Hub_274,high,Hub_274,1124.8,local,Hub_274
+f000681,744,Aniak,744,Hub_274,high,Hub_274,3257.6,local,Hub_274
+f000146,901,Aniak,901,Hub_274,high,Hub_274,1344.6,local,Hub_274
+f001098,1160,Aniak,,,not built (no mode/capacity),Hub_274,72.2,local,Hub_274
+f001650,1309,Aniak,SYN-645,Hub_274,high,Hub_274,990.8,local,Hub_274
+f001726,1310,Aniak,SYN-640,Hub_274,high,Hub_274,108.1,local,Hub_274
+f000622,1311,Aniak,SYN-643,Hub_274,high,Hub_274,357.7,local,Hub_274
+f001533,1312,Aniak,SYN-644,Hub_274,high,Hub_274,407.6,local,Hub_274
+f001201,1313,Aniak,SYN-641,Hub_274,high,Hub_274,305.7,local,Hub_274
+f001675,1314,Aniak,SYN-641,Hub_274,high,Hub_274,305.7,local,Hub_274
+f001254,1315,Aniak,SYN-646,Hub_274,high,Hub_274,1045.9,local,Hub_274
+f000564,1316,Aniak,SYN-642,Hub_274,high,Hub_274,275.6,local,Hub_274
+f000194,1317,Aniak,SYN-647,Hub_274,high,Hub_274,1002.5,local,Hub_274
+f001696,1318,Aniak,SYN-650,Hub_274,high,Hub_274,883.0,local,Hub_274
+f000271,325,Anvik,325,Hub_15,high,Hub_15,304.0,local,Hub_15
+f000963,906,Anvik,906,Hub_15,high,Hub_15,215.3,local,Hub_15
+f000667,1014,Anvik,1014,Hub_15,high,Hub_15,283.8,local,Hub_15
+f001298,1319,Anvik,SYN-617,Hub_15,high,Hub_15,165.8,local,Hub_15
+f000115,1320,Anvik,SYN-617,Hub_15,high,Hub_15,165.8,local,Hub_15
+f001479,1321,Anvik,SYN-622,Hub_15,high,Hub_15,837.7,local,Hub_15
+f001323,1322,Anvik,SYN-618,Hub_15,high,Hub_15,177.7,local,Hub_15
+f001481,1323,Anvik,SYN-618,Hub_15,high,Hub_15,184.6,local,Hub_15
+f001561,903,Arctic Village,903,Hub_361,high,Hub_361,1117.0,local,Hub_361
+f001143,904,Arctic Village,903,Hub_361,high,Hub_361,1117.0,local,Hub_361
+f000955,1324,Arctic Village,SYN-365,Hub_361,high,Hub_378,289.4,local,Hub_361
+f001543,1325,Arctic Village,903,Hub_361,high,Hub_361,1111.8,local,Hub_361
+f000155,1326,Arctic Village,SYN-364,Hub_361,high,Hub_378,117.5,local,Hub_361
+f001213,1327,Arctic Village,SYN-362,Hub_361,high,Hub_378,47.3,local,Hub_361
+f001626,456,Atka,456,Hub_275,high,Hub_275,1400.8,local,Hub_275
+f001203,1328,Atka,SYN-445,Hub_275,high,Hub_275,419.8,local,Hub_275
+f001742,1329,Atka,SYN-446,Hub_275,high,Hub_275,729.7,local,Hub_275
+f001684,1330,Atka,SYN-445,Hub_275,high,Hub_275,420.4,local,Hub_275
+f001383,392,Atmautluak,392,Hub_231,hub lost in snapping,Hub_387,193.3,local,Hub_266
+f000546,995,Atmautluak,995,Hub_196,hub lost in snapping,Hub_387,692.0,local,Hub_387
+f001522,996,Atmautluak,995,Hub_196,hub lost in snapping,Hub_387,685.6,local,Hub_387
+f000889,997,Atmautluak,995,Hub_196,hub lost in snapping,Hub_387,679.7,local,Hub_387
+f001665,1331,Atmautluak,SYN-573,Hub_196,hub lost in snapping,Hub_387,475.7,local,Hub_387
+f000541,468,Atqasuk,468,Hub_278,high,Hub_278,248.7,local,Hub_278
+f000157,1332,Atqasuk,SYN-867,Hub_278,high,Hub_278,125.4,local,Hub_278
+f001139,1333,Atqasuk,468,Hub_278,high,Hub_278,238.5,local,Hub_278
+f001026,1334,Atqasuk,SYN-869,Hub_278,high,Hub_278,145.3,local,Hub_278
+f000293,1335,Atqasuk,SYN-868,Hub_278,high,Hub_278,90.7,local,Hub_278
+f001703,1336,Atqasuk,SYN-871,Hub_278,high,Hub_278,97.4,local,Hub_278
+f000854,1337,Atqasuk,SYN-870,Hub_278,high,Hub_278,71.6,local,Hub_278
+f000330,1338,Atqasuk,SYN-874,Hub_278,high,Hub_278,251.5,local,Hub_278
+f000989,1339,Atqasuk,SYN-872,Hub_278,high,Hub_278,40.6,local,Hub_278
+f000015,1340,Atqasuk,SYN-875,Hub_278,high,Hub_278,481.8,local,Hub_278
+f001337,1341,Atqasuk,468,Hub_278,high,Hub_278,238.5,local,Hub_278
+f000294,1342,Atqasuk,SYN-868,Hub_278,high,Hub_278,90.7,local,Hub_278
+f000103,1343,Atqasuk,SYN-874,Hub_278,high,Hub_278,251.5,local,Hub_278
+f000078,1344,Atqasuk,SYN-867,Hub_278,high,Hub_278,125.4,local,Hub_278
+f000495,1345,Atqasuk,SYN-873,Hub_278,high,Hub_278,155.3,local,Hub_278
+f001475,1346,Atqasuk,SYN-870,Hub_278,high,Hub_278,94.4,local,Hub_278
+f001115,1347,Atqasuk,SYN-874,Hub_278,high,Hub_278,254.9,local,Hub_278
+f001809,265,Barrow,265,Hub_210,high,Hub_210,1347.9,local,Hub_210
+f000793,469,Barrow,469,Hub_210,high,Hub_210,751.6,local,Hub_210
+f000580,605,Barrow,605,Hub_210,high,Hub_210,1144.3,local,Hub_210
+f000566,765,Barrow,765,Hub_210,high,Hub_210,2394.6,local,Hub_210
+f000530,878,Barrow,878,Hub_210,high,Hub_210,5105.0,local,Hub_210
+f000700,283,Beaver,283,Hub_218,high,Hub_218,164.2,local,Hub_218
+f001022,958,Beaver,958,Hub_218,high,Hub_218,124.0,local,Hub_218
+f000061,959,Beaver,958,Hub_218,high,Hub_218,124.0,local,Hub_218
+f001368,1348,Beaver,283,Hub_218,high,Hub_218,160.6,local,Hub_218
+f001188,227,Bethel,227,Hub_28,high,Hub_28,2728.5,local,Hub_28
+f000254,228,Bethel,228,Hub_28,high,Hub_28,2813.2,local,Hub_28
+f001116,22,Bethel,22,Hub_28,high,Hub_28,1523.8,local,Hub_28
+f001397,72,Bethel,72,Hub_28,high,Hub_28,3317.1,local,Hub_28
+f000325,172,Bethel,172,Hub_28,high,Hub_28,1861.4,local,Hub_28
+f000250,393,Bethel,393,Hub_28,high,Hub_28,2221.5,local,Hub_28
+f000808,597,Bethel,597,Hub_28,high,Hub_28,720.1,local,Hub_28
+f000283,600,Bethel,600,Hub_308,high,Hub_308,54511.3,remote,Hub_308
+f000838,750,Bethel,750,Hub_28,high,Hub_28,1552.0,local,Hub_28
+f001091,766,Bethel,766,Hub_28,high,Hub_28,2361.2,local,Hub_28
+f000481,892,Bethel,892,Hub_28,high,Hub_28,1724.2,local,Hub_28
+f001651,893,Bethel,893,Hub_28,high,Hub_28,2133.3,local,Hub_28
+f001833,1035,Bethel,1035,Hub_28,high,Hub_28,4188.3,local,Hub_28
+f000737,1036,Bethel,1036,Hub_28,high,Hub_28,2131.2,local,Hub_28
+f000087,1349,Bettles,SYN-354,Hub_377,high,Hub_23,69.3,local,Hub_377
+f000466,1350,Bettles,SYN-356,Hub_377,high,Hub_103,84.2,local,Hub_103
+f000762,1351,Bettles,SYN-359,Hub_377,high,Hub_103,138.3,local,Hub_103
+f001757,1352,Bettles,SYN-352,Hub_377,high,Hub_377,67.0,local,Hub_377
+f000105,1353,Bettles,SYN-353,Hub_377,high,Hub_377,61.6,local,Hub_377
+f000060,23,Bettles Field,23,Hub_316,hub lost in snapping,Hub_23,61450.8,remote,Hub_23
+f001640,284,Bettles Field,284,Hub_103,high,Hub_103,116.4,local,Hub_103
+f000436,621,Bettles Field,,,not built (no mode/capacity),Hub_103,4348.0,local,Hub_103
+f001430,767,Bettles Field,767,Hub_316,hub lost in snapping,Hub_33,27593.4,remote,Hub_341
+f000498,768,Bettles Field,768,Hub_316,hub lost in snapping,Hub_103,64966.3,remote,Hub_103
+f000339,1167,Bettles Field,1167,Hub_103,high,Hub_103,42.8,local,Hub_103
+f000387,1037,Big Lake,1037,Hub_29,high,Hub_29,2185.8,local,Hub_29
+f000056,285,Birch Creek,285,Hub_219,high,Hub_219,399.6,local,Hub_219
+f000867,1354,Birch Creek,SYN-366,Hub_219,high,Hub_219,269.1,local,Hub_219
+f001721,1355,Birch Creek,SYN-366,Hub_219,high,Hub_219,269.1,local,Hub_219
+f001799,1356,Birch Creek,SYN-366,Hub_219,high,Hub_219,269.1,local,Hub_219
+f001145,1357,Birch Creek,SYN-366,Hub_219,high,Hub_219,269.1,local,Hub_219
+f001694,528,Birchwood,528,Hub_293,high,Hub_293,185.6,local,Hub_293
+f000135,1181,Bird Creek,1181,Hub_113,high,Hub_113,72.7,local,Hub_113
+f001206,257,Brevig Mission,257,Hub_205,high,Hub_205,87.0,local,Hub_205
+f001705,907,Brevig Mission,907,Hub_205,high,Hub_205,277.8,local,Hub_205
+f001483,1358,Brevig Mission,SYN-522,Hub_205,high,Hub_205,88.9,local,Hub_205
+f001332,1359,Brevig Mission,SYN-522,Hub_205,high,Hub_205,88.9,local,Hub_205
+f000575,1360,Brevig Mission,SYN-524,Hub_205,high,Hub_205,46.8,local,Hub_205
+f000255,1361,Brevig Mission,SYN-520,Hub_205,high,Hub_205,355.1,local,Hub_205
+f000198,1362,Brevig Mission,SYN-522,Hub_205,high,Hub_205,88.9,local,Hub_205
+f000356,1363,Brevig Mission,,,not built (no mode/capacity),Hub_205,323.9,local,Hub_205
+f000857,182,Buckland,182,Hub_178,high,Hub_178,117.9,local,Hub_178
+f001158,183,Buckland,182,Hub_178,high,Hub_178,121.9,local,Hub_178
+f000944,184,Buckland,182,Hub_178,high,Hub_178,119.7,local,Hub_178
+f000083,185,Buckland,185,Hub_178,high,Hub_178,425.6,local,Hub_178
+f000091,186,Buckland,182,Hub_178,high,Hub_178,119.7,local,Hub_178
+f001170,328,Buckland,328,Hub_178,high,Hub_83,79.5,local,Hub_83
+f000521,1364,Buckland,SYN-917,Hub_178,high,Hub_178,37.6,local,Hub_178
+f001113,276,Cantwell,276,Hub_155,high,Hub_155,2812.4,local,Hub_155
+f000996,527,Cantwell,527,Hub_155,high,Hub_155,547.2,local,Hub_155
+f001411,988,Cantwell,988,Hub_155,high,Hub_155,1216.5,local,Hub_155
+f001798,1244,Cantwell,1244,Hub_155,high,Hub_155,1320.6,local,Hub_155
+f000628,1043,Cape Yakataga,1043,Hub_32,high,Hub_32,140201.3,remote,Hub_32
+f000041,1044,Cape Yakataga,1043,Hub_32,high,Hub_32,140201.3,remote,Hub_32
+f001002,1045,Cape Yakataga,1045,Hub_32,high,Hub_32,140205.0,remote,Hub_32
+f001311,1046,Cape Yakataga,1043,Hub_32,high,Hub_32,140201.3,remote,Hub_32
+f000256,286,Central,286,Hub_220,high,Hub_220,416.5,local,Hub_220
+f000285,287,Chalkyitsik,287,Hub_221,high,Hub_221,199.0,local,Hub_221
+f000424,475,Chalkyitsik,475,Hub_221,high,Hub_221,54.2,local,Hub_221
+f001277,476,Chalkyitsik,475,Hub_221,high,Hub_221,54.2,local,Hub_221
+f000862,477,Chalkyitsik,477,Hub_221,high,Hub_221,151.3,local,Hub_221
+f000631,1365,Chalkyitsik,SYN-253,Hub_221,high,Hub_221,467.1,local,Hub_221
+f001487,1366,Chalkyitsik,SYN-255,Hub_221,high,Hub_221,111.1,local,Hub_221
+f001736,1367,Chalkyitsik,475,Hub_221,high,Hub_221,54.9,local,Hub_221
+f001282,1368,Chalkyitsik,SYN-253,Hub_221,high,Hub_221,467.1,local,Hub_221
+f001515,1369,Chalkyitsik,SYN-255,Hub_221,high,Hub_221,111.1,local,Hub_221
+f000282,1047,Chandalar,1047,Hub_33,high,Hub_33,78507.0,remote,Hub_33
+f000918,394,Chefornak,,,not built (no mode/capacity),Hub_391,2251.5,local,Hub_391
+f001307,1370,Chefornak,SYN-652,Hub_391,high,Hub_391,30.7,local,Hub_391
+f000753,1371,Chefornak,SYN-652,Hub_391,high,Hub_391,22.9,local,Hub_391
+f001269,1372,Chefornak,SYN-572,Hub_387,high,Hub_387,629.6,local,Hub_387
+f001632,1373,Chefornak,SYN-572,Hub_387,high,Hub_387,629.6,local,Hub_387
+f001342,1374,Chefornak,SYN-654,Hub_391,high,Hub_391,229.8,local,Hub_391
+f001581,1375,Chefornak,SYN-917,Hub_178,high,Hub_178,37.6,local,Hub_178
+f000637,1376,Chefornak,SYN-653,Hub_391,high,Hub_391,136.4,local,Hub_391
+f000434,372,Chenega,372,Hub_246,high,Hub_246,2021.2,local,Hub_246
+f000108,882,Chenega,882,Hub_246,high,Hub_246,2965.1,local,Hub_246
+f001462,965,Chenega,965,Hub_246,high,Hub_246,606.6,local,Hub_246
+f001765,1377,Chenega,SYN-1028,Hub_246,high,Hub_246,634.8,local,Hub_246
+f001394,1378,Chenega,SYN-1029,Hub_246,high,Hub_246,753.3,local,Hub_246
+f000863,1379,Chenega,965,Hub_246,high,Hub_246,592.7,local,Hub_246
+f001728,395,Chevak,395,Hub_258,high,Hub_258,36.7,local,Hub_258
+f000516,908,Chevak,,,not built (no mode/capacity),Hub_363,496.7,local,Hub_363
+f000189,962,Chevak,962,Hub_363,high,Hub_363,346.0,local,Hub_363
+f000134,1380,Chevak,SYN-690,Hub_363,high,Hub_363,120.0,local,Hub_363
+f001029,1381,Chevak,SYN-694,Hub_363,high,Hub_363,257.6,local,Hub_363
+f001374,1382,Chevak,SYN-693,Hub_363,high,Hub_363,83.5,local,Hub_363
+f000830,1383,Chevak,SYN-692,Hub_363,high,Hub_363,34.9,local,Hub_363
+f001344,1384,Chevak,SYN-691,Hub_363,high,Hub_363,192.9,local,Hub_363
+f001514,1385,Chevak,SYN-520,Hub_205,high,Hub_205,355.1,local,Hub_205
+f001457,1386,Chevak,SYN-690,Hub_363,high,Hub_363,120.0,local,Hub_363
+f001225,1387,Chevak,SYN-692,Hub_363,high,Hub_363,20.1,local,Hub_363
+f000382,307,Chicken,307,Hub_237,high,Hub_194,16.7,local,Hub_237
+f001392,313,Chicken,313,Hub_237,high,Hub_237,7869.5,local,Hub_237
+f000171,885,Chignik,885,Hub_122,high,Hub_122,152.8,local,Hub_122
+f000096,1199,Chignik,1199,Hub_122,high,Hub_122,77.9,local,Hub_122
+f001509,1388,Chignik,SYN-1321,Hub_122,high,Hub_122,175.4,local,Hub_122
+f000712,1389,Chignik,SYN-1322,Hub_122,high,Hub_122,171.9,local,Hub_122
+f000438,1390,Chignik,SYN-1322,Hub_122,high,Hub_122,178.0,local,Hub_122
+f000636,83,Chignik Lagoon,83,Hub_124,high,Hub_124,276.1,local,Hub_124
+f001054,540,Chignik Lagoon,540,Hub_297,high,Hub_297,275.0,local,Hub_297
+f001414,1200,Chignik Lagoon,1200,Hub_124,high,Hub_124,81.4,local,Hub_124
+f001499,1391,Chignik Lagoon,SYN-1317,Hub_124,high,Hub_124,188.0,local,Hub_124
+f001674,1392,Chignik Lagoon,SYN-1317,Hub_124,high,Hub_124,188.0,local,Hub_124
+f000928,1393,Chignik Lagoon,SYN-1317,Hub_124,high,Hub_124,188.0,local,Hub_124
+f001184,1394,Chignik Lagoon,SYN-1317,Hub_124,high,Hub_124,188.0,local,Hub_124
+f000951,1395,Chignik Lagoon,SYN-1317,Hub_124,high,Hub_124,188.3,local,Hub_124
+f001142,1396,Chignik Lagoon,SYN-1317,Hub_124,high,Hub_124,188.3,local,Hub_124
+f001598,1397,Chignik Lagoon,SYN-1317,Hub_124,high,Hub_124,188.3,local,Hub_124
+f001442,1201,Chignik Lake,1201,Hub_125,high,Hub_125,59.0,local,Hub_125
+f000651,1398,Chignik Lake,SYN-1314,Hub_125,high,Hub_125,88.7,local,Hub_125
+f001720,1399,Chignik Lake,SYN-1314,Hub_125,high,Hub_125,88.7,local,Hub_125
+f000590,1400,Chignik Lake,SYN-1314,Hub_125,high,Hub_125,88.7,local,Hub_125
+f001154,499,Chiniak,499,Hub_287,high,Hub_287,160.2,local,Hub_287
+f000706,623,Chistochina,623,Hub_309,high,Hub_309,38348.7,remote,Hub_309
+f000848,300,Chitina,300,Hub_230,high,Hub_230,314.4,local,Hub_230
+f001258,401,Chuathbaluk,401,Hub_97,high,Hub_97,824.0,local,Hub_97
+f000663,963,Chuathbaluk,963,Hub_97,high,Hub_97,501.4,local,Hub_97
+f001793,964,Chuathbaluk,963,Hub_97,high,Hub_97,508.0,local,Hub_97
+f000304,1161,Chuathbaluk,1161,Hub_97,high,Hub_97,552.6,local,Hub_97
+f000792,1401,Chuathbaluk,SYN-637,Hub_97,high,Hub_97,527.3,local,Hub_97
+f001553,1402,Chuathbaluk,SYN-635,Hub_97,high,Hub_97,29.9,local,Hub_97
+f001068,1403,Chuathbaluk,SYN-635,Hub_97,high,Hub_97,29.9,local,Hub_97
+f001544,1404,Chuathbaluk,SYN-640,Hub_274,high,Hub_274,108.1,local,Hub_274
+f001308,1405,Chuathbaluk,SYN-637,Hub_97,high,Hub_97,525.1,local,Hub_97
+f001767,368,Chugiak,368,Hub_243,high,Hub_243,114.3,local,Hub_243
+f001562,1013,Circle,1013,Hub_14,high,Hub_14,51.9,local,Hub_14
+f001783,110,Clarks Point,110,Hub_65,high,Hub_65,347.7,local,Hub_65
+f001658,402,Clarks Point,402,Hub_65,high,Hub_65,530.9,local,Hub_65
+f000369,1406,Clark's Point,SYN-1399,Hub_372,high,Hub_372,579.5,local,Hub_372
+f000225,1407,Clark's Point,SYN-1399,Hub_372,high,Hub_372,579.5,local,Hub_372
+f001587,1408,Clark's Point,SYN-1398,Hub_372,high,Hub_372,436.6,local,Hub_372
+f001698,1409,Clark's Point,SYN-1400,Hub_372,high,Hub_372,100.5,local,Hub_372
+f001689,1410,Clark's Point,SYN-1400,Hub_372,high,Hub_372,100.5,local,Hub_372
+f000231,1411,Clark's Point,SYN-1401,Hub_372,high,Hub_372,113.8,local,Hub_372
+f001187,262,Clear,262,Hub_208,high,Hub_208,475.4,local,Hub_208
+f001348,426,Coffman Cove,426,Hub_139,high,Hub_139,34.4,local,Hub_139
+f000934,624,Coffman Cove,624,Hub_139,high,Hub_388,238.3,local,Hub_139
+f000263,1217,Coffman Cove,1217,Hub_139,high,Hub_139,183.8,local,Hub_139
+f001242,1412,Coffman Cove,SYN-62,Hub_139,high,Hub_139,482.6,local,Hub_139
+f000625,1413,Coffman Cove,SYN-60,Hub_139,high,Hub_139,122.4,local,Hub_139
+f001823,21,Cold Bay,21,Hub_37,high,Hub_37,64.6,local,Hub_37
+f000084,139,Cold Bay,139,Hub_37,high,Hub_37,125.4,local,Hub_37
+f001536,440,Cold Bay,440,Hub_37,high,Hub_37,63.6,local,Hub_37
+f001257,1052,Cold Bay,1052,Hub_37,high,Hub_37,376.1,local,Hub_37
+f000046,1053,Cold Bay,1052,Hub_37,high,Hub_37,387.5,local,Hub_37
+f001071,1414,Cold Bay,SYN-1303,Hub_37,high,Hub_37,316.8,local,Hub_37
+f000019,1415,Cold Bay,SYN-1300,Hub_37,high,Hub_37,125.4,local,Hub_37
+f001573,267,Coldfoot,267,Hub_211,high,Hub_211,331.4,local,Hub_211
+f001835,770,Coldfoot,770,Hub_343,hub lost in snapping,Hub_211,4059.3,local,Hub_377
+f000268,772,Coldfoot,772,Hub_343,hub lost in snapping,Hub_104,511172.1,remote,Hub_104
+f000224,375,Cooper Landing,375,Hub_248,high,Hub_248,342.8,local,Hub_248
+f001616,1175,Copper Center,1175,Hub_109,high,Hub_109,831.2,local,Hub_109
+f000175,24,Cordova,24,Hub_38,high,Hub_241,458.4,local,Hub_38
+f001439,77,Cordova,77,Hub_38,high,Hub_38,3395.9,local,Hub_38
+f000704,126,Cordova,126,Hub_38,high,Hub_38,2893.4,local,Hub_38
+f000430,127,Cordova,127,Hub_38,high,Hub_38,2854.7,local,Hub_38
+f001537,195,Cordova,195,Hub_38,high,Hub_38,2954.2,local,Hub_38
+f000940,880,Cordova,880,Hub_42,high,Hub_42,45150.8,remote,Hub_42
+f000856,881,Cordova,881,Hub_42,high,Hub_117,43273.6,remote,Hub_246
+f001528,884,Cordova,884,Hub_42,high,Hub_117,32703.8,remote,Hub_42
+f000916,886,Cordova,886,Hub_38,high,Hub_38,3450.0,local,Hub_38
+f001421,894,Cordova,894,Hub_38,high,Hub_38,3175.8,local,Hub_38
+f000303,984,Cordova,984,Hub_38,high,Hub_38,2903.9,local,Hub_38
+f000675,1054,Cordova,1054,Hub_38,high,Hub_241,646.5,local,Hub_241
+f000380,1055,Cordova,1055,Hub_38,high,Hub_38,2841.1,local,Hub_38
+f000051,1062,Cordova,1062,Hub_42,high,Hub_52,38746.9,remote,Hub_52
+f001361,1063,Cordova,1062,Hub_42,high,Hub_52,38746.9,remote,Hub_52
+f000012,553,Craig,553,Hub_301,high,Hub_301,827.6,local,Hub_301
+f000766,625,Craig,625,Hub_301,high,Hub_301,625.1,local,Hub_301
+f000715,626,Craig,626,Hub_301,high,Hub_301,1087.1,local,Hub_301
+f001359,985,Craig,985,Hub_301,high,Hub_301,1250.9,local,Hub_301
+f000697,1416,Craig,SYN-28,Hub_301,high,Hub_301,949.2,local,Hub_301
+f000337,1417,Craig,SYN-24,Hub_301,high,Hub_301,540.2,local,Hub_301
+f000534,1418,Craig,SYN-58,Hub_388,high,Hub_388,119.6,local,Hub_388
+f000855,1419,Craig,SYN-24,Hub_301,high,Hub_301,540.4,local,Hub_301
+f000868,1420,Craig,SYN-23,Hub_301,high,Hub_301,594.2,local,Hub_301
+f001558,1421,Craig,SYN-24,Hub_301,high,Hub_301,540.2,local,Hub_301
+f001120,1422,Craig,SYN-26,Hub_301,high,Hub_301,862.1,local,Hub_301
+f000318,1423,Craig,SYN-25,Hub_301,high,Hub_301,248.2,local,Hub_301
+f000787,1162,Crooked Creek,1162,Hub_98,high,Hub_98,471.2,local,Hub_98
+f001255,1221,Crooked Creek,1221,Hub_98,high,Hub_98,556.2,local,Hub_98
+f001248,1424,Crooked Creek,SYN-1169,Hub_98,high,Hub_98,171.9,local,Hub_98
+f001295,1425,Crooked Creek,SYN-1170,Hub_98,high,Hub_98,1058.4,local,Hub_98
+f000081,1426,Crooked Creek,1221,Hub_98,high,Hub_98,563.3,local,Hub_98
+f001482,376,Crown Point,376,Hub_249,high,Hub_249,413.8,local,Hub_249
+f001794,1427,Deadhorse,,,not built (no mode/capacity),Hub_154,4167.0,local,Hub_154
+f001137,991,Deering,991,Hub_367,high,Hub_367,975.9,local,Hub_367
+f000209,992,Deering,991,Hub_367,high,Hub_367,967.2,local,Hub_367
+f001223,993,Deering,991,Hub_367,high,Hub_367,967.2,local,Hub_367
+f001818,994,Deering,991,Hub_367,high,Hub_367,959.9,local,Hub_367
+f001614,1428,Deering,SYN-915,Hub_367,high,Hub_367,1146.7,local,Hub_367
+f000497,308,Delta Junction,308,Hub_24,high,Hub_24,430.6,local,Hub_24
+f000847,497,Delta Junction,497,Hub_24,high,Hub_24,794.1,local,Hub_24
+f001088,541,Delta Junction,541,Hub_298,high,Hub_298,2995.8,local,Hub_298
+f001084,550,Delta Junction,550,Hub_300,high,Hub_120,51407.4,remote,Hub_120
+f000418,706,Delta Junction,706,Hub_24,high,Hub_24,2761.4,local,Hub_24
+f001263,773,Delta Junction,773,Hub_300,high,Hub_285,38901.8,remote,Hub_354
+f001236,999,Delta Junction,999,Hub_24,high,Hub_24,92.6,local,Hub_24
+f000161,1023,Delta Junction,1023,Hub_24,high,Hub_24,1501.1,local,Hub_24
+f000917,1197,Delta Junction,1197,Hub_120,high,Hub_120,78.0,local,Hub_120
+f000326,1166,Denali National Park,1166,Hub_102,high,Hub_102,29.4,local,Hub_102
+f000011,18,Dillingham,18,Hub_177,high,Hub_177,1442.0,local,Hub_177
+f001177,73,Dillingham,73,Hub_177,high,Hub_177,5824.3,local,Hub_177
+f000816,403,Dillingham,403,Hub_177,high,Hub_177,1582.5,local,Hub_177
+f000018,542,Dillingham,542,Hub_177,high,Hub_177,1281.1,local,Hub_177
+f001032,751,Dillingham,751,Hub_177,high,Hub_177,1527.6,local,Hub_177
+f001195,774,Dillingham,774,Hub_177,high,Hub_177,1835.6,local,Hub_177
+f001044,863,Dillingham,863,Hub_177,high,Hub_177,3308.5,local,Hub_177
+f001520,864,Dillingham,864,Hub_177,high,Hub_177,3434.3,local,Hub_177
+f000981,895,Dillingham,895,Hub_177,high,Hub_177,1577.3,local,Hub_177
+f001604,19,Diomede,19,Hub_180,high,Hub_180,41650.9,remote,Hub_180
+f000205,133,Dot Lake,133,Hub_162,high,Hub_162,292.7,local,Hub_162
+f001305,163,Dutch Harbor,163,Hub_34,high,Hub_34,1274.8,local,Hub_34
+f000895,443,Dutch Harbor,443,Hub_34,high,Hub_34,164.1,local,Hub_34
+f000335,865,Dutch Harbor,865,Hub_34,high,Hub_34,2635.4,local,Hub_34
+f000532,1049,Dutch Harbor,1049,Hub_34,high,Hub_34,1097.6,local,Hub_34
+f000870,309,Eagle,309,Hub_104,high,Hub_104,56.4,local,Hub_104
+f001376,629,Eagle,629,Hub_104,high,Hub_104,251.6,local,Hub_104
+f000864,775,Eagle,775,Hub_156,high,Hub_156,369.4,local,Hub_156
+f000837,1168,Eagle,1168,Hub_104,high,Hub_104,258.1,local,Hub_104
+f001576,1249,Eagle,1249,Hub_156,high,Hub_156,221.1,local,Hub_156
+f000456,563,Eagle River,563,Hub_303,high,Hub_303,1019.9,local,Hub_303
+f001199,579,Eagle River,579,Hub_303,high,Hub_303,2198.7,local,Hub_303
+f000277,582,Eagle River,582,Hub_303,high,Hub_293,4612.8,local,Hub_293
+f001617,585,Eagle River,585,Hub_303,high,Hub_303,2277.0,local,Hub_303
+f001347,596,Eagle River,596,Hub_303,high,Hub_303,1984.1,local,Hub_303
+f000722,967,Edna Bay,967,Hub_140,high,Hub_140,1823.2,local,Hub_140
+f000570,1218,Edna Bay,1218,Hub_140,high,Hub_140,1949.2,local,Hub_140
+f000839,396,Eek,396,Hub_259,high,Hub_259,669.7,local,Hub_259
+f000849,551,Eek,551,Hub_259,high,Hub_259,126.7,local,Hub_259
+f000142,909,Eek,,,not built (no mode/capacity),Hub_259,142.9,local,Hub_259
+f001647,1429,Eek,SYN-1338,Hub_259,high,Hub_259,435.3,local,Hub_259
+f000165,1430,Eek,SYN-1339,Hub_259,high,Hub_259,565.8,local,Hub_259
+f000873,518,Egegik,518,Hub_126,high,Hub_126,229.5,local,Hub_126
+f001506,866,Egegik,866,Hub_126,high,Hub_126,155.8,local,Hub_126
+f001637,1202,Egegik,1202,Hub_126,high,Hub_126,183.2,local,Hub_126
+f000550,1431,Egegik,SYN-1424,Hub_126,high,Hub_126,191.4,local,Hub_126
+f001241,1432,Egegik,SYN-1420,Hub_126,high,Hub_126,155.8,local,Hub_126
+f001326,1433,Egegik,SYN-1425,Hub_126,high,Hub_126,531.1,local,Hub_126
+f000901,1434,Egegik,SYN-1420,Hub_126,high,Hub_126,196.9,local,Hub_126
+f001153,1435,Egegik,SYN-1426,Hub_126,high,Hub_126,922.2,local,Hub_126
+f000308,1436,Egegik,SYN-1420,Hub_126,high,Hub_126,154.7,local,Hub_126
+f001005,220,Eielson Afb,220,Hub_193,high,Hub_216,36586.9,remote,Hub_193
+f000970,217,Eielson Afb,217,Hub_194,"capacity-exact, geography doubtful",Hub_285,10080.8,local,Hub_300
+f000508,51,Eielson Afb,51,Hub_257,hub lost in snapping,Hub_304,2826.2,local,Hub_304
+f000810,219,Eielson Afb,219,Hub_194,"capacity-exact, geography doubtful",Hub_194,18406.6,local,Hub_194
+f001663,214,Eielson Afb,214,Hub_192,high,Hub_354,65928.8,remote,Hub_354
+f000425,215,Eielson Afb,215,Hub_192,high,Hub_250,87471.1,remote,Hub_192
+f001752,216,Eielson Afb,216,Hub_193,high,Hub_193,49424.9,remote,Hub_193
+f001602,218,Eielson Afb,218,Hub_194,"capacity-exact, geography doubtful",Hub_104,27065.4,remote,Hub_104
+f001286,677,Eklutna,676,Hub_329,high,Hub_329,245.9,local,Hub_329
+f000410,404,Ekwok,404,Hub_261,high,Hub_261,216.7,local,Hub_261
+f001644,946,Ekwok,,,not built (no mode/capacity),Hub_261,649.7,local,Hub_261
+f001110,968,Ekwok,,,not built (no mode/capacity),Hub_261,641.2,local,Hub_261
+f000562,1437,Ekwok,SYN-1387,Hub_261,high,Hub_261,251.5,local,Hub_261
+f000385,776,Elfin Cove,776,,dropped/unresolved in hub build,Hub_374,35384.1,remote,Hub_134
+f000568,1438,Elfin Cove,SYN-177,Hub_374,high,Hub_374,26530.3,remote,Hub_374
+f000688,260,Elim,260,Hub_9,high,Hub_9,86.6,local,Hub_9
+f000892,910,Elim,,,not built (no mode/capacity),Hub_9,929.9,local,Hub_9
+f001622,990,Elim,990,Hub_9,high,Hub_9,203.4,local,Hub_9
+f000510,1007,Elim,1007,Hub_9,high,Hub_9,777.3,local,Hub_9
+f000703,1439,Elim,SYN-778,Hub_9,high,Hub_9,245.7,local,Hub_9
+f000455,1440,Elim,SYN-780,Hub_9,high,Hub_9,409.5,local,Hub_9
+f001740,230,Emmonak,230,Hub_6,high,Hub_6,559.9,local,Hub_6
+f001628,332,Emmonak,332,Hub_6,high,Hub_6,1260.1,local,Hub_6
+f001775,661,Emmonak,661,Hub_6,high,Hub_6,451.6,local,Hub_6
+f001062,1002,Emmonak,1002,Hub_6,high,Hub_6,324.5,local,Hub_6
+f000894,1003,Emmonak,1003,Hub_6,high,Hub_6,350.8,local,Hub_6
+f001202,1441,Emmonak,SYN-736,Hub_6,high,Hub_6,592.6,local,Hub_6
+f001416,1442,Emmonak,1002,Hub_6,high,Hub_6,313.8,local,Hub_6
+f000574,1443,Emmonak,1002,Hub_6,high,Hub_6,328.4,local,Hub_6
+f001045,1444,Emmonak,SYN-738,Hub_6,high,Hub_6,1324.6,local,Hub_6
+f000446,1445,Emmonak,SYN-732,Hub_6,high,Hub_6,1291.7,local,Hub_6
+f001319,1022,Evansville,1022,Hub_23,high,Hub_23,61.3,local,Hub_23
+f001097,231,Fairbanks,231,Hub_25,high,Hub_25,1665.4,local,Hub_25
+f000182,233,Fairbanks,231,Hub_25,high,Hub_25,1672.9,local,Hub_25
+f000658,15,Fairbanks,15,Hub_40,"capacity-exact, geography doubtful",Hub_40,2310.2,local,Hub_40
+f000219,57,Fairbanks,57,Hub_25,high,Hub_25,2255.5,local,Hub_25
+f000054,68,Fairbanks,68,Hub_384,hub lost in snapping,Hub_25,3710.8,local,Hub_25
+f001278,99,Fairbanks,99,Hub_25,high,Hub_292,1313.7,local,Hub_292
+f001388,115,Fairbanks,115,Hub_25,high,Hub_25,2246.5,local,Hub_25
+f000022,173,Fairbanks,173,Hub_40,"capacity-exact, geography doubtful",Hub_40,1535.8,local,Hub_40
+f000488,209,Fairbanks,209,Hub_39,high,Hub_39,8284.0,local,Hub_39
+f001623,255,Fairbanks,255,Hub_25,high,Hub_25,2140.3,local,Hub_25
+f000906,280,Fairbanks,280,Hub_25,high,Hub_25,2373.7,local,Hub_25
+f001270,522,Fairbanks,522,Hub_292,high,Hub_292,84.8,local,Hub_292
+f001150,523,Fairbanks,523,Hub_39,high,Hub_39,7192.4,local,Hub_39
+f001508,524,Fairbanks,524,Hub_25,high,Hub_25,1938.5,local,Hub_25
+f001345,525,Fairbanks,525,Hub_25,high,Hub_25,2465.4,local,Hub_25
+f000388,529,Fairbanks,529,Hub_25,high,Hub_25,2194.2,local,Hub_25
+f000351,538,Fairbanks,538,Hub_25,high,Hub_25,2105.3,local,Hub_25
+f001274,543,Fairbanks,543,Hub_25,high,Hub_292,3324.3,local,Hub_292
+f000582,544,Fairbanks,544,Hub_25,high,Hub_25,1945.3,local,Hub_25
+f001033,590,Fairbanks,590,Hub_25,high,Hub_25,1592.5,local,Hub_25
+f001300,609,Fairbanks,609,Hub_25,high,Hub_25,2331.3,local,Hub_25
+f000076,654,Fairbanks,654,Hub_4,high,Hub_4,2181.6,local,Hub_4
+f001334,655,Fairbanks,655,Hub_25,high,Hub_25,2736.3,local,Hub_25
+f001403,679,Fairbanks,679,Hub_40,"capacity-exact, geography doubtful",Hub_40,1320.0,local,Hub_40
+f001192,754,Fairbanks,754,Hub_40,"capacity-exact, geography doubtful",Hub_12,345.6,local,Hub_12
+f000289,759,Fairbanks,759,Hub_39,high,Hub_39,10248.1,local,Hub_39
+f000118,761,Fairbanks,761,Hub_341,high,Hub_71,32519.0,remote,Hub_71
+f001303,777,Fairbanks,777,Hub_25,high,Hub_3,1106.8,local,Hub_3
+f001336,778,Fairbanks,778,Hub_344,high,Hub_344,13051.9,local,Hub_344
+f000327,779,Fairbanks,779,Hub_40,"capacity-exact, geography doubtful",Hub_341,10653.1,local,Hub_341
+f001599,780,Fairbanks,780,Hub_346,high,Hub_346,10235.3,local,Hub_346
+f000765,781,Fairbanks,781,Hub_25,high,Hub_25,898.8,local,Hub_25
+f000503,782,Fairbanks,782,Hub_25,high,Hub_25,1511.0,local,Hub_25
+f000251,837,Fairbanks,837,Hub_76,high,Hub_76,2570.5,local,Hub_76
+f000552,838,Fairbanks,838,Hub_359,high,Hub_359,72.9,local,Hub_359
+f001375,862,Fairbanks,862,Hub_25,high,Hub_25,1964.7,local,Hub_25
+f001692,1000,Fairbanks,1000,Hub_4,high,Hub_4,690.5,local,Hub_4
+f001680,1009,Fairbanks,1009,Hub_4,high,Hub_40,1773.4,local,Hub_40
+f000116,1024,Fairbanks,1024,Hub_25,high,Hub_25,1803.7,local,Hub_25
+f000919,1025,Fairbanks,1025,Hub_25,high,Hub_25,2291.8,local,Hub_25
+f001247,1026,Fairbanks,1025,Hub_25,high,Hub_25,2291.8,local,Hub_25
+f000064,1056,Fairbanks,1056,Hub_25,high,Hub_3,4923.9,local,Hub_3
+f001570,1057,Fairbanks,1057,Hub_39,high,Hub_39,121.5,local,Hub_39
+f000531,1058,Fairbanks,1058,Hub_384,hub lost in snapping,Hub_148,1512.8,local,Hub_148
+f000845,1059,Fairbanks,1059,Hub_40,"capacity-exact, geography doubtful",Hub_40,914.3,local,Hub_40
+f001218,1060,Fairbanks,1058,Hub_384,hub lost in snapping,Hub_148,1512.8,local,Hub_148
+f001589,1061,Fairbanks,1061,Hub_40,"capacity-exact, geography doubtful",Hub_4,1107.3,local,Hub_4
+f000984,1103,Fairbanks,1103,Hub_67,high,Hub_67,158.9,local,Hub_67
+f000718,1117,Fairbanks,1117,Hub_25,high,Hub_25,2174.4,local,Hub_25
+f001588,1118,Fairbanks,1118,Hub_76,high,Hub_76,1991.3,local,Hub_76
+f001474,1150,Fairbanks,1150,Hub_25,high,Hub_292,1873.0,local,Hub_292
+f001555,1252,Fairbanks,1252,Hub_40,"capacity-exact, geography doubtful",Hub_40,2199.2,local,Hub_40
+f001687,140,False Pass,140,Hub_70,high,Hub_70,755.5,local,Hub_70
+f001760,511,False Pass,511,Hub_70,high,Hub_70,414.1,local,Hub_70
+f000150,556,False Pass,556,Hub_70,high,Hub_70,1047.1,local,Hub_70
+f000699,1106,False Pass,1106,Hub_70,high,Hub_70,309.3,local,Hub_70
+f000126,1107,False Pass,511,Hub_70,high,Hub_70,424.3,local,Hub_70
+f000381,1192,False Pass,1192,Hub_70,high,Hub_70,870.2,local,Hub_70
+f001301,1446,False Pass,SYN-1293,Hub_70,high,Hub_70,576.7,local,Hub_70
+f000761,49,Fort Greely,49,Hub_285,high,Hub_285,4359.8,local,Hub_285
+f001281,565,Fort Richardson,565,Hub_304,high,Hub_304,359.5,local,Hub_304
+f000099,100,Fort Wainwright,100,Hub_3,high,Hub_3,2739.2,local,Hub_3
+f000059,101,Fort Wainwright,100,Hub_3,high,Hub_3,2739.2,local,Hub_3
+f001453,50,Fort Wainwright,50,Hub_3,high,Hub_3,1595.7,local,Hub_3
+f000664,103,Fort Wainwright,100,Hub_3,high,Hub_3,2739.2,local,Hub_3
+f001810,105,Fort Wainwright,100,Hub_3,high,Hub_3,2739.2,local,Hub_3
+f000732,104,Fort Wainwright,104,Hub_31,high,Hub_31,111.3,local,Hub_31
+f000608,288,Fort Yukon,288,Hub_12,high,Hub_12,277.5,local,Hub_12
+f001714,896,Fort Yukon,896,Hub_12,high,Hub_12,217.4,local,Hub_12
+f001449,1011,Fort Yukon,1011,Hub_12,high,Hub_12,190.4,local,Hub_12
+f000238,1447,Fort Yukon,SYN-371,Hub_12,high,Hub_12,245.4,local,Hub_12
+f000106,1448,Fort Yukon,SYN-374,Hub_12,high,Hub_12,371.7,local,Hub_12
+f001217,1449,Fort Yukon,SYN-373,Hub_12,high,Hub_12,356.1,local,Hub_12
+f001600,1450,Fort Yukon,SYN-381,Hub_379,high,Hub_379,49.0,local,Hub_379
+f000708,1451,Fort Yukon,SYN-368,Hub_12,high,Hub_12,319.7,local,Hub_12
+f001072,1452,Fort Yukon,SYN-369,Hub_12,high,Hub_12,302.1,local,Hub_12
+f000069,1453,Fort Yukon,SYN-373,Hub_12,high,Hub_12,344.0,local,Hub_12
+f000364,1454,Fort Yukon,SYN-368,Hub_12,high,Hub_12,312.1,local,Hub_12
+f000396,1455,Fort Yukon,SYN-368,Hub_12,high,Hub_12,334.3,local,Hub_12
+f001299,1456,Fort Yukon,SYN-369,Hub_12,high,Hub_12,294.9,local,Hub_12
+f001384,1457,Fort Yukon,958,Hub_218,high,Hub_218,119.9,local,Hub_218
+f001163,1458,Fort Yukon,SYN-369,Hub_12,high,Hub_12,302.1,local,Hub_12
+f000261,1459,Fort Yukon,SYN-369,Hub_12,high,Hub_12,302.1,local,Hub_12
+f000572,1460,Fort Yukon,SYN-379,Hub_12,high,Hub_12,468.8,local,Hub_12
+f001707,1461,Fort Yukon,SYN-377,Hub_12,high,Hub_12,501.1,local,Hub_12
+f001797,1462,Fort Yukon,SYN-378,Hub_12,high,Hub_12,500.4,local,Hub_12
+f000320,1463,Fort Yukon,SYN-369,Hub_12,high,Hub_12,288.6,local,Hub_12
+f001340,1464,Fort Yukon,,,not built (no mode/capacity),Hub_12,1187.4,local,Hub_12
+f001346,66,Fritz Creek,66,Hub_322,high,Hub_322,63.0,local,Hub_322
+f001407,755,Gakona,755,Hub_339,high,Hub_339,15070.8,local,Hub_339
+f001152,783,Gakona,783,Hub_339,high,Hub_339,6680.7,local,Hub_339
+f000990,46,Galena,46,Hub_35,high,Hub_35,1455.8,local,Hub_35
+f001516,1465,Galena,SYN-826,Hub_35,high,Hub_35,1498.3,local,Hub_35
+f001302,289,Galena,289,Hub_35,high,Hub_35,2446.5,local,Hub_35
+f000903,784,Galena,784,Hub_35,high,Hub_35,2118.2,local,Hub_35
+f001127,1050,Galena,1050,Hub_35,high,Hub_35,6058.5,local,Hub_35
+f000269,1466,Galena,SYN-831,Hub_35,high,Hub_35,851.0,local,Hub_35
+f000234,1467,Galena,SYN-828,Hub_35,high,Hub_35,1625.8,local,Hub_35
+f000474,1468,Galena,SYN-826,Hub_35,high,Hub_35,1498.3,local,Hub_35
+f000746,1469,Galena,SYN-833,Hub_35,high,Hub_35,2769.4,local,Hub_35
+f001287,1470,Galena,SYN-835,Hub_35,high,Hub_35,1902.1,local,Hub_35
+f001486,1471,Galena,SYN-373,Hub_12,high,Hub_12,344.0,local,Hub_12
+f000842,1472,Galena,SYN-831,Hub_35,high,Hub_35,851.0,local,Hub_35
+f001466,1473,Galena,SYN-829,Hub_35,high,Hub_35,1428.0,local,Hub_35
+f000007,1474,Galena,SYN-834,Hub_35,high,Hub_35,2327.0,local,Hub_35
+f000066,1475,Galena,SYN-369,Hub_12,high,Hub_12,288.6,local,Hub_12
+f000994,232,Gambell,232,Hub_187,high,Hub_187,293.3,local,Hub_187
+f001686,204,Gambell,204,Hub_187,high,Hub_187,612.8,local,Hub_187
+f001096,911,Gambell,911,Hub_187,high,Hub_187,361.0,local,Hub_187
+f000603,1476,Gambell,SYN-484,Hub_187,high,Hub_187,414.7,local,Hub_187
+f000922,1477,Gambell,SYN-485,Hub_187,high,Hub_187,397.4,local,Hub_187
+f000779,1478,Gambell,SYN-485,Hub_187,high,Hub_187,397.4,local,Hub_187
+f000621,1479,Gambell,SYN-489,Hub_187,high,Hub_187,307.8,local,Hub_187
+f000750,1480,Gambell,SYN-488,Hub_187,high,Hub_187,199.1,local,Hub_187
+f000073,369,Girdwood,369,Hub_244,high,Hub_244,1850.7,local,Hub_244
+f000647,560,Girdwood,560,Hub_244,high,Hub_244,1800.8,local,Hub_244
+f000518,36,Glennallen,36,Hub_182,high,Hub_182,2260.4,local,Hub_182
+f000789,197,Glennallen,197,Hub_182,high,Hub_182,362.3,local,Hub_182
+f001634,610,Glennallen,610,Hub_182,high,Hub_182,1740.4,local,Hub_182
+f000999,785,Glennallen,785,Hub_182,high,Hub_182,1376.0,local,Hub_182
+f000297,786,Glennallen,786,Hub_347,high,Hub_347,22761.2,local,Hub_347
+f001271,787,Glennallen,787,Hub_348,high,Hub_348,26381.9,remote,Hub_348
+f000267,849,Glennallen,849,Hub_182,high,Hub_182,220.4,local,Hub_182
+f000333,259,Golovin,259,Hub_207,high,Hub_207,51.3,local,Hub_207
+f001463,681,Golovin,681,Hub_207,high,Hub_207,46.6,local,Hub_207
+f000031,397,Goodnews Bay,397,Hub_260,high,Hub_260,379.1,local,Hub_260
+f000422,912,Goodnews Bay,912,Hub_260,high,Hub_260,152.5,local,Hub_260
+f001678,969,Goodnews Bay,912,Hub_260,high,Hub_260,161.4,local,Hub_260
+f000578,1481,Goodnews Bay,SYN-1367,Hub_260,high,Hub_260,564.5,local,Hub_260
+f000039,1482,Goodnews Bay,SYN-1364,Hub_260,high,Hub_260,185.7,local,Hub_260
+f001066,1483,Goodnews Bay,SYN-1364,Hub_260,high,Hub_260,221.9,local,Hub_260
+f001758,913,Grayling,913,Hub_16,high,Hub_16,160.1,local,Hub_16
+f001050,1015,Grayling,1015,Hub_16,high,Hub_16,109.7,local,Hub_16
+f001524,1141,Grayling,1141,Hub_87,"capacity-exact, geography doubtful",Hub_229,31910.2,remote,Hub_229
+f001200,1142,Grayling,1142,Hub_87,"capacity-exact, geography doubtful",Hub_16,7939.3,local,Hub_15
+f000102,1484,Grayling,SYN-613,Hub_16,high,Hub_16,98.1,local,Hub_16
+f001668,1485,Grayling,SYN-611,Hub_16,high,Hub_16,145.2,local,Hub_16
+f001166,1486,Grayling,913,Hub_16,high,Hub_16,152.4,local,Hub_16
+f000875,1487,Grayling,913,Hub_16,high,Hub_16,136.8,local,Hub_16
+f000696,302,Gulkana,302,Hub_232,high,Hub_232,414.0,local,Hub_232
+f000882,123,Gustavus,123,Hub_105,high,Hub_345,3951.7,local,Hub_345
+f000494,1169,Gustavus,1169,Hub_105,high,Hub_105,6035.2,local,Hub_105
+f000739,1488,Gustavus,SYN-168,Hub_105,high,Hub_105,6794.1,local,Hub_105
+f001204,1489,Gustavus,SYN-171,Hub_105,high,Hub_345,3805.1,local,Hub_345
+f001191,1490,Gustavus,SYN-168,Hub_105,high,Hub_105,6818.9,local,Hub_105
+f000321,1491,Gustavus,SYN-172,Hub_105,high,Hub_105,3874.6,local,Hub_105
+f001275,1492,Gustavus,SYN-167,Hub_105,high,Hub_105,5854.1,local,Hub_105
+f000112,1493,Gustavus,SYN-169,Hub_105,high,Hub_105,6590.1,local,Hub_105
+f001101,159,Haines,159,Hub_119,high,Hub_119,855.0,local,Hub_119
+f000890,161,Haines,161,Hub_119,high,Hub_119,636.7,local,Hub_119
+f000462,427,Haines,427,Hub_119,high,Hub_119,221.9,local,Hub_119
+f000763,631,Haines,631,Hub_119,high,Hub_119,388.1,local,Hub_119
+f000191,788,Haines,788,Hub_119,high,Hub_119,1662.4,local,Hub_119
+f000642,852,Haines,852,Hub_360,high,Hub_360,5976.5,local,Hub_360
+f001564,853,Haines,853,Hub_360,high,Hub_360,3974.2,local,Hub_360
+f000831,857,Haines,857,Hub_360,high,Hub_360,9933.2,local,Hub_360
+f000156,1196,Haines,1196,Hub_119,high,Hub_119,780.6,local,Hub_119
+f000716,277,Healy,277,Hub_213,high,Hub_213,803.6,local,Hub_213
+f001041,530,Healy,530,Hub_213,high,Hub_213,1819.8,local,Hub_213
+f001773,632,Healy,632,,dropped/unresolved in hub build,Hub_120,174.7,local,Hub_120
+f001079,989,Healy,989,Hub_213,high,Hub_213,922.0,local,Hub_213
+f001381,1027,Healy,1027,Hub_26,high,Hub_26,10052.3,local,Hub_26
+f000581,1028,Healy,1028,Hub_26,high,Hub_26,1568.9,local,Hub_26
+f001733,1494,Healy,,,not built (no mode/capacity),Hub_213,720.6,local,Hub_213
+f001681,634,Hollis,634,Hub_311,high,Hub_311,904.4,local,Hub_311
+f001059,740,Holy Cross,740,Hub_17,high,Hub_17,236.6,local,Hub_17
+f000604,741,Holy Cross,740,Hub_17,high,Hub_17,236.6,local,Hub_17
+f001378,742,Holy Cross,740,Hub_17,high,Hub_17,236.6,local,Hub_17
+f000962,1016,Holy Cross,1016,Hub_17,high,Hub_17,236.8,local,Hub_17
+f001444,1145,Holy Cross,1143,Hub_88,high,Hub_88,55696.9,remote,Hub_88
+f001297,1495,Holy Cross,1016,Hub_17,high,Hub_17,230.9,local,Hub_17
+f000216,1496,Holy Cross,SYN-792,,dropped/unresolved in hub build,Hub_149,207.0,local,Hub_149
+f001549,20,Homer,20,Hub_7,high,Hub_247,15924.0,local,Hub_247
+f000025,377,Homer,377,Hub_114,high,Hub_114,1913.3,local,Hub_114
+f001532,378,Homer,378,Hub_36,high,Hub_36,4164.7,local,Hub_36
+f000336,495,Homer,495,Hub_114,high,Hub_114,1251.8,local,Hub_114
+f000912,685,Homer,685,Hub_114,high,Hub_114,3237.8,local,Hub_114
+f000359,686,Homer,686,Hub_114,high,Hub_114,1720.1,local,Hub_114
+f001008,687,Homer,687,Hub_330,high,Hub_330,211.1,local,Hub_330
+f001547,691,Homer,691,Hub_330,high,Hub_330,201.4,local,Hub_330
+f000691,692,Homer,692,Hub_114,high,Hub_114,2685.0,local,Hub_114
+f000489,694,Homer,686,Hub_114,high,Hub_114,1673.5,local,Hub_114
+f001485,789,Homer,789,Hub_36,high,Hub_36,2826.5,local,Hub_36
+f000208,1005,Homer,1005,Hub_7,high,Hub_330,18043.7,local,Hub_7
+f001803,1051,Homer,1051,Hub_36,high,Hub_322,6534.0,local,Hub_322
+f000803,1182,Homer,1182,Hub_114,high,Hub_114,6531.9,local,Hub_114
+f001329,428,Hoonah,428,Hub_66,high,Hub_66,1748.2,local,Hub_66
+f000884,872,Hoonah,872,Hub_66,high,Hub_66,558.1,local,Hub_66
+f000299,970,Hoonah,970,Hub_66,high,Hub_66,1008.1,local,Hub_66
+f000936,1102,Hoonah,1102,Hub_66,high,Hub_66,116.0,local,Hub_66
+f001395,1497,Hoonah,SYN-187,Hub_66,high,Hub_66,476.7,local,Hub_66
+f001276,1498,Hoonah,970,Hub_66,high,Hub_66,1008.0,local,Hub_66
+f000468,1499,Hoonah,SYN-183,Hub_66,high,Hub_66,758.1,local,Hub_66
+f001210,1500,Hoonah,SYN-184,Hub_66,high,Hub_66,94.1,local,Hub_66
+f001791,1501,Hoonah,SYN-189,Hub_376,high,Hub_376,210.8,local,Hub_376
+f000196,1502,Hoonah,SYN-185,Hub_66,high,Hub_66,108.2,local,Hub_66
+f000361,1503,Hoonah,SYN-188,Hub_66,high,Hub_66,495.0,local,Hub_66
+f000414,234,Hooper Bay,234,Hub_197,high,Hub_197,251.9,local,Hub_197
+f001583,398,Hooper Bay,398,Hub_197,high,Hub_197,2264.4,local,Hub_197
+f000539,611,Hooper Bay,611,Hub_197,high,Hub_197,311.2,local,Hub_197
+f001594,662,Hooper Bay,662,Hub_197,high,Hub_197,1003.1,local,Hub_197
+f000784,897,Hooper Bay,897,Hub_197,high,Hub_197,230.2,local,Hub_197
+f001662,914,Hooper Bay,914,Hub_197,high,Hub_197,44.7,local,Hub_197
+f000650,1504,Hooper Bay,SYN-831,Hub_35,high,Hub_35,851.0,local,Hub_35
+f000537,1505,Hooper Bay,,,not built (no mode/capacity),Hub_197,1041.5,local,Hub_197
+f000302,1506,Hooper Bay,SYN-700,Hub_197,high,Hub_197,83.8,local,Hub_197
+f001597,1507,Hooper Bay,914,Hub_197,high,Hub_197,39.3,local,Hub_197
+f001386,1508,Hooper Bay,SYN-700,Hub_197,high,Hub_197,52.6,local,Hub_197
+f000070,1509,Hooper Bay,SYN-702,Hub_197,high,Hub_197,431.8,local,Hub_197
+f000773,1510,Hooper Bay,SYN-703,Hub_197,high,Hub_197,328.9,local,Hub_197
+f000520,1511,Hooper Bay,SYN-701,Hub_197,high,Hub_197,102.5,local,Hub_197
+f001664,370,Hope,370,Hub_245,high,Hub_245,593.6,local,Hub_245
+f000478,652,Houston,652,Hub_320,high,Hub_320,283.6,local,Hub_320
+f000968,290,Hughes,290,Hub_223,high,Hub_223,47.2,local,Hub_223
+f000077,487,Hughes,487,Hub_223,high,Hub_223,75.0,local,Hub_223
+f000584,1512,Hughes,SYN-799,Hub_223,high,Hub_223,182.2,local,Hub_223
+f000689,1513,Hughes,SYN-799,Hub_223,high,Hub_223,182.2,local,Hub_223
+f001517,295,Huslia,295,Hub_226,high,Hub_226,870.4,local,Hub_226
+f000050,488,Huslia,488,Hub_226,high,Hub_226,682.6,local,Hub_226
+f001465,702,Huslia,702,Hub_226,high,Hub_226,599.1,local,Hub_226
+f000092,703,Huslia,703,Hub_226,high,Hub_226,75.0,local,Hub_226
+f000883,915,Huslia,915,Hub_226,high,Hub_226,78.8,local,Hub_226
+f001772,1514,Huslia,488,Hub_226,high,Hub_226,685.2,local,Hub_226
+f000501,635,Hydaburg,635,Hub_312,high,Hub_312,462.6,local,Hub_312
+f000045,1515,Hydaburg,SYN-13,Hub_312,high,Hub_368,454.7,local,Hub_368
+f001227,1516,Hydaburg,SYN-11,Hub_368,high,Hub_368,157.6,local,Hub_368
+f001207,1517,Hydaburg,SYN-12,Hub_368,high,Hub_368,105.0,local,Hub_368
+f000377,447,Igiugig,,,not built (no mode/capacity),Hub_127,185.9,local,Hub_127
+f001126,1203,Igiugig,1203,Hub_127,high,Hub_127,169.0,local,Hub_127
+f000811,1518,Igiugig,SYN-1238,Hub_127,high,Hub_127,197.8,local,Hub_127
+f001011,1519,Igiugig,SYN-1238,Hub_127,high,Hub_127,197.8,local,Hub_127
+f001283,419,Iliamna,,,not built (no mode/capacity),Hub_371,1867.2,local,Hub_371
+f001290,1520,Iliamna,SYN-1232,Hub_371,high,Hub_371,1795.6,local,Hub_371
+f000596,1521,Iliamna,SYN-1220,Hub_371,high,Hub_371,3195.2,local,Hub_371
+f001489,1522,Iliamna,SYN-1233,Hub_371,high,Hub_371,2034.7,local,Hub_371
+f001064,1523,Iliamna,SYN-1222,Hub_371,high,Hub_371,2392.6,local,Hub_371
+f000785,1524,Iliamna,SYN-1235,Hub_371,high,Hub_371,2071.6,local,Hub_371
+f000338,1525,Iliamna,SYN-1237,Hub_371,high,Hub_371,2833.8,local,Hub_371
+f001404,1526,Iliamna,SYN-1231,Hub_371,high,Hub_371,1765.4,local,Hub_371
+f000786,1527,Iliamna,SYN-1223,Hub_371,high,Hub_371,2295.5,local,Hub_371
+f001289,1528,Iliamna,SYN-1227,Hub_371,high,Hub_371,95.2,local,Hub_371
+f001557,1529,Iliamna,SYN-1226,Hub_371,high,Hub_371,1495.5,local,Hub_371
+f000799,1530,Iliamna,SYN-1236,Hub_371,high,Hub_371,1963.9,local,Hub_371
+f001786,1531,Iliamna,SYN-1225,Hub_371,high,Hub_371,1082.4,local,Hub_371
+f000491,1532,Iliamna,SYN-1224,Hub_371,high,Hub_371,2896.9,local,Hub_371
+f000379,1533,Iliamna,SYN-1232,Hub_371,high,Hub_371,1769.6,local,Hub_371
+f000163,1534,Iliamna,SYN-1232,Hub_371,high,Hub_371,1799.1,local,Hub_371
+f000309,1535,Iliamna,SYN-1222,Hub_371,high,Hub_371,2366.4,local,Hub_371
+f000239,1536,Iliamna,SYN-1225,Hub_371,high,Hub_371,1088.7,local,Hub_371
+f000925,1537,Iliamna,SYN-1234,Hub_371,high,Hub_371,2097.8,local,Hub_371
+f000465,1538,Iliamna,SYN-1221,Hub_371,high,Hub_371,3374.8,local,Hub_371
+f001781,1204,Ivanof Bay,1204,Hub_128,high,Hub_128,19686.9,local,Hub_128
+f000741,1539,Ivanof Bay,SYN-1326,Hub_128,high,Hub_128,19798.9,local,Hub_128
+f000517,1540,Ivanof Bay,SYN-1326,Hub_128,high,Hub_128,19798.0,local,Hub_128
+f000729,235,Juneau,235,Hub_1,unresolved,Hub_1,8979.9,local,Hub_1
+f000960,27,Juneau,27,Hub_1,unresolved,Hub_1,8667.3,local,Hub_1
+f001713,236,Juneau,236,Hub_1,unresolved,Hub_1,3840.9,local,Hub_1
+f001369,1,Juneau,1,Hub_345,membership unresolved,Hub_1,5072.0,local,Hub_1
+f000768,120,Juneau,120,Hub_1,unresolved,Hub_1,5473.5,local,Hub_1
+f000826,164,Juneau,1,Hub_345,membership unresolved,Hub_1,5067.7,local,Hub_1
+f001805,174,Juneau,174,Hub_1,unresolved,Hub_1,4756.7,local,Hub_1
+f000278,429,Juneau,429,Hub_1,unresolved,Hub_1,1416.0,local,Hub_1
+f001162,512,Juneau,512,Hub_1,unresolved,Hub_1,6219.8,local,Hub_1
+f000352,514,Juneau,514,Hub_1,unresolved,Hub_1,29847.3,remote,Hub_1
+f001095,515,Juneau,515,Hub_1,unresolved,Hub_1,26817.3,remote,Hub_1
+f000619,589,Juneau,589,Hub_1,unresolved,Hub_1,1162.8,local,Hub_1
+f001053,601,Juneau,601,Hub_1,unresolved,Hub_1,4590.1,local,Hub_1
+f000759,620,Juneau,620,Hub_1,unresolved,Hub_1,12953.7,local,Hub_1
+f000074,709,Juneau,709,Hub_1,unresolved,Hub_1,690.6,local,Hub_1
+f001350,737,Juneau,737,Hub_1,unresolved,Hub_1,8834.6,local,Hub_1
+f000328,738,Juneau,738,Hub_1,unresolved,Hub_1,8219.7,local,Hub_1
+f000678,739,Juneau,739,Hub_345,membership unresolved,Hub_1,860.8,local,Hub_1
+f000821,749,Juneau,749,Hub_1,unresolved,Hub_1,9077.6,local,Hub_1
+f001111,791,Juneau,791,Hub_345,membership unresolved,Hub_1,15909.7,local,Hub_1
+f000618,982,Juneau,982,Hub_345,membership unresolved,Hub_119,50052.3,remote,Hub_58
+f001816,1048,Juneau,1048,Hub_1,unresolved,Hub_1,11501.2,local,Hub_1
+f000979,1064,Juneau,1064,Hub_1,unresolved,Hub_1,7809.8,local,Hub_1
+f001314,1065,Juneau,1065,Hub_1,unresolved,Hub_1,4266.9,local,Hub_1
+f001745,1066,Juneau,1065,Hub_1,unresolved,Hub_1,4266.9,local,Hub_1
+f001540,1067,Juneau,1064,Hub_1,unresolved,Hub_1,7809.8,local,Hub_1
+f000900,1119,Juneau,1119,Hub_1,unresolved,Hub_1,10825.4,local,Hub_1
+f000419,1183,Juneau,1183,Hub_1,unresolved,Hub_1,8781.0,local,Hub_1
+f000230,1184,Juneau,1184,Hub_1,unresolved,Hub_1,8710.5,local,Hub_1
+f000752,1253,Juneau,1253,Hub_1,unresolved,Hub_1,3197.0,local,Hub_1
+f000513,516,Kake,516,Hub_145,high,Hub_145,1040.3,local,Hub_145
+f001244,796,Kake,796,Hub_349,high,Hub_349,3977.4,local,Hub_349
+f000593,873,Kake,873,Hub_145,high,Hub_145,316.2,local,Hub_145
+f001222,1227,Kake,1227,Hub_145,high,Hub_145,1203.7,local,Hub_145
+f000591,1541,Kake,SYN-82,Hub_145,high,Hub_145,1533.0,local,Hub_145
+f000213,1542,Kake,SYN-86,Hub_145,high,Hub_145,1212.9,local,Hub_145
+f000485,1543,Kake,SYN-87,Hub_145,high,Hub_145,959.2,local,Hub_145
+f000340,1544,Kake,SYN-89,Hub_145,high,Hub_145,383.4,local,Hub_145
+f001409,1545,Kake,SYN-83,Hub_145,high,Hub_145,1286.9,local,Hub_145
+f000734,470,Kaktovik,470,Hub_279,high,Hub_279,89.3,local,Hub_279
+f001351,1546,Kaktovik,SYN-395,Hub_380,high,Hub_380,48.7,local,Hub_380
+f001625,1547,Kaktovik,SYN-386,Hub_279,high,Hub_279,224.6,local,Hub_279
+f001595,1548,Kaktovik,SYN-397,Hub_380,high,Hub_380,611.0,local,Hub_380
+f000314,1549,Kaktovik,SYN-396,Hub_279,high,Hub_380,155.0,local,Hub_380
+f001701,1550,Kaktovik,SYN-392,Hub_279,high,Hub_380,276.8,local,Hub_380
+f000226,1551,Kaktovik,SYN-392,Hub_279,high,Hub_380,246.2,local,Hub_380
+f001016,1552,Kaktovik,SYN-393,Hub_380,high,Hub_380,218.7,local,Hub_380
+f000404,1553,Kaktovik,SYN-394,Hub_380,high,Hub_380,165.0,local,Hub_380
+f001056,1554,Kaktovik,SYN-395,Hub_380,high,Hub_380,48.7,local,Hub_380
+f001006,1555,Kaktovik,SYN-389,Hub_279,high,Hub_279,144.4,local,Hub_279
+f000127,1556,Kaktovik,SYN-390,Hub_279,high,Hub_279,329.2,local,Hub_279
+f001417,1557,Kaktovik,SYN-391,Hub_279,high,Hub_279,234.3,local,Hub_279
+f000202,1558,Kaktovik,SYN-386,Hub_279,high,Hub_279,212.5,local,Hub_279
+f001055,1559,Kaktovik,SYN-386,Hub_279,high,Hub_279,224.6,local,Hub_279
+f000329,1560,Kaktovik,SYN-874,Hub_278,high,Hub_278,254.9,local,Hub_278
+f001108,1561,Kaktovik,SYN-387,Hub_279,high,Hub_279,275.7,local,Hub_279
+f000058,1562,Kaktovik,SYN-870,Hub_278,high,Hub_278,94.4,local,Hub_278
+f001058,464,Kalskag,464,Hub_276,high,Hub_276,57.7,local,Hub_276
+f001538,465,Kalskag,464,Hub_276,high,Hub_276,67.5,local,Hub_276
+f001396,916,Kalskag,916,Hub_276,high,Hub_276,130.3,local,Hub_276
+f001160,1163,Kalskag,1163,Hub_99,high,Hub_99,267.7,local,Hub_99
+f000620,291,Kaltag,291,Hub_224,high,Hub_224,771.3,local,Hub_224
+f001820,484,Kaltag,484,Hub_224,high,Hub_224,87.4,local,Hub_224
+f000476,485,Kaltag,485,Hub_224,high,Hub_224,515.2,local,Hub_224
+f001656,486,Kaltag,485,Hub_224,high,Hub_224,515.2,local,Hub_224
+f001104,918,Kaltag,918,Hub_224,high,Hub_224,250.8,local,Hub_224
+f000554,1563,Kaltag,292,Hub_225,high,Hub_225,27.9,local,Hub_225
+f000817,1564,Kaltag,SYN-821,Hub_224,high,Hub_224,160.7,local,Hub_224
+f001030,1565,Kaltag,SYN-821,Hub_224,high,Hub_224,156.8,local,Hub_224
+f000426,1566,Kaltag,SYN-823,Hub_224,high,Hub_224,131.4,local,Hub_224
+f000122,61,Karluk,61,Hub_288,high,Hub_288,1010.3,local,Hub_288
+f000125,500,Karluk,500,Hub_288,high,Hub_288,211.4,local,Hub_288
+f000587,1567,Karluk,SYN-1281,Hub_288,high,Hub_288,156.4,local,Hub_288
+f000259,64,Kasaan,64,Hub_121,high,Hub_121,459.6,local,Hub_121
+f000203,636,Kasaan,636,Hub_121,high,Hub_121,489.1,local,Hub_121
+f001420,1198,Kasaan,1198,Hub_121,high,Hub_121,999.3,local,Hub_121
+f001682,1568,Kasaan,636,Hub_121,high,Hub_121,492.6,local,Hub_121
+f000524,1569,Kasaan,64,Hub_121,high,Hub_121,462.8,local,Hub_121
+f001812,1570,Kasaan,SYN-8,Hub_121,high,Hub_121,363.0,local,Hub_121
+f000640,3,Kasigluk,3,Hub_2,high,Hub_2,556.8,local,Hub_2
+f001741,10,Kasigluk,10,Hub_2,high,Hub_2,672.5,local,Hub_2
+f000032,82,Kasigluk,82,Hub_2,high,Hub_2,1972.8,local,Hub_2
+f000908,97,Kasigluk,97,Hub_2,high,Hub_2,495.7,local,Hub_2
+f000623,919,Kasigluk,3,Hub_2,high,Hub_2,566.9,local,Hub_2
+f000924,1571,Kasigluk,SYN-583,Hub_2,high,Hub_2,280.9,local,Hub_2
+f000772,1572,Kasigluk,SYN-584,Hub_2,high,Hub_2,376.3,local,Hub_2
+f000026,1573,Kasigluk,SYN-582,Hub_2,high,Hub_2,1919.1,local,Hub_2
+f001400,147,Kasilof,147,Hub_171,high,Hub_171,158.0,local,Hub_171
+f001440,867,Kasilof,867,Hub_171,high,Hub_171,75.3,local,Hub_171
+f001641,54,Kenai,54,Hub_8,high,Hub_8,875.5,local,Hub_8
+f000431,59,Kenai,59,Hub_8,high,Hub_305,3723.8,local,Hub_305
+f001437,94,Kenai,94,Hub_305,high,Hub_305,980.2,local,Hub_305
+f001171,149,Kenai,149,Hub_8,high,Hub_8,2687.4,local,Hub_8
+f000646,379,Kenai,379,Hub_44,high,Hub_44,1025.6,local,Hub_44
+f000475,559,Kenai,559,Hub_44,high,Hub_44,4522.1,local,Hub_44
+f001232,588,Kenai,588,Hub_305,high,Hub_305,3296.3,local,Hub_305
+f000781,700,Kenai,700,Hub_305,high,Hub_305,2279.7,local,Hub_305
+f000874,701,Kenai,701,Hub_44,high,Hub_94,1362.7,local,Hub_94
+f001469,902,Kenai,654,Hub_4,high,Hub_4,2173.3,local,Hub_4
+f000483,971,Kenai,971,Hub_8,high,Hub_8,2575.0,local,Hub_8
+f001279,1006,Kenai,1006,Hub_8,high,Hub_8,941.6,local,Hub_8
+f001226,1068,Kenai,1068,Hub_43,high,Hub_43,753.7,local,Hub_43
+f001087,1069,Kenai,1069,Hub_44,high,Hub_44,1667.0,local,Hub_44
+f001268,1154,Kenai,1154,Hub_93,high,Hub_93,216.3,local,Hub_93
+f001057,1156,Kenai,1156,Hub_8,high,Hub_8,1118.1,local,Hub_8
+f000602,198,Kenny Lake,198,Hub_183,high,Hub_183,3237.2,local,Hub_183
+f000048,28,Ketchikan,28,Hub_69,high,Hub_69,3569.4,local,Hub_69
+f000310,237,Ketchikan,237,Hub_69,high,Hub_69,953.9,local,Hub_69
+f001372,2,Ketchikan,2,Hub_185,high,Hub_69,2243.5,local,Hub_69
+f001335,431,Ketchikan,431,Hub_69,high,Hub_69,1473.0,local,Hub_69
+f000555,432,Ketchikan,432,Hub_69,high,Hub_185,1793.4,local,Hub_185
+f000595,519,Ketchikan,519,Hub_69,high,Hub_69,2750.6,local,Hub_69
+f001550,633,Ketchikan,633,Hub_185,high,Hub_185,3180.6,local,Hub_185
+f001711,639,Ketchikan,639,Hub_314,high,Hub_314,7558.3,local,Hub_314
+f000080,710,Ketchikan,710,Hub_69,high,Hub_69,2750.8,local,Hub_69
+f000179,720,Ketchikan,720,Hub_185,high,Hub_185,4089.8,local,Hub_185
+f000190,727,Ketchikan,727,Hub_69,high,Hub_69,2217.4,local,Hub_69
+f000822,728,Ketchikan,728,Hub_185,high,Hub_185,7106.4,local,Hub_185
+f001585,797,Ketchikan,797,,dropped/unresolved in hub build,Hub_1,4557.6,local,Hub_1
+f001776,858,Ketchikan,858,Hub_69,high,Hub_69,1864.7,local,Hub_69
+f001504,888,Ketchikan,888,Hub_69,high,Hub_69,2433.3,local,Hub_69
+f000300,972,Ketchikan,972,Hub_69,high,Hub_69,1220.0,local,Hub_69
+f001493,1105,Ketchikan,1105,Hub_69,high,Hub_69,1904.7,local,Hub_69
+f000527,89,Kiana,89,Hub_86,high,Hub_394,274.0,local,Hub_394
+f001629,947,Kiana,947,Hub_86,high,Hub_86,377.5,local,Hub_86
+f001221,948,Kiana,947,Hub_86,high,Hub_86,364.4,local,Hub_86
+f001426,949,Kiana,947,Hub_86,high,Hub_86,353.2,local,Hub_86
+f001811,1139,Kiana,1139,Hub_86,high,Hub_86,2116.5,local,Hub_86
+f000641,1574,Kiana,SYN-910,Hub_394,high,Hub_394,328.4,local,Hub_394
+f000938,1575,Kiana,SYN-911,Hub_86,high,Hub_394,243.1,local,Hub_394
+f000731,1576,Kiana,SYN-911,Hub_86,high,Hub_394,249.9,local,Hub_394
+f000823,1577,Kiana,SYN-909,Hub_394,high,Hub_394,63.6,local,Hub_394
+f000227,1578,Kiana,328,Hub_178,high,Hub_83,76.8,local,Hub_178
+f001132,1579,Kiana,SYN-908,Hub_394,high,Hub_394,215.6,local,Hub_394
+f000820,141,King Cove,141,Hub_168,high,Hub_168,1783.3,local,Hub_168
+f000358,898,King Cove,898,,dropped/unresolved in hub build,Hub_46,1364.2,local,Hub_46
+f000316,1580,King Cove,SYN-1306,Hub_168,high,Hub_168,501.9,local,Hub_168
+f001134,1581,King Cove,SYN-1307,Hub_168,high,Hub_168,1059.0,local,Hub_168
+f001611,1582,King Cove,SYN-1304,Hub_168,high,Hub_168,157.9,local,Hub_168
+f000528,1583,King Cove,SYN-1305,Hub_168,high,Hub_168,92.0,local,Hub_168
+f001331,86,King Salmon,86,Hub_46,high,Hub_46,1311.4,local,Hub_46
+f000500,441,King Salmon,,,not built (no mode/capacity),Hub_138,270.7,local,Hub_138
+f001175,545,King Salmon,545,Hub_46,high,Hub_46,629.6,local,Hub_46
+f000638,798,King Salmon,798,Hub_46,high,Hub_46,9338.7,local,Hub_46
+f000669,1070,King Salmon,1070,Hub_46,high,Hub_138,1772.6,local,Hub_138
+f001360,1171,King Salmon,1171,Hub_46,high,Hub_138,1058.8,local,Hub_138
+f001739,1215,King Salmon,1215,Hub_138,high,Hub_138,149.6,local,Hub_138
+f001251,238,Kipnuk,238,Hub_181,high,Hub_181,193.8,local,Hub_181
+f000350,193,Kipnuk,193,Hub_181,high,Hub_181,581.9,local,Hub_181
+f001545,221,Kipnuk,193,Hub_181,high,Hub_181,556.5,local,Hub_181
+f000121,463,Kipnuk,193,Hub_181,high,Hub_181,581.9,local,Hub_181
+f001448,1584,Kipnuk,SYN-572,Hub_387,high,Hub_387,629.6,local,Hub_387
+f000493,1585,Kipnuk,SYN-657,Hub_181,high,Hub_181,291.9,local,Hub_181
+f001608,1586,Kipnuk,SYN-658,Hub_181,high,Hub_181,288.9,local,Hub_181
+f001273,338,Kivalina,338,Hub_150,high,Hub_150,526.8,local,Hub_150
+f000961,920,Kivalina,1234,Hub_150,high,Hub_150,309.3,local,Hub_150
+f000577,1234,Kivalina,1234,Hub_150,high,Hub_150,291.6,local,Hub_150
+f000390,1240,Kivalina,1240,Hub_150,high,Hub_150,33.3,local,Hub_150
+f000394,1587,Kivalina,SYN-932,Hub_150,high,Hub_150,250.2,local,Hub_150
+f001063,1588,Kivalina,1240,Hub_150,high,Hub_150,42.3,local,Hub_150
+f001119,1589,Kivalina,1234,Hub_150,high,Hub_150,313.8,local,Hub_150
+f000507,1590,Kivalina,SYN-930,Hub_150,high,Hub_150,71.2,local,Hub_150
+f000089,1591,Kivalina,1234,Hub_150,high,Hub_150,338.3,local,Hub_150
+f000931,430,Klawock,430,Hub_272,high,Hub_272,2606.8,local,Hub_272
+f000624,637,Klawock,637,Hub_313,high,Hub_313,1065.3,local,Hub_313
+f001413,638,Klawock,638,Hub_313,high,Hub_313,114.6,local,Hub_313
+f000429,1592,Klawock,SYN-16,Hub_313,high,Hub_313,330.3,local,Hub_313
+f000954,1593,Klawock,SYN-18,Hub_313,high,Hub_313,602.6,local,Hub_313
+f001370,1594,Klawock,SYN-20,Hub_272,high,Hub_313,1600.1,local,Hub_313
+f000292,1595,Klawock,879,Hub_217,high,Hub_217,951.8,local,Hub_217
+f000490,1596,Klawock,SYN-19,Hub_313,high,Hub_313,774.7,local,Hub_313
+f000024,124,Klukwan,124,Hub_152,high,Hub_152,147.1,local,Hub_152
+f000098,1235,Kobuk,1235,Hub_151,high,Hub_151,80.8,local,Hub_151
+f000079,1597,Kobuk,SYN-795,Hub_151,high,Hub_151,118.2,local,Hub_151
+f000120,239,Kodiak,239,Hub_63,"capacity-exact, geography doubtful",Hub_286,258038.2,remote,Hub_286
+f001455,79,Kodiak,79,Hub_173,high,Hub_173,1507.4,local,Hub_173
+f001427,150,Kodiak,150,Hub_173,high,Hub_173,1642.6,local,Hub_173
+f000780,177,Kodiak,177,Hub_173,high,Hub_173,214.0,local,Hub_173
+f001377,180,Kodiak,180,Hub_63,"capacity-exact, geography doubtful",Hub_47,3433.9,local,Hub_47
+f000790,181,Kodiak,181,Hub_47,high,Hub_47,1804.4,local,Hub_47
+f000407,420,Kodiak,420,Hub_47,high,Hub_47,1757.7,local,Hub_47
+f001035,421,Kodiak,421,Hub_173,high,Hub_173,376.4,local,Hub_173
+f001028,422,Kodiak,422,Hub_47,high,Hub_47,422.4,local,Hub_47
+f001510,423,Kodiak,423,Hub_173,high,Hub_173,643.7,local,Hub_173
+f000597,424,Kodiak,424,Hub_173,high,Hub_173,321.7,local,Hub_173
+f000284,425,Kodiak,425,Hub_63,"capacity-exact, geography doubtful",Hub_287,12256.9,local,Hub_287
+f000551,501,Kodiak,501,Hub_173,high,Hub_289,1888.7,local,Hub_289
+f000389,502,Kodiak,502,Hub_173,high,Hub_173,369.7,local,Hub_173
+f000473,503,Kodiak,503,Hub_173,high,Hub_173,632.7,local,Hub_173
+f001390,504,Kodiak,504,Hub_173,high,Hub_173,470.0,local,Hub_173
+f001729,505,Kodiak,505,Hub_289,high,Hub_289,126.2,local,Hub_289
+f000393,506,Kodiak,506,Hub_47,high,Hub_47,253.9,local,Hub_47
+f001837,546,Kodiak,546,Hub_173,high,Hub_173,1179.7,local,Hub_173
+f001051,747,Kodiak,747,Hub_173,high,Hub_289,1616.1,local,Hub_289
+f000932,757,Kodiak,546,Hub_173,high,Hub_173,1206.1,local,Hub_173
+f000460,887,Kodiak,887,Hub_173,high,Hub_173,1299.6,local,Hub_173
+f000645,1071,Kodiak,1071,Hub_47,high,Hub_47,513.3,local,Hub_47
+f001575,1097,Kodiak,1097,Hub_63,"capacity-exact, geography doubtful",Hub_173,3935.9,local,Hub_173
+f001768,448,Kokhanok,448,Hub_129,high,Hub_129,1980.2,local,Hub_129
+f001117,1205,Kokhanok,1205,Hub_129,high,Hub_129,924.9,local,Hub_129
+f001819,1598,Kokhanok,SYN-1240,Hub_129,high,Hub_129,723.7,local,Hub_129
+f001468,1599,Kokhanok,SYN-1242,Hub_129,high,Hub_129,504.9,local,Hub_129
+f000569,1600,Kokhanok,SYN-1240,Hub_129,high,Hub_129,708.7,local,Hub_129
+f000600,107,Koliganek,107,Hub_45,high,Hub_45,312.9,local,Hub_45
+f000184,405,Koliganek,405,Hub_45,high,Hub_45,746.8,local,Hub_45
+f000881,1601,Koliganek,SYN-1382,Hub_45,high,Hub_45,221.9,local,Hub_45
+f001635,1602,Koliganek,SYN-1383,Hub_45,high,Hub_45,218.6,local,Hub_45
+f001527,222,Kongiganak,222,Hub_195,high,Hub_195,878.7,local,Hub_195
+f000796,223,Kongiganak,223,Hub_195,high,Hub_195,289.0,local,Hub_195
+f001205,224,Kongiganak,223,Hub_195,high,Hub_195,289.0,local,Hub_195
+f001243,225,Kongiganak,223,Hub_195,high,Hub_195,289.0,local,Hub_195
+f001086,226,Kongiganak,226,Hub_195,high,Hub_195,122.4,local,Hub_195
+f000686,399,Kongiganak,399,Hub_195,high,Hub_195,11.1,local,Hub_195
+f000692,1603,Kongiganak,SYN-1353,Hub_195,high,Hub_195,211.1,local,Hub_195
+f000274,1604,Kongiganak,226,Hub_195,high,Hub_195,126.4,local,Hub_195
+f000391,1605,Kongiganak,SYN-917,Hub_178,high,Hub_178,37.6,local,Hub_178
+f000685,1606,Kongiganak,SYN-1353,Hub_195,high,Hub_195,211.1,local,Hub_195
+f000243,1607,Kongiganak,226,Hub_195,high,Hub_195,108.6,local,Hub_195
+f001324,1608,Kongiganak,SYN-1355,Hub_195,high,Hub_195,321.7,local,Hub_195
+f000236,657,Kotlik,657,Hub_321,high,Hub_321,780.8,local,Hub_321
+f001330,658,Kotlik,657,Hub_321,high,Hub_321,780.8,local,Hub_321
+f001156,659,Kotlik,659,Hub_321,high,Hub_321,693.4,local,Hub_321
+f000199,1609,Kotlik,SYN-726,Hub_321,high,Hub_321,642.3,local,Hub_321
+f000487,1610,Kotlik,SYN-727,Hub_321,high,Hub_321,39.4,local,Hub_321
+f001578,240,Kotzebue,240,Hub_110,high,Hub_110,996.3,local,Hub_110
+f000004,241,Kotzebue,241,Hub_110,high,Hub_110,1399.7,local,Hub_110
+f000223,74,Kotzebue,74,Hub_110,high,Hub_110,497.7,local,Hub_110
+f000986,175,Kotzebue,175,Hub_110,high,Hub_110,411.0,local,Hub_110
+f000406,341,Kotzebue,341,Hub_110,high,Hub_110,533.2,local,Hub_110
+f001512,799,Kotzebue,799,Hub_110,high,Hub_110,476.6,local,Hub_110
+f000040,973,Kotzebue,973,Hub_110,high,Hub_110,318.6,local,Hub_110
+f001446,1176,Kotzebue,1176,Hub_110,high,Hub_110,224.1,local,Hub_110
+f001569,1236,Kotzebue,1236,Hub_110,high,Hub_110,1421.0,local,Hub_110
+f001764,242,Koyuk,242,Hub_198,high,Hub_198,78.6,local,Hub_198
+f000846,261,Koyuk,261,Hub_198,high,Hub_198,153.6,local,Hub_198
+f001436,950,Koyuk,950,Hub_198,high,Hub_198,373.7,local,Hub_198
+f000162,951,Koyuk,950,Hub_198,high,Hub_198,359.9,local,Hub_198
+f000801,952,Koyuk,950,Hub_198,high,Hub_198,343.0,local,Hub_198
+f001825,1611,Koyuk,261,Hub_198,high,Hub_198,153.4,local,Hub_198
+f000825,1612,Koyuk,261,Hub_198,high,Hub_198,153.4,local,Hub_198
+f001774,1613,Koyuk,261,Hub_198,high,Hub_198,153.4,local,Hub_198
+f001183,292,Koyukuk,292,Hub_225,high,Hub_225,24.7,local,Hub_225
+f001814,482,Koyukuk,482,Hub_284,high,Hub_284,51.5,local,Hub_284
+f000214,483,Koyukuk,483,Hub_284,high,Hub_284,68.6,local,Hub_284
+f001518,1614,Koyukuk,SYN-917,Hub_178,high,Hub_178,37.6,local,Hub_178
+f001178,1615,Koyukuk,292,Hub_225,high,Hub_225,27.9,local,Hub_225
+f001610,243,Kwethluk,243,Hub_199,high,Hub_199,129.9,local,Hub_199
+f000502,400,Kwethluk,400,Hub_199,high,Hub_199,1804.0,local,Hub_199
+f001364,670,Kwethluk,670,Hub_199,high,Hub_199,331.9,local,Hub_199
+f000949,671,Kwethluk,671,Hub_199,high,Hub_386,229.2,local,Hub_386
+f001458,672,Kwethluk,671,Hub_199,high,Hub_386,229.2,local,Hub_386
+f001312,673,Kwethluk,,,not built (no mode/capacity),Hub_386,416.7,local,Hub_386
+f001534,674,Kwethluk,674,Hub_199,high,Hub_386,380.3,local,Hub_386
+f000264,1616,Kwethluk,SYN-564,Hub_199,high,Hub_199,180.7,local,Hub_199
+f000315,1617,Kwethluk,SYN-564,Hub_199,high,Hub_199,159.1,local,Hub_199
+f001338,712,Kwigillingok,712,Hub_335,high,Hub_335,1077.3,local,Hub_335
+f000598,713,Kwigillingok,712,Hub_335,high,Hub_335,1075.7,local,Hub_335
+f001584,714,Kwigillingok,714,Hub_335,high,Hub_335,521.3,local,Hub_335
+f000435,1618,Kwigillingok,SYN-917,Hub_178,high,Hub_178,37.6,local,Hub_178
+f000357,293,Lake Minchumina,293,Hub_48,high,Hub_48,181.5,local,Hub_48
+f000797,1072,Lake Minchumina,1072,Hub_48,high,Hub_48,308.8,local,Hub_48
+f000859,264,Larsen Bay,264,Hub_209,high,Hub_209,593.5,local,Hub_209
+f001771,507,Larsen Bay,507,Hub_209,high,Hub_209,818.1,local,Hub_209
+f000152,868,Larsen Bay,868,Hub_209,high,Hub_209,448.6,local,Hub_209
+f001382,1619,Larsen Bay,868,Hub_209,high,Hub_209,451.8,local,Hub_209
+f001401,450,Levelock,,,not built (no mode/capacity),Hub_130,1631.3,local,Hub_130
+f000525,1206,Levelock,1206,Hub_130,high,Hub_130,125.0,local,Hub_130
+f000133,1620,Levelock,SYN-1427,Hub_130,high,Hub_130,174.6,local,Hub_130
+f000914,1621,Levelock,SYN-1427,Hub_130,high,Hub_130,174.6,local,Hub_130
+f001138,1622,Levelock,SYN-1427,Hub_130,high,Hub_130,174.6,local,Hub_130
+f001461,1623,Lime Village,SYN-1163,Hub_369,high,Hub_369,64.9,local,Hub_369
+f000930,1624,Lime Village,SYN-1165,Hub_369,high,Hub_369,53.9,local,Hub_369
+f001089,1625,Lime Village,SYN-1163,Hub_369,high,Hub_369,85.4,local,Hub_369
+f000913,1626,Lime Village,SYN-1164,Hub_369,high,Hub_369,85.1,local,Hub_369
+f000827,1627,Lime Village,SYN-1164,Hub_369,high,Hub_369,84.6,local,Hub_369
+f001751,1628,Lime Village,SYN-1164,Hub_369,high,Hub_369,84.6,local,Hub_369
+f000992,270,Livengood,270,Hub_79,high,Hub_79,2827.2,local,Hub_79
+f000472,800,Livengood,800,Hub_350,high,Hub_350,8596.6,local,Hub_350
+f000270,801,Livengood,801,Hub_79,high,Hub_79,10421.8,local,Hub_79
+f001371,1121,Livengood,1121,Hub_79,high,Hub_79,4668.6,local,Hub_79
+f000030,65,Lower Kalskag,65,Hub_319,high,Hub_319,244.8,local,Hub_319
+f000967,1629,Lower Kalskag,SYN-632,Hub_319,high,Hub_319,101.9,local,Hub_319
+f000896,1630,Lower Kalskag,SYN-640,Hub_274,high,Hub_274,108.1,local,Hub_274
+f000020,1631,Lower Kalskag,SYN-633,Hub_319,high,Hub_319,97.8,local,Hub_319
+f001829,271,Manley Hot Springs,271,Hub_146,high,Hub_146,153.6,local,Hub_146
+f001671,272,Manley Hot Springs,272,Hub_146,high,Hub_146,1427.1,local,Hub_146
+f000195,489,Manley Hot Springs,489,Hub_146,high,Hub_146,422.3,local,Hub_146
+f001424,1229,Manley Hot Springs,1229,Hub_146,high,Hub_146,603.5,local,Hub_146
+f001472,111,Manokotak,111,Hub_72,high,Hub_72,665.1,local,Hub_72
+f000946,406,Manokotak,406,Hub_262,high,Hub_262,67.0,local,Hub_262
+f000131,1632,Manokotak,SYN-1391,Hub_72,high,Hub_72,340.9,local,Hub_72
+f001821,1633,Manokotak,SYN-1391,Hub_72,high,Hub_72,326.4,local,Hub_72
+f001631,1634,Manokotak,SYN-1391,Hub_72,high,Hub_72,346.5,local,Hub_72
+f000865,1635,Manokotak,SYN-1391,Hub_72,high,Hub_72,346.5,local,Hub_72
+f000834,1636,Manokotak,SYN-1393,Hub_72,high,Hub_72,179.5,local,Hub_72
+f001779,1637,Manokotak,SYN-1394,Hub_72,high,Hub_72,57.6,local,Hub_72
+f001081,1638,Manokotak,SYN-1392,Hub_72,high,Hub_72,371.1,local,Hub_72
+f001294,663,Marshall,663,Hub_324,high,Hub_324,119.3,local,Hub_324
+f000812,921,Marshall,921,Hub_324,high,Hub_324,84.9,local,Hub_324
+f000036,1639,Marshall,SYN-544,Hub_324,high,Hub_324,35.4,local,Hub_324
+f001264,1640,Marshall,SYN-544,Hub_324,high,Hub_324,48.2,local,Hub_324
+f000421,60,McGrath,60,Hub_18,high,Hub_18,431.4,local,Hub_18
+f000877,192,McGrath,192,Hub_18,high,Hub_18,377.8,local,Hub_18
+f000869,385,McGrath,385,Hub_18,high,Hub_18,439.3,local,Hub_18
+f000123,805,McGrath,192,Hub_18,high,Hub_18,385.8,local,Hub_18
+f000442,1017,McGrath,1017,Hub_18,high,Hub_18,211.6,local,Hub_18
+f001679,1076,McGrath,1076,Hub_50,high,Hub_50,36404.8,remote,Hub_50
+f000049,244,Mekoryuk,244,Hub_200,high,Hub_200,329.0,local,Hub_200
+f000200,718,Mekoryuk,718,Hub_200,high,Hub_200,194.5,local,Hub_200
+f000701,922,Mekoryuk,974,Hub_200,high,Hub_200,422.5,local,Hub_200
+f001100,974,Mekoryuk,974,Hub_200,high,Hub_200,408.8,local,Hub_200
+f001646,975,Mekoryuk,974,Hub_200,high,Hub_200,436.7,local,Hub_200
+f000519,1641,Mekoryuk,SYN-661,Hub_200,high,Hub_200,453.5,local,Hub_200
+f000035,1642,Mekoryuk,SYN-661,Hub_200,high,Hub_200,453.5,local,Hub_200
+f000101,1643,Mekoryuk,SYN-659,Hub_200,high,Hub_200,363.5,local,Hub_200
+f001615,1644,Mekoryuk,SYN-664,Hub_200,high,Hub_200,1480.0,local,Hub_200
+f000188,1645,Mekoryuk,SYN-659,Hub_200,high,Hub_200,365.1,local,Hub_200
+f001034,134,Mentasta Lake,134,Hub_163,high,Hub_163,47.1,local,Hub_163
+f000558,117,Metlakatla,117,Hub_106,high,Hub_106,1060.7,local,Hub_106
+f000888,806,Metlakatla,806,Hub_351,high,Hub_351,45691.9,remote,Hub_351
+f000659,1077,Metlakatla,1077,Hub_51,high,Hub_51,45.7,local,Hub_51
+f001525,1646,Metlakatla,SYN-32,Hub_106,high,Hub_106,65.2,local,Hub_106
+f000470,1647,Metlakatla,SYN-34,Hub_106,high,Hub_106,409.5,local,Hub_106
+f000548,1648,Metlakatla,SYN-33,Hub_106,high,Hub_106,260.8,local,Hub_106
+f000788,1649,Metlakatla,SYN-36,Hub_106,high,Hub_106,1043.2,local,Hub_106
+f001491,273,Minto,273,Hub_212,high,Hub_212,536.2,local,Hub_212
+f001639,490,Minto,490,Hub_212,high,Hub_212,539.1,local,Hub_212
+f000215,617,Minto,617,Hub_212,high,Hub_212,985.8,local,Hub_212
+f001676,953,Minto,953,Hub_212,high,Hub_212,202.9,local,Hub_212
+f001697,1232,Minto,953,Hub_212,high,Hub_212,201.6,local,Hub_212
+f001513,1650,Minto,617,Hub_212,high,Hub_212,981.4,local,Hub_212
+f001523,16,Moose Pass,16,Hub_175,high,Hub_175,12372.0,local,Hub_175
+f000008,664,Mountain Village,664,Hub_325,high,Hub_325,153.0,local,Hub_325
+f001112,833,Mountain Village,833,Hub_325,high,Hub_325,323.7,local,Hub_325
+f001577,923,Mountain Village,923,Hub_325,high,Hub_325,316.3,local,Hub_325
+f001074,1651,Mountain Village,833,Hub_325,high,Hub_325,317.0,local,Hub_325
+f001220,80,Naknek,80,Hub_172,high,Hub_172,486.6,local,Hub_172
+f001467,87,Naknek,87,Hub_172,high,Hub_172,2631.5,local,Hub_172
+f000334,148,Naknek,148,Hub_172,high,Hub_172,1192.6,local,Hub_172
+f001541,151,Naknek,151,Hub_172,high,Hub_172,5010.0,local,Hub_172
+f001624,460,Naknek,,,not built (no mode/capacity),Hub_172,523.9,local,Hub_172
+f000776,462,Naknek,462,Hub_172,high,Hub_172,1192.0,local,Hub_172
+f001693,520,Naknek,520,Hub_172,high,Hub_172,278.8,local,Hub_172
+f000858,521,Naknek,521,Hub_172,high,Hub_172,152.6,local,Hub_172
+f001358,640,Naukati Bay,640,Hub_315,high,Hub_315,308.7,local,Hub_315
+f001013,804,Naknek,804,Hub_172,high,Hub_172,1466.7,local,Hub_172
+f001526,875,Naknek,875,Hub_172,high,Hub_172,3126.2,local,Hub_172
+f001834,877,Naknek,,,not built (no mode/capacity),Hub_172,1105.4,local,Hub_172
+f000743,889,Naknek,889,Hub_172,high,Hub_172,867.2,local,Hub_172
+f000927,1652,Naknek,SYN-1441,Hub_172,high,Hub_172,532.2,local,Hub_172
+f001813,409,Napakiak,409,Hub_264,high,Hub_264,231.7,local,Hub_264
+f000384,1653,Napakiak,SYN-588,Hub_264,high,Hub_264,227.1,local,Hub_264
+f000950,1654,Napakiak,SYN-567,Hub_386,high,Hub_386,12.2,local,Hub_386
+f000005,1655,Napakiak,SYN-588,Hub_264,high,Hub_264,227.1,local,Hub_264
+f001582,1656,Napakiak,SYN-588,Hub_264,high,Hub_264,227.1,local,Hub_264
+f000244,1657,Napakiak,SYN-589,Hub_264,high,Hub_264,46.7,local,Hub_264
+f001539,1658,Napakiak,SYN-591,Hub_264,high,Hub_264,389.0,local,Hub_264
+f001691,715,Napaskiak,715,Hub_336,high,Hub_336,226.6,local,Hub_336
+f001325,716,Napaskiak,715,Hub_336,high,Hub_336,226.6,local,Hub_336
+f001730,717,Napaskiak,717,Hub_336,high,Hub_336,174.7,local,Hub_336
+f000662,1659,Napaskiak,SYN-596,Hub_336,high,Hub_336,44.1,local,Hub_336
+f001735,1219,Naukati,1219,Hub_141,high,Hub_141,71.9,local,Hub_141
+f000953,303,Nelchina,303,Hub_233,high,Hub_233,5368.4,local,Hub_233
+f000094,517,Nelson Lagoon,517,Hub_291,high,Hub_158,645.4,local,Hub_158
+f000257,1660,Nelson Lagoon,SYN-1334,Hub_291,high,Hub_291,172.8,local,Hub_291
+f000807,1661,Nelson Lagoon,SYN-1335,Hub_291,high,Hub_291,301.1,local,Hub_291
+f000670,278,Nenana,278,Hub_214,high,Hub_214,90.8,local,Hub_214
+f000249,1085,Nenana,1085,Hub_54,high,Hub_54,2073.2,local,Hub_54
+f000909,108,New Stuyahok,108,Hub_53,high,Hub_53,259.2,local,Hub_53
+f000093,407,New Stuyahok,407,Hub_263,high,Hub_263,42690.1,remote,Hub_263
+f001613,924,New Stuyahok,924,Hub_53,high,Hub_53,266.9,local,Hub_53
+f000921,1662,New Stuyahok,SYN-1388,Hub_53,high,Hub_53,386.8,local,Hub_53
+f001169,1663,New Stuyahok,SYN-1388,Hub_53,high,Hub_53,363.7,local,Hub_53
+f000735,1207,Newhalen,1207,Hub_131,high,Hub_131,112.5,local,Hub_131
+f000218,1664,Newhalen,SYN-1230,Hub_131,high,Hub_131,220.1,local,Hub_131
+f001643,1665,Newhalen,1207,Hub_131,high,Hub_131,73.3,local,Hub_131
+f000679,1666,Newhalen,SYN-1229,Hub_131,high,Hub_131,130.7,local,Hub_131
+f000982,1667,Newtok,SYN-670,Hub_201,high,Hub_201,14396.5,local,Hub_201
+f001702,1668,Newtok,SYN-667,Hub_201,high,Hub_201,14871.9,local,Hub_201
+f000021,1669,Newtok,SYN-669,Hub_201,high,Hub_201,14719.7,local,Hub_201
+f001828,1670,Newtok,SYN-666,Hub_201,high,Hub_201,15044.7,local,Hub_201
+f000129,1671,Newtok,238,Hub_181,high,Hub_181,180.3,local,Hub_181
+f000586,1672,Newtok,,,not built (no mode/capacity),Hub_201,14814.7,local,Hub_201
+f000017,410,Nightmute,410,Hub_265,high,Hub_265,1389.5,local,Hub_265
+f000885,1673,Nightmute,SYN-673,Hub_265,high,Hub_265,749.3,local,Hub_265
+f000345,1674,Nightmute,SYN-671,Hub_265,high,Hub_265,212.4,local,Hub_265
+f000332,1675,Nightmute,SYN-671,Hub_265,high,Hub_265,209.8,local,Hub_265
+f000627,1676,Nightmute,SYN-572,Hub_387,high,Hub_387,629.6,local,Hub_387
+f000353,1677,Nightmute,SYN-671,Hub_265,high,Hub_265,221.2,local,Hub_265
+f000764,1678,Nightmute,SYN-520,Hub_205,high,Hub_205,355.1,local,Hub_205
+f001094,1679,Nightmute,SYN-672,Hub_265,high,Hub_265,315.5,local,Hub_265
+f001250,1680,Nightmute,SYN-1231,Hub_371,high,Hub_371,1739.2,local,Hub_371
+f001128,1157,Nikiski,1157,Hub_94,high,Hub_94,246.0,local,Hub_94
+f000744,1019,Nikolai,1019,Hub_20,high,Hub_20,71.3,local,Hub_20
+f000843,1681,Nikolai,SYN-1153,Hub_20,high,Hub_20,172.0,local,Hub_20
+f000648,1682,Nikolski,SYN-466,Hub_383,high,Hub_383,27.6,local,Hub_383
+f001459,1683,Nikolski,SYN-467,Hub_383,high,Hub_383,680.4,local,Hub_383
+f000754,1684,Nikolski,SYN-464,Hub_383,high,Hub_383,223.3,local,Hub_383
+f001670,1685,Nikolski,SYN-465,Hub_383,high,Hub_383,293.1,local,Hub_383
+f000897,374,Ninilchik,374,Hub_95,high,Hub_95,3999.4,local,Hub_95
+f000168,688,Ninilchik,688,Hub_95,high,Hub_95,4182.0,local,Hub_95
+f000964,1158,Ninilchik,1158,Hub_95,high,Hub_95,8110.4,local,Hub_95
+f001529,925,Noatak,1104,Hub_68,high,Hub_68,225.2,local,Hub_68
+f000301,1104,Noatak,1104,Hub_68,high,Hub_68,243.0,local,Hub_68
+f000643,1237,Noatak,1237,Hub_68,high,Hub_68,105.9,local,Hub_68
+f001826,1686,Noatak,921,Hub_324,high,Hub_324,83.9,local,Hub_324
+f000241,1687,Noatak,SYN-892,Hub_68,high,Hub_68,244.7,local,Hub_68
+f000167,1688,Noatak,SYN-894,Hub_68,high,Hub_68,409.7,local,Hub_68
+f000245,246,Nome,246,Hub_148,high,Hub_148,2049.2,local,Hub_148
+f000344,247,Nome,247,Hub_148,high,Hub_148,662.0,local,Hub_148
+f000437,248,Nome,247,Hub_148,high,Hub_148,662.0,local,Hub_148
+f001322,176,Nome,176,Hub_148,high,Hub_148,1899.6,local,Hub_148
+f001778,346,Nome,346,Hub_148,high,Hub_148,1706.6,local,Hub_148
+f001182,347,Nome,347,Hub_148,high,Hub_148,3476.0,local,Hub_148
+f001494,493,Nome,493,Hub_148,high,Hub_148,1086.2,local,Hub_148
+f000579,591,Nome,591,Hub_148,high,Hub_148,3647.2,local,Hub_148
+f000965,656,Nome,656,Hub_148,high,Hub_148,906.3,local,Hub_148
+f001159,752,Nome,752,Hub_148,high,Hub_148,1139.9,local,Hub_148
+f000408,810,Nome,810,Hub_148,high,Hub_148,995.6,local,Hub_148
+f001027,899,Nome,899,Hub_148,high,Hub_148,119.9,local,Hub_148
+f001451,960,Nome,960,Hub_148,high,Hub_148,1586.9,local,Hub_148
+f000247,1086,Nome,1086,Hub_55,high,Hub_55,3283.1,local,Hub_55
+f000176,1122,Nome,1122,Hub_55,high,Hub_55,12948.0,local,Hub_55
+f001304,1231,Nome,1231,Hub_148,high,Hub_148,4183.0,local,Hub_148
+f001630,1250,Nome,1250,Hub_148,high,Hub_148,2359.0,local,Hub_148
+f001654,1251,Nome,1251,Hub_148,high,Hub_148,1402.8,local,Hub_148
+f000695,446,Nondalton,446,Hub_132,high,Hub_132,751.2,local,Hub_132
+f001592,1208,Nondalton,1208,Hub_132,high,Hub_132,1032.3,local,Hub_132
+f000824,1689,Nondalton,SYN-1217,Hub_132,high,Hub_132,763.5,local,Hub_132
+f001796,1690,Nondalton,SYN-1219,Hub_132,high,Hub_132,479.5,local,Hub_132
+f000085,1691,Nondalton,1208,Hub_132,high,Hub_132,1030.7,local,Hub_132
+f001501,926,Noorvik,926,Hub_64,high,Hub_64,96.0,local,Hub_64
+f000988,1098,Noorvik,1098,Hub_64,high,Hub_64,128.7,local,Hub_64
+f000181,1099,Noorvik,1098,Hub_64,high,Hub_64,128.7,local,Hub_64
+f001477,1100,Noorvik,1098,Hub_64,high,Hub_64,128.7,local,Hub_64
+f001531,1101,Noorvik,1098,Hub_64,high,Hub_64,128.7,local,Hub_64
+f001579,1692,Noorvik,918,Hub_224,high,Hub_224,229.4,local,Hub_224
+f001339,1693,Noorvik,SYN-908,Hub_394,high,Hub_394,215.6,local,Hub_394
+f000705,1694,Noorvik,1098,Hub_64,high,Hub_64,128.4,local,Hub_64
+f001725,1695,Noorvik,SYN-906,Hub_64,high,Hub_64,445.7,local,Hub_64
+f001746,1696,Noorvik,SYN-908,Hub_394,high,Hub_394,215.6,local,Hub_394
+f000376,1697,Noorvik,SYN-905,Hub_64,high,Hub_64,189.9,local,Hub_64
+f000844,169,North Pole,169,Hub_74,high,Hub_27,3623.1,local,Hub_27
+f000416,707,North Pole,707,Hub_74,high,Hub_74,5089.9,local,Hub_74
+f001048,708,North Pole,708,Hub_74,high,Hub_74,3526.4,local,Hub_74
+f001186,836,North Pole,836,Hub_74,high,Hub_74,2830.0,local,Hub_74
+f000346,1030,North Pole,1030,Hub_27,high,Hub_27,115.7,local,Hub_27
+f000711,1113,North Pole,1113,Hub_74,high,Hub_74,5357.6,local,Hub_74
+f000480,37,Northway,37,Hub_164,high,Hub_164,2908.7,local,Hub_164
+f000260,44,Northway,44,Hub_164,high,Hub_164,1523.3,local,Hub_164
+f000504,45,Northway,45,Hub_164,high,Hub_164,2761.7,local,Hub_164
+f000654,135,Northway,135,Hub_164,high,Hub_164,571.1,local,Hub_164
+f000397,311,Northway,311,Hub_164,high,Hub_164,13721.4,local,Hub_164
+f001001,641,Northway,,,not built (no mode/capacity),Hub_164,7500.3,local,Hub_164
+f001180,471,Nuiqsut,471,Hub_280,high,Hub_280,310.3,local,Hub_280
+f000280,1698,Nuiqsut,SYN-398,Hub_280,high,Hub_280,356.9,local,Hub_280
+f001412,1699,Nuiqsut,SYN-402,Hub_280,high,Hub_280,557.3,local,Hub_280
+f000791,1700,Nuiqsut,SYN-406,Hub_280,high,Hub_280,116.9,local,Hub_280
+f001498,1701,Nuiqsut,SYN-408,Hub_280,high,Hub_280,383.2,local,Hub_280
+f001133,1702,Nuiqsut,SYN-408,Hub_280,high,Hub_280,364.1,local,Hub_280
+f001379,1703,Nuiqsut,SYN-404,Hub_280,high,Hub_280,148.5,local,Hub_280
+f000657,1704,Nuiqsut,SYN-401,Hub_280,high,Hub_280,313.0,local,Hub_280
+f001554,1705,Nuiqsut,SYN-403,Hub_280,high,Hub_280,128.6,local,Hub_280
+f001015,1706,Nuiqsut,SYN-408,Hub_280,high,Hub_280,390.3,local,Hub_280
+f000143,1707,Nuiqsut,SYN-405,Hub_280,high,Hub_280,224.8,local,Hub_280
+f000454,1708,Nuiqsut,SYN-407,Hub_280,high,Hub_280,321.5,local,Hub_280
+f001385,1709,Nuiqsut,SYN-407,Hub_280,high,Hub_280,317.1,local,Hub_280
+f000183,1710,Nuiqsut,SYN-409,Hub_280,high,Hub_280,280.0,local,Hub_280
+f000957,1711,Nuiqsut,SYN-398,Hub_280,high,Hub_280,356.9,local,Hub_280
+f000417,1712,Nuiqsut,SYN-404,Hub_280,high,Hub_280,148.5,local,Hub_280
+f000767,1713,Nuiqsut,SYN-403,Hub_280,high,Hub_280,128.6,local,Hub_280
+f001318,1714,Nuiqsut,SYN-405,Hub_280,high,Hub_280,224.8,local,Hub_280
+f001103,1715,Nuiqsut,SYN-408,Hub_280,high,Hub_280,383.2,local,Hub_280
+f001571,1716,Nuiqsut,SYN-870,Hub_278,high,Hub_278,94.4,local,Hub_278
+f000920,1717,Nuiqsut,SYN-874,Hub_278,high,Hub_278,254.9,local,Hub_278
+f000052,1718,Nuiqsut,SYN-873,Hub_278,high,Hub_278,155.3,local,Hub_278
+f001060,1719,Nuiqsut,SYN-400,Hub_280,high,Hub_280,367.8,local,Hub_280
+f000806,206,Nulato,206,Hub_189,high,Hub_189,174.6,local,Hub_189
+f000423,294,Nulato,294,Hub_189,high,Hub_189,128.8,local,Hub_189
+f001061,491,Nulato,491,Hub_189,high,Hub_189,415.1,local,Hub_189
+f001265,927,Nulato,927,Hub_189,high,Hub_189,296.2,local,Hub_189
+f001167,665,Nunam Iqua,665,Hub_326,high,Hub_326,873.1,local,Hub_326
+f000453,976,Nunam Iqua,976,Hub_326,high,Hub_326,153.3,local,Hub_326
+f001109,1720,Nunam Iqua,SYN-728,Hub_326,high,Hub_326,489.2,local,Hub_326
+f000707,1721,Nunam Iqua,SYN-728,Hub_326,high,Hub_326,465.3,local,Hub_326
+f000114,96,Nunapitchuk,96,Hub_266,high,Hub_266,786.5,local,Hub_266
+f000958,411,Nunapitchuk,411,Hub_266,high,Hub_266,1253.6,local,Hub_266
+f001067,928,Nunapitchuk,928,Hub_266,high,Hub_266,665.8,local,Hub_266
+f001716,1722,Nunapitchuk,SYN-580,Hub_266,high,Hub_266,66.1,local,Hub_266
+f000850,1723,Nunapitchuk,SYN-576,Hub_266,high,Hub_266,844.0,local,Hub_266
+f001185,1724,Nunapitchuk,SYN-578,Hub_266,high,Hub_266,614.5,local,Hub_266
+f000433,929,Old Harbor,929,Hub_362,high,Hub_362,239.7,local,Hub_362
+f001432,1725,Old Harbor,SYN-1286,Hub_362,high,Hub_362,274.1,local,Hub_362
+f001445,1726,Old Harbor,SYN-1286,Hub_362,high,Hub_362,277.5,local,Hub_362
+f001443,1727,Oscarville,SYN-592,Hub_389,high,Hub_389,74.2,local,Hub_389
+f001415,1728,Oscarville,SYN-593,Hub_389,high,Hub_389,84.2,local,Hub_389
+f000262,146,Ouzinkie,146,Hub_170,high,Hub_170,295.2,local,Hub_170
+f001149,433,Ouzinkie,433,Hub_273,high,Hub_273,24.4,local,Hub_273
+f000544,508,Ouzinkie,508,Hub_170,high,Hub_170,471.1,local,Hub_170
+f001024,977,Ouzinkie,977,Hub_170,high,Hub_170,411.4,local,Hub_170
+f001196,1729,Ouzinkie,SYN-1257,Hub_170,high,Hub_170,789.6,local,Hub_170
+f000639,12,Palmer,12,Hub_123,high,Hub_123,458.5,local,Hub_123
+f001732,13,Palmer,13,Hub_161,high,Hub_161,3448.6,local,Hub_161
+f001460,14,Palmer,14,Hub_161,high,Hub_294,9066.1,local,Hub_294
+f000153,95,Palmer,95,Hub_123,high,Hub_123,666.7,local,Hub_123
+f000800,386,Palmer,386,Hub_123,high,Hub_123,865.7,local,Hub_123
+f001507,593,Palmer,593,Hub_123,high,Hub_123,1125.8,local,Hub_123
+f000290,612,Palmer,612,Hub_123,high,Hub_123,982.0,local,Hub_123
+f000170,758,Palmer,758,Hub_340,high,Hub_340,234.0,local,Hub_340
+f001130,811,Palmer,811,Hub_352,high,Hub_352,209.7,local,Hub_352
+f000851,812,Palmer,812,Hub_353,high,Hub_353,28.0,local,Hub_353
+f000607,978,Palmer,978,Hub_123,high,Hub_123,231.3,local,Hub_123
+f001603,304,Paxson,304,Hub_234,high,Hub_234,394.6,local,Hub_234
+f000151,813,Paxson,813,Hub_354,high,Hub_354,6099.3,local,Hub_354
+f001580,821,Paxson,821,Hub_357,high,Hub_357,25131.8,remote,Hub_357
+f001046,883,Paxson,883,Hub_234,high,Hub_234,3889.9,local,Hub_234
+f000479,17,Pedro Bay,17,Hub_133,high,Hub_133,159.2,local,Hub_133
+f001567,449,Pedro Bay,,,not built (no mode/capacity),Hub_133,1926.0,local,Hub_133
+f000942,1209,Pedro Bay,1209,Hub_133,high,Hub_133,157.4,local,Hub_133
+f000148,121,Pelican,121,Hub_134,high,Hub_134,160.8,local,Hub_134
+f000086,1730,Pelican,SYN-174,Hub_134,high,Hub_134,134.4,local,Hub_134
+f001607,1731,Pelican,SYN-175,Hub_134,high,Hub_134,618.4,local,Hub_134
+f000067,455,Perryville,,,not built (no mode/capacity),Hub_135,998.0,local,Hub_135
+f000492,1210,Perryville,1210,Hub_135,high,Hub_135,73.0,local,Hub_135
+f000795,1732,Perryville,SYN-1325,Hub_135,high,Hub_135,119.0,local,Hub_135
+f000632,1733,Perryville,SYN-1231,Hub_371,high,Hub_371,1739.2,local,Hub_371
+f000985,547,Petersburg,547,Hub_299,high,Hub_299,10015.3,local,Hub_299
+f000616,814,Petersburg,814,Hub_299,high,Hub_314,12699.1,local,Hub_314
+f000228,815,Petersburg,815,,dropped/unresolved in hub build,Hub_318,15919.6,local,Hub_118
+f000535,856,Petersburg,856,Hub_159,high,Hub_159,215.8,local,Hub_159
+f000286,869,Petersburg,869,Hub_159,high,Hub_159,175.1,local,Hub_159
+f000104,1257,Petersburg,1257,Hub_159,high,Hub_159,280.5,local,Hub_159
+f000486,452,Pilot Point,,,not built (no mode/capacity),Hub_136,31117.5,remote,Hub_136
+f001660,1211,Pilot Point,1211,Hub_136,high,Hub_136,51.5,local,Hub_136
+f001288,1734,Pilot Point,SYN-1418,Hub_136,high,Hub_136,200.1,local,Hub_136
+f000559,1735,Pilot Point,SYN-1418,Hub_136,high,Hub_136,200.1,local,Hub_136
+f000724,1736,Pilot Point,SYN-1418,Hub_136,high,Hub_136,200.1,local,Hub_136
+f001164,666,Pilot Station,666,Hub_327,high,Hub_327,344.6,local,Hub_327
+f000904,930,Pilot Station,930,Hub_327,high,Hub_327,348.7,local,Hub_327
+f001065,1737,Pilot Station,SYN-714,Hub_327,high,Hub_327,44.6,local,Hub_327
+f000905,1738,Pilot Station,SYN-712,Hub_327,high,Hub_327,179.6,local,Hub_327
+f000063,1739,Pilot Station,SYN-713,Hub_327,high,Hub_327,164.5,local,Hub_327
+f001310,412,Platinum,,,not built (no mode/capacity),Hub_90,686.6,local,Hub_90
+f000771,1146,Platinum,1146,Hub_90,high,Hub_90,351.6,local,Hub_90
+f000757,1242,Platinum,1242,Hub_90,high,Hub_90,92.0,local,Hub_90
+f001621,1740,Platinum,1242,Hub_90,high,Hub_90,95.2,local,Hub_90
+f000980,1741,Platinum,SYN-1362,Hub_90,high,Hub_90,286.9,local,Hub_90
+f000728,1742,Platinum,SYN-1360,Hub_90,high,Hub_90,135.1,local,Hub_90
+f001753,1743,Platinum,SYN-1361,Hub_90,high,Hub_90,55.9,local,Hub_90
+f000861,1744,Point Baker,SYN-55,,dropped/unresolved in hub build,Hub_385,5589.1,local,Hub_385
+f001672,472,Point Hope,472,Hub_281,high,Hub_281,157.1,local,Hub_281
+f000709,1745,Point Hope,472,Hub_281,high,Hub_281,177.1,local,Hub_281
+f001685,1746,Point Hope,472,Hub_281,high,Hub_281,168.7,local,Hub_281
+f001428,1747,Point Hope,SYN-935,Hub_281,high,Hub_281,610.8,local,Hub_281
+f001215,1748,Point Hope,SYN-936,Hub_281,high,Hub_281,294.4,local,Hub_281
+f000360,1749,Point Hope,SYN-940,Hub_281,high,Hub_281,605.4,local,Hub_281
+f001633,1750,Point Hope,SYN-939,Hub_281,high,Hub_281,92.3,local,Hub_281
+f001744,1751,Point Hope,SYN-934,Hub_281,high,Hub_281,643.0,local,Hub_281
+f000943,1752,Point Hope,SYN-874,Hub_278,high,Hub_278,254.9,local,Hub_278
+f000082,1753,Point Hope,SYN-937,Hub_281,high,Hub_281,160.1,local,Hub_281
+f000523,1754,Point Hope,SYN-934,Hub_281,high,Hub_281,673.9,local,Hub_281
+f001179,473,Point Lay,473,Hub_282,high,Hub_282,202.1,local,Hub_282
+f000141,1755,Point Lay,SYN-923,Hub_282,high,Hub_282,302.5,local,Hub_282
+f001500,1756,Point Lay,SYN-924,Hub_282,high,Hub_282,227.7,local,Hub_282
+f001118,1757,Point Lay,SYN-928,Hub_282,high,Hub_282,48.5,local,Hub_282
+f001609,1758,Point Lay,SYN-926,Hub_282,high,Hub_282,72.1,local,Hub_282
+f001291,1759,Point Lay,473,Hub_282,high,Hub_282,200.0,local,Hub_282
+f000221,1760,Point Lay,SYN-927,Hub_282,high,Hub_282,67.2,local,Hub_282
+f001019,1761,Point Lay,SYN-386,Hub_279,high,Hub_279,224.6,local,Hub_279
+f001590,1762,Point Lay,SYN-873,Hub_278,high,Hub_278,155.3,local,Hub_278
+f001076,1763,Point Lay,SYN-874,Hub_278,high,Hub_278,254.9,local,Hub_278
+f001719,384,Point Mackenzie,384,Hub_252,high,Hub_252,203.0,local,Hub_252
+f000439,1220,Port Alexander,1220,Hub_143,high,Hub_143,52.8,local,Hub_143
+f001000,1764,Port Alexander,1220,Hub_143,high,Hub_143,66.3,local,Hub_143
+f000853,1765,Port Alexander,SYN-98,Hub_143,high,Hub_143,425.5,local,Hub_143
+f001090,1766,Port Alexander,SYN-97,Hub_143,high,Hub_143,154.7,local,Hub_143
+f001690,1173,Port Alsworth,1173,Hub_108,high,Hub_108,252.3,local,Hub_108
+f000174,1213,Port Alsworth,1213,Hub_108,high,Hub_108,539.6,local,Hub_108
+f000055,1767,Port Alsworth,SYN-1211,Hub_108,high,Hub_108,171.4,local,Hub_108
+f000506,1768,Port Alsworth,SYN-1210,Hub_108,high,Hub_108,752.9,local,Hub_108
+f000448,1769,Port Alsworth,SYN-1208,Hub_108,high,Hub_108,924.5,local,Hub_108
+f001734,1770,Port Alsworth,SYN-1206,Hub_108,high,Hub_108,563.4,local,Hub_108
+f000071,1771,Port Alsworth,SYN-1207,Hub_108,high,Hub_108,390.0,local,Hub_108
+f000324,1772,Port Alsworth,SYN-1212,Hub_108,high,Hub_108,116.2,local,Hub_108
+f001146,1773,Port Graham,SYN-1186,Hub_370,high,Hub_370,102.7,local,Hub_370
+f000740,454,Port Heiden,,,not built (no mode/capacity),Hub_56,1562.8,local,Hub_56
+f001043,1087,Port Heiden,1087,Hub_56,high,Hub_56,1671.1,local,Hub_56
+f000610,1212,Port Heiden,1212,Hub_56,high,Hub_56,2727.4,local,Hub_56
+f000403,1774,Port Heiden,SYN-1309,Hub_56,high,Hub_56,2818.7,local,Hub_56
+f000341,1775,Port Heiden,SYN-1309,Hub_56,high,Hub_56,2818.7,local,Hub_56
+f001237,1776,Port Heiden,SYN-1309,Hub_56,high,Hub_56,2818.7,local,Hub_56
+f000915,1777,Port Heiden,SYN-1309,Hub_56,high,Hub_56,2853.2,local,Hub_56
+f000496,1778,Port Heiden,SYN-1311,Hub_56,high,Hub_56,819.9,local,Hub_56
+f000164,1779,Port Heiden,SYN-1311,Hub_56,high,Hub_56,821.7,local,Hub_56
+f001106,1780,Port Heiden,SYN-1313,Hub_56,high,Hub_56,1684.1,local,Hub_56
+f001259,509,Port Lions,509,Hub_290,high,Hub_290,107.7,local,Hub_290
+f001246,874,Port Lions,874,Hub_290,high,Hub_290,1447.1,local,Hub_290
+f000956,1781,Port Lions,SYN-1250,Hub_290,high,Hub_290,162.2,local,Hub_290
+f001822,1782,Port Lions,SYN-1251,Hub_290,high,Hub_290,270.0,local,Hub_290
+f000560,1256,Port Moller,1256,Hub_158,high,Hub_158,36850.8,remote,Hub_158
+f001434,1783,Port Protection,SYN-56,Hub_385,high,Hub_385,2123.5,local,Hub_385
+f001410,532,Portage,532,Hub_295,high,Hub_295,246.7,local,Hub_295
+f000971,143,Prudhoe Bay,143,Hub_154,high,Hub_154,2792.3,local,Hub_154
+f000515,268,Prudhoe Bay,268,Hub_154,high,Hub_154,2607.6,local,Hub_154
+f000974,817,Prudhoe Bay,817,Hub_355,high,Hub_355,35160.9,remote,Hub_355
+f001627,820,Prudhoe Bay,820,Hub_356,high,Hub_356,6307.4,local,Hub_356
+f001172,847,Prudhoe Bay,847,Hub_154,high,Hub_154,2172.3,local,Hub_154
+f000693,860,Prudhoe Bay,860,Hub_154,high,Hub_154,26915.6,remote,Hub_154
+f000014,861,Prudhoe Bay,861,Hub_154,high,Hub_154,1395.0,local,Hub_154
+f000698,876,Prudhoe Bay,876,Hub_154,high,Hub_154,2145.4,local,Hub_154
+f001789,961,Prudhoe Bay,961,Hub_154,high,Hub_154,1295.0,local,Hub_154
+f000656,1243,Prudhoe Bay,1243,Hub_154,high,Hub_154,1668.5,local,Hub_154
+f000100,249,Quinhagak,249,Hub_202,high,Hub_202,680.4,local,Hub_202
+f001078,931,Quinhagak,931,Hub_202,high,Hub_202,397.2,local,Hub_202
+f000068,1784,Quinhagak,SYN-1349,Hub_202,high,Hub_202,99.6,local,Hub_202
+f001021,1785,Quinhagak,SYN-1348,Hub_202,high,Hub_202,317.0,local,Hub_202
+f000742,1786,Quinhagak,SYN-1346,Hub_202,high,Hub_202,576.6,local,Hub_202
+f001586,1787,Quinhagak,SYN-1350,Hub_202,high,Hub_202,869.9,local,Hub_202
+f000677,145,Rampart,145,Hub_169,high,Hub_169,384.0,local,Hub_169
+f001123,296,Rampart,296,Hub_169,high,Hub_169,914.0,local,Hub_169
+f001795,1788,Rampart,SYN-266,Hub_169,high,Hub_169,367.8,local,Hub_169
+f001657,1222,Red Devil,1222,Hub_144,high,Hub_144,241.2,local,Hub_144
+f000311,1789,Red Devil,SYN-1182,Hub_144,high,Hub_144,125.9,local,Hub_144
+f001398,1790,Red Devil,SYN-640,Hub_274,high,Hub_274,108.1,local,Hub_274
+f000272,1791,Red Devil,SYN-1179,Hub_144,high,Hub_144,98.8,local,Hub_144
+f001559,1792,Red Devil,SYN-1180,Hub_144,high,Hub_144,149.2,local,Hub_144
+f000911,297,Ruby,297,Hub_227,high,Hub_227,977.6,local,Hub_227
+f001306,492,Ruby,492,Hub_227,high,Hub_85,249.3,local,Hub_85
+f000158,1793,Ruby,SYN-853,Hub_227,high,Hub_227,564.6,local,Hub_227
+f000952,1794,Ruby,SYN-851,Hub_227,high,Hub_227,456.3,local,Hub_227
+f000774,1795,Ruby,SYN-852,Hub_227,high,Hub_227,541.6,local,Hub_227
+f000395,667,Russian Mission,667,Hub_160,high,Hub_160,198.2,local,Hub_160
+f001194,932,Russian Mission,932,Hub_160,high,Hub_160,105.1,local,Hub_160
+f001473,1259,Russian Mission,1259,Hub_160,high,Hub_160,284.9,local,Hub_160
+f001235,1796,Russian Mission,1259,Hub_160,high,Hub_160,278.8,local,Hub_160
+f001756,1797,Russian Mission,SYN-547,Hub_160,high,Hub_160,160.7,local,Hub_160
+f000617,1798,Russian Mission,SYN-549,Hub_160,high,Hub_160,84.8,local,Hub_160
+f001762,1799,Saint George,SYN-460,Hub_365,high,Hub_365,109.0,local,Hub_365
+f000136,1800,Saint George,SYN-462,Hub_365,high,Hub_365,159.8,local,Hub_365
+f000343,1801,Saint George,979,Hub_365,high,Hub_365,263.4,local,Hub_365
+f000815,1802,Saint George,SYN-461,Hub_365,high,Hub_365,109.5,local,Hub_365
+f000794,1803,Saint George,SYN-460,Hub_365,high,Hub_365,117.4,local,Hub_365
+f000266,167,Saint George Island,167,Hub_176,high,Hub_176,130.2,local,Hub_176
+f000879,458,Saint George Island,,,not built (no mode/capacity),Hub_176,622.8,local,Hub_176
+f001280,979,Saint George Island,979,Hub_365,high,Hub_365,262.4,local,Hub_365
+f000037,355,Saint Marys,355,Hub_60,high,Hub_60,1785.0,local,Hub_60
+f001832,763,Saint Marys,763,Hub_60,high,Hub_392,428.1,local,Hub_392
+f000451,939,Saint Marys,SYN-719,Hub_392,high,Hub_392,565.6,local,Hub_392
+f001107,1093,Saint Marys,1093,Hub_60,high,Hub_60,2218.3,local,Hub_60
+f000726,1262,Saint Marys,1262,Hub_60,high,Hub_392,169.0,local,Hub_392
+f001373,1804,Saint Mary's,SYN-722,Hub_392,high,Hub_392,632.6,local,Hub_392
+f000038,1805,Saint Mary's,SYN-719,Hub_392,high,Hub_392,575.2,local,Hub_392
+f001069,1806,Saint Mary's,SYN-719,Hub_392,high,Hub_392,597.7,local,Hub_392
+f001792,1807,Saint Mary's,SYN-723,Hub_392,high,Hub_392,750.3,local,Hub_392
+f001208,253,Saint Michael,253,Hub_188,high,Hub_188,309.8,local,Hub_188
+f001366,88,Saint Michael,88,Hub_188,high,Hub_188,577.6,local,Hub_188
+f001800,205,Saint Michael,205,Hub_188,high,Hub_188,475.8,local,Hub_188
+f000248,552,Saint Michael,552,Hub_188,high,Hub_188,156.6,local,Hub_188
+f000676,1808,Saint Michael,253,Hub_188,high,Hub_188,310.2,local,Hub_188
+f000545,1809,Saint Michael,SYN-765,Hub_188,high,Hub_188,124.4,local,Hub_188
+f001239,1810,Saint Michael,SYN-762,Hub_188,high,Hub_188,199.3,local,Hub_188
+f001572,1811,Saint Michael,257,Hub_205,high,Hub_205,77.5,local,Hub_205
+f000443,1812,Saint Michael,257,Hub_205,high,Hub_205,77.5,local,Hub_205
+f000420,1813,Saint Michael,SYN-764,Hub_188,high,Hub_188,394.4,local,Hub_188
+f001661,1814,Saint Michael,SYN-764,Hub_188,high,Hub_188,394.4,local,Hub_188
+f000756,1815,Saint Paul,SYN-453,Hub_382,high,Hub_382,1421.0,local,Hub_382
+f001009,1816,Saint Paul,SYN-450,Hub_382,high,Hub_382,176.7,local,Hub_382
+f000966,1817,Saint Paul,SYN-456,Hub_382,high,Hub_57,2791.1,local,Hub_57
+f001435,1818,Saint Paul,SYN-452,Hub_382,high,Hub_382,105.6,local,Hub_382
+f001105,1819,Saint Paul,SYN-451,Hub_382,high,Hub_382,165.0,local,Hub_382
+f000109,1820,Saint Paul,SYN-456,Hub_382,high,Hub_57,2777.2,local,Hub_57
+f000057,40,Saint Paul Island,40,Hub_57,high,Hub_57,843.6,local,Hub_57
+f000464,35,Saint Paul Island,,,not built (no mode/capacity),Hub_57,2359.8,local,Hub_57
+f000002,459,Saint Paul Island,SYN-456,Hub_382,high,Hub_57,2803.3,local,Hub_57
+f001566,890,Saint Paul Island,890,Hub_57,high,Hub_382,1480.5,local,Hub_57
+f001560,998,Saint Paul Island,998,Hub_57,high,Hub_382,1692.1,local,Hub_382
+f000615,1088,Saint Paul Island,1088,Hub_57,high,Hub_57,3779.3,local,Hub_57
+f001542,142,Sand Point,142,Hub_147,high,Hub_147,1833.4,local,Hub_147
+f000719,445,Sand Point,443,Hub_34,high,Hub_34,164.1,local,Hub_34
+f000111,603,Sand Point,603,Hub_147,high,Hub_147,2992.0,local,Hub_147
+f000802,1230,Sand Point,1230,Hub_147,high,Hub_147,673.5,local,Hub_147
+f000197,1821,Sand Point,SYN-1330,Hub_147,high,Hub_147,728.8,local,Hub_147
+f000459,1822,Sand Point,SYN-1331,Hub_147,high,Hub_147,757.2,local,Hub_147
+f001488,1823,Sand Point,142,Hub_147,high,Hub_147,1857.0,local,Hub_147
+f001738,1824,Sand Point,SYN-1332,Hub_147,high,Hub_147,211.7,local,Hub_147
+f001667,250,Savoonga,250,Hub_203,high,Hub_203,141.1,local,Hub_203
+f001317,356,Savoonga,356,Hub_203,high,Hub_203,570.3,local,Hub_203
+f001173,933,Savoonga,933,Hub_203,high,Hub_203,238.7,local,Hub_203
+f000366,1825,Savoonga,SYN-491,Hub_203,high,Hub_203,239.7,local,Hub_203
+f000139,1826,Savoonga,257,Hub_205,high,Hub_205,77.5,local,Hub_205
+f001075,1827,Savoonga,SYN-495,Hub_203,high,Hub_203,197.1,local,Hub_203
+f001198,1828,Savoonga,SYN-494,Hub_203,high,Hub_203,336.4,local,Hub_203
+f001216,1829,Savoonga,SYN-491,Hub_203,high,Hub_203,239.7,local,Hub_203
+f000832,1830,Savoonga,SYN-484,Hub_187,high,Hub_187,414.7,local,Hub_187
+f000509,413,Scammon Bay,413,Hub_267,high,Hub_267,208.6,local,Hub_267
+f000172,668,Scammon Bay,668,Hub_328,high,Hub_328,1276.2,local,Hub_328
+f000736,934,Scammon Bay,934,Hub_267,high,Hub_267,40.5,local,Hub_267
+f001320,957,Scammon Bay,957,Hub_267,high,Hub_328,279.4,local,Hub_328
+f000412,1831,Scammon Bay,SYN-686,Hub_267,high,Hub_267,85.7,local,Hub_267
+f001502,1832,Scammon Bay,SYN-683,Hub_267,high,Hub_267,236.5,local,Hub_267
+f001787,1833,Scammon Bay,SYN-684,Hub_267,high,Hub_267,189.6,local,Hub_267
+f000840,251,Selawik,251,Hub_157,high,Hub_157,357.4,local,Hub_157
+f001004,357,Selawik,357,Hub_157,high,Hub_157,701.7,local,Hub_157
+f000124,954,Selawik,954,Hub_157,high,Hub_157,481.1,local,Hub_157
+f000065,955,Selawik,954,Hub_157,high,Hub_157,472.6,local,Hub_157
+f001042,956,Selawik,954,Hub_157,high,Hub_157,458.8,local,Hub_157
+f000543,1254,Selawik,1254,Hub_157,high,Hub_157,187.4,local,Hub_157
+f001422,1834,Selawik,SYN-910,Hub_394,high,Hub_394,328.4,local,Hub_394
+f001321,1835,Selawik,SYN-897,Hub_157,high,Hub_157,407.0,local,Hub_157
+f000471,1836,Selawik,SYN-902,Hub_157,high,Hub_157,495.4,local,Hub_157
+f001189,1837,Selawik,SYN-899,Hub_157,high,Hub_157,243.3,local,Hub_157
+f000090,1838,Selawik,328,Hub_178,high,Hub_83,76.8,local,Hub_178
+f001077,43,Seldovia,43,Hub_247,high,Hub_247,334.5,local,Hub_247
+f001228,373,Seldovia,373,Hub_247,high,Hub_247,488.6,local,Hub_247
+f001749,690,Seldovia,690,Hub_247,high,Hub_247,237.5,local,Hub_247
+f000629,29,Seward,29,Hub_222,high,Hub_222,294.6,local,Hub_222
+f001389,380,Seward,380,Hub_222,high,Hub_222,1216.2,local,Hub_222
+f000512,534,Seward,534,Hub_222,high,Hub_222,218.5,local,Hub_222
+f000720,535,Seward,535,Hub_222,high,Hub_31,296.4,local,Hub_31
+f001763,587,Seward,587,Hub_222,high,Hub_222,6085.4,local,Hub_222
+f001565,682,Seward,682,Hub_222,high,Hub_31,298.3,local,Hub_31
+f001353,683,Seward,683,Hub_222,high,Hub_31,751.1,local,Hub_31
+f001754,684,Seward,684,Hub_222,high,Hub_31,606.6,local,Hub_31
+f001025,696,Seward,696,Hub_333,high,Hub_333,97.5,local,Hub_333
+f001788,760,Seward,760,Hub_222,high,Hub_222,2524.0,local,Hub_222
+f001099,822,Seward,822,Hub_222,high,Hub_222,601.5,local,Hub_222
+f000461,870,Seward,870,Hub_222,high,Hub_222,458.5,local,Hub_222
+f000201,935,Shageluk,,,not built (no mode/capacity),Hub_19,195.6,local,Hub_19
+f000976,1018,Shageluk,1018,Hub_19,high,Hub_19,183.9,local,Hub_19
+f000246,1839,Shageluk,1018,Hub_19,high,Hub_19,174.7,local,Hub_19
+f000674,1840,Shageluk,SYN-616,Hub_19,high,Hub_19,137.4,local,Hub_19
+f000563,188,Shaktoolik,188,Hub_179,high,Hub_179,1328.9,local,Hub_179
+f000514,189,Shaktoolik,188,Hub_179,high,Hub_179,1328.9,local,Hub_179
+f000287,190,Shaktoolik,188,Hub_179,high,Hub_179,1328.9,local,Hub_179
+f000347,191,Shaktoolik,191,Hub_179,high,Hub_179,550.7,local,Hub_179
+f000871,936,Shaktoolik,,,not built (no mode/capacity),Hub_179,954.8,local,Hub_179
+f001161,1841,Shaktoolik,SYN-774,Hub_179,high,Hub_179,1023.9,local,Hub_179
+f001393,207,Shishmaref,207,Hub_190,high,Hub_190,179.7,local,Hub_190
+f001456,208,Shishmaref,208,Hub_190,high,Hub_190,482.5,local,Hub_190
+f000178,210,Shishmaref,208,Hub_190,high,Hub_190,518.7,local,Hub_190
+f000959,211,Shishmaref,211,Hub_190,high,Hub_190,135.3,local,Hub_190
+f001039,937,Shishmaref,211,Hub_190,high,Hub_190,120.3,local,Hub_190
+f000978,1842,Shishmaref,207,Hub_190,high,Hub_190,156.1,local,Hub_190
+f001040,1843,Shishmaref,SYN-541,Hub_190,high,Hub_190,274.7,local,Hub_190
+f001642,1844,Shishmaref,SYN-537,Hub_190,high,Hub_190,208.6,local,Hub_190
+f000457,1845,Shishmaref,207,Hub_190,high,Hub_190,156.1,local,Hub_190
+f000373,1846,Shishmaref,208,Hub_190,high,Hub_190,516.1,local,Hub_190
+f001827,1847,Shishmaref,SYN-540,Hub_190,high,Hub_190,325.9,local,Hub_190
+f000180,834,Shungnak,834,Hub_137,high,Hub_137,131.4,local,Hub_137
+f000119,938,Shungnak,,,not built (no mode/capacity),Hub_137,66.9,local,Hub_137
+f001231,1214,Shungnak,1214,Hub_137,high,Hub_137,118.1,local,Hub_137
+f001387,1238,Shungnak,1238,Hub_137,high,Hub_137,153.5,local,Hub_137
+f001530,32,Sitka,32,Hub_30,high,Hub_30,1096.5,local,Hub_30
+f000469,252,Sitka,,,not built (no mode/capacity),Hub_30,3275.1,local,Hub_30
+f000001,165,Sitka,165,Hub_30,high,Hub_30,8977.8,local,Hub_30
+f000207,166,Sitka,166,Hub_30,high,Hub_30,7822.4,local,Hub_30
+f000745,434,Sitka,434,Hub_30,high,Hub_30,774.0,local,Hub_30
+f000185,554,Sitka,554,Hub_30,high,Hub_30,7445.9,local,Hub_30
+f001155,599,Sitka,599,Hub_30,high,Hub_30,7532.0,local,Hub_30
+f000206,680,Sitka,32,Hub_30,high,Hub_30,1092.1,local,Hub_30
+f000730,711,Sitka,711,Hub_30,high,Hub_30,6420.5,local,Hub_30
+f000947,841,Sitka,841,Hub_30,high,Hub_30,2751.5,local,Hub_30
+f001620,842,Sitka,842,Hub_30,high,Hub_30,240.0,local,Hub_30
+f001464,900,Sitka,900,Hub_30,high,Hub_30,967.3,local,Hub_30
+f001122,1174,Sitka,1174,Hub_30,high,Hub_30,2125.2,local,Hub_30
+f000370,106,Skagway,106,Hub_41,high,Hub_41,179.1,local,Hub_41
+f000291,435,Skagway,435,Hub_41,high,Hub_41,1347.2,local,Hub_41
+f000571,436,Skagway,436,Hub_41,high,Hub_41,1375.9,local,Hub_41
+f000634,642,Skagway,642,Hub_41,high,Hub_41,855.7,local,Hub_41
+f000362,859,Skagway,859,Hub_115,high,Hub_115,4808.1,local,Hub_115
+f000097,1172,Skagway,1172,Hub_41,high,Hub_41,1074.9,local,Hub_41
+f001546,1187,Skagway,1187,Hub_115,high,Hub_41,1671.5,local,Hub_41
+f001666,1245,Skagway,1245,Hub_41,high,Hub_41,694.7,local,Hub_41
+f000998,387,Skwentna,387,Hub_253,high,Hub_253,453.6,local,Hub_253
+f001333,199,Slana,199,Hub_184,hub lost in snapping,Hub_339,18630.7,local,Hub_339
+f000044,305,Slana,305,Hub_184,hub lost in snapping,Hub_309,831.0,local,Hub_309
+f000088,643,Slana,643,Hub_184,hub lost in snapping,Hub_309,2505.0,local,Hub_309
+f000880,745,Sleetmute,745,Hub_100,high,Hub_100,23.7,local,Hub_100
+f000354,1164,Sleetmute,1164,Hub_100,high,Hub_100,56.3,local,Hub_100
+f001349,1223,Sleetmute,745,Hub_100,high,Hub_100,40.0,local,Hub_100
+f000177,1848,Sleetmute,SYN-1178,Hub_100,high,Hub_100,100.3,local,Hub_100
+f001695,1849,Sleetmute,745,Hub_100,high,Hub_100,36.7,local,Hub_100
+f000605,1850,Sleetmute,1164,Hub_100,high,Hub_100,51.6,local,Hub_100
+f001129,69,Soldotna,69,Hub_116,high,Hub_116,2306.6,local,Hub_116
+f001484,381,Soldotna,381,Hub_116,high,Hub_116,3030.2,local,Hub_116
+f001047,693,Soldotna,693,Hub_332,high,Hub_332,524.6,local,Hub_332
+f001272,695,Soldotna,695,Hub_332,high,Hub_332,1131.3,local,Hub_332
+f000783,697,Soldotna,697,Hub_116,high,Hub_116,3347.5,local,Hub_116
+f001212,698,Soldotna,698,Hub_332,high,Hub_332,1287.4,local,Hub_332
+f001802,699,Soldotna,699,Hub_116,high,Hub_116,1870.1,local,Hub_116
+f000556,748,Soldotna,748,Hub_332,high,Hub_116,1524.8,local,Hub_116
+f001761,1188,Soldotna,1188,Hub_116,high,Hub_116,2371.9,local,Hub_116
+f000630,451,South Naknek,,,not built (no mode/capacity),Hub_373,1030.0,local,Hub_373
+f001596,1851,South Naknek,SYN-1432,Hub_373,high,Hub_373,373.0,local,Hub_373
+f001748,1852,South Naknek,SYN-1434,Hub_373,high,Hub_373,450.0,local,Hub_373
+f000573,1853,South Naknek,SYN-1433,Hub_373,high,Hub_373,179.7,local,Hub_373
+f001429,200,Stebbins,200,Hub_186,high,Hub_186,103.5,local,Hub_186
+f000428,202,Stebbins,202,Hub_186,high,Hub_186,251.8,local,Hub_186
+f000405,203,Stebbins,203,Hub_186,high,Hub_186,141.1,local,Hub_186
+f001148,940,Stebbins,940,Hub_186,high,Hub_186,238.0,local,Hub_186
+f001256,1854,Stebbins,SYN-755,Hub_186,high,Hub_186,293.9,local,Hub_186
+f001261,1855,Stebbins,SYN-520,Hub_205,high,Hub_205,355.1,local,Hub_205
+f001824,1856,Stebbins,SYN-757,Hub_186,high,Hub_186,196.0,local,Hub_186
+f000298,1857,Stebbins,SYN-753,Hub_186,high,Hub_186,366.7,local,Hub_186
+f001316,298,Stevens Village,298,Hub_228,high,Hub_228,653.9,local,Hub_228
+f001399,1858,Stevens Village,SYN-363,Hub_378,high,Hub_378,95.6,local,Hub_378
+f000969,1859,Stevens Village,SYN-276,Hub_228,high,Hub_228,1067.1,local,Hub_228
+f001471,1860,Stevens Village,298,Hub_228,high,Hub_228,654.2,local,Hub_228
+f000482,1165,Stony River,1165,Hub_101,high,Hub_101,240.0,local,Hub_101
+f000769,1224,Stony River,1224,Hub_101,high,Hub_101,88.0,local,Hub_101
+f000540,1861,Stony River,SYN-1174,Hub_101,high,Hub_101,67.7,local,Hub_101
+f000609,1862,Stony River,SYN-1173,Hub_101,high,Hub_101,21.0,local,Hub_101
+f001165,598,Sutton,,,not built (no mode/capacity),Hub_123,12468.8,local,Hub_123
+f001234,414,Takotna,414,Hub_22,high,Hub_22,1235.0,local,Hub_22
+f000149,1020,Takotna,1020,Hub_22,high,Hub_22,576.3,local,Hub_22
+f000276,1863,Takotna,SYN-1158,Hub_22,high,Hub_22,864.3,local,Hub_22
+f001328,1864,Takotna,SYN-1158,Hub_22,high,Hub_22,875.8,local,Hub_22
+f000661,118,Talkeetna,118,Hub_61,high,Hub_61,1450.0,local,Hub_61
+f000003,389,Talkeetna,389,Hub_61,high,Hub_61,1666.0,local,Hub_61
+f001836,536,Talkeetna,536,Hub_61,high,Hub_61,1991.1,local,Hub_61
+f001784,613,Talkeetna,613,Hub_61,high,Hub_61,4402.4,local,Hub_61
+f001362,1094,Talkeetna,1094,Hub_61,high,Hub_61,1124.3,local,Hub_61
+f000671,1095,Talkeetna,1095,Hub_61,high,Hub_61,1819.1,local,Hub_61
+f000432,58,Tanana,58,Hub_229,high,Hub_229,533.1,local,Hub_229
+f001723,62,Tanana,62,Hub_229,high,Hub_229,140.2,local,Hub_229
+f001131,299,Tanana,299,Hub_229,high,Hub_229,1141.4,local,Hub_229
+f000400,824,Tanana,824,Hub_229,high,Hub_229,853.8,local,Hub_229
+f000755,1865,Tanana,SYN-814,Hub_229,high,Hub_229,236.5,local,Hub_229
+f000016,1866,Tanana,SYN-815,Hub_229,high,Hub_229,202.5,local,Hub_229
+f000522,1867,Tanana,58,Hub_229,high,Hub_229,515.4,local,Hub_229
+f000166,966,Tatitlek,966,Hub_364,high,Hub_364,185.1,local,Hub_364
+f001770,1868,Tatitlek,SYN-947,Hub_364,high,Hub_364,462.0,local,Hub_364
+f000042,1869,Tatitlek,SYN-947,Hub_364,high,Hub_364,462.0,local,Hub_364
+f000684,1870,Tatitlek,SYN-949,Hub_364,high,Hub_364,573.8,local,Hub_364
+f001790,306,Tazlina,306,Hub_236,high,Hub_236,51.2,local,Hub_236
+f000553,258,Teller,258,Hub_206,high,Hub_206,154.2,local,Hub_206
+f000891,363,Teller,363,Hub_242,high,Hub_242,38.0,local,Hub_242
+f001438,669,Teller,669,Hub_206,high,Hub_206,187.0,local,Hub_206
+f001405,941,Teller,941,Hub_206,high,Hub_206,53.4,local,Hub_206
+f001038,980,Teller,980,Hub_206,high,Hub_206,149.7,local,Hub_206
+f000886,1871,Teller,SYN-529,Hub_206,high,Hub_206,74.4,local,Hub_206
+f000452,1872,Teller,SYN-529,Hub_206,high,Hub_206,92.7,local,Hub_206
+f000281,1873,Teller,SYN-526,Hub_206,high,Hub_206,381.2,local,Hub_206
+f001363,1874,Teller,SYN-533,Hub_206,high,Hub_206,43.7,local,Hub_206
+f000721,1875,Teller,257,Hub_205,high,Hub_205,77.5,local,Hub_205
+f001722,1876,Teller,258,Hub_206,high,Hub_206,125.6,local,Hub_206
+f001548,1877,Teller,SYN-527,Hub_206,high,Hub_206,302.0,local,Hub_206
+f000371,1878,Teller,SYN-531,Hub_206,high,Hub_206,72.8,local,Hub_206
+f000561,1879,Teller,SYN-531,Hub_206,high,Hub_206,116.6,local,Hub_206
+f001673,1880,Tenakee Springs,SYN-178,Hub_375,high,Hub_375,17.1,local,Hub_375
+f001556,1881,Tenakee Springs,SYN-178,Hub_375,high,Hub_375,37.4,local,Hub_375
+f001365,136,Tetlin,136,Hub_165,high,Hub_165,653.4,local,Hub_165
+f001124,314,Tetlin,314,Hub_165,high,Hub_165,503.9,local,Hub_165
+f000415,646,Thorne Bay,646,Hub_317,high,Hub_317,146.6,local,Hub_317
+f000275,1882,Thorne Bay,SYN-5,Hub_317,high,Hub_317,797.5,local,Hub_317
+f000594,1883,Thorne Bay,SYN-1,Hub_317,high,Hub_317,505.0,local,Hub_317
+f001214,1884,Thorne Bay,SYN-3,Hub_317,high,Hub_317,175.8,local,Hub_317
+f000893,1885,Thorne Bay,SYN-3,Hub_317,high,Hub_317,174.6,local,Hub_317
+f000987,1886,Thorne Bay,SYN-3,Hub_317,high,Hub_317,174.6,local,Hub_317
+f001782,1887,Thorne Bay,SYN-2,Hub_317,high,Hub_317,381.8,local,Hub_317
+f000687,113,Togiak,113,Hub_84,high,Hub_81,1600.3,local,Hub_84
+f001804,942,Togiak,942,Hub_84,high,Hub_84,355.2,local,Hub_84
+f001568,1125,Togiak,1125,Hub_81,high,Hub_81,16968.3,local,Hub_81
+f001197,1888,Togiak,SYN-1374,Hub_84,high,Hub_84,327.9,local,Hub_84
+f001293,1889,Togiak,SYN-1374,Hub_84,high,Hub_84,325.3,local,Hub_84
+f001766,1890,Togiak,SYN-1373,Hub_84,high,Hub_84,1025.5,local,Hub_84
+f001431,1891,Togiak,SYN-1376,Hub_84,high,Hub_84,203.0,local,Hub_84
+f001724,1892,Togiak,SYN-1373,Hub_84,high,Hub_84,1042.8,local,Hub_84
+f001073,137,Tok,137,Hub_166,high,Hub_166,690.7,local,Hub_166
+f000009,316,Tok,316,Hub_166,high,Hub_166,1368.8,local,Hub_166
+f001240,317,Tok,317,Hub_239,high,Hub_239,1147.4,local,Hub_239
+f000463,647,Tok,,,not built (no mode/capacity),Hub_166,1291.1,local,Hub_166
+f000852,653,Tok,653,Hub_166,high,Hub_166,431.7,local,Hub_166
+f000138,415,Toksook Bay,415,Hub_268,high,Hub_268,1098.6,local,Hub_268
+f001267,943,Toksook Bay,943,Hub_268,high,Hub_268,323.2,local,Hub_268
+f000140,1893,Toksook Bay,SYN-567,Hub_386,high,Hub_386,12.2,local,Hub_386
+f001563,1894,Toksook Bay,SYN-679,Hub_268,high,Hub_268,239.9,local,Hub_268
+f001708,1895,Toksook Bay,SYN-680,Hub_268,high,Hub_268,209.1,local,Hub_268
+f000409,1896,Toksook Bay,SYN-679,Hub_268,high,Hub_268,239.9,local,Hub_268
+f000154,1897,Toksook Bay,SYN-520,Hub_205,high,Hub_205,355.1,local,Hub_205
+f000043,1898,Toksook Bay,SYN-679,Hub_268,high,Hub_268,239.9,local,Hub_268
+f000592,383,Trapper Creek,383,Hub_251,high,Hub_251,7190.8,local,Hub_251
+f000229,1177,Trapper Creek,1177,Hub_111,high,Hub_111,3986.5,local,Hub_111
+f001052,416,Tuluksak,416,Hub_269,high,Hub_269,1537.5,local,Hub_269
+f001284,726,Tuluksak,726,Hub_338,high,Hub_338,114.0,local,Hub_338
+f000899,1899,Tuluksak,SYN-551,Hub_338,high,Hub_338,29.2,local,Hub_338
+f001750,1900,Tuluksak,SYN-553,Hub_338,high,Hub_338,154.5,local,Hub_338
+f001619,1901,Tuluksak,SYN-551,Hub_338,high,Hub_338,14.5,local,Hub_338
+f001636,1902,Tuluksak,,,not built (no mode/capacity),Hub_338,388.5,local,Hub_338
+f000450,417,Tuntutuliak,417,Hub_270,high,Hub_270,792.6,local,Hub_270
+f001245,1903,Tuntutuliak,SYN-1342,Hub_270,high,Hub_270,186.9,local,Hub_270
+f000690,1904,Tuntutuliak,SYN-1342,Hub_270,high,Hub_270,186.9,local,Hub_270
+f000449,1905,Tuntutuliak,SYN-1343,Hub_270,high,Hub_270,638.9,local,Hub_270
+f000649,1906,Tuntutuliak,SYN-572,Hub_387,high,Hub_387,629.6,local,Hub_387
+f001777,418,Tununak,418,Hub_271,high,Hub_271,811.7,local,Hub_271
+f000872,1907,Tununak,SYN-572,Hub_387,high,Hub_387,629.6,local,Hub_387
+f001080,1908,Tununak,SYN-677,Hub_271,high,Hub_271,91.4,local,Hub_271
+f000672,1909,Tununak,SYN-676,Hub_271,high,Hub_271,533.3,local,Hub_271
+f000368,1910,Tununak,SYN-572,Hub_387,high,Hub_387,629.6,local,Hub_387
+f001709,1911,Tununak,SYN-675,Hub_271,high,Hub_271,520.6,local,Hub_271
+f000169,1912,Tununak,SYN-675,Hub_271,high,Hub_271,520.6,local,Hub_271
+f000505,1913,Tununak,SYN-520,Hub_205,high,Hub_205,355.1,local,Hub_205
+f000819,112,Twin Hills,112,Hub_77,high,Hub_77,355.0,local,Hub_77
+f001830,152,Twin Hills,152,Hub_77,high,Hub_84,2874.2,local,Hub_84
+f000798,408,Twin Hills,408,Hub_77,high,Hub_77,610.9,local,Hub_77
+f001710,1246,Twin Hills,1246,Hub_77,high,Hub_77,261.0,local,Hub_77
+f000991,1914,Twin Hills,SYN-1369,Hub_77,high,Hub_77,243.7,local,Hub_77
+f000972,1915,Twin Hills,SYN-1369,Hub_77,high,Hub_77,243.7,local,Hub_77
+f000447,689,Tyonek,689,Hub_331,high,Hub_331,55.5,local,Hub_331
+f001007,453,Ugashik,,,not built (no mode/capacity),Hub_136,11376.0,local,Hub_136
+f001618,98,Unalakleet,98,Hub_96,high,Hub_96,277.5,local,Hub_96
+f001020,116,Unalakleet,116,Hub_96,high,Hub_96,348.3,local,Hub_96
+f000217,128,Unalakleet,128,Hub_96,high,Hub_96,1161.5,local,Hub_96
+f001669,129,Unalakleet,128,Hub_96,high,Hub_96,1161.5,local,Hub_96
+f000372,130,Unalakleet,128,Hub_96,high,Hub_96,1161.5,local,Hub_96
+f000738,131,Unalakleet,131,Hub_96,high,Hub_96,576.6,local,Hub_96
+f000635,364,Unalakleet,364,Hub_96,high,Hub_96,344.6,local,Hub_96
+f001838,1144,Unalakleet,1144,Hub_89,high,Hub_89,9195.3,local,Hub_89
+f000147,1255,Unalakleet,1255,Hub_235,hub lost in snapping,Hub_283,1661.7,local,Hub_283
+f000683,1916,Unalakleet,131,Hub_96,high,Hub_96,594.9,local,Hub_96
+f001645,1917,Unalakleet,SYN-747,Hub_96,high,Hub_96,190.8,local,Hub_96
+f000860,1918,Unalakleet,131,Hub_96,high,Hub_96,575.1,local,Hub_96
+f001313,1919,Unalakleet,364,Hub_96,high,Hub_96,342.5,local,Hub_96
+f001808,1920,Unalakleet,SYN-745,Hub_96,high,Hub_96,713.4,local,Hub_96
+f000445,1921,Unalakleet,SYN-746,Hub_96,high,Hub_96,675.5,local,Hub_96
+f000613,1922,Unalakleet,SYN-747,Hub_96,high,Hub_96,198.1,local,Hub_96
+f001521,48,Unalaska,48,Hub_283,high,Hub_283,148.1,local,Hub_283
+f000565,729,Unalaska,729,Hub_283,high,Hub_283,184.3,local,Hub_283
+f000233,730,Unalaska,730,Hub_283,high,Hub_283,1682.9,local,Hub_283
+f001605,734,Unalaska,734,Hub_283,high,Hub_283,1660.5,local,Hub_283
+f000319,735,Unalaska,735,Hub_283,high,Hub_283,1702.4,local,Hub_283
+f000132,828,Unalaska,828,Hub_283,high,Hub_283,736.1,local,Hub_283
+f001606,1096,Unalaska,1096,Hub_62,high,Hub_62,1174.8,local,Hub_62
+f000653,1923,Upper Kalskag,SYN-640,Hub_274,high,Hub_274,108.1,local,Hub_274
+f000836,1924,Upper Kalskag,SYN-640,Hub_274,high,Hub_274,108.1,local,Hub_274
+f000747,1925,Upper Kalskag,SYN-627,Hub_390,high,Hub_390,122.7,local,Hub_390
+f000626,1926,Upper Kalskag,SYN-628,Hub_390,high,Hub_390,226.3,local,Hub_390
+f000655,1927,Upper Kalskag,SYN-629,Hub_390,high,Hub_390,681.6,local,Hub_390
+f001049,1928,Upper Kalskag,SYN-626,Hub_390,high,Hub_99,374.5,local,Hub_99
+f000467,41,Valdez,41,Hub_75,high,Hub_75,2086.4,local,Hub_75
+f000993,254,Valdez,254,Hub_75,high,Hub_75,4881.0,local,Hub_75
+f000348,319,Valdez,319,Hub_240,high,Hub_240,3464.9,local,Hub_240
+f001492,320,Valdez,320,Hub_75,high,Hub_75,4926.9,local,Hub_75
+f001151,321,Valdez,321,Hub_75,high,Hub_75,937.3,local,Hub_75
+f000929,322,Valdez,322,Hub_241,high,Hub_241,507.1,local,Hub_241
+f000945,555,Valdez,555,Hub_75,high,Hub_75,567.2,local,Hub_75
+f000529,614,Valdez,614,Hub_75,high,Hub_75,4053.7,local,Hub_75
+f001219,829,Valdez,829,Hub_75,high,Hub_75,483.1,local,Hub_75
+f000694,830,Valdez,830,Hub_240,high,Hub_240,9355.8,local,Hub_240
+f000440,831,Valdez,831,Hub_358,high,Hub_358,5792.4,local,Hub_358
+f001519,832,Valdez,832,Hub_240,high,Hub_358,30620.1,remote,Hub_358
+f001649,844,Valdez,844,Hub_75,high,Hub_75,1684.7,local,Hub_75
+f001070,845,Valdez,845,Hub_75,high,Hub_75,1566.8,local,Hub_75
+f000367,848,Valdez,848,Hub_75,high,Hub_75,5277.9,local,Hub_75
+f000252,850,Valdez,850,Hub_75,high,Hub_75,1459.7,local,Hub_75
+f000307,851,Valdez,851,Hub_75,high,Hub_75,6790.0,local,Hub_75
+f000113,1114,Valdez,1114,Hub_75,high,Hub_75,504.6,local,Hub_75
+f000378,132,Venetie,132,Hub_13,high,Hub_13,234.6,local,Hub_13
+f000374,1012,Venetie,1012,Hub_13,high,Hub_13,234.8,local,Hub_13
+f001157,604,Wainwright,604,Hub_5,high,Hub_5,189.8,local,Hub_5
+f000107,1929,Wainwright,604,Hub_5,high,Hub_5,187.7,local,Hub_5
+f001785,1930,Wainwright,1001,Hub_5,high,Hub_5,206.4,local,Hub_5
+f001677,1931,Wainwright,SYN-860,Hub_5,high,Hub_5,137.2,local,Hub_5
+f000306,1932,Wainwright,SYN-864,Hub_5,high,Hub_5,499.3,local,Hub_5
+f001715,1933,Wainwright,SYN-861,Hub_5,high,Hub_5,184.7,local,Hub_5
+f001433,1934,Wainwright,SYN-865,Hub_5,high,Hub_5,663.0,local,Hub_5
+f001141,474,Wainwright,474,Hub_5,high,Hub_5,287.3,local,Hub_5
+f001408,1935,Wainwright,SYN-859,Hub_5,high,Hub_5,368.0,local,Hub_5
+f001355,1001,Wainwright,1001,Hub_5,high,Hub_5,198.6,local,Hub_5
+f000222,1936,Wainwright,1001,Hub_5,high,Hub_5,199.5,local,Hub_5
+f000941,1937,Wainwright,SYN-394,Hub_380,high,Hub_380,165.0,local,Hub_380
+f000835,256,Wales,256,Hub_204,high,Hub_204,182.9,local,Hub_204
+f000775,944,Wales,944,Hub_204,high,Hub_204,301.3,local,Hub_204
+f000611,1938,Wales,SYN-518,Hub_204,high,Hub_204,9.0,local,Hub_204
+f001093,1939,Wales,944,Hub_204,high,Hub_204,288.1,local,Hub_204
+f000804,1940,Wales,SYN-792,,dropped/unresolved in hub build,Hub_149,207.0,local,Hub_149
+f000413,70,Wasilla,70,Hub_334,high,Hub_334,64.0,local,Hub_334
+f001085,85,Wasilla,,,not built (no mode/capacity),Hub_91,2272.4,local,Hub_91
+f001704,592,Wasilla,592,Hub_306,high,Hub_306,5318.4,local,Hub_306
+f000444,595,Wasilla,595,Hub_306,high,Hub_306,1928.9,local,Hub_306
+f000062,615,Wasilla,615,Hub_91,high,Hub_91,4888.2,local,Hub_91
+f000427,981,Wasilla,981,Hub_91,high,Hub_91,1066.5,local,Hub_91
+f001652,1151,Wasilla,1151,Hub_91,high,Hub_91,3720.1,local,Hub_91
+f001292,649,Whale Pass,649,Hub_318,high,Hub_318,100.1,local,Hub_318
+f001380,6,White Mountain,6,Hub_307,high,Hub_307,674.5,local,Hub_307
+f001367,7,White Mountain,7,Hub_307,high,Hub_307,122.4,local,Hub_307
+f000866,8,White Mountain,8,Hub_307,high,Hub_307,351.2,local,Hub_307
+f000533,9,White Mountain,8,Hub_307,high,Hub_307,351.2,local,Hub_307
+f000770,1941,White Mountain,SYN-784,Hub_307,high,Hub_307,162.1,local,Hub_307
+f001717,1942,White Mountain,SYN-753,Hub_186,high,Hub_186,366.7,local,Hub_186
+f001699,1943,White Mountain,8,Hub_307,high,Hub_307,337.4,local,Hub_307
+f000010,1190,Whittier,1190,Hub_117,high,Hub_117,32.7,local,Hub_117
+f000137,388,Willow,388,Hub_254,high,Hub_254,136.8,local,Hub_254
+f001700,125,Wrangell,125,Hub_118,high,Hub_118,7778.5,local,Hub_118
+f000939,437,Wrangell,437,Hub_118,high,Hub_118,9117.8,local,Hub_118
+f000386,622,Wrangell,622,Hub_118,high,Hub_388,29407.4,remote,Hub_118
+f000349,891,Wrangell,891,Hub_118,high,Hub_118,7283.7,local,Hub_118
+f000130,1073,Wrangell,1073,Hub_49,high,Hub_49,12457.9,local,Hub_49
+f001209,1074,Wrangell,1073,Hub_49,high,Hub_49,12457.9,local,Hub_49
+f001010,1075,Wrangell,1073,Hub_49,high,Hub_49,12457.9,local,Hub_49
+f000710,1191,Wrangell,1191,Hub_118,high,Hub_118,6977.2,local,Hub_118
+f001593,158,Yakutat,158,Hub_174,high,Hub_174,113.4,local,Hub_174
+f001391,438,Yakutat,438,Hub_174,high,Hub_174,111.5,local,Hub_174
+f000923,439,Yakutat,,,not built (no mode/capacity),Hub_174,86.6,local,Hub_174
+f001309,945,Yakutat,,,not built (no mode/capacity),Hub_174,5141.6,local,Hub_174

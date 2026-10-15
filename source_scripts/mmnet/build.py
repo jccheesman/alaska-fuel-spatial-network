@@ -347,6 +347,7 @@ def _snap_airways_to_road(r_edges: gpd.GeoDataFrame, from_label: str, to_label: 
 
 
 def build_network(layers: list[str], out_prefix: str | Path, hubs: gpd.GeoDataFrame,
+                  max_snap_dist: float = 0.0,
                   timeout_s: int = 1800) -> NetworkTables:
     """Build the connected multimodal network: **R nodes road/ice/air, Python connects it.**
 
@@ -414,6 +415,10 @@ def build_network(layers: list[str], out_prefix: str | Path, hubs: gpd.GeoDataFr
     road_types = {s.edge_label for s in line_specs if s.mode == "Road"}
     # ground surface(s) hubs may snap onto (profile snap_target flag); default to road.
     snap_types = {s.edge_label for s in line_specs if getattr(s, "snap_target", False)} or road_types
+    # own-mode fallback surfaces (profile snap_fallback flag) for hubs with no ground node within the
+    # cap: edge_label -> mode decides which fallback a hub may use (Barge -> waterway, Plane -> air).
+    snap_fallback = {s.edge_label for s in line_specs if getattr(s, "snap_fallback", False)}
+    snap_modes = {s.edge_label: s.mode for s in line_specs}
 
     # 2a. airport snap-to-road: move each air-leg airport endpoint onto its nearest road node (a SHARED
     #     node, no transfer edge) before the connect.
@@ -442,10 +447,18 @@ def build_network(layers: list[str], out_prefix: str | Path, hubs: gpd.GeoDataFr
     connect_max_dist = float(cfg.connect_to_giant.max_dist)
 
     # 3. Python connect — fast, spatial-indexed, once.
-    nodes, edges, _ = connect_multimodal(r_edges, hubs, road_types, transfers, anchors,
-                                         snap_types=snap_types, waterway=waterway,
-                                         waterway_label=waterway_label, bridges=bridges,
-                                         connect_max_dist=connect_max_dist)
+    nodes, edges, summary = connect_multimodal(r_edges, hubs, road_types, transfers, anchors,
+                                               snap_types=snap_types, waterway=waterway,
+                                               waterway_label=waterway_label, bridges=bridges,
+                                               connect_max_dist=connect_max_dist,
+                                               max_snap_dist=max_snap_dist, snap_modes=snap_modes,
+                                               snap_fallback_types=snap_fallback)
+    # hub placement trail: every Stage-02 hub -> node (or why not), beside the network files.
+    hs = summary.get("hub_snaps")
+    if hs is not None:
+        out_prefix = Path(out_prefix)
+        out_prefix.parent.mkdir(parents=True, exist_ok=True)
+        hs.to_csv(out_prefix.parent / "02_hub_snaps.csv", index=False, lineterminator="\n")
 
     net = NetworkTables.from_parts(nodes, edges)
     net.to_gpkg(out_prefix)

@@ -39,6 +39,10 @@ reading/verifying the result.
 
 ## Procedure
 
+0. **The facility inventory must be green first.** Run `validate-facility-inventory` (read-only
+   `python .claude/skills/validate-facility-inventory/scripts/validate_inventory.py`) and require exit 0:
+   the hub build consumes the facility table, and a stale or failing inventory chain means the hubs
+   inherit uncorrected labels/positions. Do not build on a red inventory.
 1. **Check prerequisites.** `python -c "import mmnet"` imports; `Rscript --version` works and
    sf/sfnetworks/tidygraph/dplyr are installed. Confirm the profile validates
    (`define-network-profile` step 5).
@@ -58,7 +62,16 @@ reading/verifying the result.
      the profile (`define-network-profile`); or
    - a tolerance genuinely too tight for the geography (a real gap) → report the gap distance and
      propose a justified `max_dist`/rule change, then re-run.
-6. **Report** the final numbers (nodes/edges/components/giant %/hubs reachable) + the proof result.
+6. **Read the hub trails** in `output/`: `01_withheld.csv` (records with an open owner review item,
+   kept out of hubs while `hubs.withhold_pending_review` is on — their capacity is absent from the
+   network on purpose; report the count), `01b_conflicts.csv` (labelled facilities whose label's
+   borough differs from their coordinates' — each is an inventory correction to record, not a build
+   fix), `02_hub_snaps.csv` (`status` = placed / `unplaced:beyond_cap` / `merged:<hub>`; an unplaced
+   hub is a village with no ground surface within `hubs.max_snap_dist_m` — report it, do not raise
+   the cap to hide it), and `02_hub_members.csv` + `01_site_members.csv` (hub → site → inventory
+   record, so every hub's capacity is traceable to AEA records).
+7. **Report** the final numbers (nodes/edges/components/giant %/hubs placed, unplaced, merged,
+   conflicts) + the proof result.
 
 ## What NOT to do
 
@@ -69,6 +82,8 @@ reading/verifying the result.
 - Do NOT hand-edit the built GeoPackages; change the `profile.yaml` and rebuild.
 
 ## Related
+
+- `validate-facility-inventory` — the inventory gate this build depends on (step 0).
 
 - `define-network-profile` — author/extend the profile that this build consumes.
 - `mmnet/r_oracle/CONTRACT.md` — the R↔Python file contract (WORKDIR, params/registry, node-only mode).

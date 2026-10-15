@@ -33,7 +33,26 @@ If a proposed change would break any of these, stop and surface the conflict bef
      into the giant within `max_dist` (this is what joins coastal/North-Slope pieces by sea).
    - `join_components:` → the optional Stage-04 distance join: link every remaining non-giant component
      to the giant within `max_dist`, iterated. `max_dist: 0` disables it (03 stays canonical).
-3. **`snap_target: true`** marks the surfaces hubs may land on (Road ∪ Ice Road). Hubs snap only there.
+3. **`snap_target: true`** marks the ground surfaces hubs land on first (Road ∪ Ice Road: the AK DOT
+   layer carries most village streets, and every delivery ends on a truck). Within
+   `hubs.max_snap_dist_m` (0 = no cap) a hub always takes the nearest ground node. Beyond it, a hub
+   tries the layers marked **`snap_fallback: true`** whose mode it is served by (a Barge hub → the
+   waterway, a Plane hub → its airport node), still within the cap; otherwise it is left unplaced
+   and listed in `output/02_hub_snaps.csv` — widen the cap or fix the inventory, never move the hub
+   by hand. Tested 2026-10-08 on the frozen network: forcing barge hubs onto the waterway FIRST was
+   worse (73 of 99 barge-only villages have a street within 1 km); the fallback recovers only the
+   7 coastal sites with no road at all.
+4. **`hubs.group_by: [community]`** — one hub per canonical corrected community label. Adding `city`
+   or `region` splits a community along TIGER place / borough lines (the pre-2026-10 behaviour that
+   gave Fairbanks 11 hubs); add `delivery_method` only for per-mode hubs.
+   `hubs.cannot_link_across_community: true` keeps records with different labels apart inside the
+   `dedup_tol_m` merge. `hubs.remote_site_km` (needs `inventory.community_distance`) turns a site
+   farther than that from its labelled community into its own `remote_site` hub — the label stays,
+   the town's centroid stops moving; 0 switches it off. `hubs.withhold_pending_review: true`
+   (needs `inventory.qc_status`) keeps every record with an open owner review item out of
+   consolidation and hubs, listed in `output/01_withheld.csv`; the build catches, never fixes. `inventory.community_key` / `inventory.record_id` map workflow 00's
+   canonical label and stable record id so the member trails (`01_site_members`, `02_hub_members`)
+   are written.
 4. **Units.** Distances are METERS in the profile's projected `crs.target` (e.g. EPSG:3338 Alaska
    Albers). Meter thresholds require a projected CRS — `validate_profile` rejects meters on a geographic
    (degree) CRS.
@@ -41,7 +60,8 @@ If a proposed change would break any of these, stop and surface the conflict bef
 
 ## Where the canonical values live
 
-- `profile.yaml` — the file you edit: `crs`, `inventory`, `modes`, `tagging`, `layers`, `transfers`,
+- `profile.yaml` — the file you edit: `crs`, `inventory` (incl. the optional `record_id` key that
+  makes consolidation write `01_site_members.csv`), `modes`, `tagging`, `layers`, `transfers`,
   `snaps`, `bridges`, `connect_to_giant`, `join_components`, `anchors`, `hubs`, `topology`.
 - `mmnet/config.py` — the strict schema (pydantic `extra="forbid"`): `RegionProfile` and the specs
   `ProfileLayerSource`, `TransferSpec`, `SnapSpec`, `BridgeSpec`, `ConnectToGiantSpec`,
@@ -54,7 +74,7 @@ If a proposed change would break any of these, stop and surface the conflict bef
 2. **Add a transport MODE** = two entries, no code:
    - `modes:` → `{ name: <Mode>, routable: true }`
    - `layers:` → `{ name: <layer>, mode: <Mode>, edge_label: <Label>, kind: line, loader: <loader>,
-     source: { type: file, path: <path> }, snap_target: true|false }`
+     source: { type: file, path: <path> }, snap_target: true|false, snap_fallback: true|false }`
    The `edge_label` is the value that shows up as the edge `type` in the built network.
 3. **Add a CONNECTION** = one rule of the right kind (invariant #2), using **mode names** (not labels):
    e.g. `transfers: - { from_mode: Road, to_mode: Barge, anchor: ports, max_dist: 5000 }`, or

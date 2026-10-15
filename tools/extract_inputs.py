@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Extract the committed inputs/*.zip bundles into their gitignored working dirs.
 
-  inputs/bulk_fuel_data.zip          -> inputs/bulk_fuel_data/
+  inputs/raw_facility_data/2022/bulk_fuel_data.zip -> inputs/bulk_fuel_data/
   inputs/data_for_network_build.zip  -> inputs/data_for_network_build/
   inputs/region_and_census_data.zip  -> inputs/region_and_census_data/
   inputs/network_raw.zip             -> data/raw/          (workflow 02 sources;
@@ -20,7 +20,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]  # repo root
 
 TARGETS = {
-    ROOT / "inputs" / "bulk_fuel_data.zip": ROOT / "inputs",
+    ROOT / "inputs" / "raw_facility_data" / "2022" / "bulk_fuel_data.zip": ROOT / "inputs",
     ROOT / "inputs" / "data_for_network_build.zip": ROOT / "inputs",
     ROOT / "inputs" / "region_and_census_data.zip": ROOT / "inputs",
     # network_raw.zip: destination depends on how its members are rooted —
@@ -63,7 +63,7 @@ def main() -> None:
 
     # Nested shapefile bundle: friction_costs.load_ice_road_communities reads
     # inputs/bulk_fuel_data/raw/Fuel_Delivery_Method.shp, which ships zipped
-    # one level deeper inside bulk_fuel_data.zip.
+    # one level deeper inside raw_facility_data/2022/bulk_fuel_data.zip.
     fdm_zip = ROOT / "inputs" / "bulk_fuel_data" / "raw" / "Fuel_Delivery_Method.zip"
     if fdm_zip.exists():
         with zipfile.ZipFile(fdm_zip) as zf:

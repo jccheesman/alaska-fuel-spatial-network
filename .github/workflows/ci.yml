@@ -37,6 +37,9 @@ jobs:
       - name: Pytest
         run: uv run pytest tests/ -v
 
+      - name: Facility-inventory QC chain (read-only; committed clean table must match a fresh run)
+        run: uv run python .claude/skills/validate-facility-inventory/scripts/validate_inventory.py
+
       - name: Validate the network profile
         run: |
           uv run python -c "

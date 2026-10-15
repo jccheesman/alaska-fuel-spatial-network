@@ -90,7 +90,7 @@ NETWORK_CRS = "EPSG:3338"
 INPUTS_DIR = os.getenv("INPUTS_DIR", os.path.join(PROJECT_ROOT, "inputs"))
 OUTPUTS_DIR = os.getenv("OUTPUTS_DIR", os.path.join(PROJECT_ROOT, "outputs"))
 
-# Ships zipped in inputs/bulk_fuel_data.zip; extract with tools/extract_inputs.py.
+# Ships zipped in inputs/raw_facility_data/2022/bulk_fuel_data.zip; extract with tools/extract_inputs.py.
 # Read by friction_costs.load_ice_road_communities.
 FUEL_DELIVERY_METHOD_SHP = os.path.join(INPUTS_DIR, "bulk_fuel_data", "raw",
                                         "Fuel_Delivery_Method.shp")

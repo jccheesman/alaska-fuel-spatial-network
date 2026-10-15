@@ -1,0 +1,386 @@
+hub_pid,hub_id,harness_label,build_label,build_group,n_sites,n_unnamed,n_facilities,snap_km,spread_km,raw_flagged_members,all_members_raw_flagged,membership_exact,is_giant,deliv_meth,hub_cap,member_pids,label_changed_by_harness
+h000379,Hub_248,Cooper Landing,Cooper Landing,named,1,0,1,0.3,0.0,,False,True,True,Road,6000.0,f000224,False
+h000028,Hub_245,Hope,Hope,named,1,0,1,0.6,0.0,,False,True,True,Road,7000.0,f001664,False
+h000386,Hub_295,Portage,Portage,named,1,0,1,0.2,0.0,,False,True,True,Road,3000.0,f001410,False
+h000318,Hub_113,Bird Creek,Bird Creek,named,1,0,1,0.1,0.0,,False,True,True,Road,4000.0,f000135,False
+h000393,Hub_175,Moose Pass,Moose Pass,named,1,0,1,12.4,0.0,,False,True,True,Road,20000.0,f001523,False
+h000024,Hub_249,Crown Point,Crown Point,named,1,0,1,0.4,0.0,,False,True,True,Road,8000.0,f001482,False
+h000007,Hub_348,,Glennallen,named,1,0,1,26.4,0.0,f001271,True,True,True,Plane,5000.0,f001271,True
+h000382,Hub_347,Glennallen,Glennallen,named,1,0,1,22.8,0.0,f000297,True,True,True,Road,5000.0,f000297,False
+h000174,Hub_183,Kenny Lake,Kenny Lake,named,1,0,1,3.2,0.0,,False,True,True,Road,4000.0,f000602,False
+h000224,Hub_230,Chitina,Chitina,named,1,0,1,0.3,0.0,,False,True,True,Road,7200.0,f000848,False
+h000331,Hub_233,Nelchina,Nelchina,named,1,0,1,5.4,0.0,,False,True,True,Road,4500.0,f000953,False
+h000023,Hub_192,,Eielson Afb,named,2,0,2,73.2,45.0,f001663;f000425,True,True,True,Plane,2000.0,f001663;f000425,True
+h000099,Hub_250,,,unnamed (place or borough fallback),1,1,1,0.3,0.0,,False,True,True,Road,6000.0,f000666,False
+h000346,Hub_182,Glennallen,Glennallen,named,5,0,5,0.4,1.8,,False,True,True,Road,244817.0,f000789;f000518;f001634;f000999;f000267,False
+h000244,Hub_353,Palmer,Palmer,named,1,0,1,0.0,0.0,f000851,True,True,True,Road,3000.0,f000851,False
+h000048,Hub_309,Slana,Chistochina,named,1,0,1,38.3,0.0,,False,True,True,Road,3000.0,f000706,True
+h000141,Hub_163,Mentasta Lake,Mentasta Lake,named,1,0,1,0.0,0.0,,False,True,True,Road,10000.0,f001034,False
+h000130,Hub_358,Valdez,Valdez,named,1,0,1,5.8,0.0,f000440,True,True,True,Plane,5000.0,f000440,False
+h000078,Hub_109,Copper Center,Copper Center,named,1,0,1,0.8,0.0,,False,True,True,Road,18100.0,f001616,False
+h000135,Hub_357,,Paxson,named,1,0,1,25.1,0.0,f001580,True,True,True,Plane,5000.0,f001580,True
+h000138,Hub_354,Paxson,Paxson,named,1,0,1,6.1,0.0,,False,True,True,Plane,5000.0,f000151,False
+h000098,Hub_285,Fort Greely,Fort Greely,named,1,0,1,4.4,0.0,,False,True,True,Road,2000.0,f000761,False
+h000348,Hub_346,Fairbanks,Fairbanks,named,1,0,1,10.2,0.0,f001599,True,True,True,Plane,5000.0,f001599,False
+h000120,Hub_215,,,unnamed (place or borough fallback),1,1,1,0.1,0.0,,False,True,True,Road,5000.0,f000749,False
+h000094,Hub_240,Valdez,Valdez,named,3,0,3,8.3,25.9,f001519,False,True,True,Plane or Road,14000.0,f000348;f000694;f001519,False
+h000059,Hub_232,Gulkana,Gulkana,named,1,0,1,0.4,0.0,,False,True,True,Road,4000.0,f000696,False
+h000253,Hub_339,Gakona,Gakona,named,2,0,2,10.9,4.2,,False,True,True,Road,37000.0,f001407;f001152,False
+h000210,Hub_234,Paxson,Paxson,named,2,0,2,2.0,1.9,,False,True,True,Road,14000.0,f001603;f001046,False
+h000306,Hub_320,Houston,Houston,named,1,0,1,0.3,0.0,,False,True,True,Road,30000.0,f000478,False
+h000332,Hub_254,Willow,Willow,named,1,0,1,0.1,0.0,,False,True,True,Road,6000.0,f000137,False
+h000250,Hub_54,Nenana,Nenana,named,1,0,1,2.1,0.0,,False,True,True,Road,1000.0,f000249,False
+h000404,Hub_366,Anderson,Anderson,named,2,0,2,1.0,4.4,,False,True,True,Road,6500.0,f001114;f000235,False
+h000320,Hub_191,,,unnamed (place or borough fallback),1,1,1,28.0,0.0,,False,True,True,Plane,1000.0,f000159,False
+h000043,Hub_208,Clear,Clear,named,1,0,1,0.5,0.0,,False,True,True,Road,16000.0,f001187,False
+h000377,Hub_102,Denali National Park,Denali National Park,named,1,0,1,0.0,0.0,,False,True,True,Road,75200.0,f000326,False
+h000074,Hub_294,Palmer,,unnamed (place or borough fallback),1,1,1,23.7,0.0,,False,True,False,Road,18000.0,f000232,True
+h000309,Hub_161,Palmer,Palmer,named,2,0,2,25.9,29.2,f001732;f001460,True,True,True,Road,6000.0,f001732;f001460,False
+h000145,Hub_213,Healy,Healy,named,3,0,3,0.0,1.8,,False,True,True,Road,15000.0,f000716;f001041;f001079,False
+h000275,Hub_239,Tok,Tok,named,1,0,1,1.1,0.0,,False,True,True,Road,2000.0,f001240,False
+h000178,Hub_298,Delta Junction,Delta Junction,named,1,0,1,3.0,0.0,,False,True,True,Road,1000.0,f001088,False
+h000116,Hub_164,Northway,Northway,named,5,0,5,1.7,12.1,,False,True,True,Road,57000.0,f000654;f000397;f000480;f000260;f000504,False
+h000227,Hub_165,Tetlin,Tetlin,named,2,0,2,0.1,0.6,,False,True,True,Road,13000.0,f001365;f001124,False
+h000222,Hub_237,Chicken,Chicken,named,2,0,2,3.8,4.1,,False,True,True,Road,10000.0,f000382;f001392,False
+h000343,Hub_194,Eielson Afb,Eielson Afb,named,3,0,3,68.5,129.3,f001602;f000810,False,True,True,Plane,73075.0,f000970;f001602;f000810,False
+h000121,Hub_104,Eagle,Eagle,named,3,0,3,0.0,0.3,,False,True,True,Plane or Road,56000.0,f000837;f000870;f001376,False
+h000255,Hub_156,Eagle,Eagle,named,2,0,2,0.1,0.3,,False,True,True,Plane or Road,11000.0,f001576;f000864,False
+h000214,Hub_79,Livengood,Livengood,named,3,0,3,2.8,7.7,,False,True,True,Plane or Road,21900.0,f001371;f000992;f000270,False
+h000129,Hub_146,Manley Hot Springs,Manley Hot Springs,named,4,0,4,0.3,1.3,,False,True,True,Road,30000.0,f001424;f001829;f001671;f000195,False
+h000248,Hub_212,Minto,Minto,named,4,0,6,0.3,0.8,,False,True,True,Plane or Road,84000.0,f001491;f001639;f000215;f001513;f001676;f001697,False
+h000192,Hub_344,Fairbanks,Fairbanks,named,1,0,1,13.1,0.0,f001336,True,True,True,Plane,5000.0,f001336,False
+h000066,Hub_67,Fairbanks,Fairbanks,named,1,0,1,0.2,0.0,,False,True,True,Road,29000.0,f000984,False
+h000234,Hub_216,,,unnamed (place or borough fallback),1,1,1,9.1,0.0,,False,True,True,Road,11500.0,f001831,False
+h000245,Hub_220,Central,Central,named,1,0,1,0.4,0.0,,False,True,True,Plane,3260.0,f000256,False
+h000081,Hub_292,Fairbanks,Fairbanks,named,1,0,1,0.1,0.0,,False,True,True,Road,22500.0,f001270,False
+h000001,Hub_39,Fairbanks,Fairbanks,named,4,0,4,1.5,8.8,f000289,False,True,True,Road,34000.0,f001570;f000488;f001150;f000289,False
+h000194,Hub_14,Circle,Circle,named,1,0,1,0.1,0.0,,False,True,True,Road,7000.0,f001562,False
+h000340,Hub_33,,Chandalar,named,1,0,1,78.5,0.0,,False,True,True,Road,2000.0,f000282,True
+h000005,Hub_341,Fairbanks,Fairbanks,named,2,1,2,29.1,31.7,f000118,False,True,True,Plane or Road,7000.0,f000118;f001249,False
+h000213,Hub_211,Coldfoot,Coldfoot,named,1,0,1,0.3,0.0,,False,True,True,Road,15500.0,f001573,False
+h000009,Hub_154,Prudhoe Bay,Prudhoe Bay,named,9,1,9,2.2,24.7,,False,True,True,Road,153400.0,f000656;f000971;f000515;f001083;f001172;f000693;f000014;f000698;f001789,False
+h000231,Hub_152,Klukwan,Klukwan,named,1,0,1,0.1,0.0,,False,True,True,Road,3000.0,f000024,False
+h000177,Hub_119,Haines,Haines,named,6,0,6,0.1,1.6,,False,True,True,Plane or Road,55700.0,f000156;f001101;f000890;f000462;f000763;f000191,False
+h000385,Hub_115,Skagway,Skagway,named,2,0,2,0.3,5.1,,False,True,True,Road,52500.0,f001546;f000362,False
+h000127,Hub_41,Skagway,Skagway,named,6,0,6,0.1,1.3,,False,True,True,Road,41500.0,f000370;f000097;f001666;f000291;f000571;f000634,False
+h000055,Hub_114,Homer,Homer,named,6,0,7,0.1,6.6,,False,True,True,Barge or Road,96000.0,f000803;f000025;f000336;f000912;f000359;f000489;f000691,False
+h000004,Hub_330,Homer,Homer,named,2,0,2,0.2,0.1,,False,True,True,Road,5000.0,f001008;f001547,False
+h000110,Hub_322,Homer,Fritz Creek,named,1,0,1,0.1,0.0,,False,True,True,Road,12000.0,f001346,True
+h000400,Hub_36,Homer,Homer,named,3,0,3,0.6,7.2,,False,True,True,Road,6000.0,f001803;f001532;f001485,False
+h000378,Hub_112,Anchor Point,Anchor Point,named,2,0,2,0.3,5.7,,False,True,True,Road,45100.0,f000902;f001441,False
+h000274,Hub_95,Ninilchik,Ninilchik,named,3,0,3,0.1,8.1,,False,True,True,Road,8800.0,f000964;f000897;f000168,False
+h000151,Hub_31,Seward,Fort Wainwright,named,1,0,1,0.1,0.0,f000732,True,True,True,Road,1500.0,f000732,True
+h000034,Hub_333,Seward,Seward,named,1,0,1,0.1,0.0,,False,True,True,Road,8000.0,f001025,False
+h000133,Hub_222,Seward,Seward,named,11,0,11,0.1,6.0,,False,True,True,Road,89750.0,f000629;f001389;f000512;f000720;f001763;f001565;f001353;f001754;f001788;f001099;f000461,False
+h000279,Hub_332,Soldotna,Soldotna,named,4,0,4,0.1,2.3,,False,True,True,Road,5200.0,f001047;f001272;f001212;f000556,False
+h000181,Hub_116,Soldotna,Soldotna,named,5,0,5,0.2,3.4,,False,True,True,Road,119100.0,f001761;f001484;f001129;f000783;f001802,False
+h000068,Hub_93,Kenai,Kenai,named,1,0,1,0.2,0.0,,False,True,True,Road,1000.0,f001268,False
+h000030,Hub_171,Kasilof,Kasilof,named,2,0,2,0.1,0.0,,False,True,True,Road,15000.0,f001400;f001440,False
+h000175,Hub_8,Kenai,Kenai,named,6,0,6,0.1,4.1,,False,True,True,Road,104600.0,f001279;f001057;f001171;f001641;f000431;f000483,False
+h000035,Hub_356,Prudhoe Bay,Prudhoe Bay,named,1,0,1,6.3,0.0,f001627,True,True,True,Road,1250.0,f001627,False
+h000033,Hub_305,Kenai,Kenai,named,3,0,3,0.0,3.3,,False,True,True,Road,5500.0,f001232;f000781;f001437,False
+h000189,Hub_94,Nikiski,Nikiski,named,1,0,1,0.2,0.0,,False,True,True,Road,9500.0,f001128,False
+h000381,Hub_44,Kenai,Kenai,named,4,0,4,0.1,4.4,,False,True,True,Road,13634.0,f001087;f000646;f000475;f000874,False
+h000252,Hub_244,Girdwood,Girdwood,named,2,0,2,0.1,1.8,,False,True,True,Road,7000.0,f000073;f000647,False
+h000045,Hub_75,Valdez,Valdez,named,14,1,14,1.3,10.5,,False,True,True,Barge or Road,159800.0,f000113;f000993;f000717;f001492;f001151;f000467;f000945;f000529;f001219;f001649;f001070;f000367;f000252;f000307,False
+h000313,Hub_304,Anchorage,Fort Richardson,named,1,0,1,0.4,0.0,,False,True,True,Road,1000.0,f001281,True
+h000197,Hub_11,Anchorage,Anchorage,named,58,0,62,1.4,13.2,,False,True,True,Barge or Road,812812.0,f000633;f000398;f000477;f001017;f000484;f001503;f000265;f000220;f000682;f000748;f000365;f001551;f001755;f001018;f000313;f000547;f001495;f000644;f001535;f000317;f001638;f000288;f001230;f001147;f000585;f000612;f000601;f000907;f001743;f000660;f001406;f001470;f000392;f000782;f000355;f000818;f000211;f001352;f001193;f000053;f000727;f000072;f001731;f000273;f000192;f000614;f000160;f001253;f001252;f000702;f001224;f001343;f000363;f000402;f001102;f001144;f000751;f000075;f000583;f001418;f000995;f001285,False
+h000284,Hub_243,Chugiak,Chugiak,named,1,0,1,0.1,0.0,,False,True,True,Road,4000.0,f001767,False
+h000208,Hub_293,Eagle River,Birchwood,named,1,0,1,0.2,0.0,,False,True,True,Road,1000.0,f001694,True
+h000190,Hub_303,Eagle River,Eagle River,named,5,0,5,0.1,6.1,,False,True,True,Road,37700.0,f000456;f001199;f000277;f001617;f001347,False
+h000375,Hub_306,Wasilla,Wasilla,named,2,0,2,1.7,3.6,f001704;f000444,True,True,True,Road,80000.0,f001704;f000444,False
+h000044,Hub_29,Big Lake,Big Lake,named,1,0,1,2.2,0.0,,False,True,True,Road,1000.0,f000387,False
+h000338,Hub_340,Palmer,Palmer,named,1,0,1,0.2,0.0,,False,True,True,Road,2000.0,f000170,False
+h000299,Hub_123,Palmer,Palmer,named,6,0,6,0.0,1.1,,False,True,True,Road,45064.0,f000639;f000800;f001507;f000290;f000153;f000607,False
+h000072,Hub_252,Point Mackenzie,Point Mackenzie,named,1,0,1,0.2,0.0,,False,True,True,Road,1000.0,f001719,False
+h000334,Hub_352,Palmer,Palmer,named,1,0,1,0.2,0.0,,False,True,True,Road,2000.0,f001130,False
+h000166,Hub_334,Wasilla,Wasilla,named,1,0,1,0.1,0.0,,False,True,True,Road,8000.0,f000413,False
+h000221,Hub_91,Wasilla,Wasilla,named,3,0,3,0.2,4.7,,False,True,True,Road,12000.0,f001652;f000062;f000427,False
+h000365,Hub_251,Trapper Creek,Trapper Creek,named,1,0,1,7.2,0.0,,False,True,True,Road,12000.0,f000592,False
+h000328,Hub_61,Talkeetna,Talkeetna,named,6,0,6,0.7,4.4,,False,True,True,Road,92000.0,f001362;f000671;f000661;f000003;f001836;f001784,False
+h000102,Hub_111,Trapper Creek,Trapper Creek,named,1,0,1,4.0,0.0,f000229,True,True,True,Road,5000.0,f000229,False
+h000262,Hub_166,Tok,Tok,named,4,1,4,0.2,1.2,,False,True,True,Road,42700.0,f001073;f000009;f000829;f000852,False
+h000154,Hub_153,,,unnamed (place or borough fallback),5,5,9,58.9,427.6,,False,True,True,Road,37204.0,f000033;f000997;f000401;f000983;f001136;f000760;f001014;f000499;f001727,False
+h000047,Hub_300,,Delta Junction,named,2,0,2,0.9,55.2,f001084;f001263,True,True,True,Plane or Road,84000.0,f001084;f001263,True
+h000077,Hub_24,Delta Junction,Delta Junction,named,5,0,5,0.0,2.7,,False,True,True,Road,109500.0,f000161;f000497;f000847;f000418;f001236,False
+h000278,Hub_214,Nenana,Nenana,named,1,0,1,0.1,0.0,,False,True,True,Road,4000.0,f000670,False
+h000403,Hub_27,North Pole,North Pole,named,1,0,1,0.1,0.0,,False,True,True,Road,53500.0,f000346,False
+h000361,Hub_74,North Pole,North Pole,named,5,0,5,0.7,11.9,,False,True,True,Road,30500.0,f000711;f000844;f000416;f001048;f001186,False
+h000219,Hub_3,Fort Wainwright,Fort Wainwright,named,2,0,5,1.8,1.4,,False,True,True,Road,225170.0,f000099;f000059;f000664;f001810;f001453,False
+h000148,Hub_40,Fairbanks,Fairbanks,named,8,0,8,71.3,308.4,f001192;f000327,False,True,True,Road,39000.0,f000845;f001589;f001555;f000658;f000022;f001403;f001192;f000327,False
+h000323,Hub_25,Fairbanks,Fairbanks,named,24,0,26,0.0,7.1,,False,True,True,Road,480767.0,f000116;f000919;f001247;f000064;f000718;f001388;f001474;f001097;f000182;f001623;f000906;f001508;f001345;f000388;f000351;f001274;f000582;f000219;f001033;f001300;f001334;f001303;f000765;f000503;f001375;f001278,False
+h000109,Hub_359,Fairbanks,Fairbanks,named,1,0,1,0.1,0.0,,False,True,True,Road,4000.0,f000552,False
+h000287,Hub_76,Fairbanks,Fairbanks,named,2,0,2,0.3,2.3,,False,True,True,Road,23000.0,f001588;f000251,False
+h000204,Hub_106,Metlakatla,Metlakatla,named,5,0,5,0.1,1.1,,False,True,True,Barge or Road,627500.0,f000558;f001525;f000548;f000470;f000788,False
+h000029,Hub_51,Metlakatla,Metlakatla,named,1,0,1,0.0,0.0,,False,True,True,Road,1000.0,f000659,False
+h000298,Hub_368,Hydaburg,Hydaburg,named,2,0,2,0.1,0.1,,False,True,True,Barge,15000.0,f001227;f001207,False
+h000161,Hub_312,Hydaburg,Hydaburg,named,2,0,2,0.1,0.5,,False,True,True,Barge or Road,111000.0,f000501;f000045,False
+h000021,Hub_69,Ketchikan,Ketchikan,named,11,0,11,0.1,5.7,,False,True,True,Barge or Road,144367.0,f001493;f000310;f000048;f001335;f000555;f000595;f000080;f000190;f001776;f001504;f000300,False
+h000183,Hub_238,,,unnamed (place or borough fallback),1,1,1,15.2,0.0,,False,True,True,Barge,2000.0,f000253,False
+h000018,Hub_185,Ketchikan,Ketchikan,named,4,0,4,1.1,6.4,,False,True,True,Barge or Plane or Road,61900.0,f001372;f001550;f000179;f000822,False
+h000212,Hub_301,Craig,Craig,named,9,0,11,0.2,1.1,,False,True,True,Barge or Road,362485.0,f000012;f000766;f000715;f001359;f000868;f000337;f000855;f001558;f000318;f001120;f000697,False
+h000268,Hub_311,Hollis,Hollis,named,1,0,1,0.9,0.0,,False,True,True,Road,3000.0,f001681,False
+h000354,Hub_121,Kasaan,Kasaan,named,4,0,6,0.1,1.1,,False,True,True,Barge or Road,45200.0,f001420;f000203;f001682;f000259;f000524;f001812,False
+h000241,Hub_272,Klawock,Klawock,named,2,0,2,0.3,2.3,,False,True,True,Barge or Road,24484.0,f000931;f001370,False
+h000316,Hub_313,Klawock,Klawock,named,5,0,5,0.0,1.0,,False,True,True,Barge or Road,133000.0,f000624;f001413;f000429;f000954;f000490,False
+h000147,Hub_317,Thorne Bay,Thorne Bay,named,5,0,7,0.0,0.8,,False,True,True,Barge or Road,308455.0,f000415;f000594;f001782;f001214;f000893;f000987;f000275,False
+h000017,Hub_385,Port Protection,Port Protection,named,1,0,1,2.1,0.0,,False,True,True,Barge,24094.0,f001434,False
+h000173,Hub_318,Whale Pass,Whale Pass,named,1,0,1,0.1,0.0,,False,True,True,Road,10000.0,f001292,False
+h000307,Hub_141,Naukati,Naukati,named,1,0,1,0.1,0.0,,False,True,True,Road,2000.0,f001735,False
+h000137,Hub_315,Naukati Bay,Naukati Bay,named,1,0,1,0.3,0.0,,False,True,True,Road,4000.0,f001358,False
+h000310,Hub_388,Craig,Craig,named,1,0,1,0.1,0.0,f000534,True,True,True,Barge,21900.0,f000534,False
+h000238,Hub_139,Coffman Cove,Coffman Cove,named,5,0,5,0.0,0.6,,False,True,True,Road,62842.0,f000263;f001348;f000934;f000625;f001242,False
+h000327,Hub_143,Port Alexander,Port Alexander,named,3,0,4,0.2,0.2,,False,True,True,Barge,44170.0,f000439;f001000;f001090;f000853,False
+h000337,Hub_118,Wrangell,Wrangell,named,5,0,5,2.8,30.0,f000386,False,True,True,Barge or Plane or Road,167000.0,f000710;f001700;f000939;f000386;f000349,False
+h000027,Hub_159,Petersburg,Petersburg,named,3,0,3,0.0,0.3,,False,True,True,Road,17600.0,f000104;f000535;f000286,False
+h000097,Hub_49,Wrangell,Wrangell,named,1,0,3,12.5,0.0,f000130;f001209;f001010,True,True,True,Barge,25000.0,f000130;f001209;f001010,False
+h000155,Hub_349,Kake,Kake,named,1,0,1,4.0,0.0,,False,True,True,Plane,6000.0,f001244,False
+h000321,Hub_310,,,unnamed (place or borough fallback),2,2,2,19.6,64.0,,False,True,True,Plane,12000.0,f001511;f000458,False
+h000352,Hub_30,Sitka,Sitka,named,12,1,17,0.1,25.2,,False,True,True,Barge or Road,634829.0,f001181;f000576;f000733;f001476;f000023;f001122;f000001;f000207;f001530;f000206;f000745;f000185;f001155;f000730;f000947;f001620;f001464,False
+h000199,Hub_142,Angoon,Angoon,named,3,0,4,0.1,0.8,,False,True,True,Barge or Road,66568.0,f000006;f000973;f001425;f000898,False
+h000295,Hub_375,Tenakee Springs,Tenakee Springs,named,1,0,2,0.0,0.0,,False,True,True,Barge,71869.0,f001673;f001556,False
+h000300,Hub_134,Pelican,Pelican,named,3,0,3,0.1,0.5,,False,True,True,Barge or Plane,233185.0,f000148;f000086;f001607,False
+h000259,Hub_374,,Elfin Cove,named,1,0,1,26.5,0.0,,False,True,True,Barge,102465.0,f000568,True
+h000264,Hub_66,Hoonah,Hoonah,named,9,0,10,0.1,1.8,,False,True,True,Barge or Road,288971.0,f000936;f001329;f000884;f000299;f001276;f000468;f001210;f000196;f001395;f000361,False
+h000269,Hub_376,Hoonah,Hoonah,named,1,0,1,0.2,0.0,,False,True,True,Barge,71257.0,f001791,False
+h000339,Hub_345,Gustavus,Juneau,named,4,0,5,54.0,43.6,f000618,False,False,True,Barge or Road,218520.0,f001369;f000826;f000678;f001111;f000618,True
+h000153,Hub_1,Juneau,Juneau,named,23,0,25,2.3,29.9,f000352;f001095,False,True,True,Barge or Plane or Road,698800.0,f001816;f000979;f001540;f001314;f001745;f000900;f000419;f000230;f000768;f000752;f001805;f000729;f001713;f000960;f000278;f001162;f000352;f001095;f000619;f001053;f000759;f000074;f001350;f000328;f000821,False
+h000261,Hub_174,Yakutat,Yakutat,named,2,0,2,0.0,0.1,,False,True,True,Road,23000.0,f001593;f001391,False
+h000168,Hub_286,Akhiok,Akhiok,named,2,0,2,0.8,1.3,,False,True,True,Barge or Road,42200.0,f001037;f000511,False
+h000160,Hub_362,Old Harbor,Old Harbor,named,2,0,3,0.1,0.3,,False,True,True,Barge,115700.0,f000433;f001432;f001445,False
+h000170,Hub_209,Larsen Bay,Larsen Bay,named,3,0,4,0.2,0.8,,False,True,True,Barge or Road,251400.0,f000859;f001771;f000152;f001382,False
+h000229,Hub_47,Kodiak,Kodiak,named,5,0,5,0.1,1.9,,False,True,True,Barge or Road,45000.0,f000645;f000790;f000407;f001028;f000393,False
+h000406,Hub_289,Kodiak,Kodiak,named,1,0,1,0.1,0.0,,False,True,True,Road,5000.0,f001729,False
+h000124,Hub_273,Ouzinkie,Ouzinkie,named,1,0,1,0.0,0.0,,False,True,True,Road,3000.0,f001149,False
+h000084,Hub_170,Ouzinkie,Ouzinkie,named,4,0,4,0.0,0.8,,False,True,True,Barge or Road,159100.0,f000262;f000544;f001024;f001196,False
+h000136,Hub_370,Port Graham,Port Graham,named,1,0,1,0.1,0.0,,False,True,True,Barge,91200.0,f001146,False
+h000246,Hub_247,Seldovia,Seldovia,named,3,0,3,0.0,0.5,,False,True,True,Barge or Road,360500.0,f001228;f001077;f001749,False
+h000119,Hub_246,Chenega,Chenega,named,5,0,6,0.2,3.1,,False,True,False,Barge,103600.0,f000434;f000108;f001462;f000863;f001765;f001394,False
+h000232,Hub_52,,,unnamed (place or borough fallback),5,5,5,99.7,815.4,,False,True,True,Barge or Plane,34000.0,f001238;f001683;f000680;f000948;f000323,False
+h000022,Hub_241,Cordova,Valdez,named,1,0,1,0.5,0.0,f000929,True,True,True,Road,14000.0,f000929,True
+h000089,Hub_32,,Cape Yakataga,named,2,0,4,140.2,0.3,,False,True,True,Barge,20000.0,f000628;f000041;f001311;f001002,True
+h000311,Hub_364,Tatitlek,Tatitlek,named,3,0,4,0.1,0.6,,False,True,True,Barge,23000.0,f000166;f001770;f000042;f000684,False
+h000157,Hub_42,,Cordova,named,4,0,5,51.4,58.8,f000051;f001361;f000940;f000856;f001528,True,True,True,Barge,77800.0,f000051;f001361;f000940;f000856;f001528,True
+h000399,Hub_92,,,unnamed (place or borough fallback),1,1,1,0.3,0.0,,False,True,True,Plane,20000.0,f000975,False
+h000058,Hub_329,Eklutna,Eklutna,named,1,0,2,0.2,0.0,,False,True,True,Plane or Road,5000.0,f001229;f001286,False
+h000314,Hub_331,Tyonek,Tyonek,named,1,0,1,0.1,0.0,,False,True,True,Road,1000.0,f000447,False
+h000036,Hub_21,Adak,Adak,named,2,0,2,0.2,2.7,,False,True,True,Barge or Road,112180.0,f001419;f000144,False
+h000080,Hub_275,Atka,Atka,named,3,0,4,0.1,1.3,,False,True,True,Barge,108600.0,f001626;f001203;f001684;f001742,False
+h000297,Hub_383,Nikolski,Nikolski,named,4,0,4,0.0,0.6,,False,True,True,Barge,66200.0,f000754;f001670;f000648;f001459,False
+h000112,Hub_34,Dutch Harbor,Dutch Harbor,named,4,0,5,0.4,2.3,f000719,False,True,True,Barge or Road,12218.0,f000532;f001305;f000895;f000719;f000335,False
+h000254,Hub_283,Unalaska,Unalaska,named,6,0,6,0.1,1.7,,False,True,True,Road,16100.0,f001521;f000565;f000233;f001605;f000319;f000132,False
+h000057,Hub_167,Akutan,Akutan,named,5,1,5,4.4,7.0,,False,True,True,Barge or Road,1928490.0,f001447;f001003;f001655;f001168;f000723,False
+h000071,Hub_168,King Cove,King Cove,named,5,0,5,0.3,1.7,,False,True,True,Barge,660115.0,f000820;f001611;f000528;f000316;f001134,False
+h000389,Hub_37,Cold Bay,Cold Bay,named,6,0,7,0.1,0.3,,False,True,True,Road,39000.0,f001257;f000046;f000084;f001823;f001536;f000019;f001071,False
+h000186,Hub_147,Sand Point,Sand Point,named,6,0,7,0.3,2.9,,False,True,True,Barge or Road,106300.0,f000802;f001542;f001488;f000111;f000197;f000459;f001738,False
+h000397,Hub_135,Perryville,Perryville,named,2,0,2,0.0,0.1,,False,True,True,Barge,95900.0,f000492;f000795,False
+h000260,Hub_158,Nelson Lagoon,Port Moller,named,1,0,1,36.9,0.0,,False,True,True,Barge,330600.0,f000560,True
+h000277,Hub_291,Nelson Lagoon,Nelson Lagoon,named,3,0,3,0.5,1.1,,False,True,True,Barge,205500.0,f000094;f000257;f000807,False
+h000115,Hub_125,Chignik Lake,Chignik Lake,named,2,0,4,0.0,0.1,,False,True,True,Barge or Road,67400.0,f001442;f000651;f001720;f000590,False
+h000103,Hub_297,Chignik Lagoon,Chignik Lagoon,named,1,0,1,0.3,0.0,,False,True,True,Barge,3200.0,f001054,False
+h000302,Hub_124,Chignik Lagoon,Chignik Lagoon,named,3,0,9,0.1,0.2,,False,True,True,Barge,107750.0,f001414;f000636;f001499;f001674;f000928;f001184;f000951;f001142;f001598,False
+h000085,Hub_122,Chignik,Chignik,named,4,0,5,0.0,0.2,,False,True,True,Barge,430000.0,f000096;f000171;f001509;f000712;f000438,False
+h000167,Hub_56,Port Heiden,Port Heiden,named,5,0,9,0.6,2.5,,False,True,True,Barge or Road,109600.0,f001043;f000610;f000403;f000341;f001237;f000915;f000496;f000164;f001106,False
+h000336,Hub_136,Pilot Point,Pilot Point,named,2,0,4,0.1,0.1,,False,True,True,Barge or Road,24400.0,f001660;f001288;f000559;f000724,False
+h000283,Hub_126,Egegik,Egegik,named,7,0,9,0.1,0.8,,False,True,True,Barge or Road,306775.0,f001637;f000873;f001506;f001241;f000901;f000308;f000550;f001326;f001153,False
+h000364,Hub_138,King Salmon,King Salmon,named,1,0,1,0.1,0.0,,False,True,True,Road,2000.0,f001739,False
+h000371,Hub_46,King Salmon,King Salmon,named,5,0,5,1.4,8.1,,False,True,True,Barge or Road,27500.0,f000669;f001360;f001175;f000638;f001331,False
+h000108,Hub_107,,,unnamed (place or borough fallback),2,2,2,59.3,30.7,,False,True,True,Barge or Plane,59431.0,f001266;f000110,False
+h000368,Hub_373,South Naknek,South Naknek,named,3,0,3,0.0,0.5,,False,True,True,Barge,67000.0,f001596;f000573;f001748,False
+h000258,Hub_172,Naknek,Naknek,named,11,0,11,0.4,4.6,,False,True,True,Barge or Road,418620.0,f000334;f001541;f000776;f001693;f000858;f001220;f001013;f001467;f001526;f000743;f000927,False
+h000026,Hub_65,Clarks Point,Clarks Point,named,2,0,2,0.1,0.4,,False,True,True,Barge,14000.0,f001783;f001658,False
+h000100,Hub_372,Clark's Point,Clark's Point,named,4,0,6,0.1,0.5,,False,True,True,Barge,43800.0,f001587;f000369;f000225;f001698;f001689;f000231,False
+h000158,Hub_72,Manokotak,Manokotak,named,5,0,8,0.0,0.6,,False,True,True,Barge or Plane,148250.0,f001472;f000131;f001821;f001631;f000865;f001081;f000834;f001779,False
+h000228,Hub_263,,New Stuyahok,named,1,0,1,42.7,0.0,f000093,True,True,True,Barge,2000.0,f000093,True
+h000333,Hub_177,Dillingham,Dillingham,named,9,0,9,0.5,6.2,,False,True,True,Barge or Road,37500.0,f000011;f000816;f000018;f001177;f001032;f001195;f001044;f001520;f000981,False
+h000201,Hub_130,Levelock,Levelock,named,2,0,4,0.0,0.1,,False,True,True,Barge or Road,136900.0,f000525;f000133;f000914;f001138,False
+h000152,Hub_59,Aleknagik,Aleknagik,named,4,0,4,0.2,1.0,,False,True,True,Barge or Road,95000.0,f000538;f000375;f000668;f000240,False
+h000267,Hub_73,Aleknagik,Aleknagik,named,1,0,1,19.1,0.0,,False,True,True,Road,5000.0,f001327,False
+h000114,Hub_127,Igiugig,Igiugig,named,2,0,3,0.0,0.2,,False,True,True,Barge or Plane or Road,9500.0,f001126;f000811;f001011,False
+h000312,Hub_261,Ekwok,Ekwok,named,2,0,2,0.1,0.2,,False,True,True,Barge,47200.0,f000410;f000562,False
+h000069,Hub_129,Kokhanok,Kokhanok,named,4,0,5,0.2,2.0,,False,True,True,Barge or Plane or Road,107400.0,f001117;f001768;f001819;f000569;f001468,False
+h000237,Hub_53,New Stuyahok,New Stuyahok,named,3,0,4,0.1,0.4,,False,True,True,Barge,412000.0,f000909;f001613;f000921;f001169,False
+h000366,Hub_45,Koliganek,Koliganek,named,4,0,4,0.0,0.7,,False,True,True,Barge,132000.0,f000600;f000184;f000881;f001635,False
+h000159,Hub_133,Pedro Bay,Pedro Bay,named,2,0,2,0.0,0.2,,False,True,True,Plane or Road,85000.0,f000942;f000479,False
+h000271,Hub_371,Iliamna,Iliamna,named,15,0,21,0.2,3.2,f001250;f000632,False,True,True,Barge or Plane,161100.0,f000596;f000465;f001064;f000309;f000786;f000491;f001786;f000239;f001557;f001289;f001404;f001250;f000632;f001290;f000379;f000163;f001489;f000925;f000785;f000799;f000338,False
+h000131,Hub_131,Newhalen,Newhalen,named,3,0,4,0.1,0.2,,False,True,True,Barge or Plane or Road,360200.0,f000735;f001643;f000679;f000218,False
+h000357,Hub_132,Nondalton,Nondalton,named,4,0,5,0.0,1.0,,False,True,True,Barge or Plane,21200.0,f001592;f000085;f000695;f000824;f001796,False
+h000049,Hub_108,Port Alsworth,Port Alsworth,named,8,0,8,0.0,0.9,,False,True,True,Barge or Plane or Road,67455.0,f001690;f000174;f001734;f000071;f000448;f000506;f000055;f000324,False
+h000293,Hub_176,Saint George Island,Saint George Island,named,1,0,1,0.1,0.0,,False,True,True,Barge,132000.0,f000266,False
+h000162,Hub_365,Saint George,Saint George,named,4,0,6,0.2,0.1,,False,True,True,Barge,1085400.0,f000343;f001280;f001762;f000794;f000815;f000136,False
+h000182,Hub_57,Saint Paul Island,Saint Paul Island,named,4,0,4,0.4,4.0,,False,True,True,Barge or Road,26000.0,f000615;f000057;f001566;f001560,False
+h000292,Hub_382,Saint Paul,Saint Paul,named,5,0,7,0.6,3.3,,False,True,True,Barge,29500.0,f001009;f001105;f001435;f000756;f000966;f000109;f000002,False
+h000101,Hub_90,Platinum,Platinum,named,5,0,6,0.1,0.4,,False,True,True,Barge or Plane,79700.0,f000771;f000757;f001621;f000728;f001753;f000980,False
+h000291,Hub_84,Togiak,Togiak,named,5,0,7,0.1,2.2,,False,True,True,Barge,734803.0,f000687;f001804;f001766;f001724;f001197;f001293;f001431,False
+h000020,Hub_81,Togiak,Togiak,named,1,0,1,17.0,0.0,,False,True,True,Plane,9000.0,f001568,False
+h000002,Hub_77,Twin Hills,Twin Hills,named,5,0,6,0.4,3.0,,False,True,True,Barge,212400.0,f000819;f001710;f001830;f000798;f000991;f000972,False
+h000088,Hub_260,Goodnews Bay,Goodnews Bay,named,4,0,6,0.1,0.5,,False,True,True,Barge or Road,247500.0,f000031;f000422;f001678;f000039;f001066;f000578,False
+h000063,Hub_202,Quinhagak,Quinhagak,named,6,0,6,0.1,0.8,,False,True,True,Barge or Road,527800.0,f000100;f001078;f000742;f001021;f000068;f001586,False
+h000360,Hub_335,Kwigillingok,Kwigillingok,named,2,0,3,0.8,0.3,,False,True,True,Barge,224900.0,f001338;f000598;f001584,False
+h000126,Hub_181,Kipnuk,Kipnuk,named,4,0,7,0.2,0.4,f000129,False,True,True,Barge or Road,700300.0,f000350;f001545;f000121;f001251;f000129;f000493;f001608,False
+h000286,Hub_195,Kongiganak,Kongiganak,named,6,0,11,0.2,0.8,,False,True,True,Barge or Road,300100.0,f001527;f000796;f001205;f001243;f001086;f000274;f000243;f000686;f000692;f000685;f001324,False
+h000308,Hub_391,Chefornak,Chefornak,named,3,0,4,0.0,0.2,,False,True,True,Barge,169340.0,f001307;f000753;f000637;f001342,False
+h000373,Hub_259,Eek,Eek,named,4,0,4,0.3,0.6,,False,True,True,Barge or Plane or Road,157906.0,f000839;f000849;f001647;f000165,False
+h000073,Hub_270,Tuntutuliak,Tuntutuliak,named,3,0,4,0.1,0.8,,False,True,True,Barge or Road,144200.0,f000450;f001245;f000690;f000449,False
+h000362,Hub_200,Mekoryuk,Mekoryuk,named,6,0,10,0.1,1.5,,False,True,True,Barge or Road,360500.0,f000049;f000200;f000701;f001100;f001646;f000101;f000188;f000519;f000035;f001615,False
+h000225,Hub_268,Toksook Bay,Toksook Bay,named,4,0,6,0.1,1.0,,False,True,True,Barge or Road,505420.0,f000138;f001267;f001563;f000409;f000043;f001708,False
+h000363,Hub_271,Tununak,Tununak,named,4,0,5,0.1,0.9,,False,True,True,Barge or Road,159200.0,f001777;f001709;f000169;f000672;f001080,False
+h000064,Hub_264,Napakiak,Napakiak,named,4,0,6,0.1,0.3,,False,True,True,Barge or Road,65830.0,f001813;f000384;f000005;f001582;f000244;f001539,False
+h000402,Hub_336,Napaskiak,Napaskiak,named,3,0,4,0.1,0.2,,False,True,True,Barge or Road,125000.0,f001691;f001325;f001730;f000662,False
+h000140,Hub_389,Oscarville,Oscarville,named,2,0,2,0.0,0.1,,False,True,True,Barge,45100.0,f001443;f001415,False
+h000324,Hub_386,Kwethluk,Napakiak,named,1,0,2,0.0,0.0,f000950;f000140,True,True,True,Barge,76156.0,f000950;f000140,True
+h000104,Hub_266,Nunapitchuk,Nunapitchuk,named,6,0,6,0.6,0.9,,False,True,True,Barge or Road,279550.0,f000958;f001067;f000114;f000850;f001185;f001716,False
+h000370,Hub_256,Akiak,Akiak,named,6,0,7,0.1,0.5,,False,True,True,Barge or Road,395300.0,f000237;f000887;f001354;f001496;f001211;f000606;f000652,False
+h000330,Hub_338,Tuluksak,Tuluksak,named,3,0,4,0.1,0.1,,False,True,True,Barge,109437.0,f001284;f000899;f001619;f001750,False
+h000105,Hub_269,Tuluksak,Tuluksak,named,1,0,1,1.5,0.0,,False,True,True,Road,3000.0,f001052,False
+h000200,Hub_390,Upper Kalskag,Upper Kalskag,named,4,0,4,0.1,0.6,,False,True,True,Barge,77480.0,f001049;f000747;f000626;f000655,False
+h000122,Hub_99,Upper Kalskag,Kalskag,named,1,0,1,0.3,0.0,,False,True,True,Barge,49000.0,f001160,True
+h000256,Hub_319,Lower Kalskag,Lower Kalskag,named,3,0,3,0.0,0.2,,False,True,True,Barge,211270.0,f000030;f000967;f000020,False
+h000235,Hub_276,Kalskag,Kalskag,named,2,0,3,0.1,0.0,,False,True,True,Barge,329000.0,f001058;f001538;f001396,False
+h000093,Hub_197,Hooper Bay,Hooper Bay,named,10,0,12,0.1,2.1,,False,True,True,Barge or Road,1008669.0,f000414;f001583;f000539;f001594;f000784;f001662;f001597;f000302;f001386;f000520;f000070;f000773,False
+h000266,Hub_363,Chevak,Chevak,named,6,0,8,0.0,0.4,,False,True,True,Barge,436840.0,f000189;f000134;f001457;f001344;f000830;f001225;f001374;f001029,False
+h000172,Hub_258,Chevak,Chevak,named,1,0,1,0.0,0.0,,False,True,True,Road,2000.0,f001728,False
+h000075,Hub_160,Russian Mission,Russian Mission,named,5,0,6,0.0,0.3,,False,True,True,Barge,375600.0,f001473;f001235;f000395;f001194;f001756;f000617,False
+h000032,Hub_267,Scammon Bay,Scammon Bay,named,6,0,6,0.0,0.3,,False,True,True,Barge or Road,475857.0,f000509;f000736;f001320;f001502;f001787;f000412,False
+h000096,Hub_328,Scammon Bay,Scammon Bay,named,1,0,1,1.3,0.0,,False,True,True,Barge,94419.0,f000172,False
+h000342,Hub_324,Marshall,Marshall,named,3,0,5,0.0,0.1,f001826,False,True,True,Barge or Plane,343300.0,f001294;f000812;f001826;f000036;f001264,False
+h000117,Hub_327,Pilot Station,Pilot Station,named,5,0,5,0.1,0.3,,False,True,True,Barge,367060.0,f001164;f000904;f000905;f000063;f001065,False
+h000350,Hub_60,Saint Marys,Saint Marys,named,4,0,4,1.2,3.4,,False,True,True,Barge or Plane or Road,151500.0,f001107;f000726;f000037;f001832,False
+h000240,Hub_392,Saint Mary's,Saint Mary's,named,3,0,5,0.1,0.9,,False,True,True,Barge,16500.0,f000451;f000038;f001069;f001373;f001792,False
+h000125,Hub_325,Mountain Village,Mountain Village,named,4,1,5,0.1,0.3,,False,True,True,Barge,738550.0,f000008;f001112;f001074;f000145;f001577,False
+h000198,Hub_323,Alakanuk,Alakanuk,named,3,0,5,0.4,1.6,,False,True,True,Barge,396029.0,f000095;f000186;f001601;f000833;f000665,False
+h000106,Hub_6,Emmonak,Emmonak,named,8,0,10,0.2,1.3,,False,True,True,Barge or Plane or Road,871747.0,f001062;f001416;f000574;f000894;f001740;f001628;f001775;f000446;f001202;f001045,False
+h000150,Hub_321,Kotlik,Kotlik,named,4,0,5,0.1,0.9,,False,True,True,Barge,294100.0,f000236;f001330;f001156;f000199;f000487,False
+h000193,Hub_203,Savoonga,Savoonga,named,6,0,7,0.0,0.6,,False,True,True,Barge or Plane or Road,522500.0,f001667;f001317;f001173;f000366;f001216;f001198;f001075,False
+h000223,Hub_187,Gambell,Gambell,named,7,0,9,0.3,0.6,f000832,False,True,True,Barge or Road,657600.0,f001686;f000994;f001096;f000603;f000832;f000922;f000779;f000750;f000621,False
+h000322,Hub_369,Lime Village,Lime Village,named,3,0,6,0.0,0.1,,False,True,True,Barge or Plane,17200.0,f001461;f001089;f000913;f000827;f001751;f000930,False
+h000118,Hub_97,Chuathbaluk,Chuathbaluk,named,5,0,8,0.1,0.9,,False,True,True,Barge or Road,63300.0,f000304;f001258;f000663;f001793;f001553;f001068;f000792;f001308,False
+h000289,Hub_274,Aniak,Aniak,named,12,0,18,0.3,3.6,f000896;f001398;f000653;f000836,False,True,True,Barge or Road,842730.0,f001356;f000681;f000146;f001726;f001544;f000896;f001398;f000653;f000836;f001201;f001675;f000564;f000622;f001533;f001650;f001254;f000194;f001696,False
+h000239,Hub_100,Sleetmute,Sleetmute,named,3,0,6,0.0,0.1,,False,True,True,Barge,89100.0,f000354;f000605;f000880;f001349;f001695;f000177,False
+h000090,Hub_101,Stony River,Stony River,named,4,0,4,0.1,0.2,,False,True,True,Barge,72600.0,f000482;f000769;f000609;f000540,False
+h000270,Hub_98,Crooked Creek,Crooked Creek,named,4,0,5,0.1,1.0,,False,True,True,Barge,121700.0,f000787;f001255;f000081;f001248;f001295,False
+h000215,Hub_17,Holy Cross,Holy Cross,named,2,0,5,0.0,0.2,,False,True,True,Barge,118500.0,f000962;f001297;f001059;f000604;f001378,False
+h000123,Hub_15,Anvik,Anvik,named,6,0,8,0.1,0.8,,False,True,True,Barge or Plane,129885.0,f000667;f000271;f000963;f001298;f000115;f001323;f001481;f001479,False
+h000061,Hub_19,Shageluk,Shageluk,named,2,0,3,0.0,0.2,,False,True,True,Barge,48500.0,f000976;f000246;f000674,False
+h000019,Hub_16,Grayling,Grayling,named,4,0,6,0.1,0.1,,False,True,True,Barge,269389.0,f001050;f001758;f001166;f000875;f001668;f000102,False
+h000358,Hub_18,McGrath,McGrath,named,4,0,5,0.1,0.4,,False,True,True,Barge or Road,459500.0,f000442;f000877;f000123;f000869;f000421,False
+h000272,Hub_22,Takotna,Takotna,named,3,0,4,0.2,1.3,,False,True,True,Barge or Road,149700.0,f000149;f001234;f000276;f001328,False
+h000083,Hub_50,,McGrath,named,1,0,1,36.4,0.0,f001679,True,True,True,Road,10000.0,f001679,True
+h000046,Hub_20,Nikolai,Nikolai,named,2,0,2,0.1,0.1,,False,True,True,Barge or Plane,73700.0,f000744;f000843,False
+h000394,Hub_48,Lake Minchumina,Lake Minchumina,named,2,0,2,0.1,0.2,,False,True,True,Plane or Road,3000.0,f000797;f000357,False
+h000217,Hub_120,Healy,Delta Junction,named,1,0,1,0.1,0.0,f000917,True,True,True,Road,7000.0,f000917,True
+h000051,Hub_224,Kaltag,Kaltag,named,6,0,9,0.1,0.7,f001579,False,True,True,Barge or Plane,392480.0,f000620;f001820;f000476;f001656;f001104;f001579;f000817;f001030;f000426,False
+h000025,Hub_227,Ruby,Ruby,named,5,0,5,0.1,1.0,,False,True,True,Barge or Plane or Road,225800.0,f000911;f001306;f000952;f000774;f000158,False
+h000304,Hub_85,Ruby,,unnamed (place or borough fallback),3,3,3,21.9,471.6,,False,False,True,Plane or Road,144500.0,f000526;f000204;f001688,True
+h000056,Hub_35,Galena,Galena,named,11,0,14,0.4,5.8,f000650,False,True,True,Barge or Road,956000.0,f001127;f001302;f000990;f000903;f001516;f000474;f000234;f001466;f000269;f000842;f000650;f000746;f000007;f001287,False
+h000202,Hub_189,Nulato,Nulato,named,4,0,4,0.0,0.4,,False,True,True,Barge or Plane,237800.0,f000806;f000423;f001061;f001265,False
+h000247,Hub_225,Koyukuk,Kaltag,named,1,0,3,0.0,0.0,f000554,False,True,True,Barge or Plane,1000.0,f000554;f001183;f001178,True
+h000359,Hub_284,Koyukuk,Koyukuk,named,2,0,2,0.1,0.0,,False,True,True,Barge,112000.0,f001814;f000214,False
+h000010,Hub_229,Tanana,Tanana,named,6,0,7,0.1,1.2,,False,True,True,Barge or Plane or Road,462100.0,f001131;f000432;f000522;f001723;f000400;f000755;f000016,False
+h000006,Hub_169,Rampart,Rampart,named,3,0,3,0.1,0.9,,False,True,True,Plane,71000.0,f000677;f001123;f001795,False
+h000326,Hub_226,Huslia,Huslia,named,5,0,6,0.3,0.8,,False,True,True,Barge or Road,308074.0,f001517;f000050;f001772;f001465;f000092;f000883,False
+h000065,Hub_228,Stevens Village,Stevens Village,named,2,0,3,0.4,0.8,,False,True,True,Barge or Plane,27700.0,f001316;f001471;f000969,False
+h000146,Hub_223,Hughes,Hughes,named,3,0,4,0.0,0.2,,False,True,True,Plane,19000.0,f000968;f000077;f000584;f000689,False
+h000355,Hub_219,Birch Creek,Birch Creek,named,2,0,5,0.1,0.3,,False,True,True,Plane,8800.0,f000056;f000867;f001721;f001799;f001145,False
+h000401,Hub_218,Beaver,Beaver,named,2,0,5,0.0,0.1,f001384,False,True,True,Barge or Plane,44000.0,f000700;f001368;f001022;f000061;f001384,False
+h000038,Hub_217,Allakaket,Allakaket,named,6,0,13,0.5,1.2,f000292,False,True,True,Barge or Plane,123600.0,f001712;f000242;f001296;f001648;f000411;f001315;f001176;f000828;f001140;f000292;f000295;f001801;f000536,False
+h000280,Hub_393,Alatna,Alatna,named,1,0,1,0.0,0.0,,False,True,True,Plane,10500.0,f001262,False
+h000383,Hub_379,Fort Yukon,Fort Yukon,named,1,0,1,0.0,0.0,,False,True,True,Barge or Plane,19000.0,f001600,False
+h000282,Hub_12,Fort Yukon,Fort Yukon,named,11,0,20,0.0,0.5,f000066;f001486,False,True,True,Barge or Plane or Road,167000.0,f001449;f000608;f001714;f000708;f000364;f000396;f001072;f001299;f001163;f000261;f000320;f000066;f000238;f001217;f000069;f001486;f000106;f001707;f001797;f000572,False
+h000251,Hub_342,,,unnamed (place or borough fallback),7,7,7,110.9,1062.0,,False,False,True,Plane or Road,9000.0,f000029;f000937;f001233;f000713;f001552;f001012;f001454,False
+h000176,Hub_221,Chalkyitsik,Chalkyitsik,named,5,0,9,0.0,0.5,,False,True,True,Plane,99775.0,f000285;f000424;f001277;f001736;f000862;f000631;f001282;f001487;f001515,False
+h000263,Hub_103,Bettles Field,Bettles Field,named,2,0,2,0.1,0.1,,False,True,True,Plane or Road,5500.0,f000339;f001640,False
+h000356,Hub_377,Bettles,Bettles,named,5,0,5,0.1,0.4,,False,True,True,Plane,119700.0,f001757;f000105;f000087;f000466;f000762,False
+h000369,Hub_23,Evansville,Evansville,named,1,0,1,0.1,0.0,,False,True,True,Road,15000.0,f001319,False
+h000351,Hub_13,Venetie,Venetie,named,2,0,2,0.1,0.2,,False,True,True,Plane,31400.0,f000374;f000378,False
+h000303,Hub_186,Stebbins,Stebbins,named,7,0,8,0.1,0.3,f001717,False,True,True,Barge,817800.0,f001429;f000428;f000405;f001148;f000298;f001717;f001256;f001824,False
+h000165,Hub_89,Unalakleet,Unalakleet,named,1,0,1,9.2,0.0,,False,True,True,Plane,9000.0,f001838,False
+h000216,Hub_62,Unalaska,Unalaska,named,1,0,1,1.2,0.0,f001606,True,True,True,Road,1000.0,f001606,False
+h000052,Hub_96,Unalakleet,Unalakleet,named,8,0,14,0.1,1.2,,False,True,True,Barge or Plane,754400.0,f001020;f000217;f001669;f000372;f000738;f000683;f000860;f000635;f001313;f001618;f001808;f000445;f001645;f000613,False
+h000205,Hub_179,Shaktoolik,Shaktoolik,named,3,0,5,1.0,0.4,,False,True,True,Barge,112400.0,f000563;f000514;f000287;f000347;f001161,False
+h000317,Hub_80,,,unnamed (place or borough fallback),5,5,5,42.5,165.0,,False,True,True,Plane or Road,42000.0,f000047;f001125;f000714;f000809;f000258,False
+h000076,Hub_9,Elim,Elim,named,5,0,5,0.1,0.7,,False,True,True,Barge or Road,281500.0,f000510;f000688;f001622;f000703;f000455,False
+h000163,Hub_207,Golovin,Golovin,named,2,0,2,0.0,0.0,,False,True,True,Barge,407804.0,f000333;f001463,False
+h000236,Hub_307,White Mountain,White Mountain,named,4,0,6,0.0,0.6,,False,True,True,Barge,101000.0,f001380;f001367;f000866;f000533;f001699;f000770,False
+h000319,Hub_148,Nome,Nome,named,15,0,16,0.7,3.5,,False,True,True,Barge or Road,276900.0,f001304;f001630;f001654;f001322;f000245;f000344;f000437;f001778;f001182;f001494;f000579;f000965;f001159;f000408;f001027;f001451,False
+h000288,Hub_242,Teller,Teller,named,1,0,1,0.0,0.0,,False,True,True,Plane,3000.0,f000891,False
+h000012,Hub_55,Nome,Nome,named,2,0,2,4.8,8.1,,False,True,True,Plane or Road,11000.0,f000247;f000176,False
+h000185,Hub_206,Teller,Teller,named,9,0,12,0.0,0.3,,False,True,True,Barge or Road,453000.0,f000553;f001722;f001438;f001405;f001038;f000281;f001548;f000886;f000452;f000371;f000561;f001363,False
+h000040,Hub_198,Koyuk,Koyuk,named,3,0,8,0.1,0.3,,False,True,True,Barge or Road,219500.0,f001764;f000846;f001825;f000825;f001774;f001436;f000162;f000801,False
+h000349,Hub_205,Brevig Mission,Brevig Mission,named,5,0,16,0.0,0.4,f001572;f000443;f000139;f001514;f000764;f001261;f000154;f000505,False,True,True,Barge,352000.0,f001206;f001572;f000443;f000139;f000721;f001705;f000255;f001514;f000764;f001261;f000154;f000505;f001483;f001332;f000198;f000575,False
+h000345,Hub_204,Wales,Wales,named,3,0,4,0.0,0.3,,False,True,True,Barge,214300.0,f000835;f000775;f001093;f000611,False
+h000290,Hub_180,,Diomede,named,1,0,1,41.7,0.0,,False,True,True,Barge,157900.0,f001604,True
+h000273,Hub_367,Deering,Deering,named,2,0,5,1.1,0.1,,False,True,True,Barge or Road,98000.0,f001137;f000209;f001223;f001818;f001614,False
+h000144,Hub_178,Buckland,Buckland,named,4,0,13,0.1,0.4,f000227;f000090;f001581;f000391;f001518;f000435,False,True,True,Barge or Plane,180600.0,f000857;f001158;f000944;f000091;f000083;f001170;f000227;f000090;f000521;f001581;f000391;f001518;f000435,False
+h000230,Hub_83,Selawik,,unnamed (place or borough fallback),4,4,4,43.2,165.4,,False,True,True,Plane,36000.0,f001817;f001450;f001769;f000117,True
+h000184,Hub_190,Shishmaref,Shishmaref,named,6,0,11,0.0,0.5,,False,True,True,Barge,408000.0,f001393;f000978;f000457;f001456;f000178;f000373;f000959;f001039;f001642;f001827;f001040,False
+h000380,Hub_157,Selawik,Selawik,named,7,0,9,0.0,0.7,,False,True,True,Barge or Plane or Road,624400.0,f000543;f000840;f001004;f000124;f000065;f001042;f001321;f001189;f000471,False
+h000203,Hub_302,,Anchorage,named,1,0,1,34.9,0.0,f001653,True,True,True,Road,6000.0,f001653,True
+h000169,Hub_64,Noorvik,Noorvik,named,4,0,8,0.1,0.4,,False,True,True,Barge,548900.0,f000988;f000181;f001477;f001531;f000705;f001501;f000376;f001725,False
+h000276,Hub_110,Kotzebue,Kotzebue,named,9,0,9,0.0,1.4,,False,True,True,Barge or Road,285600.0,f001446;f001569;f000986;f001578;f000004;f000406;f000223;f001512;f000040,False
+h000233,Hub_137,Shungnak,Shungnak,named,3,0,3,0.0,0.2,,False,True,True,Barge or Plane,119300.0,f001231;f001387;f000180,False
+h000335,Hub_86,Kiana,Kiana,named,4,0,7,0.5,2.0,,False,True,True,Barge or Plane,350000.0,f001811;f000527;f001629;f001221;f001426;f000938;f000731,False
+h000156,Hub_394,Kiana,Kiana,named,3,0,6,0.1,0.3,f001339;f001746;f001422,False,True,True,Barge,177100.0,f001132;f001339;f001746;f000823;f000641;f001422,False
+h000142,Hub_151,Kobuk,Kobuk,named,2,0,2,0.0,0.1,,False,True,True,Barge or Plane,44400.0,f000098;f000079,False
+h000015,Hub_149,Ambler,Ambler,named,4,0,6,0.0,1.2,,False,True,True,Barge or Plane,294900.0,f001718;f001737;f000342;f000383;f001082;f000128,False
+h000243,Hub_68,Noatak,Noatak,named,4,0,5,0.0,0.4,,False,True,True,Barge or Plane,175700.0,f001529;f000301;f000643;f000241;f000167,False
+h000164,Hub_150,Kivalina,Kivalina,named,5,0,9,0.0,0.5,,False,True,True,Barge or Plane,252400.0,f000961;f000577;f001119;f000089;f000390;f001063;f001273;f000507;f000394,False
+h000054,Hub_308,,Bethel,named,1,0,1,54.5,0.0,f000283,True,True,False,Road,6000.0,f000283,True
+h000218,Hub_378,Arctic Village,Stevens Village,named,1,0,1,0.1,0.0,f001399,True,True,True,Barge,47500.0,f001399,True
+h000031,Hub_361,Arctic Village,Arctic Village,named,4,0,6,0.0,1.1,,False,True,True,Plane,61455.0,f001561;f001143;f001543;f001213;f000155;f000955,False
+h000226,Hub_277,Anaktuvuk Pass,Anaktuvuk Pass,named,7,0,16,0.0,0.4,,False,True,True,Plane,46200.0,f000312;f000977;f001806;f000926;f000193;f000589;f001357;f000876;f000187;f000305;f000441;f001031;f001023;f001423;f000841;f001341,False
+h000325,Hub_381,Anaktuvuk Pass,Anaktuvuk Pass,named,2,0,4,0.6,0.1,,False,True,True,Plane,258000.0,f000542;f001036;f000034;f000567,False
+h000367,Hub_281,Point Hope,Point Hope,named,7,0,10,0.0,0.6,,False,True,True,Barge or Road,51500.0,f001672;f000709;f001685;f001744;f000523;f001428;f001215;f000082;f001633;f000360,False
+h000195,Hub_282,Point Lay,Point Lay,named,6,0,7,0.1,0.2,,False,True,True,Barge or Road,573900.0,f001179;f001291;f000141;f001500;f001609;f000221;f001118,False
+h000149,Hub_279,Kaktovik,Kaktovik,named,8,0,12,0.0,0.5,f001019,False,True,True,Barge or Road,1017000.0,f000734;f001625;f000202;f001055;f001019;f001108;f001006;f000127;f001417;f001701;f000226;f000314,False
+h000384,Hub_380,Kaktovik,Kaktovik,named,4,0,6,0.2,0.4,f000941,False,True,True,Barge,284000.0,f001016;f000404;f000941;f001351;f001056;f001595,False
+h000301,Hub_280,Nuiqsut,Nuiqsut,named,12,0,20,0.1,0.5,,False,True,True,Plane or Road,655850.0,f001180;f000280;f000957;f001060;f000657;f001412;f001554;f000767;f001379;f000417;f000143;f001318;f000791;f000454;f001385;f001498;f001133;f001015;f001103;f000183,False
+h000060,Hub_278,Atqasuk,Atqasuk,named,10,0,25,0.0,0.5,f000058;f001571;f000052;f001590;f000329;f000920;f000943;f001076,False,True,True,Barge or Plane or Road,703300.0,f000541;f001139;f001337;f000157;f000078;f000293;f000294;f001026;f000854;f001475;f000058;f001571;f001703;f000989;f000495;f000052;f001590;f000330;f000103;f001115;f000329;f000920;f000943;f001076;f000015,False
+h000242,Hub_5,Wainwright,Wainwright,named,8,0,11,0.1,0.7,,False,True,True,Barge or Road,1445400.0,f001785;f001355;f000222;f001141;f001157;f000107;f001408;f001677;f001715;f000306;f001433,False
+h000107,Hub_210,Barrow,Barrow,named,5,0,5,0.2,5.1,,False,True,True,Road,27700.0,f001809;f000793;f000580;f000566;f000530,False
+h000281,Hub_38,Cordova,Cordova,named,10,0,10,0.3,13.3,,False,True,True,Plane or Road,54300.0,f000675;f000380;f000704;f000430;f001537;f000175;f001439;f000916;f001421;f000303,False
+h000067,Hub_188,Saint Michael,Saint Michael,named,7,0,9,0.1,0.6,,False,True,True,Barge or Road,288000.0,f001800;f001208;f000676;f000248;f001366;f001239;f000420;f001661;f000545,False
+h000180,Hub_350,Livengood,Livengood,named,1,0,1,8.6,0.0,f000472,True,True,True,Plane,5000.0,f000472,False
+h000086,Hub_71,,,unnamed (place or borough fallback),6,6,6,100.3,659.6,,False,True,True,Plane or Road,230400.0,f001174;f000027;f001190;f001780;f000813;f000557,False
+h000139,Hub_145,Kake,Kake,named,8,0,8,0.1,1.5,,False,True,True,Barge or Road,260213.0,f001222;f000513;f000593;f000591;f001409;f000213;f000485;f000340,False
+h000257,Hub_105,Gustavus,Gustavus,named,7,0,8,2.0,6.1,,False,True,True,Barge or Road,154992.0,f000494;f000882;f001275;f000739;f001191;f000112;f001204;f000321,False
+h000132,Hub_117,Whittier,Whittier,named,1,0,1,0.0,0.0,,False,True,True,Road,224000.0,f000010,False
+h000134,Hub_58,,,unnamed (place or borough fallback),2,2,2,22.8,21.7,,False,True,True,Barge or Plane,14000.0,f000331;f001480,False
+h000087,Hub_140,Edna Bay,Edna Bay,named,2,0,2,0.8,1.7,,False,True,True,Barge,34500.0,f000570;f000722,False
+h000039,Hub_262,Manokotak,Manokotak,named,1,0,1,0.1,0.0,,False,True,True,Barge,5500.0,f000946,False
+h000079,Hub_299,Petersburg,Petersburg,named,2,0,2,4.1,13.6,,False,True,True,Plane or Road,7000.0,f000985;f000616,False
+h000220,Hub_314,Petersburg,Ketchikan,named,1,0,1,7.6,0.0,f001711,True,True,True,Plane,5000.0,f001711,True
+h000405,Hub_10,,,unnamed (place or borough fallback),4,4,4,18.1,121.4,,False,True,True,Barge or Road,266110.0,f001135;f000322;f001402;f000399,False
+h000392,Hub_43,Kenai,Kenai,named,1,0,1,0.8,0.0,,False,True,True,Road,3000.0,f001226,False
+h000398,Hub_288,Karluk,Karluk,named,3,0,3,0.2,0.8,,False,True,True,Barge or Road,108000.0,f000125;f000122;f000587,False
+h000395,Hub_290,Port Lions,Port Lions,named,4,0,4,0.2,1.2,,False,True,True,Barge or Road,189700.0,f001259;f001246;f000956;f001822,False
+h000391,Hub_173,Kodiak,Kodiak,named,13,0,14,0.0,2.7,,False,True,True,Barge or Road,96250.0,f001427;f000780;f001035;f001510;f000597;f000551;f000389;f000473;f001390;f001837;f000932;f001051;f001455;f000460,False
+h000390,Hub_360,Haines,Haines,named,3,0,3,0.7,9.3,f000642;f001564;f000831,True,True,True,Road,11000.0,f000642;f001564;f000831,False
+h000409,Hub_201,Newtok,Newtok,named,5,1,5,14.8,0.4,,False,True,True,Barge or Road,198400.0,f001659;f001828;f001702;f000021;f000982,False
+h000396,Hub_7,,Homer,named,2,0,2,12.2,23.6,f000208,False,True,True,Barge or Road,27000.0,f000208;f001549,True
+h000407,Hub_155,Cantwell,Cantwell,named,4,0,4,0.6,2.2,,False,True,True,Road,10000.0,f001798;f001113;f000996;f001411,False
+h000388,Hub_70,False Pass,False Pass,named,6,0,7,0.3,1.0,,False,True,True,Barge or Road,335200.0,f000699;f000381;f001687;f001760;f000126;f000150;f001301,False
+h000387,Hub_26,Healy,Healy,named,2,0,2,4.4,5.7,,False,True,True,Road,2500.0,f001381;f000581,False
+h000408,Hub_128,Ivanof Bay,Ivanof Bay,named,2,0,3,19.7,0.1,,False,True,True,Barge,42600.0,f001781;f000741;f000517,False
+h000344,Hub_296,,,unnamed (place or borough fallback),1,1,1,16.4,0.0,,False,True,True,Road,10000.0,f000910,False
+h000053,Hub_236,Tazlina,Tazlina,named,1,0,1,0.1,0.0,,False,True,True,Road,5500.0,f001790,False
+h000016,Hub_162,Dot Lake,Dot Lake,named,1,0,1,0.3,0.0,,False,True,True,Road,10000.0,f000205,False
+h000374,Hub_193,,Eielson Afb,named,2,0,2,32.0,46.2,f001752;f001005,True,True,True,Plane,54500.0,f001752;f001005,True
+h000171,Hub_4,Fairbanks,Fairbanks,named,3,0,4,0.1,2.5,f001469,False,True,True,Road,16500.0,f001692;f001680;f000076;f001469,False
+h000095,Hub_351,,Metlakatla,named,1,0,1,45.7,0.0,f000888,True,True,True,Plane,6000.0,f000888,True
+h000143,Hub_63,,Kodiak,named,4,0,5,47.9,239.2,f000120,False,True,True,Road,19100.0,f001575;f001377;f000120;f001574;f000284,True
+h000329,Hub_287,Kodiak,Chiniak,named,1,0,1,0.2,0.0,,False,True,True,Road,3000.0,f001154,True
+h000013,Hub_253,Skwentna,Skwentna,named,1,0,1,0.5,0.0,,False,True,True,Road,4000.0,f000998,False
+h000376,Hub_265,Nightmute,Nightmute,named,4,0,6,0.0,1.4,,False,True,True,Barge or Road,86950.0,f000017;f000345;f000332;f000353;f001094;f000885,False
+h000111,Hub_28,Bethel,Bethel,named,13,0,13,0.4,4.1,,False,True,True,Road,84250.0,f001833;f000737;f000325;f001116;f001188;f000254;f000250;f000808;f001397;f000838;f001091;f000481;f001651,False
+h000206,Hub_199,Kwethluk,Kwethluk,named,6,0,8,0.3,1.6,,False,True,True,Barge or Road,337250.0,f001610;f000502;f001364;f000949;f001458;f001534;f000264;f000315,False
+h000062,Hub_255,Akiachak,Akiachak,named,1,0,1,0.1,0.0,,False,True,True,Road,2000.0,f000173,False
+h000092,Hub_337,Akiachak,Akiachak,named,1,0,3,0.3,0.0,,False,True,True,Barge,400000.0,f001092;f001591;f000028,False
+h000011,Hub_326,Nunam Iqua,Nunam Iqua,named,3,0,4,0.5,0.4,,False,True,True,Barge,357423.0,f001167;f000453;f001109;f000707,False
+h000082,Hub_144,Red Devil,Red Devil,named,4,0,4,0.1,0.2,,False,True,True,Barge,54035.0,f001657;f000272;f001559;f000311,False
+h000209,Hub_87,,Grayling,named,2,0,2,51.8,221.5,f001524,False,True,True,Plane,18000.0,f001524;f001200,True
+h000347,Hub_88,,Holy Cross,named,1,0,2,55.7,0.0,f001444,False,True,True,Plane,9000.0,f001612;f001444,True
+h000188,Hub_2,Kasigluk,Kasigluk,named,7,0,8,0.3,1.7,,False,True,True,Barge,558000.0,f001741;f000640;f000623;f000032;f000908;f000026;f000924;f000772,False
+h000211,Hub_387,Atmautluak,Chefornak,named,1,0,7,0.6,0.0,f001269;f001632;f001448;f000627;f000649;f000872;f000368,True,True,True,Barge,24700.0,f001269;f001632;f001448;f000627;f000649;f000872;f000368,True
+h000014,Hub_78,,,unnamed (place or borough fallback),3,3,3,98.0,218.7,,False,True,True,Plane or Road,59000.0,f001505;f001706;f000878,False
+h000315,Hub_355,,Prudhoe Bay,named,1,0,1,35.2,0.0,f000974,True,True,True,Plane,3750.0,f000974,True

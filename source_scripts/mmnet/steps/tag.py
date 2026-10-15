@@ -57,9 +57,10 @@ def assign_community_region(
     The inventory community is authoritative, then reconciled against the place polygon via a
     canonical name match into `name_match`: `agree` (same canonical name, absorbing spelling
     variants), `neighbor` (differs but same borough — kept as the inventory community), or `conflict`
-    (the labelled community belongs to a different borough than the coordinates → a genuine data
-    error, **dropped** from the output). Adds assigned_community/level, geo_label, name_match,
-    name_agrees.
+    (the labelled community belongs to a different borough than the coordinates → a data error,
+    **kept and flagged**, never dropped). The test runs for every labelled facility whose label is a
+    known place, not only inside a place polygon. Adds assigned_community/level, geo_label,
+    name_match, name_agrees, label_borough.
     """
     fac = facilities.copy()
 
@@ -107,20 +108,23 @@ def assign_community_region(
 
     cp, cc = _canon(out["place_name"]), _canon(out["community_name"])
     comm_borough = cc.map(place_borough)                 # borough the LABELLED community belongs to
-    comparable = has_place & has_comm
-    agree = (comparable & (cp == cc)).fillna(False)
-    conflict = (comparable & ~agree & comm_borough.notna()
-                & (comm_borough != out["region_name"])).fillna(False)
-    neighbor = (comparable & ~agree & ~conflict).fillna(False)
+    # Every labelled facility whose label names a known place is tested — inside a place polygon
+    # or not (a labelled site in open country used to bypass the test and become its own hub).
+    testable = has_comm & comm_borough.notna()
+    agree = (has_place & has_comm & (cp == cc)).fillna(False)
+    conflict = (testable & ~agree & (comm_borough != out["region_name"])).fillna(False)
+    neighbor = (testable & ~agree & ~conflict).fillna(False)
     out["name_match"] = np.select([agree, neighbor, conflict],
                                   ["agree", "neighbor", "conflict"], default="n/a")
     out["name_agrees"] = agree                            # back-compat (now includes spelling variants)
+    out["label_borough"] = comm_borough                   # borough of the LABELLED community (NA = untested)
 
-    # Conflict = the labelled community is in a different borough than the coordinates: a genuine
-    # data error (wrong coordinate or label). DROP these facilities from the tagged set.
+    # Conflict = the labelled community sits in a different borough than the coordinates: a data
+    # error (wrong coordinate or wrong label). It is KEPT and reported (pipeline: 01b_conflicts.csv),
+    # never dropped — the fix belongs in the inventory corrections, not in a silent filter.
     n_conflict = int(conflict.sum())
     if n_conflict:
-        print(f"[tag] dropped {n_conflict} cross-borough conflict facilities (name_match='conflict')")
-        out = out[~conflict.values].copy()
+        print(f"[tag] {n_conflict} labelled facilities conflict with their coordinates' borough "
+              f"(name_match='conflict'; kept, see 01b_conflicts.csv)")
 
     return out.sort_values("ast_facility_id", kind="stable").reset_index(drop=True)

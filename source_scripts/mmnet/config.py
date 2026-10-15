@@ -84,6 +84,7 @@ class LayerSpec(_Strict):
     paths: list[str] = Field(default_factory=list)
     extra_paths: list[str] = Field(default_factory=list)
     snap_target: bool = False   # hubs snap onto this layer's nodes (the ground surface)
+    snap_fallback: bool = False  # a hub with no ground node within the cap may land here if served by this layer's mode
 
 
 class TransferSpec(_Strict):
@@ -249,6 +250,10 @@ class Params(_Strict):
     title: str = "mmnet — multimodal network"
     group_by: list[str] = Field(default_factory=lambda: ["community", "delivery_method"])
     tagging_enabled: bool = True
+    cannot_link_across_community: bool = False
+    max_snap_dist_m: float = 0.0
+    remote_site_km: float = 0.0
+    withhold_pending_review: bool = False
 
 
 # --------------------------------------------------------------------------- RegionProfile
@@ -277,6 +282,10 @@ class InventorySpec(_Strict):
     name: Optional[str] = None
     entity: Optional[str] = None
     type: Optional[str] = None
+    record_id: Optional[str] = None      # stable per-record id; carried through consolidation as the site-member trail
+    community_key: Optional[str] = None  # canonical community key (aliases folded); hub grouping + cannot-link use it
+    community_distance: Optional[str] = None  # km from the record to its labelled community (workflow 00); remote-site rule
+    qc_status: Optional[str] = None      # workflow 00 qc_status column; pending_review records can be withheld from hubs
     extra_capacity: list[str] = Field(default_factory=list)
     delivery_method_fallback: Optional[DeliveryFallback] = None   # fill blank modes from a community layer
 
@@ -310,6 +319,7 @@ class ProfileLayerSource(_Strict):
     source: Optional[FileSource] = None
     extra_source: Optional[FileSource] = None
     snap_target: bool = False   # hubs snap onto this layer's nodes (the ground surface)
+    snap_fallback: bool = False  # a hub with no ground node within the cap may land here if served by this layer's mode
 
 
 class HubParams(_Strict):
@@ -319,6 +329,22 @@ class HubParams(_Strict):
     buffer_dist: float = 5000.0
     dedup_tol_m: float = 10.0
     group_by: list[str] = Field(default_factory=lambda: ["community", "delivery_method"])
+    # Never merge two records with DIFFERENT community labels inside the dedup_tol_m cluster
+    # (a copied-coordinate stack of several villages stays several sites). Unlabelled records
+    # still merge with their nearest labelled neighbour.
+    cannot_link_across_community: bool = False
+    # Hubs displaced farther than this when snapped onto the ground surface are NOT placed
+    # (reported in output/02_hub_snaps.csv). 0 = no cap (legacy behaviour).
+    max_snap_dist_m: float = 0.0
+    # A site farther than this (km, `inventory.community_distance`) from its labelled community
+    # becomes its OWN hub (hub_kind=remote_site) instead of pulling the town's hub centroid.
+    # 0 = off. Remote repeaters, mines, camps and hatcheries keep their home-town label.
+    remote_site_km: float = 0.0
+    # ON/OFF: records whose qc_status is pending_review (an open owner review item) are kept OUT
+    # of consolidation and hubs, listed in output/01_withheld.csv. The build catches, never fixes:
+    # a label or position the owner cannot vouch for must not become a hub. Needs
+    # inventory.qc_status.
+    withhold_pending_review: bool = False
 
 
 class TopologyParams(_Strict):
@@ -372,7 +398,7 @@ class RegionProfile(_Strict):
             layers.append(LayerSpec(
                 name=ls.name, mode=ls.mode, edge_label=ls.edge_label, kind=ls.kind,
                 loader=ls.loader or "load_lines", paths=paths, extra_paths=extra,
-                snap_target=ls.snap_target,
+                snap_target=ls.snap_target, snap_fallback=ls.snap_fallback,
             ))
 
         # internal facility column map (raw header -> internal snake_case) the readers expect.
@@ -387,6 +413,14 @@ class RegionProfile(_Strict):
         }
         if inv.entity:
             facility_columns[inv.entity] = "entity_name"
+        if inv.record_id:
+            facility_columns[inv.record_id] = "record_id"
+        if inv.community_key:
+            facility_columns[inv.community_key] = "community_key"
+        if inv.community_distance:
+            facility_columns[inv.community_distance] = "community_distance_km"
+        if inv.qc_status:
+            facility_columns[inv.qc_status] = "qc_status"
         capacity_columns = ["total_capacity"]
         for extra in inv.extra_capacity:
             internal = _snake(extra)
@@ -443,6 +477,10 @@ class RegionProfile(_Strict):
             title=self.title,
             group_by=list(h.group_by),
             tagging_enabled=self.tagging.enabled,
+            cannot_link_across_community=h.cannot_link_across_community,
+            max_snap_dist_m=h.max_snap_dist_m,
+            remote_site_km=h.remote_site_km,
+            withhold_pending_review=h.withhold_pending_review,
         )
 
 
