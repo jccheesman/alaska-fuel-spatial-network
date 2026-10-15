@@ -62,24 +62,27 @@ DB_PATH = ROOT / "outputs" / "fuel_network.duckdb"
 # Expected inventory per final_network/README.md — a changed export should
 # fail loudly here, not flow silently into the weighted graph.
 EXPECTED = {
-    "n_nodes": 84_089,
-    "n_edges": 92_978,
-    "n_hubs": 385,
-    "n_components": 5,
+    "n_nodes": 84_094,
+    "n_edges": 93_049,
+    "n_hubs": 329,
+    "n_components": 4,
     "giant_share": 0.9999,
     # Mode-based connector vocabulary (refine-synthetic-connectors, 2026-09):
     # welds -> {Mode}Connector, cross-mode handoffs -> per-pair {A}{B}Transfer.
+    # Re-exported 2026-10-15: phase-5 hub builder + corrected 2025 inventory +
+    # 25 km connect/barge + 2 km snap-to-edge fallback (see final_network/README.md).
     "edge_types": {
-        "Road": 55_534,
+        "Road": 55_539,
         "Waterway": 34_178,
         "Air": 226,
         "IceRoad": 1_248,
         "RoadConnector": 1_498,
-        "IceRoadConnector": 35,
-        "BargeRoadTransfer": 234,
-        "BargeIceRoadTransfer": 11,
+        "IceRoadConnector": 34,
+        "BargeRoadTransfer": 289,
+        "BargeIceRoadTransfer": 21,
         "IceRoadRoadTransfer": 12,
         "AirRoadTransfer": 2,
+        "BargeAirTransfer": 2,
     },
 }
 

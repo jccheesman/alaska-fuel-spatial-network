@@ -108,7 +108,8 @@ def run_pipeline(profile_path: str | Path, project_dir: str | Path | None = None
     # 03 — build the multimodal network: R nodes, Python connects (gold procedure)
     layer_list = [s.name for s in cfg.layers if s.kind == "line"]
     net = build_network(layer_list, output_dir() / "03_network", hubs,
-                        max_snap_dist=float(params.max_snap_dist_m))
+                        max_snap_dist=float(params.max_snap_dist_m),
+                        snap_to_edge_tol=float(params.snap_to_edge_tol_m))
 
     # 03b — re-type synthetic connectors by the modes they join (same-mode ->
     # {Mode}Connector, two modes -> per-pair Transfer). Rewrites 03_network so the

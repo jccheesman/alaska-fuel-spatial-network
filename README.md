@@ -7,12 +7,14 @@ costs, per gallon and per month, to move bulk fuel along every edge of Alaska's
 multimodal transport network (road + barge + air + seasonal ice road).
 
 The repository is one pipeline across four steps, which are found in the numbered
-folders under `workflows/`. Each is described below:
+folders under `workflows/`, with a facility-inventory QC gate (`00_`) feeding the
+network build. Each is described below:
 
 | Step | Workflow | What it does | Key output |
 |---|---|---|---|
+| (0) | `workflows/00_inventory_qc/` | QC a raw AEA/DCRA bulk-fuel inventory release into the published clean facility table that act (b) reads — apply owner-approved corrections, normalise community keys, run detectors + boundary check, build the review queue, publish | `outputs/00_inventory_qc/<release>/facilities_clean.csv` |
 | (a) | `workflows/01_friction_build/` | Build monthly environmental friction surfaces for Alaska (terrain, land cover, permafrost, sea/river ice) on the canonical 150 m EPSG:3338 grid | `outputs/01_friction_build/friction_stack/` (14 TIFs) |
-| (b) | `workflows/02_network_build/` | Build the connected multimodal network from the facility inventory + connectivity layers with the region-agnostic `mmnet` engine (`profile.yaml` holds every region-specific choice) | `final_network/network_joined_{nodes,edges}.zip` |
+| (b) | `workflows/02_network_build/` | Build the connected multimodal network from the facility inventory (act 0's published clean table) + connectivity layers with the region-agnostic `mmnet` engine (`profile.yaml` holds every region-specific choice) | `final_network/network_joined_{nodes,edges}.zip` |
 | (c) | `workflows/03_multimodal_join/` | Sample friction along every edge, join $-rates, assemble the weighted graph | `edge_month_weights`, `edge_costs` in DuckDB |
 | (d) | `workflows/04_duckdb_export/` | Validate and document the deliverable | `outputs/fuel_network.duckdb` (4 tables) |
 
@@ -120,13 +122,13 @@ provenance: `final_network/README.md`.
 |---|---|
 | `source_scripts/mmnet/` | The region-agnostic network engine (R-noding oracle included) — the single canonical copy |
 | `source_scripts/friction_surface/` | Friction builders + `friction_config.py` + `friction_costs.py` (all USD $) |
-| `workflows/01..04_*/` | The four steps: thin numbered drivers, per-stage READMEs, run orders |
+| `workflows/00..04_*/` | The inventory-QC gate + the four steps: thin numbered drivers, per-stage READMEs, run orders |
 | `inputs/` | Available input datasets located here, open-source dataset information provided |
 | `final_network/` | The frozen act-(b)→(c) handoff; this step is regenerable with source scripts |
 | `outputs/` | Gitignored regenerables + committed tables/analysis + the DuckDB deliverable |
-| `docs/` | `ARCHITECTURE.md` (engine design), `DATA_CONTRACTS.md` (every inter-stage contract) |
+| `docs/` | `ARCHITECTURE.md` (engine design), `DATA_CONTRACTS.md` (every inter-stage contract), `INVENTORY_QC_PLAN.md` + `data_audit/` (the facility-inventory QC plan and its 2026-10 investigation) |
 | `tests/` | pytest suite (run by CI) |
-| `.claude/skills/` | Six procedural playbooks (friction, costs, network profile/build) |
+| `.claude/skills/` | Nine procedural playbooks (friction, costs, network profile/build; inventory ingest/record-corrections/validate) |
 
 ## Preprocessing the friction inputs
 
@@ -146,6 +148,9 @@ snaps any new raster onto the reference grid.
   contract, the R WORKDIR contract, the handoff schema, the edge_id rule, the
   DuckDB schema — every inter-stage contract on one page
 - `docs/ARCHITECTURE.md` — the mmnet engine: profile-as-data, stage chain, R↔Python seam
+- `docs/INVENTORY_QC_PLAN.md` — the facility-inventory QC plan + numbered owner decisions; the
+  `ingest-`/`record-`/`validate-facility-inventory` skills run the chain, and `docs/data_audit/`
+  archives the 2026-10 investigation that produced the decisions
 - `docs/TEST_LOG.md` — the verified end-to-end friction → weighting → costing run
 - `EXTERNAL_DATA.md` — what exists where (committed / regenerable / absent)
 - `CLAUDE.md` — the lab notebook: one row per numbered script, with findings

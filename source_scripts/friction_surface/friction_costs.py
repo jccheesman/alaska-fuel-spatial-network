@@ -218,6 +218,12 @@ TRANSFER_TYPE_TO_MODES = {
     "BargeIceRoadTransfer": ("barge", "ice_road"),
     "IceRoadRoadTransfer":  ("overland", "ice_road"),
     "AirRoadTransfer":      ("overland", "plane"),
+    # A barge connector landing on a hub node that ALSO carries an air leg gets
+    # named BargeAirTransfer (classify_connectors ranks Air over Road). Physically
+    # it is still the barge->ground handoff — fuel lands at the hub's dock/road,
+    # not nozzle-to-wing — so it is priced barge<->overland, same as BargeRoadTransfer.
+    # Any onward air movement is the separate overland<->air step at that node.
+    "BargeAirTransfer":     ("barge", "overland"),
 }
 
 

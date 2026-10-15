@@ -51,7 +51,8 @@ def connect_multimodal(r_edges: gpd.GeoDataFrame, hubs: gpd.GeoDataFrame, road_t
                        waterway: gpd.GeoDataFrame | None = None, waterway_label: str = "Waterway",
                        waterway_node_tol: float = 50.0, bridges: list | None = None,
                        connect_max_dist: float = 0.0, max_snap_dist: float = 0.0,
-                       snap_modes: dict | None = None, snap_fallback_types: set | None = None):
+                       snap_modes: dict | None = None, snap_fallback_types: set | None = None,
+                       snap_to_edge_tol: float = 0.0):
     """Connect R's noded edges into one multimodal network — fast, spatial-indexed, once.
 
     This is the no-redundancy connector: R has already noded each mode's lines, so we DERIVE the
@@ -84,6 +85,7 @@ def connect_multimodal(r_edges: gpd.GeoDataFrame, hubs: gpd.GeoDataFrame, road_t
     import numpy as np
     import pandas as pd
     from shapely.geometry import LineString, Point
+    from shapely.ops import substring
 
     from .connect_extras import connect_to_giant, cross_mode_connectors, within_mode_connectors
 
@@ -200,6 +202,72 @@ def connect_multimodal(r_edges: gpd.GeoDataFrame, hubs: gpd.GeoDataFrame, road_t
                 fbj = pd.concat(parts)
                 better = fbj[fbj["_d"] <= max_snap_dist]
                 j = pd.concat([j.drop(index=better.index), better]).sort_index()
+        # 2b. edge-projection fallback (snap_to_edge_tol): a hub still beyond the node cap but
+        #     sitting ON a snap-type EDGE is landed by SPLITTING that edge at the projection and
+        #     attaching to the inserted node. AK-DOT roads are noded as very long edges, so a
+        #     mid-edge village is metres from the LINE yet tens of km from either NODE. Rescue-only:
+        #     only hubs that would otherwise be unplaced; it never moves an already-placed hub.
+        new_node_ids: list = []
+        if snap_to_edge_tol and max_snap_dist:
+            far_idx = list(j[j["_d"] > max_snap_dist].index)
+            snap_eids = [i for i, e in enumerate(edge_rows)
+                         if e["type"] in snap_types and e["geometry"] is not None
+                         and e["geometry"].geom_type == "LineString"]
+            if far_idx and snap_eids:
+                se = gpd.GeoDataFrame({"_eid": snap_eids},
+                                      geometry=[edge_rows[i]["geometry"] for i in snap_eids], crs=crs)
+                je = gpd.sjoin_nearest(h.loc[far_idx, ["geometry"]], se, how="left", distance_col="_dl")
+                je = je[~je.index.duplicated(keep="first")]
+                by_edge: dict = {}            # edge_row index -> [(hub_index, dist_along, dist_to_line)]
+                for hidx, er in je.iterrows():
+                    if pd.isna(er.get("_eid")) or float(er["_dl"]) > snap_to_edge_tol:
+                        continue
+                    ei = int(er["_eid"])
+                    by_edge.setdefault(ei, []).append(
+                        (hidx, edge_rows[ei]["geometry"].project(h.at[hidx, "geometry"]), float(er["_dl"])))
+                for ei, landings in by_edge.items():
+                    eg = edge_rows[ei]["geometry"]
+                    a, b, etype, esrc = (edge_rows[ei]["from"], edge_rows[ei]["to"],
+                                         edge_rows[ei]["type"], edge_rows[ei]["source"])
+                    length = eg.length
+                    cuts: list = []           # (dist_along, node_id) interior landings on this edge
+                    for hidx, dalong, dl in sorted(landings, key=lambda t: t[1]):
+                        if dalong <= node_tol or dalong >= length - node_tol:
+                            nid = a if dalong <= node_tol else b      # projects onto an endpoint
+                        else:
+                            pt = eg.interpolate(dalong)
+                            lk = (round(pt.x / node_tol) * node_tol, round(pt.y / node_tol) * node_tol)
+                            if lk in coord_id:
+                                nid = coord_id[lk]
+                            else:
+                                nid = len(coords); coord_id[lk] = nid
+                                coords.append(lk); node_pt.append(Point(lk)); new_node_ids.append(nid)
+                            ids_by_type.setdefault(etype, set()).add(nid)
+                            cuts.append((dalong, nid))
+                        j.at[hidx, "node_id"] = nid
+                        j.at[hidx, "_d"] = dl
+                    seen_n: set = set(); uniq: list = []               # one cut per node, in order
+                    for d, nid in cuts:
+                        if nid not in seen_n:
+                            seen_n.add(nid); uniq.append((d, nid))
+                    if uniq:                                           # rewrite edge ei as a chain a→…→b
+                        chain = [(0.0, a)] + uniq + [(length, b)]
+                        segs = [{"from": n0, "to": n1, "type": etype, "source": esrc,
+                                 "geometry": substring(eg, d0, d1)}
+                                for (d0, n0), (d1, n1) in zip(chain[:-1], chain[1:]) if n0 != n1]
+                        edge_rows[ei] = segs[0]
+                        edge_rows.extend(segs[1:])
+                if new_node_ids:
+                    extra = gpd.GeoDataFrame(
+                        {"node_id": new_node_ids, "is_hub": [False] * len(new_node_ids),
+                         "hub_id": None, "delivery_method": None, "hub_type": None,
+                         "total_hub_capacity": None, "snap_surface": None, "snap_dist_m": None},
+                        geometry=[node_pt[i] for i in new_node_ids], crs=crs)
+                    nodes_gdf = gpd.GeoDataFrame(pd.concat([nodes_gdf, extra], ignore_index=True),
+                                                 geometry="geometry", crs=crs)
+                    print(f"[connect] edge-snap: landed {len(by_edge)} edge(s) / "
+                          f"{sum(len(v) for v in by_edge.values())} hub(s) within {snap_to_edge_tol:.0f} m "
+                          f"of a road the network already had (split {len(new_node_ids)} new node(s))")
         placed_at: dict = {}
         for _, row in j.iterrows():
             ni, d = int(row["node_id"]), float(row["_d"])

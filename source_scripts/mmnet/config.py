@@ -254,6 +254,7 @@ class Params(_Strict):
     max_snap_dist_m: float = 0.0
     remote_site_km: float = 0.0
     withhold_pending_review: bool = False
+    snap_to_edge_tol_m: float = 0.0
 
 
 # --------------------------------------------------------------------------- RegionProfile
@@ -345,6 +346,13 @@ class HubParams(_Strict):
     # a label or position the owner cannot vouch for must not become a hub. Needs
     # inventory.qc_status.
     withhold_pending_review: bool = False
+    # A hub still beyond max_snap_dist_m from every snap-target NODE but sitting within this
+    # distance (m) of a snap-target EDGE is landed by SPLITTING that edge at the projection and
+    # attaching to the inserted node. The AK-DOT roads are noded as very long edges, so a mid-edge
+    # village is metres from the road LINE yet tens of km from either endpoint NODE — snap-to-node
+    # alone wrongly drops it. Rescue-only: runs only for hubs that would otherwise be unplaced.
+    # 0 = off. Keep small (~2 km) so a hub near a road it is not served by does not weld.
+    snap_to_edge_tol_m: float = 0.0
 
 
 class TopologyParams(_Strict):
@@ -481,6 +489,7 @@ class RegionProfile(_Strict):
             max_snap_dist_m=h.max_snap_dist_m,
             remote_site_km=h.remote_site_km,
             withhold_pending_review=h.withhold_pending_review,
+            snap_to_edge_tol_m=h.snap_to_edge_tol_m,
         )
 
 

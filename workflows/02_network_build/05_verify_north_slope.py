@@ -103,7 +103,7 @@ def main() -> None:
         "waterway 100% connected": abs(pct(wid, Gfull) - 100.0) < 0.05,
         "road >= 95% in giant": pct(rid, Gfull) >= 95.0,
         "ice  >= 95% in giant": pct(iid, Gfull) >= 95.0,
-        "barge transfers ~201 (ports+hubs)": 180 <= cnt(et.str.endswith("Transfer") & sr.isin(["ports", "barge_hubs"])) <= 220,
+        "barge transfers ~292 (ports+hubs)": 270 <= cnt(et.str.endswith("Transfer") & sr.isin(["ports", "barge_hubs"])) <= 320,
     }
     print("\n checks")
     for label, ok in checks.items():

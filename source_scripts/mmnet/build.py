@@ -347,7 +347,7 @@ def _snap_airways_to_road(r_edges: gpd.GeoDataFrame, from_label: str, to_label: 
 
 
 def build_network(layers: list[str], out_prefix: str | Path, hubs: gpd.GeoDataFrame,
-                  max_snap_dist: float = 0.0,
+                  max_snap_dist: float = 0.0, snap_to_edge_tol: float = 0.0,
                   timeout_s: int = 1800) -> NetworkTables:
     """Build the connected multimodal network: **R nodes road/ice/air, Python connects it.**
 
@@ -452,7 +452,8 @@ def build_network(layers: list[str], out_prefix: str | Path, hubs: gpd.GeoDataFr
                                                waterway_label=waterway_label, bridges=bridges,
                                                connect_max_dist=connect_max_dist,
                                                max_snap_dist=max_snap_dist, snap_modes=snap_modes,
-                                               snap_fallback_types=snap_fallback)
+                                               snap_fallback_types=snap_fallback,
+                                               snap_to_edge_tol=snap_to_edge_tol)
     # hub placement trail: every Stage-02 hub -> node (or why not), beside the network files.
     hs = summary.get("hub_snaps")
     if hs is not None:

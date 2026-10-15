@@ -74,22 +74,24 @@ replaces the network-of-record.
   The old flat `Bridge`/`Weld`/`Join`/generic-`Transfer` type labels are retired
   (provenance stays in `source`). Ice↔road connections are now a **priced Transfer**
   (`("overland","ice_road")` = $0.022/gal), not an ice-road line-haul. `EXPECTED`
-  counts: RoadConnector 1,498 · IceRoadConnector 35 · BargeRoadTransfer 234 ·
-  BargeIceRoadTransfer 11 · IceRoadRoadTransfer 12 · AirRoadTransfer 2. The mode is
+  counts (2026-10-15 network-of-record): RoadConnector 1,498 · IceRoadConnector 34 ·
+  BargeRoadTransfer 289 · BargeIceRoadTransfer 21 · IceRoadRoadTransfer 12 ·
+  AirRoadTransfer 2 · BargeAirTransfer 2. The mode is
   spelled `IceRoad` (no space) everywhere in the profile.
-- **The network-of-record was rebuilt 2026-09-15 with AK-DOT-only roads**
-  (84,089 nodes / 92,978 edges / 385 hubs / 5 components): the GRIP4 Canada
-  border-stitch `extra_source` was removed (transnational roads are not
-  fuel-delivery routes) and the road source updated to the 2026-09 AK DOT&PF
-  download. It supersedes the 2026-09-12 manual-connections export and the
-  2026-07-20 pre-fix freeze (both preserved in git history); the
-  manual-connections layer is still included. **The phase-5 hub-builder fixes
-  (2026-10-07) are in the code and profile but NOT yet in the network-of-record:
-  the next rebuild on the owner's machine is the one rebuild the plan allows.**
-  A re-export is a NEW network-of-record: regenerate the zips, the checksums
-  (`inputs/MANIFEST.md`, `final_network/README.md`, `.github/workflows/ci.yml`),
-  the `EXPECTED` tripwire, and the edge_id-keyed tables together. Do not
-  re-export and commit without the owner asking.
+- **The network-of-record was re-exported 2026-10-15** (84,094 nodes / 93,049
+  edges / 329 hubs / 4 components): the first export carrying the phase-5 hub
+  builder, the corrected 2025 facility inventory (workflow 00 `facilities_clean.csv`),
+  the 25 km connect-to-giant / barge-transfer reach, and the 2 km snap-to-edge hub
+  fallback. It supersedes the 2026-09-15 AK-DOT-only export (84,089 / 92,978 / 385 /
+  5), which removed the GRIP4 Canada border-stitch (road source = 2026-09 AK DOT&PF);
+  that in turn superseded the 2026-09-12 and 2026-07-20 exports (all in git history).
+  The manual-connections layer is still included. A re-export is a NEW
+  network-of-record: regenerate the zips, the checksums (`inputs/MANIFEST.md`,
+  `final_network/README.md`, `.github/workflows/ci.yml`), the `EXPECTED` tripwire,
+  and the edge_id-keyed tables together. Do not re-export and commit without the
+  owner asking. **The downstream `edge_month_weights` / `edge_costs` DuckDB tables
+  were NOT regenerated with this export (they need the friction stack) — rerun
+  workflow 03 in full on a machine that has it before using the costed graph.**
 - **Strict NoData rule.** One NoData sample makes an edge impassable for the
   month. This is a design decision (auditable via nodata_frac), not a bug.
 - **The friction half WAS verified end-to-end on 2026-08-06** on the owner's

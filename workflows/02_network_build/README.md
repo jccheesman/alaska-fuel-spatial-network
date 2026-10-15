@@ -21,6 +21,9 @@ python 06_export_final_network.py  # -> final_network/ zips + sha256 manifest (D
 Raw inputs: `data/raw/**` — populated by `tools/extract_inputs.py` from
 `inputs/network_raw.zip` (pending; interim fallback documented in
 `inputs/README.md`). The air CSVs are tracked at `inputs/air/`.
+The **facility inventory** is not the raw AEA CSV: `00_normalize_raw.py` reads
+the published `facilities_clean.csv` from workflow 00 (`00_inventory_qc`, latest
+release) — QC a release there before building.
 Requires `Rscript` + sf/sfnetworks/tidygraph/dplyr for the noding oracle.
 
 ## Outputs and the downstream consumer
