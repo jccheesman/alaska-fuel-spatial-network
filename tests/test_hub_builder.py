@@ -224,3 +224,34 @@ def test_no_fallback_types_is_legacy_behaviour():
     _, _, s = connect_multimodal(road, hubs, {"Road"}, [], {}, snap_types={"Road"}, waterway=water,
                                  waterway_label="Waterway", max_snap_dist=25_000)
     assert s["hub_snaps"].loc[0, "status"] == "unplaced:beyond_cap"
+
+
+# ----------------------------------------------------------------------------- edge-projection snap
+def _long_road():
+    # one 100 km edge with nodes ONLY at its ends — a mid-edge village is far from either node.
+    return gpd.GeoDataFrame({"type": ["Road"]}, geometry=[LineString([(0, 0), (100_000, 0)])], crs=CRS)
+
+
+def test_edge_snap_lands_a_mid_long_edge_hub_by_splitting():
+    road = _long_road()
+    hub = _hubs([(50_000, 100)])                       # 100 m from the middle of the line, 50 km from a node
+    # control: snap-to-node only -> unplaced (nearest node 50 km > 25 km cap)
+    _, _, s0 = connect_multimodal(road, hub, {"Road"}, [], {}, max_snap_dist=25_000)
+    assert s0["hub_snaps"].loc[0, "status"] == "unplaced:beyond_cap"
+    # with a 2 km edge tol -> the edge is split at the projection and the hub lands on it
+    nodes, edges, s = connect_multimodal(road, hub, {"Road"}, [], {},
+                                         max_snap_dist=25_000, snap_to_edge_tol=2000)
+    hs = s["hub_snaps"].set_index("hub_id")
+    assert hs.loc["Hub_1", "status"] == "placed"
+    assert hs.loc["Hub_1", "snap_dist_m"] == 100.0
+    assert int((edges["type"] == "Road").sum()) == 2, "the long edge was split into two at the landing"
+    assert len(nodes) == 3, "two original endpoints + one inserted landing node"
+    assert s["n_hubs"] == 1
+
+
+def test_edge_snap_respects_the_tolerance():
+    road = _long_road()
+    hub = _hubs([(50_000, 5000)])                      # 5 km from the line — beyond the 2 km tol
+    _, _, s = connect_multimodal(road, hub, {"Road"}, [], {},
+                                 max_snap_dist=25_000, snap_to_edge_tol=2000)
+    assert s["hub_snaps"].loc[0, "status"] == "unplaced:beyond_cap", "no overreach beyond the tol"

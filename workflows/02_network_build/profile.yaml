@@ -176,10 +176,10 @@ anchors:
 # to-mode node. Barge connects to BOTH road and ice, at ports AND barge hubs (coastal demand).
 # (Air is NOT a transfer — airports SNAP onto the road; see `snaps:` below.)
 transfers:
-  - { from_mode: Road,     to_mode: Barge, anchor: ports,      max_dist: 5000 }
-  - { from_mode: IceRoad,  to_mode: Barge, anchor: ports,      max_dist: 5000 }
-  - { from_mode: Road,     to_mode: Barge, anchor: barge_hubs, max_dist: 5000 }
-  - { from_mode: IceRoad,  to_mode: Barge, anchor: barge_hubs, max_dist: 5000 }
+  - { from_mode: Road,     to_mode: Barge, anchor: ports,      max_dist: 25000 }
+  - { from_mode: IceRoad,  to_mode: Barge, anchor: ports,      max_dist: 25000 }
+  - { from_mode: Road,     to_mode: Barge, anchor: barge_hubs, max_dist: 25000 }
+  - { from_mode: IceRoad,  to_mode: Barge, anchor: barge_hubs, max_dist: 25000 }
 
 # Snap-to-node connections (mmnet.build._snap_airways_to_road): the from-mode's leg endpoint at each
 # anchor is moved ONTO the nearest to-mode node — a SHARED node, not a transfer edge. Airports snap to
@@ -202,7 +202,7 @@ bridges:
 # Final shore-landing pass: join every still-disconnected piece to the giant within this distance
 # (a coastal barge landing where road meets sea — the North-Slope fix). 0 disables.
 connect_to_giant:
-  max_dist: 2000
+  max_dist: 25000
 
 # Stage 04 — join every still-disconnected component to the giant when its nearest node is within
 # this distance (meters) of a giant node. A synthetic connector per component (then mode-typed by
@@ -226,6 +226,9 @@ hubs:
   max_snap_dist_m: 25000                # road-first: a hub farther than this from any road/ice node tries its own-mode
                                         # snap_fallback layers (Barge -> waterway, Plane -> air), else is left unplaced + reported
   remote_site_km: 20                    # a site farther than this from its community is its own hub (keeps its label); 0 = off
+  snap_to_edge_tol_m: 2000              # rescue-only: an unplaced hub within this of a road/ice EDGE lands by splitting the
+                                        # edge at the projection (AK-DOT roads are noded as long edges; a mid-edge village is
+                                        # metres from the LINE but far from any NODE). Small, so it never welds to a road it is not on
   withhold_pending_review: true         # ON/OFF: records with an open owner review item take no part in hubs (output/01_withheld.csv)
 
 # The only noding knob the gold pipeline consumes: the R planar-cleaning precision (meters).

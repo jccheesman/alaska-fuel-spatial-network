@@ -7,9 +7,9 @@ network. This folder contains a **frozen handoff**: workflow 02
 (`01_extract_network_handoff.py` → `02_load_final_network.py`) extracts and
 ingests it.
 
-- **Nodes:** `network_joined_nodes.zip` → `network_joined_nodes/…shp` — 84,089 points
-- **Edges:** `network_joined_edges.zip` → `network_joined_edges/…shp` — 92,978 lines (synthetic connectors are mode-typed: `{Mode}Connector` welds + per-pair `*Transfer` handoffs)
-- **Components:** 5 · **giant:** 99.99% of nodes · **fuel hubs:** 385
+- **Nodes:** `network_joined_nodes.zip` → `network_joined_nodes/…shp` — 84,094 points
+- **Edges:** `network_joined_edges.zip` → `network_joined_edges/…shp` — 93,049 lines (synthetic connectors are mode-typed: `{Mode}Connector` welds + per-pair `*Transfer` handoffs)
+- **Components:** 4 · **giant:** 99.99% of nodes · **fuel hubs:** 329
 - **CRS:** EPSG:3338 — NAD83 / Alaska Albers (meters). The `.prj` reads as `NAD_1983_Alaska_Albers`.
 
 The zips are committed; the extracted shapefiles are gitignored
@@ -24,52 +24,58 @@ to these bytes — a re-export, a repack that re-orders rows, even a
 `edge_month_weights`, and `edge_costs` together. That is why the members are
 checksummed below and must stay **byte-identical**.
 
-## PROVENANCE — rebuilt 2026-09-15 with AK-DOT-only roads
+## PROVENANCE — re-exported 2026-10-15 (phase-5 hubs + corrected inventory + reach tuning)
 
-This network was re-exported on **2026-09-15** by `06_export_final_network.py`
-from a full stage-02 rebuild whose ONLY road source is the **2026-09 AK DOT&PF
-Roads download** (26,650 features): the GRIP4 Canada `extra_source` and its
-border-stitch were removed (transnational roads are not fuel-delivery routes).
-The profile still includes the user-authored manual-connections layer
-(`inputs/mannual_connections/` — 7 barge, 6 plane, 1 road hand-drawn lines).
-It **supersedes** the 2026-09-12 manual-connections export (82,412 nodes /
-91,087 edges / 6 components, preserved in git history), which itself
-superseded the 2026-07-20 pre-fix freeze (82,300 / 90,921).
+This network was re-exported on **2026-10-15** by `06_export_final_network.py`
+from a full stage-02 rebuild carrying, for the first time in the
+network-of-record: the **phase-5 hub builder** (group by corrected community,
+cannot-link across communities, remote-site isolation, withhold-pending-review);
+the **corrected 2025 facility inventory** (workflow 00 `facilities_clean.csv` —
+coordinate/label corrections, 71 duplicate rows removed); the **25 km
+connect-to-giant and barge-transfer reach** (was 2 km / 5 km — Alaskan coastal
+gaps are larger); and a **2 km snap-to-edge hub fallback** (a hub beyond the
+25 km node cap but sitting on a long road edge lands by splitting that edge).
+The road source is still the 2026-09 AK DOT&PF download; the user-authored
+manual-connections layer is still included.
 
-- The road swap moved every road-derived quantity: +1,739 Road edges (newer,
-  denser AK DOT data), +152 Bridge welds, one more fuel hub (385 — a snap/dedup
-  outcome shifted with the new geometry), one fewer Transfer (225), and the
-  join now closes the network to 5 components / 99.99% giant. Every
-  edge_id-keyed table moved with it.
+It **supersedes** the 2026-09-15 AK-DOT-only export (84,089 nodes / 92,978 edges /
+5 components / 385 hubs, preserved in git history), which superseded the
+2026-09-12 manual-connections export and the 2026-07-20 pre-fix freeze.
+
+- vs. the 2026-09-15 network: nodes 84,089 → **84,094**, edges 92,978 → **93,049**,
+  components 5 → **4**, hubs 385 → **329** (the corrected inventory consolidates
+  duplicates and isolates remote sites; the wider reach + edge-snap then rejoin
+  27 coastal communities and 5 mid-long-edge hubs that were previously stranded).
+  Every edge_id-keyed table moved with it.
 - Any future re-export must regenerate, together: these zips, the `EXPECTED`
   inventory in `02_load_final_network.py`, the checksums here +
   `inputs/MANIFEST.md` + `.github/workflows/ci.yml`, and the downstream
   `edge_month_weights` / `edge_costs` tables (rerun workflow 03 in full).
 
-**Gates at export (refine-synthetic-connectors rebuild):** `05_verify_north_slope.py`
-PASS — North Slope road + ice in giant, waterway 100% connected, road ≥95% in giant
-(98.3% full-network), barge transfers ~201. Synthetic connectors are mode-typed by
-`pipeline.classify_connectors`: within-mode welds → `{Mode}Connector`, cross-mode
-handoffs → per-pair `{A}{B}Transfer`; `edge_class` mirrors `type`.
+**Gates at export:** `05_verify_north_slope.py` PASS — North Slope road + ice in
+giant, waterway 100% connected, road ≥95% in giant, barge transfers ~292.
+Synthetic connectors are mode-typed by `pipeline.classify_connectors`:
+within-mode welds → `{Mode}Connector`, cross-mode handoffs → per-pair
+`{A}{B}Transfer`; `edge_class` mirrors `type`.
 
 ## Checksums (sha256; also in `inputs/MANIFEST.md`)
 
 | Zip | sha256 |
 |---|---|
-| `network_joined_nodes.zip` | `1bcfdb5e21213e60` … (full value in `inputs/MANIFEST.md`) |
-| `network_joined_edges.zip` | `302bf150b690e760` … (full value in `inputs/MANIFEST.md`) |
+| `network_joined_nodes.zip` | `f6775915ca4d0d8c` … (full value in `inputs/MANIFEST.md`) |
+| `network_joined_edges.zip` | `2104767a4721c333` … (full value in `inputs/MANIFEST.md`) |
 
 Members (md5; full sha256 per member in `final_network/MANIFEST.sha256` and
 `inputs/MANIFEST.md`):
 
 | Member | md5 |
 |---|---|
-| `network_joined_nodes/network_joined_nodes.shp` | `9685481d30377442f7a455a9de3286d0` |
-| `network_joined_nodes/network_joined_nodes.dbf` | `0b5cc825c4db635cf8d35203704ede44` |
-| `network_joined_nodes/network_joined_nodes.shx` | `acd6a82a15dae827837537aaf2df724d` |
-| `network_joined_edges/network_joined_edges.shp` | `7fac5ddd0283696294daa15f2fc8d56c` |
-| `network_joined_edges/network_joined_edges.dbf` | `fd23b1bc213c67871ec01a68124ae1bd` |
-| `network_joined_edges/network_joined_edges.shx` | `2e49a99b450e317b001f33fb6044f335` |
+| `network_joined_nodes/network_joined_nodes.shp` | `ee75104dfa6b0c2845067d5cc4a3535f` |
+| `network_joined_nodes/network_joined_nodes.dbf` | `b0fda5a840f80ca5f6da90f615128349` |
+| `network_joined_nodes/network_joined_nodes.shx` | `f102775eb5ff2f21e02bf7e480ed9be9` |
+| `network_joined_edges/network_joined_edges.shp` | `acc2dc25e39448c3bfb74b572b4a0efa` |
+| `network_joined_edges/network_joined_edges.dbf` | `d98ffc70b1d045e74d26b085b1ffa71b` |
+| `network_joined_edges/network_joined_edges.shx` | `94a980f2ec7fc83085431dba7d3339d9` |
 
 ## Field names (Shapefile 10-character limit)
 
@@ -95,14 +101,14 @@ shortened on export. Full mapping:
 | shapefile field | meaning |
 |---|---|
 | `from`, `to` | endpoint `node_id`s |
-| `type`       | Road · Waterway · Air · IceRoad · RoadConnector · IceRoadConnector · BargeRoadTransfer · BargeIceRoadTransfer · IceRoadRoadTransfer · AirRoadTransfer |
+| `type`       | Road · Waterway · Air · IceRoad · RoadConnector · IceRoadConnector · BargeRoadTransfer · BargeIceRoadTransfer · IceRoadRoadTransfer · AirRoadTransfer · BargeAirTransfer |
 | `source`     | provenance (e.g. `Road`, `ports`, `barge_hubs`, `weld:*`, `bridge:*`, `shore:*`, `join:to-giant`) |
 | `join_gap_m` | for stage-04 join connectors, the straight-line gap (m) that was closed; NULL/0 otherwise |
 
-Edge-type inventory (the ingest's hard tripwire): Road 55,534 · Waterway
-34,178 · Air 226 · IceRoad 1,248 · RoadConnector 1,498 · IceRoadConnector 35 ·
-BargeRoadTransfer 234 · BargeIceRoadTransfer 11 · IceRoadRoadTransfer 12 ·
-AirRoadTransfer 2. Synthetic connectors are named by the modes they join
+Edge-type inventory (the ingest's hard tripwire): Road 55,539 · Waterway
+34,178 · Air 226 · IceRoad 1,248 · RoadConnector 1,498 · IceRoadConnector 34 ·
+BargeRoadTransfer 289 · BargeIceRoadTransfer 21 · IceRoadRoadTransfer 12 ·
+AirRoadTransfer 2 · BargeAirTransfer 2. Synthetic connectors are named by the modes they join
 (`{Mode}Connector` welds, per-pair `{A}{B}Transfer` handoffs); `edge_class`
 mirrors `type`.
 
