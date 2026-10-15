@@ -109,6 +109,7 @@ EDGE_TYPE_MAP: dict[str, tuple[str | None, str]] = {
     "BargeIceRoadTransfer": (None, "Transfer"),
     "IceRoadRoadTransfer":  (None, "Transfer"),
     "AirRoadTransfer":      (None, "Transfer"),
+    "BargeAirTransfer":     (None, "Transfer"),   # barge->road-hub (node also has air); priced barge<->overland
     # legacy types (older frozen exports / DuckDBs) kept so this map never KeyErrors.
     "Join":     ("road_base", "Road"),
     "Bridge":   (None,        "Road"),
