@@ -1,0 +1,1660 @@
+hub_id,hub_key,hub_community,hub_kind,delivery_method,hub_type,ast_facility_id,record_id,node_id,snap_status
+Hub_1,JUNEAU,Juneau,community,Barge or Plane or Road,Receiver,1,{9EEEFD45-9229-41CC-9C88-B8BAF8D02172},37746,placed
+Hub_1,JUNEAU,Juneau,community,Barge or Plane or Road,Receiver,1,{FF7AD52D-4ED4-4440-8BE8-F4F4F99CAB0E},37746,placed
+Hub_1,JUNEAU,Juneau,community,Barge or Plane or Road,Receiver,1048,{9AF340FB-79A0-4D54-9807-CA77612ABF42},37746,placed
+Hub_1,JUNEAU,Juneau,community,Barge or Plane or Road,Receiver,1064,{6FE55817-54F1-4D23-9AA5-C0E1D138A819},37746,placed
+Hub_1,JUNEAU,Juneau,community,Barge or Plane or Road,Receiver,1064,{73E14F94-CC4A-4023-8BB4-D48EE37FA854},37746,placed
+Hub_1,JUNEAU,Juneau,community,Barge or Plane or Road,Receiver,1065,{4F5A3756-C467-4F7F-BE1D-773559BD5A00},37746,placed
+Hub_1,JUNEAU,Juneau,community,Barge or Plane or Road,Receiver,1065,{B1155E19-CC5E-4A58-978B-634BB0EF5F61},37746,placed
+Hub_1,JUNEAU,Juneau,community,Barge or Plane or Road,Receiver,1119,{B8EB3AD2-B5B7-4B0B-A66C-A6BF78D8D867},37746,placed
+Hub_1,JUNEAU,Juneau,community,Barge or Plane or Road,Receiver,1183,{973EB153-3564-4267-A075-6C6E8D0F454D},37746,placed
+Hub_1,JUNEAU,Juneau,community,Barge or Plane or Road,Receiver,1184,{F7C0D388-EB07-4DCE-80C9-FF3BB5BD234F},37746,placed
+Hub_1,JUNEAU,Juneau,community,Barge or Plane or Road,Receiver,120,{FD9A149F-BACE-4BFC-8875-99A90D1FC7C9},37746,placed
+Hub_1,JUNEAU,Juneau,community,Barge or Plane or Road,Receiver,1253,{313FC53D-9310-4320-BE69-18364F32B047},37746,placed
+Hub_1,JUNEAU,Juneau,community,Barge or Plane or Road,Receiver,174,{BC94FCDF-0AAC-4F61-B6A6-1F6A6D21D34F},37746,placed
+Hub_1,JUNEAU,Juneau,community,Barge or Plane or Road,Receiver,235,{2F376614-6B0B-4D87-B112-D5A784EEF8CB},37746,placed
+Hub_1,JUNEAU,Juneau,community,Barge or Plane or Road,Receiver,236,{CB050A66-FBE4-4B19-A6CB-68222A86FE8B},37746,placed
+Hub_1,JUNEAU,Juneau,community,Barge or Plane or Road,Receiver,27,{CC97B0FE-5F7B-484B-BCA6-F6A7AEC05666},37746,placed
+Hub_1,JUNEAU,Juneau,community,Barge or Plane or Road,Receiver,429,{6EE1A097-EE5D-483C-B97B-60235650AA97},37746,placed
+Hub_1,JUNEAU,Juneau,community,Barge or Plane or Road,Receiver,512,{30444699-5371-436C-A9D1-539FB28CFDBF},37746,placed
+Hub_1,JUNEAU,Juneau,community,Barge or Plane or Road,Receiver,514,{B81A6E58-57B2-4A7D-980B-3DA6129191C0},37746,placed
+Hub_1,JUNEAU,Juneau,community,Barge or Plane or Road,Receiver,515,{9A09CCA7-74E0-41A4-A6D8-9D72251E909D},37746,placed
+Hub_1,JUNEAU,Juneau,community,Barge or Plane or Road,Receiver,548,{EA1C6A09-2625-46E4-91BB-34FC46FBC729},37746,placed
+Hub_1,JUNEAU,Juneau,community,Barge or Plane or Road,Receiver,589,{BCBAA36E-1FD6-4388-B636-77F2EFC7E596},37746,placed
+Hub_1,JUNEAU,Juneau,community,Barge or Plane or Road,Receiver,601,{5A94EA96-3E72-4421-86AE-82D2C8836A97},37746,placed
+Hub_1,JUNEAU,Juneau,community,Barge or Plane or Road,Receiver,620,{8B6EF195-8E41-4B4A-A704-BC446DAE2FBC},37746,placed
+Hub_1,JUNEAU,Juneau,community,Barge or Plane or Road,Receiver,645,{B1C330CD-F2C3-4C1A-B12A-82BFA2DE8BC7},37746,placed
+Hub_1,JUNEAU,Juneau,community,Barge or Plane or Road,Receiver,709,{E8EBA337-4E99-462B-B598-48ACEC1CF721},37746,placed
+Hub_1,JUNEAU,Juneau,community,Barge or Plane or Road,Receiver,737,{CB681F0F-2520-4EDD-ADBB-7F514E5CB705},37746,placed
+Hub_1,JUNEAU,Juneau,community,Barge or Plane or Road,Receiver,738,{E4218125-2B99-44D5-8CFD-349D1CAA389F},37746,placed
+Hub_1,JUNEAU,Juneau,community,Barge or Plane or Road,Receiver,739,{655E73A8-FE86-45FD-98CC-00AD1AE0EB19},37746,placed
+Hub_1,JUNEAU,Juneau,community,Barge or Plane or Road,Receiver,749,{902C403F-FA1A-4FCC-8980-CD8418AD8F61},37746,placed
+Hub_1,JUNEAU,Juneau,community,Barge or Plane or Road,Receiver,791,{6C1F0595-0E71-4B73-93E4-3141333E00A4},37746,placed
+Hub_1,JUNEAU,Juneau,community,Barge or Plane or Road,Receiver,982,{AC577471-586A-4960-BE1D-80611DE3D2C9},37746,placed
+Hub_2,KASIGLUK,Kasigluk,community,Barge,Supplier,10,{D6060993-C880-4CFD-9A13-0D44D3A81F53},49048,placed
+Hub_2,KASIGLUK,Kasigluk,community,Barge,Supplier,3,{2815501C-6816-45E9-9738-4E61188D06E4},49048,placed
+Hub_2,KASIGLUK,Kasigluk,community,Barge,Supplier,3,{F0234DED-3087-44A2-B87A-59E8A8561D5E},49048,placed
+Hub_2,KASIGLUK,Kasigluk,community,Barge,Supplier,82,{73C63010-C645-41DF-8242-C6D3424317F8},49048,placed
+Hub_2,KASIGLUK,Kasigluk,community,Barge,Supplier,97,{82F478F7-CC16-44C5-85B8-F5BB3B1201BA},49048,placed
+Hub_2,KASIGLUK,Kasigluk,community,Barge,Supplier,SYN-806,{82DB30CE-DB64-49B3-872D-4EB71DD98B99},49048,placed
+Hub_2,KASIGLUK,Kasigluk,community,Barge,Supplier,SYN-807,{4E912B7F-3F82-42E3-94E4-B403A00103B9},49048,placed
+Hub_2,KASIGLUK,Kasigluk,community,Barge,Supplier,SYN-808,{775F9BF3-A84A-4D16-99F8-0FD90EB06CE5},49048,placed
+Hub_3,FORT WAINWRIGHT,Fort Wainwright,community,Road,Supplier,100,{06B82250-2AD5-462B-932C-ECBE4564ECC4},30799,placed
+Hub_3,FORT WAINWRIGHT,Fort Wainwright,community,Road,Supplier,100,{43BB828A-58FF-4DA8-95D6-95845BA0AE0E},30799,placed
+Hub_3,FORT WAINWRIGHT,Fort Wainwright,community,Road,Supplier,100,{6D77D3CE-1656-4DE0-82E1-B4E58334CEC1},30799,placed
+Hub_3,FORT WAINWRIGHT,Fort Wainwright,community,Road,Supplier,100,{F4B5DEE4-6F15-445D-84EB-5A6938C710D8},30799,placed
+Hub_3,FORT WAINWRIGHT,Fort Wainwright,community,Road,Supplier,50,{E7D371F4-1EF0-4BEC-B0F0-BDDE7CDEFF07},30799,placed
+Hub_4,FAIRBANKS,Fairbanks,community,Road,Supplier,1000,{B1C3993C-E3D4-4232-8551-C55E13B0EA36},31508,placed
+Hub_4,FAIRBANKS,Fairbanks,community,Road,Supplier,1009,{B35105C7-0E6D-4238-ABF1-8D7EF7F936A0},31508,placed
+Hub_4,FAIRBANKS,Fairbanks,community,Road,Supplier,1024,{16694921-0732-4982-AD5B-A93BF197F037},31508,placed
+Hub_4,FAIRBANKS,Fairbanks,community,Road,Supplier,1025,{31AA9173-FC92-45FC-BE99-7FE4ACDC88A9},31508,placed
+Hub_4,FAIRBANKS,Fairbanks,community,Road,Supplier,1025,{C104E278-22E5-4954-A955-C765E7F547CA},31508,placed
+Hub_4,FAIRBANKS,Fairbanks,community,Road,Supplier,1056,{A27DE0D0-3E19-44DB-8FE0-4DB5895E4CD2},31508,placed
+Hub_4,FAIRBANKS,Fairbanks,community,Road,Supplier,1057,{400DF95A-C142-4FA6-A7F5-4D7D370AF326},31508,placed
+Hub_4,FAIRBANKS,Fairbanks,community,Road,Supplier,1059,{0FA216D2-7ACC-4EFF-AA2B-EEB5F7C95A78},31508,placed
+Hub_4,FAIRBANKS,Fairbanks,community,Road,Supplier,1061,{8A0AA12B-5E97-4768-80B0-F2E86C50DFDD},31508,placed
+Hub_4,FAIRBANKS,Fairbanks,community,Road,Supplier,1103,{591FEE4C-4EAA-4F0F-A6EE-B6FA2F107E7B},31508,placed
+Hub_4,FAIRBANKS,Fairbanks,community,Road,Supplier,1117,{E4AB4D46-CF85-4C56-9B07-82B5AA1F0492},31508,placed
+Hub_4,FAIRBANKS,Fairbanks,community,Road,Supplier,1118,{4D06EDBB-76ED-4BC8-B6B8-D96FC8B60FD3},31508,placed
+Hub_4,FAIRBANKS,Fairbanks,community,Road,Supplier,115,{71E15B58-4B6E-4550-B046-0061972C68C1},31508,placed
+Hub_4,FAIRBANKS,Fairbanks,community,Road,Supplier,1150,{EA9FD404-2758-49CB-81A4-82A43AF09848},31508,placed
+Hub_4,FAIRBANKS,Fairbanks,community,Road,Supplier,1252,{E32D2921-8176-4468-A0AB-9AE351693922},31508,placed
+Hub_4,FAIRBANKS,Fairbanks,community,Road,Supplier,15,{FC344191-8F9F-4DF7-84FF-90BA3D492D11},31508,placed
+Hub_4,FAIRBANKS,Fairbanks,community,Road,Supplier,173,{7E123490-F0E5-496F-86D3-91FDF4B5F41F},31508,placed
+Hub_4,FAIRBANKS,Fairbanks,community,Road,Supplier,209,{98C0B2E1-F078-434C-BF55-6F9EDBAEA7A6},31508,placed
+Hub_4,FAIRBANKS,Fairbanks,community,Road,Supplier,231,{8DFDEEB4-A8C9-45E0-9A50-01087533E7EA},31508,placed
+Hub_4,FAIRBANKS,Fairbanks,community,Road,Supplier,231,{960DA580-1D5B-47A0-BE35-1226E5B9AAF0},31508,placed
+Hub_4,FAIRBANKS,Fairbanks,community,Road,Supplier,255,{84B1808F-27AC-4CA6-8BC7-55D136BFC0C3},31508,placed
+Hub_4,FAIRBANKS,Fairbanks,community,Road,Supplier,280,{A2C4E584-2F29-4B2A-BAF5-5D57224E0CE8},31508,placed
+Hub_4,FAIRBANKS,Fairbanks,community,Road,Supplier,522,{5D5D6679-F398-4FC0-A386-A00300F67B5E},31508,placed
+Hub_4,FAIRBANKS,Fairbanks,community,Road,Supplier,523,{2FC94A57-252B-464C-AE5D-7FEC48FF42DE},31508,placed
+Hub_4,FAIRBANKS,Fairbanks,community,Road,Supplier,524,{3AD3B973-0229-490F-8D29-1B8223DDA68E},31508,placed
+Hub_4,FAIRBANKS,Fairbanks,community,Road,Supplier,525,{B5897603-E5C9-4D4B-9F7C-B66E6EBB82A8},31508,placed
+Hub_4,FAIRBANKS,Fairbanks,community,Road,Supplier,529,{7BDCCAAA-AE32-4A90-A622-015CBC9E9CBE},31508,placed
+Hub_4,FAIRBANKS,Fairbanks,community,Road,Supplier,538,{121E93CF-71BA-4B5B-93E8-A8A301C129CB},31508,placed
+Hub_4,FAIRBANKS,Fairbanks,community,Road,Supplier,543,{155C8EA1-74BC-42EB-9C4F-1BCE89188BB7},31508,placed
+Hub_4,FAIRBANKS,Fairbanks,community,Road,Supplier,544,{22D8D20B-5B11-4D38-A226-711A10FC53FE},31508,placed
+Hub_4,FAIRBANKS,Fairbanks,community,Road,Supplier,57,{BC39EB0F-6814-4625-93FE-8E550E89A942},31508,placed
+Hub_4,FAIRBANKS,Fairbanks,community,Road,Supplier,590,{D6E40633-C0D4-4AF8-9429-3CEC7CADC45F},31508,placed
+Hub_4,FAIRBANKS,Fairbanks,community,Road,Supplier,609,{430A2281-F102-4389-A982-C017D19E885F},31508,placed
+Hub_4,FAIRBANKS,Fairbanks,community,Road,Supplier,654,{943CE1E4-8EAA-4570-B982-6837734C51BE},31508,placed
+Hub_4,FAIRBANKS,Fairbanks,community,Road,Supplier,655,{80449CC7-A8AC-4CA0-AD2A-2DD0B92CF5B9},31508,placed
+Hub_4,FAIRBANKS,Fairbanks,community,Road,Supplier,679,{BBE5B557-5508-4F7D-AC95-E0CD329CFF20},31508,placed
+Hub_4,FAIRBANKS,Fairbanks,community,Road,Supplier,68,{AFA96D1A-F5E6-4F43-B736-7A1701B0E813},31508,placed
+Hub_4,FAIRBANKS,Fairbanks,community,Road,Supplier,777,{7B696AAD-579A-4E64-8A07-8E8A1EEEB9F2},31508,placed
+Hub_4,FAIRBANKS,Fairbanks,community,Road,Supplier,781,{7CF2C4CB-7FFF-4BA5-BCAD-B26DBAECFA39},31508,placed
+Hub_4,FAIRBANKS,Fairbanks,community,Road,Supplier,782,{0C480E12-87D5-45E9-813F-9B396422A9F8},31508,placed
+Hub_4,FAIRBANKS,Fairbanks,community,Road,Supplier,837,{ACBD4800-17CA-4F80-8DDE-714558A21D6F},31508,placed
+Hub_4,FAIRBANKS,Fairbanks,community,Road,Supplier,838,{1A2F20D8-0EC8-48FB-BF8A-3CD11F54461A},31508,placed
+Hub_4,FAIRBANKS,Fairbanks,community,Road,Supplier,862,{4C27052C-C2CF-4508-B7D0-79656E5BD037},31508,placed
+Hub_4,FAIRBANKS,Fairbanks,community,Road,Supplier,99,{95CEF384-5B51-41F9-868C-ED018C6B3051},31508,placed
+Hub_5,WAINWRIGHT,Wainwright,community,Barge or Road,Supplier,1001,{08A09353-8C0F-47F7-850E-77DB129A1B41},44779,placed
+Hub_5,WAINWRIGHT,Wainwright,community,Barge or Road,Supplier,1001,{245C6061-B9C9-4F8F-AF7E-346343A5D94C},44779,placed
+Hub_5,WAINWRIGHT,Wainwright,community,Barge or Road,Supplier,1001,{A4BFB65F-3817-45CA-8B53-0E122E14A4C1},44779,placed
+Hub_5,WAINWRIGHT,Wainwright,community,Barge or Road,Supplier,474,{95DCBA93-2554-4903-87A5-DCAB9E99CDD8},44779,placed
+Hub_5,WAINWRIGHT,Wainwright,community,Barge or Road,Supplier,604,{445446BF-8151-4996-BF23-899DCB9133B1},44779,placed
+Hub_5,WAINWRIGHT,Wainwright,community,Barge or Road,Supplier,604,{8FD82835-EB2B-444F-ABFE-B24E94439A61},44779,placed
+Hub_5,WAINWRIGHT,Wainwright,community,Barge or Road,Supplier,SYN-493,{847E852A-C3F8-4E3F-8540-1D5838E47248},44779,placed
+Hub_5,WAINWRIGHT,Wainwright,community,Barge or Road,Supplier,SYN-494,{B82E0630-287E-4591-89C8-CEBAB608667F},44779,placed
+Hub_5,WAINWRIGHT,Wainwright,community,Barge or Road,Supplier,SYN-495,{AC2A183B-9056-4584-A18C-B39363D95AD7},44779,placed
+Hub_5,WAINWRIGHT,Wainwright,community,Barge or Road,Supplier,SYN-498,{10E17596-EA7D-4231-BFF9-570A63ADEA9E},44779,placed
+Hub_5,WAINWRIGHT,Wainwright,community,Barge or Road,Supplier,SYN-499,{45A65B7E-EC2D-4DEA-8128-8BB70F8BBC83},44779,placed
+Hub_6,EMMONAK,Emmonak,community,Barge or Plane or Road,Supplier,1002,{748B2C47-6F53-4F18-A713-48B459244BC0},42256,placed
+Hub_6,EMMONAK,Emmonak,community,Barge or Plane or Road,Supplier,1002,{F7B5D498-D033-4DA4-8410-BF6B12F3DF66},42256,placed
+Hub_6,EMMONAK,Emmonak,community,Barge or Plane or Road,Supplier,1002,{FC5CF6B6-4F4D-419A-9C9C-AF80A016FA7C},42256,placed
+Hub_6,EMMONAK,Emmonak,community,Barge or Plane or Road,Supplier,1003,{C366C8A6-C327-46CE-AE00-04C0BE38C7E2},42256,placed
+Hub_6,EMMONAK,Emmonak,community,Barge or Plane or Road,Supplier,230,{9D247D7F-51AC-49F0-89FD-59E47C2F2FC9},42256,placed
+Hub_6,EMMONAK,Emmonak,community,Barge or Plane or Road,Supplier,332,{27972340-89DF-4B21-B947-C94211050A21},42256,placed
+Hub_6,EMMONAK,Emmonak,community,Barge or Plane or Road,Supplier,661,{22A07DE1-5430-4283-9AE0-D92320A0EFA1},42256,placed
+Hub_6,EMMONAK,Emmonak,community,Barge or Plane or Road,Supplier,SYN-958,{150EB6CF-7262-4ABF-AAA4-E58A6587C34C},42256,placed
+Hub_6,EMMONAK,Emmonak,community,Barge or Plane or Road,Supplier,SYN-962,{AC024D0B-F6A8-4873-A2E6-17A620B1D007},42256,placed
+Hub_6,EMMONAK,Emmonak,community,Barge or Plane or Road,Supplier,SYN-964,{CF53613F-3E89-446F-98A3-CA1D7E676BA7},42256,placed
+Hub_7,remote:1005,Homer,remote_site,Barge,Receiver,1005,{19C3BA91-EE4F-4E21-89D8-1D3FC0EDF306},39262,placed
+Hub_8,KENAI,Kenai,community,Road,Supplier,1006,{7ADDFF04-A12F-4F20-9F36-FAD9B1F27C15},47127,placed
+Hub_8,KENAI,Kenai,community,Road,Supplier,1068,{D5BCC064-B7B2-4BA0-8911-B9BB258591BB},47127,placed
+Hub_8,KENAI,Kenai,community,Road,Supplier,1069,{697E1F9D-6660-4785-A1A5-3883D9ED9847},47127,placed
+Hub_8,KENAI,Kenai,community,Road,Supplier,1154,{1C49E7B5-4A11-4F71-8688-C1B006050B00},47127,placed
+Hub_8,KENAI,Kenai,community,Road,Supplier,1156,{683F0B16-0349-48D4-94B5-27C2D5DCB65B},47127,placed
+Hub_8,KENAI,Kenai,community,Road,Supplier,149,{3AE11B7A-9B95-4700-8C9A-FA09FF447888},47127,placed
+Hub_8,KENAI,Kenai,community,Road,Supplier,379,{DEB163BB-3EFE-46BC-8642-B72714A3D58C},47127,placed
+Hub_8,KENAI,Kenai,community,Road,Supplier,54,{3D2816B2-1E4C-4829-8327-9D3E324174AF},47127,placed
+Hub_8,KENAI,Kenai,community,Road,Supplier,559,{9D2D53BE-A6BE-4C90-B542-326627B0F06A},47127,placed
+Hub_8,KENAI,Kenai,community,Road,Supplier,588,{AE3A12BF-C938-4998-B176-94765EAE7B73},47127,placed
+Hub_8,KENAI,Kenai,community,Road,Supplier,59,{3A004E0D-AF41-4BAE-8AC7-D2B77DBE62FD},47127,placed
+Hub_8,KENAI,Kenai,community,Road,Supplier,700,{F93EBEDC-66D5-4E8B-82A0-9F5BDB091DD5},47127,placed
+Hub_8,KENAI,Kenai,community,Road,Supplier,701,{C253B60F-62F5-4774-B931-D13375BD8265},47127,placed
+Hub_8,KENAI,Kenai,community,Road,Supplier,902,{835A9532-B50F-4307-8766-44E644F988D9},47127,placed
+Hub_8,KENAI,Kenai,community,Road,Supplier,94,{C42E7D33-D740-4F3C-88CE-CDCB54F1E1C1},47127,placed
+Hub_8,KENAI,Kenai,community,Road,Supplier,971,{A2AD11A6-2429-4E57-BB30-097D389AED9F},47127,placed
+Hub_9,ELIM,Elim,community,Barge or Road,Receiver,1007,{F85C69A4-3110-49AB-8573-452FE30EEAB7},43589,placed
+Hub_9,ELIM,Elim,community,Barge or Road,Receiver,260,{540E628D-EFC5-404A-8464-202C7439F12E},43589,placed
+Hub_9,ELIM,Elim,community,Barge or Road,Receiver,990,{88B8198F-E3E4-4060-94E8-60F4A41385FA},43589,placed
+Hub_9,ELIM,Elim,community,Barge or Road,Receiver,SYN-668,{08F52340-FE40-4C20-B7D8-2922E0841D71},43589,placed
+Hub_9,ELIM,Elim,community,Barge or Road,Receiver,SYN-670,{C5239287-43F6-4C25-8984-4C975E90503E},43589,placed
+Hub_10,blob:29,blob:29,blob,Barge,Receiver,1008,{B4AA41CA-3A16-4E05-A060-1882D5DF320D},74374,placed
+Hub_11,ANCHORAGE,Anchorage,community,Barge or Road,Supplier,1010,{6D5FB766-9E15-45A9-A918-04328EFE0E7F},20756,placed
+Hub_11,ANCHORAGE,Anchorage,community,Barge or Road,Supplier,1021,{4A58F3C3-208C-4D95-BCC3-667BF010941C},20756,placed
+Hub_11,ANCHORAGE,Anchorage,community,Barge or Road,Supplier,1032,{DA84F06B-802C-4550-9C22-FE03979714E2},20756,placed
+Hub_11,ANCHORAGE,Anchorage,community,Barge or Road,Supplier,1033,{9C8FED26-AB7E-47BD-840A-3271CFB92E7B},20756,placed
+Hub_11,ANCHORAGE,Anchorage,community,Barge or Road,Supplier,1034,{82786333-0523-4B2A-8D57-1D372E9D3F01},20756,placed
+Hub_11,ANCHORAGE,Anchorage,community,Barge or Road,Supplier,1112,{BE1BDB82-E648-4974-8944-E76427AD8699},20756,placed
+Hub_11,ANCHORAGE,Anchorage,community,Barge or Road,Supplier,1115,{4516AC97-6819-43DF-95C5-E74912398039},20756,placed
+Hub_11,ANCHORAGE,Anchorage,community,Barge or Road,Supplier,1116,{35C756BA-6ABC-46AF-A1CE-7B04F0398B92},20756,placed
+Hub_11,ANCHORAGE,Anchorage,community,Barge or Road,Supplier,1147,{5F01CBF4-73B2-4E31-817E-B6260B8849C6},20756,placed
+Hub_11,ANCHORAGE,Anchorage,community,Barge or Road,Supplier,1148,{797A3ACD-3784-4EEF-BE33-42B7DA4E9B69},20756,placed
+Hub_11,ANCHORAGE,Anchorage,community,Barge or Road,Supplier,1149,{B4417888-37CE-4EF6-A26A-55AF825A21AB},20756,placed
+Hub_11,ANCHORAGE,Anchorage,community,Barge or Road,Supplier,1159,{63074EC4-7211-4F0E-AB39-1F4E107E73F9},20756,placed
+Hub_11,ANCHORAGE,Anchorage,community,Barge or Road,Supplier,1178,{2A532DB0-BADF-4AF5-A3AE-160DB76E6278},20756,placed
+Hub_11,ANCHORAGE,Anchorage,community,Barge or Road,Supplier,1179,{A0289C80-A3E8-4499-84A1-64567897D7FF},20756,placed
+Hub_11,ANCHORAGE,Anchorage,community,Barge or Road,Supplier,1216,{832D7857-2A62-4375-B073-5F9EE29F2B5A},20756,placed
+Hub_11,ANCHORAGE,Anchorage,community,Barge or Road,Supplier,1226,{75668C60-1872-4D4C-8044-F1DD5491AC2A},20756,placed
+Hub_11,ANCHORAGE,Anchorage,community,Barge or Road,Supplier,1239,{7413849C-F5C7-4FDF-A3E3-E95447A0C807},20756,placed
+Hub_11,ANCHORAGE,Anchorage,community,Barge or Road,Supplier,1248,{29247ED0-1337-401F-B61E-16CC3CA5ADCA},20756,placed
+Hub_11,ANCHORAGE,Anchorage,community,Barge or Road,Supplier,1258,{2F52A7FA-6ED5-433F-A1F9-BA3347CD1F20},20756,placed
+Hub_11,ANCHORAGE,Anchorage,community,Barge or Road,Supplier,153,{5AD6E053-8701-48DC-81A9-5962E9731141},20756,placed
+Hub_11,ANCHORAGE,Anchorage,community,Barge or Road,Supplier,153,{DCC6BD42-2620-46F3-B756-171CA27E6222},20756,placed
+Hub_11,ANCHORAGE,Anchorage,community,Barge or Road,Supplier,153,{E951B02D-CDE8-4D02-A808-236A1E749DDC},20756,placed
+Hub_11,ANCHORAGE,Anchorage,community,Barge or Road,Supplier,154,{06398E45-6B4F-42C3-8567-10AC4652B28F},20756,placed
+Hub_11,ANCHORAGE,Anchorage,community,Barge or Road,Supplier,154,{300C8047-CA46-431A-A995-1B787F79392B},20756,placed
+Hub_11,ANCHORAGE,Anchorage,community,Barge or Road,Supplier,154,{ECE99F26-72D5-4DB9-84A6-747709CDD668},20756,placed
+Hub_11,ANCHORAGE,Anchorage,community,Barge or Road,Supplier,168,{5E60CFBE-1754-4A9C-8D68-F7EBF52CDB05},20756,placed
+Hub_11,ANCHORAGE,Anchorage,community,Barge or Road,Supplier,229,{2A2B529A-311A-405A-A8FA-04AD9A6AE9C6},20756,placed
+Hub_11,ANCHORAGE,Anchorage,community,Barge or Road,Supplier,34,{B461A6E1-EF73-41C4-8195-F61F8C1B730F},20756,placed
+Hub_11,ANCHORAGE,Anchorage,community,Barge or Road,Supplier,367,{5509D500-C9C2-4D19-B577-8386869D47DF},20756,placed
+Hub_11,ANCHORAGE,Anchorage,community,Barge or Road,Supplier,371,{EC24F4B9-DE86-407E-A1E8-020A81196406},20756,placed
+Hub_11,ANCHORAGE,Anchorage,community,Barge or Road,Supplier,38,{6C28B2E0-7583-4FB4-9B04-A8A26BA310F3},20756,placed
+Hub_11,ANCHORAGE,Anchorage,community,Barge or Road,Supplier,51,{B15A52C6-6F30-470D-9BA8-5037E9F1F1EC},20756,placed
+Hub_11,ANCHORAGE,Anchorage,community,Barge or Road,Supplier,526,{5A485B74-9E5B-4E4B-A8F6-5D955150F7D0},20756,placed
+Hub_11,ANCHORAGE,Anchorage,community,Barge or Road,Supplier,539,{206962E5-8311-4ACF-9E3E-9319F4032873},20756,placed
+Hub_11,ANCHORAGE,Anchorage,community,Barge or Road,Supplier,55,{ECE40BF8-AC76-495C-82E6-79FBF77BAE00},20756,placed
+Hub_11,ANCHORAGE,Anchorage,community,Barge or Road,Supplier,557,{97124690-7D44-4102-AC45-8181A4D7ED0C},20756,placed
+Hub_11,ANCHORAGE,Anchorage,community,Barge or Road,Supplier,558,{07C48A5D-A1EC-41E4-B6D9-D96CF8B72D43},20756,placed
+Hub_11,ANCHORAGE,Anchorage,community,Barge or Road,Supplier,56,{777BD506-2C38-4DFA-9680-7F5305C23F7B},20756,placed
+Hub_11,ANCHORAGE,Anchorage,community,Barge or Road,Supplier,561,{E2523660-1F61-490B-90E2-2359BED4159E},20756,placed
+Hub_11,ANCHORAGE,Anchorage,community,Barge or Road,Supplier,562,{B7CC301C-B675-40C9-80A7-82BA544A799E},20756,placed
+Hub_11,ANCHORAGE,Anchorage,community,Barge or Road,Supplier,564,{19BBFD89-30F0-4ED7-A2BB-8975054F6C2C},20756,placed
+Hub_11,ANCHORAGE,Anchorage,community,Barge or Road,Supplier,566,{21291BA3-351F-4D14-8831-B18D8E574C5B},20756,placed
+Hub_11,ANCHORAGE,Anchorage,community,Barge or Road,Supplier,567,{1C045B0E-1915-4EFF-B0FE-50F571183A50},20756,placed
+Hub_11,ANCHORAGE,Anchorage,community,Barge or Road,Supplier,570,{E98D3FA4-6365-44C5-9736-E87A8555B71D},20756,placed
+Hub_11,ANCHORAGE,Anchorage,community,Barge or Road,Supplier,571,{6FDF1AEA-54BB-4A5D-9141-CA3C6E257CB4},20756,placed
+Hub_11,ANCHORAGE,Anchorage,community,Barge or Road,Supplier,572,{E9120740-60FA-4B54-926C-BF402402BE41},20756,placed
+Hub_11,ANCHORAGE,Anchorage,community,Barge or Road,Supplier,573,{3A68F9F2-8524-46D4-AE21-5554583FDE61},20756,placed
+Hub_11,ANCHORAGE,Anchorage,community,Barge or Road,Supplier,574,{CC5DD9BA-0777-46CB-8C5A-B4093F71E8A7},20756,placed
+Hub_11,ANCHORAGE,Anchorage,community,Barge or Road,Supplier,575,{C9C55A93-61A6-4764-B097-78DBF717D1B2},20756,placed
+Hub_11,ANCHORAGE,Anchorage,community,Barge or Road,Supplier,576,{45545605-70C4-4325-BB1A-0BD2AA0B3C6C},20756,placed
+Hub_11,ANCHORAGE,Anchorage,community,Barge or Road,Supplier,577,{2A9929CD-2C24-4C78-8498-1DBC5BCC6A1D},20756,placed
+Hub_11,ANCHORAGE,Anchorage,community,Barge or Road,Supplier,578,{650F4992-AB58-4A98-BEBB-C20F649E0733},20756,placed
+Hub_11,ANCHORAGE,Anchorage,community,Barge or Road,Supplier,580,{D67235C3-3D8B-485F-B7AF-4D964FCAA312},20756,placed
+Hub_11,ANCHORAGE,Anchorage,community,Barge or Road,Supplier,581,{F1657983-D3E3-44A8-96D8-91DFAD79BC5E},20756,placed
+Hub_11,ANCHORAGE,Anchorage,community,Barge or Road,Supplier,583,{2706137F-5ED4-447E-8C0E-35FB45086E7C},20756,placed
+Hub_11,ANCHORAGE,Anchorage,community,Barge or Road,Supplier,584,{CE6D73AC-0A81-486A-8D5A-376A624F516B},20756,placed
+Hub_11,ANCHORAGE,Anchorage,community,Barge or Road,Supplier,586,{76F94D91-B7A2-4F41-A8D4-BC17A1AECA17},20756,placed
+Hub_11,ANCHORAGE,Anchorage,community,Barge or Road,Supplier,594,{FC655AD0-5508-4BE0-9D1F-1871442754F8},20756,placed
+Hub_11,ANCHORAGE,Anchorage,community,Barge or Road,Supplier,602,{5ACBE17A-21DF-40B4-A9B4-B04B37C89D9A},20756,placed
+Hub_11,ANCHORAGE,Anchorage,community,Barge or Road,Supplier,607,{2A9B911B-4E3C-4269-AAA6-5AE279B5FEC0},20756,placed
+Hub_11,ANCHORAGE,Anchorage,community,Barge or Road,Supplier,67,{C51EFE45-833F-492D-9D41-79A332CA4263},20756,placed
+Hub_11,ANCHORAGE,Anchorage,community,Barge or Road,Supplier,675,{4CD13895-8EAB-4F3B-8C00-101747A4985E},20756,placed
+Hub_11,ANCHORAGE,Anchorage,community,Barge or Road,Supplier,746,{786F7C14-A6C6-4859-AA45-7085CDE46EE8},20756,placed
+Hub_11,ANCHORAGE,Anchorage,community,Barge or Road,Supplier,84,{D1F05634-C359-4D56-976B-BAD0A2DA4669},20756,placed
+Hub_11,ANCHORAGE,Anchorage,community,Barge or Road,Supplier,91,{392D764D-71F7-45B2-BAE8-2F521955D788},20756,placed
+Hub_11,ANCHORAGE,Anchorage,community,Barge or Road,Supplier,93,{64761B55-BBD0-4736-A66B-237FD41E4C18},20756,placed
+Hub_12,FORT YUKON,Fort Yukon,community,Barge or Plane or Road,Receiver,1011,{911BED9C-EC53-44C9-A650-937BDE34EC0D},43232,placed
+Hub_12,FORT YUKON,Fort Yukon,community,Barge or Plane or Road,Receiver,288,{78B0D1D5-FF20-4A58-881C-647D1EFDD2B9},43232,placed
+Hub_12,FORT YUKON,Fort Yukon,community,Barge or Plane or Road,Receiver,896,{D99D1073-2B1A-442D-A734-E3D9DCEDD425},43232,placed
+Hub_12,FORT YUKON,Fort Yukon,community,Barge or Plane or Road,Receiver,SYN-415,{6EE0E40F-5A4C-4F71-BA4A-EF0463967C3F},43232,placed
+Hub_12,FORT YUKON,Fort Yukon,community,Barge or Plane or Road,Receiver,SYN-415,{D6A3659F-8B2C-4447-BE15-E82D27D62AF2},43232,placed
+Hub_12,FORT YUKON,Fort Yukon,community,Barge or Plane or Road,Receiver,SYN-415,{D92BD537-BC5E-45D8-B5D5-467F33E6FB74},43232,placed
+Hub_12,FORT YUKON,Fort Yukon,community,Barge or Plane or Road,Receiver,SYN-416,{881A7E25-6B8E-43C5-872F-FBB1810B9115},43232,placed
+Hub_12,FORT YUKON,Fort Yukon,community,Barge or Plane or Road,Receiver,SYN-416,{B78D59B6-B929-4BBF-83B0-AFBDE59D3954},43232,placed
+Hub_12,FORT YUKON,Fort Yukon,community,Barge or Plane or Road,Receiver,SYN-418,{50539CE7-AE72-4BE5-B34B-5CFE5FD44568},43232,placed
+Hub_12,FORT YUKON,Fort Yukon,community,Barge or Plane or Road,Receiver,SYN-420,{58EE35A2-3A08-4BA7-BF4C-04E89E4D064C},43232,placed
+Hub_12,FORT YUKON,Fort Yukon,community,Barge or Plane or Road,Receiver,SYN-420,{AA4C91F1-4525-4ADD-93A3-F931F44C5C74},43232,placed
+Hub_12,FORT YUKON,Fort Yukon,community,Barge or Plane or Road,Receiver,SYN-421,{CC88A802-1D40-443D-9C55-23F9F8729518},43232,placed
+Hub_12,FORT YUKON,Fort Yukon,community,Barge or Plane or Road,Receiver,SYN-424,{56FA3AE0-76F4-46DF-84EB-F201D2D15CD8},43232,placed
+Hub_12,FORT YUKON,Fort Yukon,community,Barge or Plane or Road,Receiver,SYN-425,{47AEF73D-6FD9-41C6-AA25-FEB3B53DFC9A},43232,placed
+Hub_12,FORT YUKON,Fort Yukon,community,Barge or Plane or Road,Receiver,SYN-426,{B764FB91-117D-48DF-94E6-BD2A0C3925B6},43232,placed
+Hub_12,FORT YUKON,Fort Yukon,community,Barge or Plane or Road,Receiver,SYN-428,{6BF83DA9-AFD6-420C-BA70-0BCC46214100},43232,placed
+Hub_13,VENETIE,Venetie,community,Plane,Receiver,1012,{F89CBAB9-8EE3-4852-BC80-4FC7BC0CB3EF},43349,placed
+Hub_13,VENETIE,Venetie,community,Plane,Receiver,132,{E2EF0E5B-287E-4122-A175-2E0B85FD9D17},43349,placed
+Hub_14,CIRCLE,Circle,community,Road,Receiver,1013,{DC1660F8-7010-4048-8650-DFA40389687F},2825,placed
+Hub_15,ANVIK,Anvik,community,Barge or Plane,Receiver,1014,{721D7D28-9E11-4A58-A705-BE3CBA892C42},42535,placed
+Hub_15,ANVIK,Anvik,community,Barge or Plane,Receiver,325,{7FC94AF0-E66C-48D3-8197-1854A8ADE01F},42535,placed
+Hub_15,ANVIK,Anvik,community,Barge or Plane,Receiver,906,{77612800-0D07-46EF-A3BD-AF20E41D610E},42535,placed
+Hub_15,ANVIK,Anvik,community,Barge or Plane,Receiver,SYN-842,{376EBA89-4D26-4E3E-9BBE-1F3848E6B697},42535,placed
+Hub_15,ANVIK,Anvik,community,Barge or Plane,Receiver,SYN-842,{DC5823E8-AB66-4C44-A453-9F0A1FFBA77F},42535,placed
+Hub_15,ANVIK,Anvik,community,Barge or Plane,Receiver,SYN-843,{FF611883-59A7-4F35-9580-8631875F301E},42535,placed
+Hub_15,ANVIK,Anvik,community,Barge or Plane,Receiver,SYN-847,{FF09F5E1-BD51-4156-859E-5064DAB7B4FE},42535,placed
+Hub_16,GRAYLING,Grayling,community,Barge or Plane,Receiver,1015,{ABAD2EE2-9E85-4C4A-B842-A3C00F4B54B7},48845,placed
+Hub_16,GRAYLING,Grayling,community,Barge or Plane,Receiver,1142,{AF0B22FA-9863-4EEB-8301-672C0FE42AEB},48845,placed
+Hub_16,GRAYLING,Grayling,community,Barge or Plane,Receiver,913,{3ACCCEC3-494E-4C62-BEDC-7721843C1601},48845,placed
+Hub_16,GRAYLING,Grayling,community,Barge or Plane,Receiver,913,{452B04B0-F1CD-49B3-BBA7-3AABA29C1CB4},48845,placed
+Hub_16,GRAYLING,Grayling,community,Barge or Plane,Receiver,913,{A8B50C02-94E9-4108-AA7E-7EE23CC1EEF2},48845,placed
+Hub_16,GRAYLING,Grayling,community,Barge or Plane,Receiver,SYN-836,{C73C3438-575C-42A1-B923-9C7224431065},48845,placed
+Hub_16,GRAYLING,Grayling,community,Barge or Plane,Receiver,SYN-838,{2D7DADDE-8A80-4AA3-B5F5-FC6E61425E86},48845,placed
+Hub_17,HOLY CROSS,Holy Cross,community,Barge,Receiver,1016,{420AC3D5-63CC-4D15-8B27-63AEDD2C02D2},42523,placed
+Hub_17,HOLY CROSS,Holy Cross,community,Barge,Receiver,1016,{D288D4AE-A1D2-4647-BFB5-535070CDD4C4},42523,placed
+Hub_17,HOLY CROSS,Holy Cross,community,Barge,Receiver,740,{66EF6F7E-91BA-4537-8B1E-897ADBAE771C},42523,placed
+Hub_17,HOLY CROSS,Holy Cross,community,Barge,Receiver,740,{AE5F3E72-8390-444C-8C46-BB22FFFF9A8A},42523,placed
+Hub_17,HOLY CROSS,Holy Cross,community,Barge,Receiver,740,{D41F7208-7E6A-4C09-8B46-B4441F8857CF},42523,placed
+Hub_18,MCGRATH,McGrath,community,Barge or Road,Receiver,1017,{F7BC2F70-DEB3-4539-8EB4-8CE743DC31AB},42640,placed
+Hub_18,MCGRATH,McGrath,community,Barge or Road,Receiver,192,{8F1DAEF7-4CF1-4340-9398-68F4645A1F18},42640,placed
+Hub_18,MCGRATH,McGrath,community,Barge or Road,Receiver,192,{DE51C970-B898-40CE-AADC-9FA47BA4D7DB},42640,placed
+Hub_18,MCGRATH,McGrath,community,Barge or Road,Receiver,385,{9942D7E8-9989-4E76-8408-2E10FCB167C8},42640,placed
+Hub_18,MCGRATH,McGrath,community,Barge or Road,Receiver,60,{235636AE-E29E-4AAC-8696-5F02D103CDE8},42640,placed
+Hub_19,SHAGELUK,Shageluk,community,Barge,Receiver,1018,{4B2ED0D3-F659-41CA-904B-34FD763C99E5},42562,placed
+Hub_19,SHAGELUK,Shageluk,community,Barge,Receiver,1018,{4E2499EB-5842-459B-B3A2-CB4C6798626A},42562,placed
+Hub_19,SHAGELUK,Shageluk,community,Barge,Receiver,SYN-841,{EF608B80-7931-4342-A64A-98E73B563C54},42562,placed
+Hub_20,NIKOLAI,Nikolai,community,Barge or Plane,Receiver,1019,{EB324C93-9396-4768-B372-5073A1FBE274},42689,placed
+Hub_20,NIKOLAI,Nikolai,community,Barge or Plane,Receiver,SYN-680,{0DEA1588-048C-4EEB-BAB6-F885D02F870F},42689,placed
+Hub_21,ADAK,Adak,community,Barge or Road,Receiver,102,{992B0451-5B75-4FCC-A203-B62B2E651A00},39596,placed
+Hub_21,ADAK,Adak,community,Barge or Road,Receiver,1228,{9ADD91D4-F447-462A-9EFB-96369EBC0BD7},39596,placed
+Hub_22,TAKOTNA,Takotna,community,Barge or Road,Receiver,1020,{BFFC22DE-8C43-473B-A696-5370C6EB2162},42657,placed
+Hub_22,TAKOTNA,Takotna,community,Barge or Road,Receiver,414,{A9ECBD54-7C82-4C47-932F-979C91AFCEB1},42657,placed
+Hub_22,TAKOTNA,Takotna,community,Barge or Road,Receiver,SYN-685,{15028AA5-F109-4744-BF76-7BF60743660D},42657,placed
+Hub_22,TAKOTNA,Takotna,community,Barge or Road,Receiver,SYN-685,{FAAF6A17-564C-409A-A614-9F39370808A1},42657,placed
+Hub_23,EVANSVILLE,Evansville,community,Road,Receiver,1022,{FC9DA1C8-6339-4597-A442-0F5C02A65B78},43344,placed
+Hub_24,DELTA JUNCTION,Delta Junction,community,Road,Supplier,1023,{C89E8FC3-B4E0-4B5C-BB68-B3E740D304C5},28322,placed
+Hub_24,DELTA JUNCTION,Delta Junction,community,Road,Supplier,308,{149089F2-4FC8-4451-8DA0-29F251F2342A},28322,placed
+Hub_24,DELTA JUNCTION,Delta Junction,community,Road,Supplier,497,{7038E498-0B28-4CEC-9C24-3F94EE184F85},28322,placed
+Hub_24,DELTA JUNCTION,Delta Junction,community,Road,Supplier,706,{2B4C0A41-A893-4B32-A211-6203CA1A3E7E},28322,placed
+Hub_24,DELTA JUNCTION,Delta Junction,community,Road,Supplier,999,{9AB2CBDA-D17F-41F4-8F72-7DAB908CC9D1},28322,placed
+Hub_25,HEALY,Healy,community,Road,Receiver,1027,{7E320E02-ED16-4013-AA62-D9862E3AEE6F},1849,placed
+Hub_25,HEALY,Healy,community,Road,Receiver,1028,{B80B9117-2A48-449E-839A-C42855A531BB},1849,placed
+Hub_25,HEALY,Healy,community,Road,Receiver,277,{509F4BA3-BB26-4969-8300-CF3DFA06FAC2},1849,placed
+Hub_25,HEALY,Healy,community,Road,Receiver,530,{D76F15DE-85A3-44BE-AE59-2A6533F81512},1849,placed
+Hub_25,HEALY,Healy,community,Road,Receiver,989,{D2C6A9F9-037C-4AA8-8FDC-6D9CE0A36EEC},1849,placed
+Hub_26,NORTH POLE,North Pole,community,Road,Receiver,1030,{06020A2C-EF28-4F96-B0C9-5E1ACFDCCE87},30237,placed
+Hub_26,NORTH POLE,North Pole,community,Road,Receiver,1113,{AA03A04C-1699-4D6B-9606-784F5118684C},30237,placed
+Hub_26,NORTH POLE,North Pole,community,Road,Receiver,169,{D4480803-987D-48DA-80DF-D4C7F0E68FE3},30237,placed
+Hub_26,NORTH POLE,North Pole,community,Road,Receiver,707,{18E12583-BE85-4409-BB78-FE88AF66E31D},30237,placed
+Hub_26,NORTH POLE,North Pole,community,Road,Receiver,708,{AAB281BB-64C6-44DD-AE7A-FBCC90EE0783},30237,placed
+Hub_26,NORTH POLE,North Pole,community,Road,Receiver,836,{9FCB9E11-BCB9-4736-AB12-985E5D526459},30237,placed
+Hub_27,BETHEL,Bethel,community,Road,Supplier,1035,{3EF25FC2-55B4-4BFE-9DB0-1D0359115778},41634,placed
+Hub_27,BETHEL,Bethel,community,Road,Supplier,1036,{E7ECD652-D585-4837-8BEC-05FA96860368},41634,placed
+Hub_27,BETHEL,Bethel,community,Road,Supplier,172,{8FB9BBBA-7CE5-433A-A414-4C475FF1F8E1},41634,placed
+Hub_27,BETHEL,Bethel,community,Road,Supplier,22,{A6BE53B1-F755-448C-BD1F-63099BD047E5},41634,placed
+Hub_27,BETHEL,Bethel,community,Road,Supplier,227,{0232A859-6ACA-4830-96D2-A1F36E44D4C2},41634,placed
+Hub_27,BETHEL,Bethel,community,Road,Supplier,228,{14BD9A76-B93C-4CE2-899B-ED7D4C319475},41634,placed
+Hub_27,BETHEL,Bethel,community,Road,Supplier,393,{A446513F-92EF-4674-A337-D582E472D82A},41634,placed
+Hub_27,BETHEL,Bethel,community,Road,Supplier,597,{9B58B56D-A2A6-4894-BE2A-B2BBC4F4E153},41634,placed
+Hub_27,BETHEL,Bethel,community,Road,Supplier,600,{8D408F52-5CE0-4A95-A586-79D54041D7C7},41634,placed
+Hub_27,BETHEL,Bethel,community,Road,Supplier,72,{9FE39ADD-F730-47D5-AB1A-CB525E786000},41634,placed
+Hub_27,BETHEL,Bethel,community,Road,Supplier,750,{5BC6B33B-BBDA-455D-BEBA-624BEDA7F496},41634,placed
+Hub_27,BETHEL,Bethel,community,Road,Supplier,766,{77333D69-86A6-415C-B007-BED39EBE37A6},41634,placed
+Hub_27,BETHEL,Bethel,community,Road,Supplier,892,{F92B3587-546E-46A3-B6CA-7532E1CA09F9},41634,placed
+Hub_27,BETHEL,Bethel,community,Road,Supplier,893,{D290AE1E-2F5C-419B-A813-0A64071A1325},41634,placed
+Hub_28,BIG LAKE,Big Lake,community,Road,Receiver,1037,{481B7FA5-019D-40DA-9EE2-D0C2CB23EE1C},20515,placed
+Hub_29,SITKA,Sitka,community,Barge or Road,Receiver,1038,{01E6A252-86D1-4511-ACCE-5B7A1979DB95},36483,placed
+Hub_29,SITKA,Sitka,community,Barge or Road,Receiver,1038,{3F9E0A01-54D7-494B-9BBA-ABE68BDD1666},36483,placed
+Hub_29,SITKA,Sitka,community,Barge or Road,Receiver,1038,{83C0B81C-5110-4333-BC95-68B43F5C22F4},36483,placed
+Hub_29,SITKA,Sitka,community,Barge or Road,Receiver,1038,{8B65442E-82F6-44DA-BAC0-2C12653106B9},36483,placed
+Hub_29,SITKA,Sitka,community,Barge or Road,Receiver,1038,{B06057DA-8EB9-4521-B9CE-3A2D36CEECCC},36483,placed
+Hub_29,SITKA,Sitka,community,Barge or Road,Receiver,1174,{A83D391D-29F1-4CE6-A8B5-E111EC571EA4},36483,placed
+Hub_29,SITKA,Sitka,community,Barge or Road,Receiver,165,{4A1D0B54-5FB4-4582-A44A-565444B59487},36483,placed
+Hub_29,SITKA,Sitka,community,Barge or Road,Receiver,166,{162AE5D4-A7E5-48AC-8614-E3F989299E8B},36483,placed
+Hub_29,SITKA,Sitka,community,Barge or Road,Receiver,32,{C0345116-F30E-40B5-946D-4AFBF9F8D648},36483,placed
+Hub_29,SITKA,Sitka,community,Barge or Road,Receiver,32,{C739225D-BEFB-4FFE-9018-AAA89364833B},36483,placed
+Hub_29,SITKA,Sitka,community,Barge or Road,Receiver,434,{374E3A5B-88DE-4DF8-B3B6-FFEDF42E51E4},36483,placed
+Hub_29,SITKA,Sitka,community,Barge or Road,Receiver,554,{AC8E871E-2494-46AF-8BF8-376AC70ECDB4},36483,placed
+Hub_29,SITKA,Sitka,community,Barge or Road,Receiver,599,{0979B703-23BD-4E4D-B3BF-D97B57BD01FB},36483,placed
+Hub_29,SITKA,Sitka,community,Barge or Road,Receiver,711,{FC8F1A13-5A59-478C-BC2A-D235F70BF4CC},36483,placed
+Hub_29,SITKA,Sitka,community,Barge or Road,Receiver,841,{F4A5FE3C-02D9-4F5F-98A3-E675FC30C462},36483,placed
+Hub_29,SITKA,Sitka,community,Barge or Road,Receiver,842,{A7652739-61F7-4745-8408-50A3C13A48AA},36483,placed
+Hub_29,SITKA,Sitka,community,Barge or Road,Receiver,900,{0B438119-212C-4295-A54F-72F4641CCA57},36483,placed
+Hub_30,SEWARD,Seward,community,Road,Supplier,104,{BDC6AEBD-A6BF-4D0C-929B-36D15018837C},5457,placed
+Hub_30,SEWARD,Seward,community,Road,Supplier,29,{F14F033F-F95C-4CFA-AFFE-C591A2DE7B3E},5457,placed
+Hub_30,SEWARD,Seward,community,Road,Supplier,380,{B989A1D4-E1F6-49C4-AE4A-EE42004D4E92},5457,placed
+Hub_30,SEWARD,Seward,community,Road,Supplier,534,{D3C67F95-4D95-4DED-8E34-558CEA3B78CE},5457,placed
+Hub_30,SEWARD,Seward,community,Road,Supplier,535,{B14FE478-41B4-4B67-BF61-8D60B9964248},5457,placed
+Hub_30,SEWARD,Seward,community,Road,Supplier,587,{A767B6F4-71AF-4BEF-8A8F-CFC0C88774D2},5457,placed
+Hub_30,SEWARD,Seward,community,Road,Supplier,682,{AEE5AF01-1BA4-4D7E-BD47-22025EB97CE9},5457,placed
+Hub_30,SEWARD,Seward,community,Road,Supplier,683,{AF6A455C-7DE7-475E-B400-0270987FA395},5457,placed
+Hub_30,SEWARD,Seward,community,Road,Supplier,684,{6A226C6A-23B9-4C71-923E-F34176506FF2},5457,placed
+Hub_30,SEWARD,Seward,community,Road,Supplier,696,{6D2C0D30-6E8C-4094-B60B-FE6B27FAA8CF},5457,placed
+Hub_30,SEWARD,Seward,community,Road,Supplier,760,{95F72083-EED7-4AD1-B7BC-434444DFE20A},5457,placed
+Hub_30,SEWARD,Seward,community,Road,Supplier,822,{1949D4CD-4AE9-4857-B85C-60F9E7B4E24A},5457,placed
+Hub_30,SEWARD,Seward,community,Road,Supplier,870,{F568A4A6-B0FA-414A-9577-CF79370E1A1A},5457,placed
+Hub_31,CAPE YAKATAGA,Cape Yakataga,community,Barge,Receiver,1043,{75230271-32F6-4C6D-BA8E-F99D7D6D6098},82172,placed
+Hub_31,CAPE YAKATAGA,Cape Yakataga,community,Barge,Receiver,1043,{98694E28-FA3A-4F54-951D-F78AD96C9F88},82172,placed
+Hub_31,CAPE YAKATAGA,Cape Yakataga,community,Barge,Receiver,1043,{DBCFD06D-526C-4AAD-BD2A-072EA1EFBE48},82172,placed
+Hub_31,CAPE YAKATAGA,Cape Yakataga,community,Barge,Receiver,1045,{5CDF6E80-B781-482B-B1CD-42F5BC36719E},82172,placed
+Hub_32,CHANDALAR,Chandalar,community,Road,Receiver,1047,{D720738D-2DD8-45E6-B817-894344848C7F},,unplaced:beyond_cap
+Hub_33,UNALASKA,Unalaska,community,Barge or Road,Receiver,1049,{F1376769-3624-43A5-9248-CADA5B67B566},39741,placed
+Hub_33,UNALASKA,Unalaska,community,Barge or Road,Receiver,1096,{A5E8D42A-4A72-4380-B9D4-5CC0084B55D2},39741,placed
+Hub_33,UNALASKA,Unalaska,community,Barge or Road,Receiver,163,{488BFE21-36C1-4EF2-9D43-1DE0A36534D0},39741,placed
+Hub_33,UNALASKA,Unalaska,community,Barge or Road,Receiver,443,{8911BFBD-59A5-485A-86C4-7EA6C3180F66},39741,placed
+Hub_33,UNALASKA,Unalaska,community,Barge or Road,Receiver,48,{EFA2FFD0-5E26-4F0B-AB88-C80C174ED85B},39741,placed
+Hub_33,UNALASKA,Unalaska,community,Barge or Road,Receiver,729,{087E5597-2E93-4DDC-A089-439BD1AD3295},39741,placed
+Hub_33,UNALASKA,Unalaska,community,Barge or Road,Receiver,730,{1AF09CDB-0CF2-49E8-AB5D-E1914905790C},39741,placed
+Hub_33,UNALASKA,Unalaska,community,Barge or Road,Receiver,734,{9D8271CA-C47C-4335-86DB-840808B20357},39741,placed
+Hub_33,UNALASKA,Unalaska,community,Barge or Road,Receiver,735,{2CD379B1-9DA0-4E0E-9EA6-013BA2B85C2C},39741,placed
+Hub_33,UNALASKA,Unalaska,community,Barge or Road,Receiver,828,{FFC6D08E-A827-4B6C-891F-D6C2D7CA90FC},39741,placed
+Hub_33,UNALASKA,Unalaska,community,Barge or Road,Receiver,865,{7D987B23-D133-42DE-B929-973C9C816886},39741,placed
+Hub_34,GALENA,Galena,community,Barge or Road,Supplier,1050,{59B6F627-42C1-487F-9A00-76D9F63FA010},42806,placed
+Hub_34,GALENA,Galena,community,Barge or Road,Supplier,289,{A8127B68-83B7-4431-8F66-D91552206E5C},42806,placed
+Hub_34,GALENA,Galena,community,Barge or Road,Supplier,46,{A6931EBC-3E8A-4E86-827E-9214C8482A3B},42806,placed
+Hub_34,GALENA,Galena,community,Barge or Road,Supplier,784,{1FE614D9-633B-49DC-A233-193E56910FE3},42806,placed
+Hub_34,GALENA,Galena,community,Barge or Road,Supplier,SYN-601,{60AC36FC-11A2-4126-B20C-4FC3BB51A21A},42806,placed
+Hub_34,GALENA,Galena,community,Barge or Road,Supplier,SYN-602,{242DF498-1FE8-4CF2-9961-E0B7533A4355},42806,placed
+Hub_34,GALENA,Galena,community,Barge or Road,Supplier,SYN-603,{925BEAA7-E1AC-43BE-8EBE-8B54D61F439C},42806,placed
+Hub_34,GALENA,Galena,community,Barge or Road,Supplier,SYN-606,{8628475F-5F6A-41CC-9E19-59184B52A870},42806,placed
+Hub_34,GALENA,Galena,community,Barge or Road,Supplier,SYN-607,{1FC36070-6859-4383-9040-51DA754947F1},42806,placed
+Hub_34,GALENA,Galena,community,Barge or Road,Supplier,SYN-608,{F2783EA8-D735-446B-A993-92559DEB2E11},42806,placed
+Hub_34,GALENA,Galena,community,Barge or Road,Supplier,SYN-609,{94FF39D9-B453-4A2D-BD74-6A160024C80D},42806,placed
+Hub_35,HOMER,Homer,community,Barge or Road,Receiver,1051,{DDBEA947-84DD-4443-88BD-348496D95D9D},3302,placed
+Hub_35,HOMER,Homer,community,Barge or Road,Receiver,1182,{D61C075A-5C1A-4E6A-BCE5-D342E1793C3B},3302,placed
+Hub_35,HOMER,Homer,community,Barge or Road,Receiver,20,{D0F2748C-7DEB-450F-8C52-E8CB21ECA1B0},3302,placed
+Hub_35,HOMER,Homer,community,Barge or Road,Receiver,377,{6BFD6489-5B36-4DC3-B14C-F950751A2138},3302,placed
+Hub_35,HOMER,Homer,community,Barge or Road,Receiver,378,{B5257EDF-FE10-458B-9388-8397A316873E},3302,placed
+Hub_35,HOMER,Homer,community,Barge or Road,Receiver,495,{45F72F82-F146-48B7-8510-EC81B37616DD},3302,placed
+Hub_35,HOMER,Homer,community,Barge or Road,Receiver,685,{1B526668-A75F-4655-81E4-CD1636D7B664},3302,placed
+Hub_35,HOMER,Homer,community,Barge or Road,Receiver,686,{7F82FA64-8EC3-41DE-B358-5745EA81032B},3302,placed
+Hub_35,HOMER,Homer,community,Barge or Road,Receiver,686,{A4DCAADC-7778-42DC-AE34-3DB4F7E5B534},3302,placed
+Hub_35,HOMER,Homer,community,Barge or Road,Receiver,687,{B05026CD-3A84-439D-A809-4C9614FB88CD},3302,placed
+Hub_35,HOMER,Homer,community,Barge or Road,Receiver,691,{B5302F24-7BC3-4365-B265-9200D736044A},3302,placed
+Hub_35,HOMER,Homer,community,Barge or Road,Receiver,692,{F0E3811E-BDAC-4B95-A047-6232801A109E},3302,placed
+Hub_35,HOMER,Homer,community,Barge or Road,Receiver,789,{3D4292B1-2476-4370-9C0A-38D9681783E2},3302,placed
+Hub_36,COLD BAY,Cold Bay,community,Road,Receiver,1052,{5F66D6A9-1B61-40A5-B639-1546DF189A85},39938,placed
+Hub_36,COLD BAY,Cold Bay,community,Road,Receiver,1052,{A203032F-1412-4EF3-918D-A214669EF4B4},39938,placed
+Hub_36,COLD BAY,Cold Bay,community,Road,Receiver,139,{DE28396A-DEE2-44C9-B2DA-6D1A8CF2EFCE},39938,placed
+Hub_36,COLD BAY,Cold Bay,community,Road,Receiver,21,{4B0AE969-B2AA-4C9A-8CDC-8C82BEB37F87},39938,placed
+Hub_36,COLD BAY,Cold Bay,community,Road,Receiver,440,{EAEFD0BA-2E87-4EE1-AE9D-B356943D2788},39938,placed
+Hub_36,COLD BAY,Cold Bay,community,Road,Receiver,SYN-976,{4A8981F9-BC70-4F6B-8692-1C3091AC9F2A},39938,placed
+Hub_36,COLD BAY,Cold Bay,community,Road,Receiver,SYN-979,{919294F2-5937-4637-AEAB-851700C75F7A},39938,placed
+Hub_37,CORDOVA,Cordova,community,Plane or Road,Receiver,1054,{A01AEC49-0662-40CE-84C2-FF4805EE2D8D},45371,placed
+Hub_37,CORDOVA,Cordova,community,Plane or Road,Receiver,1055,{CDF44668-FCE1-412E-9AED-B6E36850A02B},45371,placed
+Hub_37,CORDOVA,Cordova,community,Plane or Road,Receiver,126,{71EC5B24-7855-441C-A05D-9F2E5682E052},45371,placed
+Hub_37,CORDOVA,Cordova,community,Plane or Road,Receiver,127,{991585AC-A293-4D46-8026-D8384688F8F0},45371,placed
+Hub_37,CORDOVA,Cordova,community,Plane or Road,Receiver,195,{287A73F4-6B01-4BC5-9764-647FA3359303},45371,placed
+Hub_37,CORDOVA,Cordova,community,Plane or Road,Receiver,24,{CE3676FB-5E29-4BA0-ABC8-A95B8EA061B0},45371,placed
+Hub_37,CORDOVA,Cordova,community,Plane or Road,Receiver,77,{72365B62-C5FD-4862-96DB-CC1CB42EF93F},45371,placed
+Hub_37,CORDOVA,Cordova,community,Plane or Road,Receiver,886,{AD383347-C78A-4F0E-84E7-0A07975B206C},45371,placed
+Hub_37,CORDOVA,Cordova,community,Plane or Road,Receiver,894,{73FD0062-5B5A-4BB4-A9C6-33FD2843A69A},45371,placed
+Hub_37,CORDOVA,Cordova,community,Plane or Road,Receiver,984,{D7CDBBEC-A81A-4C94-965B-2B315201ED4A},45371,placed
+Hub_38,remote:1058,Fairbanks,remote_site,Road,Receiver,1058,{2B48564F-DF5A-4814-B2B3-21E3157048CA},43806,placed
+Hub_38,remote:1058,Fairbanks,remote_site,Road,Receiver,1058,{9D56DBE7-1A09-4398-8622-73AF3113418C},43806,placed
+Hub_39,SKAGWAY,Skagway,community,Road,Supplier,106,{A2E2E76C-E71B-4696-9936-258011512563},3171,placed
+Hub_39,SKAGWAY,Skagway,community,Road,Supplier,1172,{C47D7DBA-4047-4D31-BD3A-280B320E6442},3171,placed
+Hub_39,SKAGWAY,Skagway,community,Road,Supplier,1187,{228C21E5-6D74-4B43-86E6-C553172271CA},3171,placed
+Hub_39,SKAGWAY,Skagway,community,Road,Supplier,1245,{23A5FE3D-9473-4B6C-AEAA-A953E6CB4879},3171,placed
+Hub_39,SKAGWAY,Skagway,community,Road,Supplier,435,{3A778B46-748E-42C0-9547-3C3B6F7C4E15},3171,placed
+Hub_39,SKAGWAY,Skagway,community,Road,Supplier,436,{83932FE5-91EE-4880-BB83-A9D1757E16E1},3171,placed
+Hub_39,SKAGWAY,Skagway,community,Road,Supplier,642,{E8D942CE-3386-4DE8-8667-2A8395EDE2F3},3171,placed
+Hub_39,SKAGWAY,Skagway,community,Road,Supplier,859,{BF854CB0-CF80-43E3-A809-F6B36D83690B},3171,placed
+Hub_40,remote:1062,Cordova,remote_site,Barge,Receiver,1062,{0FA60D29-5FDB-45C0-8C23-DBEF952F6C70},52957,placed
+Hub_40,remote:1062,Cordova,remote_site,Barge,Receiver,1062,{AE259A2D-93B6-4E34-AEE3-3F39B37685ED},52957,placed
+Hub_41,KOLIGANEK,Koliganek,community,Barge,Receiver,107,{95DF95A0-6956-4D5C-9D73-51AD61ADE160},41029,placed
+Hub_41,KOLIGANEK,Koliganek,community,Barge,Receiver,405,{7D5A8BD8-2EC3-4F0D-B29C-8A0C58165A4B},41029,placed
+Hub_41,KOLIGANEK,Koliganek,community,Barge,Receiver,SYN-1057,{4EA87B2D-C068-44CC-970C-0D53111ACA7E},41029,placed
+Hub_41,KOLIGANEK,Koliganek,community,Barge,Receiver,SYN-1058,{E6F89934-850D-4A9A-ACEE-2DD093C349F2},41029,placed
+Hub_42,KING SALMON,King Salmon,community,Barge or Road,Receiver,1070,{7468E915-540F-4DD3-9191-E29646D8AD4F},40288,placed
+Hub_42,KING SALMON,King Salmon,community,Barge or Road,Receiver,1171,{2252CEB0-6807-417D-BB44-607C323ACE41},40288,placed
+Hub_42,KING SALMON,King Salmon,community,Barge or Road,Receiver,1215,{902FD68A-9632-42F4-9216-EA07E1A8598E},40288,placed
+Hub_42,KING SALMON,King Salmon,community,Barge or Road,Receiver,545,{4BAF775A-D866-4D12-81DE-CE93DE008CF2},40288,placed
+Hub_42,KING SALMON,King Salmon,community,Barge or Road,Receiver,798,{E1382C04-8BCB-4CB3-8640-A3678801E8F8},40288,placed
+Hub_42,KING SALMON,King Salmon,community,Barge or Road,Receiver,86,{9D8422E9-699D-4E93-870C-660389356C64},40288,placed
+Hub_43,KODIAK,Kodiak,community,Barge or Road,Receiver,1071,{8D76DC1E-DDFB-4491-9559-92EF69C41AAA},38842,placed
+Hub_43,KODIAK,Kodiak,community,Barge or Road,Receiver,1097,{248652B4-D9D2-4A72-90D6-67D7D8F1B4FB},38842,placed
+Hub_43,KODIAK,Kodiak,community,Barge or Road,Receiver,150,{332D3B7F-3381-46AA-8D87-8B750D32974D},38842,placed
+Hub_43,KODIAK,Kodiak,community,Barge or Road,Receiver,177,{A1B0FDAC-70EF-4983-B621-720E37481700},38842,placed
+Hub_43,KODIAK,Kodiak,community,Barge or Road,Receiver,180,{110EF110-7B9A-4124-8FD4-03B28B4DBDF1},38842,placed
+Hub_43,KODIAK,Kodiak,community,Barge or Road,Receiver,181,{576E8567-E85B-419E-9B43-1C4C0B1093F8},38842,placed
+Hub_43,KODIAK,Kodiak,community,Barge or Road,Receiver,239,{5AEE4579-120C-418C-965A-911EFB7A4873},38842,placed
+Hub_43,KODIAK,Kodiak,community,Barge or Road,Receiver,420,{B46ED03F-5DB4-4255-A1AC-59B085DBF727},38842,placed
+Hub_43,KODIAK,Kodiak,community,Barge or Road,Receiver,421,{B46E79C4-84C1-4A2D-87CF-4831E82CA4A9},38842,placed
+Hub_43,KODIAK,Kodiak,community,Barge or Road,Receiver,422,{6280955D-A73E-4167-B155-9FE66EA27BEF},38842,placed
+Hub_43,KODIAK,Kodiak,community,Barge or Road,Receiver,423,{0283A5A4-459A-49DA-B8ED-DEF2FCEC9908},38842,placed
+Hub_43,KODIAK,Kodiak,community,Barge or Road,Receiver,424,{6CE5C5C5-1A21-4866-8D92-163EB710A180},38842,placed
+Hub_43,KODIAK,Kodiak,community,Barge or Road,Receiver,501,{CEFEF0C0-D1C6-4A0B-ABF5-66311BFEFFF9},38842,placed
+Hub_43,KODIAK,Kodiak,community,Barge or Road,Receiver,502,{1FFEB283-7638-4BB4-A7B7-A262F90CC0BA},38842,placed
+Hub_43,KODIAK,Kodiak,community,Barge or Road,Receiver,503,{9E27F54B-1C0A-4D44-BDBA-3BA09D587DC3},38842,placed
+Hub_43,KODIAK,Kodiak,community,Barge or Road,Receiver,504,{E6878C9C-E636-4C33-A5F5-14420473C72B},38842,placed
+Hub_43,KODIAK,Kodiak,community,Barge or Road,Receiver,505,{920525BE-F98F-41CE-AB7F-DBCC02C15A72},38842,placed
+Hub_43,KODIAK,Kodiak,community,Barge or Road,Receiver,506,{0616261B-5C6C-4C13-A78B-D76C3F4C4780},38842,placed
+Hub_43,KODIAK,Kodiak,community,Barge or Road,Receiver,546,{919C5058-0CBA-459E-8F22-C9D6305E556C},38842,placed
+Hub_43,KODIAK,Kodiak,community,Barge or Road,Receiver,546,{D6DCE4DB-5CDA-4A88-843D-D8ACEF31E2C5},38842,placed
+Hub_43,KODIAK,Kodiak,community,Barge or Road,Receiver,747,{C7184088-386E-4C35-A4AB-2D0D9F2B3A77},38842,placed
+Hub_43,KODIAK,Kodiak,community,Barge or Road,Receiver,79,{19F9BC71-4564-4B4E-A915-5CB5DC25D415},38842,placed
+Hub_43,KODIAK,Kodiak,community,Barge or Road,Receiver,887,{707557AC-2FD8-459E-93CE-C5109AF191DD},38842,placed
+Hub_44,LAKE MINCHUMINA,Lake Minchumina,community,Plane or Road,Receiver,1072,{B83E08B4-8B8B-4C46-992F-3376059CFB8E},42695,placed
+Hub_44,LAKE MINCHUMINA,Lake Minchumina,community,Plane or Road,Receiver,293,{BA85C1A4-F6AC-4ED4-82F8-22E205D1445F},42695,placed
+Hub_45,WRANGELL,Wrangell,community,Barge or Plane or Road,Receiver,1073,{00FE63AA-5E45-43C4-9375-CC5CF7A9E6E9},48681,placed
+Hub_45,WRANGELL,Wrangell,community,Barge or Plane or Road,Receiver,1073,{029144DB-D39A-486C-B8D6-E3F2283CB705},48681,placed
+Hub_45,WRANGELL,Wrangell,community,Barge or Plane or Road,Receiver,1073,{7F23C07F-3D93-4F9A-93BB-055A6DACE41E},48681,placed
+Hub_45,WRANGELL,Wrangell,community,Barge or Plane or Road,Receiver,1191,{239349BF-5CB8-495A-9528-6FC4CC87C758},48681,placed
+Hub_45,WRANGELL,Wrangell,community,Barge or Plane or Road,Receiver,125,{A9739326-6E04-44CC-85BE-78E4EE799C62},48681,placed
+Hub_45,WRANGELL,Wrangell,community,Barge or Plane or Road,Receiver,437,{52E943A5-33B0-4E92-9D20-8D14C388A65D},48681,placed
+Hub_45,WRANGELL,Wrangell,community,Barge or Plane or Road,Receiver,622,{78CFC821-3DC6-4967-BE1E-BF74D043A62F},48681,placed
+Hub_45,WRANGELL,Wrangell,community,Barge or Plane or Road,Receiver,891,{83EBFCD7-DC31-4A3C-93C1-1EB5548E30F5},48681,placed
+Hub_46,remote:1076,McGrath,remote_site,Road,Receiver,1076,{E24B5472-872F-4239-A116-FC23CC2087AB},,unplaced:beyond_cap
+Hub_47,METLAKATLA,Metlakatla,community,Barge or Road,Receiver,1077,{4299A108-428F-4C46-BB6C-90DD2E681FD9},34739,placed
+Hub_47,METLAKATLA,Metlakatla,community,Barge or Road,Receiver,117,{1737C177-FB89-49A7-AC6E-857178178F6D},34739,placed
+Hub_47,METLAKATLA,Metlakatla,community,Barge or Road,Receiver,SYN-73,{3F596E2B-A780-43C1-A340-4B36328A1F83},34739,placed
+Hub_47,METLAKATLA,Metlakatla,community,Barge or Road,Receiver,SYN-74,{ED4F5011-31F9-4D8C-88A0-EED50DDE9C4C},34739,placed
+Hub_47,METLAKATLA,Metlakatla,community,Barge or Road,Receiver,SYN-75,{A1945276-60BA-4DE2-8B03-D3ED2EAEBA26},34739,placed
+Hub_47,METLAKATLA,Metlakatla,community,Barge or Road,Receiver,SYN-77,{93B075DF-FD65-4374-83EE-F837CEB612AA},34739,placed
+Hub_48,blob:46,blob:46,blob,Barge,Receiver,1078,{64002474-A125-43D0-96CD-5DD07E87A726},,unplaced:beyond_cap
+Hub_48,blob:46,blob:46,blob,Barge,Receiver,1079,{333EAFB9-AF25-4F1D-8170-665304F68235},,unplaced:beyond_cap
+Hub_48,blob:46,blob:46,blob,Barge,Receiver,1080,{15BA0B5D-95C5-4664-80A4-DDE0E1372019},,unplaced:beyond_cap
+Hub_48,blob:46,blob:46,blob,Barge,Receiver,1080,{73551016-2EBE-4AB7-B7E5-ABD8942D3FD0},,unplaced:beyond_cap
+Hub_48,blob:46,blob:46,blob,Barge,Receiver,1080,{75434559-4B67-4F44-8A49-86D22C40CFFA},,unplaced:beyond_cap
+Hub_48,blob:46,blob:46,blob,Barge,Receiver,1080,{B339EDD1-9BFD-436F-9843-F5E324A97456},,unplaced:beyond_cap
+Hub_48,blob:46,blob:46,blob,Barge,Receiver,1080,{F9DB899A-9514-44F0-A6B5-B8193D735639},,unplaced:beyond_cap
+Hub_49,NEW STUYAHOK,New Stuyahok,community,Barge,Receiver,108,{63033420-1BE9-4793-99BA-20FB95E2F16F},41008,placed
+Hub_49,NEW STUYAHOK,New Stuyahok,community,Barge,Receiver,407,{978F2CF3-F873-42E9-A4F4-4744D455FBA9},41008,placed
+Hub_49,NEW STUYAHOK,New Stuyahok,community,Barge,Receiver,924,{3E41E641-35DA-4E24-B24E-1FD9B7F0881D},41008,placed
+Hub_49,NEW STUYAHOK,New Stuyahok,community,Barge,Receiver,SYN-1063,{01C203B4-DBFF-4226-80A5-9FC0219681DA},41008,placed
+Hub_49,NEW STUYAHOK,New Stuyahok,community,Barge,Receiver,SYN-1063,{7F2075CE-6833-4592-BBDB-EDAFAFC5045D},41008,placed
+Hub_50,NENANA,Nenana,community,Road,Receiver,1085,{39D39C45-2B34-4C54-9DE9-165016D302D5},28898,placed
+Hub_50,NENANA,Nenana,community,Road,Receiver,278,{7232E8F4-5E65-4714-8708-386B0CA2CA09},28898,placed
+Hub_51,NOME,Nome,community,Barge or Plane or Road,Receiver,1086,{9A01FD57-CBD2-4F5D-ABAD-0A5CC6F78CCA},46984,placed
+Hub_51,NOME,Nome,community,Barge or Plane or Road,Receiver,1122,{0382E721-45D3-49C3-AA1A-07F5088F21E7},46984,placed
+Hub_51,NOME,Nome,community,Barge or Plane or Road,Receiver,1231,{ADA92A6C-1168-4113-9B0F-A9E279CD5BC0},46984,placed
+Hub_51,NOME,Nome,community,Barge or Plane or Road,Receiver,1250,{C0D0ADB5-AA69-4FA8-9D2A-B8FD8003517D},46984,placed
+Hub_51,NOME,Nome,community,Barge or Plane or Road,Receiver,1251,{40ECB6D0-1843-4EA2-85DA-4B150AB646AA},46984,placed
+Hub_51,NOME,Nome,community,Barge or Plane or Road,Receiver,176,{BC2E8F21-077A-42DF-8F52-DE001B0C90B7},46984,placed
+Hub_51,NOME,Nome,community,Barge or Plane or Road,Receiver,246,{44B0BB3F-E0E5-4C98-9CB6-BBE0C8E54750},46984,placed
+Hub_51,NOME,Nome,community,Barge or Plane or Road,Receiver,247,{8C88A626-EDAA-4193-BD47-880E50DFC931},46984,placed
+Hub_51,NOME,Nome,community,Barge or Plane or Road,Receiver,247,{F9454094-3027-4D64-990B-DC14F65AD11C},46984,placed
+Hub_51,NOME,Nome,community,Barge or Plane or Road,Receiver,346,{5E4E7BC6-A837-44F6-8087-8D9B8D2BD86B},46984,placed
+Hub_51,NOME,Nome,community,Barge or Plane or Road,Receiver,347,{5398334A-0C02-4F38-A0B1-92FE564CB5BB},46984,placed
+Hub_51,NOME,Nome,community,Barge or Plane or Road,Receiver,493,{83BF471D-E5BB-4A9E-B610-9B332CDCCFA5},46984,placed
+Hub_51,NOME,Nome,community,Barge or Plane or Road,Receiver,591,{C0A918AD-D63C-470D-8B6E-750AAAA6A2B9},46984,placed
+Hub_51,NOME,Nome,community,Barge or Plane or Road,Receiver,656,{AF91A6A4-0D88-461C-A1B2-664558EEBACB},46984,placed
+Hub_51,NOME,Nome,community,Barge or Plane or Road,Receiver,752,{69EE33D2-8A4D-4652-A816-1E3DE66C69A4},46984,placed
+Hub_51,NOME,Nome,community,Barge or Plane or Road,Receiver,810,{E7F7C72E-3C31-4C85-AC61-D685DE531E55},46984,placed
+Hub_51,NOME,Nome,community,Barge or Plane or Road,Receiver,899,{E854004D-0A4D-48A9-A6FE-DEC878FA235C},46984,placed
+Hub_51,NOME,Nome,community,Barge or Plane or Road,Receiver,960,{2330F1A6-65BB-416F-B313-08A7AE8D495D},46984,placed
+Hub_52,PORT HEIDEN,Port Heiden,community,Barge or Road,Receiver,1087,{2BD1EE1A-DAA3-4141-955A-87A40EAD9087},40123,placed
+Hub_52,PORT HEIDEN,Port Heiden,community,Barge or Road,Receiver,1212,{DEC23BD2-8C24-47A8-8716-E64D51BA97CC},40123,placed
+Hub_52,PORT HEIDEN,Port Heiden,community,Barge or Road,Receiver,SYN-985,{6A12D0A8-816C-47B5-9A9D-934875250393},40123,placed
+Hub_52,PORT HEIDEN,Port Heiden,community,Barge or Road,Receiver,SYN-985,{C3F7371E-FD52-4FA5-BEF2-1E1AAA9C2F2D},40123,placed
+Hub_52,PORT HEIDEN,Port Heiden,community,Barge or Road,Receiver,SYN-987,{8EB3E76F-E364-4F3B-B0D5-75669BA8658E},40123,placed
+Hub_52,PORT HEIDEN,Port Heiden,community,Barge or Road,Receiver,SYN-987,{B5A77B3F-AAE4-4D2E-B070-88205D10B320},40123,placed
+Hub_52,PORT HEIDEN,Port Heiden,community,Barge or Road,Receiver,SYN-989,{1D71BA09-6508-45A9-9D77-00122CE95EE9},40123,placed
+Hub_53,ST PAUL,Saint Paul,community,Barge or Road,Receiver,1088,{C2EE3D68-85C8-4D15-8DCF-735AE274FD08},41260,placed
+Hub_53,ST PAUL,Saint Paul,community,Barge or Road,Receiver,40,{569725C5-F6E9-4B28-96C7-8BDF5BCB6C06},41260,placed
+Hub_53,ST PAUL,Saint Paul,community,Barge or Road,Receiver,890,{8D19934A-76B9-4669-B600-BFECB43DCCF3},41260,placed
+Hub_53,ST PAUL,Saint Paul,community,Barge or Road,Receiver,998,{52B7BAA3-AC93-4AF7-8E9A-0DEEE954C6EE},41260,placed
+Hub_53,ST PAUL,Saint Paul,community,Barge or Road,Receiver,SYN-12,{E239BC24-44CF-4882-8407-56CAEAEE0463},41260,placed
+Hub_53,ST PAUL,Saint Paul,community,Barge or Road,Receiver,SYN-12,{E52F8BF1-0669-4629-8E08-E889F6CF8435},41260,placed
+Hub_53,ST PAUL,Saint Paul,community,Barge or Road,Receiver,SYN-6,{EF318649-1C9B-45B9-8616-DCC8F7FB4907},41260,placed
+Hub_53,ST PAUL,Saint Paul,community,Barge or Road,Receiver,SYN-7,{2C5EE7B4-B6FD-490D-A50C-76C7122A724C},41260,placed
+Hub_53,ST PAUL,Saint Paul,community,Barge or Road,Receiver,SYN-8,{787EC87D-7389-4E27-A739-748992563E44},41260,placed
+Hub_53,ST PAUL,Saint Paul,community,Barge or Road,Receiver,SYN-9,{7BB86274-5C89-4083-9160-7B35466B0C5B},41260,placed
+Hub_54,blob:53,blob:53,blob,Barge,Receiver,1089,{0F7B6455-CCAB-43E2-BCEF-6F41C7B17371},36907,placed
+Hub_54,blob:53,blob:53,blob,Barge,Receiver,1089,{2316ADF7-972E-42ED-B0F8-A563D8A894CC},36907,placed
+Hub_54,blob:53,blob:53,blob,Barge,Receiver,1089,{92196345-FB54-4020-8781-36E2254DDA7B},36907,placed
+Hub_54,blob:53,blob:53,blob,Barge,Receiver,1089,{C7381421-CE6D-4452-8BB7-96893AC454E8},36907,placed
+Hub_55,ALEKNAGIK,Aleknagik,community,Barge or Road,Receiver,109,{0CA1F24C-70BD-456D-A855-67322ADA7ECC},40869,placed
+Hub_55,ALEKNAGIK,Aleknagik,community,Barge or Road,Receiver,1111,{2987CCEB-7A5C-41D0-A9DE-C028E4D0605D},40869,placed
+Hub_55,ALEKNAGIK,Aleknagik,community,Barge or Road,Receiver,SYN-1089,{402FC105-DF52-4DB7-A9F7-FED492CD2892},40869,placed
+Hub_55,ALEKNAGIK,Aleknagik,community,Barge or Road,Receiver,SYN-1090,{F12EDD5E-D488-4E3E-9514-878127D92029},40869,placed
+Hub_55,ALEKNAGIK,Aleknagik,community,Barge or Road,Receiver,SYN-1091,{49C03361-C246-451F-A9B7-E62E298F2BF3},40869,placed
+Hub_56,ST MARYS,Saint Mary's,community,Barge or Plane or Road,Receiver,1093,{D74EF297-A73B-4181-A759-56C37FDE41DF},42162,placed
+Hub_56,ST MARYS,Saint Mary's,community,Barge or Plane or Road,Receiver,1262,{8AD14672-6D41-4612-9C63-B8526F36290D},42162,placed
+Hub_56,ST MARYS,Saint Mary's,community,Barge or Plane or Road,Receiver,355,{14E28DA5-69A4-4D2F-BB92-286834F0B46F},42162,placed
+Hub_56,ST MARYS,Saint Mary's,community,Barge or Plane or Road,Receiver,763,{E7455FE8-21D1-4DB9-B9A2-3E131F07722C},42162,placed
+Hub_56,ST MARYS,Saint Mary's,community,Barge or Plane or Road,Receiver,SYN-945,{69EE9C79-67EB-416E-9868-DDF61D587BF5},42162,placed
+Hub_56,ST MARYS,Saint Mary's,community,Barge or Plane or Road,Receiver,SYN-945,{D9EF5217-BAAC-4EEF-8883-FE240CA4CBDC},42162,placed
+Hub_56,ST MARYS,Saint Mary's,community,Barge or Plane or Road,Receiver,SYN-948,{2A2F0E07-8AD2-4D14-8DED-80191257F7F4},42162,placed
+Hub_56,ST MARYS,Saint Mary's,community,Barge or Plane or Road,Receiver,SYN-949,{5CD6F72F-BE50-4016-AC72-80DF8A393B12},42162,placed
+Hub_57,TALKEETNA,Talkeetna,community,Road,Supplier,1094,{7FD81069-D51F-4034-9EFC-B817378DA498},27982,placed
+Hub_57,TALKEETNA,Talkeetna,community,Road,Supplier,1095,{CB5F15FA-D66B-441C-BF8C-63502D037209},27982,placed
+Hub_57,TALKEETNA,Talkeetna,community,Road,Supplier,118,{FB134D16-49E3-46D3-907B-F546E8F4C681},27982,placed
+Hub_57,TALKEETNA,Talkeetna,community,Road,Supplier,389,{30075FA5-1B85-4EBC-8E2B-939C3065DC3C},27982,placed
+Hub_57,TALKEETNA,Talkeetna,community,Road,Supplier,536,{9F79FB88-D416-4714-9F4E-8F1FEC0570C2},27982,placed
+Hub_57,TALKEETNA,Talkeetna,community,Road,Supplier,613,{F5248E29-E273-4E51-9DE6-31E437308952},27982,placed
+Hub_58,NOORVIK,Noorvik,community,Barge,Supplier,1098,{1F236E12-D209-41AD-B142-115193CFD5C5},44195,placed
+Hub_58,NOORVIK,Noorvik,community,Barge,Supplier,1098,{4DBA97A7-7784-44F2-9ECF-001A573B6035},44195,placed
+Hub_58,NOORVIK,Noorvik,community,Barge,Supplier,1098,{A88A4221-EFB5-4D98-BE34-4E1A9CA8C2A3},44195,placed
+Hub_58,NOORVIK,Noorvik,community,Barge,Supplier,1098,{B15585A9-81DC-44FE-B56A-EDA5807B30C5},44195,placed
+Hub_58,NOORVIK,Noorvik,community,Barge,Supplier,1098,{B1E2DF31-83AC-4972-AEB7-DBBB326D649D},44195,placed
+Hub_58,NOORVIK,Noorvik,community,Barge,Supplier,926,{F121AA8F-FCE6-469A-AD26-98BD7D63BAEA},44195,placed
+Hub_58,NOORVIK,Noorvik,community,Barge,Supplier,SYN-474,{8C665C51-6648-478E-81D5-2AA3D18973DE},44195,placed
+Hub_58,NOORVIK,Noorvik,community,Barge,Supplier,SYN-475,{14C297C3-2167-4D23-8B3D-FDD12520BFB1},44195,placed
+Hub_59,CLARKS POINT,Clark's Point,community,Barge,Receiver,110,{60E9F7B5-8A63-4781-81E6-69A693BAD37D},40528,placed
+Hub_59,CLARKS POINT,Clark's Point,community,Barge,Receiver,402,{4BEF8811-2274-4D00-AC1C-998D040903CB},40528,placed
+Hub_59,CLARKS POINT,Clark's Point,community,Barge,Receiver,SYN-1074,{563BB483-9F52-411F-98B6-114988EB26AF},40528,placed
+Hub_59,CLARKS POINT,Clark's Point,community,Barge,Receiver,SYN-1075,{9BA9AAC2-A297-4D86-BA33-73597A255D86},40528,placed
+Hub_59,CLARKS POINT,Clark's Point,community,Barge,Receiver,SYN-1076,{33FD53A5-78B9-4370-85C6-63EDE4FE8184},40528,placed
+Hub_59,CLARKS POINT,Clark's Point,community,Barge,Receiver,SYN-1077,{DC7AB0D0-85E7-4037-A97D-5136255831FA},40528,placed
+Hub_60,HOONAH,Hoonah,community,Barge or Road,Receiver,1102,{6A9CD630-686F-474E-9CE9-6031808EFEC7},36880,placed
+Hub_60,HOONAH,Hoonah,community,Barge or Road,Receiver,428,{7B2C8A93-1209-4F1C-86B4-830CF883B118},36880,placed
+Hub_60,HOONAH,Hoonah,community,Barge or Road,Receiver,872,{E0A8AC68-CE38-4642-AC6E-8E5679E9D539},36880,placed
+Hub_60,HOONAH,Hoonah,community,Barge or Road,Receiver,970,{BB50F72C-CB36-4632-9736-BFCF1FD13E72},36880,placed
+Hub_60,HOONAH,Hoonah,community,Barge or Road,Receiver,970,{C6F86AE2-7719-442B-88C0-08D0176E33BE},36880,placed
+Hub_60,HOONAH,Hoonah,community,Barge or Road,Receiver,SYN-224,{1D3152B7-FC9D-4968-B000-12057FAB74D7},36880,placed
+Hub_60,HOONAH,Hoonah,community,Barge or Road,Receiver,SYN-225,{473D6546-4125-4228-8C36-95B76AA0FC27},36880,placed
+Hub_60,HOONAH,Hoonah,community,Barge or Road,Receiver,SYN-226,{1C7E00F7-FF5D-4FA7-8DA7-64B429F2682D},36880,placed
+Hub_60,HOONAH,Hoonah,community,Barge or Road,Receiver,SYN-228,{173A65EE-29AC-4AA7-AA27-766F4B89A6C3},36880,placed
+Hub_60,HOONAH,Hoonah,community,Barge or Road,Receiver,SYN-229,{EF0093E9-D1F3-42AA-B772-A3A3E6267575},36880,placed
+Hub_60,HOONAH,Hoonah,community,Barge or Road,Receiver,SYN-230,{9BCB41EC-DF28-4A3E-BDB7-216A0745DF9E},36880,placed
+Hub_61,NOATAK,Noatak,community,Barge or Plane,Receiver,1104,{4B5EFC28-233C-4089-A53B-8CFE817994BA},44454,placed
+Hub_61,NOATAK,Noatak,community,Barge or Plane,Receiver,1237,{A47A5CD5-7E81-47E9-8195-533AEBF62CEA},44454,placed
+Hub_61,NOATAK,Noatak,community,Barge or Plane,Receiver,SYN-457,{244CDA16-C245-4007-ABC2-3A8251B00F31},44454,placed
+Hub_61,NOATAK,Noatak,community,Barge or Plane,Receiver,SYN-459,{1B58621C-9C3B-44AE-87C8-600ED9975067},44454,placed
+Hub_62,KETCHIKAN,Ketchikan,community,Barge or Plane or Road,Receiver,1105,{F9A3F8E4-4D4A-4EC2-9917-B3464DC4BC42},35302,placed
+Hub_62,KETCHIKAN,Ketchikan,community,Barge or Plane or Road,Receiver,2,{CBC48C5B-1B5E-410F-97DE-D67332C3B6DD},35302,placed
+Hub_62,KETCHIKAN,Ketchikan,community,Barge or Plane or Road,Receiver,237,{B2361FF5-97F3-44BE-B463-E1BEA5098719},35302,placed
+Hub_62,KETCHIKAN,Ketchikan,community,Barge or Plane or Road,Receiver,28,{44D5A7BD-3E91-4753-9077-7934F7745FB4},35302,placed
+Hub_62,KETCHIKAN,Ketchikan,community,Barge or Plane or Road,Receiver,431,{C26441CB-9315-4F5F-A109-D3725C17B586},35302,placed
+Hub_62,KETCHIKAN,Ketchikan,community,Barge or Plane or Road,Receiver,432,{A9D42BE2-8741-44EB-9D76-C45071496923},35302,placed
+Hub_62,KETCHIKAN,Ketchikan,community,Barge or Plane or Road,Receiver,519,{A6438E8E-EC86-43B8-A939-ECCBB039056D},35302,placed
+Hub_62,KETCHIKAN,Ketchikan,community,Barge or Plane or Road,Receiver,633,{DF7DE3EA-8366-4CB9-8D57-C492F2B43793},35302,placed
+Hub_62,KETCHIKAN,Ketchikan,community,Barge or Plane or Road,Receiver,710,{25B5D119-20BE-4211-91E4-E75BF7969171},35302,placed
+Hub_62,KETCHIKAN,Ketchikan,community,Barge or Plane or Road,Receiver,720,{EF799C7C-48D8-475B-816B-6D08F25BBB08},35302,placed
+Hub_62,KETCHIKAN,Ketchikan,community,Barge or Plane or Road,Receiver,727,{FA4C73B2-596D-48AE-A49A-70B70258ED8D},35302,placed
+Hub_62,KETCHIKAN,Ketchikan,community,Barge or Plane or Road,Receiver,728,{B82A34CB-3CD0-4A7F-BFEE-BA349A32E157},35302,placed
+Hub_62,KETCHIKAN,Ketchikan,community,Barge or Plane or Road,Receiver,858,{7E331BCD-38FC-45CA-B676-38CFC2492CC6},35302,placed
+Hub_62,KETCHIKAN,Ketchikan,community,Barge or Plane or Road,Receiver,888,{876E6B25-489C-4734-9FED-335A8FEA21D0},35302,placed
+Hub_62,KETCHIKAN,Ketchikan,community,Barge or Plane or Road,Receiver,972,{6E5C4B48-52F2-45E9-BFA5-C7CCE180C9F9},35302,placed
+Hub_63,FALSE PASS,False Pass,community,Barge or Road,Receiver,1106,{5553F08E-643A-415D-8BA6-6C25914904DC},47648,placed
+Hub_63,FALSE PASS,False Pass,community,Barge or Road,Receiver,1192,{AB23A4FE-2B44-4EE0-9ECF-0D11705EC96D},47648,placed
+Hub_63,FALSE PASS,False Pass,community,Barge or Road,Receiver,140,{4423FEAA-6CA7-48F5-B89D-7EDDC5DFF1F2},47648,placed
+Hub_63,FALSE PASS,False Pass,community,Barge or Road,Receiver,511,{37E9912D-6B47-48B5-A018-C41BFD73CCA0},47648,placed
+Hub_63,FALSE PASS,False Pass,community,Barge or Road,Receiver,511,{D01D9DD1-1629-411F-9602-1EBA924BC4D1},47648,placed
+Hub_63,FALSE PASS,False Pass,community,Barge or Road,Receiver,556,{8036C5D7-767C-4593-A72A-15CA64AC8BD0},47648,placed
+Hub_63,FALSE PASS,False Pass,community,Barge or Road,Receiver,SYN-969,{811E6ABE-AD0B-4DE5-BC2B-46B69105F5EF},47648,placed
+Hub_64,blob:34,blob:34,blob,Plane or Road,Receiver,1108,{0532E4A1-8BCD-492D-A91D-854AD1A0A486},2836,placed
+Hub_64,blob:34,blob:34,blob,Plane or Road,Receiver,266,{11347F21-1300-4D5F-A511-ADCB96465D53},2836,placed
+Hub_64,blob:34,blob:34,blob,Plane or Road,Receiver,819,{C678BE69-8301-45BA-8BB8-7BD23D530023},2836,placed
+Hub_65,blob:38,blob:38,blob,Road,Receiver,1109,{17AC451F-03F3-4C19-A5D1-1D2B071DC61A},49878,placed
+Hub_66,MANOKOTAK,Manokotak,community,Barge or Plane,Receiver,111,{436C8E35-D254-4FBA-8564-6DE2E2BAAD3C},40563,placed
+Hub_66,MANOKOTAK,Manokotak,community,Barge or Plane,Receiver,406,{12AB835A-E2CA-498A-B5EB-BA0FDA8EBD71},40563,placed
+Hub_66,MANOKOTAK,Manokotak,community,Barge or Plane,Receiver,SYN-1067,{2884A5C2-BA00-4DBF-BC7C-C793B3D0CBD7},40563,placed
+Hub_66,MANOKOTAK,Manokotak,community,Barge or Plane,Receiver,SYN-1067,{91083E3A-19D1-4D6F-B057-A329E9283F1F},40563,placed
+Hub_66,MANOKOTAK,Manokotak,community,Barge or Plane,Receiver,SYN-1067,{FAD572FC-11B2-4DE4-B16A-D59A71D55896},40563,placed
+Hub_66,MANOKOTAK,Manokotak,community,Barge or Plane,Receiver,SYN-1068,{5080792E-6BE2-4D7A-BD57-AF8BF71FFF30},40563,placed
+Hub_66,MANOKOTAK,Manokotak,community,Barge or Plane,Receiver,SYN-1069,{D9FE15B2-31C8-46BC-9A6D-F66958E9E233},40563,placed
+Hub_66,MANOKOTAK,Manokotak,community,Barge or Plane,Receiver,SYN-1070,{558AB51A-7628-4CB4-B3E5-7A6B1532B027},40563,placed
+Hub_67,blob:36,blob:36,blob,Plane or Road,Receiver,1110,{EC3737B3-4DF5-43BE-B889-8854827FF5FA},45557,placed
+Hub_67,blob:36,blob:36,blob,Plane or Road,Receiver,274,{0CAB0B8D-D906-49C4-A353-2269607ABD33},45557,placed
+Hub_67,blob:36,blob:36,blob,Plane or Road,Receiver,827,{DA956473-B640-4963-9D10-1421DF815278},45557,placed
+Hub_68,VALDEZ,Valdez,community,Barge or Plane or Road,Receiver,1114,{9BD1E836-06B9-4EAA-A631-8CCC69261C22},10459,placed
+Hub_68,VALDEZ,Valdez,community,Barge or Plane or Road,Receiver,254,{316442FE-F21C-4BAD-B4A4-700329BA1914},10459,placed
+Hub_68,VALDEZ,Valdez,community,Barge or Plane or Road,Receiver,30,{8D14412D-5103-49AD-8AFB-6B4F425D82DF},10459,placed
+Hub_68,VALDEZ,Valdez,community,Barge or Plane or Road,Receiver,319,{5D6DD34B-DAEE-49F9-988E-21E080CB537A},10459,placed
+Hub_68,VALDEZ,Valdez,community,Barge or Plane or Road,Receiver,320,{18A0F761-6B93-4198-82BD-6BEAA7405909},10459,placed
+Hub_68,VALDEZ,Valdez,community,Barge or Plane or Road,Receiver,321,{96237B31-0C4F-486F-99F1-B7F39326C8FA},10459,placed
+Hub_68,VALDEZ,Valdez,community,Barge or Plane or Road,Receiver,41,{1DF623E1-B266-4C31-BB2D-2ABE4B807661},10459,placed
+Hub_68,VALDEZ,Valdez,community,Barge or Plane or Road,Receiver,555,{D90B5B01-B43C-47E6-AFBE-60E05BEBF7DC},10459,placed
+Hub_68,VALDEZ,Valdez,community,Barge or Plane or Road,Receiver,614,{C70F025D-17AF-456C-8E48-D5735931DDB5},10459,placed
+Hub_68,VALDEZ,Valdez,community,Barge or Plane or Road,Receiver,829,{E9721470-3863-4DF0-8FA9-DEE71E0F717F},10459,placed
+Hub_68,VALDEZ,Valdez,community,Barge or Plane or Road,Receiver,830,{C9BC00FA-491A-4D02-BFB8-B40977DA2016},10459,placed
+Hub_68,VALDEZ,Valdez,community,Barge or Plane or Road,Receiver,831,{71EF2656-042E-4F42-A78D-E48CD254C0EB},10459,placed
+Hub_68,VALDEZ,Valdez,community,Barge or Plane or Road,Receiver,844,{C1ADC4CF-10B4-46CB-869B-B99E2F70453E},10459,placed
+Hub_68,VALDEZ,Valdez,community,Barge or Plane or Road,Receiver,845,{10C293FA-932B-464D-A923-2CE29D264905},10459,placed
+Hub_68,VALDEZ,Valdez,community,Barge or Plane or Road,Receiver,848,{15F42230-AEBD-4A55-B59D-170175A8B3BE},10459,placed
+Hub_68,VALDEZ,Valdez,community,Barge or Plane or Road,Receiver,850,{E440AFDF-429C-43EF-97E7-E99BC8872AF7},10459,placed
+Hub_68,VALDEZ,Valdez,community,Barge or Plane or Road,Receiver,851,{F19B2D16-1835-43FE-9850-72DF8B05E016},10459,placed
+Hub_69,TWIN HILLS,Twin Hills,community,Barge,Receiver,112,{AAE0CDFD-B257-4827-AB4E-3FA700BE29A7},41376,placed
+Hub_69,TWIN HILLS,Twin Hills,community,Barge,Receiver,1246,{36F83444-DBD2-4AD3-A139-81A0F56C2A2D},41376,placed
+Hub_69,TWIN HILLS,Twin Hills,community,Barge,Receiver,152,{42BE0729-57F3-409D-990B-0667528A16F1},41376,placed
+Hub_69,TWIN HILLS,Twin Hills,community,Barge,Receiver,408,{6CC77A07-14DE-4D62-824B-C2858DC4D5FC},41376,placed
+Hub_69,TWIN HILLS,Twin Hills,community,Barge,Receiver,SYN-1047,{B2287974-A30A-4154-B089-CD95A7185409},41376,placed
+Hub_70,blob:19,blob:19,blob,Road,Receiver,1120,{BC7D6512-454F-4C88-AE3B-4FFA5D51901E},42334,placed
+Hub_71,LIVENGOOD,Livengood,community,Plane or Road,Receiver,1121,{92D9A297-0605-4AF5-938B-9B434117412A},2564,placed
+Hub_71,LIVENGOOD,Livengood,community,Plane or Road,Receiver,270,{97A8BEAA-FAAE-41E6-A071-70852AC87F76},2564,placed
+Hub_71,LIVENGOOD,Livengood,community,Plane or Road,Receiver,801,{A168E5AD-EFD4-408B-8604-155ACC08560E},2564,placed
+Hub_72,blob:2,blob:2,blob,Plane,Receiver,1123,{796278F9-D4FE-4905-9377-0098410318CB},43783,placed
+Hub_73,blob:4,blob:4,blob,Road,Receiver,1124,{56E259C0-3D1E-4F96-8DC8-B3314524F255},43612,placed
+Hub_74,TOGIAK,Togiak,community,Barge or Plane,Supplier,1125,{FC4F1FED-EBC1-4847-BD73-63BF9DA79F57},41356,placed
+Hub_74,TOGIAK,Togiak,community,Barge or Plane,Supplier,113,{753FD735-3081-4808-8B14-73A0463F3BC5},41356,placed
+Hub_74,TOGIAK,Togiak,community,Barge or Plane,Supplier,942,{8246435C-38B7-4C06-83AD-E741DB114913},41356,placed
+Hub_74,TOGIAK,Togiak,community,Barge or Plane,Supplier,SYN-1049,{40B65273-A8C5-4017-AF78-8A65C850D928},41356,placed
+Hub_74,TOGIAK,Togiak,community,Barge or Plane,Supplier,SYN-1049,{A8982EF5-33DF-4199-A007-78C5331E926A},41356,placed
+Hub_74,TOGIAK,Togiak,community,Barge or Plane,Supplier,SYN-1050,{5E94939C-C4FF-4F31-8656-D1955C13B0F2},41356,placed
+Hub_74,TOGIAK,Togiak,community,Barge or Plane,Supplier,SYN-1050,{8BD0D6E7-2B7D-4848-9B1D-A309ACA94679},41356,placed
+Hub_74,TOGIAK,Togiak,community,Barge or Plane,Supplier,SYN-1052,{1565B7EF-19B4-4703-A9F8-62D9D2AC6885},41356,placed
+Hub_75,blob:3,blob:3,blob,Plane,Receiver,1126,{F5DD5967-D189-418D-894D-841F2B1535F8},,unplaced:beyond_cap
+Hub_76,blob:13,blob:13,blob,Plane,Receiver,1127,{1D92DA33-1010-4A0B-AC0E-965828BAEA3D},40897,placed
+Hub_77,blob:7,blob:7,blob,Plane,Receiver,1128,{2DB8E8D5-5632-49B7-A98B-E95459A2C824},,unplaced:beyond_cap
+Hub_78,blob:6,blob:6,blob,Plane,Receiver,1129,{8E7FB782-7DEF-47BE-9712-1220B420288B},,unplaced:beyond_cap
+Hub_79,blob:9,blob:9,blob,Plane,Receiver,1130,{E40F47E8-DDAF-49A1-933C-821B7401109C},44018,placed
+Hub_80,blob:11,blob:11,blob,Plane,Receiver,1131,{DA511820-2AB6-4A95-BBFA-684B0F675A1A},,unplaced:beyond_cap
+Hub_81,blob:10,blob:10,blob,Plane,Receiver,1132,{DC63FF5C-C2A2-4923-89EF-FD5BA149B40C},,unplaced:beyond_cap
+Hub_82,blob:8,blob:8,blob,Plane,Receiver,1133,{3867676D-35AE-40FA-9B94-AC050118795C},,unplaced:beyond_cap
+Hub_83,blob:24,blob:24,blob,Plane,Receiver,1134,{641F930A-86F7-4774-BE98-C59AF457B2F1},,unplaced:beyond_cap
+Hub_84,blob:25,blob:25,blob,Plane,Receiver,1135,{4DAD23C9-1989-4433-A021-C16100182BC6},,unplaced:beyond_cap
+Hub_85,blob:21,blob:21,blob,Plane,Receiver,1136,{422048B3-901C-42B2-8FA0-92EF128B3C51},42775,placed
+Hub_86,blob:12,blob:12,blob,Plane,Receiver,1137,{5ADE8F5D-F009-4DF3-B60C-41E1F96A0566},,unplaced:beyond_cap
+Hub_87,blob:5,blob:5,blob,Plane,Receiver,1138,{120F446E-4319-46F6-BF44-EDA28C89AD55},,unplaced:beyond_cap
+Hub_88,KIANA,Kiana,community,Barge or Plane,Supplier,1139,{A5155750-38EC-47C7-B827-7975F4A90D3E},44392,placed
+Hub_88,KIANA,Kiana,community,Barge or Plane,Supplier,89,{434E09F8-0BC0-4400-9C37-090E2AC9AC89},44392,placed
+Hub_88,KIANA,Kiana,community,Barge or Plane,Supplier,947,{6A6FAD87-D981-43FB-B310-DD4E6D7E5005},44392,placed
+Hub_88,KIANA,Kiana,community,Barge or Plane,Supplier,947,{8165CCA3-56E8-47A2-8CFE-A8EAD7AB657B},44392,placed
+Hub_88,KIANA,Kiana,community,Barge or Plane,Supplier,947,{DC804955-7654-4EBB-AC92-0A0266163C08},44392,placed
+Hub_88,KIANA,Kiana,community,Barge or Plane,Supplier,SYN-477,{A4C45CB7-78AE-4218-B7EC-684EAC385193},44392,placed
+Hub_88,KIANA,Kiana,community,Barge or Plane,Supplier,SYN-478,{E77A8666-C3DB-4AE5-ABD7-A169FFB122E7},44392,placed
+Hub_88,KIANA,Kiana,community,Barge or Plane,Supplier,SYN-479,{79DEAD08-49F9-444F-9111-EFAC1EBFCDD1},44392,placed
+Hub_88,KIANA,Kiana,community,Barge or Plane,Supplier,SYN-479,{DF0D091B-FBBB-4517-AA45-0BAA2F320FDE},44392,placed
+Hub_88,KIANA,Kiana,community,Barge or Plane,Supplier,SYN-480,{7F9C4747-8957-4871-8E6F-F1ED7917FB36},44392,placed
+Hub_89,blob:28,blob:28,blob,Barge,Receiver,114,{165BC5D6-DBAE-442C-AE72-804C4FFF53A3},39090,placed
+Hub_90,blob:15,blob:15,blob,Plane,Receiver,1140,{AA3958B9-E108-4B2D-94B1-50DB4E5D7630},42893,placed
+Hub_91,remote:1141,Grayling,remote_site,Plane,Receiver,1141,{CAAC5221-829D-4B94-872F-BF7B98979A46},,unplaced:beyond_cap
+Hub_92,remote:1143,Holy Cross,remote_site,Plane,Receiver,1143,{BFB7DB54-CA46-4BD6-9543-C377A3C476CC},,unplaced:beyond_cap
+Hub_92,remote:1143,Holy Cross,remote_site,Plane,Receiver,1143,{DB4A3350-A9BC-4AF3-A19B-3FEA13954BDD},,unplaced:beyond_cap
+Hub_93,UNALAKLEET,Unalakleet,community,Barge or Plane or Road,Supplier,1144,{0348C10F-900C-4DEE-B116-5841EADCA147},43481,placed
+Hub_93,UNALAKLEET,Unalakleet,community,Barge or Plane or Road,Supplier,116,{5724C91B-F6B4-4EF2-B050-67E266B4E600},43481,placed
+Hub_93,UNALAKLEET,Unalakleet,community,Barge or Plane or Road,Supplier,1255,{621FCC2F-3A90-426E-A211-00250864F71E},43481,placed
+Hub_93,UNALAKLEET,Unalakleet,community,Barge or Plane or Road,Supplier,128,{233BA067-6BF5-4221-8448-2A6DD3131467},43481,placed
+Hub_93,UNALAKLEET,Unalakleet,community,Barge or Plane or Road,Supplier,128,{A2A6565E-0AB3-4959-BD55-0557CA9A3A1E},43481,placed
+Hub_93,UNALAKLEET,Unalakleet,community,Barge or Plane or Road,Supplier,128,{BB305CE8-F6DD-43BD-84C8-0B5E833AF5C6},43481,placed
+Hub_93,UNALAKLEET,Unalakleet,community,Barge or Plane or Road,Supplier,131,{A958F4D2-051D-4E8F-AF6E-9B74D92FE917},43481,placed
+Hub_93,UNALAKLEET,Unalakleet,community,Barge or Plane or Road,Supplier,131,{D9A44F25-7BD5-452C-B8EC-E436366772FE},43481,placed
+Hub_93,UNALAKLEET,Unalakleet,community,Barge or Plane or Road,Supplier,131,{ED965264-815C-46DB-A2C0-252D0EDEEB45},43481,placed
+Hub_93,UNALAKLEET,Unalakleet,community,Barge or Plane or Road,Supplier,364,{CC640165-0D81-487D-A9C2-561FACFE5085},43481,placed
+Hub_93,UNALAKLEET,Unalakleet,community,Barge or Plane or Road,Supplier,364,{D56D7018-E852-420A-B32D-D20B5B07A893},43481,placed
+Hub_93,UNALAKLEET,Unalakleet,community,Barge or Plane or Road,Supplier,98,{C0078B6F-6E82-4228-8A2C-24B01CE556CE},43481,placed
+Hub_93,UNALAKLEET,Unalakleet,community,Barge or Plane or Road,Supplier,SYN-635,{E98F3A3E-E585-4EEE-80D1-92ED1E2D5F56},43481,placed
+Hub_93,UNALAKLEET,Unalakleet,community,Barge or Plane or Road,Supplier,SYN-636,{783EBD25-B5D8-4056-9E13-9080E10AD0E8},43481,placed
+Hub_93,UNALAKLEET,Unalakleet,community,Barge or Plane or Road,Supplier,SYN-637,{44725B4B-BE85-44D7-B855-A2B0FAE8A4A2},43481,placed
+Hub_93,UNALAKLEET,Unalakleet,community,Barge or Plane or Road,Supplier,SYN-637,{B7C1513A-81D7-4D29-B32B-B54EF5E38F76},43481,placed
+Hub_94,PLATINUM,Platinum,community,Barge or Plane,Receiver,1146,{4597868B-DAB9-43AA-A082-D0652EF78EEC},41321,placed
+Hub_94,PLATINUM,Platinum,community,Barge or Plane,Receiver,1242,{09049BF3-80A1-449D-8DD9-F6F3D988870D},41321,placed
+Hub_94,PLATINUM,Platinum,community,Barge or Plane,Receiver,1242,{20037641-A51B-4BDC-8495-1E81F40E75A4},41321,placed
+Hub_94,PLATINUM,Platinum,community,Barge or Plane,Receiver,SYN-1036,{C3238FD9-9D5F-4558-AB66-9F0E37FF8191},41321,placed
+Hub_94,PLATINUM,Platinum,community,Barge or Plane,Receiver,SYN-1037,{6EB566C2-0246-4043-B2DA-4488096CC6C6},41321,placed
+Hub_94,PLATINUM,Platinum,community,Barge or Plane,Receiver,SYN-1038,{C4C5D0B6-E282-4658-B458-82DFF089E607},41321,placed
+Hub_95,WASILLA,Wasilla,community,Road,Receiver,1151,{C79DD2E6-D5FF-43CB-B4E3-362A2D1FD2CD},22654,placed
+Hub_95,WASILLA,Wasilla,community,Road,Receiver,615,{1B293629-AD2E-4C83-91D3-3350830FD212},22654,placed
+Hub_95,WASILLA,Wasilla,community,Road,Receiver,70,{33CE5488-B9E3-4D2C-9002-C9070398F548},22654,placed
+Hub_95,WASILLA,Wasilla,community,Road,Receiver,981,{4161C397-A0E9-4D17-A7C4-A1B5869F650F},22654,placed
+Hub_96,BELUGA,Beluga,community,Plane,Receiver,1152,{D43C27D7-B4F2-487C-8D23-889506ADBB70},39489,placed
+Hub_97,NIKISKI,Nikiski,community,Road,Receiver,1157,{827B291B-0875-400B-B99C-BAB1F97A5A3F},9257,placed
+Hub_98,NINILCHIK,Ninilchik,community,Road,Receiver,1158,{4C46574A-2B37-44A1-87E2-4C1A17B2A4D1},5042,placed
+Hub_98,NINILCHIK,Ninilchik,community,Road,Receiver,374,{853920D1-6D8A-4C73-B673-398EF4E1A137},5042,placed
+Hub_98,NINILCHIK,Ninilchik,community,Road,Receiver,688,{1C4700D7-8EB2-4516-9DE8-4074B1D1A203},5042,placed
+Hub_99,CHUATHBALUK,Chuathbaluk,community,Barge or Road,Receiver,1161,{666AF2B3-097B-4007-AC06-0BEC7A92A08C},42339,placed
+Hub_99,CHUATHBALUK,Chuathbaluk,community,Barge or Road,Receiver,401,{A6CB6477-FB04-4004-957A-50D44B89565D},42339,placed
+Hub_99,CHUATHBALUK,Chuathbaluk,community,Barge or Road,Receiver,963,{DF089F3D-FF57-46E4-926F-17F5878F0CE9},42339,placed
+Hub_99,CHUATHBALUK,Chuathbaluk,community,Barge or Road,Receiver,963,{E06E92CB-E637-4120-967B-1F567B0B9489},42339,placed
+Hub_99,CHUATHBALUK,Chuathbaluk,community,Barge or Road,Receiver,SYN-861,{199DCD38-B4D0-4C40-B569-F661EB0257D1},42339,placed
+Hub_99,CHUATHBALUK,Chuathbaluk,community,Barge or Road,Receiver,SYN-861,{5CEED9A4-3489-41F3-BE24-92F9FC2039C0},42339,placed
+Hub_99,CHUATHBALUK,Chuathbaluk,community,Barge or Road,Receiver,SYN-863,{B5D70A47-AC0D-44DA-80B7-98684B3A142F},42339,placed
+Hub_100,CROOKED CREEK,Crooked Creek,community,Barge,Receiver,1162,{3EDBC3D9-B754-435F-8C6D-2BA2FDBB9607},42487,placed
+Hub_100,CROOKED CREEK,Crooked Creek,community,Barge,Receiver,1221,{251778BF-3735-4E77-8E9B-5ABB3A33E2AA},42487,placed
+Hub_100,CROOKED CREEK,Crooked Creek,community,Barge,Receiver,1221,{CA46A88C-BFAC-4DAA-87F9-5F98FFA280A8},42487,placed
+Hub_100,CROOKED CREEK,Crooked Creek,community,Barge,Receiver,SYN-696,{5C8BA5EB-7A40-4B8F-80DD-58E08A2E84BF},42487,placed
+Hub_100,CROOKED CREEK,Crooked Creek,community,Barge,Receiver,SYN-697,{44244771-16B8-40ED-9FF2-2D77E405955A},42487,placed
+Hub_101,UPPER KALSKAG,Upper Kalskag,community,Barge,Supplier,1163,{41C39C16-6197-4AF1-A699-E8B804A72331},41960,placed
+Hub_101,UPPER KALSKAG,Upper Kalskag,community,Barge,Supplier,464,{013ABDFD-DB31-4E01-B9E3-9FF760C2BB05},41960,placed
+Hub_101,UPPER KALSKAG,Upper Kalskag,community,Barge,Supplier,464,{114FF0DE-E8A1-487F-8505-67999F6000EC},41960,placed
+Hub_101,UPPER KALSKAG,Upper Kalskag,community,Barge,Supplier,916,{6B2DF7B5-09D6-4DC1-81C3-144F567B9178},41960,placed
+Hub_101,UPPER KALSKAG,Upper Kalskag,community,Barge,Supplier,SYN-851,{D7310362-3F08-4501-8005-DF61067A12BF},41960,placed
+Hub_101,UPPER KALSKAG,Upper Kalskag,community,Barge,Supplier,SYN-852,{FE80FFE4-DA2A-4520-83FA-EBF49A90B09C},41960,placed
+Hub_101,UPPER KALSKAG,Upper Kalskag,community,Barge,Supplier,SYN-853,{39B31BE9-3E59-4729-89B1-63A59C31F2D7},41960,placed
+Hub_101,UPPER KALSKAG,Upper Kalskag,community,Barge,Supplier,SYN-854,{E4B7575E-9F3B-44DD-88D5-F0519B402055},41960,placed
+Hub_102,SLEETMUTE,Sleetmute,community,Barge,Receiver,1164,{01744D37-24A3-4287-8792-B3ABA3E36990},42448,placed
+Hub_102,SLEETMUTE,Sleetmute,community,Barge,Receiver,1164,{559A13A2-8320-416A-BEC8-2097305335E9},42448,placed
+Hub_102,SLEETMUTE,Sleetmute,community,Barge,Receiver,745,{364E303A-DABA-49E2-9A59-DF3D2E1C6CDA},42448,placed
+Hub_102,SLEETMUTE,Sleetmute,community,Barge,Receiver,745,{5318062B-2912-4651-85F2-985B9025DFCC},42448,placed
+Hub_102,SLEETMUTE,Sleetmute,community,Barge,Receiver,745,{DD6207A5-AD90-42B2-93C6-4A2AF3EF6A60},42448,placed
+Hub_102,SLEETMUTE,Sleetmute,community,Barge,Receiver,SYN-705,{B410D852-150D-4717-90A5-44DAC736B163},42448,placed
+Hub_103,STONY RIVER,Stony River,community,Barge,Receiver,1165,{1F3399A7-FBC2-40CA-9B93-794EAE08D2F5},42480,placed
+Hub_103,STONY RIVER,Stony River,community,Barge,Receiver,1224,{8DFD230E-C5E7-49E1-B2B1-F1DE440DAE7B},42480,placed
+Hub_103,STONY RIVER,Stony River,community,Barge,Receiver,SYN-700,{0C9AC49C-C828-4A4E-96CF-F1D42D769F14},42480,placed
+Hub_103,STONY RIVER,Stony River,community,Barge,Receiver,SYN-701,{2759C0BB-C0D5-4543-AED2-2BF2DC54F247},42480,placed
+Hub_104,DENALI NATIONAL PARK,Denali National Park,community,Road,Receiver,1166,{5B1AEAB7-BC9D-4F53-92E6-5C4E64F4BFD0},2043,placed
+Hub_105,BETTLES FIELD,Bettles Field,community,Plane or Road,Supplier,1167,{9FE4EA49-0ACD-4C6A-89BF-F196359859F6},43317,placed
+Hub_105,BETTLES FIELD,Bettles Field,community,Plane or Road,Supplier,284,{DA9AE6EB-3E04-4550-A71C-981B511781C4},43317,placed
+Hub_105,BETTLES FIELD,Bettles Field,community,Plane or Road,Supplier,SYN-399,{0C5BEC21-0D02-4217-BB25-11C53F2A57C2},43317,placed
+Hub_105,BETTLES FIELD,Bettles Field,community,Plane or Road,Supplier,SYN-400,{95BA79A7-EECB-4B9D-8F6C-82D0C48A0838},43317,placed
+Hub_105,BETTLES FIELD,Bettles Field,community,Plane or Road,Supplier,SYN-401,{4F994E16-6208-479F-B3B2-22194B179F84},43317,placed
+Hub_105,BETTLES FIELD,Bettles Field,community,Plane or Road,Supplier,SYN-403,{086531C1-92F4-4C8B-95C4-BA197AAAD587},43317,placed
+Hub_105,BETTLES FIELD,Bettles Field,community,Plane or Road,Supplier,SYN-406,{DFFEA010-C78E-4C70-A5A9-0089FFA544FA},43317,placed
+Hub_106,EAGLE,Eagle,community,Plane or Road,Receiver,1168,{9F1EAB80-15AC-4B09-9B0B-09F30E3772F1},2321,placed
+Hub_106,EAGLE,Eagle,community,Plane or Road,Receiver,1249,{CDFDD706-0D5A-4E70-8BBE-5C6E499DC2C1},2321,placed
+Hub_106,EAGLE,Eagle,community,Plane or Road,Receiver,309,{AC79B6DF-37F4-4141-A2B0-20447B7A3E1C},2321,placed
+Hub_106,EAGLE,Eagle,community,Plane or Road,Receiver,629,{81F15798-5642-47BA-92D1-9D31759AF769},2321,placed
+Hub_106,EAGLE,Eagle,community,Plane or Road,Receiver,775,{986F0832-D7FF-48D1-A9F4-9AF8CE00BB51},2321,placed
+Hub_107,GUSTAVUS,Gustavus,community,Barge or Road,Receiver,1169,{B718A85C-8F35-4926-949D-1A17CD92D97A},45788,placed
+Hub_107,GUSTAVUS,Gustavus,community,Barge or Road,Receiver,123,{F5AD660F-BFB2-45F7-A0DD-3D6376AE81F5},45788,placed
+Hub_107,GUSTAVUS,Gustavus,community,Barge or Road,Receiver,SYN-208,{375B0BE8-37A8-4560-8FF4-1D5C1841820D},45788,placed
+Hub_107,GUSTAVUS,Gustavus,community,Barge or Road,Receiver,SYN-209,{2BE14DE6-6F88-4708-9D02-A0D0695E325F},45788,placed
+Hub_107,GUSTAVUS,Gustavus,community,Barge or Road,Receiver,SYN-209,{31253619-C27C-45C2-B04C-29DC2F737A49},45788,placed
+Hub_107,GUSTAVUS,Gustavus,community,Barge or Road,Receiver,SYN-210,{8B7B524E-71CF-40B9-BE1E-CAE473BC5CE7},45788,placed
+Hub_107,GUSTAVUS,Gustavus,community,Barge or Road,Receiver,SYN-212,{F90B614D-0126-446C-8EA2-D45D46B53701},45788,placed
+Hub_107,GUSTAVUS,Gustavus,community,Barge or Road,Receiver,SYN-213,{B057ED6C-AB74-4C0C-A33E-C27C193AC3EA},45788,placed
+Hub_108,blob:17,blob:17,blob,Barge,Receiver,1170,{EE9F299B-7FBB-46A0-A9F0-61E7D1B5A1E7},,unplaced:beyond_cap
+Hub_109,PORT ALSWORTH,Port Alsworth,community,Barge or Plane or Road,Receiver,1173,{E670FA80-0EEE-4383-AF9E-7B7B187485C4},41215,placed
+Hub_109,PORT ALSWORTH,Port Alsworth,community,Barge or Plane or Road,Receiver,1213,{A9C3A000-424E-4DCA-83F3-1BAEAB5E58D3},41215,placed
+Hub_109,PORT ALSWORTH,Port Alsworth,community,Barge or Plane or Road,Receiver,SYN-1197,{29C04990-053F-44BA-A0A4-2BBF5E2CF374},41215,placed
+Hub_109,PORT ALSWORTH,Port Alsworth,community,Barge or Plane or Road,Receiver,SYN-1198,{1C8923BB-1BB1-40AD-9EB8-1432E351A4A4},41215,placed
+Hub_109,PORT ALSWORTH,Port Alsworth,community,Barge or Plane or Road,Receiver,SYN-1199,{E1A25DB3-FA3A-4228-B3DF-72F39484C323},41215,placed
+Hub_109,PORT ALSWORTH,Port Alsworth,community,Barge or Plane or Road,Receiver,SYN-1201,{F4D6963C-5D38-438F-805F-32542198763E},41215,placed
+Hub_109,PORT ALSWORTH,Port Alsworth,community,Barge or Plane or Road,Receiver,SYN-1202,{A4E5681F-EF6B-483C-AF08-BFC129E2D93D},41215,placed
+Hub_109,PORT ALSWORTH,Port Alsworth,community,Barge or Plane or Road,Receiver,SYN-1203,{94F72FDD-056D-44E9-91B5-9AEAA2646F47},41215,placed
+Hub_110,COPPER CENTER,Copper Center,community,Road,Receiver,1175,{7786B49A-CFD5-4175-B3BC-4F71C71275F3},1236,placed
+Hub_111,KOTZEBUE,Kotzebue,community,Barge or Road,Receiver,1176,{D044CE70-F602-4D76-8E80-C741490CDEC2},44212,placed
+Hub_111,KOTZEBUE,Kotzebue,community,Barge or Road,Receiver,1236,{DCE1573C-EE52-4563-81A1-532110C2CE26},44212,placed
+Hub_111,KOTZEBUE,Kotzebue,community,Barge or Road,Receiver,175,{470F1396-C8AE-477E-848A-7BE1F18CBBC7},44212,placed
+Hub_111,KOTZEBUE,Kotzebue,community,Barge or Road,Receiver,240,{2678E393-F35F-445F-9255-1156CDCA6C7C},44212,placed
+Hub_111,KOTZEBUE,Kotzebue,community,Barge or Road,Receiver,241,{00AFD389-4C3E-4212-91BE-EFC91119FCDF},44212,placed
+Hub_111,KOTZEBUE,Kotzebue,community,Barge or Road,Receiver,341,{EA033FEC-60D8-448B-A49A-6DCACE5AB189},44212,placed
+Hub_111,KOTZEBUE,Kotzebue,community,Barge or Road,Receiver,74,{C1443882-281A-4530-989F-8E2696B6131E},44212,placed
+Hub_111,KOTZEBUE,Kotzebue,community,Barge or Road,Receiver,799,{20D927A8-361D-43C0-BD76-C7A27D0A4DC0},44212,placed
+Hub_111,KOTZEBUE,Kotzebue,community,Barge or Road,Receiver,973,{3F306805-C39B-439C-8FAB-996948D604C0},44212,placed
+Hub_112,TRAPPER CREEK,Trapper Creek,community,Road,Receiver,1177,{C995496F-83BC-4D90-B7A0-8346CD6E515C},46655,placed
+Hub_112,TRAPPER CREEK,Trapper Creek,community,Road,Receiver,383,{FFAACF52-4DDD-43E9-BF72-FE3F8A80F480},46655,placed
+Hub_113,ANCHOR POINT,Anchor Point,community,Road,Receiver,1180,{7EEB830F-716D-4B7E-B1AA-0E90DA5C1C9A},4350,placed
+Hub_113,ANCHOR POINT,Anchor Point,community,Road,Receiver,81,{4EE59B93-7660-4A46-98B0-D8E8DCE49350},4350,placed
+Hub_114,BIRD CREEK,Bird Creek,community,Road,Receiver,1181,{1D7B454B-0160-4177-AF68-7279EA76EF52},499,placed
+Hub_115,SOLDOTNA,Soldotna,community,Road,Supplier,1188,{7194E7D0-61E4-4529-9365-D335C386020F},7171,placed
+Hub_115,SOLDOTNA,Soldotna,community,Road,Supplier,381,{F838A24B-74C8-4827-BDA2-B393AB91F423},7171,placed
+Hub_115,SOLDOTNA,Soldotna,community,Road,Supplier,69,{01CC0E0C-B1D0-4ACE-BB8C-7D124D55C13C},7171,placed
+Hub_115,SOLDOTNA,Soldotna,community,Road,Supplier,693,{EEF98AEC-B3D9-49F8-B68D-1051218EE404},7171,placed
+Hub_115,SOLDOTNA,Soldotna,community,Road,Supplier,695,{B9036553-889F-4AA5-B39F-08B8BACE8D3F},7171,placed
+Hub_115,SOLDOTNA,Soldotna,community,Road,Supplier,697,{EFB8BB07-4BF6-42EF-8860-505B1E26AE40},7171,placed
+Hub_115,SOLDOTNA,Soldotna,community,Road,Supplier,698,{80AD0D72-EDDF-414A-AB9A-6958587FD3E6},7171,placed
+Hub_115,SOLDOTNA,Soldotna,community,Road,Supplier,699,{3282A734-D7C0-4BDC-988C-4806E34D3B0F},7171,placed
+Hub_115,SOLDOTNA,Soldotna,community,Road,Supplier,748,{C1258475-1FC1-491C-9142-9658BFEEF0FB},7171,placed
+Hub_116,WHITTIER,Whittier,community,Road,Supplier,1190,{9B515F41-7F7E-44D5-9473-004F31942046},45828,placed
+Hub_117,HAINES,Haines,community,Plane or Road,Receiver,1196,{2D742A13-062B-4111-A3EA-AA77C7360838},3051,placed
+Hub_117,HAINES,Haines,community,Plane or Road,Receiver,159,{6EB6FBF9-7227-46E6-9566-9CDFE3039517},3051,placed
+Hub_117,HAINES,Haines,community,Plane or Road,Receiver,161,{63499130-C393-4124-906B-08DA99CA5EB8},3051,placed
+Hub_117,HAINES,Haines,community,Plane or Road,Receiver,427,{532C1372-1D15-4036-9A8B-4ADC4480E152},3051,placed
+Hub_117,HAINES,Haines,community,Plane or Road,Receiver,631,{428ABEF1-08E0-4B0F-88D9-94AADA3CE711},3051,placed
+Hub_117,HAINES,Haines,community,Plane or Road,Receiver,788,{7CD62740-2CC2-47F0-B0F9-2C76B695BC47},3051,placed
+Hub_118,remote:1197,Delta Junction,remote_site,Road,Receiver,1197,{E4CF3B9E-8613-49C3-94A8-E46B9248AE34},42697,placed
+Hub_119,KASAAN,Kasaan,community,Barge or Road,Receiver,1198,{B180DDDE-3929-4A7B-8974-8163ACFD6C3A},35706,placed
+Hub_119,KASAAN,Kasaan,community,Barge or Road,Receiver,636,{3585D40E-898B-4939-9239-5E8763D652DB},35706,placed
+Hub_119,KASAAN,Kasaan,community,Barge or Road,Receiver,636,{946D5691-F5D6-4C5E-9205-073F89821A7D},35706,placed
+Hub_119,KASAAN,Kasaan,community,Barge or Road,Receiver,64,{7A634204-0D42-424E-B19E-058E52FB63DB},35706,placed
+Hub_119,KASAAN,Kasaan,community,Barge or Road,Receiver,64,{CA25E36E-8FCA-45E3-AB5A-0B05B3A26097},35706,placed
+Hub_119,KASAAN,Kasaan,community,Barge or Road,Receiver,SYN-48,{D1E9B280-33D0-4584-B779-96F3378A1E4B},35706,placed
+Hub_120,CHIGNIK,Chignik,community,Barge,Receiver,1199,{E28836DE-2C57-40A3-B75C-FB7EB08D38C3},40117,placed
+Hub_120,CHIGNIK,Chignik,community,Barge,Receiver,885,{B5E90817-D98F-4DBE-8C24-C42163277CEA},40117,placed
+Hub_120,CHIGNIK,Chignik,community,Barge,Receiver,SYN-997,{B2CB3063-B2FF-4B00-8451-105642A700DD},40117,placed
+Hub_120,CHIGNIK,Chignik,community,Barge,Receiver,SYN-998,{9232BC22-0B6C-423A-B37B-CD4B2A279126},40117,placed
+Hub_120,CHIGNIK,Chignik,community,Barge,Receiver,SYN-998,{C5F4D4C2-7256-4841-A844-75F247DB7AEB},40117,placed
+Hub_121,PALMER,Palmer,community,Road,Receiver,12,{DF6648FB-7E01-4D97-AD35-9477293F4C57},46091,placed
+Hub_121,PALMER,Palmer,community,Road,Receiver,386,{1357CE94-8168-435D-90F7-C00A036EE70A},46091,placed
+Hub_121,PALMER,Palmer,community,Road,Receiver,593,{8CD94505-4EC1-4C3E-A3F9-4648A47F56CC},46091,placed
+Hub_121,PALMER,Palmer,community,Road,Receiver,612,{E97E7FA3-5A3B-497A-9EFF-6E3E1832C369},46091,placed
+Hub_121,PALMER,Palmer,community,Road,Receiver,758,{96C86C0C-2A57-4A26-94E5-72600F5A5FCC},46091,placed
+Hub_121,PALMER,Palmer,community,Road,Receiver,811,{8CC32BC7-7206-4A37-AD96-8E8D803BE4FA},46091,placed
+Hub_121,PALMER,Palmer,community,Road,Receiver,95,{7FAAB439-FAD9-4983-9F0D-8B67F366F7BA},46091,placed
+Hub_121,PALMER,Palmer,community,Road,Receiver,978,{844A9392-863B-4FA8-889B-0947AB68248D},46091,placed
+Hub_122,CHIGNIK LAGOON,Chignik Lagoon,community,Barge,Receiver,1200,{A83E2FB7-E147-4DD4-BD40-5D5698C340FA},48773,placed
+Hub_122,CHIGNIK LAGOON,Chignik Lagoon,community,Barge,Receiver,540,{12A13951-6E36-475D-8947-BB0A95EB953D},48773,placed
+Hub_122,CHIGNIK LAGOON,Chignik Lagoon,community,Barge,Receiver,83,{B2D66571-9AF4-41D6-B083-AB1294B64E39},48773,placed
+Hub_122,CHIGNIK LAGOON,Chignik Lagoon,community,Barge,Receiver,SYN-993,{0D44C3AF-5DC1-4518-BBEA-FB3F0C68D860},48773,placed
+Hub_122,CHIGNIK LAGOON,Chignik Lagoon,community,Barge,Receiver,SYN-993,{1E6B3861-0BB7-44C5-B50C-1F7046320EAE},48773,placed
+Hub_122,CHIGNIK LAGOON,Chignik Lagoon,community,Barge,Receiver,SYN-993,{2B1BB9DC-F56A-461B-A9C9-0BD7DCA2E0E5},48773,placed
+Hub_122,CHIGNIK LAGOON,Chignik Lagoon,community,Barge,Receiver,SYN-993,{71B2729A-1D1D-4425-A8C9-0B2EE92A5A23},48773,placed
+Hub_122,CHIGNIK LAGOON,Chignik Lagoon,community,Barge,Receiver,SYN-993,{72CC1CF3-EBE3-4E3B-9B08-97203635FA45},48773,placed
+Hub_122,CHIGNIK LAGOON,Chignik Lagoon,community,Barge,Receiver,SYN-993,{C1777E18-0538-46D5-9FD1-1AB070AA933F},48773,placed
+Hub_122,CHIGNIK LAGOON,Chignik Lagoon,community,Barge,Receiver,SYN-993,{C1CE1A5B-F613-4687-9FF3-B36494EFC3AC},48773,placed
+Hub_123,CHIGNIK LAKE,Chignik Lake,community,Barge or Road,Receiver,1201,{5E372C3D-3EF8-4DF7-832F-612BE448C469},40084,placed
+Hub_123,CHIGNIK LAKE,Chignik Lake,community,Barge or Road,Receiver,SYN-990,{3A7D8FB2-40D2-426B-B2CA-0708168B90C1},40084,placed
+Hub_123,CHIGNIK LAKE,Chignik Lake,community,Barge or Road,Receiver,SYN-990,{ED80EB74-DD45-4CF1-AF10-93AF97EA137C},40084,placed
+Hub_124,EGEGIK,Egegik,community,Barge or Road,Receiver,1202,{A16F2934-D0B1-4C18-8E5B-9ED57B2C5421},40185,placed
+Hub_124,EGEGIK,Egegik,community,Barge or Road,Receiver,518,{A0E8B87A-66B0-4FAF-AF1E-22BC549E09C6},40185,placed
+Hub_124,EGEGIK,Egegik,community,Barge or Road,Receiver,866,{0AEF0513-6EE5-4AAE-AC95-75FC279EA120},40185,placed
+Hub_124,EGEGIK,Egegik,community,Barge or Road,Receiver,SYN-1096,{D60C23D0-11CC-4BD4-ACD0-86109EA5F37A},40185,placed
+Hub_124,EGEGIK,Egegik,community,Barge or Road,Receiver,SYN-1096,{E2CFD171-4F72-4EE8-AA24-C3C8C233BAA9},40185,placed
+Hub_124,EGEGIK,Egegik,community,Barge or Road,Receiver,SYN-1096,{E96D8287-193E-47D7-B6ED-C714E62819BD},40185,placed
+Hub_124,EGEGIK,Egegik,community,Barge or Road,Receiver,SYN-1100,{DCEA69CC-0392-4D6B-83AF-6DF819F9F130},40185,placed
+Hub_124,EGEGIK,Egegik,community,Barge or Road,Receiver,SYN-1101,{0143D47A-7E82-4EB8-866B-68F9FCC0626C},40185,placed
+Hub_124,EGEGIK,Egegik,community,Barge or Road,Receiver,SYN-1102,{A3070A39-1285-484C-AA8A-075CF281AD63},40185,placed
+Hub_125,IGIUGIG,Igiugig,community,Barge or Plane or Road,Receiver,1203,{659310D0-09A0-45D3-AF45-AA1F2A9E1F62},40920,placed
+Hub_125,IGIUGIG,Igiugig,community,Barge or Plane or Road,Receiver,SYN-1230,{465146AD-FB3B-45ED-AE32-8A6CC9625813},40920,placed
+Hub_126,IVANOF BAY,Ivanof Bay,community,Barge,Receiver,1204,{7C4C1CA2-B985-4749-9FD0-D2D21DBC3867},47834,placed
+Hub_126,IVANOF BAY,Ivanof Bay,community,Barge,Receiver,SYN-1002,{279DD612-28E0-4868-B801-AFCF16AE85B6},47834,placed
+Hub_126,IVANOF BAY,Ivanof Bay,community,Barge,Receiver,SYN-1002,{32EFC37E-347F-4AB4-B724-D1533B96A091},47834,placed
+Hub_127,KOKHANOK,Kokhanok,community,Barge or Plane or Road,Receiver,1205,{EB7C0400-4008-4293-A2E5-5436D5F383E3},40966,placed
+Hub_127,KOKHANOK,Kokhanok,community,Barge or Plane or Road,Receiver,448,{75270031-386E-446D-8718-2254299400DD},40966,placed
+Hub_127,KOKHANOK,Kokhanok,community,Barge or Plane or Road,Receiver,SYN-1231,{02C430B2-B9D2-4141-B9BE-FBFCB517E885},40966,placed
+Hub_127,KOKHANOK,Kokhanok,community,Barge or Plane or Road,Receiver,SYN-1231,{0F6E52E2-A85E-4BB6-92EA-34C3232C9855},40966,placed
+Hub_127,KOKHANOK,Kokhanok,community,Barge or Plane or Road,Receiver,SYN-1233,{215BE7CB-672B-465B-A6A9-E47D982AE06E},40966,placed
+Hub_128,LEVELOCK,Levelock,community,Barge or Road,Receiver,1206,{3DF22722-8282-47E1-8E71-78EB77A66857},40817,placed
+Hub_128,LEVELOCK,Levelock,community,Barge or Road,Receiver,SYN-1104,{268070AA-D83E-449C-BB0D-3A25985D3464},40817,placed
+Hub_129,NEWHALEN,Newhalen,community,Barge or Plane or Road,Receiver,1207,{1515E810-A497-476A-AFB4-632BA14A6973},41164,placed
+Hub_129,NEWHALEN,Newhalen,community,Barge or Plane or Road,Receiver,1207,{E09E2D7A-3D9D-4BC8-8FB4-8E2A425B1C82},41164,placed
+Hub_129,NEWHALEN,Newhalen,community,Barge or Plane or Road,Receiver,SYN-1220,{DAC83E96-633B-4414-8CEC-1D32B57B3ED9},41164,placed
+Hub_129,NEWHALEN,Newhalen,community,Barge or Plane or Road,Receiver,SYN-1221,{18BC4EB8-ECA2-4EBA-91BF-FA7BF073AD23},41164,placed
+Hub_130,NONDALTON,Nondalton,community,Barge or Plane,Receiver,1208,{7811C706-626D-4B66-9F85-1F802EFF04D4},41197,placed
+Hub_130,NONDALTON,Nondalton,community,Barge or Plane,Receiver,1208,{D5406CE7-E5F0-4CD2-9308-D182C109FBFF},41197,placed
+Hub_130,NONDALTON,Nondalton,community,Barge or Plane,Receiver,446,{CD097E8A-4E3A-4726-A8A1-A9E1F06AE093},41197,placed
+Hub_130,NONDALTON,Nondalton,community,Barge or Plane,Receiver,SYN-1208,{80173C7B-A7CB-4EA6-B291-FCB452208371},41197,placed
+Hub_130,NONDALTON,Nondalton,community,Barge or Plane,Receiver,SYN-1210,{AF0ABF99-24F8-4E84-AB63-AA9019770C31},41197,placed
+Hub_131,PEDRO BAY,Pedro Bay,community,Plane or Road,Receiver,1209,{8E9C13BE-51FB-4A86-A897-0DC38BB3C6A4},41059,placed
+Hub_131,PEDRO BAY,Pedro Bay,community,Plane or Road,Receiver,17,{2CF279D7-7465-4DE6-B7F7-C8078D9808C0},41059,placed
+Hub_132,PELICAN,Pelican,community,Barge or Plane,Receiver,121,{76B6513B-5CFF-4872-96F9-6D2907D54615},36864,placed
+Hub_132,PELICAN,Pelican,community,Barge or Plane,Receiver,SYN-215,{ABC8D56B-A787-4CE7-A688-D7B9AAD7DE8B},36864,placed
+Hub_132,PELICAN,Pelican,community,Barge or Plane,Receiver,SYN-216,{9E08B983-031B-412A-99CF-E3CD28560FC4},36864,placed
+Hub_133,PERRYVILLE,Perryville,community,Barge,Receiver,1210,{0603769B-74B3-4779-9406-0C322B1770A9},40063,placed
+Hub_133,PERRYVILLE,Perryville,community,Barge,Receiver,SYN-1001,{3B87C0C1-1E1C-4249-B3A5-9446F600ABB9},40063,placed
+Hub_134,PILOT POINT,Pilot Point,community,Barge or Road,Receiver,1211,{09A5DE30-C78A-449E-9D21-B18DF6D8A5C0},40147,placed
+Hub_134,PILOT POINT,Pilot Point,community,Barge or Road,Receiver,SYN-1095,{7EA59D7C-879D-4AD7-BC92-953B56AC58C1},40147,placed
+Hub_135,SHUNGNAK,Shungnak,community,Barge or Plane,Receiver,1214,{8899CFDC-080E-43A2-825F-DF52659E8B93},44332,placed
+Hub_135,SHUNGNAK,Shungnak,community,Barge or Plane,Receiver,1238,{1829B647-73C9-46F7-A8B5-BA17AD6D60EE},44332,placed
+Hub_135,SHUNGNAK,Shungnak,community,Barge or Plane,Receiver,834,{91B6F056-6DB5-4A7B-A701-5760274B83B1},44332,placed
+Hub_136,COFFMAN COVE,Coffman Cove,community,Road,Receiver,1217,{26336E7B-4494-4624-B15D-14BC073F0E91},35970,placed
+Hub_136,COFFMAN COVE,Coffman Cove,community,Road,Receiver,426,{91739D6D-423C-492C-8F39-4D7FD6DC114F},35970,placed
+Hub_136,COFFMAN COVE,Coffman Cove,community,Road,Receiver,624,{8BB67B9D-C0EA-4475-BE85-76933EAE09C2},35970,placed
+Hub_136,COFFMAN COVE,Coffman Cove,community,Road,Receiver,SYN-101,{D54CE33A-6C0C-486B-ABA1-2034B64E891D},35970,placed
+Hub_136,COFFMAN COVE,Coffman Cove,community,Road,Receiver,SYN-103,{9C729250-0809-4D28-8591-7130D402279B},35970,placed
+Hub_137,EDNA BAY,Edna Bay,community,Barge,Receiver,1218,{42A88935-54F4-4F69-BCEE-122B4C3D5570},45887,placed
+Hub_137,EDNA BAY,Edna Bay,community,Barge,Receiver,967,{69EA3EB2-DC90-4B6E-9FB4-5A0E23225411},45887,placed
+Hub_138,NAUKATI BAY,Naukati Bay,community,Road,Receiver,1219,{A530462C-BE7E-4917-B358-72FCC00AFB68},35955,placed
+Hub_138,NAUKATI BAY,Naukati Bay,community,Road,Receiver,640,{FDBC58AD-8866-43BC-880C-54DBF59C43F6},35955,placed
+Hub_139,ANGOON,Angoon,community,Barge or Road,Receiver,122,{A13608F5-7F72-484F-9ABF-102B38FF6875},36830,placed
+Hub_139,ANGOON,Angoon,community,Barge or Road,Receiver,871,{569DF6D7-2D48-451A-B7D9-BF65E546D40F},36830,placed
+Hub_139,ANGOON,Angoon,community,Barge or Road,Receiver,871,{646C9FA3-4B5F-4C6C-ABE9-8F27FA0B7280},36830,placed
+Hub_139,ANGOON,Angoon,community,Barge or Road,Receiver,SYN-135,{6BA7F264-7B69-4DB3-9C00-22810922225F},36830,placed
+Hub_140,PORT ALEXANDER,Port Alexander,community,Barge,Receiver,1220,{84F7D2A4-B82A-4EB2-B094-6A324A7066EB},36016,placed
+Hub_140,PORT ALEXANDER,Port Alexander,community,Barge,Receiver,1220,{F4B4F5F1-E086-430C-BAC8-81ED0B39F112},36016,placed
+Hub_140,PORT ALEXANDER,Port Alexander,community,Barge,Receiver,SYN-138,{CB3D1D62-2E1D-4B0D-94E5-48A58F4CFBBF},36016,placed
+Hub_140,PORT ALEXANDER,Port Alexander,community,Barge,Receiver,SYN-139,{C1A959C4-95BB-47A3-8681-6A5776CDD88D},36016,placed
+Hub_141,RED DEVIL,Red Devil,community,Barge,Receiver,1222,{A9A5D050-3B47-437F-80C0-8BD0FAA3A474},48843,placed
+Hub_141,RED DEVIL,Red Devil,community,Barge,Receiver,SYN-706,{2120284C-BF36-47C9-B064-FF414EB4FE7E},48843,placed
+Hub_141,RED DEVIL,Red Devil,community,Barge,Receiver,SYN-707,{6E246E33-5F7D-4CA3-B421-60A0EF328649},48843,placed
+Hub_141,RED DEVIL,Red Devil,community,Barge,Receiver,SYN-709,{EA8037D3-7189-4248-9499-E94F9DEB1ECB},48843,placed
+Hub_142,blob:18,blob:18,blob,Plane,Receiver,1225,{422C8B1B-5465-490C-8A59-09E173CDC260},,unplaced:beyond_cap
+Hub_143,KAKE,Kake,community,Barge or Plane or Road,Receiver,1227,{240D7405-12A0-4369-8158-75A6C0E0136D},36419,placed
+Hub_143,KAKE,Kake,community,Barge or Plane or Road,Receiver,516,{DAEC5650-5C4C-492E-B977-651DB9917A01},36419,placed
+Hub_143,KAKE,Kake,community,Barge or Plane or Road,Receiver,796,{5D38D34D-5AB2-45F5-AA22-BE25817C0538},36419,placed
+Hub_143,KAKE,Kake,community,Barge or Plane or Road,Receiver,873,{759C64F5-DB1B-455D-85C0-2F0F02803E51},36419,placed
+Hub_143,KAKE,Kake,community,Barge or Plane or Road,Receiver,SYN-123,{39ED9F42-2893-4AB7-B3C0-318A6CD5E318},36419,placed
+Hub_143,KAKE,Kake,community,Barge or Plane or Road,Receiver,SYN-124,{C668154A-D1ED-4408-B774-186E91D7BC7E},36419,placed
+Hub_143,KAKE,Kake,community,Barge or Plane or Road,Receiver,SYN-127,{21A977B8-BC7C-4CEF-BB22-B9EE62F3B91B},36419,placed
+Hub_143,KAKE,Kake,community,Barge or Plane or Road,Receiver,SYN-128,{E762FF48-E51C-4FF1-BB99-94DA3D5D0CB4},36419,placed
+Hub_143,KAKE,Kake,community,Barge or Plane or Road,Receiver,SYN-130,{A8BBF513-E14C-4B7B-82CC-147958FFDAD0},36419,placed
+Hub_144,MANLEY HOT SPRINGS,Manley Hot Springs,community,Road,Receiver,1229,{18521C94-5BEA-4B54-9043-F330F2BBC359},2570,placed
+Hub_144,MANLEY HOT SPRINGS,Manley Hot Springs,community,Road,Receiver,271,{27B88589-90C2-450B-9FDE-9781E9220650},2570,placed
+Hub_144,MANLEY HOT SPRINGS,Manley Hot Springs,community,Road,Receiver,272,{ACE4A6F5-F863-43EC-A3D7-F3D44ED62F64},2570,placed
+Hub_144,MANLEY HOT SPRINGS,Manley Hot Springs,community,Road,Receiver,489,{553EA5B8-F7A2-4B10-AC7C-2CE7F6E2B7DD},2570,placed
+Hub_145,SAND POINT,Sand Point,community,Barge or Road,Receiver,1230,{96BB9651-60E8-4357-9DC1-C24D1519AF25},40050,placed
+Hub_145,SAND POINT,Sand Point,community,Barge or Road,Receiver,142,{8D426044-9314-4A84-8C3E-53D7A8E8EF82},40050,placed
+Hub_145,SAND POINT,Sand Point,community,Barge or Road,Receiver,142,{952659E7-1F6B-458C-B0BD-64F21D2CB9C8},40050,placed
+Hub_145,SAND POINT,Sand Point,community,Barge or Road,Receiver,603,{E1693C3D-F6A9-432D-8B18-315BB5BCFB77},40050,placed
+Hub_145,SAND POINT,Sand Point,community,Barge or Road,Receiver,SYN-1006,{81330027-5DF1-4FFC-9D97-F8CAFFAA18BB},40050,placed
+Hub_145,SAND POINT,Sand Point,community,Barge or Road,Receiver,SYN-1007,{5F071BE6-B2D3-4258-BB7E-50DE04BBB504},40050,placed
+Hub_145,SAND POINT,Sand Point,community,Barge or Road,Receiver,SYN-1008,{01FC2D37-9430-4C4C-8FB2-A70260C93481},40050,placed
+Hub_146,AMBLER,Ambler,community,Barge or Plane,Receiver,1233,{A84D01CD-5627-44BC-ADBD-1E3AF860E970},44435,placed
+Hub_146,AMBLER,Ambler,community,Barge or Plane,Receiver,1233,{B7865DED-BA93-4C1A-8624-E2191CB6ED2E},44435,placed
+Hub_146,AMBLER,Ambler,community,Barge or Plane,Receiver,324,{EDA71B0B-E7D6-4E52-BD75-CDA27756C3FE},44435,placed
+Hub_146,AMBLER,Ambler,community,Barge or Plane,Receiver,324,{F9896EFC-C80E-4D8F-9717-DEC9D59550B7},44435,placed
+Hub_146,AMBLER,Ambler,community,Barge or Plane,Receiver,SYN-575,{5BD9746B-58B7-4F77-8EED-A244DE54F62D},44435,placed
+Hub_146,AMBLER,Ambler,community,Barge or Plane,Receiver,SYN-576,{62115B99-42C5-489F-B5A0-22C9EC99DAB0},44435,placed
+Hub_147,KIVALINA,Kivalina,community,Barge or Plane,Receiver,1234,{25C41539-EFB9-4782-8641-837493BF05AF},44476,placed
+Hub_147,KIVALINA,Kivalina,community,Barge or Plane,Receiver,1234,{83F44065-C39A-46E4-ABDF-30950D435ED3},44476,placed
+Hub_147,KIVALINA,Kivalina,community,Barge or Plane,Receiver,1234,{94DBEDF4-75CF-44C4-9181-226982180808},44476,placed
+Hub_147,KIVALINA,Kivalina,community,Barge or Plane,Receiver,1240,{12B0F97A-7477-4F96-8DB3-E0011D684287},44476,placed
+Hub_147,KIVALINA,Kivalina,community,Barge or Plane,Receiver,1240,{5491897A-FF63-4987-8BF9-8F41FF9B65A8},44476,placed
+Hub_147,KIVALINA,Kivalina,community,Barge or Plane,Receiver,338,{5FCBFA7A-738A-4726-A6FC-375ADA4BD577},44476,placed
+Hub_147,KIVALINA,Kivalina,community,Barge or Plane,Receiver,SYN-461,{7FE51A83-103F-4C96-A750-59C5C1860B52},44476,placed
+Hub_147,KIVALINA,Kivalina,community,Barge or Plane,Receiver,SYN-463,{C8717693-9691-48EF-828D-267CFD4347C9},44476,placed
+Hub_148,KOBUK,Kobuk,community,Barge or Plane,Receiver,1235,{78FF04C4-4FF5-44FB-9845-D1752F0F23FE},44420,placed
+Hub_148,KOBUK,Kobuk,community,Barge or Plane,Receiver,SYN-578,{DECC4CB4-9217-4FA6-A6F1-FB5AF9F5A76D},44420,placed
+Hub_149,KLUKWAN,Klukwan,community,Road,Receiver,124,{B9AACFC4-FEA7-440D-9A2F-69CBCDAB04A1},2866,placed
+Hub_150,blob:51,blob:51,blob,Road,Receiver,1241,{3F0E87F2-85BB-4913-8BA3-211ACF8E6AFC},,unplaced:beyond_cap
+Hub_151,PRUDHOE BAY,Prudhoe Bay,community,Road,Supplier,1243,{70972937-9205-4869-88C9-F47DBC3ADEA7},2843,placed
+Hub_151,PRUDHOE BAY,Prudhoe Bay,community,Road,Supplier,143,{9FF07A4A-E872-482A-AE33-1D74601D306C},2843,placed
+Hub_151,PRUDHOE BAY,Prudhoe Bay,community,Road,Supplier,268,{6326F4C4-82C0-47FA-8A97-704CCB99399C},2843,placed
+Hub_151,PRUDHOE BAY,Prudhoe Bay,community,Road,Supplier,618,{6651A82C-CC4D-434F-9688-2F9309674D16},2843,placed
+Hub_151,PRUDHOE BAY,Prudhoe Bay,community,Road,Supplier,847,{CB76F2D9-3BE8-4FBD-AA72-19659BA88B47},2843,placed
+Hub_151,PRUDHOE BAY,Prudhoe Bay,community,Road,Supplier,860,{51417ED5-3E1D-4A90-98BE-EE63632631CB},2843,placed
+Hub_151,PRUDHOE BAY,Prudhoe Bay,community,Road,Supplier,861,{D2C96C71-BCAE-424D-9393-241DF0F42EE0},2843,placed
+Hub_151,PRUDHOE BAY,Prudhoe Bay,community,Road,Supplier,876,{00CFB075-110B-4FAE-AD61-956F3ABCF6D8},2843,placed
+Hub_151,PRUDHOE BAY,Prudhoe Bay,community,Road,Supplier,961,{894AC954-4844-4F69-B96A-3ED58FAA4D88},2843,placed
+Hub_152,CANTWELL,Cantwell,community,Road,Receiver,1244,{B9EB1A03-7098-44D3-8382-43D1EC13C97A},47618,placed
+Hub_152,CANTWELL,Cantwell,community,Road,Receiver,276,{6E789582-AAC2-485A-B989-37C7DF0A9867},47618,placed
+Hub_152,CANTWELL,Cantwell,community,Road,Receiver,527,{F5EEFC5C-66FC-4AD0-ABCE-A2FE24FE5CEC},47618,placed
+Hub_152,CANTWELL,Cantwell,community,Road,Receiver,988,{88271815-7933-4E45-98AD-F580F1F4EAE0},47618,placed
+Hub_153,blob:50,blob:50,blob,Road,Receiver,1247,{B200FB79-729C-4E7F-95CC-51B7277831CB},2277,placed
+Hub_153,blob:50,blob:50,blob,Road,Receiver,719,{E280D44D-4D91-4A5E-BCBA-2A77A8DC8D4F},2277,placed
+Hub_154,SELAWIK,Selawik,community,Barge or Plane or Road,Receiver,1254,{683148F1-46BD-434C-AB08-C53F625B71F6},44158,placed
+Hub_154,SELAWIK,Selawik,community,Barge or Plane or Road,Receiver,251,{96FE6742-CA6A-4170-A567-DAE43F26A7A6},44158,placed
+Hub_154,SELAWIK,Selawik,community,Barge or Plane or Road,Receiver,357,{D9B91291-5840-478F-A822-A19E95DA2C23},44158,placed
+Hub_154,SELAWIK,Selawik,community,Barge or Plane or Road,Receiver,954,{B4D5EE26-39E2-46BF-B83C-B634BBA008EB},44158,placed
+Hub_154,SELAWIK,Selawik,community,Barge or Plane or Road,Receiver,954,{B80548E9-C5CF-4823-A943-82BB8ADF4D12},44158,placed
+Hub_154,SELAWIK,Selawik,community,Barge or Plane or Road,Receiver,954,{DC60B9F5-62A5-457E-A0B7-8BA4851ABE97},44158,placed
+Hub_154,SELAWIK,Selawik,community,Barge or Plane or Road,Receiver,SYN-466,{1D1891A5-BB40-4550-944B-3437313732A5},44158,placed
+Hub_154,SELAWIK,Selawik,community,Barge or Plane or Road,Receiver,SYN-468,{B343C91A-25D7-42DF-B513-17A326BD56A4},44158,placed
+Hub_154,SELAWIK,Selawik,community,Barge or Plane or Road,Receiver,SYN-471,{76FC16FB-A51A-44A4-BBB0-138C892695CB},44158,placed
+Hub_155,PORT MOLLER,Port Moller,community,Barge,Receiver,1256,{0F542138-8AC9-4FCA-84D7-E15C2511E8AA},79123,placed
+Hub_156,PETERSBURG,Petersburg,community,Plane or Road,Receiver,1257,{1DFE0049-CD5E-4363-8E45-9C1BD35E298B},36244,placed
+Hub_156,PETERSBURG,Petersburg,community,Plane or Road,Receiver,547,{0C8FE23A-EFDE-4FF0-8A74-D3F9F8D2A0F7},36244,placed
+Hub_156,PETERSBURG,Petersburg,community,Plane or Road,Receiver,814,{855FBE7C-9B33-45BC-8C4D-2394A0C95208},36244,placed
+Hub_156,PETERSBURG,Petersburg,community,Plane or Road,Receiver,856,{43B781A0-2BFF-47EF-A784-555A71603EA7},36244,placed
+Hub_156,PETERSBURG,Petersburg,community,Plane or Road,Receiver,869,{38E7CF68-F312-4AC0-8AC0-8200B684215A},36244,placed
+Hub_157,RUSSIAN MISSION,Russian Mission,community,Barge,Receiver,1259,{3679B53D-9AE5-4B42-BEE4-D8A171EAB2C1},42083,placed
+Hub_157,RUSSIAN MISSION,Russian Mission,community,Barge,Receiver,1259,{D3AB658E-4DCD-4C78-969F-0BA4EA63EC9F},42083,placed
+Hub_157,RUSSIAN MISSION,Russian Mission,community,Barge,Receiver,667,{80B1E5C2-BB9E-4ADA-B223-19A86DAEE9E4},42083,placed
+Hub_157,RUSSIAN MISSION,Russian Mission,community,Barge,Receiver,932,{861754D6-9098-4EE9-991A-8A67BE29D4E1},42083,placed
+Hub_157,RUSSIAN MISSION,Russian Mission,community,Barge,Receiver,SYN-772,{5BFB43F5-855A-4897-8C0E-293579F1C6C9},42083,placed
+Hub_157,RUSSIAN MISSION,Russian Mission,community,Barge,Receiver,SYN-774,{CD59A84B-EAA2-435A-B68A-251A0FA02239},42083,placed
+Hub_158,blob:32,blob:32,blob,Road,Receiver,1260,{E3DA4A6D-2545-4031-85A7-7F30CDA34F87},49932,placed
+Hub_159,remote:13,Palmer,remote_site,Road,Receiver,13,{0DE678C6-4B7C-4C87-95F2-EF1B81C0A3C4},1700,placed
+Hub_160,DOT LAKE,Dot Lake,community,Road,Receiver,133,{66A8B98E-8DF9-476D-8B05-5CAA90850960},47872,placed
+Hub_161,MENTASTA LAKE,Mentasta Lake,community,Road,Receiver,134,{85A8FB35-A2EF-4BA5-BF8F-C4766AD36804},1131,placed
+Hub_162,NORTHWAY,Northway,community,Road,Receiver,135,{94C938BE-1557-4311-AE6C-B8BB0565343E},2233,placed
+Hub_162,NORTHWAY,Northway,community,Road,Receiver,311,{0B8943D5-9AE2-4E8E-AF73-D41B884F6BE4},2233,placed
+Hub_162,NORTHWAY,Northway,community,Road,Receiver,37,{4145B20F-484E-433C-A165-E475386E2DF1},2233,placed
+Hub_162,NORTHWAY,Northway,community,Road,Receiver,44,{23D2D90A-3907-4924-B37C-86BB9044A895},2233,placed
+Hub_162,NORTHWAY,Northway,community,Road,Receiver,45,{FA53E1C8-0845-4954-BE87-36058654B230},2233,placed
+Hub_163,TETLIN,Tetlin,community,Road,Receiver,136,{415F06AF-2D4C-4C1A-879F-FCF2BE8760AF},2249,placed
+Hub_163,TETLIN,Tetlin,community,Road,Receiver,314,{198362A5-508C-4395-8391-42808AB5823A},2249,placed
+Hub_164,TOK,Tok,community,Road,Receiver,137,{6AB69FE3-8865-4F3E-929D-ADAA25394B3E},28234,placed
+Hub_164,TOK,Tok,community,Road,Receiver,316,{5B3A4427-3CF1-47FE-8D8F-D47DD33BE928},28234,placed
+Hub_164,TOK,Tok,community,Road,Receiver,317,{17AE2E7D-2835-4E26-B1ED-BE3B1E2035DA},28234,placed
+Hub_164,TOK,Tok,community,Road,Receiver,549,{B9F91E61-DD1A-4880-8347-A73C8957CBF9},28234,placed
+Hub_164,TOK,Tok,community,Road,Receiver,653,{19A80AE5-C3F6-4CD4-9420-5EBE3D700780},28234,placed
+Hub_165,AKUTAN,Akutan,community,Barge or Road,Supplier,138,{D60CDEBF-4FAB-4440-A647-D4CC1187D243},39884,placed
+Hub_165,AKUTAN,Akutan,community,Barge or Road,Supplier,194,{67A427B8-24AF-46E3-82E0-0740A89A2760},39884,placed
+Hub_165,AKUTAN,Akutan,community,Barge or Road,Supplier,213,{48F56D25-2979-4108-A6D1-03E7668C4BD9},39884,placed
+Hub_165,AKUTAN,Akutan,community,Barge or Road,Supplier,457,{3DC23E6C-2C08-4283-9119-F36339ABBD1A},39884,placed
+Hub_165,AKUTAN,Akutan,community,Barge or Road,Supplier,SYN-40,{F0DAA8B9-C1E9-4BD4-95C4-640F84ECCF64},39884,placed
+Hub_166,remote:14,Palmer,remote_site,Road,Receiver,14,{9527986F-DC3A-486F-B81A-AC989BA9B5F2},2086,placed
+Hub_167,KING COVE,King Cove,community,Barge,Supplier,141,{AB061DFF-3825-4970-BD3B-DCD11F9B692B},39915,placed
+Hub_167,KING COVE,King Cove,community,Barge,Supplier,SYN-980,{8BF97F0B-2103-496C-8E65-620939823407},39915,placed
+Hub_167,KING COVE,King Cove,community,Barge,Supplier,SYN-981,{6C1A4CF5-8F39-4798-9B02-FF6DDAE8AD0A},39915,placed
+Hub_167,KING COVE,King Cove,community,Barge,Supplier,SYN-982,{7B159976-97D0-498B-8D9A-99A0BDC3D898},39915,placed
+Hub_167,KING COVE,King Cove,community,Barge,Supplier,SYN-983,{87CD167B-6282-4F43-A82E-3D0636CC1156},39915,placed
+Hub_168,RAMPART,Rampart,community,Plane,Supplier,145,{9150F0C7-6592-410A-94F0-8D62A5392586},43009,placed
+Hub_168,RAMPART,Rampart,community,Plane,Supplier,296,{2DE3C9D9-65AB-402D-9940-9217BA3EB1B0},43009,placed
+Hub_168,RAMPART,Rampart,community,Plane,Supplier,SYN-362,{05391BD2-6123-4ACE-8BCF-6651882699D5},43009,placed
+Hub_169,OUZINKIE,Ouzinkie,community,Barge or Road,Receiver,146,{CCE658EB-BACB-4015-9254-BEC151035E99},39101,placed
+Hub_169,OUZINKIE,Ouzinkie,community,Barge or Road,Receiver,433,{AB75DEC6-BE12-4BD6-8039-6FCBEFD315E7},39101,placed
+Hub_169,OUZINKIE,Ouzinkie,community,Barge or Road,Receiver,508,{07D80506-7548-4842-9341-A037E3C35474},39101,placed
+Hub_169,OUZINKIE,Ouzinkie,community,Barge or Road,Receiver,977,{3EBA99FF-2688-434F-B811-41CC22EBD898},39101,placed
+Hub_169,OUZINKIE,Ouzinkie,community,Barge or Road,Receiver,SYN-1139,{D98885C5-A822-4810-810F-CB8B2F5DFDB0},39101,placed
+Hub_170,KASILOF,Kasilof,community,Road,Receiver,147,{CC464040-DC6C-40F1-8945-651DE5EAB4F4},6841,placed
+Hub_170,KASILOF,Kasilof,community,Road,Receiver,867,{8DD95CDF-8767-4EB6-B07F-09F075FC7FEB},6841,placed
+Hub_171,NAKNEK,Naknek,community,Barge or Road,Receiver,148,{AFF28455-DC30-427A-8DD4-AEA794FA40B2},40499,placed
+Hub_171,NAKNEK,Naknek,community,Barge or Road,Receiver,151,{F23482A5-67DC-4289-8D90-2F5BB44CD164},40499,placed
+Hub_171,NAKNEK,Naknek,community,Barge or Road,Receiver,462,{5CE63EE1-AE92-409F-8DF0-21A5339183C7},40499,placed
+Hub_171,NAKNEK,Naknek,community,Barge or Road,Receiver,520,{A9C92D12-FAE6-4509-996E-95FCD6FDAEA8},40499,placed
+Hub_171,NAKNEK,Naknek,community,Barge or Road,Receiver,521,{1C2508B3-735C-43E0-9062-C168E05E150F},40499,placed
+Hub_171,NAKNEK,Naknek,community,Barge or Road,Receiver,80,{90C4118D-4186-4481-B51A-59065E6E841C},40499,placed
+Hub_171,NAKNEK,Naknek,community,Barge or Road,Receiver,804,{0411680E-36BE-42E5-838F-43ACC390DB99},40499,placed
+Hub_171,NAKNEK,Naknek,community,Barge or Road,Receiver,87,{F454630A-16D4-4DA7-8F38-7F966AF61A9F},40499,placed
+Hub_171,NAKNEK,Naknek,community,Barge or Road,Receiver,875,{295FD225-B6F2-4408-B6BB-01783A2C272A},40499,placed
+Hub_171,NAKNEK,Naknek,community,Barge or Road,Receiver,889,{A4713C99-5157-4572-A54F-A37EA3C662B9},40499,placed
+Hub_171,NAKNEK,Naknek,community,Barge or Road,Receiver,SYN-1117,{5552FD2D-2175-4D63-B47E-37AD4AFE647F},40499,placed
+Hub_172,blob:47,blob:47,blob,Road,Receiver,157,{A4337509-34B8-4A34-AC17-8065764A1BFC},,unplaced:beyond_cap
+Hub_173,YAKUTAT,Yakutat,community,Road,Receiver,158,{13B3E9E9-88BD-4D8B-9BCC-BF79E45636FE},38266,placed
+Hub_173,YAKUTAT,Yakutat,community,Road,Receiver,438,{04C5B487-CBD8-4D4D-AAC8-176B1871C27C},38266,placed
+Hub_174,MOOSE PASS,Moose Pass,community,Road,Receiver,16,{559D9A9C-9221-48BD-8906-31B25B07DCD5},535,placed
+Hub_175,ST GEORGE,Saint George,community,Barge,Supplier,167,{15B249BC-700E-47F6-A75F-F39B21D66AD6},41232,placed
+Hub_175,ST GEORGE,Saint George,community,Barge,Supplier,458,{9F3D036A-E04E-431E-919E-5677FE81308D},41232,placed
+Hub_175,ST GEORGE,Saint George,community,Barge,Supplier,979,{1FF8EE87-BBCC-416D-9B93-4AE5B2704310},41232,placed
+Hub_175,ST GEORGE,Saint George,community,Barge,Supplier,979,{4A687B18-56BC-47EE-AE19-F5B59F929D13},41232,placed
+Hub_175,ST GEORGE,Saint George,community,Barge,Supplier,SYN-16,{5AA9BCDF-259D-4BC9-81C5-9630A137311C},41232,placed
+Hub_175,ST GEORGE,Saint George,community,Barge,Supplier,SYN-16,{852A9253-8E7F-4AE9-B965-550A2EBFA180},41232,placed
+Hub_175,ST GEORGE,Saint George,community,Barge,Supplier,SYN-17,{8C87980B-33BC-4627-AFBC-6427DFE0F128},41232,placed
+Hub_175,ST GEORGE,Saint George,community,Barge,Supplier,SYN-18,{60BD1DF4-D095-4F2B-A8BE-5B989A77E9D6},41232,placed
+Hub_176,blob:26,blob:26,blob,Road,Receiver,179,{24556C63-709F-4A95-8AC5-CEC7DD17A1A3},38647,placed
+Hub_177,DILLINGHAM,Dillingham,community,Barge or Road,Receiver,18,{FAC08AF5-2D55-4F59-A66B-90E72DBC6E90},40697,placed
+Hub_177,DILLINGHAM,Dillingham,community,Barge or Road,Receiver,403,{91994F4C-CAB8-4660-93FB-52EF7AC9D2BC},40697,placed
+Hub_177,DILLINGHAM,Dillingham,community,Barge or Road,Receiver,542,{BDEC4C5C-D118-4F4E-B272-32B64D6613A9},40697,placed
+Hub_177,DILLINGHAM,Dillingham,community,Barge or Road,Receiver,73,{52EBE454-0EBE-4C8B-84CF-5CD690AA1A3C},40697,placed
+Hub_177,DILLINGHAM,Dillingham,community,Barge or Road,Receiver,751,{2AA22D28-8BC1-4219-A165-3D5E10EE9EC5},40697,placed
+Hub_177,DILLINGHAM,Dillingham,community,Barge or Road,Receiver,774,{B05FDC3E-7883-499D-B81D-800F7708DB3C},40697,placed
+Hub_177,DILLINGHAM,Dillingham,community,Barge or Road,Receiver,863,{9D9BC94E-DF98-4E24-9001-CA01A8CA56F0},40697,placed
+Hub_177,DILLINGHAM,Dillingham,community,Barge or Road,Receiver,864,{E784CB11-693E-4ACD-99C8-A9E006782F07},40697,placed
+Hub_177,DILLINGHAM,Dillingham,community,Barge or Road,Receiver,895,{B7885440-B2E6-4B50-8FB3-A4D4295D9536},40697,placed
+Hub_178,BUCKLAND,Buckland,community,Barge or Plane,Receiver,182,{103D66F1-55ED-45EA-ACBF-965862157104},44101,placed
+Hub_178,BUCKLAND,Buckland,community,Barge or Plane,Receiver,182,{E044B030-CE0C-407D-9875-B4B4609B1B50},44101,placed
+Hub_178,BUCKLAND,Buckland,community,Barge or Plane,Receiver,182,{E6E8B171-EEAD-4097-8EF3-6EE74CECD474},44101,placed
+Hub_178,BUCKLAND,Buckland,community,Barge or Plane,Receiver,182,{FC1A0FF3-1FFB-4CF5-804C-3CB2F5811594},44101,placed
+Hub_178,BUCKLAND,Buckland,community,Barge or Plane,Receiver,185,{B35757F9-6BED-4813-9B71-D1F6F2DCA0DF},44101,placed
+Hub_178,BUCKLAND,Buckland,community,Barge or Plane,Receiver,328,{146F9100-1BBD-4C57-87C4-EA4BC5064C1D},44101,placed
+Hub_178,BUCKLAND,Buckland,community,Barge or Plane,Receiver,SYN-486,{DE58A4B0-4535-43C7-A7EF-69081AB2F18A},44101,placed
+Hub_179,SHAKTOOLIK,Shaktoolik,community,Barge,Receiver,188,{2953E0F0-E16B-4151-819A-C5B384689FB0},43548,placed
+Hub_179,SHAKTOOLIK,Shaktoolik,community,Barge,Receiver,188,{B18E95A5-0733-4D86-A729-454A57417F73},43548,placed
+Hub_179,SHAKTOOLIK,Shaktoolik,community,Barge,Receiver,188,{C89DCAD2-C6AE-44E9-A966-0697EE252D72},43548,placed
+Hub_179,SHAKTOOLIK,Shaktoolik,community,Barge,Receiver,191,{011468FB-129F-4341-B443-F20118579BB5},43548,placed
+Hub_179,SHAKTOOLIK,Shaktoolik,community,Barge,Receiver,SYN-664,{C60251DB-41AE-4DAB-AC00-F999EA235D54},43548,placed
+Hub_180,DIOMEDE,Diomede,community,Barge,Receiver,19,{8BE7431D-D7DE-4CE3-9A08-EF985487928F},79118,placed
+Hub_181,KIPNUK,Kipnuk,community,Barge or Road,Supplier,193,{645417DA-4F8B-4031-A517-C48025BF221B},41449,placed
+Hub_181,KIPNUK,Kipnuk,community,Barge or Road,Supplier,193,{A3B3F429-09A4-455B-893A-2952BC47D69B},41449,placed
+Hub_181,KIPNUK,Kipnuk,community,Barge or Road,Supplier,193,{CAC8C78D-3D19-4C6F-A779-DE02FB53C120},41449,placed
+Hub_181,KIPNUK,Kipnuk,community,Barge or Road,Supplier,238,{77011D21-7ADA-4557-BF17-0EA44E8DD280},41449,placed
+Hub_181,KIPNUK,Kipnuk,community,Barge or Road,Supplier,SYN-883,{1C4C49F2-17CB-4764-9E37-D5AA272237CB},41449,placed
+Hub_181,KIPNUK,Kipnuk,community,Barge or Road,Supplier,SYN-884,{B9A277E6-8FA2-412D-B000-F529103122C0},41449,placed
+Hub_182,blob:1,blob:1,blob,Road,Receiver,196,{6E70E987-0982-4AC4-AADD-CF8730C1B329},,unplaced:beyond_cap
+Hub_183,GLENNALLEN,Glennallen,community,Road,Supplier,197,{4B9917B3-ECED-4935-AA32-00AE4F9FBAB1},945,placed
+Hub_183,GLENNALLEN,Glennallen,community,Road,Supplier,36,{8C215872-3DF7-46F5-A5B2-7C694F8BF815},945,placed
+Hub_183,GLENNALLEN,Glennallen,community,Road,Supplier,610,{FC75D2A6-024E-4C86-8398-DC9589B89F9C},945,placed
+Hub_183,GLENNALLEN,Glennallen,community,Road,Supplier,785,{AA02A331-9867-4BA3-99F7-81F5B4789144},945,placed
+Hub_183,GLENNALLEN,Glennallen,community,Road,Supplier,849,{D32C5145-0F7B-4CCD-98DA-4F63C5C70400},945,placed
+Hub_184,KENNY LAKE,Kenny Lake,community,Road,Receiver,198,{9A56C5FE-510A-412C-9FCD-D1552C51E820},605,placed
+Hub_185,remote:199,Slana,remote_site,Road,Receiver,199,{B1C31D12-4C17-457D-9F1D-668A0A5F6225},1437,placed
+Hub_186,STEBBINS,Stebbins,community,Barge,Supplier,200,{FF9C2E22-B0F4-4471-A542-FF86F28C55DE},43420,placed
+Hub_186,STEBBINS,Stebbins,community,Barge,Supplier,202,{5D9A3A99-CEFE-445E-AC2A-F20DDFF484A3},43420,placed
+Hub_186,STEBBINS,Stebbins,community,Barge,Supplier,203,{81AAA6DF-C293-4238-81DE-867DEA949B15},43420,placed
+Hub_186,STEBBINS,Stebbins,community,Barge,Supplier,940,{C5F32E6B-816C-473F-B868-AC94234612E8},43420,placed
+Hub_186,STEBBINS,Stebbins,community,Barge,Supplier,SYN-644,{FE63D401-849B-48B1-8FAF-6B046322D185},43420,placed
+Hub_186,STEBBINS,Stebbins,community,Barge,Supplier,SYN-645,{95AE33D6-5B7B-453A-AC8B-95782D829675},43420,placed
+Hub_186,STEBBINS,Stebbins,community,Barge,Supplier,SYN-647,{2AF943FF-83E3-4FC5-B107-FB1FE63168A0},43420,placed
+Hub_187,GAMBELL,Gambell,community,Barge or Road,Receiver,204,{4FECB5C8-1B1B-43E1-809A-82580669F105},42322,placed
+Hub_187,GAMBELL,Gambell,community,Barge or Road,Receiver,232,{450BB183-9E66-4ABC-966A-165BD8839798},42322,placed
+Hub_187,GAMBELL,Gambell,community,Barge or Road,Receiver,911,{0A4DC447-9742-4966-8414-FE0937DE7487},42322,placed
+Hub_187,GAMBELL,Gambell,community,Barge or Road,Receiver,SYN-710,{ECBCD8D2-3AC3-4138-99A9-100BBD56D4ED},42322,placed
+Hub_187,GAMBELL,Gambell,community,Barge or Road,Receiver,SYN-711,{EA99F3E6-95C7-4A2D-B594-6959266E71F9},42322,placed
+Hub_187,GAMBELL,Gambell,community,Barge or Road,Receiver,SYN-714,{2EEB9F86-9E52-4DB2-8CFB-F76BC37F6086},42322,placed
+Hub_187,GAMBELL,Gambell,community,Barge or Road,Receiver,SYN-715,{66D787F9-17BE-4A5B-8890-8AC36424CD55},42322,placed
+Hub_188,ST MICHAEL,Saint Michael,community,Barge or Road,Receiver,205,{1B9700AB-35C9-4023-A262-4A95B4E49C8F},45508,placed
+Hub_188,ST MICHAEL,Saint Michael,community,Barge or Road,Receiver,253,{2C29BFFD-EE44-4623-AB67-8AD4B8047DCD},45508,placed
+Hub_188,ST MICHAEL,Saint Michael,community,Barge or Road,Receiver,253,{EBAB23EE-9C6B-4BD5-A51F-1E23EFD52514},45508,placed
+Hub_188,ST MICHAEL,Saint Michael,community,Barge or Road,Receiver,552,{8F116362-8543-41B1-84DF-46B0EC78C58B},45508,placed
+Hub_188,ST MICHAEL,Saint Michael,community,Barge or Road,Receiver,88,{BF76F338-B8AA-4609-AA28-F3921F9695DC},45508,placed
+Hub_188,ST MICHAEL,Saint Michael,community,Barge or Road,Receiver,SYN-652,{41AA42C0-BF55-4E9B-A88E-0578D52BAF81},45508,placed
+Hub_188,ST MICHAEL,Saint Michael,community,Barge or Road,Receiver,SYN-654,{A3C09E30-FF98-4742-A0FB-3CBE3697ADBC},45508,placed
+Hub_188,ST MICHAEL,Saint Michael,community,Barge or Road,Receiver,SYN-655,{FCF5DE13-804A-4060-9FE1-B8560D4A7056},45508,placed
+Hub_189,NULATO,Nulato,community,Barge or Plane,Receiver,206,{8A2972AB-84F2-46F0-A771-6C8C7C0AD31B},42876,placed
+Hub_189,NULATO,Nulato,community,Barge or Plane,Receiver,294,{63D13EF4-A0F0-4895-B5BD-141FD7541375},42876,placed
+Hub_189,NULATO,Nulato,community,Barge or Plane,Receiver,491,{A07FF7A6-29DD-4F0C-8ED2-992C6C8DC2A6},42876,placed
+Hub_189,NULATO,Nulato,community,Barge or Plane,Receiver,927,{8F92D9EF-EF82-4775-BCB3-DF53797AF5C0},42876,placed
+Hub_190,SHISHMAREF,Shishmaref,community,Barge,Receiver,207,{E2C20C9D-DC5C-4D14-B512-E8C41312EA92},44128,placed
+Hub_190,SHISHMAREF,Shishmaref,community,Barge,Receiver,207,{F75EDA26-FB7A-4212-9A92-1EFC1B431DCE},44128,placed
+Hub_190,SHISHMAREF,Shishmaref,community,Barge,Receiver,208,{0188F5E2-C4B3-4A32-B75A-E7E6F6A72CE9},44128,placed
+Hub_190,SHISHMAREF,Shishmaref,community,Barge,Receiver,208,{59E906D7-37C0-4DDE-A16A-8B52C5FE2DF3},44128,placed
+Hub_190,SHISHMAREF,Shishmaref,community,Barge,Receiver,208,{BEDF4DA1-CE41-487E-97C9-7DD236954746},44128,placed
+Hub_190,SHISHMAREF,Shishmaref,community,Barge,Receiver,211,{01A9966D-C1DC-47AA-949A-89D610D1E56E},44128,placed
+Hub_190,SHISHMAREF,Shishmaref,community,Barge,Receiver,211,{5B0C866F-F775-4190-B09B-985A2B276D31},44128,placed
+Hub_190,SHISHMAREF,Shishmaref,community,Barge,Receiver,SYN-763,{AF00A56B-27C0-4A8F-8C02-0B6F58B1FB45},44128,placed
+Hub_190,SHISHMAREF,Shishmaref,community,Barge,Receiver,SYN-766,{CEBBA7D6-6120-4AEA-8289-21EF73999913},44128,placed
+Hub_190,SHISHMAREF,Shishmaref,community,Barge,Receiver,SYN-767,{F3F5E887-8B3A-4E61-A0EA-95B7A28D000B},44128,placed
+Hub_191,blob:41,blob:41,blob,Plane,Receiver,212,{5DAA4AB9-BDC3-49F4-B40D-567C49D8D89D},,unplaced:beyond_cap
+Hub_192,remote:214,Eielson Afb,remote_site,Plane,Receiver,214,{86F201C8-8EC4-4EC4-8A63-3339D2F4DC72},,unplaced:beyond_cap
+Hub_193,remote:215,Eielson Afb,remote_site,Plane,Receiver,215,{A82B5A6A-FC3F-4B18-8C71-C5DD4E03ECC4},,unplaced:beyond_cap
+Hub_194,remote:216,Eielson Afb,remote_site,Plane,Receiver,216,{AB04C3B7-730E-44F4-AD27-ADC5B4B13493},,unplaced:beyond_cap
+Hub_195,remote:218,Eielson Afb,remote_site,Plane,Receiver,218,{CB4253E4-9DE9-4D95-AF37-62AF93235BC4},,unplaced:beyond_cap
+Hub_196,remote:219,Eielson Afb,remote_site,Plane,Receiver,219,{F9922F7E-63F1-4190-A7B0-695BCB54A77F},2290,placed
+Hub_197,remote:220,Eielson Afb,remote_site,Plane,Receiver,220,{A4BAA2CF-A008-4738-A346-372CD20F7805},2418,placed
+Hub_198,KONGIGANAK,Kongiganak,community,Barge or Road,Receiver,222,{6B8B493B-8184-4051-A68A-5E838AE19317},41456,placed
+Hub_198,KONGIGANAK,Kongiganak,community,Barge or Road,Receiver,223,{5EEAAC19-79D9-4423-BAAC-E8C448C4BBD1},41456,placed
+Hub_198,KONGIGANAK,Kongiganak,community,Barge or Road,Receiver,223,{721F79AC-0E90-4CB1-85AC-8A9BE73E51DE},41456,placed
+Hub_198,KONGIGANAK,Kongiganak,community,Barge or Road,Receiver,223,{72FC3FC4-C253-4EB8-92A4-8219876AD426},41456,placed
+Hub_198,KONGIGANAK,Kongiganak,community,Barge or Road,Receiver,226,{1F3E5119-0B67-402E-BCC6-A6FB3D649C1A},41456,placed
+Hub_198,KONGIGANAK,Kongiganak,community,Barge or Road,Receiver,226,{2D94CADD-0758-4D2E-8ED4-C1BB651EDDDA},41456,placed
+Hub_198,KONGIGANAK,Kongiganak,community,Barge or Road,Receiver,226,{A1715C2D-0EE2-43E1-A0EE-B1F07DFECCB7},41456,placed
+Hub_198,KONGIGANAK,Kongiganak,community,Barge or Road,Receiver,399,{1CB3B2C8-5A1C-47C2-9944-447BF7AF404F},41456,placed
+Hub_198,KONGIGANAK,Kongiganak,community,Barge or Road,Receiver,SYN-1029,{353A5042-21AD-4457-BA26-5213430A7E03},41456,placed
+Hub_198,KONGIGANAK,Kongiganak,community,Barge or Road,Receiver,SYN-1029,{4CEE5FA2-FBE0-425C-A4B0-4AF20625DC4C},41456,placed
+Hub_198,KONGIGANAK,Kongiganak,community,Barge or Road,Receiver,SYN-1031,{CEBF6A18-6725-4A8C-8A3A-A21D32473D23},41456,placed
+Hub_199,remote:23,Bettles Field,remote_site,Road,Receiver,23,{ACFDB0DB-4CB5-4622-965E-BDE30178DF29},,unplaced:beyond_cap
+Hub_200,HOOPER BAY,Hooper Bay,community,Barge or Road,Supplier,234,{887DB1BB-123E-4376-ADAC-6E12268D877B},41991,placed
+Hub_200,HOOPER BAY,Hooper Bay,community,Barge or Road,Supplier,398,{8ADDB08B-141C-463F-AF0D-00CB11ED85BB},41991,placed
+Hub_200,HOOPER BAY,Hooper Bay,community,Barge or Road,Supplier,611,{20DD3A01-5B0A-472D-A396-C9118EE2DB95},41991,placed
+Hub_200,HOOPER BAY,Hooper Bay,community,Barge or Road,Supplier,662,{9B6E707C-3648-4486-86B1-87811824DA67},41991,placed
+Hub_200,HOOPER BAY,Hooper Bay,community,Barge or Road,Supplier,897,{93566EA2-A919-4717-BB31-81D367FFC7F3},41991,placed
+Hub_200,HOOPER BAY,Hooper Bay,community,Barge or Road,Supplier,914,{3734C771-7E3F-4526-A652-56D9779C6F09},41991,placed
+Hub_200,HOOPER BAY,Hooper Bay,community,Barge or Road,Supplier,914,{449628B5-6B03-41F8-92FA-E931C030D353},41991,placed
+Hub_200,HOOPER BAY,Hooper Bay,community,Barge or Road,Supplier,SYN-926,{57CBFD5A-B0B9-4C1D-A73B-1CED62471744},41991,placed
+Hub_200,HOOPER BAY,Hooper Bay,community,Barge or Road,Supplier,SYN-926,{9D116191-6B6E-4AD2-B09D-41FE4B38B659},41991,placed
+Hub_200,HOOPER BAY,Hooper Bay,community,Barge or Road,Supplier,SYN-927,{88A5A8CE-033C-48C5-B537-5CDF4ED67B25},41991,placed
+Hub_200,HOOPER BAY,Hooper Bay,community,Barge or Road,Supplier,SYN-928,{A27942C2-FA2F-492A-A3C3-0F16D8FB9618},41991,placed
+Hub_200,HOOPER BAY,Hooper Bay,community,Barge or Road,Supplier,SYN-929,{47D2944D-42AD-431F-975F-E10C14A3CAC9},41991,placed
+Hub_201,KOYUK,Koyuk,community,Barge or Road,Receiver,242,{B5C82EF4-79DB-417C-9A44-A90C8CBCF6EC},44009,placed
+Hub_201,KOYUK,Koyuk,community,Barge or Road,Receiver,261,{29891D9C-5E68-4937-B0ED-CB59B250A0D8},44009,placed
+Hub_201,KOYUK,Koyuk,community,Barge or Road,Receiver,261,{646135BE-4BDA-41E6-BB75-8D7817C4BD00},44009,placed
+Hub_201,KOYUK,Koyuk,community,Barge or Road,Receiver,261,{A711DDDE-1999-4493-A3CD-A603CD67B3FF},44009,placed
+Hub_201,KOYUK,Koyuk,community,Barge or Road,Receiver,261,{D4FB8AB8-618F-4FBA-BDDC-292B669758E6},44009,placed
+Hub_201,KOYUK,Koyuk,community,Barge or Road,Receiver,950,{2D4608DF-39F1-4BF7-A6E8-1204529443BC},44009,placed
+Hub_201,KOYUK,Koyuk,community,Barge or Road,Receiver,950,{63F62819-A90B-4541-A5A3-05D54AEF64DC},44009,placed
+Hub_201,KOYUK,Koyuk,community,Barge or Road,Receiver,950,{B70644C4-0854-45E2-B80A-F541CEB000BF},44009,placed
+Hub_202,KWETHLUK,Kwethluk,community,Barge or Road,Receiver,243,{F05FA2FA-A821-4D39-B9E0-CC3DD65848FD},48820,placed
+Hub_202,KWETHLUK,Kwethluk,community,Barge or Road,Receiver,400,{A1EC74F9-781B-4035-B9D3-8CD0AC3E7511},48820,placed
+Hub_202,KWETHLUK,Kwethluk,community,Barge or Road,Receiver,670,{A588F617-E750-41C4-86BE-2B7559AFFFFE},48820,placed
+Hub_202,KWETHLUK,Kwethluk,community,Barge or Road,Receiver,671,{22B4264A-345B-409D-A28D-70E9EFBA5DEE},48820,placed
+Hub_202,KWETHLUK,Kwethluk,community,Barge or Road,Receiver,671,{238D30F6-758B-4499-8535-0CED8540916F},48820,placed
+Hub_202,KWETHLUK,Kwethluk,community,Barge or Road,Receiver,674,{16ECC698-F851-4017-8C0C-19961D441BDC},48820,placed
+Hub_202,KWETHLUK,Kwethluk,community,Barge or Road,Receiver,SYN-789,{123EF56C-C6EF-4645-B929-EF11B578B022},48820,placed
+Hub_202,KWETHLUK,Kwethluk,community,Barge or Road,Receiver,SYN-789,{3B823603-BB28-48C8-93C3-8622DFC647EC},48820,placed
+Hub_203,MEKORYUK,Mekoryuk,community,Barge or Road,Receiver,244,{8EB99286-AF2B-44D9-8E66-3E5984C63B97},41540,placed
+Hub_203,MEKORYUK,Mekoryuk,community,Barge or Road,Receiver,718,{DF8A51FF-9743-44F6-9433-B5029478C477},41540,placed
+Hub_203,MEKORYUK,Mekoryuk,community,Barge or Road,Receiver,974,{29B2013B-4675-4DBE-83DB-FE0BE549E55E},41540,placed
+Hub_203,MEKORYUK,Mekoryuk,community,Barge or Road,Receiver,974,{FDF3F3FC-28C1-46DD-AF3B-029C231E2328},41540,placed
+Hub_203,MEKORYUK,Mekoryuk,community,Barge or Road,Receiver,SYN-885,{DE0B34DB-8C02-4D9D-94E1-A19418FBBABD},41540,placed
+Hub_203,MEKORYUK,Mekoryuk,community,Barge or Road,Receiver,SYN-885,{F28E3A63-4862-46AA-A43E-F021AEEE73F2},41540,placed
+Hub_203,MEKORYUK,Mekoryuk,community,Barge or Road,Receiver,SYN-888,{F0A479C4-125F-4C07-90E6-6C5B434E39C3},41540,placed
+Hub_203,MEKORYUK,Mekoryuk,community,Barge or Road,Receiver,SYN-890,{014FC20F-A187-4730-9063-3A6FD183BF0F},41540,placed
+Hub_204,NEWTOK,Newtok,community,Barge or Road,Receiver,245,{DAB1B98D-CCC0-4662-920A-432A27A48097},47406,placed
+Hub_204,NEWTOK,Newtok,community,Barge or Road,Receiver,SYN-892,{4BB48263-7E3B-4C23-AFB4-7F080EE47448},47406,placed
+Hub_204,NEWTOK,Newtok,community,Barge or Road,Receiver,SYN-893,{1B7ADC5D-27C3-4015-B623-9E74C855045C},47406,placed
+Hub_204,NEWTOK,Newtok,community,Barge or Road,Receiver,SYN-895,{892AE18F-C639-4A7B-919E-5536BD309E88},47406,placed
+Hub_204,NEWTOK,Newtok,community,Barge or Road,Receiver,SYN-896,{8536A199-0B19-4F30-9F38-76088DDD4D1B},47406,placed
+Hub_205,QUINHAGAK,Quinhagak,community,Barge or Road,Receiver,249,{B41C346B-C17B-4154-A14C-3B28B36C4C1D},41408,placed
+Hub_205,QUINHAGAK,Quinhagak,community,Barge or Road,Receiver,931,{9EE26DD2-4A76-4497-A338-80454B55D00E},41408,placed
+Hub_205,QUINHAGAK,Quinhagak,community,Barge or Road,Receiver,SYN-1022,{B8D4BCC5-2A6C-4A5F-A0E1-F1F3FDE9F2B4},41408,placed
+Hub_205,QUINHAGAK,Quinhagak,community,Barge or Road,Receiver,SYN-1024,{2017458D-BB37-4241-8770-3494EBE5EE60},41408,placed
+Hub_205,QUINHAGAK,Quinhagak,community,Barge or Road,Receiver,SYN-1025,{D4587BF4-E139-47DD-BC30-428544F2F8A8},41408,placed
+Hub_205,QUINHAGAK,Quinhagak,community,Barge or Road,Receiver,SYN-1026,{5456D64C-D158-422D-A371-B6F74124189E},41408,placed
+Hub_206,blob:43,blob:43,blob,Plane,Receiver,25,{DEC507FE-8A64-4440-BA11-D2663D6C51B2},,unplaced:beyond_cap
+Hub_207,SAVOONGA,Savoonga,community,Barge or Plane or Road,Receiver,250,{26F3706A-EF0A-4C2E-99BB-9BC0372D55BA},42318,placed
+Hub_207,SAVOONGA,Savoonga,community,Barge or Plane or Road,Receiver,356,{3A1AD328-7F5C-4BD3-8EEA-B71BFE108918},42318,placed
+Hub_207,SAVOONGA,Savoonga,community,Barge or Plane or Road,Receiver,933,{2A805635-FBF8-4D78-9462-6183C5D358C5},42318,placed
+Hub_207,SAVOONGA,Savoonga,community,Barge or Plane or Road,Receiver,SYN-718,{DDE35DBE-E122-4919-AC13-F1C44D4FA731},42318,placed
+Hub_207,SAVOONGA,Savoonga,community,Barge or Plane or Road,Receiver,SYN-720,{177A8782-8C79-44EA-AA37-CDDBE4DD9E40},42318,placed
+Hub_207,SAVOONGA,Savoonga,community,Barge or Plane or Road,Receiver,SYN-721,{97F241AB-0575-407D-896D-47BC5D61389A},42318,placed
+Hub_208,WALES,Wales,community,Barge,Receiver,256,{B0066921-3F79-4DC7-A0D1-CDB913214CE5},44072,placed
+Hub_208,WALES,Wales,community,Barge,Receiver,944,{9590870E-3874-48C9-A5A1-809FF3E2A8F7},44072,placed
+Hub_208,WALES,Wales,community,Barge,Receiver,944,{A40B8C7B-DF45-4488-8F49-74757BD35050},44072,placed
+Hub_208,WALES,Wales,community,Barge,Receiver,SYN-744,{31748366-F5A6-4B80-A966-0BEA4B94E1F7},44072,placed
+Hub_209,BREVIG MISSION,Brevig Mission,community,Barge,Receiver,257,{CA12C55C-A65F-44D1-BF96-F6C28B1C5113},44050,placed
+Hub_209,BREVIG MISSION,Brevig Mission,community,Barge,Receiver,907,{0A5FA4B6-C7EF-4488-B4D6-B4532765F844},44050,placed
+Hub_209,BREVIG MISSION,Brevig Mission,community,Barge,Receiver,SYN-746,{43DD9874-FC62-4F32-AC8A-D99446EB7491},44050,placed
+Hub_209,BREVIG MISSION,Brevig Mission,community,Barge,Receiver,SYN-749,{C343C747-D430-467B-8173-BE496195CA2C},44050,placed
+Hub_209,BREVIG MISSION,Brevig Mission,community,Barge,Receiver,SYN-750,{36D107A2-A916-43C3-928F-29ACD9874AD9},44050,placed
+Hub_210,TELLER,Teller,community,Barge or Plane or Road,Receiver,258,{51FA77EC-8692-4F71-B5BE-AE060C540739},43852,placed
+Hub_210,TELLER,Teller,community,Barge or Plane or Road,Receiver,258,{C8837112-5BF5-4885-80C3-89AC55F0D248},43852,placed
+Hub_210,TELLER,Teller,community,Barge or Plane or Road,Receiver,363,{41EEA5A2-FDA1-4DC9-973C-3DD0D62E1328},43852,placed
+Hub_210,TELLER,Teller,community,Barge or Plane or Road,Receiver,669,{D1EB681F-FE8B-4DEF-BC9B-29CC5CC7CE27},43852,placed
+Hub_210,TELLER,Teller,community,Barge or Plane or Road,Receiver,941,{B366EDFE-8B21-4D77-AFDB-D1639DE91AE0},43852,placed
+Hub_210,TELLER,Teller,community,Barge or Plane or Road,Receiver,980,{42A9122C-DCF9-4935-A1B4-67D244B3FD79},43852,placed
+Hub_210,TELLER,Teller,community,Barge or Plane or Road,Receiver,SYN-752,{A28C0559-38B5-4735-BF6B-26311071B63D},43852,placed
+Hub_210,TELLER,Teller,community,Barge or Plane or Road,Receiver,SYN-753,{994105DB-6F36-41A1-B230-E0373F9E975F},43852,placed
+Hub_210,TELLER,Teller,community,Barge or Plane or Road,Receiver,SYN-755,{900E68BF-1D5B-4576-AA79-59EAF14176E7},43852,placed
+Hub_210,TELLER,Teller,community,Barge or Plane or Road,Receiver,SYN-755,{FAFEBD1F-25B1-4F8A-87F2-3478B694F763},43852,placed
+Hub_210,TELLER,Teller,community,Barge or Plane or Road,Receiver,SYN-757,{1629B350-C98B-4525-A641-3C0396489C45},43852,placed
+Hub_210,TELLER,Teller,community,Barge or Plane or Road,Receiver,SYN-757,{1C4ACFE0-0158-45D7-ACA9-C070DB72B892},43852,placed
+Hub_210,TELLER,Teller,community,Barge or Plane or Road,Receiver,SYN-759,{7FD6FBDB-244E-42CD-84F3-B8C11ED50D6D},43852,placed
+Hub_211,GOLOVIN,Golovin,community,Barge,Receiver,259,{17167C82-B94D-4D95-9821-759B8F922368},43618,placed
+Hub_211,GOLOVIN,Golovin,community,Barge,Receiver,681,{931CEEFB-1FB9-4F9D-8D10-D18DBC4CC1DF},43618,placed
+Hub_212,CLEAR,Clear,community,Road,Receiver,262,{18D63502-F027-4AAB-BF07-46290071FFC6},1941,placed
+Hub_213,LARSEN BAY,Larsen Bay,community,Barge or Road,Receiver,264,{6FFCF56E-AE3D-44CF-A8C6-62083A75AD34},38412,placed
+Hub_213,LARSEN BAY,Larsen Bay,community,Barge or Road,Receiver,507,{31AFC5F9-52E9-4580-9502-B9A75D6096CC},38412,placed
+Hub_213,LARSEN BAY,Larsen Bay,community,Barge or Road,Receiver,868,{05940B17-A438-4A05-A779-1DA030BFADD7},38412,placed
+Hub_213,LARSEN BAY,Larsen Bay,community,Barge or Road,Receiver,868,{FC7172A9-1AD9-4D0C-A042-488D9BE77C44},38412,placed
+Hub_214,BARROW,Barrow,community,Road,Receiver,265,{F681A2B1-247E-42A5-9190-DF9189FC6EDF},44859,placed
+Hub_214,BARROW,Barrow,community,Road,Receiver,469,{46458926-F688-4612-ABF5-300ABAE53C25},44859,placed
+Hub_214,BARROW,Barrow,community,Road,Receiver,605,{61590B3C-7B6F-4882-9598-3D11DCDC4FE5},44859,placed
+Hub_214,BARROW,Barrow,community,Road,Receiver,765,{AA46E999-9021-49E7-9F8E-58ADC5E2C929},44859,placed
+Hub_214,BARROW,Barrow,community,Road,Receiver,878,{A816C762-5E40-489E-89F9-BA4C1D7C7825},44859,placed
+Hub_215,COLDFOOT,Coldfoot,community,Plane or Road,Receiver,267,{21EE8D6B-9546-4920-A291-30B520F15B15},2840,placed
+Hub_215,COLDFOOT,Coldfoot,community,Plane or Road,Receiver,770,{AEC3F544-FBA6-450A-BA4E-FC337AFB6FCA},2840,placed
+Hub_215,COLDFOOT,Coldfoot,community,Plane or Road,Receiver,770,{D0D325AD-A296-437B-9213-8A2FD2F3621D},2840,placed
+Hub_216,blob:30,blob:30,blob,Road,Receiver,269,{32A205AC-8EDE-4217-924B-F980C9601A08},49063,placed
+Hub_217,MINTO,Minto,community,Plane or Road,Receiver,273,{C34CCB22-D514-4F25-9E87-638161362114},2575,placed
+Hub_217,MINTO,Minto,community,Plane or Road,Receiver,490,{E2861BD3-C905-4D5D-B58F-B62EF99C0B2D},2575,placed
+Hub_217,MINTO,Minto,community,Plane or Road,Receiver,617,{1E4F5A63-4728-4AB5-B065-D3C091AC8E28},2575,placed
+Hub_217,MINTO,Minto,community,Plane or Road,Receiver,617,{FB4DD9E6-3392-4E3E-A574-C2E4FF9A0CE0},2575,placed
+Hub_217,MINTO,Minto,community,Plane or Road,Receiver,953,{366F32F8-C6B1-4774-BC82-2D10FA4CDEA5},2575,placed
+Hub_217,MINTO,Minto,community,Plane or Road,Receiver,953,{D09AC76A-E60F-4EFE-915F-BDE854349BA0},2575,placed
+Hub_218,blob:35,blob:35,blob,Road,Receiver,275,{FFF367B0-972E-4126-B5A7-31F3709A99A6},45551,placed
+Hub_219,HARDING-BIRCH LAKES,Harding-Birch Lakes,community,Road,Receiver,279,{D0A200D0-FFC1-4BCC-9DD2-A24F7835EAD8},1285,placed
+Hub_220,blob:42,blob:42,blob,Road,Receiver,281,{69923A6C-9EA5-47E9-9D52-5380195961B2},2710,placed
+Hub_221,ALLAKAKET,Allakaket,community,Plane,Supplier,282,{F729F6FD-CA95-4695-B3B0-6992D56CFD1B},43148,placed
+Hub_221,ALLAKAKET,Allakaket,community,Plane,Supplier,479,{A7EA9E25-E914-4577-97C7-9D9E1A63BD1C},43148,placed
+Hub_221,ALLAKAKET,Allakaket,community,Plane,Supplier,480,{83E88E4B-2856-41B9-B5D4-97F9A4C21BC1},43148,placed
+Hub_221,ALLAKAKET,Allakaket,community,Plane,Supplier,480,{FACB07C6-BCA3-48B2-85F6-AC60C6860B65},43148,placed
+Hub_221,ALLAKAKET,Allakaket,community,Plane,Supplier,481,{72D561CA-BBAD-4D27-A4F4-0FC17DF9CAD6},43148,placed
+Hub_221,ALLAKAKET,Allakaket,community,Plane,Supplier,481,{8A77CC14-5CFE-4749-8376-7AA7F17E5A30},43148,placed
+Hub_221,ALLAKAKET,Allakaket,community,Plane,Supplier,481,{8C281BCB-FCAF-4D86-A387-5CDD46D6DE01},43148,placed
+Hub_221,ALLAKAKET,Allakaket,community,Plane,Supplier,879,{5FAA65FF-9E91-4893-ADFF-78AC5B432EE0},43148,placed
+Hub_221,ALLAKAKET,Allakaket,community,Plane,Supplier,SYN-585,{A8E15613-2636-4E8E-A76D-BF767EC36F40},43148,placed
+Hub_221,ALLAKAKET,Allakaket,community,Plane,Supplier,SYN-585,{D573C229-77DD-4562-A220-718A3BE11844},43148,placed
+Hub_221,ALLAKAKET,Allakaket,community,Plane,Supplier,SYN-585,{D8DD03D1-0045-4F20-808E-99BCCD553C35},43148,placed
+Hub_222,BEAVER,Beaver,community,Barge or Plane,Receiver,283,{1D1A98B5-D9D0-40A5-82C8-01218C8450C7},43127,placed
+Hub_222,BEAVER,Beaver,community,Barge or Plane,Receiver,283,{9CEDCD36-9995-4BC2-BF28-E57031C681F3},43127,placed
+Hub_222,BEAVER,Beaver,community,Barge or Plane,Receiver,958,{71A53B1D-97A9-40E4-BD9D-A9C1956FE6E9},43127,placed
+Hub_222,BEAVER,Beaver,community,Barge or Plane,Receiver,958,{F0DC7758-EFFA-4B91-84B0-2C2C02EBA419},43127,placed
+Hub_223,BIRCH CREEK,Birch Creek,community,Plane,Receiver,285,{4095831C-DD72-4AA7-84A9-24C5050007C5},43111,placed
+Hub_223,BIRCH CREEK,Birch Creek,community,Plane,Receiver,SYN-414,{679C1FC6-00CF-4BC3-93B7-21630B847652},43111,placed
+Hub_224,CENTRAL,Central,community,Plane,Receiver,286,{A11B75DB-3AE4-4352-854F-00945DBA7130},2713,placed
+Hub_225,CHALKYITSIK,Chalkyitsik,community,Plane,Supplier,287,{6A7E5E6F-FF46-455D-88CD-E1A277E01EA5},43312,placed
+Hub_225,CHALKYITSIK,Chalkyitsik,community,Plane,Supplier,475,{3B2B6CA7-1382-4D85-95B1-02BFB635F737},43312,placed
+Hub_225,CHALKYITSIK,Chalkyitsik,community,Plane,Supplier,475,{949B583B-D2A5-4C20-8C1B-E7FB18788B6C},43312,placed
+Hub_225,CHALKYITSIK,Chalkyitsik,community,Plane,Supplier,475,{C4E7CA6C-65FB-42A3-887B-D4A9C17BFC85},43312,placed
+Hub_225,CHALKYITSIK,Chalkyitsik,community,Plane,Supplier,477,{8ED91C17-5C29-4269-B1C3-F14B3B54034B},43312,placed
+Hub_225,CHALKYITSIK,Chalkyitsik,community,Plane,Supplier,SYN-387,{C5CD2299-5D48-457E-A887-9914B94A3D80},43312,placed
+Hub_225,CHALKYITSIK,Chalkyitsik,community,Plane,Supplier,SYN-389,{BEF19A88-DBAC-4119-9202-5151653EB319},43312,placed
+Hub_226,HUGHES,Hughes,community,Plane,Receiver,290,{7A15F83D-F6C9-40A8-ACC1-4D1B644A5224},43087,placed
+Hub_226,HUGHES,Hughes,community,Plane,Receiver,487,{88AED113-8FB3-4795-8643-8390D01668AE},43087,placed
+Hub_226,HUGHES,Hughes,community,Plane,Receiver,SYN-584,{E21C4E02-36BA-461C-B1E8-98CFECCDF0C8},43087,placed
+Hub_227,KALTAG,Kaltag,community,Barge or Plane,Supplier,291,{499800EC-20F2-45F2-AFC1-7AAB952DCA55},42701,placed
+Hub_227,KALTAG,Kaltag,community,Barge or Plane,Supplier,484,{7C0A5075-DEE5-4F29-B64A-0D729DA587AC},42701,placed
+Hub_227,KALTAG,Kaltag,community,Barge or Plane,Supplier,485,{141859AB-9A88-4E21-AFB2-06797206FEC1},42701,placed
+Hub_227,KALTAG,Kaltag,community,Barge or Plane,Supplier,485,{FB1215D5-A0E0-4889-8D27-2E9CE4564801},42701,placed
+Hub_227,KALTAG,Kaltag,community,Barge or Plane,Supplier,918,{315BB5AA-A0D8-4C55-AE93-3B532A903517},42701,placed
+Hub_227,KALTAG,Kaltag,community,Barge or Plane,Supplier,SYN-595,{0499C749-EF7C-49B6-B569-A3CC570BC16C},42701,placed
+Hub_227,KALTAG,Kaltag,community,Barge or Plane,Supplier,SYN-595,{17383E1F-DD0F-48AC-80E4-1826186772F5},42701,placed
+Hub_227,KALTAG,Kaltag,community,Barge or Plane,Supplier,SYN-597,{8736694E-B515-4A19-AB80-2C87B923D457},42701,placed
+Hub_228,KOYUKUK,Koyukuk,community,Barge or Plane,Receiver,292,{267923CC-B079-457C-AE8E-665ECAC1C97E},42933,placed
+Hub_228,KOYUKUK,Koyukuk,community,Barge or Plane,Receiver,292,{A8DD319B-5CCE-40D5-ACBC-8E90A95348B9},42933,placed
+Hub_228,KOYUKUK,Koyukuk,community,Barge or Plane,Receiver,482,{7A3D0B3B-5FC9-4B1B-A087-222C99BD5703},42933,placed
+Hub_228,KOYUKUK,Koyukuk,community,Barge or Plane,Receiver,483,{05CC38AB-A05B-4F94-A85B-F972828E21CA},42933,placed
+Hub_229,HUSLIA,Huslia,community,Barge or Road,Receiver,295,{0A397502-B97C-4DFF-B1D7-BD80D81BAC33},43034,placed
+Hub_229,HUSLIA,Huslia,community,Barge or Road,Receiver,488,{AABB804C-6713-48DB-8B61-4A5A582D0DE5},43034,placed
+Hub_229,HUSLIA,Huslia,community,Barge or Road,Receiver,488,{AB994952-3C53-44E5-816D-B6C2A1A9012A},43034,placed
+Hub_229,HUSLIA,Huslia,community,Barge or Road,Receiver,702,{A081B9F8-3FE6-48E7-981D-D43D941BC8FF},43034,placed
+Hub_229,HUSLIA,Huslia,community,Barge or Road,Receiver,703,{F29B8DDC-91DB-4ACC-8F34-04F488ED7F05},43034,placed
+Hub_229,HUSLIA,Huslia,community,Barge or Road,Receiver,915,{41752EEE-403A-4394-8AF1-3D255A7A8F9F},43034,placed
+Hub_230,RUBY,Ruby,community,Barge or Plane or Road,Receiver,297,{D01F6BDD-1243-4DD4-8535-C3B8E665FA0C},42770,placed
+Hub_230,RUBY,Ruby,community,Barge or Plane or Road,Receiver,492,{0038F2D1-22F0-45C9-B78F-02C0A50909B1},42770,placed
+Hub_230,RUBY,Ruby,community,Barge or Plane or Road,Receiver,SYN-625,{E55B146D-4351-4F1D-838C-CBE8D7A2A8FC},42770,placed
+Hub_230,RUBY,Ruby,community,Barge or Plane or Road,Receiver,SYN-626,{BFB14370-94DF-41D5-859D-B21FCE998FE3},42770,placed
+Hub_230,RUBY,Ruby,community,Barge or Plane or Road,Receiver,SYN-627,{1E8B6CD0-23A6-46F4-B08A-F60D09F8CD91},42770,placed
+Hub_231,STEVENS VILLAGE,Stevens Village,community,Barge or Plane,Receiver,298,{DC3FECD9-9A70-472C-8141-F082D544889E},43054,placed
+Hub_231,STEVENS VILLAGE,Stevens Village,community,Barge or Plane,Receiver,298,{E2564600-5F0C-4B9C-8869-F3712D55D68D},43054,placed
+Hub_231,STEVENS VILLAGE,Stevens Village,community,Barge or Plane,Receiver,SYN-372,{7E73E0F8-E2C3-435D-88DC-F981B21B96C2},43054,placed
+Hub_232,TANANA,Tanana,community,Barge or Plane or Road,Receiver,299,{D8E39A41-4ACE-4C9A-8FA8-F5201ED04032},42981,placed
+Hub_232,TANANA,Tanana,community,Barge or Plane or Road,Receiver,58,{6200DA3C-6A75-4E38-B994-E2B0E427839F},42981,placed
+Hub_232,TANANA,Tanana,community,Barge or Plane or Road,Receiver,58,{F0743589-FDEE-4485-B8E0-66C6997B864A},42981,placed
+Hub_232,TANANA,Tanana,community,Barge or Plane or Road,Receiver,62,{FF2FD009-AF6E-448D-A99A-94EBEEAFB344},42981,placed
+Hub_232,TANANA,Tanana,community,Barge or Plane or Road,Receiver,824,{39D03317-EED1-4E0E-B1CF-3A9479C9357E},42981,placed
+Hub_232,TANANA,Tanana,community,Barge or Plane or Road,Receiver,SYN-380,{A919E785-7508-4B03-B79B-5726EAAEF7FC},42981,placed
+Hub_232,TANANA,Tanana,community,Barge or Plane or Road,Receiver,SYN-381,{A41AD6AE-236E-4BD3-9AB7-77691DD47DA1},42981,placed
+Hub_233,CHITINA,Chitina,community,Road,Receiver,300,{6F0B4405-777D-4F6C-A85C-D26FEB5C8373},607,placed
+Hub_234,blob:48,blob:48,blob,Road,Receiver,301,{FEF19473-F330-472E-B4D7-1BFE5DAC285F},84090,placed
+Hub_235,GULKANA,Gulkana,community,Road,Receiver,302,{49254AE2-8D43-4937-AF5B-27770C31B4DB},1435,placed
+Hub_236,NELCHINA,Nelchina,community,Road,Receiver,303,{228185AD-273F-4302-A688-10350338C49D},849,placed
+Hub_237,PAXSON,Paxson,community,Plane or Road,Receiver,304,{E2092758-6B1B-4406-9634-61C15D25036D},1447,placed
+Hub_237,PAXSON,Paxson,community,Plane or Road,Receiver,813,{B50C3F10-1576-41B3-84F8-FA0CA4542BC6},1447,placed
+Hub_237,PAXSON,Paxson,community,Plane or Road,Receiver,821,{5D6D86C0-354F-48E0-A12F-CD12687033EC},1447,placed
+Hub_237,PAXSON,Paxson,community,Plane or Road,Receiver,883,{941478E6-074B-4359-9A54-28CA2129D36F},1447,placed
+Hub_238,SLANA,Slana,community,Road,Receiver,305,{A6F3D5DB-5508-4B0A-8A10-9BFCA0BFA601},1111,placed
+Hub_238,SLANA,Slana,community,Road,Receiver,643,{5BA42C76-D40B-475E-BE1F-1AC1210A7126},1111,placed
+Hub_239,TAZLINA,Tazlina,community,Road,Receiver,306,{699323F4-730E-4B7A-9FCE-3485E983A725},47868,placed
+Hub_240,CHICKEN,Chicken,community,Road,Receiver,307,{B4D6D584-2183-46FA-A49A-8007A9A27B9B},2278,placed
+Hub_240,CHICKEN,Chicken,community,Road,Receiver,313,{62EAA10A-C62B-41F4-914C-0D161B46FE25},2278,placed
+Hub_241,blob:58,blob:58,blob,Barge,Receiver,31,{F7DD87D6-0CF8-4210-8D91-0811CAD7E2A5},35077,placed
+Hub_242,blob:49,blob:49,blob,Road,Receiver,312,{2E1A4AF6-7B26-445E-863B-74ADE105B453},2279,placed
+Hub_243,blob:44,blob:44,blob,Road,Receiver,318,{7B89ED61-3040-4FCE-8B1D-80E2A9444FBD},1248,placed
+Hub_244,CHUGIAK,Chugiak,community,Road,Receiver,368,{B47BDC9C-D98B-4416-91A6-F1A5A1A96B4D},19220,placed
+Hub_245,GIRDWOOD,Girdwood,community,Road,Receiver,369,{1A74BEEC-86F2-496E-BC64-B8298B907F17},10155,placed
+Hub_245,GIRDWOOD,Girdwood,community,Road,Receiver,560,{78E87343-723A-45F8-9F57-CA9682B01C90},10155,placed
+Hub_246,HOPE,Hope,community,Road,Receiver,370,{38E82315-8B3C-44A8-8C51-723335301BFB},493,placed
+Hub_247,CHENEGA,Chenega,community,Barge,Receiver,372,{D259579F-391E-4012-8B57-3FBC580FC61B},39268,placed
+Hub_247,CHENEGA,Chenega,community,Barge,Receiver,882,{4F217687-58E4-41F1-BC02-DE4F52EDB4EC},39268,placed
+Hub_247,CHENEGA,Chenega,community,Barge,Receiver,965,{21834ECF-DD77-4715-AAE4-CF990659EA4F},39268,placed
+Hub_247,CHENEGA,Chenega,community,Barge,Receiver,965,{62CC57DA-769A-48CA-AC8A-2338BE283096},39268,placed
+Hub_247,CHENEGA,Chenega,community,Barge,Receiver,SYN-1320,{4DB9B26B-6708-445E-8807-973AB9424037},39268,placed
+Hub_247,CHENEGA,Chenega,community,Barge,Receiver,SYN-1321,{8A61B008-E3EC-4C08-8075-DDF79CCEE7F8},39268,placed
+Hub_248,SELDOVIA,Seldovia,community,Barge or Road,Receiver,373,{653555F4-0E48-4EEC-B326-6042DDD62DC0},39243,placed
+Hub_248,SELDOVIA,Seldovia,community,Barge or Road,Receiver,43,{045934AD-2BCF-44F0-84B9-C7E3EBDD9156},39243,placed
+Hub_248,SELDOVIA,Seldovia,community,Barge or Road,Receiver,690,{0F656157-B21E-40D4-8524-2319155AFBB3},39243,placed
+Hub_249,COOPER LANDING,Cooper Landing,community,Road,Receiver,375,{9D76FA1D-AF1E-40E9-8EA2-47C4C9B0D071},261,placed
+Hub_250,CROWN POINT,Crown Point,community,Road,Receiver,376,{32598407-07A8-463F-A3C6-E55AC9BC9DDD},553,placed
+Hub_251,GLACIER VIEW,Glacier View,community,Road,Receiver,382,{0FD29D07-17D3-4E0E-A860-BB784E36C547},916,placed
+Hub_252,POINT MACKENZIE,Point Mackenzie,community,Road,Receiver,384,{97E77B03-20AE-4291-A9A5-15C73AA55976},22994,placed
+Hub_253,SKWENTNA,Skwentna,community,Road,Receiver,387,{C313ACE1-83FE-465B-9DB3-436CB2D48F7D},48761,placed
+Hub_254,WILLOW,Willow,community,Road,Receiver,388,{24CCA6CF-4088-407D-BF53-36411FF7A44D},1651,placed
+Hub_255,AKIACHAK,Akiachak,community,Barge or Road,Receiver,390,{0DD524A1-60B5-4049-833A-BCD12122BD6A},48825,placed
+Hub_255,AKIACHAK,Akiachak,community,Barge or Road,Receiver,722,{50B0DA07-CC55-4458-825A-5EAD7328F878},48825,placed
+Hub_255,AKIACHAK,Akiachak,community,Barge or Road,Receiver,722,{5E39BCC6-8EBB-4E87-8E24-53576A9C08B3},48825,placed
+Hub_255,AKIACHAK,Akiachak,community,Barge or Road,Receiver,722,{ED065D32-B350-4A2B-A53C-282E4A15376A},48825,placed
+Hub_256,AKIAK,Akiak,community,Barge or Road,Receiver,391,{131A1E41-6632-44F1-9501-ABA1E95CE7E8},41903,placed
+Hub_256,AKIAK,Akiak,community,Barge or Road,Receiver,725,{26138EA6-C276-480E-BD37-260733B682D2},41903,placed
+Hub_256,AKIAK,Akiak,community,Barge or Road,Receiver,SYN-783,{079DDBF2-3AC1-4CAF-A2E7-355251502294},41903,placed
+Hub_256,AKIAK,Akiak,community,Barge or Road,Receiver,SYN-784,{00A49923-D74F-435D-B25E-CB942DD684FB},41903,placed
+Hub_256,AKIAK,Akiak,community,Barge or Road,Receiver,SYN-785,{B00C34E3-78CF-4E85-BB72-D9C79AF1A27A},41903,placed
+Hub_256,AKIAK,Akiak,community,Barge or Road,Receiver,SYN-785,{B07EB472-F08E-4523-850D-3B55EC1020B6},41903,placed
+Hub_256,AKIAK,Akiak,community,Barge or Road,Receiver,SYN-786,{169427EF-CD53-4AE7-800C-C4BD422D33B0},41903,placed
+Hub_257,ATMAUTLUAK,Atmautluak,community,Barge or Road,Receiver,392,{D2B6AD33-B4EC-4CBE-8876-6A89A68C69DB},49049,placed
+Hub_257,ATMAUTLUAK,Atmautluak,community,Barge or Road,Receiver,995,{4647BABE-15E4-4187-9385-1C62344CD6BC},49049,placed
+Hub_257,ATMAUTLUAK,Atmautluak,community,Barge or Road,Receiver,995,{7E4D8AE1-7843-49A3-9585-9B6F01F7736A},49049,placed
+Hub_257,ATMAUTLUAK,Atmautluak,community,Barge or Road,Receiver,995,{812EE745-86FB-46CA-BCD5-0923DCA97BDF},49049,placed
+Hub_257,ATMAUTLUAK,Atmautluak,community,Barge or Road,Receiver,SYN-797,{12AF761E-4E98-4313-8B18-67C630E34B81},49049,placed
+Hub_258,CHEVAK,Chevak,community,Barge or Road,Receiver,395,{8C28EF0F-18CD-407E-8002-921191C21ED1},42013,placed
+Hub_258,CHEVAK,Chevak,community,Barge or Road,Receiver,962,{AAB3F5C1-2AD5-4A34-BB01-B155229C18D5},42013,placed
+Hub_258,CHEVAK,Chevak,community,Barge or Road,Receiver,SYN-916,{3422CFAB-36FA-4948-819D-BF43C5EBA6EE},42013,placed
+Hub_258,CHEVAK,Chevak,community,Barge or Road,Receiver,SYN-917,{C0223FF5-B95B-4CF2-80C4-FB5DCC124ADC},42013,placed
+Hub_258,CHEVAK,Chevak,community,Barge or Road,Receiver,SYN-918,{7170A605-FFC2-47EF-AEDC-440948DAFE5D},42013,placed
+Hub_258,CHEVAK,Chevak,community,Barge or Road,Receiver,SYN-918,{A36D0D2B-DD3E-4F4D-82C7-556B48F7B05E},42013,placed
+Hub_258,CHEVAK,Chevak,community,Barge or Road,Receiver,SYN-919,{485090BC-7E66-492A-A558-7CD6303CC673},42013,placed
+Hub_258,CHEVAK,Chevak,community,Barge or Road,Receiver,SYN-920,{57802F02-1FE2-4D07-A325-DC027155B116},42013,placed
+Hub_259,EEK,Eek,community,Barge or Plane or Road,Receiver,396,{60A14302-A0A8-47DD-8BD2-C6091FA92BC0},41471,placed
+Hub_259,EEK,Eek,community,Barge or Plane or Road,Receiver,551,{7ADFD434-2937-469D-9454-AB530C9D44EE},41471,placed
+Hub_259,EEK,Eek,community,Barge or Plane or Road,Receiver,SYN-1014,{E01A6243-BF36-4B61-A01B-F4A0F8AEA260},41471,placed
+Hub_259,EEK,Eek,community,Barge or Plane or Road,Receiver,SYN-1015,{24A96028-6719-465B-9311-C7FBFF278384},41471,placed
+Hub_260,GOODNEWS BAY,Goodnews Bay,community,Barge or Road,Receiver,397,{978129B6-FA2A-40BE-8F70-0AC2A6AD42BC},41390,placed
+Hub_260,GOODNEWS BAY,Goodnews Bay,community,Barge or Road,Receiver,912,{9744BE1C-30A9-42EA-BE46-A88FA1F98BF3},41390,placed
+Hub_260,GOODNEWS BAY,Goodnews Bay,community,Barge or Road,Receiver,912,{F842B64F-E61B-446B-B295-990120CE5CA2},41390,placed
+Hub_260,GOODNEWS BAY,Goodnews Bay,community,Barge or Road,Receiver,SYN-1040,{6C27264B-0B0D-4D54-8E6E-15F1518AAFC9},41390,placed
+Hub_260,GOODNEWS BAY,Goodnews Bay,community,Barge or Road,Receiver,SYN-1040,{D528E31C-2076-4981-8108-ACAE1377AAB6},41390,placed
+Hub_260,GOODNEWS BAY,Goodnews Bay,community,Barge or Road,Receiver,SYN-1043,{56278046-41C5-406E-AC92-1B6A785FE9A1},41390,placed
+Hub_261,EKWOK,Ekwok,community,Barge,Receiver,404,{EFDF3393-228B-44BE-B646-0D8E1DD9AA52},40948,placed
+Hub_261,EKWOK,Ekwok,community,Barge,Receiver,SYN-1062,{ED76EDD9-CFFA-446D-983F-B066C8D335BD},40948,placed
+Hub_262,NAPAKIAK,Napakiak,community,Barge or Road,Receiver,409,{6553CDC8-80FA-4178-8880-C3D596370C35},41599,placed
+Hub_262,NAPAKIAK,Napakiak,community,Barge or Road,Receiver,SYN-812,{E4EE10B6-0678-4598-BDAB-CF65C3FE1ABD},41599,placed
+Hub_262,NAPAKIAK,Napakiak,community,Barge or Road,Receiver,SYN-813,{3C1D37EC-8ACF-4B66-9712-5053F5C05C7A},41599,placed
+Hub_262,NAPAKIAK,Napakiak,community,Barge or Road,Receiver,SYN-815,{D33E9F72-38F5-4436-A633-27A623F29032},41599,placed
+Hub_263,NIGHTMUTE,Nightmute,community,Barge or Road,Receiver,410,{B121A7B4-DF9E-473A-AA2E-5B54FF74D1E3},48809,placed
+Hub_263,NIGHTMUTE,Nightmute,community,Barge or Road,Receiver,SYN-897,{3AF5B78A-D633-4C80-AE00-103C435D22D2},48809,placed
+Hub_263,NIGHTMUTE,Nightmute,community,Barge or Road,Receiver,SYN-897,{4DE683E4-9661-425B-927E-86B2F7AFB3DF},48809,placed
+Hub_263,NIGHTMUTE,Nightmute,community,Barge or Road,Receiver,SYN-897,{51E9D9BB-4D2D-4E8E-8793-49B295C1AA4D},48809,placed
+Hub_263,NIGHTMUTE,Nightmute,community,Barge or Road,Receiver,SYN-898,{37AB6F34-681B-4D19-B653-CE206E88FC2C},48809,placed
+Hub_263,NIGHTMUTE,Nightmute,community,Barge or Road,Receiver,SYN-899,{0B072B69-6A65-4BF2-A67F-BDC7BC3573A5},48809,placed
+Hub_264,NUNAPITCHUK,Nunapitchuk,community,Barge or Road,Receiver,411,{356DC4A7-68DF-460C-9CDC-D6F6F2ACCC75},41890,placed
+Hub_264,NUNAPITCHUK,Nunapitchuk,community,Barge or Road,Receiver,928,{CA9377E2-F045-4E12-899E-A00B06C00908},41890,placed
+Hub_264,NUNAPITCHUK,Nunapitchuk,community,Barge or Road,Receiver,96,{C7474B3B-DBB9-4CAF-B697-A0283730EE6B},41890,placed
+Hub_264,NUNAPITCHUK,Nunapitchuk,community,Barge or Road,Receiver,SYN-800,{D8ACD98E-7DEB-42E9-A3B7-80BBD2D3E1C8},41890,placed
+Hub_264,NUNAPITCHUK,Nunapitchuk,community,Barge or Road,Receiver,SYN-802,{09FFCC6F-D44E-4B62-B7B4-EEA2D70056F3},41890,placed
+Hub_264,NUNAPITCHUK,Nunapitchuk,community,Barge or Road,Receiver,SYN-804,{5071DA87-0E0C-4F44-A6F1-39C4A054DAC1},41890,placed
+Hub_265,SCAMMON BAY,Scammon Bay,community,Barge or Road,Receiver,413,{DE33EAF6-CE90-4E59-BD71-AC863E6D0244},42107,placed
+Hub_265,SCAMMON BAY,Scammon Bay,community,Barge or Road,Receiver,668,{3329718C-57DB-4741-9526-28493B9AFBF7},42107,placed
+Hub_265,SCAMMON BAY,Scammon Bay,community,Barge or Road,Receiver,934,{9D3A72F4-AA05-49D7-B2C6-F108BFE5084F},42107,placed
+Hub_265,SCAMMON BAY,Scammon Bay,community,Barge or Road,Receiver,957,{838491D3-14F7-4317-AFC9-3570A079A523},42107,placed
+Hub_265,SCAMMON BAY,Scammon Bay,community,Barge or Road,Receiver,SYN-909,{2AA31D47-1FA0-4B12-855A-4442D50FDB7B},42107,placed
+Hub_265,SCAMMON BAY,Scammon Bay,community,Barge or Road,Receiver,SYN-910,{2875753A-54D1-4AC4-9D2F-244B4D37B6ED},42107,placed
+Hub_265,SCAMMON BAY,Scammon Bay,community,Barge or Road,Receiver,SYN-912,{BCB8E82D-3D1A-42BE-80FF-E02EE58FAC8E},42107,placed
+Hub_266,TOKSOOK BAY,Toksook Bay,community,Barge or Road,Receiver,415,{B90D6701-CFBA-411A-AA88-820AA5501C37},41572,placed
+Hub_266,TOKSOOK BAY,Toksook Bay,community,Barge or Road,Receiver,943,{2D0BF1A6-B953-4D89-9CA0-EF4A333A17EA},41572,placed
+Hub_266,TOKSOOK BAY,Toksook Bay,community,Barge or Road,Receiver,SYN-905,{98D06281-B559-477C-9060-B1774E8EB752},41572,placed
+Hub_266,TOKSOOK BAY,Toksook Bay,community,Barge or Road,Receiver,SYN-906,{15BF1AC8-F89B-48D5-B561-12A84722E9E9},41572,placed
+Hub_267,TULUKSAK,Tuluksak,community,Barge or Road,Receiver,416,{63A1EA3E-67AB-4F08-96E2-50D651BB69F1},41944,placed
+Hub_267,TULUKSAK,Tuluksak,community,Barge or Road,Receiver,726,{C5F70E6F-558B-494F-8A4B-85362B35A220},41944,placed
+Hub_267,TULUKSAK,Tuluksak,community,Barge or Road,Receiver,SYN-776,{04F78EFB-A590-4C71-9C7D-734A6BB28282},41944,placed
+Hub_267,TULUKSAK,Tuluksak,community,Barge or Road,Receiver,SYN-776,{3CC9100D-2C2B-4C2F-B01F-7B06C7ED4603},41944,placed
+Hub_267,TULUKSAK,Tuluksak,community,Barge or Road,Receiver,SYN-778,{3EA0F247-55BA-42BB-BE13-C99C28D121C8},41944,placed
+Hub_268,TUNTUTULIAK,Tuntutuliak,community,Barge or Road,Receiver,417,{04274DBD-1CBE-4D49-BE5E-C0038176D2C6},41504,placed
+Hub_268,TUNTUTULIAK,Tuntutuliak,community,Barge or Road,Receiver,SYN-1018,{A28261CE-B417-46F6-A18A-F59D145A763C},41504,placed
+Hub_268,TUNTUTULIAK,Tuntutuliak,community,Barge or Road,Receiver,SYN-1019,{A933ED2A-778A-45EB-8CF9-59AB7F424859},41504,placed
+Hub_269,TUNUNAK,Tununak,community,Barge or Road,Receiver,418,{8D819DD1-0266-4167-8D95-07E8122F761C},41580,placed
+Hub_269,TUNUNAK,Tununak,community,Barge or Road,Receiver,SYN-901,{FFFDF6A3-B357-4C44-B64A-EFF940529D00},41580,placed
+Hub_269,TUNUNAK,Tununak,community,Barge or Road,Receiver,SYN-902,{AE4C81AC-F533-4FFF-B91D-80DD9CF22EF2},41580,placed
+Hub_269,TUNUNAK,Tununak,community,Barge or Road,Receiver,SYN-903,{49BC4240-FDF1-4E25-9410-050D27C154B8},41580,placed
+Hub_270,blob:27,blob:27,blob,Plane,Supplier,42,{0068B24C-B0D6-4EEC-9C89-1E7A160A9EF3},49890,placed
+Hub_271,remote:425,Kodiak,remote_site,Road,Receiver,425,{D5803C6E-27CF-4FEB-A024-8178DC9ED46E},38461,placed
+Hub_272,KLAWOCK,Klawock,community,Barge or Road,Receiver,430,{587A9516-FAF3-407A-88FB-213E57091443},35772,placed
+Hub_272,KLAWOCK,Klawock,community,Barge or Road,Receiver,637,{A24C50F8-2F52-4515-9587-E777B549DF91},35772,placed
+Hub_272,KLAWOCK,Klawock,community,Barge or Road,Receiver,638,{F7CD73E8-FFE8-4CCA-9375-B27B2CEE2101},35772,placed
+Hub_272,KLAWOCK,Klawock,community,Barge or Road,Receiver,SYN-56,{0B7A618A-4185-4D5C-8B45-57361B2432E2},35772,placed
+Hub_272,KLAWOCK,Klawock,community,Barge or Road,Receiver,SYN-58,{3B7A4949-DC0C-4487-A692-3A82A1E0208D},35772,placed
+Hub_272,KLAWOCK,Klawock,community,Barge or Road,Receiver,SYN-59,{23971D5E-A473-4A82-921B-EA3545F06790},35772,placed
+Hub_272,KLAWOCK,Klawock,community,Barge or Road,Receiver,SYN-60,{6D4B4A33-4BA6-4F24-B682-8F598BC19947},35772,placed
+Hub_272,KLAWOCK,Klawock,community,Barge or Road,Receiver,SYN-61,{596974D7-F780-4D0D-AD2B-2F58BAC71571},35772,placed
+Hub_273,ANIAK,Aniak,community,Barge or Road,Supplier,444,{DF60A289-BFB7-4882-92EA-89D65B32D0B7},42417,placed
+Hub_273,ANIAK,Aniak,community,Barge or Road,Supplier,744,{3FA95472-66EF-46BC-A7EF-18C4B0302C1D},42417,placed
+Hub_273,ANIAK,Aniak,community,Barge or Road,Supplier,901,{41BB80C2-006E-426F-9920-D13010CE5C2D},42417,placed
+Hub_273,ANIAK,Aniak,community,Barge or Road,Supplier,SYN-865,{C07AC1AD-4251-4C10-86A0-278F8ECD612C},42417,placed
+Hub_273,ANIAK,Aniak,community,Barge or Road,Supplier,SYN-866,{3FF37BD1-5EF6-44F1-A580-1D075BF23D76},42417,placed
+Hub_273,ANIAK,Aniak,community,Barge or Road,Supplier,SYN-867,{2D3C9A98-7E19-4E00-9BCB-CF2BE0589B99},42417,placed
+Hub_273,ANIAK,Aniak,community,Barge or Road,Supplier,SYN-868,{9CEC70E8-E407-458B-A62B-57821D8B6094},42417,placed
+Hub_273,ANIAK,Aniak,community,Barge or Road,Supplier,SYN-869,{EE90D296-0F4B-47F2-A7ED-8AAE074E53AD},42417,placed
+Hub_273,ANIAK,Aniak,community,Barge or Road,Supplier,SYN-870,{1D74665A-CC9A-41A2-A6E3-DB563298ACE6},42417,placed
+Hub_273,ANIAK,Aniak,community,Barge or Road,Supplier,SYN-871,{5C421205-5987-413D-96B8-2DE9EBCF4A59},42417,placed
+Hub_273,ANIAK,Aniak,community,Barge or Road,Supplier,SYN-872,{6703BC9D-F2E8-4C08-A4D3-CEB43610384B},42417,placed
+Hub_273,ANIAK,Aniak,community,Barge or Road,Supplier,SYN-875,{84F06B79-99E4-427C-83B3-79E25AA7481C},42417,placed
+Hub_274,ATKA,Atka,community,Barge,Receiver,456,{2B9BCCF0-A8EA-4A79-A9A5-E5459C1CB96E},39697,placed
+Hub_274,ATKA,Atka,community,Barge,Receiver,SYN-1,{1888FF7D-A817-4439-8206-FB12949AC6F9},39697,placed
+Hub_274,ATKA,Atka,community,Barge,Receiver,SYN-1,{CAAE0ACC-7057-49EF-8361-8E6DB054D284},39697,placed
+Hub_274,ATKA,Atka,community,Barge,Receiver,SYN-2,{EA679999-727C-4A29-8C51-BD75D33F8B4C},39697,placed
+Hub_275,ANAKTUVUK PASS,Anaktuvuk Pass,community,Plane,Supplier,467,{54D20E55-8F84-41A6-B0F3-24B04EA0E52E},44512,placed
+Hub_275,ANAKTUVUK PASS,Anaktuvuk Pass,community,Plane,Supplier,467,{995EFEC8-6A75-4544-A383-B1F0A2AB57A7},44512,placed
+Hub_275,ANAKTUVUK PASS,Anaktuvuk Pass,community,Plane,Supplier,SYN-553,{4BCF95D3-0532-4523-B45E-D24C6F765E35},44512,placed
+Hub_275,ANAKTUVUK PASS,Anaktuvuk Pass,community,Plane,Supplier,SYN-553,{711EA1EB-4271-4CCB-B942-0EE7EBF7C038},44512,placed
+Hub_275,ANAKTUVUK PASS,Anaktuvuk Pass,community,Plane,Supplier,SYN-554,{61CBFB0D-FEBD-4177-A368-3463C5B78DE0},44512,placed
+Hub_275,ANAKTUVUK PASS,Anaktuvuk Pass,community,Plane,Supplier,SYN-555,{501A14A2-615F-49CE-907A-D8E2EE6E3746},44512,placed
+Hub_275,ANAKTUVUK PASS,Anaktuvuk Pass,community,Plane,Supplier,SYN-555,{91D13034-039C-42D7-A9A4-C1DC142C3BE0},44512,placed
+Hub_275,ANAKTUVUK PASS,Anaktuvuk Pass,community,Plane,Supplier,SYN-556,{7862A45C-5E05-4C4F-B7FA-EBECBA73483E},44512,placed
+Hub_275,ANAKTUVUK PASS,Anaktuvuk Pass,community,Plane,Supplier,SYN-557,{8D3C8994-1BDD-4D5B-9FCF-258A3714140F},44512,placed
+Hub_275,ANAKTUVUK PASS,Anaktuvuk Pass,community,Plane,Supplier,SYN-557,{D12CFD70-6484-4BD7-8274-44742430D06D},44512,placed
+Hub_275,ANAKTUVUK PASS,Anaktuvuk Pass,community,Plane,Supplier,SYN-558,{1C7A5084-32EF-4D32-9B21-FCA8F4E126C5},44512,placed
+Hub_275,ANAKTUVUK PASS,Anaktuvuk Pass,community,Plane,Supplier,SYN-560,{27EDC9A0-1301-4693-A50A-7C327EA724C9},44512,placed
+Hub_275,ANAKTUVUK PASS,Anaktuvuk Pass,community,Plane,Supplier,SYN-561,{E17122C9-87B6-4F81-A62D-DA62D26F8FA0},44512,placed
+Hub_276,ATQASUK,Atqasuk,community,Barge or Plane or Road,Supplier,468,{925D5799-A54B-41FD-8583-D7981B826986},44748,placed
+Hub_276,ATQASUK,Atqasuk,community,Barge or Plane or Road,Supplier,468,{AEBDC0B1-4030-4175-AE7E-71B9DE474AE5},44748,placed
+Hub_276,ATQASUK,Atqasuk,community,Barge or Plane or Road,Supplier,SYN-501,{7DDAB030-F316-43A2-8F5A-E3D3249A6C49},44748,placed
+Hub_276,ATQASUK,Atqasuk,community,Barge or Plane or Road,Supplier,SYN-502,{2FB3911F-A242-4BDC-B123-373E5C2F731E},44748,placed
+Hub_276,ATQASUK,Atqasuk,community,Barge or Plane or Road,Supplier,SYN-503,{960DC572-560B-4542-95CD-B9560B68ECFC},44748,placed
+Hub_276,ATQASUK,Atqasuk,community,Barge or Plane or Road,Supplier,SYN-504,{46B7841A-6BC9-41E3-A253-23EF7D0D8FC9},44748,placed
+Hub_276,ATQASUK,Atqasuk,community,Barge or Plane or Road,Supplier,SYN-504,{A60A4DC2-B791-4D51-AC2C-5A319BB965F7},44748,placed
+Hub_276,ATQASUK,Atqasuk,community,Barge or Plane or Road,Supplier,SYN-505,{F3136DB4-1CCC-4368-967C-3AC99CF344A2},44748,placed
+Hub_276,ATQASUK,Atqasuk,community,Barge or Plane or Road,Supplier,SYN-506,{1B5CBE2A-BBA2-4726-A10F-5A4D615E2CF8},44748,placed
+Hub_276,ATQASUK,Atqasuk,community,Barge or Plane or Road,Supplier,SYN-507,{E20099E2-C75B-43CE-A5A2-EA64F5F047EF},44748,placed
+Hub_276,ATQASUK,Atqasuk,community,Barge or Plane or Road,Supplier,SYN-507,{EBE4B52C-8327-4736-B32F-36B795B4C16F},44748,placed
+Hub_276,ATQASUK,Atqasuk,community,Barge or Plane or Road,Supplier,SYN-508,{D45BE12C-652A-4463-9CA9-3542B3E29AC2},44748,placed
+Hub_276,ATQASUK,Atqasuk,community,Barge or Plane or Road,Supplier,SYN-509,{5FF04C70-0A1C-488B-8F6A-046A0EA1877C},44748,placed
+Hub_277,KAKTOVIK,Kaktovik,community,Barge or Road,Supplier,470,{4D4F9FAC-94B3-4589-A30B-47466C3D493F},44646,placed
+Hub_277,KAKTOVIK,Kaktovik,community,Barge or Road,Supplier,SYN-515,{80B22708-BF6D-46B9-AEB3-1AF02C2A7D4F},44646,placed
+Hub_277,KAKTOVIK,Kaktovik,community,Barge or Road,Supplier,SYN-515,{DBA4C5BF-0B56-42B8-8DE2-271388AAFF3D},44646,placed
+Hub_277,KAKTOVIK,Kaktovik,community,Barge or Road,Supplier,SYN-516,{C39D8402-2AA1-4195-A7AF-F5576A67671A},44646,placed
+Hub_277,KAKTOVIK,Kaktovik,community,Barge or Road,Supplier,SYN-518,{F060B769-BCA9-4B91-A1E7-E936A99285B7},44646,placed
+Hub_277,KAKTOVIK,Kaktovik,community,Barge or Road,Supplier,SYN-519,{F40348F2-5021-4CCE-92F5-0C245CCF8E63},44646,placed
+Hub_277,KAKTOVIK,Kaktovik,community,Barge or Road,Supplier,SYN-520,{8B741A03-8655-4FDD-999F-F92837F2B6E8},44646,placed
+Hub_277,KAKTOVIK,Kaktovik,community,Barge or Road,Supplier,SYN-521,{55F0B751-1B5E-452C-A8ED-BDF068920FE9},44646,placed
+Hub_277,KAKTOVIK,Kaktovik,community,Barge or Road,Supplier,SYN-521,{8B8C1349-1A6E-4941-81A5-24E96C455522},44646,placed
+Hub_277,KAKTOVIK,Kaktovik,community,Barge or Road,Supplier,SYN-522,{B27809F4-1A92-40D2-B92B-31644CA598B4},44646,placed
+Hub_277,KAKTOVIK,Kaktovik,community,Barge or Road,Supplier,SYN-523,{F1134CBD-470B-4F6C-9283-B5D4F61D0DF3},44646,placed
+Hub_277,KAKTOVIK,Kaktovik,community,Barge or Road,Supplier,SYN-524,{EEFF47E2-0593-4707-A88F-5C25BC48F5D0},44646,placed
+Hub_277,KAKTOVIK,Kaktovik,community,Barge or Road,Supplier,SYN-525,{11F1668C-4A0E-4ABC-AA8D-6FCBE49F48B1},44646,placed
+Hub_277,KAKTOVIK,Kaktovik,community,Barge or Road,Supplier,SYN-526,{09939AF9-7257-4724-BC0B-9F4C389518C1},44646,placed
+Hub_278,NUIQSUT,Nuiqsut,community,Plane or Road,Supplier,471,{03F321AF-CAA8-4847-90D5-81CA044AF4AA},44708,placed
+Hub_278,NUIQSUT,Nuiqsut,community,Plane or Road,Supplier,SYN-528,{4D256757-A50A-438F-B0F5-270751D24162},44708,placed
+Hub_278,NUIQSUT,Nuiqsut,community,Plane or Road,Supplier,SYN-529,{004D8597-2D52-4BB0-AB89-AC4CF13F28D8},44708,placed
+Hub_278,NUIQSUT,Nuiqsut,community,Plane or Road,Supplier,SYN-530,{547B1211-2230-4412-9DDA-A428F900442B},44708,placed
+Hub_278,NUIQSUT,Nuiqsut,community,Plane or Road,Supplier,SYN-531,{15BD4EB8-C4BB-4C12-82E1-C88B6BBF46BE},44708,placed
+Hub_278,NUIQSUT,Nuiqsut,community,Plane or Road,Supplier,SYN-532,{1E567F40-129D-48E5-AF98-68298F01439F},44708,placed
+Hub_278,NUIQSUT,Nuiqsut,community,Plane or Road,Supplier,SYN-533,{A205A972-EE54-419C-A784-22F6C5EFBEA2},44708,placed
+Hub_278,NUIQSUT,Nuiqsut,community,Plane or Road,Supplier,SYN-534,{F9448E88-297B-4A3D-9C04-D55A61CA4E0B},44708,placed
+Hub_278,NUIQSUT,Nuiqsut,community,Plane or Road,Supplier,SYN-535,{3933D80F-39D4-48E4-B969-6CF6060FD916},44708,placed
+Hub_278,NUIQSUT,Nuiqsut,community,Plane or Road,Supplier,SYN-536,{0B585140-BD0B-4D35-80CF-331764B7BBFE},44708,placed
+Hub_278,NUIQSUT,Nuiqsut,community,Plane or Road,Supplier,SYN-536,{A0835329-AF65-4E84-84CE-7747EB08843C},44708,placed
+Hub_278,NUIQSUT,Nuiqsut,community,Plane or Road,Supplier,SYN-537,{733759D7-CB44-4A5E-A706-DE653583CF62},44708,placed
+Hub_278,NUIQSUT,Nuiqsut,community,Plane or Road,Supplier,SYN-537,{DDD6686D-1B80-4635-9915-CF8C6D9CC472},44708,placed
+Hub_278,NUIQSUT,Nuiqsut,community,Plane or Road,Supplier,SYN-537,{E53E0A9F-D574-4511-81AC-AF770008F760},44708,placed
+Hub_278,NUIQSUT,Nuiqsut,community,Plane or Road,Supplier,SYN-538,{BDA7F567-7CCB-440D-B865-2323652B61EB},44708,placed
+Hub_279,POINT HOPE,Point Hope,community,Barge or Road,Receiver,472,{0F86901E-02A6-4561-89BC-A618E5245256},44566,placed
+Hub_279,POINT HOPE,Point Hope,community,Barge or Road,Receiver,472,{60E89C03-0731-48F9-9A8D-E0F338FFE0CD},44566,placed
+Hub_279,POINT HOPE,Point Hope,community,Barge or Road,Receiver,472,{FA7B5845-7940-4C5F-8EAA-A7A359D16B42},44566,placed
+Hub_279,POINT HOPE,Point Hope,community,Barge or Road,Receiver,SYN-439,{8A108F8E-4CF4-4400-BB47-FDB696592362},44566,placed
+Hub_279,POINT HOPE,Point Hope,community,Barge or Road,Receiver,SYN-439,{E474BE21-EF86-4234-AB76-B32CE68F896D},44566,placed
+Hub_279,POINT HOPE,Point Hope,community,Barge or Road,Receiver,SYN-440,{8D812624-BDC6-4331-A085-BA75DC62D419},44566,placed
+Hub_279,POINT HOPE,Point Hope,community,Barge or Road,Receiver,SYN-441,{43954A97-4351-4BF0-967A-29A64D36C646},44566,placed
+Hub_279,POINT HOPE,Point Hope,community,Barge or Road,Receiver,SYN-442,{DC601FC1-3A2B-4C80-9F95-10FE3EDD9761},44566,placed
+Hub_279,POINT HOPE,Point Hope,community,Barge or Road,Receiver,SYN-444,{95D354A8-7E2A-4D28-A476-37F53ECD6368},44566,placed
+Hub_279,POINT HOPE,Point Hope,community,Barge or Road,Receiver,SYN-445,{C2D61671-EB4E-40BE-96BC-49F296E8D8A2},44566,placed
+Hub_280,POINT LAY,Point Lay,community,Barge or Road,Receiver,473,{997CADE8-A481-4A8A-A027-66C67951720C},44605,placed
+Hub_280,POINT LAY,Point Lay,community,Barge or Road,Receiver,473,{FA9A470E-A5C1-4191-BB0D-7B2A1FC6454C},44605,placed
+Hub_280,POINT LAY,Point Lay,community,Barge or Road,Receiver,SYN-433,{E867DC72-3920-4177-BBB6-DA377D5FDC91},44605,placed
+Hub_280,POINT LAY,Point Lay,community,Barge or Road,Receiver,SYN-434,{C9115959-A754-41E2-9301-60F06A3FCABD},44605,placed
+Hub_280,POINT LAY,Point Lay,community,Barge or Road,Receiver,SYN-436,{CC18CA40-3547-4E41-A733-8A4082DD1FA6},44605,placed
+Hub_280,POINT LAY,Point Lay,community,Barge or Road,Receiver,SYN-437,{F207D927-3A36-41F6-8394-36D45D4847EC},44605,placed
+Hub_280,POINT LAY,Point Lay,community,Barge or Road,Receiver,SYN-438,{62BDFC20-7D02-406B-AE7B-E8E3A792568A},44605,placed
+Hub_281,FORT GREELY,Fort Greely,community,Road,Receiver,49,{D5D3CEB4-1913-4496-9C63-0A9124E8357A},1250,placed
+Hub_282,AKHIOK,Akhiok,community,Barge or Road,Receiver,498,{BBA36534-3C4E-43D6-BD17-8021C056B7C1},38352,placed
+Hub_282,AKHIOK,Akhiok,community,Barge or Road,Receiver,721,{A210FF9F-C75E-419E-A0E0-E4D737704853},38352,placed
+Hub_283,CHINIAK,Chiniak,community,Road,Receiver,499,{142D8A26-7B1C-468A-9C61-A1395DAFB343},48744,placed
+Hub_284,KARLUK,Karluk,community,Barge or Road,Receiver,500,{E01B3F6B-7D46-4185-BC28-80C76DB7851D},47131,placed
+Hub_284,KARLUK,Karluk,community,Barge or Road,Receiver,61,{AA7002E5-8CA3-4134-810A-4979F830E599},47131,placed
+Hub_284,KARLUK,Karluk,community,Barge or Road,Receiver,SYN-1164,{43AF95F7-DBE3-4585-87E8-E416FF06342B},47131,placed
+Hub_285,PORT LIONS,Port Lions,community,Barge or Road,Receiver,509,{369BD22E-80EC-4EA0-89F9-C6FFE57A172E},47226,placed
+Hub_285,PORT LIONS,Port Lions,community,Barge or Road,Receiver,874,{1E92352C-691A-49A5-B8E8-782773562097},47226,placed
+Hub_285,PORT LIONS,Port Lions,community,Barge or Road,Receiver,SYN-1132,{7C257586-80F1-486E-8553-C7820F24243E},47226,placed
+Hub_285,PORT LIONS,Port Lions,community,Barge or Road,Receiver,SYN-1133,{643042A2-CA9E-4BF2-B2DA-99F186999078},47226,placed
+Hub_286,blob:16,blob:16,blob,Plane,Receiver,510,{F0062498-93C4-45AC-AB62-A5CBF508003C},,unplaced:beyond_cap
+Hub_287,NELSON LAGOON,Nelson Lagoon,community,Barge,Receiver,517,{7D8DADC6-63EA-4BF0-A33B-AF25CB5B3CBF},40076,placed
+Hub_287,NELSON LAGOON,Nelson Lagoon,community,Barge,Receiver,SYN-1010,{5EFE5B88-520E-45A1-A234-AB53C41E434B},40076,placed
+Hub_287,NELSON LAGOON,Nelson Lagoon,community,Barge,Receiver,SYN-1011,{9989BDD2-2643-43C7-ADC1-42F7C69E5601},40076,placed
+Hub_288,BIRCHWOOD,Birchwood,community,Road,Receiver,528,{8D67D957-D513-43DA-BA7D-8DAA7CD728C8},19278,placed
+Hub_289,blob:39,blob:39,blob,Road,Receiver,531,{296267E5-D838-415E-8928-E0A27F81C00B},2086,merged:Hub_166
+Hub_290,PORTAGE,Portage,community,Road,Receiver,532,{C8DF6A5F-A2B8-4E05-A26C-E2CFB7A19B4D},494,placed
+Hub_291,blob:40,blob:40,blob,Road,Receiver,533,{EB31C6E5-4774-40D4-BFE5-5D80850118C3},47854,placed
+Hub_292,remote:550,Delta Junction,remote_site,Road,Receiver,550,{08DF0E56-0A7D-4977-AD97-99A7EA583DA8},,unplaced:beyond_cap
+Hub_293,CRAIG,Craig,community,Barge or Road,Receiver,553,{68CEEBF4-3767-4E8A-8301-6323FA775299},35611,placed
+Hub_293,CRAIG,Craig,community,Barge or Road,Receiver,625,{9AF54278-0AC3-48DB-83EF-B042D108462E},35611,placed
+Hub_293,CRAIG,Craig,community,Barge or Road,Receiver,626,{2454F76D-02D9-4ABB-9E2C-9AE77AE9E9E7},35611,placed
+Hub_293,CRAIG,Craig,community,Barge or Road,Receiver,985,{C27C9D60-E59E-4014-ADA0-9D09317C648F},35611,placed
+Hub_293,CRAIG,Craig,community,Barge or Road,Receiver,SYN-64,{5C69DCCA-C3EA-4055-A242-C577155B97AB},35611,placed
+Hub_293,CRAIG,Craig,community,Barge or Road,Receiver,SYN-65,{21DDAD1B-9C61-47BD-A8C6-33E062CB10ED},35611,placed
+Hub_293,CRAIG,Craig,community,Barge or Road,Receiver,SYN-65,{A3C5A24A-8CD9-4E80-B046-F4962CD034BE},35611,placed
+Hub_293,CRAIG,Craig,community,Barge or Road,Receiver,SYN-66,{5D38C80C-477A-42F1-83C9-E26877DCD969},35611,placed
+Hub_293,CRAIG,Craig,community,Barge or Road,Receiver,SYN-67,{C0620CC1-EBEF-4F2F-AF56-158342519586},35611,placed
+Hub_293,CRAIG,Craig,community,Barge or Road,Receiver,SYN-69,{DF11E142-0A1B-4FD7-870D-B2432FB23B38},35611,placed
+Hub_294,EAGLE RIVER,Eagle River,community,Road,Receiver,563,{ADB712F1-7ED2-48F4-8513-9B6160732903},19311,placed
+Hub_294,EAGLE RIVER,Eagle River,community,Road,Receiver,579,{9DEFD06F-B6FE-479D-9D7A-0EADC169D38B},19311,placed
+Hub_294,EAGLE RIVER,Eagle River,community,Road,Receiver,582,{8E477B32-9CAB-4D31-8463-F93B4E3FE70F},19311,placed
+Hub_294,EAGLE RIVER,Eagle River,community,Road,Receiver,585,{1E420A2D-EE4F-48E1-AC1D-C325E61CCE7A},19311,placed
+Hub_294,EAGLE RIVER,Eagle River,community,Road,Receiver,596,{709D5E3C-6F2B-4AB9-B183-AE95F5889E26},19311,placed
+Hub_295,FORT RICHARDSON,Fort Richardson,community,Road,Receiver,565,{1DC59D11-9BEB-49DC-9CE6-3A8DA28A5E39},11130,placed
+Hub_296,WHITE MOUNTAIN,White Mountain,community,Barge,Receiver,6,{A9993CC3-DCF0-49EA-9210-B68096AC8937},43651,placed
+Hub_296,WHITE MOUNTAIN,White Mountain,community,Barge,Receiver,7,{4A73D3E0-116B-4AF8-A2F3-038C017E8809},43651,placed
+Hub_296,WHITE MOUNTAIN,White Mountain,community,Barge,Receiver,8,{0FEDC2D8-085A-43FE-B5FB-451D906348F4},43651,placed
+Hub_296,WHITE MOUNTAIN,White Mountain,community,Barge,Receiver,8,{34A3BF09-BB74-4346-A4B0-FC8B8ADC229C},43651,placed
+Hub_296,WHITE MOUNTAIN,White Mountain,community,Barge,Receiver,8,{70BB636F-D062-4A27-A409-C97B7E62A741},43651,placed
+Hub_296,WHITE MOUNTAIN,White Mountain,community,Barge,Receiver,SYN-674,{16F606AE-A8A1-4DC1-A796-D156260875C4},43651,placed
+Hub_297,blob:31,blob:31,blob,Road,Receiver,619,{C4B4BE90-2902-41BA-BF4B-93E1FAD0149D},49518,placed
+Hub_298,CHISTOCHINA,Chistochina,community,Road,Receiver,623,{8FC5ECEA-A6F5-475B-977C-54D1FBDC9365},84092,placed
+Hub_299,blob:56,blob:56,blob,Plane,Receiver,627,{6F3F14B7-DE1D-4467-A722-FE33DE5C3456},36205,placed
+Hub_300,blob:54,blob:54,blob,Plane,Receiver,628,{F04DC3EA-5855-4E10-91BD-CFE7A24D6FED},,unplaced:beyond_cap
+Hub_301,blob:20,blob:20,blob,Plane,Supplier,63,{5924466F-88D5-4EC0-A530-3F0D08E841C6},,unplaced:beyond_cap
+Hub_302,blob:52,blob:52,blob,Plane,Receiver,630,{D933651F-909C-49D8-AE55-BA247D25FBCD},37493,placed
+Hub_303,HOLLIS,Hollis,community,Road,Receiver,634,{7010ACCB-CD36-42F3-B74C-6B7F199CB2DE},35666,placed
+Hub_304,HYDABURG,Hydaburg,community,Barge or Road,Receiver,635,{A7EBAE89-F17F-40AC-8D9F-B0C83C6758D0},34832,placed
+Hub_304,HYDABURG,Hydaburg,community,Barge or Road,Receiver,SYN-51,{FAFA9E0C-DDE5-4987-8789-2B08C79EA31C},34832,placed
+Hub_304,HYDABURG,Hydaburg,community,Barge or Road,Receiver,SYN-52,{B8B70286-B51A-4677-91C7-E04F9EB3A1E5},34832,placed
+Hub_304,HYDABURG,Hydaburg,community,Barge or Road,Receiver,SYN-53,{92136E75-35E2-441E-86C7-EB3CFA08A9C6},34832,placed
+Hub_305,remote:639,Ketchikan,remote_site,Plane,Receiver,639,{6C13BFD5-738C-446F-9571-94F911FE6187},46151,placed
+Hub_306,blob:57,blob:57,blob,Plane,Receiver,644,{7E66D389-8985-428D-9145-8D7B8F3D876A},35868,placed
+Hub_307,THORNE BAY,Thorne Bay,community,Barge or Road,Receiver,646,{9986BFFD-064E-4BA2-A9BC-2E9146E041DE},35785,placed
+Hub_307,THORNE BAY,Thorne Bay,community,Barge or Road,Receiver,SYN-41,{86E650B9-1319-42EF-B571-A4AFD46E468A},35785,placed
+Hub_307,THORNE BAY,Thorne Bay,community,Barge or Road,Receiver,SYN-42,{6DDFF002-8AD8-4274-9BB0-7EC701513845},35785,placed
+Hub_307,THORNE BAY,Thorne Bay,community,Barge or Road,Receiver,SYN-43,{1B7CC7FC-1C14-46E8-8611-7A87DEBB6A85},35785,placed
+Hub_307,THORNE BAY,Thorne Bay,community,Barge or Road,Receiver,SYN-43,{44A8C085-BF24-471E-871F-5A8A8E0BED6F},35785,placed
+Hub_307,THORNE BAY,Thorne Bay,community,Barge or Road,Receiver,SYN-45,{5EB1AA1E-67B9-4C04-8A91-2EEE1893AB22},35785,placed
+Hub_308,blob:55,blob:55,blob,Plane,Receiver,648,{8772AFDF-4C08-43FA-8E31-88991E65374E},48683,placed
+Hub_309,WHALE PASS,Whale Pass,community,Road,Receiver,649,{B0D43C0D-743A-444E-BA07-F893397FE358},35936,placed
+Hub_310,LOWER KALSKAG,Lower Kalskag,community,Barge,Receiver,65,{D0E49797-847C-4472-A8D7-96DC9775EAFE},41967,placed
+Hub_310,LOWER KALSKAG,Lower Kalskag,community,Barge,Receiver,SYN-857,{1D57EE39-37F0-4F10-BC87-F3FFB32C5B2B},41967,placed
+Hub_310,LOWER KALSKAG,Lower Kalskag,community,Barge,Receiver,SYN-858,{18E7D5C9-193D-44BC-B51F-F737E1FE5C33},41967,placed
+Hub_311,HOUSTON,Houston,community,Road,Receiver,652,{E02F82E9-0CBA-4960-8280-19B03E874280},1629,placed
+Hub_312,KOTLIK,Kotlik,community,Barge,Receiver,657,{4B38321E-ED50-4C94-A6BF-B66BFE86FB86},42286,placed
+Hub_312,KOTLIK,Kotlik,community,Barge,Receiver,657,{D7037064-2B6C-4EB3-8145-FF0C714AEA24},42286,placed
+Hub_312,KOTLIK,Kotlik,community,Barge,Receiver,659,{398E44E8-E70B-4752-9C5D-72E9B35CFE48},42286,placed
+Hub_312,KOTLIK,Kotlik,community,Barge,Receiver,SYN-952,{97961562-1051-4566-8A91-2EBDE3E2B851},42286,placed
+Hub_312,KOTLIK,Kotlik,community,Barge,Receiver,SYN-953,{2A23D579-10CA-4A9D-BB28-767301C1B066},42286,placed
+Hub_313,FRITZ CREEK,Fritz Creek,community,Road,Receiver,66,{D5834F27-2798-4F85-ACD2-68A063A0C5AD},3539,placed
+Hub_314,ALAKANUK,Alakanuk,community,Barge,Receiver,660,{8B560984-93A7-477C-9DB1-FD4EDC9D3DF1},42248,placed
+Hub_314,ALAKANUK,Alakanuk,community,Barge,Receiver,SYN-965,{38BA658A-4660-449D-9654-ED0895FECEB6},42248,placed
+Hub_314,ALAKANUK,Alakanuk,community,Barge,Receiver,SYN-965,{D006AEA8-FB4B-4EC8-8B12-A7A3D223249C},42248,placed
+Hub_314,ALAKANUK,Alakanuk,community,Barge,Receiver,SYN-966,{6B8D0DD4-3D0D-4B97-8BBD-AB4B3D7333DF},42248,placed
+Hub_314,ALAKANUK,Alakanuk,community,Barge,Receiver,SYN-966,{A33F94B4-31AE-48BE-B2E6-07A4BA6B6E4C},42248,placed
+Hub_315,MARSHALL,Marshall,community,Barge,Receiver,663,{8D84338F-249C-4902-A550-4DE848EDC2B5},42119,placed
+Hub_315,MARSHALL,Marshall,community,Barge,Receiver,921,{32EC90DB-A78A-4F44-A541-6F8413A60FA1},42119,placed
+Hub_315,MARSHALL,Marshall,community,Barge,Receiver,921,{7A04FB3B-C9C5-4C98-B74F-393C46715566},42119,placed
+Hub_315,MARSHALL,Marshall,community,Barge,Receiver,921,{7E0F11B3-4341-4BBB-BAD4-E3A3F00A110A},42119,placed
+Hub_316,MOUNTAIN VILLAGE,Mountain Village,community,Barge,Supplier,664,{9137545A-6738-4180-947F-18EF2B5F7BF9},42211,placed
+Hub_316,MOUNTAIN VILLAGE,Mountain Village,community,Barge,Supplier,833,{68FC80A6-76F3-461C-B2C9-691F86D13882},42211,placed
+Hub_316,MOUNTAIN VILLAGE,Mountain Village,community,Barge,Supplier,833,{B5F8918F-A855-4169-9042-2A713EF776E9},42211,placed
+Hub_316,MOUNTAIN VILLAGE,Mountain Village,community,Barge,Supplier,835,{5425C309-26A9-4D99-ABE4-3FD582FBCBE6},42211,placed
+Hub_316,MOUNTAIN VILLAGE,Mountain Village,community,Barge,Supplier,923,{BFBBB1DE-3035-4277-A6A1-635A35EF1A6C},42211,placed
+Hub_317,NUNAM IQUA,Nunam Iqua,community,Barge,Receiver,665,{FDD95CA1-7593-453A-B389-E07884735185},48834,placed
+Hub_317,NUNAM IQUA,Nunam Iqua,community,Barge,Receiver,976,{F9070B81-4310-41C8-A97D-D03C967F42A9},48834,placed
+Hub_317,NUNAM IQUA,Nunam Iqua,community,Barge,Receiver,SYN-954,{2B8CA0EE-A6A3-426A-B347-A135F7B81054},48834,placed
+Hub_317,NUNAM IQUA,Nunam Iqua,community,Barge,Receiver,SYN-954,{96591F9F-54A5-4054-B859-E0A7C8852D5A},48834,placed
+Hub_318,PILOT STATION,Pilot Station,community,Barge,Receiver,666,{D54EFE07-2827-4A72-B381-179D181BB4F4},42146,placed
+Hub_318,PILOT STATION,Pilot Station,community,Barge,Receiver,930,{3D022116-FC74-4A74-85B7-3FF086A4E087},42146,placed
+Hub_318,PILOT STATION,Pilot Station,community,Barge,Receiver,SYN-938,{D2806126-38C8-426E-99E5-86A20E20DD7E},42146,placed
+Hub_318,PILOT STATION,Pilot Station,community,Barge,Receiver,SYN-939,{4AF313D9-947D-4640-8D44-71F6891E9724},42146,placed
+Hub_318,PILOT STATION,Pilot Station,community,Barge,Receiver,SYN-940,{41B1DA99-9DED-42C1-A3BD-E191A86BAEE9},42146,placed
+Hub_319,EKLUTNA,Eklutna,community,Plane or Road,Receiver,676,{666BC5EF-1172-49EF-A5E7-FAF1437217D0},39491,placed
+Hub_319,EKLUTNA,Eklutna,community,Plane or Road,Receiver,676,{DF2B4DBC-053C-4B0A-8693-01DB75BA149B},39491,placed
+Hub_320,TYONEK,Tyonek,community,Road,Receiver,689,{7CD84E5B-2773-4604-800C-1C400D6AD79E},39509,placed
+Hub_321,KWIGILLINGOK,Kwigillingok,community,Barge,Receiver,712,{1FCCD80E-981C-4337-B5CA-6CECAEAC8D74},41439,placed
+Hub_321,KWIGILLINGOK,Kwigillingok,community,Barge,Receiver,712,{3E008AE5-2D53-4204-ABED-2229B0816697},41439,placed
+Hub_321,KWIGILLINGOK,Kwigillingok,community,Barge,Receiver,714,{B4C2906B-6DF1-4DA7-BA8F-6C9D0CEF2F20},41439,placed
+Hub_322,NAPASKIAK,Napaskiak,community,Barge or Road,Receiver,715,{3D59252C-9203-4025-9B29-73D718F93C7D},41610,placed
+Hub_322,NAPASKIAK,Napaskiak,community,Barge or Road,Receiver,715,{89DA62E0-9930-40F0-B0CD-EFE4FCB70133},41610,placed
+Hub_322,NAPASKIAK,Napaskiak,community,Barge or Road,Receiver,717,{15C391A6-C587-4419-BEA9-7C324886C14D},41610,placed
+Hub_322,NAPASKIAK,Napaskiak,community,Barge or Road,Receiver,SYN-820,{11278BDC-1003-43CC-AC1A-EF01CB28FBE5},41610,placed
+Hub_323,blob:23,blob:23,blob,Barge,Receiver,75,{0C0D7C65-C6C5-4293-A58D-8DB8A9E3283C},47124,placed
+Hub_324,remote:754,Fort Yukon,remote_site,Barge,Receiver,754,{BFC59C95-ABE4-4959-BE52-7F09A5308991},43247,placed
+Hub_325,GAKONA,Gakona,community,Road,Receiver,755,{5DEC0033-91A2-4B58-93E2-945AFDAA8725},1437,merged:Hub_185
+Hub_325,GAKONA,Gakona,community,Road,Receiver,783,{679E2DA1-DC50-426B-B1F2-F6DC8D2DB1AD},1437,merged:Hub_185
+Hub_326,remote:759,Fairbanks,remote_site,Road,Receiver,759,{D4DC4358-AD2A-4F62-A059-4266EFCD6437},2772,placed
+Hub_327,remote:761,Fairbanks,remote_site,Road,Receiver,761,{27836AC8-344A-4140-8EBE-9B551A586869},84093,placed
+Hub_328,remote:767,Bettles Field,remote_site,Plane,Receiver,767,{D99442DA-9542-41C2-88DE-A2C473548FDD},,unplaced:beyond_cap
+Hub_329,remote:768,Bettles Field,remote_site,Plane,Receiver,768,{ADDAB7A9-008D-4294-A74F-B722E49B32DC},,unplaced:beyond_cap
+Hub_330,remote:773,Delta Junction,remote_site,Plane,Receiver,773,{23438583-E320-48B3-8C36-733AAA636B53},28569,placed
+Hub_331,ELFIN COVE,Elfin Cove,community,Barge or Plane,Receiver,776,{FFFE3140-EE71-41D1-A6C0-CAE8A0D5466C},56760,placed
+Hub_331,ELFIN COVE,Elfin Cove,community,Barge or Plane,Receiver,SYN-218,{96E5368E-7124-4460-A687-759DC084F019},56760,placed
+Hub_332,remote:778,Fairbanks,remote_site,Plane,Receiver,778,{8C45602F-E138-4FFD-8E8B-C5CA68675B72},2587,placed
+Hub_333,remote:779,Fairbanks,remote_site,Plane,Receiver,779,{267D2EF2-63DA-4FEA-ABB6-EB7BFB60BF26},2831,placed
+Hub_334,EXCURSION INLET,Excursion Inlet,community,Barge or Road,Receiver,78,{4C120687-7512-4E08-BC90-9674A4F4C54C},37017,placed
+Hub_334,EXCURSION INLET,Excursion Inlet,community,Barge or Road,Receiver,854,{0C0656F7-A4B6-48AB-9431-BCB107F78864},37017,placed
+Hub_335,remote:787,Glennallen,remote_site,Plane,Receiver,787,{F495099F-BE9E-49DE-BD7B-1C31183F8BDE},84091,placed
+Hub_336,remote:797,Ketchikan,remote_site,Road,Receiver,797,{BFF9DB9E-CA56-440D-B966-058492E9DF73},37267,placed
+Hub_337,remote:800,Livengood,remote_site,Plane,Receiver,800,{2B46951B-0771-4DA5-B85E-08528246F05C},45551,merged:Hub_218
+Hub_338,remote:806,Metlakatla,remote_site,Plane,Receiver,806,{7AC691F0-663D-4947-B5B2-783A7B0ADA02},,unplaced:beyond_cap
+Hub_339,remote:815,Petersburg,remote_site,Plane,Receiver,815,{0F01BB32-5A29-4652-976C-10E724180102},35935,placed
+Hub_340,remote:817,Prudhoe Bay,remote_site,Plane,Receiver,817,{4669A088-FDE7-4974-9B95-0EEA23C33FC4},,unplaced:beyond_cap
+Hub_341,remote:820,Prudhoe Bay,remote_site,Road,Receiver,820,{F5EA86DC-3AD5-4EBB-9B32-1E3296DE10A4},8881,placed
+Hub_342,blob:37,blob:37,blob,Plane,Receiver,825,{1C90A3F0-FA24-4549-B39D-A7D68691CD55},,unplaced:beyond_cap
+Hub_343,blob:33,blob:33,blob,Plane,Receiver,826,{88EB0B7B-A644-419C-A1A0-A28C818B9BEA},,unplaced:beyond_cap
+Hub_344,remote:832,Valdez,remote_site,Plane,Receiver,832,{3E126E10-1FB3-4698-B4A2-1CE1635F721D},84089,placed
+Hub_345,blob:22,blob:22,blob,Plane,Receiver,839,{664F9327-5294-4681-9F68-2784A1F806E8},,unplaced:beyond_cap
+Hub_346,blob:45,blob:45,blob,Road,Receiver,840,{AC3EBB88-FB69-40A7-BB5C-3C789CD4B663},,unplaced:beyond_cap
+Hub_347,remote:852,Haines,remote_site,Road,Receiver,852,{5B6D7E1C-3FCD-4202-88E8-14F202F1FE92},2993,placed
+Hub_348,remote:853,Haines,remote_site,Road,Receiver,853,{183A8E95-D80D-4CAE-9F17-F67AC2C20CFE},2995,placed
+Hub_349,blob:14,blob:14,blob,Plane,Receiver,855,{3B53A2C4-6794-4EE7-8E79-1CE7CB908122},42491,placed
+Hub_350,remote:857,Haines,remote_site,Road,Receiver,857,{984C8F00-5900-483B-B4A1-43D255646FAC},2954,placed
+Hub_351,remote:880,Cordova,remote_site,Barge,Receiver,880,{A582CD1B-2461-42BC-AD24-4957D48F8D0C},,unplaced:beyond_cap
+Hub_352,remote:881,Cordova,remote_site,Barge,Receiver,881,{5C4B0813-680E-47D6-A697-FE76F3230475},,unplaced:beyond_cap
+Hub_353,remote:884,Cordova,remote_site,Barge,Receiver,884,{1FF7A1D5-A8B5-49A0-BF91-D7BC0D3F5FB3},55408,placed
+Hub_354,remote:898,King Salmon,remote_site,Road,Receiver,898,{BACAEA02-40B4-467A-B3B9-39C3197CF50D},40280,placed
+Hub_355,ARCTIC VILLAGE,Arctic Village,community,Barge or Plane,Receiver,903,{08FBA8A0-92C4-4FCE-A99B-AF2EAE8B1E3B},44492,placed
+Hub_355,ARCTIC VILLAGE,Arctic Village,community,Barge or Plane,Receiver,903,{B7E68FA8-CBBD-45FD-8AAC-B95EF13A029A},44492,placed
+Hub_355,ARCTIC VILLAGE,Arctic Village,community,Barge or Plane,Receiver,903,{F84F522D-6A01-40D7-9D01-97D1EF0E401B},44492,placed
+Hub_355,ARCTIC VILLAGE,Arctic Village,community,Barge or Plane,Receiver,SYN-409,{2425287B-91A3-44C7-8A88-44E42DF0BFD8},44492,placed
+Hub_355,ARCTIC VILLAGE,Arctic Village,community,Barge or Plane,Receiver,SYN-410,{EE49D47C-9B92-431B-9D0B-77844BA21CF8},44492,placed
+Hub_355,ARCTIC VILLAGE,Arctic Village,community,Barge or Plane,Receiver,SYN-411,{DDA6FB76-5380-4BC4-93FD-1522BFE1A796},44492,placed
+Hub_355,ARCTIC VILLAGE,Arctic Village,community,Barge or Plane,Receiver,SYN-412,{3F4D3DE2-6539-41BA-9378-0C54BD000B01},44492,placed
+Hub_356,OLD HARBOR,Old Harbor,community,Barge,Receiver,929,{29EDFCE9-CDDB-4679-B507-BF60F8DA6E24},38378,placed
+Hub_356,OLD HARBOR,Old Harbor,community,Barge,Receiver,SYN-1169,{0491888E-6920-4836-8099-4A0EE9529B8A},38378,placed
+Hub_356,OLD HARBOR,Old Harbor,community,Barge,Receiver,SYN-1169,{801CC974-B897-41D3-A9FB-A3B7C883E0FA},38378,placed
+Hub_357,TATITLEK,Tatitlek,community,Barge,Receiver,966,{B111E91E-EB87-4AAA-8E4E-8BE0A7677641},39461,placed
+Hub_357,TATITLEK,Tatitlek,community,Barge,Receiver,SYN-1243,{4772434D-F5AF-48B9-8585-F49B2EDACA93},39461,placed
+Hub_357,TATITLEK,Tatitlek,community,Barge,Receiver,SYN-1244,{EE1FBA59-8354-45FF-8D5B-ADC9DDBE6A5E},39461,placed
+Hub_358,ANDERSON,Anderson,community,Road,Receiver,986,{F0B55A5E-4D44-483F-959F-F391B03E5092},1836,placed
+Hub_358,ANDERSON,Anderson,community,Road,Receiver,987,{ACC2E82E-44B3-4A22-9FB0-A4E7A2571A04},1836,placed
+Hub_359,DEERING,Deering,community,Barge or Road,Receiver,991,{262CA1C1-4C87-44F2-AE72-4AF7E944AF9C},44090,placed
+Hub_359,DEERING,Deering,community,Barge or Road,Receiver,991,{77B9E568-6D73-4FF3-B12F-9E3ED9120891},44090,placed
+Hub_359,DEERING,Deering,community,Barge or Road,Receiver,991,{DD445EE1-3F10-4146-A63C-843325C1AEA0},44090,placed
+Hub_359,DEERING,Deering,community,Barge or Road,Receiver,991,{F3E0843B-7A8E-4A0B-A1D2-E8B831675754},44090,placed
+Hub_359,DEERING,Deering,community,Barge or Road,Receiver,SYN-484,{BCD651E8-4423-42E9-8590-DAE2B2CE66E6},44090,placed
+Hub_360,SOUTH NAKNEK,South Naknek,community,Barge,Receiver,SYN-1108,{A2EC8460-8ABE-4893-B4D3-7CEEDDC03597},40380,placed
+Hub_360,SOUTH NAKNEK,South Naknek,community,Barge,Receiver,SYN-1109,{531FCE13-5F37-4206-ABD6-E479328F3B28},40380,placed
+Hub_360,SOUTH NAKNEK,South Naknek,community,Barge,Receiver,SYN-1110,{0A1579D5-A92D-4837-B2EC-95B2608B962B},40380,placed
+Hub_361,PORT GRAHAM,Port Graham,community,Barge,Receiver,SYN-1177,{63C5CA7F-C393-4342-8E80-D7F62055405D},39104,placed
+Hub_362,ILIAMNA,Iliamna,community,Barge or Plane,Receiver,SYN-1211,{6F583D81-6839-467F-9E95-2BFB4381CCB2},41103,placed
+Hub_362,ILIAMNA,Iliamna,community,Barge or Plane,Receiver,SYN-1212,{06185C17-CBAF-4E61-89A3-B934B49C0168},41103,placed
+Hub_362,ILIAMNA,Iliamna,community,Barge or Plane,Receiver,SYN-1213,{0A9A2F3F-4A66-4DB9-95B5-EF76EEBA63F2},41103,placed
+Hub_362,ILIAMNA,Iliamna,community,Barge or Plane,Receiver,SYN-1213,{A4C680D0-130E-4F05-9998-29522329BAF6},41103,placed
+Hub_362,ILIAMNA,Iliamna,community,Barge or Plane,Receiver,SYN-1214,{B82BCD44-0AB9-477F-AB04-130B254298CD},41103,placed
+Hub_362,ILIAMNA,Iliamna,community,Barge or Plane,Receiver,SYN-1215,{FC332169-1A4B-42A4-BB5F-E595065D2DED},41103,placed
+Hub_362,ILIAMNA,Iliamna,community,Barge or Plane,Receiver,SYN-1216,{27EE94C1-0090-43B3-BBF7-F9034AE6B955},41103,placed
+Hub_362,ILIAMNA,Iliamna,community,Barge or Plane,Receiver,SYN-1216,{A8C51656-470A-4DE2-9586-AAE7535B2919},41103,placed
+Hub_362,ILIAMNA,Iliamna,community,Barge or Plane,Receiver,SYN-1217,{0791B938-8883-46B3-BF0D-A325ED762DC1},41103,placed
+Hub_362,ILIAMNA,Iliamna,community,Barge or Plane,Receiver,SYN-1218,{4C820FFA-B9B8-45FD-8186-606B829A7418},41103,placed
+Hub_362,ILIAMNA,Iliamna,community,Barge or Plane,Receiver,SYN-1223,{1DC2552B-7FE7-4148-A95D-24CE7E9B7ABB},41103,placed
+Hub_362,ILIAMNA,Iliamna,community,Barge or Plane,Receiver,SYN-1223,{DEF25DC7-2502-4A06-BE1A-12930080D395},41103,placed
+Hub_362,ILIAMNA,Iliamna,community,Barge or Plane,Receiver,SYN-1223,{E6B99EC5-748C-4D83-97F7-7E5E958EB571},41103,placed
+Hub_362,ILIAMNA,Iliamna,community,Barge or Plane,Receiver,SYN-1224,{A1ACAD7B-9BE0-491A-951F-BE7A6A70D642},41103,placed
+Hub_362,ILIAMNA,Iliamna,community,Barge or Plane,Receiver,SYN-1225,{6640F7BB-49A4-49F4-A25C-85DF1B38168B},41103,placed
+Hub_362,ILIAMNA,Iliamna,community,Barge or Plane,Receiver,SYN-1226,{1339630D-DD58-4DA8-BE58-827A4869D20E},41103,placed
+Hub_362,ILIAMNA,Iliamna,community,Barge or Plane,Receiver,SYN-1227,{22013382-A10C-4076-B29A-822BB4B68ECA},41103,placed
+Hub_362,ILIAMNA,Iliamna,community,Barge or Plane,Receiver,SYN-1228,{8353797D-296E-4920-83C7-1E71CB31BC64},41103,placed
+Hub_363,remote:SYN-1222,Iliamna,remote_site,Barge or Plane,Receiver,SYN-1222,{39943186-EB34-4A7C-B510-E1F60F6E5B77},41077,placed
+Hub_363,remote:SYN-1222,Iliamna,remote_site,Barge or Plane,Receiver,SYN-1222,{EB39FAA6-2449-4158-A5F0-0D771F933278},41077,placed
+Hub_364,NIKOLSKI,Nikolski,community,Barge,Receiver,SYN-21,{7D5A2F92-603F-4A0C-A125-C4F4103E475E},39719,placed
+Hub_364,NIKOLSKI,Nikolski,community,Barge,Receiver,SYN-22,{4999327D-B23E-4564-B1CE-95ED4317DEBD},39719,placed
+Hub_364,NIKOLSKI,Nikolski,community,Barge,Receiver,SYN-23,{B4946844-727D-478C-B06B-3C7EC55D583C},39719,placed
+Hub_364,NIKOLSKI,Nikolski,community,Barge,Receiver,SYN-24,{DB8F47BD-14D1-4503-BECA-6523E2C003B7},39719,placed
+Hub_365,TENAKEE SPRINGS,Tenakee Springs,community,Barge,Receiver,SYN-219,{0088E9DC-A0A4-44B1-8A01-BD8C0F5EF8E1},36840,placed
+Hub_365,TENAKEE SPRINGS,Tenakee Springs,community,Barge,Receiver,SYN-219,{0A8E46F6-85F9-461E-9D8A-7B10FBCC5F4A},36840,placed
+Hub_366,ALATNA,Alatna,community,Plane,Receiver,SYN-591,{73EF2225-6598-4DE7-AFC3-A4F4A4A8712F},43188,placed
+Hub_367,remote:SYN-594,Noorvik,remote_site,Barge,Receiver,SYN-594,{056D0E34-0F8F-4089-8FD4-38E6687C1E94},42734,placed
+Hub_368,LIME VILLAGE,Lime Village,community,Barge or Plane,Receiver,SYN-690,{364570AC-CE66-4B24-A88F-55A73DA9A405},42327,placed
+Hub_368,LIME VILLAGE,Lime Village,community,Barge or Plane,Receiver,SYN-690,{875DCE4F-F3F0-4D9C-9E0D-2F07D38F6400},42327,placed
+Hub_368,LIME VILLAGE,Lime Village,community,Barge or Plane,Receiver,SYN-691,{5E5BAF5F-E77E-438F-A387-FBAE0D5613C7},42327,placed
+Hub_368,LIME VILLAGE,Lime Village,community,Barge or Plane,Receiver,SYN-691,{CEDEBA38-2030-4837-8FFD-E164080B8CC2},42327,placed
+Hub_368,LIME VILLAGE,Lime Village,community,Barge or Plane,Receiver,SYN-692,{75D73E2E-6972-443E-B451-01F8EC0448D5},42327,placed
+Hub_369,remote:SYN-793,Kwethluk,remote_site,Barge,Receiver,SYN-793,{E8C7FE98-2833-47DB-A566-8D25750D48D2},41850,placed
+Hub_370,OSCARVILLE,Oscarville,community,Barge,Receiver,SYN-816,{CBB7DC3E-0AF5-41C6-A7B3-5C65F6397177},41621,placed
+Hub_370,OSCARVILLE,Oscarville,community,Barge,Receiver,SYN-817,{DCB13A71-B53D-45F9-928A-929F2BF933C1},41621,placed
+Hub_371,CHEFORNAK,Chefornak,community,Barge,Receiver,SYN-877,{874475C1-7248-408E-B0F1-2E36A1CA3F6A},41458,placed
+Hub_371,CHEFORNAK,Chefornak,community,Barge,Receiver,SYN-877,{AD0AB2B7-65FB-40CB-A1A9-2316C82F20FA},41458,placed
+Hub_371,CHEFORNAK,Chefornak,community,Barge,Receiver,SYN-878,{39BED115-6EC9-4598-8396-F20395351B98},41458,placed
+Hub_371,CHEFORNAK,Chefornak,community,Barge,Receiver,SYN-879,{55769367-D290-4411-8FA6-01549B3A022A},41458,placed
+Hub_372,POINT BAKER,Point Baker,community,Barge,Receiver,SYN-96,{B5F9DF89-516A-4284-9CF3-8F1871A3A263},35901,placed
+Hub_373,PORT PROTECTION,Port Protection,community,Barge,Receiver,SYN-97,{8D44AF61-AB31-4870-AB4E-4D0246D4376E},35901,merged:Hub_372
+Hub_374,remote:SYN-99,Craig,remote_site,Barge,Receiver,SYN-99,{5CE97A73-0D33-4600-836B-A3E084CE3826},35963,placed

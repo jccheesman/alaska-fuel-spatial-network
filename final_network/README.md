@@ -77,6 +77,26 @@ Members (md5; full sha256 per member in `final_network/MANIFEST.sha256` and
 | `network_joined_edges/network_joined_edges.dbf` | `d98ffc70b1d045e74d26b085b1ffa71b` |
 | `network_joined_edges/network_joined_edges.shx` | `94a980f2ec7fc83085431dba7d3339d9` |
 
+## The hub handoff: `hub_members.csv` + `hub_snaps.csv`
+
+Written by `06_export_final_network.py` through `mmnet.handoff` beside the zips (and
+listed in `MANIFEST.sha256`), from stage 02's `02_hubs.gpkg` + `01_site_members.csv` and
+stage 03's `02_hub_snaps.csv`. They say what the shapefiles cannot: which inventory
+records each hub serves, the corrected community key it was built for, and where it
+landed. A consumer reads them instead of inferring hub membership by distance or a hub's
+community by a vote over nearby facility labels.
+
+| File | One row per | Columns |
+|---|---|---|
+| `hub_members.csv` | (hub, raw inventory record) | `hub_id` (as in `network_joined_nodes.hub_id`), `hub_key` (workflow 00's `community_key`, else the canonical inventory spelling), `hub_community` (display label), `hub_kind` (community · remote_site · blob), `delivery_method`, `hub_type`, `ast_facility_id` (member site; `SYN-<cluster>` when the records carry none), `record_id` (workflow 00's raw record id; empty without the record trail), `node_id` (empty when unplaced), `snap_status` (placed · merged:<hub> · unplaced:beyond_cap) |
+| `hub_snaps.csv` | hub | `hub_id`, `node_id`, `snap_dist_m`, `snap_surface`, `status` — stage 03's placement trail, verbatim |
+
+A hub `merged:<other>` shares `<other>`'s node: the node's `hub_id` reads `Hub_a+Hub_b`.
+`02_load_final_network.py` loads both files into the DuckDB deliverable as `hub_members`
+and `hub_snaps` when they exist (an older export has neither), checking that every placed
+hub's node is an `is_hub` node and that the placed hubs land on exactly the shapefile's
+hub-node count.
+
 ## Field names (Shapefile 10-character limit)
 
 Shapefile/DBF truncates field names to 10 characters, so three long names are

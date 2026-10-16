@@ -49,8 +49,16 @@ ice / air only; the waterway is noded in Python at 50 m rounding).
 
 ## 4. The final_network handoff (workflow 02 → workflow 03)
 
-Producer: `06_export_final_network.py` (zips + sha256 manifest). Consumers:
+Producer: `06_export_final_network.py` (zips + sha256 manifest + the hub handoff
+`hub_members.csv` / `hub_snaps.csv` via `mmnet.handoff`). Consumers:
 `01_extract_network_handoff.py` → `02_load_final_network.py`.
+
+The hub handoff (2026-10): `hub_members.csv` has one row per (hub, raw inventory
+record) — `hub_id`, `hub_key`, `hub_community`, `hub_kind`, `delivery_method`,
+`hub_type`, `ast_facility_id`, `record_id`, `node_id`, `snap_status`; `hub_snaps.csv`
+is stage 03's placement trail (`hub_id`, `node_id`, `snap_dist_m`, `snap_surface`,
+`status`). Both are listed in `final_network/MANIFEST.sha256`. A consumer takes hub
+membership and a hub's community from these files, never by re-inference.
 
 Schema (DBF-safe field names): see `final_network/README.md` — nodes
 (node_id, is_hub, hub_id, deliv_meth, hub_type, hub_cap, snap_surf,
@@ -61,11 +69,11 @@ LineString, EPSG:3338). `length_m` is DERIVED by the consumer
 (geometry.length — EPSG:3338 is meters).
 
 Inventory (the ingest's hard tripwire, `EXPECTED` in
-`02_load_final_network.py`): 84,089 nodes / 92,978 edges / 385 hubs / 5
-components / giant 0.9999 / Road 55,534 · Waterway 34,178 · Air 226 ·
-IceRoad 1,248 · RoadConnector 1,498 · IceRoadConnector 35 ·
-BargeRoadTransfer 234 · BargeIceRoadTransfer 11 · IceRoadRoadTransfer 12 ·
-AirRoadTransfer 2.
+`02_load_final_network.py`): 84,094 nodes / 93,049 edges / 329 hubs / 4
+components / giant 0.9999 / Road 55,539 · Waterway 34,178 · Air 226 ·
+IceRoad 1,248 · RoadConnector 1,498 · IceRoadConnector 34 ·
+BargeRoadTransfer 289 · BargeIceRoadTransfer 21 · IceRoadRoadTransfer 12 ·
+AirRoadTransfer 2 · BargeAirTransfer 2.
 
 ## 5. THE edge_id RULE (the contract everything hangs on)
 
@@ -107,15 +115,20 @@ via `TRANSFER_TYPE_TO_MODES`).
 
 | Table | Rows | Columns | Writer |
 |---|---|---|---|
-| `network_nodes` | 84,089 | node_id PK, is_hub, hub_id, deliv_meth, hub_type, hub_cap, snap_surf, component, is_giant, x, y | 03/02_load |
-| `network_edges` | 92,978 | edge_id PK, from_node, to_node, type, edge_class, source, join_gap_m, length_m | 03/02_load |
-| `edge_month_weights` | 1,115,736 | edge_id, month, mode, avg_friction, nodata_frac, passable | 03/03_weight |
-| `edge_costs` | 1,115,736 | edge_id, month, cost_per_gallon, passable | 03/04_assemble |
+| `network_nodes` | 84,094 | node_id PK, is_hub, hub_id, deliv_meth, hub_type, hub_cap, snap_surf, component, is_giant, x, y | 03/02_load |
+| `network_edges` | 93,049 | edge_id PK, from_node, to_node, type, edge_class, source, join_gap_m, length_m | 03/02_load |
+| `edge_month_weights` | 1,116,588 | edge_id, month, mode, avg_friction, nodata_frac, passable | 03/03_weight |
+| `edge_costs` | 1,116,588 | edge_id, month, cost_per_gallon, passable | 03/04_assemble |
 
-`hub_facility_map` (hub_id ↔ facility_id) is **documented future work**: the
-routing layer's `backfill_facility_edges` stub depends on it, and no writer
-or source data exists in this repository (see
-`workflows/04_duckdb_export/README.md`).
+| `hub_members` | one per (hub, raw record) | hub_id, hub_key, hub_community, hub_kind, delivery_method, hub_type, ast_facility_id, record_id, node_id, snap_status | 03/02_load from `final_network/hub_members.csv` (when present) |
+| `hub_snaps` | one per hub | hub_id, node_id, snap_dist_m, snap_surface, status | 03/02_load from `final_network/hub_snaps.csv` (when present) |
+
+`hub_members` is the writer the old "`hub_facility_map` — documented future
+work" note waited for: hub ↔ inventory record membership comes from stage 02's
+build itself (`mmnet.handoff`), keyed by workflow 00's `record_id`, so a
+downstream facility table joins on `record_id`. The routing layer's
+`backfill_facility_edges` stub can now be built on it. Exports before 2026-10
+carry neither table.
 
 ## 9. Config surfaces (one per concern)
 

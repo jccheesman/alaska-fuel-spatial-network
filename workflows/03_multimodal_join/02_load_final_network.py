@@ -16,6 +16,15 @@ Tables written (CREATE OR REPLACE):
                   hub_cap, snap_surf, component, is_giant, x, y)
     network_edges(edge_id PK, from_node, to_node, type, edge_class,
                   source, join_gap_m, length_m)
+    hub_members(hub_id, hub_key, hub_community, hub_kind, delivery_method,
+                hub_type, ast_facility_id, record_id, node_id, snap_status)
+    hub_snaps(hub_id, node_id, snap_dist_m, snap_surface, status)
+
+The last two come from final_network/hub_members.csv + hub_snaps.csv (written
+by 06_export_final_network.py via mmnet.handoff since the 2026-10 export) and
+are written only when those files exist beside the zips: the builder's own
+answer to "which inventory records does this hub serve, what community is
+it, where did it land" (closes the hub_facility_map seam of DATA_CONTRACTS §8).
 
 Current exports carry a mode-based `type` vocabulary set by
 `pipeline.classify_connectors`: within-mode welds are `{Mode}Connector`
@@ -57,6 +66,8 @@ ROOT = Path(__file__).resolve().parents[2]
 FINAL_NETWORK_DIR = ROOT / "final_network"
 NODES_SHP = FINAL_NETWORK_DIR / "network_joined_nodes" / "network_joined_nodes.shp"
 EDGES_SHP = FINAL_NETWORK_DIR / "network_joined_edges" / "network_joined_edges.shp"
+HUB_MEMBERS_CSV = FINAL_NETWORK_DIR / "hub_members.csv"
+HUB_SNAPS_CSV = FINAL_NETWORK_DIR / "hub_snaps.csv"
 DB_PATH = ROOT / "outputs" / "fuel_network.duckdb"
 
 # Expected inventory per final_network/README.md — a changed export should
@@ -168,6 +179,54 @@ def cross_check_edge_month_weights(con: duckdb.DuckDBPyConnection,
     logger.info("edge_month_weights cross-check OK (%d edge_ids align)", n_edges)
 
 
+def load_hub_handoff(con: duckdb.DuckDBPyConnection,
+                     members_csv: str | Path = HUB_MEMBERS_CSV,
+                     snaps_csv: str | Path = HUB_SNAPS_CSV) -> dict:
+    """Load final_network/hub_members.csv and hub_snaps.csv as DuckDB tables when present.
+
+    Checks (hard errors): every placed or merged hub's node_id is a network_nodes row that
+    carries is_hub, and the number of DISTINCT nodes the placed hubs landed on equals the
+    is_hub count — the two files and the shapefile describe the same build. Returns the
+    row counts written (empty when the files are absent, which an older export is)."""
+    members_csv, snaps_csv = Path(members_csv), Path(snaps_csv)
+    written: dict[str, int] = {}
+    if not members_csv.exists():
+        logger.info("no %s beside the zips (export predates the hub handoff) — skipping", members_csv.name)
+        return written
+    con.execute("""
+        CREATE OR REPLACE TABLE hub_members AS
+        SELECT hub_id::VARCHAR AS hub_id, hub_key::VARCHAR AS hub_key,
+               hub_community::VARCHAR AS hub_community, hub_kind::VARCHAR AS hub_kind,
+               delivery_method::VARCHAR AS delivery_method, hub_type::VARCHAR AS hub_type,
+               ast_facility_id::VARCHAR AS ast_facility_id, record_id::VARCHAR AS record_id,
+               node_id::BIGINT AS node_id, snap_status::VARCHAR AS snap_status
+        FROM read_csv(?, header = true, all_varchar = true)""", [str(members_csv)])
+    written["hub_members"] = con.execute("SELECT count(*) FROM hub_members").fetchone()[0]
+    if snaps_csv.exists():
+        con.execute("""
+            CREATE OR REPLACE TABLE hub_snaps AS
+            SELECT hub_id::VARCHAR AS hub_id, node_id::BIGINT AS node_id,
+                   snap_dist_m::DOUBLE AS snap_dist_m, snap_surface::VARCHAR AS snap_surface,
+                   status::VARCHAR AS status
+            FROM read_csv(?, header = true, all_varchar = true)""", [str(snaps_csv)])
+        written["hub_snaps"] = con.execute("SELECT count(*) FROM hub_snaps").fetchone()[0]
+    # the handoff and the shapefile describe one build
+    orphans = con.execute("""
+        SELECT count(DISTINCT m.hub_id) FROM hub_members m
+        LEFT JOIN network_nodes n ON n.node_id = m.node_id
+        WHERE m.node_id IS NOT NULL AND (n.node_id IS NULL OR NOT n.is_hub)""").fetchone()[0]
+    if orphans:
+        raise SystemExit(f"hub_members: {orphans} hub(s) name a node_id that is not a hub node")
+    landed = con.execute("SELECT count(DISTINCT node_id) FROM hub_members "
+                         "WHERE snap_status = 'placed'").fetchone()[0]
+    n_hub_nodes = con.execute("SELECT count(*) FROM network_nodes WHERE is_hub").fetchone()[0]
+    if landed != n_hub_nodes:
+        raise SystemExit(f"hub_members: {landed} distinct placed nodes vs {n_hub_nodes} hub nodes "
+                         "in network_nodes — the handoff files and the shapefile are from different builds")
+    logger.info("hub handoff loaded: %s", written)
+    return written
+
+
 def load_final_network(
     nodes_shp: str | Path = NODES_SHP,
     edges_shp: str | Path = EDGES_SHP,
@@ -253,6 +312,8 @@ def load_final_network(
         n_edges = con.execute("SELECT COUNT(*) FROM network_edges").fetchone()[0]
         logger.info("wrote network_nodes (%d rows) + network_edges (%d rows) -> %s",
                     n_nodes, n_edges, db_path)
+        load_hub_handoff(con, Path(nodes_shp).parents[1] / "hub_members.csv",
+                         Path(nodes_shp).parents[1] / "hub_snaps.csv")
     finally:
         con.close()
 
