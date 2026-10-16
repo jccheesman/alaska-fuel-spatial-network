@@ -10,9 +10,13 @@ writes, into the top-level final_network/ folder consumed by workflow 03
      so long attribute names get ArcGIS-safe aliases (documented in
      final_network/README.md and printed below).
   2. network_joined_{nodes,edges}.zip — the committed handoff artifacts.
-  3. MANIFEST.sha256 — checksums of every zip member, so a re-export that
-     changes ANY byte (and therefore potentially the edge_id = row-order
-     contract) is loud, not silent.
+  3. hub_members.csv + hub_snaps.csv — the hub handoff (mmnet.handoff): which
+     inventory records each hub serves, the community key it was built for,
+     and the node it landed on. Consumers read these instead of inferring
+     membership by distance or a hub's community by vote.
+  4. MANIFEST.sha256 — checksums of every zip member and of the two CSVs, so
+     a re-export that changes ANY byte (and therefore potentially the
+     edge_id = row-order contract) is loud, not silent.
 
 CAUTION — edge_id contract: workflow 03 keys every DuckDB table by the
 0-based shapefile row order. Re-running this export after a rebuild
@@ -28,6 +32,7 @@ import hashlib
 import zipfile
 from pathlib import Path
 
+from mmnet.handoff import write_hub_handoff
 from mmnet.network import NetworkTables
 
 ROOT = Path(__file__).resolve().parents[2]  # repo root
@@ -75,6 +80,10 @@ def main() -> None:
         gdf.to_file(shp_dir / f"{name}.shp", driver="ESRI Shapefile")
         manifest_entries += _zip_shapefile_dir(shp_dir, OUT / f"{name}.zip")
         print(f"{name}: {len(gdf):,} features -> {name}.zip (EPSG:{gdf.crs.to_epsg()})")
+
+    # the hub handoff: stage 02's membership + stage 03's placement, beside the zips
+    for p in write_hub_handoff(PROJ / "output", OUT):
+        manifest_entries.append((p.name, hashlib.sha256(p.read_bytes()).hexdigest()))
 
     manifest = OUT / "MANIFEST.sha256"
     manifest.write_text(
