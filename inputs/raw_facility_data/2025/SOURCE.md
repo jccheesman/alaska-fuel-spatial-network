@@ -4,6 +4,8 @@
 - **Raw file:** `Utilities_Bulk_Fuel_Inventory.csv` — **NOT committed** (contains facility-representative, owner and operator names, phones and emails).
 - **Raw SHA-256:** `3fbee569c63dccf813d6fa53e608820d53b92e415feb2c7f20556fc0bb0c30b0`
 - **Raw rows:** 1830 (1767 with coordinates)
+- **Retrieved via:** State of Alaska Geoportal item "Utilities Bulk Fuel Inventory" (https://gis.data.alaska.gov/maps/DCCED::utilities-bulk-fuel-inventory/about) → Download → CSV export.
+- **Geoportal item dates (as shown at download):** published 2020-12-03; last updated 2026-09-03. These are the portal item's dates, not record edits: the newest per-record `last_edited` in this file is 2025-12-16 (1,825 rows last edited 2022-12, 5 rows 2025-12), hence the `2025` release label.
 - **Downloaded:** 2026-10-05 (owner download)
 - **Note:** AEA/DCRA Bulk Fuel Inventory, last AEA edit 2025-12-16. 71 duplicate records removed; 5 records edited (3 map-point corrections).
 
