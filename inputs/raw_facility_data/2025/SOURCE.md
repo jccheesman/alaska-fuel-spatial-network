@@ -9,6 +9,23 @@
 - **Downloaded:** 2026-10-05 (owner download)
 - **Note:** AEA/DCRA Bulk Fuel Inventory, last AEA edit 2025-12-16. 71 duplicate records removed; 5 records edited (3 map-point corrections).
 
+## How to cite
+
+Cite the version used (the Geoportal item's "last updated" year), with the retrieval date; state the
+record currency separately in the methods. Confirm the publisher/credit line on the Geoportal page.
+
+> Alaska Energy Authority & Division of Community and Regional Affairs. (2026). *Utilities Bulk Fuel
+> Inventory* [Data set]. State of Alaska Geoportal.
+> https://gis.data.alaska.gov/maps/DCCED::utilities-bulk-fuel-inventory/about. Retrieved October 5, 2026.
+
+Methods wording:
+
+> We used the AEA/DCRA Bulk Fuel Inventory as downloaded on 5 October 2026 (1,830 records; most recent
+> record edit 16 December 2025), after removing 27 duplicate records and applying 80 reviewed corrections.
+
+The exact file used is identified by the raw SHA-256 above. The 27 / 80 counts are from
+`outputs/00_inventory_qc/2025/qc_report.md`; update them if the corrections change before publication.
+
 ## What is committed here
 
 - `aea_inventory_2025.csv` — the 29 clean-schema columns only (see `inputs/inventory_qc/sources/aea/column_map.csv`; written by `workflows/00_inventory_qc/01_ingest.py`), raw row order preserved via `source_row`. SHA-256 `e83e5f35f1389f67c998d19e1898c829f24b871fae3f6af17b3948ff2ea571cb`.
