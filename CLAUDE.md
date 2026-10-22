@@ -25,6 +25,13 @@ All five drivers (`run_all.sh` + the four stage ones) source
   Any other non-zero exit means a real failure. The top-level `run_all.sh`
   reports the two separately and exits non-zero only for the second.
 
+Every Python script locates the repo with `import repo_paths as rp`
+(`source_scripts/repo_paths.py`, every location defined once) — never
+`Path(__file__).resolve().parents[N]`; `tests/test_repo_paths.py` enforces it.
+Only `run_all.py` and `tools/extract_inputs.py` locate themselves (they run
+before or outside the project environment). After pulling this change an
+existing environment needs `uv pip install -e .` once more to pick the module up.
+
 Stage 02's export step is opt-in (`EXPORT_FINAL_NETWORK=1`) because it
 replaces the network-of-record.
 

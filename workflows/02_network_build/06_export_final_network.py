@@ -35,9 +35,10 @@ from pathlib import Path
 from mmnet.handoff import write_hub_handoff
 from mmnet.network import NetworkTables
 
-ROOT = Path(__file__).resolve().parents[2]  # repo root
-PROJ = ROOT / "outputs" / "02_network_build"  # mmnet project dir
-OUT = ROOT / "final_network"                # the frozen handoff folder
+import repo_paths as rp
+ROOT = rp.ROOT
+PROJ = rp.NETWORK_PROJECT  # mmnet project dir
+OUT = rp.FINAL_NETWORK  # the frozen handoff folder
 
 # long name -> ArcGIS/DBF-safe (<=10 chars). Anything not listed is already <=10 and kept as-is.
 NODE_RENAME = {

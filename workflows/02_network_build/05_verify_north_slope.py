@@ -13,14 +13,13 @@ Run:  python workflows/02_network_build/05_verify_north_slope.py   (after 04_bui
 from __future__ import annotations
 
 import sys
-from pathlib import Path
 
 import networkx as nx
 import numpy as np
 from scipy.spatial import cKDTree
 
-ROOT = Path(__file__).resolve().parents[2]  # repo root
-PROJ = ROOT / "outputs" / "02_network_build"  # mmnet project dir: engine writes PROJ/output + PROJ/reports
+import repo_paths as rp
+PROJ = rp.NETWORK_PROJECT  # mmnet project dir: engine writes PROJ/output + PROJ/reports
 from mmnet.network import NetworkTables  # noqa: E402
 
 BARROW = (-100728.0, 2368953.0)          # a North-Slope (Barrow/Utqiaġvik) coordinate, EPSG:3338

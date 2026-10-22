@@ -45,6 +45,7 @@ gee = ["earthengine-api>=0.1.390"]   # only for re-exporting the GEE stack
 
 [tool.setuptools]
 package-dir = {"" = "source_scripts"}
+py-modules = ["repo_paths"]   # every repository location (source_scripts/repo_paths.py)
 packages = [
     "mmnet",
     "mmnet.steps",
@@ -75,6 +76,7 @@ ignore = ["E701", "E702", "E402", "E741", "E731"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+pythonpath = ["source_scripts"]
 filterwarnings = [
     # rasterio's DatasetReader.read() hits a NumPy 2.5 shape-assignment
     # deprecation internally (rasterio/_io.pyx) on read(). Not our code —

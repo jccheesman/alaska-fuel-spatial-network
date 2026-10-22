@@ -18,9 +18,9 @@ from pathlib import Path
 import mmnet
 from mmnet.config import validate_profile
 
-ROOT = Path(__file__).resolve().parents[2]  # repo root
-PROJ = ROOT / "outputs" / "02_network_build"  # mmnet project dir
-PROFILE = Path(__file__).resolve().parent / "profile.yaml"
+import repo_paths as rp
+PROJ = rp.NETWORK_PROJECT  # mmnet project dir
+PROFILE = rp.NETWORK_PROFILE
 
 
 def main() -> None:

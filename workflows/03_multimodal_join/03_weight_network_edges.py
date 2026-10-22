@@ -84,11 +84,10 @@ logger = logging.getLogger(__name__)
 # Half a 150 m pixel — guarantees every traversed cell is hit at least once.
 SAMPLE_SPACING_M = 75.0
 
-# Anchored to the repo root (two levels above workflows/03_multimodal_join/)
-# so the script works from any CWD — no import-time chdir anywhere anymore.
-ROOT = Path(__file__).resolve().parents[2]
-EDGES_SHP = ROOT / "final_network" / "network_joined_edges" / "network_joined_edges.shp"
-DB_PATH = ROOT / "outputs" / "fuel_network.duckdb"
+# Every location comes from repo_paths (anchored to the repo, not the CWD).
+import repo_paths as rp
+EDGES_SHP = rp.FINAL_EDGES_SHP
+DB_PATH = rp.DUCKDB
 
 # Edge type -> (sampling source, rate-mode key). Rate-mode keys match
 # friction_costs.BASELINE_RATES_PER_GALLON_MILE so Phase 3's cost join is a

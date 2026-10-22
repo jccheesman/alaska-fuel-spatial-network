@@ -315,11 +315,10 @@ def test_network_tables_round_trips_through_networkx():
 def test_shipped_profile_validates():
     """profile.yaml is THE config surface — region-as-data. A profile that stops
     validating breaks the build for everyone, so it is a test, not just a CI step."""
-    from pathlib import Path
-
+    import repo_paths as rp
     from mmnet.config import validate_profile
 
-    profile = Path(__file__).resolve().parents[1] / "workflows/02_network_build/profile.yaml"
+    profile = rp.NETWORK_PROFILE
     assert profile.exists(), profile
     prof, warnings = validate_profile(str(profile))
     assert prof is not None

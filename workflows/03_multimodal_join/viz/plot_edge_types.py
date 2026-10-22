@@ -12,7 +12,6 @@ metres), so they're drawn thick to read as strokes at statewide scale.
 """
 from __future__ import annotations
 
-from pathlib import Path
 
 import geopandas as gpd
 import matplotlib
@@ -20,10 +19,10 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
 
-ROOT = Path(__file__).resolve().parents[3]
-EDGES = ROOT / "final_network" / "network_joined_edges" / "network_joined_edges.shp"
-BOUNDARY = ROOT / "data" / "boundary.geojson"
-OUTDIR = ROOT / "outputs" / "final_network_plots"
+import repo_paths as rp
+EDGES = rp.FINAL_EDGES_SHP
+BOUNDARY = rp.BOUNDARY
+OUTDIR = rp.NETWORK_PLOTS
 
 # draw order: line-haul first (base), connectors, then transfers on top
 LINEHAUL = ["Road", "Waterway", "IceRoad", "Air"]

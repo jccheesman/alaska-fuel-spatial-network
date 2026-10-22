@@ -1,20 +1,18 @@
 """Phase 4 of the inventory QC plan: the build reads workflow 00's published table and keeps a
 site-member trail (record_id) through the 50 m consolidation."""
 import importlib.util
-import sys
 from pathlib import Path
 
 import pandas as pd
 import pytest
 
-ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "source_scripts"))
+import repo_paths as rp
 
 from mmnet.config import PipelineConfig, Params, load_profile  # noqa: E402
 from mmnet.steps.consolidate import consolidate_facilities  # noqa: E402
 
-PROFILE = ROOT / "workflows" / "02_network_build" / "profile.yaml"
-CLEAN = sorted((ROOT / "outputs" / "00_inventory_qc").glob("*/facilities_clean.csv"))
+PROFILE = rp.NETWORK_PROFILE
+CLEAN = sorted(rp.INVENTORY_QC_OUT.glob("*/facilities_clean.csv"))
 
 
 def _config(record_id: bool) -> PipelineConfig:
@@ -65,7 +63,7 @@ def test_shipped_profile_maps_record_id():
 
 @pytest.mark.skipif(not CLEAN, reason="no published facility table")
 def test_normalize_raw_reads_published_table_with_profile_columns(tmp_path):
-    spec = importlib.util.spec_from_file_location("nr", ROOT / "workflows" / "02_network_build" / "00_normalize_raw.py")
+    spec = importlib.util.spec_from_file_location("nr", rp.WORKFLOWS / "02_network_build" / "00_normalize_raw.py")
     nr = importlib.util.module_from_spec(spec); spec.loader.exec_module(nr)
     e = next(e for e in nr.SPEC if e["name"] == "facilities")
     assert e["src"] == CLEAN[-1]                                            # latest release, never data/raw

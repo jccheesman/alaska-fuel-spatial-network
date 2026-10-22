@@ -11,7 +11,6 @@ Run (in the project .venv):
 """
 from __future__ import annotations
 
-from pathlib import Path
 
 import matplotlib
 matplotlib.use("Agg")
@@ -19,15 +18,16 @@ import matplotlib.pyplot as plt
 import geopandas as gpd
 import pandas as pd
 
-ROOT = Path(__file__).resolve().parents[3]
-OUT = ROOT / "outputs" / "figures" / "disconnected_hubs.png"
+import repo_paths as rp
+ROOT = rp.ROOT
+OUT = rp.FIGURES / "disconnected_hubs.png"
 
-OLD_NODES = ROOT / "final_network" / "network_joined_nodes" / "network_joined_nodes.shp"
-NEW_NODES = ROOT / "outputs" / "02_network_build" / "output" / "04_network_joined__nodes.gpkg"
-NEW_EDGES = ROOT / "outputs" / "02_network_build" / "output" / "04_network_joined__edges.gpkg"
-HUBS = ROOT / "outputs" / "02_network_build" / "output" / "02_hubs.gpkg"
-MANUAL = ROOT / "inputs" / "mannual_connections" / "mannual_connections.shp"
-BOUNDARY = ROOT / "data" / "boundary.geojson"
+OLD_NODES = rp.FINAL_NODES_SHP
+NEW_NODES = rp.NETWORK_PROJECT / "output" / "04_network_joined__nodes.gpkg"
+NEW_EDGES = rp.NETWORK_PROJECT / "output" / "04_network_joined__edges.gpkg"
+HUBS = rp.NETWORK_PROJECT / "output" / "02_hubs.gpkg"
+MANUAL = rp.MANUAL_CONNECTIONS
+BOUNDARY = rp.BOUNDARY
 
 MODE_COLOR = {"Barge": "#1f77b4", "Plane": "#ff7f0e", "Road": "#8c564b"}
 

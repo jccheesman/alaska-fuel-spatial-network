@@ -60,15 +60,14 @@ import pandas as pd
 
 logger = logging.getLogger(__name__)
 
-# Anchored to the repo root (two levels above workflows/03_multimodal_join/)
-# so the script works from any CWD — no import-time chdir anywhere anymore.
-ROOT = Path(__file__).resolve().parents[2]
-FINAL_NETWORK_DIR = ROOT / "final_network"
-NODES_SHP = FINAL_NETWORK_DIR / "network_joined_nodes" / "network_joined_nodes.shp"
-EDGES_SHP = FINAL_NETWORK_DIR / "network_joined_edges" / "network_joined_edges.shp"
-HUB_MEMBERS_CSV = FINAL_NETWORK_DIR / "hub_members.csv"
-HUB_SNAPS_CSV = FINAL_NETWORK_DIR / "hub_snaps.csv"
-DB_PATH = ROOT / "outputs" / "fuel_network.duckdb"
+# Every location comes from repo_paths (anchored to the repo, not the CWD).
+import repo_paths as rp
+FINAL_NETWORK_DIR = rp.FINAL_NETWORK
+NODES_SHP = rp.FINAL_NODES_SHP
+EDGES_SHP = rp.FINAL_EDGES_SHP
+HUB_MEMBERS_CSV = rp.HUB_MEMBERS_CSV
+HUB_SNAPS_CSV = rp.HUB_SNAPS_CSV
+DB_PATH = rp.DUCKDB
 
 # Expected inventory per final_network/README.md — a changed export should
 # fail loudly here, not flow silently into the weighted graph.

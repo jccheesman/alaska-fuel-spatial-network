@@ -31,9 +31,9 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-ROOT = Path(__file__).resolve().parents[2]
-QC = ROOT / "inputs" / "inventory_qc"
-RELEASES = ROOT / "inputs" / "raw_facility_data"
+import repo_paths as rp
+QC = rp.INVENTORY_QC
+RELEASES = rp.FACILITY_RELEASES
 SCHEMA = QC / "facility_schema.csv"
 KEEP_VALUES = {"yes", "fold", "no", "never"}
 TEXT_BREAK = " | "   # internal line breaks in text fields become this (AEA flips CR/LF between releases)
@@ -257,7 +257,7 @@ def _reachable_raw(folder: Path, man: dict) -> Path | None:
         with zipfile.ZipFile(z) as zf:
             for name in zf.namelist():
                 if name.endswith(man["raw_file"]):
-                    out = ROOT / "inputs" / "bulk_fuel_data" / "raw" / Path(name).name  # the extract_inputs.py location
+                    out = rp.BULK_FUEL_DATA / "raw" / Path(name).name  # the extract_inputs.py location
                     if out.exists() and hashlib.sha256(out.read_bytes()).hexdigest() == man["raw_sha256"]:
                         return out
                     import tempfile

@@ -131,6 +131,7 @@ regenerated together. Full provenance: `final_network/README.md`.
 |---|---|
 | `source_scripts/mmnet/` | The region-agnostic network engine (R-noding oracle included) — the single canonical copy |
 | `source_scripts/friction_surface/` | Friction builders + `friction_config.py` + `friction_costs.py` (all USD $) |
+| `source_scripts/repo_paths.py` | Every repository location, defined once; scripts import it instead of computing paths |
 | `workflows/00..04_*/` | The inventory-QC gate + the four steps: thin numbered drivers, per-stage READMEs, run orders |
 | `inputs/` | Committed input bundles + the inventory-QC config; `inputs/README.md` opens with a "where is X?" index by theme |
 | `final_network/` | The frozen act-(b)→(c) handoff (zips + hub handoff CSVs); regenerable with the source scripts, but a re-export is a new network-of-record |

@@ -3,15 +3,12 @@ written beside the final_network zips so consumers read the builder's answer ins
 inferring hub membership by distance or a hub's community by vote."""
 from __future__ import annotations
 
-import sys
-from pathlib import Path
 
 import geopandas as gpd
 import pandas as pd
 from shapely.geometry import Point
 
-ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "source_scripts"))
+import repo_paths as rp
 
 from mmnet.handoff import HUB_MEMBERS_COLUMNS, hub_members_table, write_hub_handoff  # noqa: E402
 
@@ -94,7 +91,7 @@ def test_write_hub_handoff_skips_an_older_build(tmp_path):
 def _loader():
     import importlib.util
     spec = importlib.util.spec_from_file_location(
-        "load02", ROOT / "workflows" / "03_multimodal_join" / "02_load_final_network.py")
+        "load02", rp.WORKFLOWS / "03_multimodal_join" / "02_load_final_network.py")
     mod = importlib.util.module_from_spec(spec); spec.loader.exec_module(mod)
     return mod
 

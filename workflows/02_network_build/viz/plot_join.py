@@ -12,13 +12,13 @@ from __future__ import annotations
 
 import warnings
 import os
-from pathlib import Path
 
 import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
 
-ROOT = Path(__file__).resolve().parents[3]  # repo root
-PROJ = ROOT / "outputs" / "02_network_build"  # mmnet project dir: engine writes PROJ/output + PROJ/reports
+import repo_paths as rp
+ROOT = rp.ROOT
+PROJ = rp.NETWORK_PROJECT  # mmnet project dir: engine writes PROJ/output + PROJ/reports
 os.environ.setdefault("MMNET_PROJECT", str(ROOT))  # mmnet.viz basemap reads <project>/data/
 
 from mmnet.config import load_profile
@@ -27,7 +27,7 @@ from mmnet.viz import _bounds_union, _draw_basemap, _load_basemap, _stacked_fig
 
 warnings.filterwarnings("ignore")
 OUT = PROJ / "output"
-CAP_KM = load_profile(Path(__file__).resolve().parents[1] / "profile.yaml").join_components.max_dist / 1000
+CAP_KM = load_profile(rp.NETWORK_PROFILE).join_components.max_dist / 1000
 
 
 def _prep(stem):

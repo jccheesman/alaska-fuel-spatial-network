@@ -32,10 +32,9 @@ Checks (FAIL = exit 1; WARN/SKIP never fail the run):
 from __future__ import annotations
 
 import sys
-from pathlib import Path
 
-REPO_ROOT = Path(__file__).resolve().parents[4]
-sys.path.insert(0, str(REPO_ROOT / "source_scripts"))  # source_scripts layout
+import repo_paths as rp
+REPO_ROOT = rp.ROOT
 
 from friction_surface import friction_costs as fc  # noqa: E402
 
@@ -148,7 +147,7 @@ def check_chain_cost():
 # --- 6. graph coverage -----------------------------------------------------
 
 def check_graph_coverage():
-    db = REPO_ROOT / "outputs/fuel_network.duckdb"
+    db = rp.DUCKDB
     if not db.exists():
         record("SKIP", "graph.fee_coverage", "outputs/fuel_network.duckdb not found")
         return
@@ -181,7 +180,7 @@ def check_graph_coverage():
 # --- 7. workbook freshness -------------------------------------------------
 
 def check_workbook_freshness():
-    wb = REPO_ROOT / "outputs" / "tables" / "modality_cost_rates.xlsx"
+    wb = rp.TABLES / "modality_cost_rates.xlsx"
     src = REPO_ROOT / "friction_surface" / "friction_costs.py"
     if not wb.exists():
         record("SKIP", "workbook.freshness", f"{wb.name} not built yet")

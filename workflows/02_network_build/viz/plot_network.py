@@ -24,10 +24,11 @@ warnings.filterwarnings("ignore")
 
 import geopandas as gpd
 
-ROOT = Path(__file__).resolve().parents[3]  # repo root
-PROJ = ROOT / "outputs" / "02_network_build"  # mmnet project dir: engine writes PROJ/output + PROJ/reports
+import repo_paths as rp
+ROOT = rp.ROOT
+PROJ = rp.NETWORK_PROJECT  # mmnet project dir: engine writes PROJ/output + PROJ/reports
 sys.path.insert(0, str(ROOT))                      # make the vendored mmnet importable
-os.environ.setdefault("NETWEAVE_PROFILE", str(ROOT / "workflows" / "02_network_build" / "profile.yaml"))
+os.environ.setdefault("NETWEAVE_PROFILE", str(rp.NETWORK_PROFILE))
 os.environ.setdefault("NETWEAVE_PROJECT", str(ROOT))
 
 from mmnet import viz as mv  # noqa: E402
@@ -39,9 +40,9 @@ MARGIN_M = 50_000           # halo around the Alaska boundary bbox
 def main() -> None:
     n = gpd.read_file(PROJ / "output" / "03_network__nodes.gpkg").to_crs(T)
     e = gpd.read_file(PROJ / "output" / "03_network__edges.gpkg").to_crs(T)
-    ak = gpd.read_file(ROOT / "data" / "boundary.geojson").to_crs(T)
-    ports = gpd.read_file(ROOT / "data" / "raw" / "anchor_points" / "Ports_and_Harbors.geojson").to_crs(T)
-    air = gpd.read_file(ROOT / "data" / "processed" / "air_nodes.geojson").to_crs(T)
+    ak = gpd.read_file(rp.BOUNDARY).to_crs(T)
+    ports = gpd.read_file(rp.RAW / "anchor_points" / "Ports_and_Harbors.geojson").to_crs(T)
+    air = gpd.read_file(rp.PROCESSED / "air_nodes.geojson").to_crs(T)
 
     minx, miny, maxx, maxy = ak.total_bounds
     minx, miny, maxx, maxy = minx - MARGIN_M, miny - MARGIN_M, maxx + MARGIN_M, maxy + MARGIN_M

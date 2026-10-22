@@ -8,7 +8,6 @@ exactly which two modes it joins. Writes outputs/final_network_plots/connector_i
 """
 from __future__ import annotations
 
-from pathlib import Path
 
 import geopandas as gpd
 import matplotlib
@@ -16,10 +15,10 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
 
-ROOT = Path(__file__).resolve().parents[3]
-EDGES = ROOT / "final_network" / "network_joined_edges" / "network_joined_edges.shp"
-BOUNDARY = ROOT / "data" / "boundary.geojson"
-OUT = ROOT / "outputs" / "final_network_plots" / "connector_insets.png"
+import repo_paths as rp
+EDGES = rp.FINAL_EDGES_SHP
+BOUNDARY = rp.BOUNDARY
+OUT = rp.NETWORK_PLOTS / "connector_insets.png"
 
 COLOR = {
     "Road": "#555555", "Waterway": "#1560a8", "IceRoad": "#12aebd", "Air": "#8452b8",

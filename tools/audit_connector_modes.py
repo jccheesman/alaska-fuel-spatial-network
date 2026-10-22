@@ -21,8 +21,8 @@ from pathlib import Path
 
 import duckdb
 
-ROOT = Path(__file__).resolve().parents[1]
-DB_PATH = ROOT / "outputs" / "fuel_network.duckdb"
+import repo_paths as rp
+DB_PATH = rp.DUCKDB
 
 # edge_label -> fee-mode (the vocabulary INTERMODAL_TRANSFER_FEES keys on)
 LABEL_MODE = {"Road": "overland", "IceRoad": "ice_road", "Waterway": "barge", "Air": "plane"}

@@ -32,15 +32,15 @@ Usage:
 from __future__ import annotations
 
 import sys
-from pathlib import Path
 
 import geopandas as gpd
 import yaml
 
-ROOT = Path(__file__).resolve().parents[2]  # repo root
-SRC = ROOT / "inputs" / "mannual_connections" / "mannual_connections.shp"
-PROFILE = Path(__file__).resolve().parent / "profile.yaml"
-OUT_DIR = ROOT / "data" / "interim"
+import repo_paths as rp
+ROOT = rp.ROOT
+SRC = rp.MANUAL_CONNECTIONS
+PROFILE = rp.NETWORK_PROFILE
+OUT_DIR = rp.INTERIM
 
 GATE_EXIT = 3  # matches workflows/_lib.sh `gate`: documented input absent -> skip
 MODE_COL_CANDIDATES = ("mode", "transport_mode", "transport", "modality", "type")

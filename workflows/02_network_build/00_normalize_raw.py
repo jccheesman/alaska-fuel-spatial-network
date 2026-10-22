@@ -22,7 +22,8 @@ import warnings
 from pathlib import Path
 
 warnings.filterwarnings("ignore")
-ROOT = Path(__file__).resolve().parents[2]  # repo root
+import repo_paths as rp
+ROOT = rp.ROOT
 
 import geopandas as gpd
 import pandas as pd
@@ -31,10 +32,10 @@ import pyogrio
 from mmnet.io_readers import _read_lines  # reuse the pipeline's line cleaning
 
 TARGET_CRS = 3338
-RAW = ROOT / "data" / "raw"
-INTERIM = ROOT / "data" / "interim"
-QC_OUT = ROOT / "outputs" / "00_inventory_qc"
-QC_DERIVED = ROOT / "inputs" / "inventory_qc" / "derived_columns.csv"
+RAW = rp.RAW
+INTERIM = rp.INTERIM
+QC_OUT = rp.INVENTORY_QC_OUT
+QC_DERIVED = rp.INVENTORY_QC / "derived_columns.csv"
 
 
 def _derived_columns() -> list[str]:
@@ -94,12 +95,12 @@ SPEC = [
     #     These two CSVs are TRACKED at inputs/air/ (small, diffable) rather than
     #     living in the gitignored data/raw tree — the merge moved them there. ---
     {"name": "airports", "kind": "table", "status": "used (air geocoding) — AK DOT&PF registry",
-     "src": ROOT / "inputs" / "air" / "airports_ak_dotpf.csv",
+     "src": rp.AIR_INPUTS / "airports_ak_dotpf.csv",
      "rename": {"NAME": "name", "LAT_DD": "latitude_deg", "LONG_DD": "longitude_deg",
                 "FAA_ID": "iata_code", "ICAO": "ident", "REGION": "region", "OWNER": "owner"},
      "keep": ["name", "latitude_deg", "longitude_deg", "iata_code", "ident", "region", "owner"]},
     {"name": "air_flight_paths_od", "kind": "table", "status": "used (air OD) — official Flights data",
-     "src": ROOT / "inputs" / "air" / "flight_paths_combined.csv",
+     "src": rp.AIR_INPUTS / "flight_paths_combined.csv",
      "rename": {"Origin_Airport_Name": "origin_node", "Origin_FAA_ID": "origin_code",
                 "Destination_Airport_Name": "destination_node", "Destination_FAA_ID": "destination_code",
                 "Carrier": "primary_carrier", "Notes": "service_type"},

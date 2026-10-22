@@ -20,14 +20,14 @@ Usage:
 
 from __future__ import annotations
 
-from pathlib import Path
 
 import geopandas as gpd
 import networkx as nx
 
-ROOT = Path(__file__).resolve().parents[2]  # repo root
-RAW = ROOT / "data/raw/connectivity/barge/NWN_Waterway_Network_Lines/Waterway_Network.shp"
-OUT = ROOT / "data" / "interim" / "ak_waterway.gpkg"
+import repo_paths as rp
+ROOT = rp.ROOT
+RAW = rp.RAW / "connectivity/barge/NWN_Waterway_Network_Lines/Waterway_Network.shp"
+OUT = rp.INTERIM / "ak_waterway.gpkg"
 
 TARGET = 3338            # NAD83 / Alaska Albers (meters) — the profile's crs.target
 NODE_TOL = 50.0          # vertex-rounding tolerance for the component check (matches the assembler)
