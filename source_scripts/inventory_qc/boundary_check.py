@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """Stage 05 — verify each record's community label against the community's boundary.
 
 Boundaries: inputs/inventory_qc/boundaries/City_Boundaries.zip (DCRA incorporated cities,
@@ -53,7 +52,7 @@ from pathlib import Path
 import geopandas as gpd
 import pandas as pd
 
-from _qc import OUT, QC, canon, corrections, latest_release, read_csv, thresholds, write_csv
+from .core import OUT, QC, canon, corrections, latest_release, read_csv, thresholds, write_csv
 
 BND = QC / "boundaries"
 CITY_ZIP, CDP_ZIP = BND / "City_Boundaries.zip", BND / "Census_Designated_Place_Boundaries.zip"
@@ -82,7 +81,7 @@ def check(label: str) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
     fac = read_csv(OUT / label / "facilities_normalised.csv")
     B = load_boundaries()
     # aliases are already folded into community_key; map boundary keys through the same alias table
-    from _qc import aliases
+    from .core import aliases
     amap = {canon(r.variant): canon(r.canonical) for r in aliases().itertuples()}
     B["bkey"] = B["bkey"].map(lambda k: amap.get(k, k))
     by_key = {k: g.geometry.union_all() for k, g in B.groupby("bkey")}

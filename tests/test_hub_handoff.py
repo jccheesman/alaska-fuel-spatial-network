@@ -8,7 +8,6 @@ import geopandas as gpd
 import pandas as pd
 from shapely.geometry import Point
 
-import repo_paths as rp
 
 from mmnet.handoff import HUB_MEMBERS_COLUMNS, hub_members_table, write_hub_handoff  # noqa: E402
 
@@ -89,11 +88,8 @@ def test_write_hub_handoff_skips_an_older_build(tmp_path):
 
 # ----------------------------------------------------------------------------- the DuckDB loader side
 def _loader():
-    import importlib.util
-    spec = importlib.util.spec_from_file_location(
-        "load02", rp.WORKFLOWS / "03_multimodal_join" / "02_load_final_network.py")
-    mod = importlib.util.module_from_spec(spec); spec.loader.exec_module(mod)
-    return mod
+    from fuel_network import load
+    return load
 
 
 def _db_with_hub_nodes(con):

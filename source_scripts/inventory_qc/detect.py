@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """Stage 04 — structural detectors on the corrected, normalised facility table.
 
 A registry of checks. Each detector declares the schema columns it NEEDS and is skipped
@@ -24,7 +23,7 @@ import numpy as np
 import pandas as pd
 from pyproj import Transformer
 
-from _qc import OUT, QC, RELEASES, corrections, latest_release, read_csv, release_manifest, thresholds, write_csv
+from .core import OUT, QC, RELEASES, corrections, latest_release, read_csv, release_manifest, thresholds, write_csv
 
 TO_3338 = Transformer.from_crs("EPSG:4326", "EPSG:3338", always_xy=True)
 REGISTRY: list[tuple[str, tuple[str, ...], object]] = []     # (name, needs, fn)

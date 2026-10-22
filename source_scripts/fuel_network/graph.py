@@ -1,4 +1,4 @@
-"""assemble_weighted_graph.py
+"""fuel_network.graph — workflow 03, stage 04 (run by workflows/03_multimodal_join/04_assemble_weighted_graph.py).
 
 Turn the ingested network (network_nodes / network_edges, Phase 1) 
 and the sampled friction weights (edge_month_weights, Phase 2) into 
@@ -37,8 +37,8 @@ is STUBBED pending the hub<->facility map (owner-provided) — see
 backfill_facility_edges().
 
 Usage:
-    python assemble_weighted_graph.py            # build edge_costs + QA
-    python assemble_weighted_graph.py --dry-run  # compute + QA, no write
+    python workflows/03_multimodal_join/04_assemble_weighted_graph.py            # build edge_costs + QA
+    python workflows/03_multimodal_join/04_assemble_weighted_graph.py --dry-run  # compute + QA, no write
 """
 
 from __future__ import annotations

@@ -3,16 +3,16 @@
 
 Runs, in order, 01 --check -> 02 apply corrections -> 03 normalise -> 04 detect ->
 05 boundary check -> 06 review queue -> 07 publish, stopping at the first failing gate and
-printing what it means and which config file or sibling skill owns the fix.
+printing what it means and which config file or skill owns the fix.
 
     # read-only: run the chain into a temp dir and compare with the committed published table
-    python .claude/skills/validate-facility-inventory/scripts/validate_inventory.py
+    python workflows/00_inventory_qc/validate_inventory.py
 
     # write: refresh outputs/00_inventory_qc/<release>/ (what run_all.sh does)
-    python .claude/skills/validate-facility-inventory/scripts/validate_inventory.py --publish
+    python workflows/00_inventory_qc/validate_inventory.py --publish
 
     # keep going after a failure; pick a release
-    python .claude/skills/validate-facility-inventory/scripts/validate_inventory.py --keep-going --release 2025
+    python workflows/00_inventory_qc/validate_inventory.py --keep-going --release 2025
 
 Exit 0 = every gating step passed (and, read-only, the committed facilities_clean.csv is
 byte-identical to a fresh run). Any other exit is a real defect; never loosen a check to pass.
@@ -87,10 +87,7 @@ def main(argv=None) -> int:
     ap.add_argument("--keep-going", action="store_true")
     ap.add_argument("--release", default=None)
     a = ap.parse_args(argv)
-    sys.path.insert(0, str(WF))
-    import importlib.util
-    spec = importlib.util.spec_from_file_location("_qc", WF / "_qc.py")
-    qc = importlib.util.module_from_spec(spec); spec.loader.exec_module(qc)
+    from inventory_qc import core as qc
     label = a.release or qc.latest_release()
 
     tmp = None

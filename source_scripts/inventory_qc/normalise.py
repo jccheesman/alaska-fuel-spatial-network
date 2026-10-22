@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """Stage 03 — normalise community names and delivery methods.
 
 Runs AFTER corrections (stage 02) so an alias can never move a correction's target.
@@ -23,7 +22,7 @@ import sys
 import numpy as np
 import pandas as pd
 
-from _qc import OUT, aliases, canon, latest_release, read_csv, write_csv
+from .core import OUT, aliases, canon, latest_release, read_csv, write_csv
 
 MODES = {"barge": "Barge", "plane": "Plane", "road": "Road"}
 

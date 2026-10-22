@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """Stage 06 — build the owner's review queue from the structural and boundary flags.
 
 One row per (record, flag) that is NOT already covered by a correction (approved / pending /
@@ -19,7 +18,7 @@ import sys
 import numpy as np
 import pandas as pd
 
-from _qc import OUT, latest_release, read_csv, write_csv
+from .core import OUT, latest_release, read_csv, write_csv
 
 DECISIONS = ["approve", "approve with my value", "reject", "ask publisher", "remote site (keep as labelled)", "skip for now"]
 ORDER = {"high": 0, "review": 0, "medium": 1, "low": 2, "info": 3}

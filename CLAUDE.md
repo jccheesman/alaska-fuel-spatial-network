@@ -32,6 +32,13 @@ Only `run_all.py` and `tools/extract_inputs.py` locate themselves (they run
 before or outside the project environment). After pulling this change an
 existing environment needs `uv pip install -e .` once more to pick the module up.
 
+Workflows say *what* to run; `source_scripts/` says *how*. The numbered scripts of
+workflows 00 and 03 are thin wrappers around a module's `main()` — the logic is the
+`inventory_qc` package (stage NN → `inventory_qc.<stage>`, shared helpers in `core`)
+and the `fuel_network` package (`load` / `weights` / `graph`; analysis code imports
+`fuel_network.load_weighted_multigraph` and friends). Script names and CLIs are unchanged.
+`validate_inventory.py` lives in `workflows/00_inventory_qc/`.
+
 Stage 02's export step is opt-in (`EXPORT_FINAL_NETWORK=1`) because it
 replaces the network-of-record.
 
@@ -64,7 +71,7 @@ replaces the network-of-record.
 | `06_export_final_network.py` | Stage-04 gpkg → final_network/ + zips + sha256 manifest | `final_network/` | NODE_RENAME | **CAUTION**: a re-export is a NEW network-of-record — see final_network/README.md before committing one |
 | **03_multimodal_join** | | | | |
 | `01_extract_network_handoff.py` | Unzips the frozen handoff | `final_network/*/` dirs | — | Fixes the fresh-clone FileNotFoundError; the old README claimed the loader extracted zips (it never did) |
-| `02_load_final_network.py` | Ingest + hard integrity tripwire + edge_class | `network_nodes`, `network_edges` | `EXPECTED` dict | edge_id = shapefile row order, derived here and ONLY here; `edge_class` mirrors the mode-based `type` (pass-through), only mapping a LEGACY frozen network's generic `Bridge` into the new vocabulary |
+| `02_load_final_network.py` | Ingest + hard integrity tripwire + edge_class (logic: `fuel_network.load`) | `network_nodes`, `network_edges` | `EXPECTED` dict in `fuel_network/load.py` | edge_id = shapefile row order, derived here and ONLY here; `edge_class` mirrors the mode-based `type` (pass-through), only mapping a LEGACY frozen network's generic `Bridge` into the new vocabulary |
 | `03_weight_network_edges.py` | 75 m friction sampling per edge-month | `edge_month_weights` (1,115,736 rows) | `SAMPLE_SPACING_M`, `EDGE_TYPE_MAP` | Strict any-NoData ⇒ impassable; consumes `edge_class` from the DB (run stage 02 first) |
 | `04_assemble_weighted_graph.py` | $-rates × friction → costs + nx.MultiGraph | `edge_costs` (1,115,736 rows) | `friction_costs.py` | MultiGraph, not Graph — parallel node-pairs would silently collapse; each per-pair `*Transfer` type maps straight to its fee via `TRANSFER_TYPE_TO_MODES` |
 | **04_duckdb_export** | | | | |

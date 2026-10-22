@@ -182,7 +182,7 @@ def stage_02_network_build(py: str, profile: str) -> None:
     if os.environ.get("EXPORT_FINAL_NETWORK", "0") == "1":
         out("EXPORT_FINAL_NETWORK=1 — regenerating the network-of-record.")
         out("  Together with these zips you MUST regenerate: the EXPECTED inventory in")
-        out("  workflows/03_multimodal_join/02_load_final_network.py, edge_month_weights,")
+        out("  source_scripts/fuel_network/load.py, edge_month_weights,")
         out("  and edge_costs. See final_network/README.md.")
         run_step(
             "06_export_final_network", py, str(here / "06_export_final_network.py"),

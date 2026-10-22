@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """Stage 02 — apply the owner-approved corrections to a release snapshot.
 
 Reads inputs/raw_facility_data/<release>/ and inputs/inventory_qc/corrections.csv.
@@ -27,7 +26,7 @@ import sys
 import numpy as np
 import pandas as pd
 
-from _qc import OUT, corrections, latest_release, read_release, write_csv
+from .core import OUT, corrections, latest_release, read_release, write_csv
 
 COORD_FIELDS = {"latitude", "longitude"}
 

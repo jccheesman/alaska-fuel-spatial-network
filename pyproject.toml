@@ -52,6 +52,8 @@ packages = [
     "friction_surface",
     "friction_surface.friction_preprocessing",
     "friction_surface.qa",
+    "inventory_qc",
+    "fuel_network",
 ]
 
 [tool.setuptools.package-data]
@@ -77,6 +79,9 @@ ignore = ["E701", "E702", "E402", "E741", "E731"]
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = ["source_scripts"]
+# importlib mode + no tests/inventory_qc/__init__.py: the test folder must not shadow the
+# source_scripts/inventory_qc package
+addopts = ["--import-mode=importlib"]
 filterwarnings = [
     # rasterio's DatasetReader.read() hits a NumPy 2.5 shape-assignment
     # deprecation internally (rasterio/_io.pyx) on read(). Not our code —
