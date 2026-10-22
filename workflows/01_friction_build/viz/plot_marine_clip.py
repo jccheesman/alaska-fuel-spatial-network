@@ -24,13 +24,16 @@ Usage:
     python plot_marine_clip.py --out figs/clip.png
 """
 
-import numpy as np, matplotlib, pyproj, warnings, json
+import numpy as np
+import matplotlib
+import pyproj
+import warnings
 matplotlib.use('Agg'); warnings.filterwarnings('ignore')
 import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
-from matplotlib.patches import Patch, Rectangle
-import geopandas as gpd, rasterio
-from shapely.ops import unary_union
+from matplotlib.patches import Patch
+import geopandas as gpd
+import rasterio
 
 SURF="#fcfcfb"; INK="#0b0b0b"; INK2="#52514e"; MUTED="#898781"; HAIR="#e1e0d9"
 WATER="#dde6f0"; LAND="#f0efec"; AXIS="#c3c2b7"

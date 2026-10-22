@@ -392,7 +392,7 @@ def build_pptx(panel_paths: dict[str, Path]) -> None:
     from pptx.dml.color import RGBColor
     from pptx.enum.shapes import MSO_SHAPE
     from pptx.enum.text import MSO_ANCHOR, PP_ALIGN
-    from pptx.util import Emu, Inches, Pt
+    from pptx.util import Inches, Pt
 
     GREY = RGBColor(0x55, 0x55, 0x55)
     DARKGREY = RGBColor(0x33, 0x33, 0x33)
@@ -409,7 +409,6 @@ def build_pptx(panel_paths: dict[str, Path]) -> None:
     slide = prs.slides.add_slide(prs.slide_layouts[6])  # blank
 
     sw = prs.slide_width
-    sh = prs.slide_height
 
     def textbox(left, top, width, height, text, *, size, bold=False,
                 italic=False, color=GREY, align=PP_ALIGN.CENTER,

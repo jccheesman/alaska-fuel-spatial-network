@@ -28,13 +28,17 @@ Palette validated with the dataviz validator (all-pairs, #fcfcfb surface).
 """
 
 import argparse
-import numpy as np, matplotlib, pyproj, warnings
+import numpy as np
+import matplotlib
+import pyproj
+import warnings
 matplotlib.use('Agg'); warnings.filterwarnings('ignore')
 import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
 from matplotlib.patches import Patch, Rectangle
 from matplotlib.colors import LinearSegmentedColormap, ListedColormap, BoundaryNorm
-import geopandas as gpd, rasterio
+import geopandas as gpd
+import rasterio
 from rasterio.windows import from_bounds
 from shapely.ops import unary_union
 

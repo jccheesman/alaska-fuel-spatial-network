@@ -145,6 +145,7 @@ def fig_connectors(nodes, edges, coords):
     t_shore = edges[src.str.startswith("shore")]
     joins = edges[src.str.startswith("join")]
     bridges = pd.concat([b_weld, b_cross])
+    transfers = pd.concat([t_port, t_barge, t_shore])
 
     # Panel A - Bridges
     plot_faint_base(axA, edges, alpha_mult=0.6)
