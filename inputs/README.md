@@ -13,6 +13,32 @@ data outside this project.
 After cloning: `python tools/extract_inputs.py` unzips the
 bundles into their gitignored working directories.
 
+## Where is X? (index by theme)
+
+Files stay where the scripts expect them; this table is the map. "Local-only"
+means `inputs/network_raw.zip` → `data/raw/` (see *Pending* below); "not
+committed" means regenerable (see `../EXTERNAL_DATA.md`).
+
+| Theme | Dataset | Where it lives | Committed? |
+|---|---|---|---|
+| **Facilities** | Bulk-fuel inventory (AEA/DCRA), one folder per release | `raw_facility_data/<release>/` | yes (clean-schema snapshots; the raw CSV only for 2022) |
+| | QC config: schema, corrections, aliases, thresholds, remote sites | `inventory_qc/` | yes |
+| | The published clean facility table (what the network build reads) | `../outputs/00_inventory_qc/<release>/facilities_clean.csv` | yes (written only by workflow 00) |
+| | Fuel delivery method per community | `raw_facility_data/2022/bulk_fuel_data.zip` → `bulk_fuel_data/raw/Fuel_Delivery_Method.shp` (costing); `data/raw/boundaries/Fuel_Delivery_Method.geojson` (network build) | zip yes; geojson local-only |
+| **Transportation** | Roads — AK DOT&PF, the network build's only road source | `data/raw/connectivity/road/Roads_AKDOT/` | local-only |
+| | Roads — legacy AKDOT + GRIP4 merge (visualization / provenance only) | `data_for_network_build.zip` → `roads_networks/` | yes |
+| | Waterways — USACE National Waterway Network | `data_for_network_build.zip` → `water_networks/` (corridor mask, workflow 01); `data/raw/connectivity/barge/` (network build) | zip yes; raw local-only |
+| | Ice roads | `data_for_network_build.zip` → `ice_roads_150m_3338/`; `data/raw/connectivity/ice_roads/` | zip yes; raw local-only |
+| | Air — AK DOT&PF airports + flight paths | `air/` | yes |
+| | Ports and harbors (barge-transfer anchors) | `data/raw/anchor_points/Ports_and_Harbors.geojson` | local-only |
+| | Hand-drawn manual connections (tagged by `Mode`) | `mannual_connections/` | yes |
+| **Places & boundaries** | DCRA city + Census-designated-place boundaries (inventory boundary check) | `inventory_qc/boundaries/` | yes |
+| | TIGER places, county subdivisions, boroughs / census areas (hub tagging) | `data/raw/boundaries/` | local-only |
+| | US state outline (TIGER cartographic boundary; figure basemap) | `region_and_census_data.zip` → `tiger/` | yes |
+| **Environment** | Land cover, slope, permafrost | `friction_rasters/{lulc,slope,permafrost}.tif` | not committed (~GBs) |
+| | Sea ice, river ice (12 monthly rasters each) | `friction_rasters/sea_ice/`, `friction_rasters/river_ice/` | not committed |
+| **Economic** | Per-mode $/gallon-mile rates and transfer fees | not an input file: `../source_scripts/friction_surface/friction_costs.py` (every dollar lives there) | yes (code) |
+
 ## Facility-inventory releases: `raw_facility_data/<release>/`
 
 One folder per AEA/DCRA bulk-fuel inventory release (`2022/`, `2025/`), each
@@ -77,7 +103,7 @@ in the Earth Engine Code Editor.
 | land cover | [Dynamic World V1](https://developers.google.com/earth-engine/datasets/catalog/GOOGLE_DYNAMICWORLD_V1) (GEE) |
 | sea ice (12 monthly medians) | [UAF SNAP Historical Sea Ice Atlas](https://catalog.snap.uaf.edu/geonetwork/srv/eng/catalog.search#/metadata/047e91c7-35c6-410a-a1ef-95539c1ee328) |
 
-**The final layers are alos hosted on GEE. Final friction stack TIF files are hosted on Google Earth Engine at:**
+**The final layers are also hosted on GEE. Final friction stack TIF files are hosted on Google Earth Engine at:**
 
 Barge_monthly Image Collection: https://code.earthengine.google.com/?asset=projects/gee-friction-layer-processing/assets/friction_stack_final/barge_monthly
 

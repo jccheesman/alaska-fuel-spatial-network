@@ -34,11 +34,12 @@ python tools/extract_inputs.py    # unzip the committed inputs/*.zip bundles
 bash run_all.sh                   # run as far as the data on disk allows
 ```
 A fresh clone runs the ingest half of step **(c)** (extract the frozen
-network, load its 84,089 nodes / 92,978 edges into DuckDB) and all of step
+network, load its 84,094 nodes / 93,049 edges into DuckDB) and all of step
 **(d)** from committed data alone. The weighting and costing stages of (c)
 additionally need the friction stack from (a), and the costing stage reads
-`inputs/bulk_fuel_data/raw/Fuel_Delivery_Method.shp` (no longer shipped as a
-committed zip — see `EXTERNAL_DATA.md` for the source). Steps (a) and (b)
+`inputs/bulk_fuel_data/raw/Fuel_Delivery_Method.shp` (shipped inside
+`inputs/raw_facility_data/2022/bulk_fuel_data.zip`; `tools/extract_inputs.py`
+unpacks it). Steps (a) and (b)
 need regenerable-only inputs — each stage's `run_all.sh` gates on what is
 missing and prints exactly how to regenerate it (`EXTERNAL_DATA.md` is the
 honest inventory of what exists where).
@@ -101,20 +102,28 @@ every OS for stage (b): install R, then
 ## The handoff that holds it together
 
 `final_network/` is the network-of-record: the joined multimodal
-network (84,089 nodes / 92,978 edges / 385 fuel hubs / 5 components / 99.99%
+network (84,094 nodes / 93,049 edges / 329 fuel hubs / 4 components / 99.99%
 giant) exported by act (b) and ingested by act (c). Its shapefile **row order
 defines `edge_id`** for every DuckDB table, so the committed zips are
 checksummed (`inputs/MANIFEST.md`) and preserved byte-identical.
 
-**Provenance:** re-exported 2026-09-15 from a rebuild whose only road source
-is the 2026-09 AK DOT&PF Roads download (the GRIP4 Canada border-stitch was
-removed — transnational roads are not fuel-delivery routes); still includes
-the user-authored manual-connections layer. It supersedes the 2026-09-12
-manual-connections export and the 2026-07-20 pre-fix freeze (both preserved
-in git history). A re-export is a *new* network-of-record and
-invalidates every edge_id-keyed table, so the zips, checksums, the `EXPECTED`
-tripwire and the downstream tables must be regenerated together. Full
-provenance: `final_network/README.md`.
+**Provenance:** re-exported 2026-10-15 — the first export carrying the
+phase-5 hub builder, the corrected 2025 facility inventory (workflow 00's
+`facilities_clean.csv`), the 25 km connect-to-giant / barge-transfer reach and
+the 2 km snap-to-edge hub fallback, plus the hub handoff
+(`final_network/hub_members.csv`, `hub_snaps.csv`). The road source is still
+the 2026-09 AK DOT&PF download alone, and the user-authored manual-connections
+layer is still included. It supersedes the 2026-09-15 AK-DOT-only export and
+every earlier one (all preserved in git history; the version list is in
+[`docs/CHANGELOG.md`](docs/CHANGELOG.md)). A re-export is a *new*
+network-of-record and invalidates every edge_id-keyed table, so the zips,
+checksums, the `EXPECTED` tripwire and the downstream tables must be
+regenerated together. Full provenance: `final_network/README.md`.
+
+> **The costed tables lag the network.** `edge_month_weights` / `edge_costs`
+> were not regenerated with the 2026-10-15 export (they need the friction
+> stack). Rerun workflow 03 in full on a machine that has it before using the
+> costed graph.
 
 ## Where things are
 
@@ -123,10 +132,10 @@ provenance: `final_network/README.md`.
 | `source_scripts/mmnet/` | The region-agnostic network engine (R-noding oracle included) — the single canonical copy |
 | `source_scripts/friction_surface/` | Friction builders + `friction_config.py` + `friction_costs.py` (all USD $) |
 | `workflows/00..04_*/` | The inventory-QC gate + the four steps: thin numbered drivers, per-stage READMEs, run orders |
-| `inputs/` | Available input datasets located here, open-source dataset information provided |
-| `final_network/` | The frozen act-(b)→(c) handoff; this step is regenerable with source scripts |
-| `outputs/` | Gitignored regenerables + committed tables/analysis + the DuckDB deliverable |
-| `docs/` | `ARCHITECTURE.md` (engine design), `DATA_CONTRACTS.md` (every inter-stage contract), `INVENTORY_QC_PLAN.md` + `data_audit/` (the facility-inventory QC plan and its 2026-10 investigation) |
+| `inputs/` | Committed input bundles + the inventory-QC config; `inputs/README.md` opens with a "where is X?" index by theme |
+| `final_network/` | The frozen act-(b)→(c) handoff (zips + hub handoff CSVs); regenerable with the source scripts, but a re-export is a new network-of-record |
+| `outputs/` | Gitignored regenerables + committed figures, tables and the published clean facility table + the DuckDB deliverable (`outputs/README.md`) |
+| `docs/` | `DATA_DICTIONARY.md` (what every field means, with units), `DATA_CONTRACTS.md` (every inter-stage contract), `ARCHITECTURE.md` (engine design), `CHANGELOG.md` (network-of-record versions), `INVENTORY_QC_PLAN.md` + `data_audit/` (the facility-inventory QC plan and its 2026-10 investigation) |
 | `tests/` | pytest suite (run by CI) |
 | `.claude/skills/` | Nine procedural playbooks (friction, costs, network profile/build; inventory ingest/record-corrections/validate) |
 
@@ -154,4 +163,9 @@ snaps any new raster onto the reference grid.
 - `docs/TEST_LOG.md` — the verified end-to-end friction → weighting → costing run
 - `EXTERNAL_DATA.md` — what exists where (committed / regenerable / absent)
 - `CLAUDE.md` — the lab notebook: one row per numbered script, with findings
-- `supplementary/` — cost-rate derivations and verification
+- `docs/DATA_DICTIONARY.md` — field meanings and units for the handoff, the DuckDB tables and
+  the clean facility table
+- `docs/CHANGELOG.md` — every network-of-record version, with counts and what changed
+- Cost-rate derivations and verification: the `supplementary/` folder was removed on 2026-08-14
+  and survives in git history at commit `b35b730`; the live rates and their source notes are in
+  `source_scripts/friction_surface/friction_costs.py`, audited by the `derive-fuel-costs` skill

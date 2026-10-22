@@ -95,8 +95,11 @@ before proceeding.
 
 ## Source registry
 
-Derivation documents (the paper trail every value must trace to), under
-`supplementary/`:
+Derivation documents (the paper trail every value must trace to). The
+`supplementary/` folder was removed from the working tree on 2026-08-14 and
+survives in git history at commit `b35b730`; read a chapter with e.g.
+`git show b35b730:supplementary/cost-derivations/02_barge.md`. File names below
+are as they stand at that commit:
 
 - `supplementary/cost-derivations/00_executive_summary.md` — methodology + final table
 - `supplementary/cost-derivations/01_road.md` … `04_ice_road.md` — per-mode full
@@ -105,9 +108,10 @@ Derivation documents (the paper trail every value must trace to), under
   (incl. the storage components deliberately NOT in the fee table)
 - `supplementary/cost-derivations/06_connection_costs.md` — storage-free fee
   re-derivation + §6.6 coupling proof that fees don't alter per-mile rates
-- `supplementary/cost-verification/Fuel Cost Blind Derivations.pdf` — compiled report
+- `supplementary/cost-verification/fuel_cost_blind_derivations.pdf` — compiled report
   (rebuild: `supplementary/cost-derivations/build_pdf.py` / `build_transfer_pdf.py`)
-- `supplementary/cost-verification/Fuel Cost Derivation Verification.md` — round-2/3 verification log
+- `supplementary/cost-derivations/transfer_fees.pdf` — compiled transfer-fee chapter
+- `supplementary/cost-verification/derivation_verification.md` — round-2/3 verification log
 
 Primary sources (third-party PDFs) are NOT included in this public repo —
 they are internal/external only (originals kept outside the release, e.g.
@@ -148,7 +152,7 @@ provenance:
 
 1. **Read the current provenance.** The comment block above the value in
    `friction_costs.py` plus the matching `supplementary/cost-derivations/`
-   chapter. Know what the current number includes/excludes before proposing
+   chapter (in git history at `b35b730`, see the source registry). Know what the current number includes/excludes before proposing
    a new one.
 2. **Derive with ≥2 independent methods** (3 for a from-scratch rate) using
    the toolkit functions; log sources, arithmetic, and dollar-year
