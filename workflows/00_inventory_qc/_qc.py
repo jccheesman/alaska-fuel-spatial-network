@@ -14,10 +14,10 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-ROOT = Path(__file__).resolve().parents[2]
-QC = ROOT / "inputs" / "inventory_qc"
-RELEASES = ROOT / "inputs" / "raw_facility_data"
-OUT = Path(os.environ["INVENTORY_QC_OUT"]) if os.environ.get("INVENTORY_QC_OUT") else ROOT / "outputs" / "00_inventory_qc"
+import repo_paths as rp
+QC = rp.INVENTORY_QC
+RELEASES = rp.FACILITY_RELEASES
+OUT = Path(os.environ["INVENTORY_QC_OUT"]) if os.environ.get("INVENTORY_QC_OUT") else rp.INVENTORY_QC_OUT
 SCHEMA = QC / "facility_schema.csv"
 CORRECTIONS = QC / "corrections.csv"
 ALIASES = QC / "aliases.csv"

@@ -19,7 +19,6 @@ Usage:
 
 from __future__ import annotations
 
-from pathlib import Path
 
 import geopandas as gpd
 import matplotlib
@@ -29,9 +28,9 @@ import matplotlib.pyplot as plt
 from pyproj import Geod
 from shapely.geometry import LineString, Point
 
-ROOT = Path(__file__).resolve().parents[3]
-BOUNDARY = ROOT / "data" / "boundary.geojson"
-OUT_DIR = ROOT / "outputs" / "figures"
+import repo_paths as rp
+BOUNDARY = rp.BOUNDARY
+OUT_DIR = rp.FIGURES
 
 # (lon, lat) in WGS84
 ANCHORAGE = (-149.9003, 61.2181)

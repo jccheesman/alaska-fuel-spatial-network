@@ -8,7 +8,6 @@ Writes outputs/final_network_plots/connector_callout.png.
 """
 from __future__ import annotations
 
-from pathlib import Path
 
 import geopandas as gpd
 import matplotlib
@@ -17,10 +16,10 @@ import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
 from matplotlib.patches import ConnectionPatch, Rectangle
 
-ROOT = Path(__file__).resolve().parents[3]
-EDGES = ROOT / "final_network" / "network_joined_edges" / "network_joined_edges.shp"
-BOUNDARY = ROOT / "data" / "boundary.geojson"
-OUT = ROOT / "outputs" / "final_network_plots" / "connector_callout.png"
+import repo_paths as rp
+EDGES = rp.FINAL_EDGES_SHP
+BOUNDARY = rp.BOUNDARY
+OUT = rp.NETWORK_PLOTS / "connector_callout.png"
 
 COLOR = {
     "Road": "#555555", "Waterway": "#1560a8", "IceRoad": "#12aebd", "Air": "#8452b8",

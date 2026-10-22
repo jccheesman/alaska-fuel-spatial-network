@@ -1,8 +1,8 @@
-from pathlib import Path
 
 import duckdb
 
-DB_PATH = Path(__file__).resolve().parents[2] / "outputs" / "fuel_network.duckdb"
+import repo_paths as rp
+DB_PATH = rp.DUCKDB
 
 def main():
     try:

@@ -2,16 +2,16 @@
 Never decides, validates values, asks instead of guessing."""
 import importlib.util
 import sys
-from pathlib import Path
 
 import pandas as pd
 
-ROOT = Path(__file__).resolve().parents[2]
-sys.path.insert(0, str(ROOT / "workflows" / "00_inventory_qc"))
+import repo_paths as rp
+ROOT = rp.ROOT
+sys.path.insert(0, str(rp.INVENTORY_QC_WORKFLOW))
 S = ROOT / ".claude" / "skills" / "record-facility-corrections" / "scripts" / "record_corrections.py"
 spec = importlib.util.spec_from_file_location("rc", S); rc = importlib.util.module_from_spec(spec); spec.loader.exec_module(rc)
 LABEL = rc.qc.latest_release()
-Q = pd.read_csv(ROOT / "outputs" / "00_inventory_qc" / LABEL / "review_queue.csv", dtype=str, keep_default_na=False)
+Q = pd.read_csv(rp.INVENTORY_QC_OUT / LABEL / "review_queue.csv", dtype=str, keep_default_na=False)
 
 
 def _filled(**over):

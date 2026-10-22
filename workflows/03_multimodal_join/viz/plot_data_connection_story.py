@@ -44,14 +44,14 @@ from matplotlib.patches import FancyArrowPatch
 # --------------------------------------------------------------------------
 # Paths
 # --------------------------------------------------------------------------
-ROOT = Path(__file__).resolve().parents[3]
+import repo_paths as rp
 
-NODES_SHP = ROOT / "final_network/network_joined_nodes/network_joined_nodes.shp"
-EDGES_SHP = ROOT / "final_network/network_joined_edges/network_joined_edges.shp"
-FUEL_CSV = ROOT / "inputs/bulk_fuel_data/processed/bulk_fuel_sites_clean.csv"
-TIGER_SHP = ROOT / "inputs/region_and_census_data/tiger/cb_2023_us_state_500k.shp"
+NODES_SHP = rp.FINAL_NODES_SHP
+EDGES_SHP = rp.FINAL_EDGES_SHP
+FUEL_CSV = rp.BULK_FUEL_DATA / "processed/bulk_fuel_sites_clean.csv"
+TIGER_SHP = rp.TIGER_STATES
 
-OUT_DIR = ROOT / "outputs/figures"
+OUT_DIR = rp.FIGURES
 PANEL_DIR = OUT_DIR / "panels"
 OUT_PNG = OUT_DIR / "data_connection_story.png"
 OUT_PPTX = OUT_DIR / "data_connection_story.pptx"

@@ -64,10 +64,9 @@ from friction_surface.friction_costs import (
 
 logger = logging.getLogger(__name__)
 
-# Anchored to the repo root (two levels above workflows/03_multimodal_join/)
-# so the script works from any CWD — no import-time chdir anywhere anymore.
-ROOT = Path(__file__).resolve().parents[2]
-DB_PATH = ROOT / "outputs" / "fuel_network.duckdb"
+# Every location comes from repo_paths (anchored to the repo, not the CWD).
+import repo_paths as rp
+DB_PATH = rp.DUCKDB
 
 
 # ---------------------------------------------------------------------------

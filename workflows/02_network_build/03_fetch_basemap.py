@@ -16,8 +16,9 @@ import sys
 import urllib.request
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[2]  # repo root
-DEST = ROOT / "data" / "basemap"
+import repo_paths as rp
+ROOT = rp.ROOT
+DEST = rp.BASEMAP
 BASE = "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson"
 FILES = [
     "ne_10m_land.geojson",

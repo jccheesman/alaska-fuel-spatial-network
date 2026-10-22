@@ -1,13 +1,12 @@
 """Stages 02-07 of workflow 00 on the committed 2025 release: guards, normalisation, publish checks."""
 import importlib.util
 import sys
-from pathlib import Path
 
 import pandas as pd
 import pytest
 
-ROOT = Path(__file__).resolve().parents[2]
-WF = ROOT / "workflows" / "00_inventory_qc"
+import repo_paths as rp
+WF = rp.INVENTORY_QC_WORKFLOW
 sys.path.insert(0, str(WF))
 
 

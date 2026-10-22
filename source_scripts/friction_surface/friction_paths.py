@@ -8,10 +8,9 @@ Defaults are environment-overridable via RASTER_DIR and NETWORK_DIR; the
 re-export shim in friction_config keeps existing call sites working.
 
 Path resolution does not depend on the process working directory: the
-default paths below are anchored to PROJECT_ROOT (the repository root, two
-levels above the source_scripts/friction_surface package) as absolute paths.
-Environment overrides are used verbatim, so a relative override is still
-resolved against the CWD.
+default paths below come from ``repo_paths`` (the one place every repository
+location is defined) as absolute paths. Environment overrides are used
+verbatim, so a relative override is still resolved against the CWD.
 
 This module has no import-time side effects. (The old import-time
 ``os.chdir(PROJECT_ROOT)`` is gone: every consumer now anchors its paths
@@ -24,23 +23,18 @@ import sys
 import logging
 from datetime import datetime
 
+import repo_paths as rp
+
 # ---------------------------------------------------------------------------
 # Project root
 # ---------------------------------------------------------------------------
-# friction_paths.py lives at source_scripts/friction_surface/friction_paths.py; the
-# repository root is two levels up from the package directory.
-PROJECT_ROOT = os.path.dirname(
-    os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-)
+PROJECT_ROOT = str(rp.ROOT)
 
 
 # ---------------------------------------------------------------------------
 # Raster inputs
 # ---------------------------------------------------------------------------
-RASTER_DIR = os.getenv(
-    "RASTER_DIR",
-    os.path.join(PROJECT_ROOT, "inputs", "friction_rasters"),
-)
+RASTER_DIR = os.getenv("RASTER_DIR", str(rp.FRICTION_RASTERS))
 
 RASTER_FILES = {
     "slope":      os.path.join(RASTER_DIR, "slope.tif"),
@@ -52,18 +46,13 @@ RASTER_FILES = {
 
 # Friction-stack output directory (the 24 monthly friction TIFs: 12 overland
 # + 12 barge, backed by 14 physical files). Produced by workflow 01.
-FRICTION_OUTPUT_DIR = os.getenv(
-    "FRICTION_DIR",
-    os.path.join(PROJECT_ROOT, "outputs", "01_friction_build", "friction_stack"),
-)
+FRICTION_OUTPUT_DIR = os.getenv("FRICTION_DIR", str(rp.FRICTION_STACK))
 
 
 # ---------------------------------------------------------------------------
 # Network vectors
 # ---------------------------------------------------------------------------
-NETWORK_DIR = os.getenv(
-    "NETWORK_DIR", os.path.join(PROJECT_ROOT, "inputs", "data_for_network_build")
-)
+NETWORK_DIR = os.getenv("NETWORK_DIR", str(rp.NETWORK_DATA))
 
 NETWORK_FILES = {
     "roads":     os.path.join(NETWORK_DIR, "roads_networks",
@@ -87,8 +76,8 @@ NETWORK_CRS = "EPSG:3338"
 # ---------------------------------------------------------------------------
 # Ice-road datasets
 # ---------------------------------------------------------------------------
-INPUTS_DIR = os.getenv("INPUTS_DIR", os.path.join(PROJECT_ROOT, "inputs"))
-OUTPUTS_DIR = os.getenv("OUTPUTS_DIR", os.path.join(PROJECT_ROOT, "outputs"))
+INPUTS_DIR = os.getenv("INPUTS_DIR", str(rp.INPUTS))
+OUTPUTS_DIR = os.getenv("OUTPUTS_DIR", str(rp.OUTPUTS))
 
 # Ships zipped in inputs/raw_facility_data/2022/bulk_fuel_data.zip; extract with tools/extract_inputs.py.
 # Read by friction_costs.load_ice_road_communities.
@@ -174,7 +163,7 @@ def setup_logging(log_dir=None):
             anchored absolutely so callers work from any CWD.
     """
     if log_dir is None:
-        log_dir = os.path.join(PROJECT_ROOT, "outputs")
+        log_dir = str(rp.OUTPUTS)
     os.makedirs(log_dir, exist_ok=True)
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     log_file = os.path.join(log_dir, f"pipeline_{timestamp}.log")

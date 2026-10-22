@@ -33,8 +33,8 @@ from pathlib import Path
 
 import pandas as pd
 
-ROOT = Path(__file__).resolve().parents[4]
-WF = ROOT / "workflows" / "00_inventory_qc"
+import repo_paths as rp
+WF = rp.INVENTORY_QC_WORKFLOW
 spec = importlib.util.spec_from_file_location("_qc", WF / "_qc.py")
 qc = importlib.util.module_from_spec(spec); spec.loader.exec_module(qc)
 

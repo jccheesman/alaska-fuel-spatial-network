@@ -19,7 +19,6 @@ from __future__ import annotations
 import os
 import sys
 import warnings
-from pathlib import Path
 
 import geopandas as gpd
 import matplotlib.pyplot as plt
@@ -27,8 +26,9 @@ import numpy as np
 import pandas as pd
 from matplotlib.lines import Line2D
 
-ROOT = Path(__file__).resolve().parents[3]  # repo root
-PROJ = ROOT / "outputs" / "02_network_build"  # mmnet project dir: engine writes PROJ/output + PROJ/reports
+import repo_paths as rp
+ROOT = rp.ROOT
+PROJ = rp.NETWORK_PROJECT  # mmnet project dir: engine writes PROJ/output + PROJ/reports
 os.environ.setdefault("MMNET_PROJECT", str(ROOT))  # mmnet.viz basemap reads <project>/data/
 from mmnet.network import NetworkTables  # noqa: E402
 
@@ -65,7 +65,7 @@ plt.rcParams.update({
 
 def _load_basemap(extent):
     """Natural Earth land + country borders, reprojected to 3338 (AK + Canada window). None if absent."""
-    d = ROOT / "data" / "basemap"
+    d = rp.BASEMAP
     land_p, bord_p = d / "ne_10m_land.geojson", d / "ne_10m_admin_0_boundary_lines_land.geojson"
     if not land_p.exists():
         import subprocess
@@ -73,7 +73,7 @@ def _load_basemap(extent):
         subprocess.run([sys.executable, str(ROOT / "scripts" / "fetch_basemap.py")], check=False)
     if not land_p.exists():
         print("[basemap] unavailable — falling back to the Alaska outline only.")
-        b = ROOT / "data" / "boundary.geojson"
+        b = rp.BOUNDARY
         return (gpd.read_file(b).to_crs(CRS) if b.exists() else None), None
 
     def _ak(path):
@@ -91,7 +91,7 @@ def _alaska_extent(nodes, pad=0.03):
     """(x0, x1, y0, y1) covering ALL of Alaska — the dissolved-state boundary bounds (no clipping of
     the Aleutians or the SE panhandle). Off-Alaska air-leg outliers simply fall outside the frame.
     Falls back to the node 0.5–99.5 percentile if the boundary file is absent."""
-    b = ROOT / "data" / "boundary.geojson"
+    b = rp.BOUNDARY
     if b.exists():
         x0, y0, x1, y1 = gpd.read_file(b).to_crs(CRS).total_bounds
     else:

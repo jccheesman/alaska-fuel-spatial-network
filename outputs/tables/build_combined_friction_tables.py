@@ -28,7 +28,6 @@ and data sources. Numeric friction/multiplier values are shown to two
 decimals. Values are otherwise unchanged from friction_config.
 """
 
-import sys
 from pathlib import Path
 
 from openpyxl import Workbook
@@ -36,8 +35,7 @@ from openpyxl.styles import Alignment, Border, Font, Side
 
 # Single source of truth: pull the routing-consumed rates and fees straight
 # from friction_costs.py so this workbook can never drift from the model.
-sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
-from friction_surface.friction_costs import (  # noqa: E402
+from friction_surface.friction_costs import (
     BASELINE_RATES_PER_GALLON_MILE as RATES,
     INTERMODAL_TRANSFER_FEES as FEES,
 )

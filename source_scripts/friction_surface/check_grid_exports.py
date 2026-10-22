@@ -90,13 +90,11 @@ def resolve_target(inputs_dir: Path) -> TargetGrid:
             source="target = lulc.tif (canonical reference grid)",
         )
 
-# This file lives at source_scripts/friction_surface/check_grid_exports.py,
-# so the repo root is three levels up (source_scripts layout).
-REPO = Path(__file__).resolve().parents[2]
+import repo_paths as rp  # noqa: E402
 # Default to the pipeline's raster home (env-overridable via RASTER_DIR).
 from .friction_paths import RASTER_DIR as _RASTER_DIR  # noqa: E402
 DEFAULT_INPUTS = Path(_RASTER_DIR)
-NODES_SHP = REPO / "final_network" / "network_joined_nodes" / "network_joined_nodes.shp"
+NODES_SHP = rp.FINAL_NODES_SHP
 KEY_HUBS = {"Hub_21": "Adak", "Hub_275": "Atka"}   # the two western hubs the fix must cover
 
 OK, BAD, WARN = "  OK ", "FAIL ", "WARN "
@@ -252,7 +250,7 @@ def _plot_western_edge(tifs, ref, target: TargetGrid):
     import matplotlib
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
-    outdir = REPO / "outputs" / "final_network_plots"
+    outdir = rp.NETWORK_PLOTS
     outdir.mkdir(parents=True, exist_ok=True)
     with rasterio.open(ref) as ds:
         scale = max(1, int(max(ds.width, ds.height) / 1200))

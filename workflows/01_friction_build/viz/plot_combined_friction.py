@@ -36,6 +36,8 @@ import matplotlib.pyplot as plt
 from matplotlib.colors import ListedColormap
 from matplotlib.patches import Patch
 
+import repo_paths as rp
+
 from ..friction_paths import get_friction_output_dir
 from .plot_friction_stack import (
     CONTINUOUS_CMAP,
@@ -197,9 +199,7 @@ def plot_network_on_friction(friction_dir: Path, output_stem: Path,
     vmin, vmax = _shared_color_range([over])
 
     # Routed edges (already EPSG:3338); split into the two land route types.
-    edges_path = (Path(__file__).resolve().parents[2] / "final_network"
-                  / "network_joined_edges" / "network_joined_edges.shp")
-    edges = gpd.read_file(edges_path)
+    edges = gpd.read_file(rp.FINAL_EDGES_SHP)
     if str(edges.crs) != str(raster_crs):
         edges = edges.to_crs(raster_crs)
     roads = edges[edges["type"] == "Road"]

@@ -46,14 +46,13 @@ from matplotlib.lines import Line2D
 
 logger = logging.getLogger(__name__)
 
-# This script lives at workflows/03_multimodal_join/viz/; the repo root is
-# three parents up. Data paths are resolved from there.
-ROOT = Path(__file__).resolve().parents[3]
-DB_PATH = ROOT / "outputs" / "fuel_network.duckdb"
-EDGES_SHP = ROOT / "final_network" / "network_joined_edges" / "network_joined_edges.shp"
-NODES_SHP = ROOT / "final_network" / "network_joined_nodes" / "network_joined_nodes.shp"
-STATES_SHP = ROOT / "inputs" / "region_and_census_data" / "tiger" / "cb_2023_us_state_500k.shp"
-OUT_DIR = ROOT / "outputs" / "figures"
+# Data paths come from repo_paths (anchored to the repo, not the CWD).
+import repo_paths as rp
+DB_PATH = rp.DUCKDB
+EDGES_SHP = rp.FINAL_EDGES_SHP
+NODES_SHP = rp.FINAL_NODES_SHP
+STATES_SHP = rp.TIGER_STATES
+OUT_DIR = rp.FIGURES
 
 SIMPLIFY_TOL_M = 300  # rendering only
 MONTH_NAMES = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",

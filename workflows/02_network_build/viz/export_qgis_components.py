@@ -19,17 +19,17 @@ Usage:  python3 workflows/02_network_build/viz/export_qgis_components.py
 from __future__ import annotations
 
 import os
-from pathlib import Path
 
 import geopandas as gpd
 import numpy as np
 from scipy.spatial import cKDTree
 from shapely.geometry import LineString, Point
 
-ROOT = Path(__file__).resolve().parents[3]  # repo root
-PROJ = ROOT / "outputs" / "02_network_build"  # mmnet project dir: engine writes PROJ/output + PROJ/reports
+import repo_paths as rp
+ROOT = rp.ROOT
+PROJ = rp.NETWORK_PROJECT  # mmnet project dir: engine writes PROJ/output + PROJ/reports
 OUT = PROJ / "output"
-BOUNDARY = ROOT / "data" / "boundary.geojson"
+BOUNDARY = rp.BOUNDARY
 GPKG_OUT = OUT / "alaska_components_qgis.gpkg"
 QGZ_OUT = OUT / "alaska_components.qgz"
 CSV_OUT = OUT / "component_distances.csv"

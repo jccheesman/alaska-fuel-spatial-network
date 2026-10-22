@@ -12,7 +12,6 @@ Reads final_network/network_joined_{nodes,edges}.shp (EPSG:3338) and writes thre
 Style: faint base transport modes, bold/bright connectors so the seams pop.
 No new deps beyond geopandas + matplotlib.
 """
-from pathlib import Path
 
 import geopandas as gpd
 import pandas as pd
@@ -21,10 +20,10 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
 
-ROOT = Path(__file__).resolve().parents[3]  # repo root
-NODES_SHP = ROOT / "final_network" / "network_joined_nodes" / "network_joined_nodes.shp"
-EDGES_SHP = ROOT / "final_network" / "network_joined_edges" / "network_joined_edges.shp"
-OUTDIR = ROOT / "outputs" / "final_network_plots"
+import repo_paths as rp
+NODES_SHP = rp.FINAL_NODES_SHP
+EDGES_SHP = rp.FINAL_EDGES_SHP
+OUTDIR = rp.NETWORK_PLOTS
 
 # ---- colours -------------------------------------------------------------
 BASE_STYLE = {  # faint context modes: (colour, linewidth, alpha, zorder)

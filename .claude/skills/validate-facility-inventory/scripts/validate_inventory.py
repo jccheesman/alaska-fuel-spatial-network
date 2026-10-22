@@ -28,9 +28,10 @@ import sys
 import tempfile
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[4]
-WF = ROOT / "workflows" / "00_inventory_qc"
-OUT = ROOT / "outputs" / "00_inventory_qc"
+import repo_paths as rp
+ROOT = rp.ROOT
+WF = rp.INVENTORY_QC_WORKFLOW
+OUT = rp.INVENTORY_QC_OUT
 PY = sys.executable
 
 # step -> (script, args, cause + fix shown when it fails)
