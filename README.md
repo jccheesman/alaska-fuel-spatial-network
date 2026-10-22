@@ -102,16 +102,23 @@ giant) exported by act (b) and ingested by act (c). Its shapefile **row order
 defines `edge_id`** for every DuckDB table, so the committed zips are
 checksummed (`inputs/MANIFEST.md`) and preserved byte-identical.
 
-**Provenance:** re-exported 2026-10-15 from a rebuild carrying the phase-5
-hub builder, the corrected 2025 facility inventory (workflow 00), the 25 km
-connect-to-giant / barge-transfer reach and the 2 km snap-to-edge hub
-fallback; the road source is the 2026-09 AK DOT&PF download alone and the
-user-authored manual-connections layer is included. It supersedes the
-2026-09-15, 2026-09-12 and 2026-07-20 exports (all preserved in git
-history). A re-export is a *new* network-of-record and
-invalidates every edge_id-keyed table, so the zips, checksums, the `EXPECTED`
-tripwire and the downstream tables must be regenerated together. Full
-provenance: `final_network/README.md`.
+**Provenance:** re-exported 2026-10-15 — the first export carrying the
+phase-5 hub builder, the corrected 2025 facility inventory (workflow 00's
+`facilities_clean.csv`), the 25 km connect-to-giant / barge-transfer reach and
+the 2 km snap-to-edge hub fallback, plus the hub handoff
+(`final_network/hub_members.csv`, `hub_snaps.csv`). The road source is still
+the 2026-09 AK DOT&PF download alone, and the user-authored manual-connections
+layer is still included. It supersedes the 2026-09-15 AK-DOT-only export and
+every earlier one (all preserved in git history; the version list is in
+[`docs/CHANGELOG.md`](docs/CHANGELOG.md)). A re-export is a *new*
+network-of-record and invalidates every edge_id-keyed table, so the zips,
+checksums, the `EXPECTED` tripwire and the downstream tables must be
+regenerated together. Full provenance: `final_network/README.md`.
+
+> **The costed tables lag the network.** `edge_month_weights` / `edge_costs`
+> were not regenerated with the 2026-10-15 export (they need the friction
+> stack). Rerun workflow 03 in full on a machine that has it before using the
+> costed graph.
 
 ## Where things are
 
@@ -121,9 +128,9 @@ provenance: `final_network/README.md`.
 | `source_scripts/friction_surface/` | Friction builders + `friction_config.py` + `friction_costs.py` (all USD $) |
 | `workflows/00..04_*/` | The inventory-QC gate + the four steps: thin numbered drivers, per-stage READMEs, run orders |
 | `inputs/` | The committed input bundles and the inventory-QC config tables; every dataset's source, status and conversion is in `DATA.md` |
-| `final_network/` | The frozen act-(b)→(c) handoff; this step is regenerable with source scripts |
-| `outputs/` | Gitignored regenerables + committed tables/analysis + the DuckDB deliverable |
-| `docs/` | `ARCHITECTURE.md` (engine design), `DATA_CONTRACTS.md` (every inter-stage contract), `INVENTORY_QC_PLAN.md` + `data_audit/` (the facility-inventory QC plan and its 2026-10 investigation) |
+| `final_network/` | The frozen act-(b)→(c) handoff (zips + hub handoff CSVs); regenerable with the source scripts, but a re-export is a new network-of-record |
+| `outputs/` | Gitignored regenerables + committed figures, tables and the published clean facility table + the DuckDB deliverable (`outputs/README.md`) |
+| `docs/` | `DATA_DICTIONARY.md` (what every field means, with units), `DATA_CONTRACTS.md` (every inter-stage contract), `ARCHITECTURE.md` (engine design), `CHANGELOG.md` (network-of-record versions), `INVENTORY_QC_PLAN.md` + `data_audit/` (the facility-inventory QC plan and its 2026-10 investigation) |
 | `tests/` | pytest suite (run by CI) |
 | `.claude/skills/` | Nine procedural playbooks (friction, costs, network profile/build; inventory ingest/record-corrections/validate) |
 
@@ -150,3 +157,9 @@ padding and alignment steps, and the ArcGIS Pro river-ice pipeline. The
   archives the 2026-10 investigation that produced the decisions
 - `docs/TEST_LOG.md` — the verified end-to-end friction → weighting → costing run
 - `CLAUDE.md` — the lab notebook: one row per numbered script, with findings
+- `docs/DATA_DICTIONARY.md` — field meanings and units for the handoff, the DuckDB tables and
+  the clean facility table
+- `docs/CHANGELOG.md` — every network-of-record version, with counts and what changed
+- Cost-rate derivations and verification: the `supplementary/` folder was removed on 2026-08-14
+  and survives in git history at commit `b35b730`; the live rates and their source notes are in
+  `source_scripts/friction_surface/friction_costs.py`, audited by the `derive-fuel-costs` skill
