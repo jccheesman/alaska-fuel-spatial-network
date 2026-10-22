@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """Stage 01 — ingest a facility-inventory release onto the clean schema.
 
 Reads ONLY the raw columns the source adapter marks keep/fold (contact fields

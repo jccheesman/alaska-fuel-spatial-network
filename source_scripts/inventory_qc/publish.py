@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """Stage 07 — publish the clean facility table and prove the output contract.
 
 Writes outputs/00_inventory_qc/<release>/
@@ -26,7 +25,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from _qc import DERIVED, OUT, QC, RELEASES, corrections, latest_release, read_csv, release_manifest, schema, write_csv
+from .core import DERIVED, OUT, QC, RELEASES, corrections, latest_release, read_csv, release_manifest, schema, write_csv
 
 LEDGER = QC / "facility_ids.csv"
 

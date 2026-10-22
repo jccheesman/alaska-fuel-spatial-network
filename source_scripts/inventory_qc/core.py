@@ -15,6 +15,7 @@ import numpy as np
 import pandas as pd
 
 import repo_paths as rp
+ROOT = rp.ROOT
 QC = rp.INVENTORY_QC
 RELEASES = rp.FACILITY_RELEASES
 OUT = Path(os.environ["INVENTORY_QC_OUT"]) if os.environ.get("INVENTORY_QC_OUT") else rp.INVENTORY_QC_OUT

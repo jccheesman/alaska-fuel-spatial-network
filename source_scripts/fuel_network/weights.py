@@ -1,4 +1,4 @@
-"""weight_network_edges.py
+"""fuel_network.weights — workflow 03, stage 03 (run by workflows/03_multimodal_join/03_weight_network_edges.py).
 
 Sample the friction rasters along every final_network edge geometry and write per-(edge, month) weights.
 
@@ -27,7 +27,7 @@ hard-gated to ICE_ROAD_SEASON_MONTHS so it cannot give phantom Apr-Dec
 connectivity into the ice-road subnetwork); cross-mode handoffs are per-pair
 `{A}{B}Transfer` (unsampled, priced by INTERMODAL_TRANSFER_FEES in Phase 3).
 `edge_class` mirrors `type` and is derived ONCE by stage 02
-(02_load_final_network.py); this script CONSUMES that column from the DB rather
+(fuel_network.load); this module CONSUMES that column from the DB rather
 than re-deriving, so the two stages cannot silently diverge. Run stage 02 first.
 
 road_base is NoData-free by construction (see friction_surface.compute_road_base)
@@ -39,7 +39,7 @@ month (passable = FALSE). The length-weighted blocked fraction is logged per
 edge (nodata_frac) so partial blockages are auditable.
 
 edge_id is the 0-based row order of final_network/network_joined_edges.shp —
-the same stable-id rule load_final_network.py (Phase 1) persists, so the
+the same stable-id rule fuel_network.load (Phase 1) persists, so the
 tables join cleanly once that lands.
 
 Output table in fuel_network.duckdb:
@@ -53,9 +53,9 @@ only. Every dollar (BASELINE_RATES_PER_GALLON_MILE, INTERMODAL_TRANSFER_FEES)
 is applied downstream in Phase 3 — never here.
 
 Usage:
-    python weight_network_edges.py                 # full run, writes DuckDB
-    python weight_network_edges.py --dry-run       # compute + QA, no write
-    python weight_network_edges.py --months 2 7    # subset of months (smoke test)
+    python workflows/03_multimodal_join/03_weight_network_edges.py                 # full run, writes DuckDB
+    python workflows/03_multimodal_join/03_weight_network_edges.py --dry-run       # compute + QA, no write
+    python workflows/03_multimodal_join/03_weight_network_edges.py --months 2 7    # subset of months (smoke test)
 """
 
 from __future__ import annotations
@@ -233,7 +233,7 @@ def edge_weighted_stats(
 def load_edge_class(db_path: str | Path, n_edges: int) -> np.ndarray:
     """Read the edge_class column stage 02 persisted, in edge_id order.
 
-    edge_class is derived exactly once (02_load_final_network.py's
+    edge_class is derived exactly once (fuel_network.load's
     derive_edge_class); consuming it here keeps the IceRoad/weld rule from
     being maintained in two places. Hard error if stage 02 hasn't run or
     the row count disagrees with the shapefile.

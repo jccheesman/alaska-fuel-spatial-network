@@ -1,4 +1,4 @@
-"""load_final_network.py
+"""fuel_network.load — workflow 03, stage 02 (run by workflows/03_multimodal_join/02_load_final_network.py).
 
 Ingest the colleague's final_network shapefiles into fuel_network.duckdb as attribute tables.
 
@@ -7,7 +7,7 @@ and vectors live on disk); DuckDB holds attributes + stable IDs only.
 
 Stable-ID rule: `edge_id` is the 0-based row order of
 final_network/network_joined_edges.shp — the SAME rule
-weight_network_edges.py uses, so `network_edges` joins `edge_month_weights`
+fuel_network.weights uses, so `network_edges` joins `edge_month_weights`
 directly. This loader cross-checks the two tables when both are present.
 
 Tables written (CREATE OR REPLACE):
@@ -43,8 +43,8 @@ Integrity checks (hard errors, run before any write):
   - if edge_month_weights exists: its edge_ids are exactly 0..n_edges-1
 
 Usage:
-    python load_final_network.py            # ingest + validate
-    python load_final_network.py --dry-run  # validate only, no write
+    python workflows/03_multimodal_join/02_load_final_network.py            # ingest + validate
+    python workflows/03_multimodal_join/02_load_final_network.py --dry-run  # validate only, no write
 """
 
 from __future__ import annotations
@@ -172,7 +172,7 @@ def cross_check_edge_month_weights(con: duckdb.DuckDBPyConnection,
         raise ValueError(
             f"edge_month_weights edge_ids (min={lo}, max={hi}, "
             f"distinct={n_distinct}) do not match network_edges row order "
-            f"(expected 0..{n_edges - 1}) — rerun weight_network_edges.py "
+            f"(expected 0..{n_edges - 1}) — rerun workflows/03_multimodal_join/03_weight_network_edges.py "
             "against the current shapefile."
         )
     logger.info("edge_month_weights cross-check OK (%d edge_ids align)", n_edges)
@@ -254,7 +254,7 @@ def load_final_network(
     })
 
     edges_df = pd.DataFrame({
-        # Stable ID = shapefile row order (same rule as weight_network_edges)
+        # Stable ID = shapefile row order (same rule as fuel_network.weights)
         "edge_id": np.arange(len(edges), dtype=np.int64),
         "from_node": edges["from"].astype("int64"),
         "to_node": edges["to"].astype("int64"),

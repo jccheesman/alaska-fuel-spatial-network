@@ -1,13 +1,11 @@
 """The scripted half of record-facility-corrections: a filled review queue -> correction rows.
 Never decides, validates values, asks instead of guessing."""
 import importlib.util
-import sys
 
 import pandas as pd
 
 import repo_paths as rp
 ROOT = rp.ROOT
-sys.path.insert(0, str(rp.INVENTORY_QC_WORKFLOW))
 S = ROOT / ".claude" / "skills" / "record-facility-corrections" / "scripts" / "record_corrections.py"
 spec = importlib.util.spec_from_file_location("rc", S); rc = importlib.util.module_from_spec(spec); spec.loader.exec_module(rc)
 LABEL = rc.qc.latest_release()

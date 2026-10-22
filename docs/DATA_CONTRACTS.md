@@ -71,7 +71,7 @@ LineString, EPSG:3338). `length_m` is DERIVED by the consumer
 (geometry.length — EPSG:3338 is meters).
 
 Inventory (the ingest's hard tripwire, `EXPECTED` in
-`02_load_final_network.py`): 84,094 nodes / 93,049 edges / 329 hubs / 4
+`source_scripts/fuel_network/load.py`): 84,094 nodes / 93,049 edges / 329 hubs / 4
 components / giant 0.9999 / Road 55,539 · Waterway 34,178 · Air 226 ·
 IceRoad 1,248 · RoadConnector 1,498 · IceRoadConnector 34 ·
 BargeRoadTransfer 289 · BargeIceRoadTransfer 21 · IceRoadRoadTransfer 12 ·
@@ -82,8 +82,8 @@ AirRoadTransfer 2 · BargeAirTransfer 2.
 **`edge_id` = 0-based row order of
 `final_network/network_joined_edges/network_joined_edges.shp`.**
 
-Created at ingest (`02_load_final_network.py`) and consumed by
-`03_weight_network_edges.py` (which reads `edge_class` back from the DB, so
+Created at ingest (`fuel_network.load`, run by `02_load_final_network.py`) and
+consumed by `fuel_network.weights` (which reads `edge_class` back from the DB, so
 the rule lives in exactly one place). Every DuckDB table joins on it. The
 shapefile bytes are therefore checksummed (`inputs/MANIFEST.md`,
 `final_network/README.md`) and preserved byte-identical; the cross-check at

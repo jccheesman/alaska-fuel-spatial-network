@@ -73,7 +73,7 @@ echo; echo "######## 7. export the final_network/ handoff ########"
 if [ "${EXPORT_FINAL_NETWORK:-0}" = "1" ]; then
   echo "EXPORT_FINAL_NETWORK=1 — regenerating the network-of-record."
   echo "  Together with these zips you MUST regenerate: the EXPECTED inventory in"
-  echo "  workflows/03_multimodal_join/02_load_final_network.py, edge_month_weights,"
+  echo "  source_scripts/fuel_network/load.py, edge_month_weights,"
   echo "  and edge_costs. See final_network/README.md."
   run_step "06_export_final_network" "$PY" "$HERE/06_export_final_network.py"
 else

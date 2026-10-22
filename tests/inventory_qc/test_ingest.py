@@ -2,13 +2,11 @@
 import hashlib
 import json
 import csv
-import importlib.util
 import pytest
 
 import repo_paths as rp
+from inventory_qc import ingest
 RELEASES = rp.FACILITY_RELEASES
-spec = importlib.util.spec_from_file_location("ingest", rp.INVENTORY_QC_WORKFLOW / "01_ingest.py")
-ingest = importlib.util.module_from_spec(spec); spec.loader.exec_module(ingest)
 FOLDERS = sorted(p for p in RELEASES.iterdir() if (p / "snapshot_manifest.json").exists())
 CONTACT_WORDS = ("Representative", "PhoneNumber", "Phone", "Email", "LandOwner", "FacilityOwner", "Operator", "Evaluator", "_user")
 
