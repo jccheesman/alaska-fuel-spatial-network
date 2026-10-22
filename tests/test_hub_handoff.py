@@ -124,7 +124,8 @@ def test_loader_writes_hub_members_and_hub_snaps(tmp_path):
 
 
 def test_loader_refuses_handoff_from_another_build(tmp_path):
-    import duckdb, pytest
+    import duckdb
+    import pytest
     load02 = _loader()
     final = tmp_path / "final_network"; final.mkdir()
     # Hub_7 claims node 12 but the shapefile has only one hub node -> different builds
