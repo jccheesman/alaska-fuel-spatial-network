@@ -10,8 +10,8 @@ wrote it; act d certifies it).
 - **edge_id = 0-based shapefile row order** of the edges shapefile. Derived
   at stage 02, shared by every table. The committed zips are checksummed —
   never mix tables from different exports.
-- **EXPECTED inventory tripwire** (stage 02): 84,089 nodes / 92,978 edges /
-  385 hubs / 5 components / 99.99% giant + the exact edge-type counts. A
+- **EXPECTED inventory tripwire** (stage 02): 84,094 nodes / 93,049 edges /
+  329 hubs / 4 components / 99.99% giant + the exact edge-type counts. A
   changed export fails loudly here, not silently downstream.
 - **Strict NoData rule** (stage 03): any NoData sample ⇒ the edge is
   impassable that month. nodata_frac makes partial blockage auditable.
@@ -31,6 +31,10 @@ python 04_assemble_weighted_graph.py   # $-rates + fees -> edge_costs (+ --smoke
 # or: bash run_all.sh                  # stops gracefully after 02 if the friction stack is absent
 ```
 
+Stages 02–04 are thin wrappers: the logic is the `fuel_network` package
+(`source_scripts/fuel_network/` — `load`, `weights`, `graph`). Analysis code
+imports it directly, e.g. `from fuel_network import load_weighted_multigraph`.
+
 Stages 01–02 run from committed data alone — that pair is the CI smoke test.
 Dollars enter ONLY at stage 04, from `source_scripts/friction_surface/friction_costs.py`.
-Figures: `viz/make_network_plots.py`.
+Figures: publication ones in `figure_scripts/`, network QA views in `diagnostics/03_multimodal_join/`.

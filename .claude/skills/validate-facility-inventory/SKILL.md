@@ -42,17 +42,19 @@ Downstream: `build-and-verify-network` requires this chain to exit 0 before a hu
 
 ## The orchestrator
 
-`scripts/validate_inventory.py` runs the chain and prints, under any failing step, the probable
-cause and the file or skill that owns the fix.
+`workflows/00_inventory_qc/validate_inventory.py` runs the chain and prints, under any failing
+step, the probable cause and the file or skill that owns the fix. (It lived under this skill's
+`scripts/` until 2026-10; CI and `run_all` call it, so it moved next to the stages it runs. The
+stage logic itself is the `inventory_qc` package in `source_scripts/`.)
 
 ```
 # read-only (default): chain into a temp dir, then compare with the committed published table
-python .claude/skills/validate-facility-inventory/scripts/validate_inventory.py
+python workflows/00_inventory_qc/validate_inventory.py
 
 # refresh outputs/00_inventory_qc/<release>/ (same as workflows/00_inventory_qc/run_all.sh)
-python .claude/skills/validate-facility-inventory/scripts/validate_inventory.py --publish
+python workflows/00_inventory_qc/validate_inventory.py --publish
 
-python .claude/skills/validate-facility-inventory/scripts/validate_inventory.py --keep-going --release 2025
+python workflows/00_inventory_qc/validate_inventory.py --keep-going --release 2025
 ```
 
 Exit 0 = every gating step passed. CI runs the read-only form.

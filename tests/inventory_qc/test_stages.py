@@ -1,27 +1,12 @@
 """Stages 02-07 of workflow 00 on the committed 2025 release: guards, normalisation, publish checks."""
-import importlib.util
-import sys
-from pathlib import Path
-
 import pandas as pd
 import pytest
 
-ROOT = Path(__file__).resolve().parents[2]
-WF = ROOT / "workflows" / "00_inventory_qc"
-sys.path.insert(0, str(WF))
+from inventory_qc import apply_corrections as apply_mod
+from inventory_qc import core as qc
+from inventory_qc import normalise as norm_mod
+from inventory_qc import publish as pub_mod
 
-
-def load(name):
-    spec = importlib.util.spec_from_file_location(name, WF / f"{name}.py")
-    mod = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(mod)
-    return mod
-
-
-qc = load("_qc")
-apply_mod = load("02_apply_corrections")
-norm_mod = load("03_normalise")
-pub_mod = load("07_publish")
 LABEL = qc.latest_release()
 
 
@@ -29,16 +14,17 @@ LABEL = qc.latest_release()
 def pipeline(tmp_path_factory):
     """Run 02 -> 03 -> 07 into a temporary outputs dir so tests never touch tracked outputs."""
     tmp = tmp_path_factory.mktemp("qc")
-    for m in (qc, apply_mod, norm_mod, pub_mod):
-        m.OUT = tmp
-    fac, excl, log = apply_mod.apply(LABEL)
-    qc.write_csv(fac, tmp / LABEL / "facilities_corrected.csv")
-    qc.write_csv(excl, tmp / LABEL / "excluded.csv")
-    qc.write_csv(log, tmp / LABEL / "corrections_log.csv")
-    nfac, rep = norm_mod.normalise(LABEL)
-    qc.write_csv(nfac, tmp / LABEL / "facilities_normalised.csv")
-    clean, checks = pub_mod.publish(LABEL)
-    return dict(fac=fac, excl=excl, log=log, nfac=nfac, rep=rep, clean=clean, checks=checks, tmp=tmp)
+    with pytest.MonkeyPatch.context() as mp:   # the stage modules are shared: undo OUT afterwards
+        for m in (qc, apply_mod, norm_mod, pub_mod):
+            mp.setattr(m, "OUT", tmp)
+        fac, excl, log = apply_mod.apply(LABEL)
+        qc.write_csv(fac, tmp / LABEL / "facilities_corrected.csv")
+        qc.write_csv(excl, tmp / LABEL / "excluded.csv")
+        qc.write_csv(log, tmp / LABEL / "corrections_log.csv")
+        nfac, rep = norm_mod.normalise(LABEL)
+        qc.write_csv(nfac, tmp / LABEL / "facilities_normalised.csv")
+        clean, checks = pub_mod.publish(LABEL)
+        yield dict(fac=fac, excl=excl, log=log, nfac=nfac, rep=rep, clean=clean, checks=checks, tmp=tmp)
 
 
 def test_every_approved_correction_applies(pipeline):

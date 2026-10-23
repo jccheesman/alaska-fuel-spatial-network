@@ -42,15 +42,19 @@ dependencies = [
 [project.optional-dependencies]
 dev = ["pytest>=7.1.1", "ruff"]
 gee = ["earthengine-api>=0.1.390"]   # only for re-exporting the GEE stack
+figures = ["openpyxl", "python-pptx"]  # figure_scripts/: tables/*.xlsx + the data-connection story deck
 
 [tool.setuptools]
 package-dir = {"" = "source_scripts"}
+py-modules = ["repo_paths"]   # every repository location (source_scripts/repo_paths.py)
 packages = [
     "mmnet",
     "mmnet.steps",
     "friction_surface",
     "friction_surface.friction_preprocessing",
     "friction_surface.qa",
+    "inventory_qc",
+    "fuel_network",
 ]
 
 [tool.setuptools.package-data]
@@ -63,11 +67,11 @@ target-version = "py310"
 [tool.ruff.lint]
 # Match the codebase as merged: keep the rule set pragmatic. The ignores
 # codify existing house style rather than churn moved-as-is files:
-# E702 (compact semicolon pairs in viz scripts), E402 (deliberate
+# E701/E702 (compact one-line loops + semicolon pairs in viz scripts), E402 (deliberate
 # bottom-of-module re-exports + matplotlib.use before pyplot),
 # E741/E731 (short math-style names + small lambdas in plot code).
 select = ["E4", "E7", "E9", "F"]
-ignore = ["E702", "E402", "E741", "E731"]
+ignore = ["E701", "E702", "E402", "E741", "E731"]
 
 [tool.ruff.lint.per-file-ignores]
 # pre-existing harmless locals kept as-is in the moved viz script
@@ -75,6 +79,10 @@ ignore = ["E702", "E402", "E741", "E731"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+pythonpath = ["source_scripts"]
+# importlib mode + no tests/inventory_qc/__init__.py: the test folder must not shadow the
+# source_scripts/inventory_qc package
+addopts = ["--import-mode=importlib"]
 filterwarnings = [
     # rasterio's DatasetReader.read() hits a NumPy 2.5 shape-assignment
     # deprecation internally (rasterio/_io.pyx) on read(). Not our code —

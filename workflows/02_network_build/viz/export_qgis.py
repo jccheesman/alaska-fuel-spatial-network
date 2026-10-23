@@ -20,18 +20,18 @@ Usage:
 from __future__ import annotations
 
 import os
-from pathlib import Path
 
 import geopandas as gpd
 
-ROOT = Path(__file__).resolve().parents[3]  # repo root
-PROJ = ROOT / "outputs" / "02_network_build"  # mmnet project dir: engine writes PROJ/output + PROJ/reports
+import repo_paths as rp
+ROOT = rp.ROOT
+PROJ = rp.NETWORK_PROJECT  # mmnet project dir: engine writes PROJ/output + PROJ/reports
 OUT = PROJ / "output"
 EDGES_IN = OUT / "03_network__edges.gpkg"
 NODES_IN = OUT / "03_network__nodes.gpkg"
-BOUNDARY = ROOT / "data" / "boundary.geojson"
-PORTS = ROOT / "data" / "raw" / "anchor_points" / "Ports_and_Harbors.geojson"
-AIR_NODES = ROOT / "data" / "processed" / "air_nodes.geojson"
+BOUNDARY = rp.BOUNDARY
+PORTS = rp.RAW / "anchor_points" / "Ports_and_Harbors.geojson"
+AIR_NODES = rp.PROCESSED / "air_nodes.geojson"
 
 GPKG_OUT = OUT / "alaska_network_qgis.gpkg"
 QGZ_OUT = OUT / "alaska_network.qgz"

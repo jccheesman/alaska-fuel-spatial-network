@@ -9,16 +9,11 @@ each pinned on a small hand-built fixture in metres (EPSG:3338-like).
 """
 from __future__ import annotations
 
-import sys
-from pathlib import Path
-
 import geopandas as gpd
 import numpy as np
 import pandas as pd
 from shapely.geometry import LineString, Point, box
 
-ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "source_scripts"))
 
 from mmnet.assemble import connect_multimodal  # noqa: E402
 from mmnet.config import Params  # noqa: E402

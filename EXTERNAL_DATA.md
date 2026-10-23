@@ -8,7 +8,12 @@ The honest inventory: what is committed and what is regenerable-only. Per-file p
 | Path | Size | What |
 |---|---|---|
 | `inputs/data_for_network_build.zip` | 33 MB | Curated network shapefiles (roads, waterways, ice roads, flights) — feeds the corridor mask |
-| `final_network/network_joined_{nodes,edges}.zip` | 10.7 MB | The frozen network-of-record — act (b)→(c) handoff, member-checksummed |
+| `inputs/region_and_census_data.zip` | 6.7 MB | TIGER state outline (the basemap of the publication figures) + an AEA library bundle |
+| `inputs/raw_facility_data/` | 1.8 MB | Facility-inventory releases: clean-schema snapshots, manifests, diffs, and the 2022 `bulk_fuel_data.zip` (incl. `Fuel_Delivery_Method.shp`) |
+| `inputs/inventory_qc/` | < 1 MB | Inventory-QC config + the DCRA city / CDP boundary zips |
+| `inputs/air/`, `inputs/mannual_connections/` | < 1 MB | AK DOT&PF airports + flight paths; the hand-drawn manual-connections layer |
+| `outputs/00_inventory_qc/<release>/` | < 1 MB | The published clean facility table + QC report (workflow 00) |
+| `final_network/` | 10.4 MB | The frozen network-of-record — act (b)→(c) handoff zips (member-checksummed) + the hub handoff CSVs |
 
 A fresh clone (after `python tools/extract_inputs.py`) can run
 workflow 03's extract + ingest stages and workflow 04 end-to-end.

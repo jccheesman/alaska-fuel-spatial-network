@@ -60,16 +60,18 @@ is stage 03's placement trail (`hub_id`, `node_id`, `snap_dist_m`, `snap_surface
 `status`). Both are listed in `final_network/MANIFEST.sha256`. A consumer takes hub
 membership and a hub's community from these files, never by re-inference.
 
-Schema (DBF-safe field names): see `final_network/README.md` — nodes
+Schema (DBF-safe field names; meanings + units in `docs/DATA_DICTIONARY.md`):
+see `final_network/README.md` — nodes
 (node_id, is_hub, hub_id, deliv_meth, hub_type, hub_cap, snap_surf,
 component, is_giant; Point, EPSG:3338), edges (from, to, type ∈ {Road,
 Waterway, Air, IceRoad, RoadConnector, IceRoadConnector, BargeRoadTransfer,
-BargeIceRoadTransfer, IceRoadRoadTransfer, AirRoadTransfer}, source, join_gap_m;
+BargeIceRoadTransfer, IceRoadRoadTransfer, AirRoadTransfer, BargeAirTransfer},
+source, join_gap_m;
 LineString, EPSG:3338). `length_m` is DERIVED by the consumer
 (geometry.length — EPSG:3338 is meters).
 
 Inventory (the ingest's hard tripwire, `EXPECTED` in
-`02_load_final_network.py`): 84,094 nodes / 93,049 edges / 329 hubs / 4
+`source_scripts/fuel_network/load.py`): 84,094 nodes / 93,049 edges / 329 hubs / 4
 components / giant 0.9999 / Road 55,539 · Waterway 34,178 · Air 226 ·
 IceRoad 1,248 · RoadConnector 1,498 · IceRoadConnector 34 ·
 BargeRoadTransfer 289 · BargeIceRoadTransfer 21 · IceRoadRoadTransfer 12 ·
@@ -80,8 +82,8 @@ AirRoadTransfer 2 · BargeAirTransfer 2.
 **`edge_id` = 0-based row order of
 `final_network/network_joined_edges/network_joined_edges.shp`.**
 
-Created at ingest (`02_load_final_network.py`) and consumed by
-`03_weight_network_edges.py` (which reads `edge_class` back from the DB, so
+Created at ingest (`fuel_network.load`, run by `02_load_final_network.py`) and
+consumed by `fuel_network.weights` (which reads `edge_class` back from the DB, so
 the rule lives in exactly one place). Every DuckDB table joins on it. The
 shapefile bytes are therefore checksummed (`inputs/MANIFEST.md`,
 `final_network/README.md`) and preserved byte-identical; the cross-check at
@@ -94,7 +96,7 @@ Synthetic connectors are named by the modes they join
 (`pipeline.classify_connectors`): within-mode welds → `{Mode}Connector`
 (RoadConnector, IceRoadConnector); cross-mode handoffs → per-pair
 `{A}{B}Transfer` (BargeRoadTransfer, BargeIceRoadTransfer, IceRoadRoadTransfer,
-AirRoadTransfer). `edge_class` is a pass-through of this `type`; it only diverges
+AirRoadTransfer, BargeAirTransfer). `edge_class` is a pass-through of this `type`; it only diverges
 for a LEGACY frozen network, mapping generic `Bridge` welds into the vocabulary
 (ice-road provenance → IceRoadConnector, else → RoadConnector). Persisted on
 `network_edges`; **no other code may re-derive this rule.**
@@ -119,9 +121,14 @@ via `TRANSFER_TYPE_TO_MODES`).
 | `network_edges` | 93,049 | edge_id PK, from_node, to_node, type, edge_class, source, join_gap_m, length_m | 03/02_load |
 | `edge_month_weights` | 1,116,588 | edge_id, month, mode, avg_friction, nodata_frac, passable | 03/03_weight |
 | `edge_costs` | 1,116,588 | edge_id, month, cost_per_gallon, passable | 03/04_assemble |
-
 | `hub_members` | one per (hub, raw record) | hub_id, hub_key, hub_community, hub_kind, delivery_method, hub_type, ast_facility_id, record_id, node_id, snap_status | 03/02_load from `final_network/hub_members.csv` (when present) |
 | `hub_snaps` | one per hub | hub_id, node_id, snap_dist_m, snap_surface, status | 03/02_load from `final_network/hub_snaps.csv` (when present) |
+
+Row counts are those for the 2026-10-15 network-of-record (93,049 edges × 12
+months). The weighted tables were not regenerated with that export: any
+`edge_month_weights` / `edge_costs` still on disk from before it hold the
+2026-09 network's 1,115,736 rows (92,978 × 12). Rerun workflow 03 in full, and
+never join tables from different exports.
 
 `hub_members` is the writer the old "`hub_facility_map` — documented future
 work" note waited for: hub ↔ inventory record membership comes from stage 02's

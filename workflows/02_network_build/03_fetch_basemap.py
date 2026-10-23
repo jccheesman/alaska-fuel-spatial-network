@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fetch the Natural Earth basemap vectors used by the publication map (workflows/02_network_build/viz/plot_paper_network.py).
+"""Fetch the Natural Earth basemap vectors used by the publication map (figure_scripts/plot_paper_network.py).
 
 Downloads two 10 m Natural Earth layers from the `nvkelso/natural-earth-vector` GitHub mirror into
 `data/basemap/` (gitignored) — run once; it skips files already present:
@@ -16,8 +16,9 @@ import sys
 import urllib.request
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[2]  # repo root
-DEST = ROOT / "data" / "basemap"
+import repo_paths as rp
+ROOT = rp.ROOT
+DEST = rp.BASEMAP
 BASE = "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson"
 FILES = [
     "ne_10m_land.geojson",

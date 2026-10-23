@@ -130,9 +130,8 @@ map.
 3. **Run the chain.** Start read-only to see current state, then `--rebuild`
    once inputs pass. Fix the earliest failure first (invariant 2) and re-run
    until exit 0.
-4. **Refresh downstream artifacts** if values changed: `viz/` figures
-   (`plot_friction_stack`, `plot_combined_friction`, the schema/pipeline
-   diagrams) and, for cost changes, the `derive-fuel-costs` downstream list
+4. **Refresh downstream artifacts** if values changed: the friction figures
+   in `figure_scripts/` (`plot_friction_stack`, `plot_combined_friction`) and, for cost changes, the `derive-fuel-costs` downstream list
    (workbook, `assemble_weighted_graph`, cost-equation figure).
 5. **Report the result** — which steps passed, what any failure was, and
    what you changed to fix it. Never report "done" on a nonzero exit.

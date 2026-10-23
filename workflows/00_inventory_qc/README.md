@@ -21,6 +21,11 @@ python 07_publish.py                            # clean table + QC report, after
 # or: bash run_all.sh [RELEASE]                 # chains all of it (default: latest release); 01 runs --check
 ```
 
+Each numbered script is a thin wrapper: the logic is the `inventory_qc` package
+(`source_scripts/inventory_qc/` — one module per stage, shared helpers in
+`core.py`). `validate_inventory.py` (here) runs the whole chain read-only, or with
+`--publish` writes the outputs — CI runs it.
+
 `01_ingest.py --check` re-derives the committed snapshots instead of writing a
 new release — that is what `run_all.sh` and CI run. Only `approved` rows of
 `corrections.csv` apply, and a stale `old_value` guard fails the stage (retire
