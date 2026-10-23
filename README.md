@@ -133,6 +133,9 @@ regenerated together. Full provenance: `final_network/README.md`.
 | `source_scripts/friction_surface/` | Friction builders + `friction_config.py` + `friction_costs.py` (all USD $) |
 | `source_scripts/inventory_qc/` | Workflow 00's facility-inventory QC chain, one module per stage (the numbered scripts are thin wrappers) |
 | `source_scripts/fuel_network/` | Workflow 03's load / friction-weighting / costing, and the weighted-graph API analysis code imports |
+| `paper/` | Generators of every publication figure and table (output lands in `outputs/figures/`, `outputs/tables/`) |
+| `diagnostics/` | Build-time checks and investigation plots by stage, one row each (question, finding, runnable?) in its README |
+| `tools/input_prep/` | Scripts that re-derive a committed input (`build_flight_map.py` → `inputs/air/flight_paths_combined.csv`) |
 | `source_scripts/repo_paths.py` | Every repository location, defined once; scripts import it instead of computing paths |
 | `workflows/00..04_*/` | The inventory-QC gate + the four steps: thin numbered drivers, per-stage READMEs, run orders |
 | `inputs/` | Committed input bundles + the inventory-QC config; `inputs/README.md` opens with a "where is X?" index by theme |

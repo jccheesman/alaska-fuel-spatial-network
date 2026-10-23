@@ -1,16 +1,21 @@
 """Match flight paths to airports and produce a combined CSV + interactive HTML map.
 
 Uses the Alaska DOT&PF airports dataset (NAME, FAA_ID, ICAO, LAT_DD, LONG_DD, ...).
+Re-derives the committed inputs/air/flight_paths_combined.csv from inputs/air/flight_paths.xlsx;
+the map and the unmatched-locations list land beside it (gitignored).
+
+    python tools/input_prep/build_flight_map.py
 """
 import json
 import re
-from pathlib import Path
 
 import pandas as pd
 
-BASE = Path(__file__).parent
+import repo_paths as rp
+
+BASE = rp.AIR_INPUTS
 AIRPORTS_CSV = BASE / "airports_ak_dotpf.csv"   # AK DOT&PF registry — provenance for flight_paths_combined.csv
-FLIGHTS_XLSX = BASE / "Flight Paths.xlsx"
+FLIGHTS_XLSX = BASE / "flight_paths.xlsx"   # committed as flight_paths.xlsx (was "Flight Paths.xlsx")
 OUT_CSV = BASE / "flight_paths_combined.csv"
 OUT_MAP = BASE / "flight_map.html"
 OUT_UNMATCHED = BASE / "unmatched_locations.csv"

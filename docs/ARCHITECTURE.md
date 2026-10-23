@@ -146,7 +146,7 @@ Python owns every connection. There is no other R path.
 `00_normalize_raw.py` (raw → `data/interim/`), `01_prep_waterway.py` (full-Alaska NWN extraction —
 required before the build), `02_prep_airways.py` (geocode OD → airways/air_nodes + boundary),
 `04_build_network.py` (validate + run_pipeline), `05_verify_north_slope.py` (assertion gate),
-`06_export_final_network.py` (the frozen handoff), `viz/plot_network.py` (static PNG),
+`06_export_final_network.py` (the frozen handoff), `diagnostics/02_network_build/plot_network.py` (static PNG),
 `viz/export_qgis.py` (styled `.qgz` + GeoPackage). Typical order:
 `00 → 01 → 02 → 04 → 05 → 06`.
 

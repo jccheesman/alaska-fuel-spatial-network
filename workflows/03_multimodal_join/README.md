@@ -37,4 +37,4 @@ imports it directly, e.g. `from fuel_network import load_weighted_multigraph`.
 
 Stages 01–02 run from committed data alone — that pair is the CI smoke test.
 Dollars enter ONLY at stage 04, from `source_scripts/friction_surface/friction_costs.py`.
-Figures: `viz/make_network_plots.py`.
+Figures: publication ones in `paper/figures/`, network QA views in `diagnostics/03_multimodal_join/`.

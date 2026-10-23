@@ -14,7 +14,7 @@ Note: within the GEE footprint, open water and land are legitimately 0 too, so g
 zeros and the pad are only distinguishable by the boundary column (drawn as a dashed
 line), not by value. Reads are decimated for display; the full grid is 28,001 x 16,567.
 
-Usage:  python friction_surface/viz/plot_sea_ice_padding.py [MM]   (default 03 = March)
+Usage:  python diagnostics/01_friction_build/plot_sea_ice_padding.py [MM]   (default 03 = March)
 """
 from __future__ import annotations
 import glob
@@ -28,9 +28,11 @@ import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
 import rasterio
 
-HERE = Path(__file__).resolve().parent
-INPUTS = HERE.parent / "friction_inputs"
-SEA_ICE = INPUTS / "sea_ice"
+import repo_paths as rp
+from friction_surface.friction_paths import RASTER_DIR
+
+OUT_DIR = rp.DIAGNOSTICS_OUT / "01_friction_build"
+SEA_ICE = Path(RASTER_DIR) / "sea_ice"
 MONTHS = {"01": "Jan", "02": "Feb", "03": "Mar", "04": "Apr", "05": "May", "06": "Jun",
           "07": "Jul", "08": "Aug", "09": "Sep", "10": "Oct", "11": "Nov", "12": "Dec"}
 TARGET_WIDTH_PX = 1400  # decimated display width
@@ -146,7 +148,8 @@ def main() -> int:
     fig.suptitle(f"Sea-ice grid padding — {name}: raw GEE export vs full-grid pad",
                  fontsize=13, fontweight="bold")
 
-    out = HERE / f"sea_ice_padding_vs_data_{mm}_{name}.png"
+    OUT_DIR.mkdir(parents=True, exist_ok=True)
+    out = OUT_DIR / f"sea_ice_padding_vs_data_{mm}_{name}.png"
     fig.savefig(out, dpi=130)
     print(f"actual data: {data_cols:,} cols (X[{g_left:,.0f} → {data_right:,.0f}] m)")
     print(f"zero pad:    {pad_cols:,} cols (X[{data_right:,.0f} → {g_right:,.0f}] m)")

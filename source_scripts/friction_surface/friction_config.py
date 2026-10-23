@@ -123,7 +123,7 @@ PERMAFROST_ZONE_MULTIPLIERS = (1.00, 1.15, 1.30, 1.50)
 #
 # RIVER_ICE_THRESHOLD = 0.15 — same conservative-operational stance,
 #   given dimensional parity. Rationale
-#   from qa_river_ice_thresholds.py against the actual 12 monthly
+#   from diagnostics/01_friction_build/qa_river_ice_thresholds.py against the actual 12 monthly
 #   river_ice rasters:
 #     - Deep winter and deep summer are saturated (Jan-Apr ~93% of
 #       pixels already >0.50; Jul-Sep ~99% <0.05) — threshold choice

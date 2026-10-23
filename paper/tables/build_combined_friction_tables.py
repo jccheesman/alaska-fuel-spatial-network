@@ -28,7 +28,6 @@ and data sources. Numeric friction/multiplier values are shown to two
 decimals. Values are otherwise unchanged from friction_config.
 """
 
-from pathlib import Path
 
 from openpyxl import Workbook
 from openpyxl.styles import Alignment, Border, Font, Side
@@ -51,7 +50,8 @@ def _fee(a: str, b: str) -> str:
     return "%g" % FEES[(a, b)]["total"]
 
 
-OUT = Path(__file__).parent / "combined_friction_tables.xlsx"
+import repo_paths as rp  # noqa: E402
+OUT = rp.TABLES / "combined_friction_tables.xlsx"
 
 # --- house style (matches build_input_datasets_xlsx.py) -----------------------
 TITLE_FONT = Font(size=12, bold=True)

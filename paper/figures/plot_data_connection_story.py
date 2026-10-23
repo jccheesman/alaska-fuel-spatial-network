@@ -25,7 +25,7 @@ Panels A-C are the real repo data (EPSG:3338 Alaska Albers); D is a
 deliberate placeholder.
 
 Run with the project venv:
-    .venv/bin/python workflows/03_multimodal_join/viz/plot_data_connection_story.py
+    .venv/bin/python paper/figures/plot_data_connection_story.py
 """
 from __future__ import annotations
 

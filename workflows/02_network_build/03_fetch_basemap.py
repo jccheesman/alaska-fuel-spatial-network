@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fetch the Natural Earth basemap vectors used by the publication map (workflows/02_network_build/viz/plot_paper_network.py).
+"""Fetch the Natural Earth basemap vectors used by the publication map (paper/figures/plot_paper_network.py).
 
 Downloads two 10 m Natural Earth layers from the `nvkelso/natural-earth-vector` GitHub mirror into
 `data/basemap/` (gitignored) — run once; it skips files already present:

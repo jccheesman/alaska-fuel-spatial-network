@@ -20,8 +20,7 @@ KEY_ID is not in friction_config.RIVER_SEGMENT_KEY_IDS. On a correctly built
 mask panel 1-3 show no dark leaked cells at all.
 
 Usage:
-    python plot_marine_clip.py
-    python plot_marine_clip.py --out figs/clip.png
+    python diagnostics/01_friction_build/plot_marine_clip.py   (needs the /tmp intermediates — see below)
 """
 
 import numpy as np
@@ -40,8 +39,11 @@ WATER="#dde6f0"; LAND="#f0efec"; AXIS="#c3c2b7"
 C_KEEP="#86b6ef"; C_BAD="#d03b3b"; C_FL="#2a78d6"; C_MAR="#898781"; C_LEAK="#7a1f1f"
 plt.rcParams.update({"font.family":["DejaVu Sans"],"figure.facecolor":SURF,
                      "axes.facecolor":SURF,"savefig.facecolor":SURF})
-OUT='outputs/analysis/river_ice_marine_clip.png'
-ref=rasterio.open('/mnt/user-data/uploads/alaska-fuel-spatial-network/outputs/01_friction_build/waterway_mask_150m.tif')
+import repo_paths as rp
+OUT=rp.DIAGNOSTICS_OUT/'01_friction_build'/'river_ice_marine_clip.png'; OUT.parent.mkdir(parents=True,exist_ok=True)
+ref=rasterio.open(rp.FRICTION_BUILD/'waterway_mask_150m.tif')
+# NOT RUNNABLE AS IS: the /tmp inputs below were intermediates of the 2026 river-ice
+# marine-leak investigation, written by an ad-hoc session and never committed.
 T=ref.transform; D=6
 water=np.load('/tmp/water_bg.npy'); H,W=water.shape
 EXT=[T.c,T.c+W*D*150,T.f-H*D*150,T.f]

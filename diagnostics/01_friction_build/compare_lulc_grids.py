@@ -13,8 +13,8 @@ water/nodata (class 0), per-class recall, and the largest class confusions. Opti
 writes a decimated disagreement map.
 
 Usage:
-    python friction_surface/qa/compare_lulc_grids.py [--plot]
-    python friction_surface/qa/compare_lulc_grids.py --new <path> --old <path>
+    python diagnostics/01_friction_build/compare_lulc_grids.py [--plot]
+    python diagnostics/01_friction_build/compare_lulc_grids.py --new <path> --old <path>
 """
 from __future__ import annotations
 import argparse
@@ -24,8 +24,11 @@ import numpy as np
 import rasterio
 from rasterio.windows import Window
 
-HERE = Path(__file__).resolve().parent
-INPUTS = HERE.parent / "friction_inputs"
+import repo_paths as rp
+from friction_surface.friction_paths import RASTER_DIR
+
+OUT_DIR = rp.DIAGNOSTICS_OUT / "01_friction_build"
+INPUTS = Path(RASTER_DIR)   # was friction_inputs/ in the pre-merge friction repo
 NEW_DEFAULT = INPUTS / "dynamic_world_LULC_2022_2024_summer_mode_150m_EPSG3338.tif"
 OLD_DEFAULT = INPUTS / "small_grid" / "lulc.tif"
 
@@ -134,6 +137,7 @@ def save_plot(new_path: Path, old_path: Path, out_png: Path, width_px: int = 140
     ax.set_title("LULC fast-nearest vs exact reference — disagreeing 150 m cells (red)\n"
                  "grey = water/nodata agree", fontsize=11)
     ax.set_xlabel("Albers easting (km)"); ax.set_ylabel("Albers northing (km)")
+    out_png.parent.mkdir(parents=True, exist_ok=True)
     fig.savefig(out_png, dpi=130)
     print(f"\nwrote {out_png}")
 
@@ -153,7 +157,7 @@ def main() -> int:
     conf = build_confusion(args.new, args.old)
     report(conf)
     if args.plot:
-        save_plot(args.new, args.old, HERE / "lulc_fast_vs_exact_disagreement.png")
+        save_plot(args.new, args.old, OUT_DIR / "lulc_fast_vs_exact_disagreement.png")
     return 0
 
 

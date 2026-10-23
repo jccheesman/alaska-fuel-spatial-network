@@ -12,7 +12,7 @@ area-proportional hub sizing with a size legend; one shared figure legend; a sca
 vector PDF + 600-dpi PNG.
 
 Prereq: run `python3 workflows/02_network_build/03_fetch_basemap.py` once (auto-invoked here if data/basemap is missing).
-Run:    python3 workflows/02_network_build/viz/plot_paper_network.py   ->  outputs/02_network_build/reports/figs/network_facets.{pdf,png}
+Run:    python3 paper/figures/plot_paper_network.py   ->  outputs/02_network_build/reports/figs/network_facets.{pdf,png}
 """
 from __future__ import annotations
 
@@ -70,7 +70,7 @@ def _load_basemap(extent):
     if not land_p.exists():
         import subprocess
         print("[basemap] fetching Natural Earth (one-time)…")
-        subprocess.run([sys.executable, str(ROOT / "scripts" / "fetch_basemap.py")], check=False)
+        subprocess.run([sys.executable, str(rp.WORKFLOWS / "02_network_build" / "03_fetch_basemap.py")], check=False)
     if not land_p.exists():
         print("[basemap] unavailable — falling back to the Alaska outline only.")
         b = rp.BOUNDARY

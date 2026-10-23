@@ -9,7 +9,7 @@ air OD endpoints whose codes geocoded to non-Alaska airports) don't squash the s
 Writes `outputs/02_network_build/reports/figs/03_alaska_network.png`.
 
 Usage:
-    python workflows/02_network_build/viz/plot_network.py
+    python diagnostics/02_network_build/plot_network.py
 """
 
 from __future__ import annotations

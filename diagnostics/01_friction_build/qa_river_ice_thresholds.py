@@ -17,10 +17,10 @@ marginal mass live?
 
 Output:
   * stdout table of per-month and overall histograms
-  * friction_outputs/river_ice_threshold_histogram.png — visual
+  * outputs/diagnostics/01_friction_build/river_ice_threshold_histogram.png — visual
 
 Run:
-    python -m friction_surface.qa.qa_river_ice_thresholds
+    python diagnostics/01_friction_build/qa_river_ice_thresholds.py
 """
 
 from __future__ import annotations
@@ -37,8 +37,11 @@ logger = logging.getLogger(__name__)
 # ---------------------------------------------------------------------------
 # Configuration
 # ---------------------------------------------------------------------------
-INPUT_DIR = Path(__file__).parent.parent / "friction_inputs" / "river_ice"
-OUTPUT_PLOT = Path(__file__).parent.parent / "friction_outputs" / "river_ice_threshold_histogram.png"
+import repo_paths as rp  # noqa: E402
+from friction_surface.friction_paths import RASTER_FILES  # noqa: E402
+
+INPUT_DIR = Path(RASTER_FILES["river_ice"])
+OUTPUT_PLOT = rp.DIAGNOSTICS_OUT / "01_friction_build" / "river_ice_threshold_histogram.png"
 
 # Bin edges chosen around the threshold candidates (0.05 / 0.10 / 0.15 /
 # 0.30 / 0.50). Right-open intervals — last bin is closed at 1.0.
