@@ -23,8 +23,8 @@ uv sync --extra figures        # or: uv pip install -e ".[figures]"
 | `plot_combined_friction.py` | friction figures under the friction-stack output dir | the friction stack; imports its sibling `plot_friction_stack.py` |
 | `plot_friction_stack.py` | the per-mode friction grids, same place | the friction stack |
 | `tables/build_input_datasets_xlsx.py` | `outputs/tables/input_datasets.xlsx` | — |
-| `tables/build_combined_friction_tables.py` | `outputs/tables/combined_friction_tables.xlsx` | — (rates and fees read from `friction_costs.py`) |
+| `tables/build_combined_friction_tables.py` | `outputs/tables/combined_friction_tables.xlsx` | — (every value read from `friction_config.py` and `friction_costs.py`) |
 
-Note: the tracked `outputs/tables/friction_config.xlsx` has no generator here;
-`build_combined_friction_tables.py` writes `combined_friction_tables.xlsx`, which
-its docstring says supersedes those sheets, but it is not committed.
+`combined_friction_tables.xlsx` replaced the hand-exported `friction_config.xlsx`
+(retired 2026-10; it survives in git history). Rebuild it whenever
+`friction_config.py` or `friction_costs.py` changes.

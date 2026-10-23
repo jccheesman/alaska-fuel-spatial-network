@@ -1,6 +1,6 @@
-"""Build outputs/input_datasets.xlsx — publication-style table of workflow input datasets.
+"""Build outputs/tables/input_datasets.xlsx — publication-style table of workflow input datasets.
 
-Mirrors the styling of outputs/friction_config.xlsx: 12pt bold title row,
+Same house style as build_combined_friction_tables.py: 12pt bold title row,
 double-border header row, thin bottom border under the last data row,
 wrapped text, top alignment, generous column widths.
 """
