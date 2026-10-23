@@ -12,7 +12,7 @@ area-proportional hub sizing with a size legend; one shared figure legend; a sca
 vector PDF + 600-dpi PNG.
 
 Prereq: run `python3 workflows/02_network_build/03_fetch_basemap.py` once (auto-invoked here if data/basemap is missing).
-Run:    python3 paper/figures/plot_paper_network.py   ->  outputs/02_network_build/reports/figs/network_facets.{pdf,png}
+Run:    python3 figure_scripts/plot_paper_network.py   ->  outputs/02_network_build/reports/figs/network_facets.{pdf,png}
 """
 from __future__ import annotations
 

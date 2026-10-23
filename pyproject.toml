@@ -42,6 +42,7 @@ dependencies = [
 [project.optional-dependencies]
 dev = ["pytest>=7.1.1", "ruff"]
 gee = ["earthengine-api>=0.1.390"]   # only for re-exporting the GEE stack
+figures = ["openpyxl", "python-pptx"]  # figure_scripts/: tables/*.xlsx + the data-connection story deck
 
 [tool.setuptools]
 package-dir = {"" = "source_scripts"}

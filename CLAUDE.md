@@ -41,7 +41,7 @@ and the `fuel_network` package (`load` / `weights` / `graph`; analysis code impo
 
 Scripts that make a figure or check something live by *who runs them*: a stage
 driver or CI → the workflow (`viz/`, `qa/`); a publication figure or table →
-`paper/`; a build-time check or investigation → `diagnostics/<stage>/` (one README
+`figure_scripts/`; a build-time check or investigation → `diagnostics/<stage>/` (one README
 row each: question, where the answer lives, runnable?); re-deriving a committed
 input → `tools/input_prep/`. `analysis/` is reserved for questions asked of the
 finished network. `tests/test_standalone_scripts.py` keeps them parseable, free of
