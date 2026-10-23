@@ -1,10 +1,13 @@
-"""Build outputs/combined_friction_tables.xlsx — publication-style tables
-combining the four friction-parameter tables that previously lived as separate
-sheets in friction_config.xlsx, plus the per-mode cost table:
+"""Build outputs/tables/combined_friction_tables.xlsx — publication-style tables
+of the friction parameters and the per-mode cost model. It replaces the
+hand-exported friction_config.xlsx (retired 2026-10): every value is read from
+friction_config.py / friction_costs.py, so the workbook cannot drift from the
+model. Run it again after changing either module.
 
   Table 1 (sheet 'Table 1'), panels side by side to save vertical space:
-    (a) Land-cover friction        (was 'LULC Friction', Table 4)
-    (b) Permafrost zonal modifier  (was 'Permafrost',    Table 5)
+    (a) Land-cover friction        (left block)
+    (b) Permafrost zonal modifier  (right block, top)
+    (c) Slope friction reclass     (right block, below (b))
 
   Table 2 (sheet 'Table 2'), stacked panels:
     (a) Ice & water constants      (was 'Ice & Water',   Table 6)
@@ -17,23 +20,24 @@ sheets in friction_config.xlsx, plus the per-mode cost table:
   rate set; supersedes the earlier ISER-only derivations in
   modality_cost_rates.xlsx).
 
-Both land-cover and permafrost are three columns wide, so Table 1 places them
-in adjacent column blocks separated by a spacer column, with their notes below
-the panels. Styling mirrors build_input_datasets_xlsx.py (12 pt bold title,
+Every Table 1 panel is three columns wide: land cover fills the left block,
+permafrost and slope stack in the right block (separated by a spacer column),
+with the notes below the panels. Styling mirrors build_input_datasets_xlsx.py (12 pt bold title,
 double-border header row, thin bottom rule, wrapped top-aligned text).
 
 Publication cleanup vs. the source sheets: internal changelog notes and
 calibration-bug narration are stripped, leaving only the scientific rationale
 and data sources. Numeric friction/multiplier values are shown to two
-decimals. Values are otherwise unchanged from friction_config.
+decimals.
 """
 
 
 from openpyxl import Workbook
 from openpyxl.styles import Alignment, Border, Font, Side
 
-# Single source of truth: pull the routing-consumed rates and fees straight
-# from friction_costs.py so this workbook can never drift from the model.
+# Single source of truth: every friction value comes from friction_config.py and
+# every rate and fee from friction_costs.py, so this workbook can never drift.
+from friction_surface import friction_config as fc
 from friction_surface.friction_costs import (
     BASELINE_RATES_PER_GALLON_MILE as RATES,
     INTERMODAL_TRANSFER_FEES as FEES,
@@ -69,11 +73,12 @@ LAST_ROW_BORDER = Border(bottom=THIN)
 LEFT_TOP_WRAP = Alignment(horizontal="left", vertical="top", wrap_text=True)
 LEFT_CENTER_WRAP = Alignment(horizontal="left", vertical="center", wrap_text=True)
 
-# Table 1: land cover (A:C) | spacer (D) | permafrost (E:G).
+# Table 1: land cover (A:C) | spacer (D) | permafrost, then slope (E:G).
 T1_COL_WIDTHS = {"A": 7, "B": 20, "C": 10, "D": 3, "E": 21, "F": 14, "G": 11}
 T1_NCOLS = 7
 LULC_SPANS = [(1, 1), (2, 2), (3, 3)]
 PERMAFROST_SPANS = [(5, 5), (6, 6), (7, 7)]
+SLOPE_SPANS = PERMAFROST_SPANS
 
 # Table 2: four columns, equations panel merges B:C for the formula.
 T2_COL_WIDTHS = {"A": 22, "B": 22, "C": 20, "D": 52}
@@ -83,16 +88,12 @@ SPANS_EQ = [(1, 1), (2, 3), (4, 4)]           # A | B:C | D        (equations)
 
 # --- panel content (publication-cleaned) --------------------------------------
 LULC_HEADERS = ("Class", "Class name", "Friction")
+LULC_CLASS_NAMES = {0: "water", 1: "trees", 2: "grass", 3: "flooded_vegetation",
+                    4: "crops", 5: "shrub_scrub", 6: "built_area", 7: "bare_ground",
+                    8: "snow_ice"}   # Dynamic World v1 labels
 LULC_ROWS = [
-    ("0", "water", "NoData"),
-    ("1", "trees", "2.00"),
-    ("2", "grass", "1.15"),
-    ("3", "flooded_vegetation", "2.50"),
-    ("4", "crops", "1.10"),
-    ("5", "shrub_scrub", "1.60"),
-    ("6", "built_area", "1.05"),
-    ("7", "bare_ground", "1.10"),
-    ("8", "snow_ice", "5.00"),
+    (str(code), LULC_CLASS_NAMES[code], "NoData" if f is None else f"{f:.2f}")
+    for code, f in sorted(fc.LULC_FRICTION.items())
 ]
 LULC_NOTE = (
     "(a) LULC friction applies only to off-network (off-road) pixels; "
@@ -103,14 +104,16 @@ LULC_NOTE = (
 )
 
 PERMAFROST_HEADERS = ("Zone (IPA convention)", "Extent fraction p", "Multiplier")
+_PF_EDGES = (0.0, *fc.PERMAFROST_ZONE_BREAKS, 1.0)
 PERMAFROST_ROWS = [
-    ("none / isolated", "[0.00, 0.10)", "1.00"),
-    ("sporadic", "[0.10, 0.50)", "1.15"),
-    ("discontinuous", "[0.50, 0.90)", "1.30"),
-    ("continuous", "[0.90, 1.00]", "1.50"),
+    (label, f"[{lo:.2f}, {hi:.2f}{']' if i == 3 else ')'}", f"{m:.2f}")
+    for i, (label, lo, hi, m) in enumerate(zip(
+        ("none / isolated", "sporadic", "discontinuous", "continuous"),
+        _PF_EDGES[:-1], _PF_EDGES[1:], fc.PERMAFROST_ZONE_MULTIPLIERS))
 ]
 PERMAFROST_NOTE = (
-    "(b) Applied year-round. Zone breaks (0.10, 0.50, 0.90) and the four-zone "
+    "(b) Applied year-round. Zone breaks ("
+    + ", ".join(f"{x:.2f}" for x in fc.PERMAFROST_ZONE_BREAKS) + ") and the four-zone "
     "naming follow the IPA convention (Brown et al. 1997, Circum-Arctic Map of "
     "Permafrost). Per-pixel near-surface (≤1 m) permafrost probability from "
     "Pastick et al. 2015 (Remote Sens. Environ. 168, doi:10.1016/j.rse.2015.07.019). "
@@ -118,36 +121,55 @@ PERMAFROST_NOTE = (
     "membership."
 )
 
+_S1, _S2 = fc.SLOPE_THRESHOLDS
+SLOPE_HEADERS = ("Class", "Slope range (°)", "Friction")
+SLOPE_ROWS = [
+    (label, rng, f"{f:.2f}")
+    for label, rng, f in zip(("flat", "rolling", "mountain"),
+                             (f"< {_S1:g}", f"{_S1:g} to < {_S2:g}", f"≥ {_S2:g}"),
+                             fc.SLOPE_FRICTION)
+]
+SLOPE_NOTE = (
+    f"(c) Terrain slope from FABDEM V1, reclassified at {_S1:g}° / {_S2:g}° "
+    "(≈ 3.5% / 14% grade), in line with the AASHTO Green Book level / rolling / "
+    "mountainous classes. Checked against AKDOT HPMS 2024 road grades: the "
+    "length-weighted mean grade is 4.29% (≈ 2.5°), at the flat/rolling boundary, "
+    "and only 1.0% of mileage exceeds 15% grade, so no separate severe class. "
+    "Applies to every land pixel; on roads it enters as max(ROAD_FRICTION, f_slope)."
+)
+
 ICE_HEADERS = ("Constant", "Value", "Units", "Rationale / source")
 ICE_ROWS = [
-    ("SEA_ICE_THRESHOLD", "0.15", "fraction [0, 1]",
+    ("SEA_ICE_THRESHOLD", f"{fc.SEA_ICE_THRESHOLD:.2f}", "fraction [0, 1]",
      "NSIDC ice-edge definition; POLARIS limit for unreinforced barges."),
-    ("RIVER_ICE_THRESHOLD", "0.15", "fraction [0, 1]",
+    ("RIVER_ICE_THRESHOLD", f"{fc.RIVER_ICE_THRESHOLD:.2f}", "fraction [0, 1]",
      "Conservative operational threshold, consistent with the sea-ice value; "
      "matches Yukon / Kuskokwim practice of sailing only after breakup."),
-    ("WATER_FRICTION_BARGE", "1.00", "unitless",
+    ("WATER_FRICTION_BARGE", f"{fc.WATER_FRICTION_BARGE:.2f}", "unitless",
      "Ice-free open-water baseline; shares the reference-pixel baseline of "
      "ROAD_FRICTION. Cross-mode cost differentiation is carried separately by "
      "the per-mode $/gallon-mile rates."),
-    ("ROAD_FRICTION", "1.00", "unitless",
+    ("ROAD_FRICTION", f"{fc.ROAD_FRICTION:.2f}", "unitless",
      "Highway-grade on-road friction, combined as "
      "max(ROAD_FRICTION, f_slope) × permafrost."),
-    ("ROAD_BRIDGE_FRICTION", "1.00", "unitless",
+    ("ROAD_BRIDGE_FRICTION", f"{fc.ROAD_BRIDGE_FRICTION:.2f}", "unitless",
      "Highway-grade friction at bridges; slope and permafrost are skipped "
      "(engineered crossings)."),
-    ("ICEROAD_TIME_PENALTY", "2.00", "× highway",
+    ("ICEROAD_TIME_PENALTY", f"{fc.ICEROAD_TIME_PENALTY:.2f}", "× highway",
      "Loaded ice-road ≈ 25 mph vs. ≈ 50 mph highway baseline "
      "(UAF/INE 2023, Table 8.1)."),
-    ("ICEROAD_BUFFER_M", "75", "m",
-     "Half-pixel buffer on ice-road centerlines for 150 m grid connectivity."),
+    ("CORRIDOR_BUFFER_M", f"{fc.CORRIDOR_BUFFER_M:g}", "m",
+     f"Half-pixel buffer on corridor centerlines (road, ice road, waterway) for "
+     f"{fc.TARGET_RESOLUTION} m grid connectivity."),
 ]
 ICE_NOTE = None
 
 EQ_HEADERS = ("Step", "Formula", "Where applied")
 EQ_ROWS = [
     ("1a. Slope reclass",
-     "f_slope = 1.00 (slope < 2°); 1.40 (2 ≤ slope < 8°); "
-     "1.75 (slope ≥ 8°)",
+     f"f_slope = {fc.SLOPE_FRICTION[0]:.2f} (slope < {_S1:g}°); "
+     f"{fc.SLOPE_FRICTION[1]:.2f} ({_S1:g} ≤ slope < {_S2:g}°); "
+     f"{fc.SLOPE_FRICTION[2]:.2f} (slope ≥ {_S2:g}°)",
      "Every land pixel"),
     ("1b. LULC reclass",
      "f_lulc = LULC_FRICTION[class]   (class 0 water → NoData)",
@@ -156,14 +178,15 @@ EQ_ROWS = [
      "p = p_src / 100 if max(p_src) > 1, else p_src; clip to [0, 1]",
      "Permafrost source (once)"),
     ("2b. Permafrost modifier",
-     "pm = 1.00 / 1.15 / 1.30 / 1.50 for p in "
-     "[0, 0.10) / [0.10, 0.50) / [0.50, 0.90) / [0.90, 1.00]",
+     "pm = " + " / ".join(f"{m:.2f}" for m in fc.PERMAFROST_ZONE_MULTIPLIERS)
+     + " for p in " + " / ".join(r[1] for r in PERMAFROST_ROWS),
      "Every land pixel (year-round)"),
     ("3a. Ice normalize",
      "ice = ice_src / 100 if max(ice_src) > 1, else ice_src",
      "Each ice raster (×12 per type)"),
     ("3b. Ice present",
-     "sea_ice_present = sea_ice > 0.15; river_ice_present = river_ice > 0.15",
+     f"sea_ice_present = sea_ice > {fc.SEA_ICE_THRESHOLD:.2f}; "
+     f"river_ice_present = river_ice > {fc.RIVER_ICE_THRESHOLD:.2f}",
      "Per month"),
     ("4a. Static base",
      "static_base = f_slope × f_lulc; NoData on water pixels",
@@ -181,16 +204,16 @@ EQ_ROWS = [
      "out = max(ROAD_FRICTION, f_slope) × pm",
      "Road ∧ land, all months"),
     ("5c. Overland: bridges",
-     "out = ROAD_BRIDGE_FRICTION = 1.00",
+     f"out = ROAD_BRIDGE_FRICTION = {fc.ROAD_BRIDGE_FRICTION:.2f}",
      "Road ∧ water, all months"),
     ("5d. Overland: ice-road",
-     "out = max(ROAD_FRICTION, f_slope) × 2.00 × pm",
+     f"out = max(ROAD_FRICTION, f_slope) × {fc.ICEROAD_TIME_PENALTY:.2f} × pm",
      "Ice-road ∧ land, Jan–Mar (LULC dropped)"),
     ("6a. Barge: navigable",
      "navigable = water ∧ ¬sea_ice_present ∧ ¬river_ice_present",
      "Per month"),
     ("6b. Barge: friction",
-     "out = 1.00 on navigable; NoData elsewhere",
+     f"out = {fc.WATER_FRICTION_BARGE:.2f} on navigable; NoData elsewhere",
      "Per month"),
 ]
 EQ_NOTE = (
@@ -542,9 +565,10 @@ def main() -> None:
     ws1.title = "Table 1"
     write_caption(
         ws1,
-        "Table 1.  Land-cover and permafrost friction factors",
-        "Off-network land-cover friction and the year-round permafrost zonal "
-        "modifier. Friction is unitless (baseline 1.0).",
+        "Table 1.  Land-cover, permafrost and slope friction factors",
+        "Off-network land-cover friction, the year-round permafrost zonal "
+        "modifier and the terrain-slope reclass. Friction is unitless "
+        "(baseline 1.0).",
         T1_NCOLS, T1_COL_WIDTHS,
     )
     lulc_last = write_panel(ws1, 4, "(a)  Land-cover friction (Dynamic World v1)",
@@ -552,9 +576,12 @@ def main() -> None:
     pf_last = write_panel(ws1, 4, "(b)  Permafrost zonal modifier (year-round)",
                           PERMAFROST_HEADERS, PERMAFROST_ROWS, PERMAFROST_SPANS,
                           T1_COL_WIDTHS)
-    r = max(lulc_last, pf_last) + 2
+    slope_last = write_panel(ws1, pf_last + 2, "(c)  Slope friction reclass",
+                             SLOPE_HEADERS, SLOPE_ROWS, SLOPE_SPANS, T1_COL_WIDTHS)
+    r = max(lulc_last, slope_last) + 2
     r = write_note(ws1, r, LULC_NOTE, T1_NCOLS, T1_COL_WIDTHS)
-    write_note(ws1, r, PERMAFROST_NOTE, T1_NCOLS, T1_COL_WIDTHS)
+    r = write_note(ws1, r, PERMAFROST_NOTE, T1_NCOLS, T1_COL_WIDTHS)
+    write_note(ws1, r, SLOPE_NOTE, T1_NCOLS, T1_COL_WIDTHS)
     _finish_sheet(ws1, T1_COL_WIDTHS)
 
     # --- Table 2: ice/water constants + equations, stacked --------------------
