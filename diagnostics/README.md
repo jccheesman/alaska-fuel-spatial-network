@@ -15,7 +15,7 @@ Rules (enforced in part by `tests/test_standalone_scripts.py`):
 - **One row per script below.** Add the row when you add the script.
 
 Not to be confused with `analysis/` (questions asked *of* the finished network) or
-`paper/` (generators of the publication figures and tables).
+`figure_scripts/` (generators of the committed figures and tables).
 
 ## 01_friction_build
 

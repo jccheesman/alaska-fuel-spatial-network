@@ -7,7 +7,7 @@ pulls it into the giant, and overlay the hand-drawn manual lines coloured by mod
 
 Outputs: outputs/figures/disconnected_hubs.png  (+ a per-region zoom panel)
 Run (in the project .venv):
-    python paper/figures/plot_disconnected_hubs.py
+    python figure_scripts/plot_disconnected_hubs.py
 """
 from __future__ import annotations
 

@@ -39,7 +39,7 @@ from matplotlib.patches import Patch
 import repo_paths as rp
 
 from friction_surface.friction_paths import get_friction_output_dir
-from plot_friction_stack import (  # sibling script in paper/figures/
+from plot_friction_stack import (  # sibling script in figure_scripts/
     CONTINUOUS_CMAP,
     DEFAULT_LEGEND,
     MODE_LEGEND,

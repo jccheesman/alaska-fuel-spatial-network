@@ -1,4 +1,4 @@
-"""paper/, diagnostics/ and tools/ hold standalone scripts nobody runs on every build, so they
+"""figure_scripts/, diagnostics/ and tools/ hold standalone scripts nobody runs on every build, so they
 rot silently: the 2026-10 sort found four that could not run (package-relative imports outside
 a package, paths to folders that no longer exist, paths on one machine). Pin the cheap part:
 each one parses, imports nothing relatively, and names no machine-specific path.
@@ -10,7 +10,7 @@ import pytest
 
 import repo_paths as rp
 
-SCRIPTS = sorted(p for d in ("paper", "diagnostics", "tools") for p in (rp.ROOT / d).rglob("*.py"))
+SCRIPTS = sorted(p for d in ("figure_scripts", "diagnostics", "tools") for p in (rp.ROOT / d).rglob("*.py"))
 MACHINE_PATH = re.compile(r"""['"](/mnt/|/tmp/|/Users/|[A-Za-z]:\\)""")
 
 # Allowed exceptions, each with its reason (keep this list short).
