@@ -20,9 +20,9 @@ see friction_preprocessing/README.md. Defaults assume the documented layout;
 override with the flags if yours differs.
 
 Usage:
-    python plot_mask_construction.py
-    python plot_mask_construction.py --month 1 --lon -159.5 --lat 61.58   # Aniak
-    python plot_mask_construction.py --half-km 60 --out figs/mask.png
+    python diagnostics/01_friction_build/plot_mask_construction.py
+    python diagnostics/01_friction_build/plot_mask_construction.py --month 1 --lon -159.5 --lat 61.58   # Aniak
+    python diagnostics/01_friction_build/plot_mask_construction.py --half-km 60 --out mask.png
 
 Palette validated with the dataviz validator (all-pairs, #fcfcfb surface).
 """
@@ -42,16 +42,17 @@ import rasterio
 from rasterio.windows import from_bounds
 from shapely.ops import unary_union
 
+import repo_paths as rp
 ap=argparse.ArgumentParser(description=__doc__,formatter_class=argparse.RawDescriptionHelpFormatter)
-ap.add_argument('--data', default='source_scripts/friction_surface/friction_preprocessing/data',
+ap.add_argument('--data', default=str(rp.ROOT/'source_scripts'/'friction_surface'/'friction_preprocessing'/'data'),
                 help='holds waterFilledMedians2000_2023.geojson, brown_river_flowlines/, brown_river_polygons/')
-ap.add_argument('--rasters', default='inputs/friction_rasters/river_ice',
+ap.add_argument('--rasters', default=str(rp.FRICTION_RASTERS/'river_ice'),
                 help='river_ice_MM.tif; provenance_MM.tif is looked for in ./provenance under this')
 ap.add_argument('--month', type=int, default=10, help='default 10 — freeze-up, so p_ice still varies')
 ap.add_argument('--lon', type=float, default=-149.10)
 ap.add_argument('--lat', type=float, default=64.56)
 ap.add_argument('--half-km', type=float, default=45.0)
-ap.add_argument('--out', default='outputs/analysis/river_ice_mask_construction.png')
+ap.add_argument('--out', default=str(rp.DIAGNOSTICS_OUT/'01_friction_build'/'river_ice_mask_construction.png'))
 args=ap.parse_args()
 import os
 D=args.data; R=args.rasters; MM=f'{args.month:02d}'

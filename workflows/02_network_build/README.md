@@ -11,7 +11,7 @@ the model by editing the profile, not the code.
 python 00_normalize_raw.py       # data/raw -> data/interim (EPSG:3338, canonical cols, MANIFEST)
 python 01_prep_waterway.py       # NWN -> data/interim/ak_waterway.gpkg  (required by stage 04!)
 python 02_prep_airways.py        # OD legs -> airways.geojson + air_nodes + boundary
-python 03_fetch_basemap.py       # Natural Earth (figures only; needed by viz/plot_paper_network)
+python 03_fetch_basemap.py       # Natural Earth (figures only; needed by paper/figures/plot_paper_network.py)
 python 04_build_network.py       # validate_profile + mmnet stages 01->04 + reports
 python 05_verify_north_slope.py  # connectivity assertion gate
 python 06_export_final_network.py  # -> final_network/ zips + sha256 manifest (DELIBERATE step)

@@ -31,9 +31,9 @@ every cell in the Gulf of Alaska, the Inside Passage and around Kodiak.
 Requires waterway_river_mask_150m.tif (written by 01_build_corridor_masks.py).
 
 Usage:
-    python plot_river_ice_marine_leak.py
-    python plot_river_ice_marine_leak.py --month 12
-    python plot_river_ice_marine_leak.py --out outputs/analysis/leak_dec.png
+    python diagnostics/01_friction_build/plot_river_ice_marine_leak.py
+    python diagnostics/01_friction_build/plot_river_ice_marine_leak.py --month 12
+    python diagnostics/01_friction_build/plot_river_ice_marine_leak.py --out leak_dec.png
 """
 
 from __future__ import annotations
@@ -53,6 +53,7 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt  # noqa: E402
 from matplotlib.lines import Line2D  # noqa: E402
 
+import repo_paths as rp  # noqa: E402
 from friction_surface.friction_config import FRICTION_NODATA  # noqa: E402
 from friction_surface.friction_paths import (  # noqa: E402
     WATERWAY_MASK_TIF,
@@ -338,8 +339,8 @@ def main() -> int:
     )
     parser.add_argument("--month", type=int, default=2,
                         help="Month to map (default 2, the worst case).")
-    parser.add_argument("--out", default="outputs/analysis/"
-                                         "river_ice_marine_leak.png")
+    parser.add_argument("--out", default=str(rp.DIAGNOSTICS_OUT / "01_friction_build"
+                                             / "river_ice_marine_leak.png"))
     args = parser.parse_args()
     logging.basicConfig(level=logging.INFO, format="%(levelname)s %(message)s")
 

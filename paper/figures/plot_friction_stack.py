@@ -38,14 +38,14 @@ from matplotlib.colors import ListedColormap
 from matplotlib.patches import Patch
 from rasterio.enums import Resampling
 
-from ..friction_config import (
+from friction_surface.friction_config import (
     FRICTION_NODATA,
     LULC_WATER_CLASS,
     MODES,
     RIVER_ICE_THRESHOLD,
     SEA_ICE_THRESHOLD,
 )
-from ..friction_paths import RASTER_FILES, get_friction_output_dir
+from friction_surface.friction_paths import RASTER_FILES, get_friction_output_dir
 
 logger = logging.getLogger(__name__)
 

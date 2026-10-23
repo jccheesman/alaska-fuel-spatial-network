@@ -39,6 +39,14 @@ and the `fuel_network` package (`load` / `weights` / `graph`; analysis code impo
 `fuel_network.load_weighted_multigraph` and friends). Script names and CLIs are unchanged.
 `validate_inventory.py` lives in `workflows/00_inventory_qc/`.
 
+Scripts that make a figure or check something live by *who runs them*: a stage
+driver or CI → the workflow (`viz/`, `qa/`); a publication figure or table →
+`paper/`; a build-time check or investigation → `diagnostics/<stage>/` (one README
+row each: question, where the answer lives, runnable?); re-deriving a committed
+input → `tools/input_prep/`. `analysis/` is reserved for questions asked of the
+finished network. `tests/test_standalone_scripts.py` keeps them parseable, free of
+relative imports and machine-specific paths.
+
 Stage 02's export step is opt-in (`EXPORT_FINAL_NETWORK=1`) because it
 replaces the network-of-record.
 

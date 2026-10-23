@@ -5,12 +5,12 @@ double-border header row, thin bottom border under the last data row,
 wrapped text, top alignment, generous column widths.
 """
 
-from pathlib import Path
 
 from openpyxl import Workbook
 from openpyxl.styles import Alignment, Border, Font, Side
 
-OUT = Path(__file__).parent / "input_datasets.xlsx"
+import repo_paths as rp  # noqa: E402
+OUT = rp.TABLES / "input_datasets.xlsx"
 
 TITLE_FONT = Font(size=12, bold=True)
 HEADER_FONT = Font(size=11, bold=True)
