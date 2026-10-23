@@ -77,8 +77,8 @@ FRICTION_ROWS = [
     (
         "river_ice_01-12.tif",
         "GeoTIFF (12 monthly rasters)",
-        "",
-        "Monthly river-ice probability on the 150 m EPSG:3338 grid. Thresholded at 0.50 (reserved for the future frozen-river mode; currently blocks barge).",
+        "Brown et al. 2026 (DOI 10.18739/A2SB3X15X), processed by friction_preprocessing/river_ice_full_pipeline.py",
+        "Monthly river-ice fractional cover on the 150 m EPSG:3338 grid (p_ice = 1 - areaPropMedWater, Brown et al. 2026, 2000-2023 climatology). Thresholded at 0.15 — matches SEA_ICE_THRESHOLD given dimensional parity (both are fractional ice cover). Blocks barge mode where ice exceeds the operational threshold.",
     ),
     (
         "dynamic_world_LULC_2022_2024_summer_mode_150m_EPSG3338.tif",
