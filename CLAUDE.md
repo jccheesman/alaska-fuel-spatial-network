@@ -125,7 +125,8 @@ replaces the network-of-record.
   rasters copied/regenerated (EXTERNAL_DATA.md).
 - **`tools/build_notebooks.py` and `tools/gen_api_docs.py` (+ `docs/API.md`) were removed on 2026-08-17** (minimalism pass: off the build path; notebooks were never committed and the API reference was auto-generated). They survive in git history at commit `53569d0`.
 - **`research/` and `diagnostics/` were removed on 2026-08-07** (build-only
-  scope). They survive in git history at commit `3aa5eab`; docstrings in
+  scope, commit `6122745`). They survive in git history at commit `f455f0e`; docstrings in
   `source_scripts/mmnet/connect_extras.py`, `source_scripts/mmnet/inspect.py` and
   `workflows/02_network_build/01_prep_waterway.py` now name the prototypes
-  without pointing at paths.
+  without pointing at paths. Today's `diagnostics/` (2026-10) is unrelated: build-time
+  checks sorted out of the workflows, with the rules in its README.
