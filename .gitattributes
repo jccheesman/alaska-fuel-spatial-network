@@ -10,6 +10,10 @@
 * text=auto
 *.sh text eol=lf
 *.R text eol=lf
+# CSVs are checksummed byte-for-byte (release snapshots vs snapshot_manifest.json,
+# facilities_clean.csv vs a fresh run, the hub handoff vs MANIFEST.sha256) and every
+# writer emits LF, so a Windows checkout must not turn them into CRLF.
+*.csv text eol=lf
 
 # Binary artifacts — never diff, merge, or normalize.
 *.zip binary
