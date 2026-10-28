@@ -49,7 +49,8 @@ may alter a facility's label, position or inclusion.
 
 ## The script
 
-`scripts/record_corrections.py REVIEW.xlsx` does the mechanical part of the procedure below and
+`scripts/record_corrections.py REVIEW.xlsx` (the ledger `inventory_ledger.xlsx` — it reads the
+'Open review queue' tab — or a bare `review_queue.xlsx`) does the mechanical part of the procedure below and
 nothing more: it maps each filled `decision` to a row, reads `old_value` from the base release,
 validates values and dates, refuses to overwrite a (record_id, field) already decided, and prints
 every ambiguity as a QUESTION for the owner instead of guessing. Dry run by default; `--write`

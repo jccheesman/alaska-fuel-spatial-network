@@ -83,7 +83,10 @@ edit. Nothing in the chain hard-codes a derived column name.
    the service community (never changed); `located_in_place` is where the point physically is.
 6. **`06_review_queue.py`** — open flags only, for the owner.
 7. **`07_publish.py`** — row reconciliation, reviewer+date on every applied correction, schema-only
-   columns, regression fixtures, determinism. Fail → see the orchestrator's message; the fix is in
+   columns, regression fixtures, determinism.
+8. **`08_ledger.py`** — `inventory_ledger.xlsx`, the one workbook to send a colleague: Summary,
+   Approved by owner, Applied by rule, Aliases, Pending, Rejected & retired, Excluded, Open review
+   queue. Generated from the CSVs, byte-deterministic, never edited by hand. Fail → see the orchestrator's message; the fix is in
    `corrections.csv`, never in the output.
 
 ## Interpreting results that are NOT failures

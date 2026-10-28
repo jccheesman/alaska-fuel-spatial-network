@@ -30,7 +30,8 @@ dependencies = [
     # network + storage
     "networkx>=3.2",
     "duckdb>=1.1.3,<=1.3.1",
-    "scipy>=1.10.0",              # cKDTree river-ice nearest-fill + verify gates
+    "scipy>=1.10.0",
+    "openpyxl>=3.1",              # review_queue.xlsx + inventory_ledger.xlsx (workflow 00)              # cKDTree river-ice nearest-fill + verify gates
     # engine config
     "pydantic>=2",
     "pyyaml",

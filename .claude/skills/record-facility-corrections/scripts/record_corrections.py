@@ -128,7 +128,12 @@ def main(argv=None) -> int:
     ap.add_argument("--write", action="store_true", help="append to corrections.csv / remote_sites.csv (default: dry run)")
     a = ap.parse_args(argv)
     p = Path(a.review)
-    review = pd.read_excel(p, dtype=str) if p.suffix.lower() in (".xlsx", ".xlsm") else pd.read_csv(p, dtype=str)
+    if p.suffix.lower() in (".xlsx", ".xlsm"):
+        x = pd.ExcelFile(p)
+        sheet = "Open review queue" if "Open review queue" in x.sheet_names else x.sheet_names[0]   # the ledger or a bare queue
+        review = x.parse(sheet, dtype=str)
+    else:
+        review = pd.read_csv(p, dtype=str)
     review = review.fillna("")
     label = a.release or qc.latest_release()
     corr, remote, questions = plan(review, label, f"{p.name}")

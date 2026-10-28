@@ -2,7 +2,7 @@
 """Orchestrator for the facility-inventory QC chain (workflow 00), with cause + fix per failure.
 
 Runs, in order, 01 --check -> 02 apply corrections -> 03 normalise -> 04 detect ->
-05 boundary check -> 06 review queue -> 07 publish, stopping at the first failing gate and
+05 boundary check -> 06 review queue -> 07 publish -> 08 ledger, stopping at the first failing gate and
 printing what it means and which config file or sibling skill owns the fix.
 
     # read-only: run the chain into a temp dir and compare with the committed published table
@@ -64,6 +64,9 @@ STEPS = [
      "   fixture (a known 2026-10 error re-appeared: a correction was retired/removed or its target moved),\n"
      "   or non-deterministic output. Fix at the source — corrections.csv / column_map.csv — never by\n"
      "   editing facilities_clean.csv or relaxing a fixture. Owning skill: record-facility-corrections."),
+    ("08 ledger", "08_ledger.py", [],
+     "The ledger workbook could not be written: openpyxl missing, or a stage output it summarises is\n"
+     "   absent. Fix: install openpyxl (project dependency) / re-run 02-07. The ledger is generated; never edit it."),
 ]
 
 
