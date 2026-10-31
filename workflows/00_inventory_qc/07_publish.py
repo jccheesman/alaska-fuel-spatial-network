@@ -9,8 +9,11 @@ Publish checks (any failure -> exit 1; never loosen one to pass — see docs/INV
   1. row reconciliation: release rows == clean rows + excluded rows, every exclusion has a reason
   2. every applied correction carries a reviewer and a date
   3. only schema + derived columns in the output; no contact-field name anywhere
-  4. regression fixtures stay fixed (known errors from the 2026-10 audit)
-  5. determinism: a second run reproduces facilities_clean.csv byte-for-byte
+  4. facility_id (stage 03b): every located record has one, none shared, none differs from the
+     append-only ledger inputs/inventory_qc/facility_ids.csv; every located record has an AEA region
+     (stage 05b) or an explicit `outside` relation
+  5. regression fixtures stay fixed (known errors from the 2026-10 audit)
+  6. determinism: a second run reproduces facilities_clean.csv byte-for-byte
 
 Run:  python workflows/00_inventory_qc/07_publish.py [--release 2025]
 """
@@ -23,7 +26,9 @@ from pathlib import Path
 
 import pandas as pd
 
-from _qc import DERIVED, OUT, RELEASES, corrections, latest_release, read_csv, release_manifest, schema, write_csv
+from _qc import DERIVED, OUT, QC, RELEASES, corrections, latest_release, read_csv, release_manifest, schema, write_csv
+
+LEDGER = QC / "facility_ids.csv"
 
 CONTACT_WORDS = ("representative", "phone", "email", "landowner", "facilityowner", "operator", "evaluator", "_user")
 
@@ -66,6 +71,17 @@ def publish(label: str) -> tuple[Path, list[tuple[str, bool, str]]]:
     open_ids = set(read_csv(rq)["record_id"]) if rq.exists() else set()
     fac["qc_status"] = fac["record_id"].map(lambda i: "pending_review" if i in open_ids else "clean")
     fac["qc_release"] = label
+    # facility_id (03b): the ledger-backed id both repositories key on, blank when not located.
+    ia = out / "facility_ids_assigned.csv"
+    I = read_csv(ia).set_index("record_id") if ia.exists() else pd.DataFrame(columns=["facility_id"])
+    fac["facility_id"] = fac["record_id"].map(I["facility_id"])
+    # AEA energy region (05b): inside / nearest-within-cap / outside / untested; describes, never moves.
+    ra = out / "region_assignment.csv"
+    R = read_csv(ra).set_index("record_id") if ra.exists() else pd.DataFrame(
+        columns=["aea_region", "aea_region_relation", "aea_region_distance_km"])
+    for col in ("aea_region", "aea_region_relation", "aea_region_distance_km"):
+        fac[col] = fac["record_id"].map(R[col])
+    fac["aea_region_relation"] = fac["aea_region_relation"].fillna("untested")
     allowed = list(schema()["name"]) + DERIVED
     extra_before = [c for c in fac.columns if c not in allowed]
     fac = fac[[c for c in allowed if c in fac.columns]]
@@ -86,6 +102,20 @@ def publish(label: str) -> tuple[Path, list[tuple[str, bool, str]]]:
     missing_derived = [c for c in DERIVED if c not in fac.columns]
     checks.append(("every declared derived column is present (derived_columns.csv)", not missing_derived, f"missing={missing_derived}"))
     located = fac.dropna(subset=["latitude", "longitude"])
+    # facility_id contract: every located record has one, none is shared, and none differs from the
+    # ledger (the harness mints public ids from this number: it never moves).
+    fid = located["facility_id"]
+    checks.append(("every located record has a facility_id", fid.notna().all(), f"missing={int(fid.isna().sum())}"))
+    checks.append(("facility_id is unique across located records", not fid.dropna().duplicated().any(),
+                   f"shared={sorted(fid[fid.duplicated() & fid.notna()].unique())[:5]}"))
+    led = pd.read_csv(LEDGER, dtype=str, keep_default_na=False) if LEDGER.exists() else pd.DataFrame(columns=["record_id", "facility_id"])
+    led_map = dict(zip(led["record_id"], led["facility_id"]))
+    moved = [r for r, f in zip(located["record_id"], fid) if r in led_map and led_map[r] != f]
+    checks.append(("facility_id never differs from the ledger (facility_ids.csv)", not moved, f"moved={moved[:3]}"))
+    rel = located["aea_region_relation"]
+    checks.append(("every located record has an AEA region or an explicit 'outside' relation",
+                   (located["aea_region"].notna() | (rel == "outside")).all(),
+                   f"inside={int((rel == 'inside').sum())} nearest={int((rel == 'nearest').sum())} outside={int((rel == 'outside').sum())}"))
     for desc, pred in FIXTURES:
         try:
             ok = bool(pred(located))
@@ -113,6 +143,10 @@ def publish(label: str) -> tuple[Path, list[tuple[str, bool, str]]]:
              f"{int(log['outcome'].str.startswith('skipped').sum()) if len(log) else 0} skipped",
              f"- community keys: {fac['community_key'].nunique()} · unlabelled records: {int(fac['community_name'].isna().sum())}",
              f"- qc_status: {int((fac['qc_status'] == 'clean').sum())} clean · {int((fac['qc_status'] == 'pending_review').sum())} pending_review (withheld from hubs by the build)",
+             f"- facility_id: {int(fac['facility_id'].notna().sum())} located records with an id ({int(fac['ast_facility_id'].notna().sum())} AEA, "
+             f"{int((fac['facility_id'].notna() & fac['ast_facility_id'].isna()).sum())} synthetic from the ledger); "
+             f"AEA regions: {int((fac['aea_region_relation'] == 'inside').sum())} inside · "
+             f"{int((fac['aea_region_relation'] == 'nearest').sum())} nearest · {int((fac['aea_region_relation'] == 'outside').sum())} outside",
              "", "## Checks", "", "| check | result | detail |", "|---|---|---|"]
     for name, ok, detail in checks:
         lines.append(f"| {name} | {'PASS' if ok else 'FAIL'} | {detail} |")

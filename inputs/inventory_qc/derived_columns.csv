@@ -9,3 +9,7 @@ community_relation,05_boundary_check,string,"inside | adjacent (neighbouring pla
 corrections_applied,02_apply_corrections,string,;-joined fields an approved correction changed on this record
 qc_release,07_publish,string,Release label the table was published from
 qc_status,07_publish,string,"clean | pending_review (the record has an open item in review_queue.csv). The build withholds pending_review records from hub aggregation when the profile's hubs.withhold_pending_review is on"
+facility_id,03b_assign_facility_ids,int,"Stable facility id both repositories key on: the AEA ast_facility_id where the release carries one, else a synthetic id minted once and recorded in inputs/inventory_qc/facility_ids.csv (append-only ledger; the harness's element registry fingerprints it with the coordinates, so it never moves). Blank = not located"
+aea_region,05b_assign_region,string,"AEA energy region (Alaska_Energy_Authority_Library, 11 regions) the point sits in; the nearest region within thresholds aea_region_nearest_km when it sits in none; blank beyond that or when not located. The harness's located_in / regions tables read it"
+aea_region_relation,05b_assign_region,string,"inside | nearest (in no region polygon; assigned the nearest within aea_region_nearest_km) | outside (farther than that; region blank) | untested (not located)"
+aea_region_distance_km,05b_assign_region,float,"0 when inside; km from the point to the nearest region polygon when it sits in none; blank = untested"

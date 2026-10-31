@@ -1,7 +1,7 @@
 ---
 name: validate-facility-inventory
 description: Run the facility-inventory QC chain (workflow 00: ingest check -> corrections ->
-  normalise -> detectors -> boundary check -> review queue -> publish) and interpret each
+  normalise -> facility ids -> detectors -> boundary check -> AEA region -> review queue -> publish) and interpret each
   failure into a cause and a fix. Use after ingesting a new inventory release
   (ingest-facility-inventory), after recording corrections (record-facility-corrections),
   before any hub/network build, or when the owner asks to validate, refresh or debug the
@@ -75,15 +75,23 @@ edit. Nothing in the chain hard-codes a derived column name.
    Fail → the publisher changed that record: mark the row `retired` (fixed upstream) or update it,
    via `record-facility-corrections`.
 3. **`03_normalise.py`** — community keys + delivery flags; reports new spellings in `name_report.csv`.
+   **`03b_assign_facility_ids.py`** — `facility_id` from the append-only ledger `facility_ids.csv`.
+   Fail → a located record is new to the ledger (`--mint` appends it; commit the ledger) or two
+   records share an id (owner decision). Never renumber: the harness's public ids hang off it.
 4. **`04_detect.py`** — the detector registry (`detectors_run.csv` says which ran / were skipped).
 5. **`05_boundary_check.py`** — labels vs city/CDP boundaries; `boundary_summary.csv`,
    `boundary_distance.csv` (every located record: km to its own boundary, the polygon it sits in,
    and the relation → published as `community_distance_km`, `located_in_place`,
    `community_relation` = inside / adjacent / remote / elsewhere / untested). `community_name` is
    the service community (never changed); `located_in_place` is where the point physically is.
+   **`05b_assign_region.py`** — AEA energy region per located record (`region_assignment.csv`;
+   `aea_regions.csv` + `aea_region_adjacency.csv` are the harness's region tables). Inside a
+   polygon, else the nearest within `aea_region_nearest_km` (relation `nearest`, distance
+   published), else blank. Describes; never moves a record.
 6. **`06_review_queue.py`** — open flags only, for the owner.
 7. **`07_publish.py`** — row reconciliation, reviewer+date on every applied correction, schema-only
-   columns, regression fixtures, determinism.
+   columns, `facility_id` present / unique / equal to the ledger, a region (or explicit `outside`)
+   for every located record, regression fixtures, determinism.
 8. **`08_ledger.py`** — `inventory_ledger.xlsx`, the one workbook to send a colleague: Summary,
    Approved by owner, Applied by rule, Aliases, Pending, Rejected & retired, Excluded, Open review
    queue. Generated from the CSVs, byte-deterministic, never edited by hand. Fail → see the orchestrator's message; the fix is in

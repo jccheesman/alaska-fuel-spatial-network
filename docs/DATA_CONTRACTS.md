@@ -140,3 +140,28 @@ carry neither table.
 
 They are deliberately not merged: network topology knobs and friction
 constants serve different stages.
+
+## 10. The published facility table (workflow 00 → workflow 02 and the harness)
+
+Producer: `workflows/00_inventory_qc/07_publish.py` →
+`outputs/00_inventory_qc/<release>/facilities_clean.csv` (tracked), with
+`aea_regions.csv` and `aea_region_adjacency.csv` beside it. Consumers:
+`02_network_build/00_normalize_raw.py` (the inventory the hubs are built from)
+and the harness's `build_facility_tables.py` (pinned copies under its
+`inputs/facility_sources/qc/`, with `PROVENANCE.json`).
+
+Columns = `inputs/inventory_qc/facility_schema.csv` + every row of
+`inputs/inventory_qc/derived_columns.csv`, nothing else (publish fails on an
+undeclared or missing derived column; no contact column ever). The derived
+columns the harness depends on, and what each promises:
+
+| Column | Promise |
+|---|---|
+| `facility_id` | The number both repos key a facility on. AEA `ast_facility_id` where present, else a synthetic id minted once and written to the append-only ledger `inputs/inventory_qc/facility_ids.csv`. Never changes for a record (publish check); blank only when not located |
+| `delivery_barge` / `delivery_plane` / `delivery_road` | Every mode the record's `delivery_method` names; a multimodal facility is true in several. The harness's `uses_method` holds one row per true flag — nothing is collapsed to a single mode |
+| `aea_region`, `aea_region_relation`, `aea_region_distance_km` | The AEA energy region the point sits in (`inside`), else the nearest within `aea_region_nearest_km` (`nearest`, distance given), else blank (`outside`); `untested` when not located. The harness's `located_in` is this column verbatim |
+| `qc_status` | `clean` or `pending_review`; the build withholds the latter, the harness serves them flagged |
+
+Drift ⇒ the harness's `build_facility_tables.py --check` differs from its
+committed database, and its `PROVENANCE.json` names the data repo commit the
+copy came from.

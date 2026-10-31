@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Orchestrator for the facility-inventory QC chain (workflow 00), with cause + fix per failure.
 
-Runs, in order, 01 --check -> 02 apply corrections -> 03 normalise -> 04 detect ->
-05 boundary check -> 06 review queue -> 07 publish -> 08 ledger, stopping at the first failing gate and
+Runs, in order, 01 --check -> 02 apply corrections -> 03 normalise -> 03b assign facility ids ->
+04 detect -> 05 boundary check -> 05b assign region -> 06 review queue -> 07 publish -> 08 ledger, stopping at the first failing gate and
 printing what it means and which config file or sibling skill owns the fix.
 
     # read-only: run the chain into a temp dir and compare with the committed published table
@@ -48,6 +48,12 @@ STEPS = [
     ("03 normalise", "03_normalise.py", [],
      "aliases.csv is malformed (needs variant,canonical,...) or a stage-02 output is missing.\n"
      "   Fix: run 02 first; check inputs/inventory_qc/aliases.csv columns."),
+    ("03b assign facility ids", "03b_assign_facility_ids.py", [],
+     "A located record has no facility_id in the append-only ledger inputs/inventory_qc/facility_ids.csv\n"
+     "   (a record new to this release), or two records share an id / an AEA id collides with a synthetic one.\n"
+     "   Fix: `03b_assign_facility_ids.py --mint` appends the missing ids (owner action; commit the ledger);\n"
+     "   a collision is an owner decision recorded in the ledger. Never renumber a record: the harness's\n"
+     "   public facility ids are minted from this number."),
     ("04 detect", "04_detect.py", [],
      "thresholds.csv is missing a value a detector needs, or corrections.csv has an unknown status.\n"
      "   Fix: inputs/inventory_qc/thresholds.csv (one row per threshold with a reason); statuses are\n"
@@ -56,6 +62,10 @@ STEPS = [
      "The boundary zips under inputs/inventory_qc/boundaries/ are missing, unreadable, or not EPSG:3338,\n"
      "   or geopandas/pyogrio is not installed. Fix: restore the zips (sha256 in boundaries/SOURCE.md and\n"
      "   inputs/MANIFEST.md); never substitute a different boundary layer without updating both."),
+    ("05b assign region", "05b_assign_region.py", [],
+     "inputs/region_and_census_data.zip (the AEA energy-region shapefile is a member of it) is missing or\n"
+     "   unreadable, or thresholds.csv lacks aea_region_nearest_km. Fix: `git lfs pull`; restore the bundle\n"
+     "   (sha256 in inputs/MANIFEST.md); one row per threshold with a reason."),
     ("06 review queue", "06_review_queue.py", [],
      "A flags file from 04/05 is missing or malformed. Fix: re-run 04 and 05."),
     ("07 publish", "07_publish.py", [],
