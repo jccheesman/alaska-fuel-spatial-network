@@ -1,0 +1,35 @@
+region_a,region_b,shared_border_m
+Aleutians,Bristol Bay,243821.13867464426
+Bering Straits,Lower Yukon Kuskokwim,99306.90368519232
+Bering Straits,Northwest Arctic,365349.43911157054
+Bering Straits,Yukon-Koyukuk Upper Tanana,409370.4328635812
+Bristol Bay,Aleutians,243821.13867464426
+Bristol Bay,Kodiak,346871.3539557652
+Bristol Bay,Lower Yukon Kuskokwim,737521.8972978524
+Bristol Bay,Railbelt,355940.54142190993
+Copper River Chugach,Railbelt,488433.6188232368
+Copper River Chugach,Southeast,254079.89794329766
+Copper River Chugach,Yukon-Koyukuk Upper Tanana,439242.9008699235
+Kodiak,Bristol Bay,346871.3539557652
+Kodiak,Railbelt,82683.42368357535
+Lower Yukon Kuskokwim,Bering Straits,99306.90368519232
+Lower Yukon Kuskokwim,Bristol Bay,737521.8972978524
+Lower Yukon Kuskokwim,Railbelt,182544.69009829825
+Lower Yukon Kuskokwim,Yukon-Koyukuk Upper Tanana,607645.7803441458
+North Slope,Northwest Arctic,521179.3808049551
+North Slope,Yukon-Koyukuk Upper Tanana,714526.6825072797
+Northwest Arctic,Bering Straits,365349.43911157054
+Northwest Arctic,North Slope,521179.3808049551
+Northwest Arctic,Yukon-Koyukuk Upper Tanana,652676.885156161
+Railbelt,Bristol Bay,355940.54142190993
+Railbelt,Copper River Chugach,488433.6188232368
+Railbelt,Kodiak,82683.42368357535
+Railbelt,Lower Yukon Kuskokwim,182544.69009829825
+Railbelt,Yukon-Koyukuk Upper Tanana,1346877.2124077105
+Southeast,Copper River Chugach,254079.89794329766
+Yukon-Koyukuk Upper Tanana,Bering Straits,409370.4328635812
+Yukon-Koyukuk Upper Tanana,Copper River Chugach,439242.9008699235
+Yukon-Koyukuk Upper Tanana,Lower Yukon Kuskokwim,607645.7803441458
+Yukon-Koyukuk Upper Tanana,North Slope,714526.6825072797
+Yukon-Koyukuk Upper Tanana,Northwest Arctic,652676.885156161
+Yukon-Koyukuk Upper Tanana,Railbelt,1346877.2124077105

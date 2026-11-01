@@ -14,8 +14,10 @@ in `docs/INVENTORY_QC_PLAN.md`.
 python 01_ingest.py RAW.csv --release <label>   # raw release -> safe-column snapshot + diff vs previous
 python 02_apply_corrections.py                  # owner-approved corrections.csv rows (old_value-guarded)
 python 03_normalise.py                          # community_key (canonical + aliases.csv) + delivery flags
+python 03b_assign_facility_ids.py [--mint]      # stable facility_id from the append-only ledger (--mint appends new records)
 python 04_detect.py                             # detector registry -> structural flags
 python 05_boundary_check.py                     # label vs DCRA city + CDP boundary (verify only)
+python 05b_assign_region.py                     # AEA energy region per record (inside, else nearest within the cap)
 python 06_review_queue.py                       # open flags -> owner review sheet
 python 07_publish.py                            # clean table + QC report, after the output-contract checks
 # or: bash run_all.sh [RELEASE]                 # chains all of it (default: latest release); 01 runs --check
@@ -34,16 +36,23 @@ community past `boundary_review_km` is reviewable.
   columns only; the raw CSV is checksummed, never committed from 2025 on).
 - `inputs/inventory_qc/` — `facility_schema.csv`, `sources/<src>/column_map.csv`,
   `corrections.csv`, `aliases.csv`, `remote_sites.csv`, `thresholds.csv`,
-  `derived_columns.csv`, and the DCRA `boundaries/`.
+  `derived_columns.csv`, `facility_ids.csv` (the append-only facility-id ledger, owner data:
+  a record's number never changes once written) and the DCRA `boundaries/`.
+- `inputs/region_and_census_data.zip` — carries the AEA energy-region shapefile stage 05b
+  reads (extracted on demand).
 
 ## Outputs
 
 `outputs/00_inventory_qc/<release>/`: the staged tables (`facilities_corrected`,
 `excluded`, `corrections_log`, `facilities_normalised`, `name_report`,
-`flags_structural`, `detectors_run`, `flags_boundary`, `boundary_distance`,
+`facility_ids_assigned`, `flags_structural`, `detectors_run`, `flags_boundary`, `boundary_distance`,
+`region_assignment`, `aea_regions`, `aea_region_adjacency` (the harness's region tables),
 `boundary_summary`, `review_queue` + `.xlsx`) and, from stage 07, the published
 **`facilities_clean.csv`** (tracked, regenerated only here) + `qc_report.md`.
-`facilities_clean.csv` is the facility inventory workflow 02 reads.
+`facilities_clean.csv` is the facility inventory workflow 02 reads, and — with `aea_regions.csv`
+and `aea_region_adjacency.csv` — the only thing the harness's `build_facility_tables.py` loads:
+it carries the facility id, every delivery mode (`delivery_barge/plane/road`), the AEA region and
+the QC status, so the harness derives nothing from raw data (plan decisions 15–16).
 
 ## Skills (the repeatable procedure)
 

@@ -21,15 +21,16 @@ def load(name):
 qc = load("_qc")
 apply_mod = load("02_apply_corrections")
 norm_mod = load("03_normalise")
+ids_mod, reg_mod = load("03b_assign_facility_ids"), load("05b_assign_region")
 pub_mod = load("07_publish")
 LABEL = qc.latest_release()
 
 
 @pytest.fixture(scope="module")
 def pipeline(tmp_path_factory):
-    """Run 02 -> 03 -> 07 into a temporary outputs dir so tests never touch tracked outputs."""
+    """Run 02 -> 03 -> 03b -> 05b -> 07 into a temporary outputs dir so tests never touch tracked outputs."""
     tmp = tmp_path_factory.mktemp("qc")
-    for m in (qc, apply_mod, norm_mod, pub_mod):
+    for m in (qc, apply_mod, norm_mod, ids_mod, reg_mod, pub_mod):
         m.OUT = tmp
     fac, excl, log = apply_mod.apply(LABEL)
     qc.write_csv(fac, tmp / LABEL / "facilities_corrected.csv")
@@ -37,6 +38,8 @@ def pipeline(tmp_path_factory):
     qc.write_csv(log, tmp / LABEL / "corrections_log.csv")
     nfac, rep = norm_mod.normalise(LABEL)
     qc.write_csv(nfac, tmp / LABEL / "facilities_normalised.csv")
+    A, _, _ = ids_mod.assign(LABEL); qc.write_csv(A, tmp / LABEL / "facility_ids_assigned.csv")
+    R, _, _ = reg_mod.assign(LABEL); qc.write_csv(R, tmp / LABEL / "region_assignment.csv")
     clean, checks = pub_mod.publish(LABEL)
     return dict(fac=fac, excl=excl, log=log, nfac=nfac, rep=rep, clean=clean, checks=checks, tmp=tmp)
 
