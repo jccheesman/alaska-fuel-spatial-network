@@ -118,9 +118,13 @@ def dir_nonempty(p: Path) -> bool:
 
 def stage_01_friction_build(py: str) -> None:
     here = WORKFLOWS / "01_friction_build"
-    if not (ROOT / "inputs/friction_rasters/lulc.tif").is_file():
+    # The grid anchor, under its producer's (GEE) name — defined once in
+    # source_scripts/friction_surface/friction_paths.py (RASTER_NAMES); the
+    # bash twin carries the same literal.
+    lulc = "inputs/friction_rasters/dynamic_world_LULC_2022_2024_summer_mode_150m_EPSG3338.tif"
+    if not (ROOT / lulc).is_file():
         gate(
-            "inputs/friction_rasters/lulc.tif missing.",
+            f"{lulc} missing.",
             "The friction rasters are not in the repository: download and regenerate them",
             "(GEE export + pad/align + river-ice pipeline), then re-run. See DATA.md section 3.1.",
         )

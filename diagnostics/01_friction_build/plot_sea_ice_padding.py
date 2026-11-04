@@ -29,7 +29,7 @@ from matplotlib.patches import Rectangle
 import rasterio
 
 import repo_paths as rp
-from friction_surface.friction_paths import RASTER_DIR
+from friction_surface.friction_paths import RASTER_DIR, sea_ice_name
 
 OUT_DIR = rp.DIAGNOSTICS_OUT / "01_friction_build"
 SEA_ICE = Path(RASTER_DIR) / "sea_ice"
@@ -39,9 +39,10 @@ TARGET_WIDTH_PX = 1400  # decimated display width
 
 
 def find_raw(mm: str) -> Path:
-    """Raw GEE-named export for month mm, wherever it currently lives."""
-    for sub in ("gee_export", "provenance", ""):
-        hits = glob.glob(str(SEA_ICE / sub / f"sea_ice_median_{mm}_*.tif"))
+    """Raw (cropped) GEE export for month mm: pad_sea_ice_to_grid.py keeps it in
+    sea_ice/gee_export/ under the same name as the padded file."""
+    for sub in ("gee_export", "provenance"):
+        hits = glob.glob(str(SEA_ICE / sub / sea_ice_name(int(mm))))
         if hits:
             return Path(hits[0])
     raise FileNotFoundError(f"no raw GEE sea-ice export found for month {mm}")
@@ -62,7 +63,7 @@ def km(extent):  # metres -> km for axis labels
 def main() -> int:
     mm = (sys.argv[1] if len(sys.argv) > 1 else "03").zfill(2)
     name = MONTHS.get(mm, mm)
-    padded_path = SEA_ICE / f"sea_ice_{mm}.tif"
+    padded_path = SEA_ICE / sea_ice_name(int(mm))
     raw_path = find_raw(mm)
     if not padded_path.exists():
         raise FileNotFoundError(f"padded file not found: {padded_path} (run pad_sea_ice_to_grid.py)")

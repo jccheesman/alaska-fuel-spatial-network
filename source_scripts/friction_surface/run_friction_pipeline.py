@@ -17,10 +17,12 @@ import logging
 import time
 from pathlib import Path
 from .friction_surface import write_friction_stack
-from .friction_paths import setup_logging
+from .friction_paths import (
+    RASTER_NAMES, river_ice_relpath, sea_ice_relpath, setup_logging,
+)
 logger = logging.getLogger(__name__)
 
-REQUIRED_STATIC = ("slope.tif", "lulc.tif", "permafrost.tif")
+REQUIRED_STATIC = tuple(RASTER_NAMES.values())
 
 
 def _validate_inputs(input_dir: Path) -> None:
@@ -29,8 +31,7 @@ def _validate_inputs(input_dir: Path) -> None:
         if not (input_dir / name).exists():
             missing.append(name)
     for month in range(1, 13):
-        for kind in ("sea_ice", "river_ice"):
-            rel = f"{kind}/{kind}_{month:02d}.tif"
+        for rel in (sea_ice_relpath(month), river_ice_relpath(month)):
             if not (input_dir / rel).exists():
                 missing.append(rel)
     if missing:

@@ -6,7 +6,8 @@ Fail-fast input validation for the friction-surface pipeline.
 Checks every raster write_friction_stack will touch BEFORE any work starts:
 existence, CRS, resolution, grid alignment (transform + shape), dtype
 sanity, and value-range spot checks. One canonical grid is established
-from lulc.tif and everything else is compared against it.
+from the land-cover raster (friction_paths.RASTER_NAMES['lulc']) and
+everything else is compared against it.
 
 Two outcomes per layer:
   OK     — matches the canonical grid exactly.
@@ -39,7 +40,9 @@ from typing import Iterable
 import numpy as np
 import rasterio
 from .friction_config import MODES
-from .friction_paths import get_raster_dir
+from .friction_paths import (
+    RASTER_NAMES, get_raster_dir, river_ice_relpath, sea_ice_relpath,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -92,13 +95,11 @@ def _expected_layers(
     signature symmetry with the pipeline but does not change the layer set.
     """
     layers: dict[str, Path] = {
-        "slope": input_dir / "slope.tif",
-        "lulc": input_dir / "lulc.tif",
-        "permafrost": input_dir / "permafrost.tif",
+        key: input_dir / name for key, name in RASTER_NAMES.items()
     }
     for m in months:
-        layers[f"sea_ice_{m:02d}"] = input_dir / "sea_ice" / f"sea_ice_{m:02d}.tif"
-        layers[f"river_ice_{m:02d}"] = input_dir / "river_ice" / f"river_ice_{m:02d}.tif"
+        layers[f"sea_ice_{m:02d}"] = input_dir / sea_ice_relpath(m)
+        layers[f"river_ice_{m:02d}"] = input_dir / river_ice_relpath(m)
     return layers
 
 
@@ -181,14 +182,14 @@ def check_inputs(
                 rep.flag(
                     "FATAL",
                     f"origin off canonical by ({dx:.4f}, {dy:.4f}) pixels; "
-                    "snap to lulc grid upstream (align_permafrost / arcpy "
+                    "snap to the land-cover grid upstream (align_permafrost / arcpy "
                     "river_ice_full_pipeline / GEE crsTransform).",
                 )
             if rep.status != "FATAL" and not same_shape:
                 rep.flag(
                     "FATAL",
                     f"shape {rep.shape} != canonical {ref_shape}; "
-                    "extent differs from lulc — align upstream.",
+                    "extent differs from the land-cover raster — align upstream.",
                 )
             if spot_check_values and rep.status != "FATAL":
                 _value_spot_check(rep, src)

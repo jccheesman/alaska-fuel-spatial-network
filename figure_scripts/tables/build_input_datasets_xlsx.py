@@ -69,13 +69,13 @@ SPATIAL_ROWS = [
 
 FRICTION_ROWS = [
     (
-        "sea_ice_median_01-12_*_150m_EPSG3338.tif",
+        "sea_ice/sea_ice_median_{01..12}_{Jan..Dec}_150m_EPSG3338.tif",
         "GeoTIFF (12 monthly rasters)",
         "",
         "Monthly median sea-ice concentration on the 150 m EPSG:3338 grid. Thresholded at 0.15 to gate barge-mode navigability per month.",
     ),
     (
-        "river_ice_01-12.tif",
+        "river_ice/river_ice_probability_{01..12}_150m_EPSG3338.tif",
         "GeoTIFF (12 monthly rasters)",
         "Brown et al. 2026 (DOI 10.18739/A2SB3X15X), processed by friction_preprocessing/river_ice_full_pipeline.py",
         "Monthly river-ice fractional cover on the 150 m EPSG:3338 grid (p_ice = 1 - areaPropMedWater, Brown et al. 2026, 2000-2023 climatology). Thresholded at 0.15 — matches SEA_ICE_THRESHOLD given dimensional parity (both are fractional ice cover). Blocks barge mode where ice exceeds the operational threshold.",

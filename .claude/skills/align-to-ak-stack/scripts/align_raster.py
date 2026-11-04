@@ -3,16 +3,16 @@
 """align_raster.py
 
 Reproject, resample, and snap a source raster onto the canonical
-inputs/AK_Stack_150m/ grid as defined by the LULC reference layer.
+inputs/friction_rasters/ grid as defined by the land-cover reference layer.
 
 Used by the `align-to-ak-stack` skill. Standalone — no project package imports.
 
 Usage:
     python align_raster.py \
         --input <src.tif> \
-        --reference inputs/AK_Stack_150m/dynamic_world_LULC_2022_2024_summer_mode_150m_EPSG3338.tif \
+        --reference inputs/friction_rasters/dynamic_world_LULC_2022_2024_summer_mode_150m_EPSG3338.tif \
         --resampling {bilinear,nearest} \
-        --output inputs/AK_Stack_150m/<layer_name>.tif
+        --output inputs/friction_rasters/<layer_name>.tif
 
 Behavior:
   - Reads source CRS, transform, dtype, nodata; reports them before transforming.

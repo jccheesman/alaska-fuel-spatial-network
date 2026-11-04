@@ -36,12 +36,67 @@ PROJECT_ROOT = str(rp.ROOT)
 # ---------------------------------------------------------------------------
 RASTER_DIR = os.getenv("RASTER_DIR", str(rp.FRICTION_RASTERS))
 
+# ---------------------------------------------------------------------------
+# THE ONE NAME RULE (owner, 2026-11-04): every input raster keeps the name its
+# producer wrote, all the way through the pipeline. The Earth Engine script
+# (friction_preprocessing/gee_friction_layer_multi_data_processing.js) exports
+# slope, land cover, permafrost and the sea-ice medians under exactly these
+# names; the ArcGIS river-ice pipeline (river_ice_full_pipeline.py) writes
+# the river-ice names below. Padding and alignment happen IN PLACE under the
+# same name (the raw export is kept beside it in gee_export/). Nothing is
+# ever renamed on disk, so a reader can trace a file from the download to
+# the build by its name alone.
+#
+# This dict and the two month helpers are the only place the names live.
+# Everything else (the loaders, preflight, the grid checker, the pad/align
+# scripts, the tests, the run drivers' gate) reads them from here. The
+# arcpy script cannot import this module (it runs in ArcGIS Pro's Python),
+# so it repeats RIVER_ICE_NAME_FMT verbatim; tests/test_friction_paths.py
+# checks that the two copies agree.
+# ---------------------------------------------------------------------------
+RASTER_NAMES = {
+    "slope":      "FABDEM_slope_150m_EPSG3338.tif",
+    "lulc":       "dynamic_world_LULC_2022_2024_summer_mode_150m_EPSG3338.tif",
+    "permafrost": "permafrost_probability_150m_EPSG3338.tif",
+}
+# Monthly stacks live in a sub-folder each; {mm} is the zero-padded month,
+# {mon} the three-letter English abbreviation GEE put in the sea-ice names.
+SEA_ICE_SUBDIR = "sea_ice"
+RIVER_ICE_SUBDIR = "river_ice"
+SEA_ICE_NAME_FMT = "sea_ice_median_{mm}_{mon}_150m_EPSG3338.tif"
+RIVER_ICE_NAME_FMT = "river_ice_probability_{mm}_150m_EPSG3338.tif"
+MONTH_ABBR = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+              "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+
+
+def sea_ice_name(month: int) -> str:
+    """File name of the sea-ice median for `month` (1..12), e.g.
+    sea_ice_median_03_Mar_150m_EPSG3338.tif."""
+    return SEA_ICE_NAME_FMT.format(mm=f"{month:02d}", mon=MONTH_ABBR[month - 1])
+
+
+def river_ice_name(month: int) -> str:
+    """File name of the river-ice probability for `month` (1..12), e.g.
+    river_ice_probability_03_150m_EPSG3338.tif."""
+    return RIVER_ICE_NAME_FMT.format(mm=f"{month:02d}")
+
+
+def sea_ice_relpath(month: int) -> str:
+    """Path of the month's sea-ice raster relative to the raster directory."""
+    return os.path.join(SEA_ICE_SUBDIR, sea_ice_name(month))
+
+
+def river_ice_relpath(month: int) -> str:
+    """Path of the month's river-ice raster relative to the raster directory."""
+    return os.path.join(RIVER_ICE_SUBDIR, river_ice_name(month))
+
+
 RASTER_FILES = {
-    "slope":      os.path.join(RASTER_DIR, "slope.tif"),
-    "lulc":       os.path.join(RASTER_DIR, "lulc.tif"),
-    "permafrost": os.path.join(RASTER_DIR, "permafrost.tif"),
-    "sea_ice":    os.path.join(RASTER_DIR, "sea_ice"),    # directory of sea_ice_{01..12}.tif
-    "river_ice":  os.path.join(RASTER_DIR, "river_ice"),  # directory of river_ice_{01..12}.tif
+    "slope":      os.path.join(RASTER_DIR, RASTER_NAMES["slope"]),
+    "lulc":       os.path.join(RASTER_DIR, RASTER_NAMES["lulc"]),   # the grid anchor
+    "permafrost": os.path.join(RASTER_DIR, RASTER_NAMES["permafrost"]),
+    "sea_ice":    os.path.join(RASTER_DIR, SEA_ICE_SUBDIR),    # directory, see sea_ice_name
+    "river_ice":  os.path.join(RASTER_DIR, RIVER_ICE_SUBDIR),  # directory, see river_ice_name
 }
 
 # Friction-stack output directory (the 24 monthly friction TIFs: 12 overland
@@ -112,7 +167,7 @@ WATERWAY_RIVER_MASK_TIF = os.path.join(OUTPUTS_DIR, "01_friction_build",
 # ---------------------------------------------------------------------------
 
 def get_raster_dir() -> str:
-    """Path to the GEE raster directory.
+    """Path to the input-raster directory.
 
     Returns the import-time-captured RASTER_DIR (env var RASTER_DIR with
     default <PROJECT_ROOT>/inputs/friction_rasters). Re-reading the env on

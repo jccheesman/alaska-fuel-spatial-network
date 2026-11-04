@@ -180,7 +180,7 @@ def check_file_set_and_profile(friction_dir: Path) -> list[str]:
             f"(stray files: {sorted(p.name for p in found if p not in expected_paths)})"
         )
 
-    # Reference profile from lulc.tif (canonical grid).
+    # Reference profile from the land-cover raster (the canonical grid).
     with rasterio.open(get_raster_path("lulc")) as ref:
         ref_crs = ref.crs
         ref_transform = ref.transform

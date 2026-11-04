@@ -1,7 +1,8 @@
 ---
 name: align-to-ak-stack
 description: Reproject, resample, and snap a raster onto the canonical
-  AK_Stack_150m grid (reference layer inputs/friction_rasters/lulc.tif)
+  AK_Stack_150m grid (reference layer: the land-cover raster
+  inputs/friction_rasters/dynamic_world_LULC_2022_2024_summer_mode_150m_EPSG3338.tif)
   used by the friction layer. Use when ingesting any new raster (land cover,
   GEE export, sea-ice median, road raster) that must stack pixel-aligned with
   existing friction-input layers. Do NOT use for vector data — rasterize
@@ -13,7 +14,7 @@ description: Reproject, resample, and snap a raster onto the canonical
 ## When to use this skill
 
 Trigger this skill when the user wants to add or refresh a raster layer in
-`inputs/AK_Stack_150m/` and the source raster has a different CRS, resolution,
+`inputs/friction_rasters/` and the source raster has a different CRS, resolution,
 extent, or pixel alignment than the canonical stack.
 
 Do NOT trigger for:
@@ -22,16 +23,15 @@ Do NOT trigger for:
 
 ## Canonical grid specification
 
-All layers in `inputs/AK_Stack_150m/` MUST match:
+All layers in `inputs/friction_rasters/` MUST match:
 
 - **CRS:** EPSG:3338 (Alaska Albers)
 - **Resolution:** 150m × 150m
 - **Pixel alignment:** snapped to the canonical reference layer
-  `inputs/friction_rasters/lulc.tif` — this is the working copy of
-  `dynamic_world_LULC_2022_2024_summer_mode_150m_EPSG3338.tif` that the
-  pipeline reads (`friction_paths.py`, `RASTER_DIR`). The original GEE export
-  is archived in `inputs/AK_Stack_150m.zip`; if you need it, unzip that
-  archive — NEVER substitute a different raster as the grid reference.
+  `inputs/friction_rasters/dynamic_world_LULC_2022_2024_summer_mode_150m_EPSG3338.tif`
+  — the Dynamic World export under its own (GEE) name, which is the name the
+  pipeline reads (`friction_paths.RASTER_NAMES["lulc"]`). NEVER substitute a
+  different raster as the grid reference, and never rename it.
 - **Extent:** matches reference grid bounds (do not clip smaller; pad with nodata)
 - **NoData:** -9999 for float, 255 for uint8
 
@@ -59,12 +59,14 @@ If a candidate doesn't match all four, run the alignment procedure below.
    ```
    python scripts/align_raster.py \
        --input <src.tif> \
-       --reference inputs/friction_rasters/lulc.tif \
+       --reference inputs/friction_rasters/dynamic_world_LULC_2022_2024_summer_mode_150m_EPSG3338.tif \
        --resampling <method> \
        --output inputs/friction_rasters/<layer_name>.tif
    ```
    Output goes to `inputs/friction_rasters/` (the pipeline's
-   `RASTER_DIR`) so `friction_paths.py` can resolve it.
+   `RASTER_DIR`). If the layer replaces one of the five pipeline inputs, write
+   it under the pipeline's name for that input (`friction_paths.RASTER_NAMES`,
+   `sea_ice_name`, `river_ice_name`); never invent a new name for a known input.
 
 4. **Verify the output** before reporting success:
    - CRS == EPSG:3338

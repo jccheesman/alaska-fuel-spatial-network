@@ -4,8 +4,8 @@ Deterministic, agent-free friction-surface construction for the DOE_MAS
 Alaska bulk-fuel logistics graph. This package is the repo's config +
 surface-builder *core*: root-level modules (build_corridor_masks,
 weight_network_edges, pipeline) import from it. It is not a
-standalone distributable — see README_friction.md for the module map and the
-library-vs-scripts split.
+standalone distributable — see README.md (this folder) for the module map and
+the library-vs-scripts split.
 
 The names re-exported below are the intended public surface. Importing the
 package is cheap (numpy + rasterio via the surface builder); matplotlib and

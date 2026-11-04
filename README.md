@@ -136,21 +136,25 @@ regenerated together. Full provenance: `final_network/README.md`.
 | `inputs/` | The committed input bundles and the inventory-QC config tables; every dataset's source, status and conversion is in `DATA.md` |
 | `final_network/` | The frozen act-(b)→(c) handoff (zips + hub handoff CSVs); regenerable with the source scripts, but a re-export is a new network-of-record |
 | `outputs/` | Gitignored regenerables + committed figures, tables and the published clean facility table + the DuckDB deliverable (`outputs/README.md`) |
-| `docs/` | `DATA_DICTIONARY.md` (what every field means, with units), `DATA_CONTRACTS.md` (every inter-stage contract), `ARCHITECTURE.md` (engine design), `CHANGELOG.md` (network-of-record versions), `INVENTORY_QC_PLAN.md` + `data_audit/` (the facility-inventory QC plan and its 2026-10 investigation) |
+| `docs/` | `GLOSSARY.md` (every acronym, Alaskan term and pipeline word, for readers new to Alaska), `DATA_DICTIONARY.md` (what every field means, with units), `DATA_CONTRACTS.md` (every inter-stage contract), `ARCHITECTURE.md` (engine design), `CHANGELOG.md` (network-of-record versions), `INVENTORY_QC_PLAN.md` + `data_audit/` (the facility-inventory QC plan and its 2026-10 investigation) |
 | `tests/` | pytest suite (run by CI) |
 | `.claude/skills/` | Nine procedural playbooks (friction, costs, network profile/build; inventory ingest/record-corrections/validate) |
 
 ## Preprocessing the friction inputs
 
 The friction stack expects grid-aligned rasters (land cover, slope, permafrost,
-12× sea ice, 12× river ice) snapped to the canonical `lulc.tif` grid. They are
-downloaded and regenerated, not committed: `DATA.md` §1.4 lists the five
-source datasets and §3.1 walks through the Earth Engine export, the
-padding and alignment steps, and the ArcGIS Pro river-ice pipeline. The
-`align-to-ak-stack` skill snaps any new raster onto the reference grid.
+12× sea ice, 12× river ice) snapped to the canonical grid of the land-cover
+raster. They are downloaded and regenerated, not committed, and every file
+keeps the name its producer gave it (the names are defined once in
+`source_scripts/friction_surface/friction_paths.py`). `DATA.md` §1.4 lists
+the five source datasets and §3.1 walks through the Earth Engine export, the
+padding and alignment steps, and the ArcGIS Pro river-ice pipeline, step by
+step. The `align-to-ak-stack` skill snaps any new raster onto the reference grid.
 
 ## Related docs
 
+- `docs/GLOSSARY.md` — the agencies, datasets, Alaskan geography and pipeline
+  vocabulary, explained for a reader new to Alaska
 - `DATA.md` — every dataset: source, where it lives, what kind it is, and the
   script that turns it into the next product, from the original downloads to
   the DuckDB deliverable
