@@ -4,6 +4,8 @@
   inputs/raw_facility_data/2022/bulk_fuel_data.zip -> inputs/bulk_fuel_data/
   inputs/data_for_network_build.zip  -> inputs/data_for_network_build/
   inputs/region_and_census_data.zip  -> inputs/region_and_census_data/
+  inputs/river_ice/river_ice_sources.zip -> inputs/river_ice_work/  (the river-ice
+                                        working directory: Brown reach points + masks)
   inputs/network_raw.zip             -> data/raw/          (workflow 02 sources;
                                         not in the repository — see DATA.md §4.1)
 
@@ -22,6 +24,7 @@ TARGETS = {
     ROOT / "inputs" / "raw_facility_data" / "2022" / "bulk_fuel_data.zip": ROOT / "inputs",
     ROOT / "inputs" / "data_for_network_build.zip": ROOT / "inputs",
     ROOT / "inputs" / "region_and_census_data.zip": ROOT / "inputs",
+    ROOT / "inputs" / "river_ice" / "river_ice_sources.zip": ROOT / "inputs" / "river_ice_work",
     # network_raw.zip: destination depends on how its members are rooted —
     # resolved dynamically in main() (see _network_raw_dest).
     ROOT / "inputs" / "network_raw.zip": None,
@@ -44,10 +47,11 @@ def main() -> None:
     extracted = 0
     for zpath, dest in TARGETS.items():
         if not zpath.exists():
-            print(f"skip: {zpath.relative_to(ROOT)} not present"
-                  + (" (not in the repository — see DATA.md section 4.1)"
-                     if zpath.name == "network_raw.zip" else
-                     " (clone incomplete? the zips are plain git blobs, no LFS)"))
+            why = {
+                "network_raw.zip": " (not in the repository — see DATA.md section 4.1)",
+                "river_ice_sources.zip": " (river-ice sources not yet added — see DATA.md section 3.1)",
+            }.get(zpath.name, " (clone incomplete? the zips are plain git blobs, no LFS)")
+            print(f"skip: {zpath.relative_to(ROOT)} not present{why}")
             continue
         with zipfile.ZipFile(zpath) as zf:
             if dest is None:  # network_raw.zip — root depends on member layout

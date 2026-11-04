@@ -25,18 +25,20 @@ Outputs:
   by GNIS_Name. 
 
 Working directory (one folder, shared with river_ice_full_pipeline.py, which
-reads what this script writes):
+reads what this script writes). Default: inputs/river_ice_work/, which
+tools/extract_inputs.py fills from the tracked inputs/river_ice/river_ice_sources.zip
+(reach points + the two masks); FRICTION_LAYER_ROOT or --work-dir overrides it.
 
-    $FRICTION_LAYER_ROOT/
-      waterFilledMedians2000_2023.geojson             Brown et al. 2026 reach points (download)
-      NHD_extracted/Shape/NHDArea.shp, NHDFlowline_*.shp   USGS NHD Alaska, unzipped (download)
-      brown_river_polygons/brown_river_polygons.shp     <- written here
-      brown_river_flowlines/brown_river_flowlines.shp   <- written here
+    <work-dir>/
+      waterFilledMedians2000_2023.geojson             Brown et al. 2026 reach points (in the bundle)
+      NHD_extracted/Shape/NHDArea.shp, NHDFlowline_*.shp   USGS NHD Alaska, unzipped (download, 5 GB;
+                                                      only needed to RE-BUILD the masks)
+      brown_river_polygons/brown_river_polygons.shp     <- written here (also in the bundle)
+      brown_river_flowlines/brown_river_flowlines.shp   <- written here (also in the bundle)
 
 Usage (from the repo root, project environment active):
-    export FRICTION_LAYER_ROOT=/path/to/river_ice_work
     python -m friction_surface.friction_preprocessing.build_brown_polygon_mask
-    # or point at the pieces explicitly:
+    # or point at another working directory / the pieces explicitly:
     python -m friction_surface.friction_preprocessing.build_brown_polygon_mask \\
         --work-dir /path/to/river_ice_work [--nhd-dir ...] [--reach-points ...]
 """
@@ -176,9 +178,9 @@ def main():
     parser = argparse.ArgumentParser(
         description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument(
-        "--work-dir", default=os.getenv("FRICTION_LAYER_ROOT"),
-        help="The river-ice working directory (default: $FRICTION_LAYER_ROOT); "
-             "the four paths below default to its layout",
+        "--work-dir", default=os.getenv("FRICTION_LAYER_ROOT") or str(rp.RIVER_ICE_WORK),
+        help="The river-ice working directory (default: $FRICTION_LAYER_ROOT, else "
+             f"{rp.RIVER_ICE_WORK}); the four paths below default to its layout",
     )
     parser.add_argument(
         "--nhd-dir", default=None,
@@ -236,15 +238,7 @@ def main():
     parser.set_defaults(marine_clip=True)
     args = parser.parse_args()
 
-    explicit = all(v is not None for v in
-                   (args.nhd_dir, args.reach_points, args.output, args.flowlines_output))
-    if args.work_dir is None and not explicit:
-        sys.exit(
-            "ERROR: set FRICTION_LAYER_ROOT (or pass --work-dir) to the river-ice "
-            "working directory, or give all four of --nhd-dir, --reach-points, "
-            "--output and --flowlines-output explicitly."
-        )
-    work = Path(args.work_dir) if args.work_dir else None
+    work = Path(args.work_dir)
     if args.nhd_dir is None:
         args.nhd_dir = str(work / "NHD_extracted" / "Shape")
     if args.reach_points is None:

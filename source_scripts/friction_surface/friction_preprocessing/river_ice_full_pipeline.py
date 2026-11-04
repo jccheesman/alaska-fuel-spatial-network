@@ -13,23 +13,25 @@ source at all are left NoData for the friction build to fill under its own
 distance cap -- see the note in process_data_month.
 
 Run with Pro's Python environment, from any directory:
-    set FRICTION_LAYER_ROOT=D:\\river_ice_work          (the working directory, below)
     set RASTER_DIR=C:\\path\\to\\repo\\inputs\\friction_rasters
     "C:\\Program Files\\ArcGIS\\Pro\\bin\\Python\\scripts\\propy.bat" river_ice_full_pipeline.py
 or, after `conda activate arcgispro-py3`:
     python river_ice_full_pipeline.py
 
-Both environment variables are required (there is no default: the original
-authoring machine's paths are nobody else's).
+RASTER_DIR is required (there is no default: the original authoring machine's
+paths are nobody else's). The working directory defaults to the repo's
+inputs/river_ice_work/ beside it, which `python tools/extract_inputs.py` fills
+from the tracked inputs/river_ice/river_ice_sources.zip; set FRICTION_LAYER_ROOT
+to use another folder.
 
 WORKING DIRECTORY LAYOUT (one folder, shared with build_brown_polygon_mask.py,
 which writes the two shapefile folders; see friction_preprocessing/README.md):
 
-    $FRICTION_LAYER_ROOT/
-      waterFilledMedians2000_2023.geojson           Brown et al. 2026 reach points (download)
-      NHD_extracted/Shape/                          USGS NHD Alaska, unzipped (download)
-      brown_river_polygons/brown_river_polygons.shp   <- build_brown_polygon_mask.py
-      brown_river_flowlines/brown_river_flowlines.shp <- build_brown_polygon_mask.py
+    <working directory>/
+      waterFilledMedians2000_2023.geojson           Brown et al. 2026 reach points (in the bundle)
+      brown_river_polygons/brown_river_polygons.shp   in the bundle; rebuilt by build_brown_polygon_mask.py
+      brown_river_flowlines/brown_river_flowlines.shp in the bundle; rebuilt by build_brown_polygon_mask.py
+      NHD_extracted/Shape/                          USGS NHD Alaska (download) — only to rebuild the masks
 
 OUTPUTS (the friction pipeline reads these directly; nothing is renamed):
 
@@ -70,8 +72,12 @@ def _required_env(name, what):
     return value
 
 
-PROJECT_ROOT = _required_env("FRICTION_LAYER_ROOT", "the river-ice working directory")
 RASTER_DIR   = _required_env("RASTER_DIR", "the repo's inputs/friction_rasters folder")
+# The working directory: FRICTION_LAYER_ROOT if set, else the repo's
+# inputs/river_ice_work/ next to RASTER_DIR (what tools/extract_inputs.py fills
+# from the tracked river_ice_sources.zip).
+PROJECT_ROOT = os.getenv("FRICTION_LAYER_ROOT") or os.path.join(
+    os.path.dirname(os.path.normpath(RASTER_DIR)), "river_ice_work")
 
 # Inputs (the working directory)
 GEOJSON_PATH = os.path.join(PROJECT_ROOT, "waterFilledMedians2000_2023.geojson")
@@ -144,6 +150,7 @@ def setup_environment():
     for d in (OUT_DIR, PROV_DIR):
         if not os.path.isdir(d):
             os.makedirs(d)
+    print("Working dir:    ", PROJECT_ROOT)
     for path, what in ((GEOJSON_PATH, "Brown reach points"),
                        (POLYGON_SHP, "Brown river polygons (build_brown_polygon_mask.py)"),
                        (FLOWLINE_SHP, "Brown river flowlines (build_brown_polygon_mask.py)")):

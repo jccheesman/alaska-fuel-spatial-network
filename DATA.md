@@ -75,7 +75,7 @@ keeps the name its producer gave it, all the way into the build (§3.1).
 | Dynamic World V1 (summer-mode land cover) | Land-cover friction; water class for barge | `inputs/friction_rasters/dynamic_world_LULC_2022_2024_summer_mode_150m_EPSG3338.tif` — the grid anchor | Download and regenerate | [GEE catalog](https://developers.google.com/earth-engine/datasets/catalog/GOOGLE_DYNAMICWORLD_V1) (read directly in GEE) |
 | Pastick et al. 2015 near-surface permafrost probability | Permafrost friction | `inputs/friction_rasters/permafrost_probability_150m_EPSG3338.tif` | Download and regenerate | [USGS](https://www.usgs.gov/publications/distribution-near-surface-permafrost-alaska-estimates-present-and-future-conditions) · [paper](https://www.sciencedirect.com/science/article/pii/S0034425715300778) (download, upload as a GEE asset) |
 | Historical Sea Ice Atlas (UAF SNAP / AOOS), monthly medians 1990–2022 | Barge ice gating, 12 months | `inputs/friction_rasters/sea_ice/sea_ice_median_{01..12}_{Jan..Dec}_150m_EPSG3338.tif` | Download and regenerate | [SNAP catalog](https://catalog.snap.uaf.edu/geonetwork/srv/eng/catalog.search#/metadata/047e91c7-35c6-410a-a1ef-95539c1ee328) (download, upload as a GEE asset) |
-| Brown et al. 2026 river-ice phenology (reach points) + USGS National Hydrography Dataset for Alaska | River ice gating, 12 months | `inputs/friction_rasters/river_ice/river_ice_probability_{01..12}_150m_EPSG3338.tif` | Download and regenerate | [Arctic Data Center 10.18739/A2SB3X15X](https://arcticdata.io/catalog/view/doi:10.18739/A2SB3X15X) · USGS National Map (NHD, Alaska state shapefile) |
+| Brown et al. 2026 river-ice phenology (reach points) + USGS National Hydrography Dataset for Alaska | River ice gating, 12 months | The reach points and the two NHD-derived river masks: `inputs/river_ice/river_ice_sources.zip` → `inputs/river_ice_work/` (`inputs/river_ice/SOURCE.md`). The twelve monthly rasters: `inputs/friction_rasters/river_ice/river_ice_probability_{01..12}_150m_EPSG3338.tif` | In the repository (reach points + masks, once the zip is added) · Download and regenerate (the rasters; the NHD download only to rebuild the masks) | [Arctic Data Center 10.18739/A2SB3X15X](https://arcticdata.io/catalog/view/doi:10.18739/A2SB3X15X) · USGS National Map (NHD, Alaska state shapefile) |
 
 The finished friction stack (the product of section 3) is also mirrored as GEE
 assets, so a user who only needs the stack can download it instead of
@@ -204,36 +204,40 @@ mirror assets in §1.4 into `outputs/01_friction_build/friction_stack/` and run
 
 #### Step B — River ice: local Python, then ArcGIS Pro
 
-River ice is not an Earth Engine product. It needs a working directory
-*outside* the repository, named by the environment variable
-`FRICTION_LAYER_ROOT`, with this layout (the scripts create the last two):
+River ice is not an Earth Engine product. Its sources live in one working
+directory, `inputs/river_ice_work/` (gitignored), which
+`python tools/extract_inputs.py` fills from the tracked bundle
+`inputs/river_ice/river_ice_sources.zip` (provenance in `inputs/river_ice/SOURCE.md`):
 
 ```
-$FRICTION_LAYER_ROOT/
-  waterFilledMedians2000_2023.geojson   Brown et al. 2026 reach points (Arctic Data Center, §1.4; 9.6 MB, CC0)
+inputs/river_ice_work/
+  waterFilledMedians2000_2023.geojson   Brown et al. 2026 reach points (in the bundle; 9.6 MB, CC0)
+  brown_river_polygons/                 in the bundle; rebuilt by step 2 if needed
+  brown_river_flowlines/                in the bundle; rebuilt by step 2 if needed
   NHD_extracted/Shape/                  USGS National Hydrography Dataset for Alaska, unzipped
-                                        (NHDArea.shp, NHDFlowline_0..6.shp; the zip is ~5 GB)
-  brown_river_polygons/                 written by step 2
-  brown_river_flowlines/                written by step 2
+                                        (NHDArea.shp, NHDFlowline_0..6.shp; the zip is ~5 GB) —
+                                        NOT in the bundle; download it only to rebuild the masks
 ```
 
-1. **Download** the two sources into that folder (NHD: USGS National Map,
-   "NHD Alaska, state, shapefile"). Run `python tools/extract_inputs.py` if
-   you have not: the mask builder needs the waterway shapefile to keep salt
-   water out of the river mask.
-2. **Build the river masks** (local Python, project environment):
+Set `FRICTION_LAYER_ROOT` to use a folder elsewhere instead.
+
+1. **Unpack the bundle**: `python tools/extract_inputs.py` (it also unpacks the
+   waterway shapefile the mask builder uses to keep salt water out of the
+   river mask). With the bundle in place, skip to step 3.
+2. **Rebuild the river masks** only if NHD or the Brown reach set changes.
+   Download the NHD shapefile bundle (USGS National Map, "NHD Alaska, state,
+   shapefile") into `inputs/river_ice_work/NHD_extracted/Shape/`, then
    ```bash
-   FRICTION_LAYER_ROOT=/path/to/river_ice_work \
    python -m friction_surface.friction_preprocessing.build_brown_polygon_mask
    ```
    filters the statewide NHD to the thirty rivers Brown et al. observed and
-   writes `brown_river_polygons/` (wide channels) and `brown_river_flowlines/`
-   (centre lines). Re-run only if NHD or the Brown reach set changes.
+   rewrites `brown_river_polygons/` (wide channels) and
+   `brown_river_flowlines/` (centre lines). Re-zip the working directory
+   without `NHD_extracted/` and update the checksums (`SOURCE.md`, `MANIFEST.md`).
 3. **Interpolate the monthly ice probability** (ArcGIS Pro with Spatial
    Analyst, Windows). The land-cover raster from Step A must already be in
    `inputs/friction_rasters/`: it is the grid the output is aligned to.
    ```
-   set FRICTION_LAYER_ROOT=D:\river_ice_work
    set RASTER_DIR=C:\path\to\repo\inputs\friction_rasters
    "C:\Program Files\ArcGIS\Pro\bin\Python\scripts\propy.bat" ^
        source_scripts\friction_surface\friction_preprocessing\river_ice_full_pipeline.py
@@ -247,8 +251,8 @@ $FRICTION_LAYER_ROOT/
    `inputs/friction_rasters/river_ice/`. July and August are ice-free by
    construction. QA rasters (`provenance_MM.tif`) and a browse mosaic land in
    `river_ice/provenance/`, which the build ignores.
-4. Optional: `plot_river_ice_provenance.py` (same two variables, same
-   Python) draws which fill stage produced each cell.
+4. Optional: `plot_river_ice_provenance.py` (same variable, same Python)
+   draws which fill stage produced each cell.
 
 `pad_river_ice_to_grid.py` is not part of a fresh regeneration: it lifts the
 archived 2026-06 narrow-grid run (`inputs/friction_rasters/small_grid/river_ice/`)
@@ -400,8 +404,8 @@ database and the committed inputs by the scripts under `figure_scripts/`
 | `inputs/raw_facility_data/<release>/` snapshot, manifest, diff | In the repository | `00/01_ingest.py` | re-ingest the raw CSV (`SOURCE.md` has its sha256) |
 | `outputs/00_inventory_qc/<release>/facilities_clean.csv`, `qc_report.md`, `inventory_ledger.xlsx` | In the repository | `00/07_publish.py`, `00/08_ledger.py` | `bash workflows/00_inventory_qc/run_all.sh` |
 | other `outputs/00_inventory_qc/<release>/*` | Built by the pipeline | workflow 00 | same |
-| `inputs/bulk_fuel_data/`, `inputs/data_for_network_build/`, `inputs/region_and_census_data/` | Built by the pipeline (unzipped from a repository file) | `tools/extract_inputs.py` | `python tools/extract_inputs.py` |
-| `inputs/friction_rasters/` | Download and regenerate | §3.1 | Step A (GEE export + pad + align) and Step B (river-ice masks + ArcGIS pipeline); every file under its producer's name |
+| `inputs/bulk_fuel_data/`, `inputs/data_for_network_build/`, `inputs/region_and_census_data/`, `inputs/river_ice_work/` | Built by the pipeline (unzipped from a repository file) | `tools/extract_inputs.py` | `python tools/extract_inputs.py` |
+| `inputs/friction_rasters/` | Download and regenerate | §3.1 | Step A (GEE export + pad + align) and Step B (the ArcGIS river-ice pipeline on the committed reach points + masks); every file under its producer's name |
 | `outputs/01_friction_build/waterway_mask_150m.tif`, `friction_stack/` (14 TIFs) | Built by the pipeline | workflow 01 | `bash workflows/01_friction_build/run_all.sh`, or download the GEE mirror (§1.4) |
 | `data/raw/` | Download and regenerate | §4.1 | `inputs/network_raw.zip` or per-dataset download |
 | `data/interim/`, `data/processed/`, `data/boundary.geojson`, `data/basemap/` | Built by the pipeline | `02/00–03` | `bash workflows/02_network_build/run_all.sh` |

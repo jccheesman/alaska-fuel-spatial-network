@@ -80,6 +80,13 @@ inputs/raw_facility_data/**/Utilities_Bulk_Fuel_Inventory*.csv
 !inputs/inventory_qc/boundaries/*.zip
 !inputs/data_for_network_build.zip
 !inputs/region_and_census_data.zip
+# River-ice sources: the Brown et al. 2026 reach points (CC0) and the two NHD-derived river
+# masks, zipped (< 50 MB). tools/extract_inputs.py unpacks it into inputs/river_ice_work/
+# (ignored); only the NHD download itself stays out (5 GB, needed only to rebuild the masks).
+!inputs/river_ice/
+inputs/river_ice/*
+!inputs/river_ice/river_ice_sources.zip
+!inputs/river_ice/SOURCE.md
 # network_raw.zip is deliberately NOT negated: it stays out of the repository (license-gated,
 # see DATA.md §4.1) and was purged from git history on 2026-08-08.
 # Small tracked air CSVs (diffable plain text)

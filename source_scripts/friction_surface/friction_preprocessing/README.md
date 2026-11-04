@@ -26,24 +26,24 @@ it (the GEE script and the arcpy script) spell them the same.
 
 ## The river-ice working directory
 
-The river-ice sources are large (the NHD zip is about 5 GB) and are never in
-the repository. They live in one folder outside it, named by the environment
-variable `FRICTION_LAYER_ROOT`; the mask builder writes into it and the arcpy
-pipeline reads from it:
+The river-ice sources live in one folder, `inputs/river_ice_work/` (gitignored),
+which `python tools/extract_inputs.py` fills from the tracked bundle
+`inputs/river_ice/river_ice_sources.zip` (provenance: `inputs/river_ice/SOURCE.md`).
+The mask builder writes into it and the arcpy pipeline reads from it:
 
 ```
-$FRICTION_LAYER_ROOT/
-  waterFilledMedians2000_2023.geojson   Brown et al. 2026 reach points (download; 9.6 MB, CC0)
-  NHD_extracted/Shape/                  USGS NHD Alaska, unzipped: NHDArea.shp, NHDFlowline_0..6.shp
-  brown_river_polygons/brown_river_polygons.shp     <- build_brown_polygon_mask.py
-  brown_river_flowlines/brown_river_flowlines.shp   <- build_brown_polygon_mask.py
+inputs/river_ice_work/
+  waterFilledMedians2000_2023.geojson   Brown et al. 2026 reach points (in the bundle; 9.6 MB, CC0)
+  brown_river_polygons/brown_river_polygons.shp     in the bundle; rebuilt by build_brown_polygon_mask.py
+  brown_river_flowlines/brown_river_flowlines.shp   in the bundle; rebuilt by build_brown_polygon_mask.py
+  NHD_extracted/Shape/                  USGS NHD Alaska (download, ~5 GB) — only to rebuild the masks
   tiger/cb_2023_us_state_500k.shp       optional, the Alaska outline for the provenance figure
 ```
 
-The arcpy scripts also need `RASTER_DIR` = the repository's
-`inputs/friction_rasters` folder (the same variable `friction_paths.py`
-honours), because that is where they read the grid anchor and write the output.
-Neither variable has a default.
+Set `FRICTION_LAYER_ROOT` (or pass `--work-dir`) to use a folder elsewhere. The
+arcpy scripts also need `RASTER_DIR` = the repository's `inputs/friction_rasters`
+folder (the same variable `friction_paths.py` honours), because that is where
+they read the grid anchor and write the output; it has no default.
 
 ## How to run
 
@@ -55,12 +55,12 @@ python -m friction_surface.friction_preprocessing.pad_sea_ice_to_grid
 python -m friction_surface.friction_preprocessing.align_permafrost
 python -m friction_surface.check_grid_exports
 
-# B. River ice, step 1 (local Python):
-export FRICTION_LAYER_ROOT=/path/to/river_ice_work
+# B. River ice, step 1: unpack the committed reach points + masks (skip step 2 unless NHD changed)
+python tools/extract_inputs.py
+# B. River ice, step 2 (local Python; only to REBUILD the masks from a fresh NHD download):
 python -m friction_surface.friction_preprocessing.build_brown_polygon_mask
 
-# B. River ice, step 2 (ArcGIS Pro's Python, Windows):
-#   set FRICTION_LAYER_ROOT=D:\river_ice_work
+# B. River ice, step 3 (ArcGIS Pro's Python, Windows):
 #   set RASTER_DIR=C:\path\to\repo\inputs\friction_rasters
 #   "C:\Program Files\ArcGIS\Pro\bin\Python\scripts\propy.bat" river_ice_full_pipeline.py
 

@@ -30,6 +30,7 @@ Raw inventory files (NOT tracked after 2022; contact fields). Verify a local cop
 | Pending | note |
 |---|---|
 | `inputs/network_raw.zip` | not in the repository — license-gated; see DATA.md §4.1 |
+| `inputs/river_ice/river_ice_sources.zip` | to be added from the owner's machine; sha256 goes here and in `inputs/river_ice/SOURCE.md` |
 
 ## final_network zip members (the current network-of-record)
 

@@ -11,8 +11,8 @@ Designed to run inside Pro's arcgispro-py3 environment alongside the
 pipeline. Uses arcpy (raster I/O + AK boundary), numpy, matplotlib, and
 scipy.ndimage (display dilation). No geopandas required.
 
-Run with Pro's Python, with the same two environment variables as the
-pipeline (FRICTION_LAYER_ROOT for the TIGER outline, RASTER_DIR for the rasters):
+Run with Pro's Python, with the same environment variables as the pipeline
+(RASTER_DIR for the rasters; FRICTION_LAYER_ROOT optional, for the TIGER outline):
     "C:\\Program Files\\ArcGIS\\Pro\\bin\\Python\\scripts\\propy.bat" plot_river_ice_provenance.py
 or, after `conda activate arcgispro-py3`:
     python plot_river_ice_provenance.py
@@ -39,8 +39,12 @@ def _required_env(name, what):
     return value
 
 
-PROJECT_ROOT = _required_env("FRICTION_LAYER_ROOT", "the river-ice working directory")
 RASTER_DIR   = _required_env("RASTER_DIR", "the repo's inputs/friction_rasters folder")
+# The working directory: FRICTION_LAYER_ROOT if set, else the repo's
+# inputs/river_ice_work/ next to RASTER_DIR (what tools/extract_inputs.py fills
+# from the tracked river_ice_sources.zip).
+PROJECT_ROOT = os.getenv("FRICTION_LAYER_ROOT") or os.path.join(
+    os.path.dirname(os.path.normpath(RASTER_DIR)), "river_ice_work")
 
 # Where river_ice_full_pipeline.py writes provenance_MM.tif
 OUT_DIR = os.path.join(RASTER_DIR, "river_ice", "provenance")
