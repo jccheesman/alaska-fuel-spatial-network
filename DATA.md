@@ -281,8 +281,8 @@ Run `bash workflows/03_multimodal_join/run_all.sh`:
 
 `bash workflows/04_duckdb_export/run_all.sh` then runs the validation queries
 and dumps the schema. Publication figures and tables are generated from the
-database and the committed inputs by the scripts under `outputs/figures/`,
-`outputs/tables/` and each workflow's `viz/`.
+database and the committed inputs by the scripts under `figure_scripts/`
+(committed figures and tables) and `diagnostics/` (build checks).
 
 ## 6. Products: what is where, and how to get it back
 
