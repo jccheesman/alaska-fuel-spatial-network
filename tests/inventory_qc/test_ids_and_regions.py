@@ -2,26 +2,14 @@
 committed release: the ledger reproduces every harness id, minting is explicit and appends only,
 the region assignment describes (inside / nearest within the cap) and never moves a record, and
 the two region tables the harness loads are complete and symmetric."""
-import importlib.util
-import sys
-from pathlib import Path
-
 import pytest
 
-ROOT = Path(__file__).resolve().parents[2]
-WF = ROOT / "workflows" / "00_inventory_qc"
-sys.path.insert(0, str(WF))
+from inventory_qc import apply_corrections as apply_mod
+from inventory_qc import assign_facility_ids as ids_mod
+from inventory_qc import assign_region as reg_mod
+from inventory_qc import core as qc
+from inventory_qc import normalise as norm_mod
 
-
-def load(name):
-    spec = importlib.util.spec_from_file_location(name, WF / f"{name}.py")
-    mod = importlib.util.module_from_spec(spec); spec.loader.exec_module(mod)
-    return mod
-
-
-qc = load("_qc")
-apply_mod, norm_mod = load("02_apply_corrections"), load("03_normalise")
-ids_mod, reg_mod = load("03b_assign_facility_ids"), load("05b_assign_region")
 LABEL = qc.latest_release()
 HAINES_MILE_42 = "{984C8F00-5900-483B-B4A1-43D255646FAC}"   # GSA - Haines, 4 km over the Canadian border
 
@@ -29,14 +17,15 @@ HAINES_MILE_42 = "{984C8F00-5900-483B-B4A1-43D255646FAC}"   # GSA - Haines, 4 km
 @pytest.fixture(scope="module")
 def run(tmp_path_factory):
     tmp = tmp_path_factory.mktemp("qc3")
-    for m in (qc, apply_mod, norm_mod, ids_mod, reg_mod):
-        m.OUT = tmp
-    fac, excl, log = apply_mod.apply(LABEL)
-    qc.write_csv(fac, tmp / LABEL / "facilities_corrected.csv")
-    nfac, _ = norm_mod.normalise(LABEL); qc.write_csv(nfac, tmp / LABEL / "facilities_normalised.csv")
-    A, new_rows, problems = ids_mod.assign(LABEL)
-    R, regions, adj = reg_mod.assign(LABEL)
-    return dict(tmp=tmp, nfac=nfac, A=A, new_rows=new_rows, problems=problems, R=R, regions=regions, adj=adj)
+    with pytest.MonkeyPatch.context() as mp:   # the stage modules are shared: undo OUT afterwards
+        for m in (qc, apply_mod, norm_mod, ids_mod, reg_mod):
+            mp.setattr(m, "OUT", tmp)
+        fac, excl, log = apply_mod.apply(LABEL)
+        qc.write_csv(fac, tmp / LABEL / "facilities_corrected.csv")
+        nfac, _ = norm_mod.normalise(LABEL); qc.write_csv(nfac, tmp / LABEL / "facilities_normalised.csv")
+        A, new_rows, problems = ids_mod.assign(LABEL)
+        R, regions, adj = reg_mod.assign(LABEL)
+        yield dict(tmp=tmp, nfac=nfac, A=A, new_rows=new_rows, problems=problems, R=R, regions=regions, adj=adj)
 
 
 # ---------------------------------------------------------------- 03b facility ids

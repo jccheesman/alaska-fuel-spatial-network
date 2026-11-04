@@ -41,7 +41,9 @@ from .friction_config import METERS_PER_MILE, TARGET_RESOLUTION
 #       1,109 nm = 1,276 sm; ISER market rate $0.19-0.22/gal), river
 #       distribution 0.011 (DEC 2007 invoice rate $0.007/gal per map mile),
 #       lightering/terminal ~$0.8-1.2/gal as a fixed transfer component
-#       currently smeared into this blended rate. May-Oct only.
+#       currently smeared into this blended rate. Seasonality is not in the
+#       rate: each waterway cell is gated by its monthly sea/river-ice cover
+#       (operators run Jun-Oct in the west and north; Gulf/SE year-round).
 #   Plane: charter-equivalent transport cost, DC-6/C-46 mix at typical
 #       130-350 mi stage lengths. Revealed premiums (DCRA Jan 2026 vs
 #       empirical $3.60 FAI wholesale anchor) + DC-6 build-up + ISER 2010
@@ -131,14 +133,15 @@ VEHICLE_MILE_RATES_REFERENCE = {
 # explicit node. Fees are direction-insensitive (a graph edge is traversed
 # both ways), so _lookup_fee tries either key ordering.
 #
-# Live in the current network (per-pair transfer types, refine-synthetic-connectors):
-# ("barge","overland") keys BargeRoadTransfer (234), ("barge","ice_road") keys
-# BargeIceRoadTransfer (11), ("overland","ice_road") keys IceRoadRoadTransfer (12),
-# ("plane","overland") keys AirRoadTransfer (2). infer_transfer_fees maps each
-# transfer type straight to its pair via TRANSFER_TYPE_TO_MODES.
+# Live in the 2026-10-15 network-of-record (per-pair transfer types; counts are
+# the EXPECTED tripwire in fuel_network/load.py): ("barge","overland") prices
+# BargeRoadTransfer (289) + BargeAirTransfer (2), ("barge","ice_road") prices
+# BargeIceRoadTransfer (21), ("overland","ice_road") prices IceRoadRoadTransfer
+# (12), ("plane","overland") prices AirRoadTransfer (2). infer_transfer_fees maps
+# each transfer type straight to its pair via TRANSFER_TYPE_TO_MODES.
 INTERMODAL_TRANSFER_FEES = {
     ("barge", "overland"): {
-        # 205 graph Transfer edges (Waterway <-> Road). Bills the road-side
+        # 291 transfer edges (BargeRoadTransfer + BargeAirTransfer). Bills the road-side
         # truck-rack out-loading only (Crowley Bethel rack $0.25 -> $0.276
         # CPI-2026, shaded to 0.24 for sole-provider margin). The barge marine-
         # header / tank-farm intake is EXCLUDED — already in the all-in barge
@@ -149,10 +152,12 @@ INTERMODAL_TRANSFER_FEES = {
         "range": (0.15, 0.30),
     },
     ("barge", "ice_road"): {
-        # 8 graph Transfer edges (Waterway <-> IceRoad) at North Slope hubs.
-        # NEVER traversed: a same-month barge<->ice-road handoff is temporally
-        # impossible (ice roads Jan-Mar, barges May-Oct; zero month-overlap at
-        # all 8 sites), so monthly Dijkstra never exercises this fee. Both
+        # 21 BargeIceRoadTransfer edges at North Slope hubs. Expected never to be
+        # traversed: a same-month barge<->ice-road handoff is temporally
+        # impossible there (ice roads Jan-Mar, barges only in the summer ice-free
+        # window; zero month-overlap verified at the 8 sites of an earlier
+        # network, recheck on rerunning workflow 03), so monthly Dijkstra should
+        # never exercise this fee. Both
         # incident modes are all-in (barge intake in 0.0010; ice-road load/
         # unload in the 0.010 rate's +20% adder), so only a thin facility-
         # interface residual remains -> ~0.011. Was 0.40 (double-counted both

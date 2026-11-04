@@ -1,17 +1,14 @@
 """Stage 08: the inventory ledger is generated from the CSVs, has the documented tabs, and is
 byte-deterministic (an unchanged inventory -> an identical workbook)."""
 import hashlib
-import importlib.util
-import sys
-from pathlib import Path
 
 import pandas as pd
 import pytest
 
-ROOT = Path(__file__).resolve().parents[2]
-WF = ROOT / "workflows" / "00_inventory_qc"
-sys.path.insert(0, str(WF))
-spec = importlib.util.spec_from_file_location("ledger", WF / "08_ledger.py"); led = importlib.util.module_from_spec(spec); spec.loader.exec_module(led)
+import repo_paths as rp
+from inventory_qc import ledger as led
+
+ROOT = rp.ROOT
 pytest.importorskip("openpyxl")
 LABEL = led.latest_release()
 TABS = ["README", "Summary", "Approved by owner", "Applied by rule", "Aliases", "Pending", "Rejected & retired", "Excluded", "Open review queue"]

@@ -24,7 +24,6 @@ Usage:
 
 from __future__ import annotations
 
-from pathlib import Path
 
 import geopandas as gpd
 import pandas as pd
@@ -32,14 +31,15 @@ from shapely.geometry import LineString, Point
 
 # Inputs are the NORMALIZED interim files (00_normalize_raw.py): airports filtered to
 # Alaska, so OD codes can no longer geocode to lower-48 airports.
-ROOT = Path(__file__).resolve().parents[2]  # repo root
-OD_CSV = ROOT / "data" / "interim" / "air_flight_paths_od.csv"
-AIRPORTS_CSV = ROOT / "data" / "interim" / "airports.csv"
-BOROUGHS = ROOT / "data" / "interim" / "boroughs.gpkg"
+import repo_paths as rp
+ROOT = rp.ROOT
+OD_CSV = rp.INTERIM / "air_flight_paths_od.csv"
+AIRPORTS_CSV = rp.INTERIM / "airports.csv"
+BOROUGHS = rp.INTERIM / "boroughs.gpkg"
 
-AIRWAYS_OUT = ROOT / "data" / "processed" / "airways.geojson"
-AIR_NODES_OUT = ROOT / "data" / "processed" / "air_nodes.geojson"
-BOUNDARY_OUT = ROOT / "data" / "boundary.geojson"
+AIRWAYS_OUT = rp.PROCESSED / "airways.geojson"
+AIR_NODES_OUT = rp.PROCESSED / "air_nodes.geojson"
+BOUNDARY_OUT = rp.BOUNDARY
 
 
 def build_code_lookup(airports: pd.DataFrame) -> dict[str, tuple[float, float]]:

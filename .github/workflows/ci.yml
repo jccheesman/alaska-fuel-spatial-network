@@ -32,13 +32,13 @@ jobs:
       # .claude/skills ships runnable scripts (the build playbooks), so they are
       # linted like the rest of the tree rather than drifting unchecked.
       - name: Ruff
-        run: uv run ruff check source_scripts workflows tools tests .claude
+        run: uv run ruff check source_scripts workflows tools tests .claude figure_scripts diagnostics
 
       - name: Pytest
         run: uv run pytest tests/ -v
 
       - name: Facility-inventory QC chain (read-only; committed clean table must match a fresh run)
-        run: uv run python .claude/skills/validate-facility-inventory/scripts/validate_inventory.py
+        run: uv run python workflows/00_inventory_qc/validate_inventory.py
 
       - name: Validate the network profile
         run: |
@@ -76,7 +76,7 @@ jobs:
           if bad:
               print("\nNETWORK-OF-RECORD CHANGED:\n" + "\n".join(bad))
               print("\nA re-export is a NEW network-of-record. If deliberate, regenerate")
-              print("together: these zips, the EXPECTED dict in 02_load_final_network.py,")
+              print("together: these zips, the EXPECTED dict in source_scripts/fuel_network/load.py,")
               print("edge_month_weights, edge_costs — then update these hashes.")
               print("See final_network/README.md.")
               sys.exit(1)

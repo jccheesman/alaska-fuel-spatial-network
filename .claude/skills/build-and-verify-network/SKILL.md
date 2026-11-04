@@ -40,7 +40,7 @@ reading/verifying the result.
 ## Procedure
 
 0. **The facility inventory must be green first.** Run `validate-facility-inventory` (read-only
-   `python .claude/skills/validate-facility-inventory/scripts/validate_inventory.py`) and require exit 0:
+   `python workflows/00_inventory_qc/validate_inventory.py`) and require exit 0:
    the hub build consumes the facility table, and a stale or failing inventory chain means the hubs
    inherit uncorrected labels/positions. Do not build on a red inventory.
 1. **Check prerequisites.** `python -c "import mmnet"` imports; `Rscript --version` works and

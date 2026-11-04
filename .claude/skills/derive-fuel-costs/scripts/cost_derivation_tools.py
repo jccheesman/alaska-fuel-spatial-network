@@ -30,9 +30,6 @@ from __future__ import annotations
 
 import math
 import sys
-from pathlib import Path
-
-REPO_ROOT = Path(__file__).resolve().parents[4]
 
 # ===========================================================================
 # CPI (dollar-year discipline)
@@ -176,7 +173,6 @@ def blend(rate_weight_pairs):
 # ===========================================================================
 
 def _load_costs():
-    sys.path.insert(0, str(REPO_ROOT))
     from friction_surface import friction_costs as fc
     return fc
 

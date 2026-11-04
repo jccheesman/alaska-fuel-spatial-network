@@ -26,17 +26,13 @@ from __future__ import annotations
 
 import argparse
 import datetime as dt
-import importlib.util
 import re
 import sys
 from pathlib import Path
 
 import pandas as pd
 
-ROOT = Path(__file__).resolve().parents[4]
-WF = ROOT / "workflows" / "00_inventory_qc"
-spec = importlib.util.spec_from_file_location("_qc", WF / "_qc.py")
-qc = importlib.util.module_from_spec(spec); spec.loader.exec_module(qc)
+from inventory_qc import core as qc
 
 CORR_COLS = ["record_id", "facility_pid_2022", "source_row_2022", "community_name", "field", "old_value", "new_value",
              "reason", "evidence", "reviewer", "reviewed_on", "status", "decided_in", "present_in_2025"]

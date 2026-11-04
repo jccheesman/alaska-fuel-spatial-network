@@ -43,7 +43,9 @@ Each source gets an **adapter**: a column map `inputs/inventory_qc/sources/<data
 
 ## Where things live
 
-Data repo `alaska-fuel-spatial-network` (the hubs are built there; the harness vendors a snapshot and reads the published table):
+Data repo `alaska-fuel-spatial-network` (the hubs are built there; the harness vendors a snapshot and reads the published table).
+*Since 2026-10 the stage logic is the `source_scripts/inventory_qc/` package and each script below is a thin
+wrapper; `validate_inventory.py` moved to `workflows/00_inventory_qc/`. The layout is otherwise as planned.*
 
 ```
 workflows/00_inventory_qc/

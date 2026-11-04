@@ -12,10 +12,10 @@ __MACOSX resource-fork entries are skipped. Extraction is idempotent.
 Run:  python workflows/03_multimodal_join/01_extract_network_handoff.py
 """
 import zipfile
-from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[2]  # repo root
-FINAL = ROOT / "final_network"
+import repo_paths as rp
+ROOT = rp.ROOT
+FINAL = rp.FINAL_NETWORK
 
 
 def main() -> None:

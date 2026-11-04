@@ -1,25 +1,14 @@
 """Stages 04-06 on the committed release: detectors find the audit's known cases, the
 boundary check verifies without relabelling, the review queue excludes decided records."""
-import importlib.util
-import sys
-from pathlib import Path
-
 import pytest
 
-ROOT = Path(__file__).resolve().parents[2]
-WF = ROOT / "workflows" / "00_inventory_qc"
-sys.path.insert(0, str(WF))
+from inventory_qc import apply_corrections as apply_mod
+from inventory_qc import boundary_check as bnd_mod
+from inventory_qc import core as qc
+from inventory_qc import detect as det_mod
+from inventory_qc import normalise as norm_mod
+from inventory_qc import review_queue as rq_mod
 
-
-def load(name):
-    spec = importlib.util.spec_from_file_location(name, WF / f"{name}.py")
-    mod = importlib.util.module_from_spec(spec); spec.loader.exec_module(mod)
-    return mod
-
-
-qc = load("_qc")
-apply_mod, norm_mod = load("02_apply_corrections"), load("03_normalise")
-det_mod, bnd_mod, rq_mod = load("04_detect"), load("05_boundary_check"), load("06_review_queue")
 LABEL = qc.latest_release()
 # 2022 harness ids of known cases -> AEA record ids
 REC = {
@@ -30,15 +19,16 @@ REC = {
 @pytest.fixture(scope="module")
 def run(tmp_path_factory):
     tmp = tmp_path_factory.mktemp("qc2")
-    for m in (qc, apply_mod, norm_mod, det_mod, bnd_mod, rq_mod):
-        m.OUT = tmp
-    fac, excl, log = apply_mod.apply(LABEL)
-    qc.write_csv(fac, tmp / LABEL / "facilities_corrected.csv"); qc.write_csv(excl, tmp / LABEL / "excluded.csv"); qc.write_csv(log, tmp / LABEL / "corrections_log.csv")
-    nfac, _ = norm_mod.normalise(LABEL); qc.write_csv(nfac, tmp / LABEL / "facilities_normalised.csv")
-    F, ran = det_mod.run(LABEL); qc.write_csv(F, tmp / LABEL / "flags_structural.csv")
-    Bf, Bs, Bd = bnd_mod.check(LABEL); qc.write_csv(Bf, tmp / LABEL / "flags_boundary.csv"); qc.write_csv(Bd, tmp / LABEL / "boundary_distance.csv")
-    Q = rq_mod.build(LABEL)
-    return dict(nfac=nfac, F=F, ran=ran, Bf=Bf, Bs=Bs, Bd=Bd, Q=Q)
+    with pytest.MonkeyPatch.context() as mp:   # the stage modules are shared: undo OUT afterwards
+        for m in (qc, apply_mod, norm_mod, det_mod, bnd_mod, rq_mod):
+            mp.setattr(m, "OUT", tmp)
+        fac, excl, log = apply_mod.apply(LABEL)
+        qc.write_csv(fac, tmp / LABEL / "facilities_corrected.csv"); qc.write_csv(excl, tmp / LABEL / "excluded.csv"); qc.write_csv(log, tmp / LABEL / "corrections_log.csv")
+        nfac, _ = norm_mod.normalise(LABEL); qc.write_csv(nfac, tmp / LABEL / "facilities_normalised.csv")
+        F, ran = det_mod.run(LABEL); qc.write_csv(F, tmp / LABEL / "flags_structural.csv")
+        Bf, Bs, Bd = bnd_mod.check(LABEL); qc.write_csv(Bf, tmp / LABEL / "flags_boundary.csv"); qc.write_csv(Bd, tmp / LABEL / "boundary_distance.csv")
+        Q = rq_mod.build(LABEL)
+        yield dict(nfac=nfac, F=F, ran=ran, Bf=Bf, Bs=Bs, Bd=Bd, Q=Q)
 
 
 def test_every_detector_ran(run):

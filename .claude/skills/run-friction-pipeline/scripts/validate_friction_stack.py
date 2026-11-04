@@ -40,7 +40,8 @@ import subprocess
 import sys
 from pathlib import Path
 
-REPO_ROOT = Path(__file__).resolve().parents[4]
+import repo_paths as rp
+REPO_ROOT = rp.ROOT
 
 # Interpretation per (step, exit code). "cause" and "fix" are printed only
 # on failure — this is the domain knowledge that turns a bare nonzero exit

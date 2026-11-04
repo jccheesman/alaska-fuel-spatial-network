@@ -1,9 +1,8 @@
-from pathlib import Path
 
 import duckdb
 
-# repo root is two levels above workflows/04_duckdb_export/
-DB_PATH = Path(__file__).resolve().parents[2] / "outputs" / "fuel_network.duckdb"
+import repo_paths as rp
+DB_PATH = rp.DUCKDB
 con = duckdb.connect(str(DB_PATH), read_only=True)
 
 try:
