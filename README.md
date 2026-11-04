@@ -33,27 +33,23 @@ uv venv && uv sync && uv pip install -e .
 python tools/extract_inputs.py    # unzip the committed inputs/*.zip bundles
 bash run_all.sh                   # run as far as the data on disk allows
 ```
-A fresh clone runs the ingest half of step **(c)** (extract the frozen
-network, load its 84,089 nodes / 92,978 edges into DuckDB) and all of step
-**(d)** from committed data alone. The weighting and costing stages of (c)
-additionally need the friction stack from (a), and the costing stage reads
-`inputs/bulk_fuel_data/raw/Fuel_Delivery_Method.shp` (no longer shipped as a
-committed zip — see `EXTERNAL_DATA.md` for the source). Steps (a) and (b)
-need regenerable-only inputs — each stage's `run_all.sh` gates on what is
-missing and prints exactly how to regenerate it (`EXTERNAL_DATA.md` is the
-honest inventory of what exists where).
+A fresh clone runs step **(0)**, the ingest half of step **(c)** (extract the
+frozen network, load its 84,089 nodes / 92,978 edges into DuckDB) and all of
+step **(d)** from committed data alone. The weighting and costing stages of
+(c) additionally need the friction stack from (a), and steps (a) and (b) need
+inputs that must be downloaded and regenerated. Each stage's `run_all.sh`
+gates on what is missing and names the section of `DATA.md` that explains how
+to get it.
+
+**`DATA.md` is the one description of every dataset:** where it comes from,
+whether it is in the repository or must be downloaded and regenerated, and
+which script turns it into the next product, from the original downloads to
+the DuckDB deliverable. The finished friction stack is also mirrored as Google
+Earth Engine assets (links in `DATA.md` §1.4).
 
 To run the test suite and linter, install the dev extra
 (`uv sync --extra dev`, then `uv run pytest tests/` and `uv run ruff check`),
 which is what CI does.
-
-**Final friction stack TIF files are hosted on Google Earth Engine at:**
-
-Barge_monthly Image Collection: https://code.earthengine.google.com/?asset=projects/gee-friction-layer-processing/assets/friction_stack_final/barge_monthly  
-
-Overland Friction: https://code.earthengine.google.com/?asset=projects/gee-friction-layer-processing/assets/friction_stack_final/overland_base
-
-Road_base Friction: https://code.earthengine.google.com/?asset=projects/gee-friction-layer-processing/assets/friction_stack_final/road_base
 
 The run scripts find the project interpreter themselves (active `$VIRTUAL_ENV`,
 then `.venv/bin/python`, then `python3` with a warning), so no activation step
@@ -65,8 +61,8 @@ helpers live in `workflows/_lib.sh`.
 Per-stage runs:
 
 ```bash
-bash workflows/01_friction_build/run_all.sh    # needs inputs/friction_rasters (~7 GB, regenerable)
-bash workflows/02_network_build/run_all.sh     # needs data/raw (inputs/network_raw.zip — local-only, license-gated)
+bash workflows/01_friction_build/run_all.sh    # needs inputs/friction_rasters — DATA.md §3.1
+bash workflows/02_network_build/run_all.sh     # needs data/raw — DATA.md §4.1
 bash workflows/03_multimodal_join/run_all.sh   # stages 01-02 run from committed data; 03-04 need the friction stack
 bash workflows/04_duckdb_export/run_all.sh
 ```
@@ -123,7 +119,7 @@ provenance: `final_network/README.md`.
 | `source_scripts/mmnet/` | The region-agnostic network engine (R-noding oracle included) — the single canonical copy |
 | `source_scripts/friction_surface/` | Friction builders + `friction_config.py` + `friction_costs.py` (all USD $) |
 | `workflows/00..04_*/` | The inventory-QC gate + the four steps: thin numbered drivers, per-stage READMEs, run orders |
-| `inputs/` | Available input datasets located here, open-source dataset information provided |
+| `inputs/` | The committed input bundles and the inventory-QC config tables; every dataset's source, status and conversion is in `DATA.md` |
 | `final_network/` | The frozen act-(b)→(c) handoff; this step is regenerable with source scripts |
 | `outputs/` | Gitignored regenerables + committed tables/analysis + the DuckDB deliverable |
 | `docs/` | `ARCHITECTURE.md` (engine design), `DATA_CONTRACTS.md` (every inter-stage contract), `INVENTORY_QC_PLAN.md` + `data_audit/` (the facility-inventory QC plan and its 2026-10 investigation) |
@@ -133,17 +129,17 @@ provenance: `final_network/README.md`.
 ## Preprocessing the friction inputs
 
 The friction stack expects grid-aligned rasters (land cover, slope, permafrost,
-12× sea ice, 12× river ice) snapped to the canonical `lulc.tif` grid
-(EPSG:3338, 150 m, 28,000 × 16,567). They are regenerable-only (~12 GB):
-- **GEE** (terrain, land cover, sea ice): `source_scripts/friction_surface/friction_preprocessing/gee_friction_layer_multi_data_processing.js` in the Earth Engine Code Editor
-- **ArcGIS Pro** (river ice): `river_ice_full_pipeline.py` (edit its Configuration block; arcpy, no CLI).
-- **Alignment:** `python -m friction_surface.friction_preprocessing.align_permafrost`, then gate with `python workflows/01_friction_build/00_preflight_inputs.py`.
-
-Source datasets and URLs: `inputs/README.md`. The `align-to-ak-stack` skill
-snaps any new raster onto the reference grid.
+12× sea ice, 12× river ice) snapped to the canonical `lulc.tif` grid. They are
+downloaded and regenerated, not committed: `DATA.md` §1.4 lists the five
+source datasets and §3.1 walks through the Earth Engine export, the
+padding and alignment steps, and the ArcGIS Pro river-ice pipeline. The
+`align-to-ak-stack` skill snaps any new raster onto the reference grid.
 
 ## Related docs
 
+- `DATA.md` — every dataset: source, where it lives, what kind it is, and the
+  script that turns it into the next product, from the original downloads to
+  the DuckDB deliverable
 - `docs/DATA_CONTRACTS.md` — the 150 m grid spec, the 14-file friction-stack
   contract, the R WORKDIR contract, the handoff schema, the edge_id rule, the
   DuckDB schema — every inter-stage contract on one page
@@ -152,6 +148,5 @@ snaps any new raster onto the reference grid.
   `ingest-`/`record-`/`validate-facility-inventory` skills run the chain, and `docs/data_audit/`
   archives the 2026-10 investigation that produced the decisions
 - `docs/TEST_LOG.md` — the verified end-to-end friction → weighting → costing run
-- `EXTERNAL_DATA.md` — what exists where (committed / regenerable / absent)
 - `CLAUDE.md` — the lab notebook: one row per numbered script, with findings
 - `supplementary/` — cost-rate derivations and verification

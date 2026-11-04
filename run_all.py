@@ -121,9 +121,8 @@ def stage_01_friction_build(py: str) -> None:
     if not (ROOT / "inputs/friction_rasters/lulc.tif").is_file():
         gate(
             "inputs/friction_rasters/lulc.tif missing.",
-            "The ~7 GB friction rasters are not committed (regenerable only).",
-            "Regenerate via source_scripts/friction_surface/friction_preprocessing/ (GEE + arcpy),",
-            "then re-run. See EXTERNAL_DATA.md.",
+            "The friction rasters are not in the repository: download and regenerate them",
+            "(GEE export + pad/align + river-ice pipeline), then re-run. See DATA.md section 3.1.",
         )
     if not (ROOT / "inputs/data_for_network_build").is_dir():
         gate(
@@ -142,7 +141,7 @@ def stage_02_network_build(py: str, profile: str) -> None:
     if not dir_nonempty(ROOT / "data/raw"):
         gate(
             "data/raw is empty. Populate it first:",
-            f"{py} tools/extract_inputs.py   (needs inputs/network_raw.zip — see inputs/README.md)",
+            f"{py} tools/extract_inputs.py   (needs inputs/network_raw.zip, or download the raw files — see DATA.md section 4.1)",
         )
 
     if not dir_nonempty(ROOT / "data/interim"):
@@ -205,7 +204,7 @@ def stage_03_multimodal_join(py: str) -> None:
     if not (ROOT / "outputs/01_friction_build/friction_stack/road_base.tif").is_file():
         out("GATE: friction stack missing (outputs/01_friction_build/friction_stack/).")
         out("  Stages 03-04 need workflow 01's rasters — regenerate via")
-        out("  bash workflows/01_friction_build/run_all.sh (see EXTERNAL_DATA.md).")
+        out("  bash workflows/01_friction_build/run_all.sh (see DATA.md section 3).")
         out("  Stopping after the ingest stage (network_nodes + network_edges written).")
         raise StageSkip()
 

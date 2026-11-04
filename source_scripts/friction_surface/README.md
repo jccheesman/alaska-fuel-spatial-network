@@ -346,7 +346,7 @@ the repo root, so it is invoked as a module from there.
 | Path | Purpose |
 |---|---|
 | `friction_preprocessing/` | Upstream pipelines that produce the inputs: GEE Code Editor scripts (slope, LULC, permafrost, sea ice) and the ArcGIS Pro river-ice pipeline. Source hydrography lives in `friction_preprocessing/data/`. |
-| `../../inputs/friction_rasters/` | Inputs consumed by this stage: `lulc.tif`, `slope.tif`, `permafrost.tif`, and the monthly `sea_ice/` and `river_ice/` stacks (regenerable-only — see `EXTERNAL_DATA.md`). |
+| `../../inputs/friction_rasters/` | Inputs consumed by this stage: `lulc.tif`, `slope.tif`, `permafrost.tif`, and the monthly `sea_ice/` and `river_ice/` stacks (not in the repository — download and regenerate, see `../../DATA.md` §3.1). |
 | `../../outputs/01_friction_build/` | Generated friction stack in `friction_stack/` — 14 files (`overland.tif`, `barge_{MM}.tif`, `road_base.tif`) backing 24 logical `(mode, month)` entries — plus the waterway mask. |
 | `../../workflows/01_friction_build/viz/` | Visualization generators — `plot_friction_stack.py` (3×4 monthly raster grid PNG), `generate_grid_schema.py` (cell-by-cell schematic PNG), `generate_pipeline_diagram.py` (two-page PDF, committed at `outputs/figures/`). |
 | `qa/` | Post-build QA scripts — `qa_friction_stack.py` (hard checks on the friction stack) and `qa_river_ice_thresholds.py` (river-ice threshold histogram diagnostic). |

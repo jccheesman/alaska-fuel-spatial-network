@@ -18,9 +18,9 @@ python 06_export_final_network.py  # -> final_network/ zips + sha256 manifest (D
 # or: bash run_all.sh            # chains all of it with input gates
 ```
 
-Raw inputs: `data/raw/**` — populated by `tools/extract_inputs.py` from
-`inputs/network_raw.zip` (pending; interim fallback documented in
-`inputs/README.md`). The air CSVs are tracked at `inputs/air/`.
+Raw inputs: `data/raw/**` (not in the repository; download and regenerate —
+the file-by-file layout and sources are in `DATA.md` §1.2–1.3 and §4.1), the
+air CSVs tracked at `inputs/air/`, and the manual-connections shapefile.
 The **facility inventory** is not the raw AEA CSV: `00_normalize_raw.py` reads
 the published `facilities_clean.csv` from workflow 00 (`00_inventory_qc`, latest
 release) — QC a release there before building.

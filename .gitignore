@@ -66,10 +66,8 @@ example_skills/
 *.zip
 
 # --- inputs/: the single home for every dataset (blanket-ignored, committed files opted in) ---
-# inputs/gee_exports/    — 4.7 GB AK_Stack_150m.zip: exceeds GitHub's 100 MB limit; regenerate
-#                          via source_scripts/friction_surface/friction_preprocessing GEE script
-# inputs/friction_rasters/ — ~7 GB slope/lulc/permafrost + sea_ice/ + river_ice/: regenerable
-#                          from gee_exports + the arcpy river-ice pipeline
+# inputs/gee_exports/ and inputs/friction_rasters/ are never committed (too large):
+# download and regenerate per DATA.md §3.1
 inputs/*
 !inputs/README.md
 !inputs/MANIFEST.md
@@ -82,8 +80,8 @@ inputs/raw_facility_data/**/Utilities_Bulk_Fuel_Inventory*.csv
 !inputs/inventory_qc/boundaries/*.zip
 !inputs/data_for_network_build.zip
 !inputs/region_and_census_data.zip
-# network_raw.zip is deliberately NOT negated: it stays LOCAL-ONLY (license-gated,
-# see inputs/README.md) and was purged from git history on 2026-08-08.
+# network_raw.zip is deliberately NOT negated: it stays out of the repository (license-gated,
+# see DATA.md §4.1) and was purged from git history on 2026-08-08.
 # Small tracked air CSVs (diffable plain text)
 !inputs/air/
 inputs/air/*

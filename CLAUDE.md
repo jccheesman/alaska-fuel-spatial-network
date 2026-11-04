@@ -103,7 +103,7 @@ replaces the network-of-record.
   reproduced the documented QA envelope (Road friction within [1.0, 2.625],
   IceRoad Jan-Mar only, transfer fees 205x0.24 + 8x0.011, zero cost-free
   passable edge-months). See docs/TEST_LOG.md. Fresh clones still need the
-  rasters copied/regenerated (EXTERNAL_DATA.md).
+  rasters copied/regenerated (DATA.md §3.1).
 - **`tools/build_notebooks.py` and `tools/gen_api_docs.py` (+ `docs/API.md`) were removed on 2026-08-17** (minimalism pass: off the build path; notebooks were never committed and the API reference was auto-generated). They survive in git history at commit `53569d0`.
 - **`research/` and `diagnostics/` were removed on 2026-08-07** (build-only
   scope). They survive in git history at commit `3aa5eab`; docstrings in

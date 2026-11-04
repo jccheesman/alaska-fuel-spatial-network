@@ -5,8 +5,7 @@
   inputs/data_for_network_build.zip  -> inputs/data_for_network_build/
   inputs/region_and_census_data.zip  -> inputs/region_and_census_data/
   inputs/network_raw.zip             -> data/raw/          (workflow 02 sources;
-                                        zip pending the data-redistribution
-                                        decision — see inputs/README.md)
+                                        not in the repository — see DATA.md §4.1)
 
 One gate for workflows 01-03: run this once after cloning (with Git LFS
 pulled). __MACOSX resource forks and .DS_Store entries are skipped.
@@ -46,7 +45,7 @@ def main() -> None:
     for zpath, dest in TARGETS.items():
         if not zpath.exists():
             print(f"skip: {zpath.relative_to(ROOT)} not present"
-                  + (" (pending data-redistribution decision — see inputs/README.md)"
+                  + (" (not in the repository — see DATA.md section 4.1)"
                      if zpath.name == "network_raw.zip" else
                      " (Git LFS: run `git lfs pull`?)"))
             continue

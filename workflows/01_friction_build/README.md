@@ -23,14 +23,10 @@ or `FRICTION_ALLOW_MISSING_WATERWAY_MASK=1`.
 
 ## Inputs
 
-`inputs/friction_rasters/` (~7 GB, regenerable-only — see `EXTERNAL_DATA.md`):
-slope, lulc, permafrost, sea_ice/{01..12}, river_ice/{01..12}, all snapped to
-`lulc.tif`. Plus the waterways shapefile from
-`inputs/data_for_network_build.zip` (run `python tools/extract_inputs.py`).
-
-External preprocessing (before this workflow can run at all): the GEE export
-script + arcpy river-ice pipeline + `align_permafrost` under
-`source_scripts/friction_surface/friction_preprocessing/`.
+`inputs/friction_rasters/` (not in the repository; download and regenerate)
+and the waterways shapefile unzipped from `inputs/data_for_network_build.zip`.
+What the rasters are, where they come from, and the Earth Engine, padding,
+alignment and river-ice steps that produce them: `DATA.md` §1.4 and §3.1.
 
 ## Outputs
 

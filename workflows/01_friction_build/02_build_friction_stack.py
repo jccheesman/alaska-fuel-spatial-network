@@ -4,7 +4,7 @@
 Calls friction_surface.run_friction_pipeline.main — writes 14 TIFs backing 24
 logical (mode, month) surfaces into outputs/01_friction_build/friction_stack/.
 
-Requires: inputs/friction_rasters/ (regenerable — see EXTERNAL_DATA.md) and
+Requires: inputs/friction_rasters/ (download and regenerate — see DATA.md §3.1) and
 the waterway corridor mask from 01_build_corridor_masks.py (the barge build
 degrades with only a warning without it, severing ~18% of waterway edges —
 run stage 01 first).

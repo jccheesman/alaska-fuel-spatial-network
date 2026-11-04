@@ -32,6 +32,9 @@ community past `boundary_review_km` is reviewable.
 
 ## Inputs
 
+Dataset sources and status (the AEA inventory, the DCRA boundaries, the AEA
+region library): `DATA.md` §1.1 and §2.
+
 - `inputs/raw_facility_data/<release>/` — the tracked release snapshots (safe
   columns only; the raw CSV is checksummed, never committed from 2025 on).
 - `inputs/inventory_qc/` — `facility_schema.csv`, `sources/<src>/column_map.csv`,
