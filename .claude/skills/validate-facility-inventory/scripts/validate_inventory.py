@@ -64,8 +64,8 @@ STEPS = [
      "   inputs/MANIFEST.md); never substitute a different boundary layer without updating both."),
     ("05b assign region", "05b_assign_region.py", [],
      "inputs/region_and_census_data.zip (the AEA energy-region shapefile is a member of it) is missing or\n"
-     "   unreadable, or thresholds.csv lacks aea_region_nearest_km. Fix: `git lfs pull`; restore the bundle\n"
-     "   (sha256 in inputs/MANIFEST.md); one row per threshold with a reason."),
+     "   unreadable, or thresholds.csv lacks aea_region_nearest_km. Fix: restore the bundle (a plain git blob,\n"
+     "   no LFS; sha256 in inputs/MANIFEST.md); one row per threshold with a reason."),
     ("06 review queue", "06_review_queue.py", [],
      "A flags file from 04/05 is missing or malformed. Fix: re-run 04 and 05."),
     ("07 publish", "07_publish.py", [],

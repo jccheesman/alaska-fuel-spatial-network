@@ -52,7 +52,7 @@ def regions_path() -> Path:
     if REGIONS_ZIP.exists():
         return REGIONS_ZIP
     if not BUNDLE.exists():
-        raise SystemExit(f"{BUNDLE.relative_to(ROOT)} is missing (Git LFS: run `git lfs pull`?)")
+        raise SystemExit(f"{BUNDLE.relative_to(ROOT)} is missing — clone incomplete? It is a plain git blob (no LFS); see DATA.md section 1.1.")
     with zipfile.ZipFile(BUNDLE) as zf:
         zf.extract(MEMBER, ROOT / "inputs")
     return REGIONS_ZIP

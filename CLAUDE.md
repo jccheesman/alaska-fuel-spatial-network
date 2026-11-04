@@ -61,8 +61,8 @@ replaces the network-of-record.
 | **03_multimodal_join** | | | | |
 | `01_extract_network_handoff.py` | Unzips the frozen handoff | `final_network/*/` dirs | — | Fixes the fresh-clone FileNotFoundError; the old README claimed the loader extracted zips (it never did) |
 | `02_load_final_network.py` | Ingest + hard integrity tripwire + edge_class | `network_nodes`, `network_edges` | `EXPECTED` dict | edge_id = shapefile row order, derived here and ONLY here; `edge_class` mirrors the mode-based `type` (pass-through), only mapping a LEGACY frozen network's generic `Bridge` into the new vocabulary |
-| `03_weight_network_edges.py` | 75 m friction sampling per edge-month | `edge_month_weights` (1,115,736 rows) | `SAMPLE_SPACING_M`, `EDGE_TYPE_MAP` | Strict any-NoData ⇒ impassable; consumes `edge_class` from the DB (run stage 02 first) |
-| `04_assemble_weighted_graph.py` | $-rates × friction → costs + nx.MultiGraph | `edge_costs` (1,115,736 rows) | `friction_costs.py` | MultiGraph, not Graph — parallel node-pairs would silently collapse; each per-pair `*Transfer` type maps straight to its fee via `TRANSFER_TYPE_TO_MODES` |
+| `03_weight_network_edges.py` | 75 m friction sampling per edge-month | `edge_month_weights` (1,116,588 rows) | `SAMPLE_SPACING_M`, `EDGE_TYPE_MAP` | Strict any-NoData ⇒ impassable; consumes `edge_class` from the DB (run stage 02 first) |
+| `04_assemble_weighted_graph.py` | $-rates × friction → costs + nx.MultiGraph | `edge_costs` (1,116,588 rows) | `friction_costs.py` | MultiGraph, not Graph — parallel node-pairs would silently collapse; each per-pair `*Transfer` type maps straight to its fee via `TRANSFER_TYPE_TO_MODES` |
 | **04_duckdb_export** | | | | |
 | `01_run_validation_queries.py` | Monthly passability by mode | stdout | — | Barge passability should peak Jun–Oct; IceRoad rows exist only Jan–Mar |
 | `02_inspect_schema.py` | Schema/count dump | stdout | — | Also probes `hub_facility_map` — expected ABSENT (documented future work) |

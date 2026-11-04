@@ -23,7 +23,7 @@ edge-cost completeness rule: no edge type is costless).
 Output table:
 
     edge_costs(edge_id, month, cost_per_gallon, passable)
-    92,978 x 12 = 1,115,736 rows
+    93,049 x 12 = 1,116,588 rows
 
 Graph assembly: ONE nx.MultiGraph (NOT nx.Graph — final_network has
 parallel node-pairs which a simple Graph would silently collapse; edges are

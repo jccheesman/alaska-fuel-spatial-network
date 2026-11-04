@@ -7,8 +7,8 @@
   inputs/network_raw.zip             -> data/raw/          (workflow 02 sources;
                                         not in the repository — see DATA.md §4.1)
 
-One gate for workflows 01-03: run this once after cloning (with Git LFS
-pulled). __MACOSX resource forks and .DS_Store entries are skipped.
+One gate for workflows 00-03: run this once after cloning. The zips are plain
+git blobs (no Git LFS). __MACOSX resource forks and .DS_Store entries are skipped.
 Extraction is idempotent.
 
 Run:  python tools/extract_inputs.py
@@ -47,7 +47,7 @@ def main() -> None:
             print(f"skip: {zpath.relative_to(ROOT)} not present"
                   + (" (not in the repository — see DATA.md section 4.1)"
                      if zpath.name == "network_raw.zip" else
-                     " (Git LFS: run `git lfs pull`?)"))
+                     " (clone incomplete? the zips are plain git blobs, no LFS)"))
             continue
         with zipfile.ZipFile(zpath) as zf:
             if dest is None:  # network_raw.zip — root depends on member layout
@@ -70,7 +70,7 @@ def main() -> None:
         print(f"extracted nested {fdm_zip.relative_to(ROOT)} -> {fdm_zip.parent.relative_to(ROOT)}/")
 
     if not extracted:
-        raise SystemExit("nothing extracted — are the LFS zips present?")
+        raise SystemExit("nothing extracted — are the committed zips present? (see DATA.md section 1)")
 
 
 if __name__ == "__main__":

@@ -34,7 +34,7 @@ python tools/extract_inputs.py    # unzip the committed inputs/*.zip bundles
 bash run_all.sh                   # run as far as the data on disk allows
 ```
 A fresh clone runs step **(0)**, the ingest half of step **(c)** (extract the
-frozen network, load its 84,089 nodes / 92,978 edges into DuckDB) and all of
+frozen network, load its 84,094 nodes / 93,049 edges into DuckDB) and all of
 step **(d)** from committed data alone. The weighting and costing stages of
 (c) additionally need the friction stack from (a), and steps (a) and (b) need
 inputs that must be downloaded and regenerated. Each stage's `run_all.sh`
@@ -97,17 +97,18 @@ every OS for stage (b): install R, then
 ## The handoff that holds it together
 
 `final_network/` is the network-of-record: the joined multimodal
-network (84,089 nodes / 92,978 edges / 385 fuel hubs / 5 components / 99.99%
+network (84,094 nodes / 93,049 edges / 329 fuel hubs / 4 components / 99.99%
 giant) exported by act (b) and ingested by act (c). Its shapefile **row order
 defines `edge_id`** for every DuckDB table, so the committed zips are
 checksummed (`inputs/MANIFEST.md`) and preserved byte-identical.
 
-**Provenance:** re-exported 2026-09-15 from a rebuild whose only road source
-is the 2026-09 AK DOT&PF Roads download (the GRIP4 Canada border-stitch was
-removed — transnational roads are not fuel-delivery routes); still includes
-the user-authored manual-connections layer. It supersedes the 2026-09-12
-manual-connections export and the 2026-07-20 pre-fix freeze (both preserved
-in git history). A re-export is a *new* network-of-record and
+**Provenance:** re-exported 2026-10-15 from a rebuild carrying the phase-5
+hub builder, the corrected 2025 facility inventory (workflow 00), the 25 km
+connect-to-giant / barge-transfer reach and the 2 km snap-to-edge hub
+fallback; the road source is the 2026-09 AK DOT&PF download alone and the
+user-authored manual-connections layer is included. It supersedes the
+2026-09-15, 2026-09-12 and 2026-07-20 exports (all preserved in git
+history). A re-export is a *new* network-of-record and
 invalidates every edge_id-keyed table, so the zips, checksums, the `EXPECTED`
 tripwire and the downstream tables must be regenerated together. Full
 provenance: `final_network/README.md`.
@@ -149,4 +150,3 @@ padding and alignment steps, and the ArcGIS Pro river-ice pipeline. The
   archives the 2026-10 investigation that produced the decisions
 - `docs/TEST_LOG.md` — the verified end-to-end friction → weighting → costing run
 - `CLAUDE.md` — the lab notebook: one row per numbered script, with findings
-- `supplementary/` — cost-rate derivations and verification

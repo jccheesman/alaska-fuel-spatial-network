@@ -22,7 +22,7 @@ def main() -> None:
     for stem in ("network_joined_nodes", "network_joined_edges"):
         zpath = FINAL / f"{stem}.zip"
         if not zpath.exists():
-            raise SystemExit(f"{zpath} missing — clone incomplete? (Git LFS: run `git lfs pull`)")
+            raise SystemExit(f"{zpath} missing — clone incomplete? It is a plain git blob (no LFS); see DATA.md section 5.")
         with zipfile.ZipFile(zpath) as zf:
             members = [m for m in zf.namelist()
                        if not m.startswith("__MACOSX/") and not m.endswith(".DS_Store")]

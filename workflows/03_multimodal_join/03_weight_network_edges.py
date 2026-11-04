@@ -2,7 +2,7 @@
 
 Sample the friction rasters along every final_network edge geometry and write per-(edge, month) weights.
 
-The final_network topology is fixed (92,978 edges with real geometries), so
+The final_network topology is fixed (93,049 edges with real geometries), so
 instead of raster-routing (least-cost cost-distance over the surface), friction
 flows the other way: each edge's LineString is densified and the friction surface
 is read at the sample points, giving a length-weighted mean friction per edge.
@@ -46,7 +46,7 @@ Output table in fuel_network.duckdb:
 
     edge_month_weights(edge_id, month, mode, avg_friction, nodata_frac, passable)
 
-92,978 edges x 12 months = 1,115,736 rows.
+93,049 edges x 12 months = 1,116,588 rows.
 
 Friction-vs-cost separation: this module writes environmental multipliers
 only. Every dollar (BASELINE_RATES_PER_GALLON_MILE, INTERMODAL_TRANSFER_FEES)

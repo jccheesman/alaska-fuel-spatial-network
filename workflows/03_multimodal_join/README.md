@@ -10,8 +10,8 @@ wrote it; act d certifies it).
 - **edge_id = 0-based shapefile row order** of the edges shapefile. Derived
   at stage 02, shared by every table. The committed zips are checksummed —
   never mix tables from different exports.
-- **EXPECTED inventory tripwire** (stage 02): 84,089 nodes / 92,978 edges /
-  385 hubs / 5 components / 99.99% giant + the exact edge-type counts. A
+- **EXPECTED inventory tripwire** (stage 02): 84,094 nodes / 93,049 edges /
+  329 hubs / 4 components / 99.99% giant + the exact edge-type counts. A
   changed export fails loudly here, not silently downstream.
 - **Strict NoData rule** (stage 03): any NoData sample ⇒ the edge is
   impassable that month. nodata_frac makes partial blockage auditable.
