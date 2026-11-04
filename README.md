@@ -30,16 +30,19 @@ throughout.
 git clone <this-repo> && cd <this-repo>
 uv venv && uv sync && uv pip install -e .
 
-python tools/extract_inputs.py    # unzip the committed inputs/*.zip bundles
-bash run_all.sh                   # run as far as the data on disk allows
+python tools/extract_inputs.py                          # unzip the committed inputs/*.zip bundles
+python workflows/00_inventory_qc/validate_inventory.py  # step (0): check the facility inventory (read-only; what CI runs)
+bash run_all.sh                                         # steps (a)-(d), as far as the data on disk allows
 ```
-A fresh clone runs step **(0)**, the ingest half of step **(c)** (extract the
-frozen network, load its 84,094 nodes / 93,049 edges into DuckDB) and all of
-step **(d)** from committed data alone. The weighting and costing stages of
-(c) additionally need the friction stack from (a), and steps (a) and (b) need
-inputs that must be downloaded and regenerated. Each stage's `run_all.sh`
-gates on what is missing and names the section of `DATA.md` that explains how
-to get it.
+`run_all.sh` drives steps **(a)–(d)**; step **(0)** has its own entry point
+because it is a review loop rather than a build (its outputs are committed, and
+a run that differs from them is a finding, not a product). On a fresh clone the
+three commands above succeed from committed data alone: step (0) in full, the
+ingest half of step (c) (extract the frozen network, load its 84,094 nodes /
+93,049 edges into DuckDB) and all of step (d). The weighting and costing stages
+of (c) additionally need the friction stack from (a), and steps (a) and (b) need
+inputs that must be downloaded and regenerated. Each stage's `run_all.sh` gates
+on what is missing and names the section of `DATA.md` that explains how to get it.
 
 **`DATA.md` is the one description of every dataset:** where it comes from,
 whether it is in the repository or must be downloaded and regenerated, and
@@ -61,6 +64,7 @@ helpers live in `workflows/_lib.sh`.
 Per-stage runs:
 
 ```bash
+bash workflows/00_inventory_qc/run_all.sh      # step (0) with outputs written (refreshes the published clean table)
 bash workflows/01_friction_build/run_all.sh    # needs inputs/friction_rasters — DATA.md §3.1
 bash workflows/02_network_build/run_all.sh     # needs data/raw — DATA.md §4.1
 bash workflows/03_multimodal_join/run_all.sh   # stages 01-02 run from committed data; 03-04 need the friction stack
