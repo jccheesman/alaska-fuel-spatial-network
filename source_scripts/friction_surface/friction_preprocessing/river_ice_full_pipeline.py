@@ -20,18 +20,21 @@ or, after `conda activate arcgispro-py3`:
 
 RASTER_DIR is required (there is no default: the original authoring machine's
 paths are nobody else's). The working directory defaults to the repo's
-inputs/river_ice_work/ beside it, which `python tools/extract_inputs.py` fills
-from the tracked inputs/river_ice/river_ice_sources.zip; set FRICTION_LAYER_ROOT
-to use another folder.
+inputs/river_ice_work/ beside it; set FRICTION_LAYER_ROOT to use another folder.
 
-WORKING DIRECTORY LAYOUT (one folder, shared with build_brown_polygon_mask.py,
-which writes the two shapefile folders; see friction_preprocessing/README.md):
+WHAT YOU NEED IN IT (two things; inputs/river_ice/SOURCE.md describes both):
+  - the Brown et al. 2026 reach points: raw data, downloaded from
+    doi:10.18739/A2SB3X15X (9.6 MB) — they say HOW MUCH ice, per reach and month;
+  - the two river masks of the thirty Brown rivers (NHD polygons = wide channels,
+    NHD flowlines = centre lines): derived data, committed in
+    inputs/river_ice/river_ice_sources.zip and unpacked by
+    `python tools/extract_inputs.py` — they say WHERE a river cell exists and
+    which cells share a polygon median.
 
     <working directory>/
-      waterFilledMedians2000_2023.geojson           Brown et al. 2026 reach points (in the bundle)
-      brown_river_polygons/brown_river_polygons.shp   in the bundle; rebuilt by build_brown_polygon_mask.py
-      brown_river_flowlines/brown_river_flowlines.shp in the bundle; rebuilt by build_brown_polygon_mask.py
-      NHD_extracted/Shape/                          USGS NHD Alaska (download) — only to rebuild the masks
+      waterFilledMedians2000_2023.geojson           download
+      brown_river_polygons/brown_river_polygons.shp   from the zip (rebuilt by build_brown_polygon_mask.py only if NHD changes)
+      brown_river_flowlines/brown_river_flowlines.shp from the zip (same)
 
 OUTPUTS (the friction pipeline reads these directly; nothing is renamed):
 

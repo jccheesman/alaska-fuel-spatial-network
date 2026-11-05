@@ -80,9 +80,10 @@ inputs/raw_facility_data/**/Utilities_Bulk_Fuel_Inventory*.csv
 !inputs/inventory_qc/boundaries/*.zip
 !inputs/data_for_network_build.zip
 !inputs/region_and_census_data.zip
-# River-ice sources: the Brown et al. 2026 reach points (CC0) and the two NHD-derived river
-# masks, zipped (< 50 MB). tools/extract_inputs.py unpacks it into inputs/river_ice_work/
-# (ignored); only the NHD download itself stays out (5 GB, needed only to rebuild the masks).
+# River-ice intermediates: the two NHD-derived river masks (and any later slow-to-rebuild
+# intermediate), zipped (< 50 MB). tools/extract_inputs.py unpacks it into inputs/river_ice_work/
+# (ignored). Raw data stays a download: the Brown et al. reach points (one small public file)
+# and the 5 GB NHD (needed only to rebuild the masks). Provenance: inputs/river_ice/SOURCE.md.
 !inputs/river_ice/
 inputs/river_ice/*
 !inputs/river_ice/river_ice_sources.zip

@@ -75,7 +75,7 @@ keeps the name its producer gave it, all the way into the build (§3.1).
 | Dynamic World V1 (summer-mode land cover) | Land-cover friction; water class for barge | `inputs/friction_rasters/dynamic_world_LULC_2022_2024_summer_mode_150m_EPSG3338.tif` — the grid anchor | Download and regenerate | [GEE catalog](https://developers.google.com/earth-engine/datasets/catalog/GOOGLE_DYNAMICWORLD_V1) (read directly in GEE) |
 | Pastick et al. 2015 near-surface permafrost probability | Permafrost friction | `inputs/friction_rasters/permafrost_probability_150m_EPSG3338.tif` | Download and regenerate | [USGS](https://www.usgs.gov/publications/distribution-near-surface-permafrost-alaska-estimates-present-and-future-conditions) · [paper](https://www.sciencedirect.com/science/article/pii/S0034425715300778) (download, upload as a GEE asset) |
 | Historical Sea Ice Atlas (UAF SNAP / AOOS), monthly medians 1990–2022 | Barge ice gating, 12 months | `inputs/friction_rasters/sea_ice/sea_ice_median_{01..12}_{Jan..Dec}_150m_EPSG3338.tif` | Download and regenerate | [SNAP catalog](https://catalog.snap.uaf.edu/geonetwork/srv/eng/catalog.search#/metadata/047e91c7-35c6-410a-a1ef-95539c1ee328) (download, upload as a GEE asset) |
-| Brown et al. 2026 river-ice phenology (reach points) + USGS National Hydrography Dataset for Alaska | River ice gating, 12 months | The reach points and the two NHD-derived river masks: `inputs/river_ice/river_ice_sources.zip` → `inputs/river_ice_work/` (`inputs/river_ice/SOURCE.md`). The twelve monthly rasters: `inputs/friction_rasters/river_ice/river_ice_probability_{01..12}_150m_EPSG3338.tif` | In the repository (reach points + masks, once the zip is added) · Download and regenerate (the rasters; the NHD download only to rebuild the masks) | [Arctic Data Center 10.18739/A2SB3X15X](https://arcticdata.io/catalog/view/doi:10.18739/A2SB3X15X) · USGS National Map (NHD, Alaska state shapefile) |
+| Brown et al. 2026 river-ice phenology (reach points) + USGS National Hydrography Dataset for Alaska | River ice gating, 12 months | Reach points: download into `inputs/river_ice_work/waterFilledMedians2000_2023.geojson`. The two NHD-derived river masks (which rivers, which cells): `inputs/river_ice/river_ice_sources.zip` → `inputs/river_ice_work/` (described in `inputs/river_ice/SOURCE.md`). The twelve monthly rasters: `inputs/friction_rasters/river_ice/river_ice_probability_{01..12}_150m_EPSG3338.tif` | Download (the reach points) · In the repository (the masks, once the zip is added) · Built by the pipeline (the rasters, in ArcGIS Pro from the two) · the NHD download only to rebuild the masks | [Arctic Data Center 10.18739/A2SB3X15X](https://arcticdata.io/catalog/view/doi:10.18739/A2SB3X15X) · USGS National Map (NHD, Alaska state shapefile) |
 
 The finished friction stack (the product of section 3) is also mirrored as GEE
 assets, so a user who only needs the stack can download it instead of
@@ -204,26 +204,32 @@ mirror assets in §1.4 into `outputs/01_friction_build/friction_stack/` and run
 
 #### Step B — River ice: local Python, then ArcGIS Pro
 
-River ice is not an Earth Engine product. Its sources live in one working
-directory, `inputs/river_ice_work/` (gitignored), which
-`python tools/extract_inputs.py` fills from the tracked bundle
-`inputs/river_ice/river_ice_sources.zip` (provenance in `inputs/river_ice/SOURCE.md`):
+River ice is not an Earth Engine product. It is interpolated in ArcGIS Pro
+from two things: the Brown et al. **reach points** (raw data, one small public
+download) and the two **river masks** (the NHD polygons and centre lines of the
+thirty Brown rivers, which say where a river cell exists; derived data, slow to
+rebuild, so committed). `inputs/river_ice/SOURCE.md` describes both masks field
+by field and how they were cut. Everything lives in one working directory,
+`inputs/river_ice_work/` (gitignored):
 
 ```
 inputs/river_ice_work/
-  waterFilledMedians2000_2023.geojson   Brown et al. 2026 reach points (in the bundle; 9.6 MB, CC0)
-  brown_river_polygons/                 in the bundle; rebuilt by step 2 if needed
-  brown_river_flowlines/                in the bundle; rebuilt by step 2 if needed
+  waterFilledMedians2000_2023.geojson   Brown et al. 2026 reach points — DOWNLOAD (§1.4; 9.6 MB, CC0)
+  brown_river_polygons/                 from the committed zip; rebuilt by step 2 only if NHD changes
+  brown_river_flowlines/                from the committed zip; rebuilt by step 2 only if NHD changes
   NHD_extracted/Shape/                  USGS National Hydrography Dataset for Alaska, unzipped
                                         (NHDArea.shp, NHDFlowline_0..6.shp; the zip is ~5 GB) —
-                                        NOT in the bundle; download it only to rebuild the masks
+                                        download it only to rebuild the masks
 ```
 
 Set `FRICTION_LAYER_ROOT` to use a folder elsewhere instead.
 
-1. **Unpack the bundle**: `python tools/extract_inputs.py` (it also unpacks the
-   waterway shapefile the mask builder uses to keep salt water out of the
-   river mask). With the bundle in place, skip to step 3.
+1. **Unpack the masks and download the points.** `python tools/extract_inputs.py`
+   unpacks `inputs/river_ice/river_ice_sources.zip` into the working directory
+   (and the waterway shapefile the mask builder needs). Then download the reach
+   points from the Arctic Data Center (§1.4) into
+   `inputs/river_ice_work/waterFilledMedians2000_2023.geojson`. With both in
+   place, skip to step 3.
 2. **Rebuild the river masks** only if NHD or the Brown reach set changes.
    Download the NHD shapefile bundle (USGS National Map, "NHD Alaska, state,
    shapefile") into `inputs/river_ice_work/NHD_extracted/Shape/`, then
@@ -232,8 +238,9 @@ Set `FRICTION_LAYER_ROOT` to use a folder elsewhere instead.
    ```
    filters the statewide NHD to the thirty rivers Brown et al. observed and
    rewrites `brown_river_polygons/` (wide channels) and
-   `brown_river_flowlines/` (centre lines). Re-zip the working directory
-   without `NHD_extracted/` and update the checksums (`SOURCE.md`, `MANIFEST.md`).
+   `brown_river_flowlines/` (centre lines). Re-zip the two folders without the
+   reach points or `NHD_extracted/` and update the checksums (`SOURCE.md`,
+   `MANIFEST.md`).
 3. **Interpolate the monthly ice probability** (ArcGIS Pro with Spatial
    Analyst, Windows). The land-cover raster from Step A must already be in
    `inputs/friction_rasters/`: it is the grid the output is aligned to.

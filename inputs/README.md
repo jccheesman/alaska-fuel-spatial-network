@@ -24,7 +24,7 @@ gitignored working directories.
 | `region_and_census_data.zip` | The AEA energy-region library (read by the inventory QC) and the 2023 Census state boundary (figures) | §1.1, §1.3 |
 | `air/` | The AK DOT&PF airport registry and the matched flight legs (tracked CSVs; `flight_paths.xlsx` is the hand-digitised source) | §1.2, §4.2 |
 | `mannual_connections/` | The user-authored manual-connections shapefile, split by `Mode` at build time | §1.2, §4.2 |
-| `river_ice/` | `river_ice_sources.zip`: the Brown et al. 2026 reach points and the two NHD-derived river masks, i.e. the river-ice working directory without the 5 GB NHD download (`SOURCE.md` has provenance and checksums) | §1.4, §3.1 |
+| `river_ice/` | `river_ice_sources.zip`: the river-ice intermediates that are slow to rebuild — the two NHD-derived river masks of the thirty Brown rivers (polygons and centre lines). With these and the downloadable Brown reach points, ArcGIS Pro regenerates the monthly river-ice rasters. `SOURCE.md` describes each member, its provenance and checksum | §1.4, §3.1 |
 | `friction_rasters/` | **Not in the repository.** The environmental rasters on the canonical grid; download and regenerate | §1.4, §3.1 |
 | `network_raw.zip` | **Not in the repository.** The raw transport and boundary files that populate `data/raw/`; download and regenerate | §4.1 |
 | `bulk_fuel_data/`, `data_for_network_build/`, `region_and_census_data/`, `river_ice_work/` | Unzipped working copies written by `tools/extract_inputs.py` (gitignored) | §6 |

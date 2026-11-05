@@ -4,8 +4,9 @@
   inputs/raw_facility_data/2022/bulk_fuel_data.zip -> inputs/bulk_fuel_data/
   inputs/data_for_network_build.zip  -> inputs/data_for_network_build/
   inputs/region_and_census_data.zip  -> inputs/region_and_census_data/
-  inputs/river_ice/river_ice_sources.zip -> inputs/river_ice_work/  (the river-ice
-                                        working directory: Brown reach points + masks)
+  inputs/river_ice/river_ice_sources.zip -> inputs/river_ice_work/  (the river masks and
+                                        other river-ice intermediates; the reach points
+                                        are a download — inputs/river_ice/SOURCE.md)
   inputs/network_raw.zip             -> data/raw/          (workflow 02 sources;
                                         not in the repository — see DATA.md §4.1)
 
@@ -49,7 +50,7 @@ def main() -> None:
         if not zpath.exists():
             why = {
                 "network_raw.zip": " (not in the repository — see DATA.md section 4.1)",
-                "river_ice_sources.zip": " (river-ice sources not yet added — see DATA.md section 3.1)",
+                "river_ice_sources.zip": " (river-ice intermediates not yet added — see DATA.md section 3.1)",
             }.get(zpath.name, " (clone incomplete? the zips are plain git blobs, no LFS)")
             print(f"skip: {zpath.relative_to(ROOT)} not present{why}")
             continue

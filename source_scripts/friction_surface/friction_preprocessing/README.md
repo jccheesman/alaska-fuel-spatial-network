@@ -26,16 +26,20 @@ it (the GEE script and the arcpy script) spell them the same.
 
 ## The river-ice working directory
 
-The river-ice sources live in one folder, `inputs/river_ice_work/` (gitignored),
-which `python tools/extract_inputs.py` fills from the tracked bundle
-`inputs/river_ice/river_ice_sources.zip` (provenance: `inputs/river_ice/SOURCE.md`).
-The mask builder writes into it and the arcpy pipeline reads from it:
+River ice is interpolated in ArcGIS Pro from two things: the Brown et al. **reach
+points** (raw data; one small public download, they say *how much* ice per reach
+and month) and the two **river masks** (derived from the 5 GB USGS NHD; they say
+*where* a river cell exists and which cells share a polygon median). The masks are
+slow to rebuild, so they are committed as `inputs/river_ice/river_ice_sources.zip`;
+`inputs/river_ice/SOURCE.md` describes each one field by field. Everything lives in
+one folder, `inputs/river_ice_work/` (gitignored), which `python tools/extract_inputs.py`
+fills from the zip:
 
 ```
 inputs/river_ice_work/
-  waterFilledMedians2000_2023.geojson   Brown et al. 2026 reach points (in the bundle; 9.6 MB, CC0)
-  brown_river_polygons/brown_river_polygons.shp     in the bundle; rebuilt by build_brown_polygon_mask.py
-  brown_river_flowlines/brown_river_flowlines.shp   in the bundle; rebuilt by build_brown_polygon_mask.py
+  waterFilledMedians2000_2023.geojson   Brown et al. 2026 reach points — DOWNLOAD (doi:10.18739/A2SB3X15X)
+  brown_river_polygons/brown_river_polygons.shp     from the zip; rebuilt by build_brown_polygon_mask.py only if NHD changes
+  brown_river_flowlines/brown_river_flowlines.shp   from the zip; same
   NHD_extracted/Shape/                  USGS NHD Alaska (download, ~5 GB) — only to rebuild the masks
   tiger/cb_2023_us_state_500k.shp       optional, the Alaska outline for the provenance figure
 ```
@@ -55,7 +59,8 @@ python -m friction_surface.friction_preprocessing.pad_sea_ice_to_grid
 python -m friction_surface.friction_preprocessing.align_permafrost
 python -m friction_surface.check_grid_exports
 
-# B. River ice, step 1: unpack the committed reach points + masks (skip step 2 unless NHD changed)
+# B. River ice, step 1: unpack the committed masks, then download the reach points into
+#    inputs/river_ice_work/waterFilledMedians2000_2023.geojson (skip step 2 unless NHD changed)
 python tools/extract_inputs.py
 # B. River ice, step 2 (local Python; only to REBUILD the masks from a fresh NHD download):
 python -m friction_surface.friction_preprocessing.build_brown_polygon_mask
