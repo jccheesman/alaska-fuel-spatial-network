@@ -34,7 +34,7 @@ file only says what the words mean.
 | **NWN** | National Waterway Network (USACE / BTS): the lines of navigable waterways. The barge network and the waterway corridor mask come from it. |
 | **Pastick et al. 2015** | USGS map of the probability of near-surface permafrost in Alaska. The permafrost input. |
 | **R oracle** | The small R program (`source_scripts/mmnet/r_oracle/`, using `sf` and `sfnetworks`) that the network build calls for one job, noding (see below). "Oracle" because Python hands it the lines and takes back the answer. |
-| **SIRA** | The third ice-road source, an ArcGIS Online item (link in `DATA.md` §1.2); its expansion is not recorded in this repository. |
+| **SIRA** | Safe Ice Roads for Alaska, a competitive grant program run by AKDOT&PF that funds the construction, maintenance and operation of seasonal and ice roads for tribes, cities and boroughs (federal Surface Transportation Block Grant money). The third ice-road source is the ArcGIS Online map of SIRA-funded routes (link in `DATA.md` §1.2). |
 | **SNAP** | Scenarios Network for Alaska and Arctic Planning, at UAF. Hosts the Historical Sea Ice Atlas. |
 | **TIGER/Line** | The US Census Bureau's boundary files: places, county subdivisions, boroughs and census areas, states. |
 | **USACE** | US Army Corps of Engineers. Publishes the National Waterway Network. |
