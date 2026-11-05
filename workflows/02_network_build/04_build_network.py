@@ -6,8 +6,9 @@ Artifacts land under outputs/02_network_build/ (the mmnet project dir):
   -> 04_network_joined__{nodes,edges}   plus reports/03_network.md etc.
 
 Requires the prep stages first (00_normalize_raw -> 01_prep_waterway ->
-02_prep_airways), which populate data/interim + data/processed from
-inputs/network_raw.zip (extract via tools/extract_inputs.py). Rscript with
+02_prep_airways), which populate data/interim + data/processed from the raw
+layers in data/raw (DATA.md section 4.1: six public downloads plus the ice-road
+layer tools/extract_inputs.py places). Rscript with
 sf/sfnetworks/tidygraph/dplyr must be on PATH for the R noding oracle.
 
 Run:  python workflows/02_network_build/04_build_network.py [profile.yaml]

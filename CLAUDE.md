@@ -108,14 +108,17 @@ replaces the network-of-record.
 - **Large data lives in the Zenodo deposit, never in git (owner 2026-11-05).** The
   rasters (friction inputs ~7 GB, the finished stack ~300 MB; even one river-ice
   month is 25 MB compressed) and the river-ice working directory are fetched with
-  `tools/fetch_archive.py --group {friction_inputs,friction_stack,network_raw,river_ice_work}`,
+  `tools/fetch_archive.py --group {friction_inputs,friction_stack,river_ice_work}`,
   which verifies each zip against the deposit's md5 and unpacks it where the
   pipeline reads. `ZENODO_RECORD` in that file is the one place the DOI lives; it
   is `None` until the deposit is published (the tool then exits 3 like a gate).
   `DATA.md` is organised as three paths: use the finished products, rebuild from
   the deposit's intermediates, rebuild from the raw sources. A committed zip under
   `inputs/` is for data under 50 MB only; the plan to commit the river masks was
-  withdrawn (the polygon shapefile alone is 79 MB zipped).
+  withdrawn (the polygon shapefile alone is 79 MB zipped). Workflow 02 has no
+  deposit group (owner 2026-11-05): its two hand-edited layers (ice roads, manual
+  connections) are in git, `tools/extract_inputs.py` copies the ice roads into the
+  `data/raw` layout, and the six public layers are downloaded from their publishers.
 - **Synthetic connectors use a mode-based vocabulary (refine-synthetic-connectors,
   2026-09).** `pipeline.classify_connectors` names every synthetic connector by the
   modes at its endpoints: within-mode welds → `{Mode}Connector` (RoadConnector,

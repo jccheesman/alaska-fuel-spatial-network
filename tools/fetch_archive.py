@@ -11,8 +11,11 @@ renamed; see friction_paths.RASTER_NAMES).
   group            deposit file          unpacks into                               used by
   friction_inputs  friction_inputs.zip   inputs/friction_rasters/                   workflow 01 (build the stack)
   friction_stack   friction_stack.zip    outputs/01_friction_build/friction_stack/  workflow 03 (weight the network)
-  network_raw      network_raw.zip       data/raw/                                  workflow 02 (build the network)
   river_ice_work   river_ice_work.zip    inputs/river_ice_work/                     the ArcGIS river-ice step (path 3)
+
+The network build (workflow 02) has no deposit group: its hand-edited layers
+(ice roads, manual connections) are in the repository and its other raw layers
+are public downloads (DATA.md §4.1).
 
 Each zip's members are laid out exactly as the destination folder (for example
 friction_inputs.zip holds sea_ice/… and river_ice/… sub-folders and the three
@@ -62,11 +65,6 @@ GROUPS = {
         "file": "friction_stack.zip",
         "dest": ROOT / "outputs" / "01_friction_build" / "friction_stack",
         "what": "the finished friction stack (overland, road_base, barge_01..12), ~300 MB",
-    },
-    "network_raw": {
-        "file": "network_raw.zip",
-        "dest": ROOT / "data" / "raw",
-        "what": "the raw transport and boundary downloads in the data/raw layout (DATA.md §4.1)",
     },
     "river_ice_work": {
         "file": "river_ice_work.zip",

@@ -26,5 +26,5 @@ gitignored working directories.
 | `mannual_connections/` | The user-authored manual-connections shapefile, split by `Mode` at build time | §1.2, §4.2 |
 | `friction_rasters/` | **Not in the repository.** The environmental rasters on the canonical grid: fetch from the Zenodo deposit (`python tools/fetch_archive.py --group friction_inputs`) or regenerate | §1.4, §3.1 |
 | `river_ice_work/` | **Not in the repository.** The river-ice working directory (Brown reach points, the two NHD river masks): fetch (`--group river_ice_work`) or rebuild; only needed to re-interpolate river ice in ArcGIS Pro | §3.1 |
-| `network_raw.zip` | **Not in the repository.** The raw transport and boundary files that populate `data/raw/`: fetch from the deposit (`--group network_raw`) or download per dataset | §4.1 |
+| `network_raw.zip` | **Optional, local only.** A private bundle of the six public downloads that populate `data/raw/`; `tools/extract_inputs.py` unpacks it if present. Never committed or deposited: those layers are downloaded from their publishers (§4.1); the hand-edited ice-road and manual-connection layers are in this folder's committed files | §4.1 |
 | `bulk_fuel_data/`, `data_for_network_build/`, `region_and_census_data/` | Unzipped working copies written by `tools/extract_inputs.py` (gitignored) | §6 |

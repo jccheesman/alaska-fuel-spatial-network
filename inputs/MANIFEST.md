@@ -29,7 +29,7 @@ Raw inventory files (NOT tracked after 2022; contact fields). Verify a local cop
 
 | Pending | note |
 |---|---|
-| `inputs/network_raw.zip` | not in the repository — license-gated; see DATA.md §4.1 |
+| `inputs/network_raw.zip` | optional local bundle of the six public downloads — never committed; see DATA.md §4.1 |
 | the rasters (`inputs/friction_rasters/`, the friction stack), `inputs/river_ice_work/` | not in the repository — in the Zenodo deposit; `tools/fetch_archive.py` verifies each download against the deposit's own checksums |
 
 ## final_network zip members (the current network-of-record)

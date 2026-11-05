@@ -143,10 +143,23 @@ def stage_01_friction_build(py: str) -> None:
 
 def stage_02_network_build(py: str, profile: str) -> None:
     here = WORKFLOWS / "02_network_build"
-    if not dir_nonempty(ROOT / "data/raw"):
+    # Verbatim from workflows/02_network_build/run_all.sh (RAW_DOWNLOADS): the six
+    # public layers are downloads; the ice-road layer is placed by extract_inputs.
+    raw_downloads = [
+        "data/raw/connectivity/road/Roads_AKDOT/Roads_AKDOT.shp",
+        "data/raw/connectivity/barge/NWN_Waterway_Network_Lines/Waterway_Network.shp",
+        "data/raw/anchor_points/Ports_and_Harbors.geojson",
+        "data/raw/boundaries/tiger_places/tl_2022_02_place.shp",
+        "data/raw/boundaries/borough_census_area/Alaska_Borough_and_Census_Area_Boundaries.shp",
+        "data/raw/boundaries/Fuel_Delivery_Method.geojson",
+    ]
+    missing = [f for f in raw_downloads if not (ROOT / f).is_file()]
+    if missing:
         gate(
-            "data/raw is empty. Populate it first:",
-            f"{py} tools/fetch_archive.py --group network_raw   (from the Zenodo deposit; or download the raw files — DATA.md section 4.1)",
+            f"data/raw is missing {len(missing)} of the 6 public downloads:",
+            *missing,
+            "Download each from its source (DATA.md section 4.1 lists the file and the link), and run",
+            f"{py} tools/extract_inputs.py once for the ice-road layer.",
         )
 
     if not dir_nonempty(ROOT / "data/interim"):

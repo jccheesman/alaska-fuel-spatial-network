@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # One-command reproduction of the four-act pipeline:
 #   (a) 01_friction_build   — friction stack        [needs the ~7 GB regenerable rasters]
-#   (b) 02_network_build    — multimodal network    [needs inputs/network_raw.zip extracted]
+#   (b) 02_network_build    — multimodal network    [needs the six public downloads in data/raw]
 #   (c) 03_multimodal_join  — weighted edges        [stages 01-02 run from committed data]
 #   (d) 04_duckdb_export    — validate the deliverable
 #

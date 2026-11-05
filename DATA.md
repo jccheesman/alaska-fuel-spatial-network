@@ -15,8 +15,8 @@ table tells you what, if anything, you have to do to get it.
 | Kind | What it means for you | Examples |
 |---|---|---|
 | **In the repository** | It arrives with the clone. There is nothing to download. Some of these are zip files that a one-line command unpacks (`python tools/extract_inputs.py`). | `inputs/*.zip`, `inputs/air/*.csv`, `final_network/*.zip`, `outputs/00_inventory_qc/<release>/facilities_clean.csv` |
-| **In the Zenodo deposit** | Too large for GitHub (the rasters: ~7 GB of friction inputs, ~300 MB of finished friction stack) or assembled from several downloads (the raw transport bundle). The deposit that complements this repository holds them as one zip per group; `python tools/fetch_archive.py --group <name>` downloads a group, verifies it against the deposit's checksum and unpacks it where the pipeline reads it. The DOI is recorded in that script once the deposit is published; until then the tool stops with exit code 3. | `inputs/friction_rasters/`, `outputs/01_friction_build/friction_stack/`, `data/raw/`, `inputs/river_ice_work/` |
-| **Download and regenerate** | The original dataset is downloaded from the source link in section 1 and converted by the script named in the walk-through. This is the only way to get something that is in neither the repository nor the deposit, and the way to reproduce what is in the deposit. | the Earth Engine exports (§3.1 Step A), the river-ice interpolation (§3.1 Step B), the raw transport files one by one (§4.1) |
+| **In the Zenodo deposit** | Too large for GitHub: the rasters (~7 GB of friction inputs, ~300 MB of finished friction stack) and the river-ice working directory. The deposit that complements this repository holds them as one zip per group; `python tools/fetch_archive.py --group <name>` downloads a group, verifies it against the deposit's checksum and unpacks it where the pipeline reads it. The DOI is recorded in that script once the deposit is published; until then the tool stops with exit code 3. | `inputs/friction_rasters/`, `outputs/01_friction_build/friction_stack/`, `inputs/river_ice_work/` |
+| **Download and regenerate** | The original dataset is downloaded from the source link in section 1 and, where needed, converted by the script named in the walk-through. Public datasets that a publisher serves directly are never re-hosted here: you download them. This is also the way to reproduce what is in the deposit. | the six public transport and boundary layers of workflow 02 (§4.1), the Earth Engine exports (§3.1 Step A), the river-ice interpolation (§3.1 Step B) |
 | **Built by the pipeline** | You never download or edit these. They are the intermediate and final products that the scripts in this repository write when you run them, starting from the kinds above. They are excluded from git on purpose. If one is missing or looks wrong, delete it and rerun the stage that produces it (section 6 names the command). | `data/interim/`, `outputs/02_network_build/`, `outputs/fuel_network.duckdb` |
 
 Each run script checks for what it needs before starting; if something is
@@ -56,8 +56,8 @@ what you want to start from, then run the workflows downstream of it:
 |---|---|---|
 | the costed graph only | `python tools/fetch_archive.py --group friction_stack` | workflows 03 and 04 |
 | the friction stack (§3.2), then the costed graph | `--group friction_inputs` | workflows 01, 03, 04 |
-| the network (§4), then the costed graph | `--group network_raw` and `--group friction_stack` | workflows 02 (export opt-in, see §4.3), 03, 04 |
-| everything downstream of the raw rasters and raw transport files | `--group friction_inputs --group network_raw` | `bash run_all.sh` |
+| the network (§4), then the costed graph | `--group friction_stack`, plus the six public downloads of §4.1 (the hand-edited layers are in the repository) | workflows 02 (export opt-in, see §4.3), 03, 04 |
+| everything downstream of the raw rasters | `--group friction_inputs`, plus the six public downloads of §4.1 | `bash run_all.sh` |
 | the river-ice interpolation itself (ArcGIS Pro) | `--group river_ice_work` | §3.1 Step B |
 
 `run_all.sh` (or `python run_all.py` on Windows) runs workflows 01–04 in order
@@ -69,7 +69,9 @@ Sections 2–5 below are this path: every original dataset in §1, downloaded
 from its source link, and every script that turns it into the next product.
 It needs an Earth Engine account (§3.1 Step A), ArcGIS Pro with Spatial
 Analyst for the river ice (§3.1 Step B), R for the network noding (§4.3), and
-roughly 12 GB of downloads. It is the path that reproduces the deposit.
+roughly 12 GB of downloads. It is the path that reproduces the deposit. The
+two layers that were drawn or merged by hand (the ice roads, the manual
+connections) are in the repository on every path; they have no publisher.
 
 ## 1. Original datasets
 
@@ -90,10 +92,10 @@ through the conversion.
 
 | Dataset | Used for | Lands in | Kind | Source |
 |---|---|---|---|---|
-| AKDOT&PF Roads (2026-09 download) | The road network — the sole road source since 2026-09-15 | `data/raw/connectivity/road/Roads_AKDOT/` | Download and regenerate | [Roads AKDOT](https://data-soa-akdot.opendata.arcgis.com/datasets/6ef677dc522542d88fba1711a7e16400_0/explore) |
-| USACE National Waterway Network lines | The barge network, and the waterway corridor mask for the friction surface | `data/raw/connectivity/barge/NWN_Waterway_Network_Lines/` (network build); `inputs/data_for_network_build.zip` → `water_networks/waterways_network_ak_albers.shp` (corridor mask) | Download and regenerate (the `data/raw/` copy) · In the repository (the zip copy) | [USACE GeoSpatial](https://geospatial-usace.opendata.arcgis.com/maps/ace7645d305647448a84492a3b909d48) · [BTS/NTAD](https://geodata.bts.gov/datasets/national-waterway-network-lines) |
-| North Slope ice roads (UAA ACCS, AKDOT, SIRA), merged and edited by hand in ArcGIS Pro | The seasonal ice-road network | `data/raw/connectivity/ice_roads/ice_roads_150m_3338/Ice_Roads.shp`; the same file is in `data_for_network_build.zip` | Download and regenerate (the `data/raw/` copy) · In the repository (the zip copy) | [UAA ACCS](https://accscatalog.uaa.alaska.edu/dataset/anthropogenic-datasets-north-slope/resource/5d898316-507e-4535-8bf0-b0608d3ca83a) · [AKDOT](https://www.arcgis.com/home/item.html?id=820ebeed349b484eab23ffaa685b64ef) · [SIRA](https://www.arcgis.com/home/item.html?id=ef4056f5fb0545698b5c4318821c8237) |
-| Ports and harbors (points) | Barge anchors: where the waterway meets land | `data/raw/anchor_points/Ports_and_Harbors.geojson`; a zipped copy in `data_for_network_build.zip` → `water_networks/AK_Ports_and_Harbors.zip` | Download and regenerate (the `data/raw/` copy) · In the repository (the zip copy) | [Harbors](https://akgeoportal.alaska.gov/datasets/113cb18269e24c3fbd031238712b2ff5_0/explore) |
+| AKDOT&PF Roads (2026-09 download) | The road network — the sole road source since 2026-09-15 | `data/raw/connectivity/road/Roads_AKDOT/` | Download (§4.1) | [Roads AKDOT](https://data-soa-akdot.opendata.arcgis.com/datasets/6ef677dc522542d88fba1711a7e16400_0/explore) |
+| USACE National Waterway Network lines | The barge network, and the waterway corridor mask for the friction surface | `data/raw/connectivity/barge/NWN_Waterway_Network_Lines/` (network build); `inputs/data_for_network_build.zip` → `water_networks/waterways_network_ak_albers.shp` (corridor mask) | Download (the `data/raw/` copy, §4.1) · In the repository (the zip copy) | [USACE GeoSpatial](https://geospatial-usace.opendata.arcgis.com/maps/ace7645d305647448a84492a3b909d48) · [BTS/NTAD](https://geodata.bts.gov/datasets/national-waterway-network-lines) |
+| North Slope ice roads, merged from three sources (UAA ACCS, AKDOT, SIRA) and edited by hand in ArcGIS Pro | The seasonal ice-road network | `inputs/data_for_network_build.zip` → `ice_roads_150m_3338/Ice_Roads.shp`; `tools/extract_inputs.py` also copies it to `data/raw/connectivity/ice_roads/ice_roads_150m_3338/` where the build reads it | In the repository (an authored layer: it exists nowhere else) | [UAA ACCS](https://accscatalog.uaa.alaska.edu/dataset/anthropogenic-datasets-north-slope/resource/5d898316-507e-4535-8bf0-b0608d3ca83a) · [AKDOT](https://www.arcgis.com/home/item.html?id=820ebeed349b484eab23ffaa685b64ef) · [SIRA](https://www.arcgis.com/home/item.html?id=ef4056f5fb0545698b5c4318821c8237) |
+| Ports and harbors (points) | Barge anchors: where the waterway meets land | `data/raw/anchor_points/Ports_and_Harbors.geojson`; a zipped copy in `data_for_network_build.zip` → `water_networks/AK_Ports_and_Harbors.zip` | Download (the `data/raw/` copy, §4.1) · In the repository (the zip copy) | [Harbors](https://akgeoportal.alaska.gov/datasets/113cb18269e24c3fbd031238712b2ff5_0/explore) |
 | AK DOT&PF airport registry and the matched origin–destination flight legs | The air network: airports are geocoded, each OD leg becomes a straight line | `inputs/air/airports_ak_dotpf.csv`, `inputs/air/flight_paths_combined.csv` (+ `flight_paths.xlsx`, the hand-digitised source) | In the repository | AK DOT&PF airport registry; flight legs digitised from carrier schedules |
 | User-authored manual connections | Hand-drawn lines that stitch hubs the public layers leave disconnected; tagged by mode | `inputs/mannual_connections/mannual_connections.shp` | In the repository | Authored in this project (QGIS/ArcGIS); not an external dataset |
 | GRIP4 global roads (CC-BY) | **No longer used.** Removed 2026-09-15; survives only in the legacy `roads_networks/ak_albers_roads_merge.shp` inside `data_for_network_build.zip` | — | In the repository (legacy, no longer read) | [GLOBIO GRIP](https://www.globio.info/download-grip-dataset) |
@@ -103,7 +105,7 @@ through the conversion.
 
 | Dataset | Used for | Lands in | Kind | Source |
 |---|---|---|---|---|
-| US Census TIGER/Line 2022: places, county subdivisions, boroughs / census areas | Tagging hubs with a place and a borough; the Alaska outline | `data/raw/boundaries/{tiger_places,tiger_county_subdivisions,borough_census_area}/` | Download and regenerate | [TIGER/Line](https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html) |
+| US Census TIGER/Line 2022: places, county subdivisions, boroughs / census areas | Tagging hubs with a place and a borough; the Alaska outline | `data/raw/boundaries/{tiger_places,tiger_county_subdivisions,borough_census_area}/` | Download (§4.1) | [TIGER/Line](https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html) |
 | US Census cartographic state boundary 2023 (500k) | Figures only | `inputs/region_and_census_data.zip` → `region_and_census_data/tiger/cb_2023_us_state_500k.shp` | In the repository | [TIGER/Line](https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html) |
 | Natural Earth 10 m land and country borders | The publication map's basemap only | `data/basemap/` | Built by the pipeline (the script downloads it) | Natural Earth, public domain |
 
@@ -352,25 +354,37 @@ facility table from §2, and the manual connections. **Ends with:**
 
 ### 4.1 Stage the raw sources
 
-`data/raw/` is never in the repository. It is populated either from the deposit,
-`python tools/fetch_archive.py --group network_raw` (the bundle assembled on the
-owner's machine, every member a public dataset from §1.2–1.3), or by
-downloading each dataset in §1.2–1.3 yourself into the layout that the `SPEC`
-table in `workflows/02_network_build/00_normalize_raw.py` names file by file:
+`data/raw/` is a working folder, never in the repository, laid out as the
+`SPEC` table in `workflows/02_network_build/00_normalize_raw.py` names it file
+by file. Its contents come from two places:
+
+**From the repository** (the layers that were made by hand and have no
+publisher): `python tools/extract_inputs.py` copies the ice-road layer out of
+`inputs/data_for_network_build.zip` into the layout below, and the
+manual-connections shapefile is read straight from `inputs/mannual_connections/`
+(§4.2). The air tables are committed at `inputs/air/` and the facility table
+comes from workflow 00, so neither is in `data/raw/`.
+
+**Downloaded by you** (public datasets their publishers serve directly, so
+this repository does not re-host them): the six layers marked *download*
+below, from the links in §1.1–1.3. Unzip each into its folder; the file names
+are the publishers' own.
 
 ```
-data/raw/connectivity/road/Roads_AKDOT/Roads_AKDOT.shp
-data/raw/connectivity/barge/NWN_Waterway_Network_Lines/Waterway_Network.shp
-data/raw/connectivity/ice_roads/ice_roads_150m_3338/Ice_Roads.shp
-data/raw/anchor_points/Ports_and_Harbors.geojson
-data/raw/boundaries/tiger_places/tl_2022_02_place.shp
-data/raw/boundaries/borough_census_area/Alaska_Borough_and_Census_Area_Boundaries.shp
-data/raw/boundaries/tiger_county_subdivisions/tl_2022_02_cousub.shp   (normalised, not used)
-data/raw/boundaries/Fuel_Delivery_Method.geojson
+data/raw/connectivity/road/Roads_AKDOT/Roads_AKDOT.shp                                  download: AKDOT&PF roads (§1.2)
+data/raw/connectivity/barge/NWN_Waterway_Network_Lines/Waterway_Network.shp             download: USACE waterway lines (§1.2)
+data/raw/connectivity/ice_roads/ice_roads_150m_3338/Ice_Roads.shp                       from the repository (extract_inputs.py)
+data/raw/anchor_points/Ports_and_Harbors.geojson                                        download: ports and harbors (§1.2)
+data/raw/boundaries/tiger_places/tl_2022_02_place.shp                                   download: TIGER 2022 places (§1.3)
+data/raw/boundaries/borough_census_area/Alaska_Borough_and_Census_Area_Boundaries.shp   download: boroughs and census areas (§1.3)
+data/raw/boundaries/tiger_county_subdivisions/tl_2022_02_cousub.shp                     download: TIGER 2022 county subdivisions (normalised, not used)
+data/raw/boundaries/Fuel_Delivery_Method.geojson                                        download: DCRA fuel delivery method (§1.1)
 ```
 
-The air tables are committed at `inputs/air/` and the facility table comes
-from workflow 00, so neither is in `data/raw/`.
+Versions matter for an exact rebuild: the network-of-record was built from
+the 2026-09 AKDOT&PF roads and the 2022 TIGER files. A publisher's current
+release may differ, which changes the rebuilt network; that is expected on
+this path and is why the network-of-record is frozen (§4.3).
 
 ### 4.2 Normalise and prepare
 
@@ -465,7 +479,7 @@ database and the committed inputs by the scripts under `figure_scripts/`
 | `inputs/friction_rasters/` | In the Zenodo deposit | §3.1 | `python tools/fetch_archive.py --group friction_inputs`, or Step A (GEE export + pad + align) and Step B (the ArcGIS river-ice pipeline); every file under its producer's name |
 | `outputs/01_friction_build/friction_stack/` (14 TIFs) | Built by the pipeline · In the Zenodo deposit | workflow 01 | `bash workflows/01_friction_build/run_all.sh`, or `python tools/fetch_archive.py --group friction_stack` (also mirrored on GEE, §1.4) |
 | `outputs/01_friction_build/waterway_mask_150m.tif` | Built by the pipeline | `01/01_build_corridor_masks.py` | `bash workflows/01_friction_build/run_all.sh` (from the committed waterway shapefile) |
-| `data/raw/` | In the Zenodo deposit | §4.1 | `python tools/fetch_archive.py --group network_raw`, or per-dataset download |
+| `data/raw/` | From the repository (the ice-road layer, via `tools/extract_inputs.py`) + Download (the six public layers) | §4.1 | `python tools/extract_inputs.py`, then the downloads listed in §4.1 |
 | `data/interim/`, `data/processed/`, `data/boundary.geojson`, `data/basemap/` | Built by the pipeline | `02/00–03` | `bash workflows/02_network_build/run_all.sh` |
 | `outputs/02_network_build/{output,reports}` | Built by the pipeline | `02/04_build_network.py` | same |
 | `final_network/*.zip`, `hub_members.csv`, `hub_snaps.csv`, `MANIFEST.sha256` | In the repository | `02/06_export_final_network.py` | `EXPORT_FINAL_NETWORK=1 …` — deliberate, see §4.3 |

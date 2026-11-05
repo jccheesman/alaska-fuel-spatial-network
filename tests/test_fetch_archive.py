@@ -15,7 +15,7 @@ spec.loader.exec_module(fa)
 def test_every_group_unpacks_where_the_pipeline_reads():
     assert fa.GROUPS["friction_inputs"]["dest"] == rp.FRICTION_RASTERS
     assert fa.GROUPS["friction_stack"]["dest"] == rp.FRICTION_STACK
-    assert fa.GROUPS["network_raw"]["dest"] == rp.RAW
+    assert "network_raw" not in fa.GROUPS  # workflow 02's raw layers are downloads or in git
     assert fa.GROUPS["river_ice_work"]["dest"] == rp.RIVER_ICE_WORK
 
 
