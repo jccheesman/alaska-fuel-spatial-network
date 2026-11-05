@@ -111,11 +111,6 @@ def run_step(label: str, *cmd: str, filt: str | None = None) -> None:
         raise StageFail(rc)
 
 
-def dir_nonempty(p: Path) -> bool:
-    """Mirror `[ -d p ] && [ -n "$(ls -A p)" ]`."""
-    return p.is_dir() and any(p.iterdir())
-
-
 def stage_01_friction_build(py: str) -> None:
     here = WORKFLOWS / "01_friction_build"
     # The grid anchor, under its producer's (GEE) name — defined once in
@@ -162,11 +157,24 @@ def stage_02_network_build(py: str, profile: str) -> None:
             f"{py} tools/extract_inputs.py once for the ice-road layer.",
         )
 
-    if not dir_nonempty(ROOT / "data/interim"):
+    # Gate on the MANIFEST 00_normalize_raw writes LAST, not on mere non-emptiness:
+    # a crashed prep leaves a partial data/interim that would otherwise skip prep.
+    if not (ROOT / "data/interim/MANIFEST.md").is_file():
         out("######## 0-2. prep: normalize_raw -> prep_waterway -> prep_airways ########")
         run_step("00_normalize_raw", py, str(here / "00_normalize_raw.py"), filt=FILT_02)
         run_step("01_prep_waterway", py, str(here / "01_prep_waterway.py"), filt=FILT_02)
         run_step("02_prep_airways", py, str(here / "02_prep_airways.py"), filt=FILT_02)
+
+    # Manual connections: re-split EVERY build (outside the prep gate above) so edits
+    # to the shapefile take effect. Optional — skipped cleanly when absent.
+    manual_shp = "inputs/mannual_connections/mannual_connections.shp"
+    if (ROOT / manual_shp).is_file():
+        out()
+        out("######## 3. prep manual connections (split by mode) ########")
+        run_step("03_prep_manual_connections", py, str(here / "03_prep_manual_connections.py"),
+                 filt=FILT_02)
+    else:
+        out(f"SKIP 03_prep_manual_connections: no {manual_shp} (optional user layer).")
 
     out()
     out("######## 3-4. validate + build (mmnet 01->04 + reports) ########")
