@@ -41,8 +41,8 @@ def _required_env(name, what):
 
 RASTER_DIR   = _required_env("RASTER_DIR", "the repo's inputs/friction_rasters folder")
 # The working directory: FRICTION_LAYER_ROOT if set, else the repo's
-# inputs/river_ice_work/ next to RASTER_DIR (what tools/extract_inputs.py fills
-# from the tracked river_ice_sources.zip).
+# inputs/river_ice_work/ next to RASTER_DIR (what tools/fetch_archive.py fills
+# from the Zenodo deposit, or build_brown_polygon_mask.py writes).
 PROJECT_ROOT = os.getenv("FRICTION_LAYER_ROOT") or os.path.join(
     os.path.dirname(os.path.normpath(RASTER_DIR)), "river_ice_work")
 

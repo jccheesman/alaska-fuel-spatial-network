@@ -125,8 +125,9 @@ def stage_01_friction_build(py: str) -> None:
     if not (ROOT / lulc).is_file():
         gate(
             f"{lulc} missing.",
-            "The friction rasters are not in the repository: download and regenerate them",
-            "(GEE export + pad/align + river-ice pipeline), then re-run. See DATA.md section 3.1.",
+            "The friction rasters are not in the repository. Either fetch them from the Zenodo",
+            f"deposit:  {py} tools/fetch_archive.py --group friction_inputs   (DATA.md, path 2)",
+            "or regenerate them (GEE export + pad/align + river-ice pipeline; DATA.md section 3.1).",
         )
     if not (ROOT / "inputs/data_for_network_build").is_dir():
         gate(
@@ -145,7 +146,7 @@ def stage_02_network_build(py: str, profile: str) -> None:
     if not dir_nonempty(ROOT / "data/raw"):
         gate(
             "data/raw is empty. Populate it first:",
-            f"{py} tools/extract_inputs.py   (needs inputs/network_raw.zip, or download the raw files — see DATA.md section 4.1)",
+            f"{py} tools/fetch_archive.py --group network_raw   (from the Zenodo deposit; or download the raw files — DATA.md section 4.1)",
         )
 
     if not dir_nonempty(ROOT / "data/interim"):
@@ -207,8 +208,9 @@ def stage_03_multimodal_join(py: str) -> None:
 
     if not (ROOT / "outputs/01_friction_build/friction_stack/road_base.tif").is_file():
         out("GATE: friction stack missing (outputs/01_friction_build/friction_stack/).")
-        out("  Stages 03-04 need workflow 01's rasters — regenerate via")
-        out("  bash workflows/01_friction_build/run_all.sh (see DATA.md section 3).")
+        out("  Stages 03-04 need workflow 01's rasters. Fetch the finished stack from the Zenodo")
+        out(f"  deposit:  {py} tools/fetch_archive.py --group friction_stack   (DATA.md, path 2)")
+        out("  or build it: bash workflows/01_friction_build/run_all.sh (DATA.md section 3).")
         out("  Stopping after the ingest stage (network_nodes + network_edges written).")
         raise StageSkip()
 

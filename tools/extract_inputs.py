@@ -4,11 +4,9 @@
   inputs/raw_facility_data/2022/bulk_fuel_data.zip -> inputs/bulk_fuel_data/
   inputs/data_for_network_build.zip  -> inputs/data_for_network_build/
   inputs/region_and_census_data.zip  -> inputs/region_and_census_data/
-  inputs/river_ice/river_ice_sources.zip -> inputs/river_ice_work/  (the river masks and
-                                        other river-ice intermediates; the reach points
-                                        are a download — inputs/river_ice/SOURCE.md)
-  inputs/network_raw.zip             -> data/raw/          (workflow 02 sources;
-                                        not in the repository — see DATA.md §4.1)
+  inputs/network_raw.zip             -> data/raw/          (workflow 02 sources; not in
+                                        the repository — fetch it from the Zenodo deposit
+                                        with tools/fetch_archive.py, see DATA.md §4.1)
 
 One gate for workflows 00-03: run this once after cloning. The zips are plain
 git blobs (no Git LFS). __MACOSX resource forks and .DS_Store entries are skipped.
@@ -25,7 +23,6 @@ TARGETS = {
     ROOT / "inputs" / "raw_facility_data" / "2022" / "bulk_fuel_data.zip": ROOT / "inputs",
     ROOT / "inputs" / "data_for_network_build.zip": ROOT / "inputs",
     ROOT / "inputs" / "region_and_census_data.zip": ROOT / "inputs",
-    ROOT / "inputs" / "river_ice" / "river_ice_sources.zip": ROOT / "inputs" / "river_ice_work",
     # network_raw.zip: destination depends on how its members are rooted —
     # resolved dynamically in main() (see _network_raw_dest).
     ROOT / "inputs" / "network_raw.zip": None,
@@ -49,8 +46,8 @@ def main() -> None:
     for zpath, dest in TARGETS.items():
         if not zpath.exists():
             why = {
-                "network_raw.zip": " (not in the repository — see DATA.md section 4.1)",
-                "river_ice_sources.zip": " (river-ice intermediates not yet added — see DATA.md section 3.1)",
+                "network_raw.zip": " (not in the repository — python tools/fetch_archive.py"
+                                   " --group network_raw, see DATA.md section 4.1)",
             }.get(zpath.name, " (clone incomplete? the zips are plain git blobs, no LFS)")
             print(f"skip: {zpath.relative_to(ROOT)} not present{why}")
             continue

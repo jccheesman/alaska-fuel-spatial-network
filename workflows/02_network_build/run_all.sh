@@ -29,7 +29,7 @@ FILT='Axes3D|warnings.warn|user_version|QStandardPaths|Application path'
 
 if [ ! -d data/raw ] || [ -z "$(ls -A data/raw 2>/dev/null)" ]; then
   gate "data/raw is empty. Populate it first:" \
-       "$PY tools/extract_inputs.py   (needs inputs/network_raw.zip, or download the raw files — see DATA.md section 4.1)"
+       "$PY tools/fetch_archive.py --group network_raw   (from the Zenodo deposit; or download the raw files — DATA.md section 4.1)"
 fi
 
 # Gate on the MANIFEST 00_normalize_raw writes LAST, not on mere non-emptiness:

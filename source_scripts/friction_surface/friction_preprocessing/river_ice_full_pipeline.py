@@ -22,19 +22,20 @@ RASTER_DIR is required (there is no default: the original authoring machine's
 paths are nobody else's). The working directory defaults to the repo's
 inputs/river_ice_work/ beside it; set FRICTION_LAYER_ROOT to use another folder.
 
-WHAT YOU NEED IN IT (two things; inputs/river_ice/SOURCE.md describes both):
+WHAT YOU NEED IN IT (two things; friction_preprocessing/README.md describes both):
   - the Brown et al. 2026 reach points: raw data, downloaded from
     doi:10.18739/A2SB3X15X (9.6 MB) — they say HOW MUCH ice, per reach and month;
   - the two river masks of the thirty Brown rivers (NHD polygons = wide channels,
-    NHD flowlines = centre lines): derived data, committed in
-    inputs/river_ice/river_ice_sources.zip and unpacked by
-    `python tools/extract_inputs.py` — they say WHERE a river cell exists and
-    which cells share a polygon median.
+    NHD flowlines = centre lines): derived data — they say WHERE a river cell
+    exists and which cells share a polygon median. Fetch the whole working
+    directory from the Zenodo deposit (`python tools/fetch_archive.py --group
+    river_ice_work`) or rebuild the masks from the NHD download with
+    build_brown_polygon_mask.py.
 
     <working directory>/
-      waterFilledMedians2000_2023.geojson           download
-      brown_river_polygons/brown_river_polygons.shp   from the zip (rebuilt by build_brown_polygon_mask.py only if NHD changes)
-      brown_river_flowlines/brown_river_flowlines.shp from the zip (same)
+      waterFilledMedians2000_2023.geojson           download (or in the deposit)
+      brown_river_polygons/brown_river_polygons.shp   deposit, or build_brown_polygon_mask.py
+      brown_river_flowlines/brown_river_flowlines.shp deposit, or build_brown_polygon_mask.py
 
 OUTPUTS (the friction pipeline reads these directly; nothing is renamed):
 
@@ -77,8 +78,8 @@ def _required_env(name, what):
 
 RASTER_DIR   = _required_env("RASTER_DIR", "the repo's inputs/friction_rasters folder")
 # The working directory: FRICTION_LAYER_ROOT if set, else the repo's
-# inputs/river_ice_work/ next to RASTER_DIR (what tools/extract_inputs.py fills
-# from the tracked river_ice_sources.zip).
+# inputs/river_ice_work/ next to RASTER_DIR (what tools/fetch_archive.py fills
+# from the Zenodo deposit, or build_brown_polygon_mask.py writes).
 PROJECT_ROOT = os.getenv("FRICTION_LAYER_ROOT") or os.path.join(
     os.path.dirname(os.path.normpath(RASTER_DIR)), "river_ice_work")
 

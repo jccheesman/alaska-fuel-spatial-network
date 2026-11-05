@@ -25,17 +25,17 @@ Outputs:
   by GNIS_Name. 
 
 Working directory (one folder, shared with river_ice_full_pipeline.py, which
-reads what this script writes). Default: inputs/river_ice_work/, which
-tools/extract_inputs.py fills from the tracked inputs/river_ice/river_ice_sources.zip
-(the two masks this script makes); FRICTION_LAYER_ROOT or --work-dir overrides it.
-You only run this script to REBUILD the masks after an NHD or reach-set change;
-the committed masks are described in inputs/river_ice/SOURCE.md.
+reads what this script writes). Default: inputs/river_ice_work/;
+FRICTION_LAYER_ROOT or --work-dir overrides it. The masks this script makes are
+in the project's Zenodo deposit (`python tools/fetch_archive.py --group
+river_ice_work`), so you only run it to REBUILD them after an NHD or reach-set
+change. What the masks are: friction_preprocessing/README.md.
 
     <work-dir>/
       waterFilledMedians2000_2023.geojson             Brown et al. 2026 reach points (download, 9.6 MB)
       NHD_extracted/Shape/NHDArea.shp, NHDFlowline_*.shp   USGS NHD Alaska, unzipped (download, 5 GB)
-      brown_river_polygons/brown_river_polygons.shp     <- written here (committed in the zip)
-      brown_river_flowlines/brown_river_flowlines.shp   <- written here (committed in the zip)
+      brown_river_polygons/brown_river_polygons.shp     <- written here
+      brown_river_flowlines/brown_river_flowlines.shp   <- written here
 
 Usage (from the repo root, project environment active):
     python -m friction_surface.friction_preprocessing.build_brown_polygon_mask

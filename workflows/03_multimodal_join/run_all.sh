@@ -15,8 +15,9 @@ run_step "02_load_final_network"      "$PY" "$HERE/02_load_final_network.py"
 
 if [ ! -f outputs/01_friction_build/friction_stack/road_base.tif ]; then
   echo "GATE: friction stack missing (outputs/01_friction_build/friction_stack/)."
-  echo "  Stages 03-04 need workflow 01's rasters — regenerate via"
-  echo "  bash workflows/01_friction_build/run_all.sh (see DATA.md section 3)."
+  echo "  Stages 03-04 need workflow 01's rasters. Fetch the finished stack from the Zenodo"
+  echo "  deposit:  $PY tools/fetch_archive.py --group friction_stack   (DATA.md, path 2)"
+  echo "  or build it: bash workflows/01_friction_build/run_all.sh (DATA.md section 3)."
   echo "  Stopping after the ingest stage (network_nodes + network_edges written)."
   exit "$GATE_EXIT"
 fi

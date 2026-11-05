@@ -15,17 +15,61 @@ table tells you what, if anything, you have to do to get it.
 | Kind | What it means for you | Examples |
 |---|---|---|
 | **In the repository** | It arrives with the clone. There is nothing to download. Some of these are zip files that a one-line command unpacks (`python tools/extract_inputs.py`). | `inputs/*.zip`, `inputs/air/*.csv`, `final_network/*.zip`, `outputs/00_inventory_qc/<release>/facilities_clean.csv` |
-| **Download and regenerate** | It is **not** in the repository, either because it is too large for GitHub or because we have not cleared permission to redistribute it. To get it, download the original dataset from the source link in section 1 and run the script named in the walk-through to rebuild it in the expected form. If you have access to a machine that already has it, copying the folder works too. | `inputs/friction_rasters/` (the environmental rasters), `data/raw/` (the raw transport and boundary files) |
-| **Built by the pipeline** | You never download or edit these. They are the intermediate and final products that the scripts in this repository write when you run them, starting from the two kinds above. They are excluded from git on purpose. If one is missing or looks wrong, delete it and rerun the stage that produces it (section 6 names the command). | `data/interim/`, `outputs/01_friction_build/`, `outputs/02_network_build/`, `outputs/fuel_network.duckdb` |
+| **In the Zenodo deposit** | Too large for GitHub (the rasters: ~7 GB of friction inputs, ~300 MB of finished friction stack) or assembled from several downloads (the raw transport bundle). The deposit that complements this repository holds them as one zip per group; `python tools/fetch_archive.py --group <name>` downloads a group, verifies it against the deposit's checksum and unpacks it where the pipeline reads it. The DOI is recorded in that script once the deposit is published; until then the tool stops with exit code 3. | `inputs/friction_rasters/`, `outputs/01_friction_build/friction_stack/`, `data/raw/`, `inputs/river_ice_work/` |
+| **Download and regenerate** | The original dataset is downloaded from the source link in section 1 and converted by the script named in the walk-through. This is the only way to get something that is in neither the repository nor the deposit, and the way to reproduce what is in the deposit. | the Earth Engine exports (§3.1 Step A), the river-ice interpolation (§3.1 Step B), the raw transport files one by one (§4.1) |
+| **Built by the pipeline** | You never download or edit these. They are the intermediate and final products that the scripts in this repository write when you run them, starting from the kinds above. They are excluded from git on purpose. If one is missing or looks wrong, delete it and rerun the stage that produces it (section 6 names the command). | `data/interim/`, `outputs/02_network_build/`, `outputs/fuel_network.duckdb` |
 
-In practice: a fresh clone, after `python tools/extract_inputs.py`, can run the
-facility-inventory QC (workflow 00), the network ingest (the first two stages of
-workflow 03) and the database checks (workflow 04) straight away, because
-everything they read is in the repository. The friction build (workflow 01) and
-the network build (workflow 02) need the download-and-regenerate inputs first.
 Each run script checks for what it needs before starting; if something is
-missing it stops with exit code 3 and prints which section of this file
-explains how to get it. That is a documented gap, not an error.
+missing it stops with exit code 3 and prints the fetch command or the section
+of this file that explains how to get it. That is a documented gap, not an
+error.
+
+## Three ways to use this repository
+
+Pick the one that matches what you want to do. Each later path contains the
+earlier ones.
+
+### Path 1 — Use the finished network and costs (nothing to download)
+
+Everything on this path is in the repository. The products are the ones the
+paper reports.
+
+```bash
+uv venv && uv sync && uv pip install -e .
+python tools/extract_inputs.py                            # unzip the committed input bundles
+python workflows/00_inventory_qc/validate_inventory.py    # the facility-inventory QC, read-only
+bash workflows/03_multimodal_join/run_all.sh              # loads the network-of-record into DuckDB; stops before weighting
+```
+
+You get the clean facility table (§2), the network-of-record extracted and
+loaded (`final_network/`, §4.3), and the `network_nodes` / `network_edges`
+tables (§5). The costed tables need the friction stack: add
+`python tools/fetch_archive.py --group friction_stack` and rerun workflow 03,
+then `bash workflows/04_duckdb_export/run_all.sh`, which is Path 2's last step.
+
+### Path 2 — Rebuild from the archived intermediates (the deposit, no ArcGIS, no Earth Engine)
+
+The deposit holds every intermediate that is slow or awkward to make. Fetch
+what you want to start from, then run the workflows downstream of it:
+
+| You want to rebuild | Fetch | Then run |
+|---|---|---|
+| the costed graph only | `python tools/fetch_archive.py --group friction_stack` | workflows 03 and 04 |
+| the friction stack (§3.2), then the costed graph | `--group friction_inputs` | workflows 01, 03, 04 |
+| the network (§4), then the costed graph | `--group network_raw` and `--group friction_stack` | workflows 02 (export opt-in, see §4.3), 03, 04 |
+| everything downstream of the raw rasters and raw transport files | `--group friction_inputs --group network_raw` | `bash run_all.sh` |
+| the river-ice interpolation itself (ArcGIS Pro) | `--group river_ice_work` | §3.1 Step B |
+
+`run_all.sh` (or `python run_all.py` on Windows) runs workflows 01–04 in order
+and skips, with a message, any stage whose inputs are absent.
+
+### Path 3 — Rebuild from the raw sources (Earth Engine + ArcGIS Pro + the downloads)
+
+Sections 2–5 below are this path: every original dataset in §1, downloaded
+from its source link, and every script that turns it into the next product.
+It needs an Earth Engine account (§3.1 Step A), ArcGIS Pro with Spatial
+Analyst for the river ice (§3.1 Step B), R for the network noding (§4.3), and
+roughly 12 GB of downloads. It is the path that reproduces the deposit.
 
 ## 1. Original datasets
 
@@ -75,11 +119,11 @@ keeps the name its producer gave it, all the way into the build (§3.1).
 | Dynamic World V1 (summer-mode land cover) | Land-cover friction; water class for barge | `inputs/friction_rasters/dynamic_world_LULC_2022_2024_summer_mode_150m_EPSG3338.tif` — the grid anchor | Download and regenerate | [GEE catalog](https://developers.google.com/earth-engine/datasets/catalog/GOOGLE_DYNAMICWORLD_V1) (read directly in GEE) |
 | Pastick et al. 2015 near-surface permafrost probability | Permafrost friction | `inputs/friction_rasters/permafrost_probability_150m_EPSG3338.tif` | Download and regenerate | [USGS](https://www.usgs.gov/publications/distribution-near-surface-permafrost-alaska-estimates-present-and-future-conditions) · [paper](https://www.sciencedirect.com/science/article/pii/S0034425715300778) (download, upload as a GEE asset) |
 | Historical Sea Ice Atlas (UAF SNAP / AOOS), monthly medians 1990–2022 | Barge ice gating, 12 months | `inputs/friction_rasters/sea_ice/sea_ice_median_{01..12}_{Jan..Dec}_150m_EPSG3338.tif` | Download and regenerate | [SNAP catalog](https://catalog.snap.uaf.edu/geonetwork/srv/eng/catalog.search#/metadata/047e91c7-35c6-410a-a1ef-95539c1ee328) (download, upload as a GEE asset) |
-| Brown et al. 2026 river-ice phenology (reach points) + USGS National Hydrography Dataset for Alaska | River ice gating, 12 months | Reach points: download into `inputs/river_ice_work/waterFilledMedians2000_2023.geojson`. The two NHD-derived river masks (which rivers, which cells): `inputs/river_ice/river_ice_sources.zip` → `inputs/river_ice_work/` (described in `inputs/river_ice/SOURCE.md`). The twelve monthly rasters: `inputs/friction_rasters/river_ice/river_ice_probability_{01..12}_150m_EPSG3338.tif` | Download (the reach points) · In the repository (the masks, once the zip is added) · Built by the pipeline (the rasters, in ArcGIS Pro from the two) · the NHD download only to rebuild the masks | [Arctic Data Center 10.18739/A2SB3X15X](https://arcticdata.io/catalog/view/doi:10.18739/A2SB3X15X) · USGS National Map (NHD, Alaska state shapefile) |
+| Brown et al. 2026 river-ice phenology (reach points) + USGS National Hydrography Dataset for Alaska | River ice gating, 12 months | The working directory `inputs/river_ice_work/` (reach points + the two NHD-derived river masks, described in `source_scripts/friction_surface/friction_preprocessing/README.md`); the twelve monthly rasters `inputs/friction_rasters/river_ice/river_ice_probability_{01..12}_150m_EPSG3338.tif` | In the Zenodo deposit (both: `--group river_ice_work`, `--group friction_inputs`) · Download and regenerate (the reach points from the DOI, the masks from the NHD download, the rasters in ArcGIS Pro; §3.1 Step B) | [Arctic Data Center 10.18739/A2SB3X15X](https://arcticdata.io/catalog/view/doi:10.18739/A2SB3X15X) · USGS National Map (NHD, Alaska state shapefile) |
 
-The finished friction stack (the product of section 3) is also mirrored as GEE
-assets, so a user who only needs the stack can download it instead of
-rebuilding. All three live under
+The finished friction stack (the product of section 3) is in the Zenodo deposit
+(`python tools/fetch_archive.py --group friction_stack`, Path 2) and is also
+mirrored as GEE assets for users who work in Earth Engine. All three live under
 `projects/gee-friction-layer-processing/assets/friction_stack_final/`:
 
 | Asset | What it is | Link |
@@ -128,7 +172,9 @@ the published table and reports is generated.
 **Starts from:** the five raster sources in §1.4. **Ends with:**
 `outputs/01_friction_build/friction_stack/` — 14 GeoTIFFs (`overland.tif`,
 `road_base.tif`, `barge_01..12.tif`) on the canonical grid, consumed by the
-weighting stage of workflow 03.
+weighting stage of workflow 03. Path 2 shortcut: the inputs this section
+produces are in the deposit (`--group friction_inputs`), and so is its result
+(`--group friction_stack`).
 
 ### 3.1 Produce the input rasters (outside this repository's Python)
 
@@ -206,17 +252,18 @@ mirror assets in §1.4 into `outputs/01_friction_build/friction_stack/` and run
 
 River ice is not an Earth Engine product. It is interpolated in ArcGIS Pro
 from two things: the Brown et al. **reach points** (raw data, one small public
-download) and the two **river masks** (the NHD polygons and centre lines of the
-thirty Brown rivers, which say where a river cell exists; derived data, slow to
-rebuild, so committed). `inputs/river_ice/SOURCE.md` describes both masks field
-by field and how they were cut. Everything lives in one working directory,
-`inputs/river_ice_work/` (gitignored):
+download; they say *how much* ice per reach and month) and the two **river
+masks** (the NHD polygons and centre lines of the thirty Brown rivers; derived
+data, they say *where* a river cell exists and which cells share a polygon
+median). `source_scripts/friction_surface/friction_preprocessing/README.md`
+describes both masks field by field and how they were cut. Everything lives in
+one working directory, `inputs/river_ice_work/` (gitignored):
 
 ```
 inputs/river_ice_work/
-  waterFilledMedians2000_2023.geojson   Brown et al. 2026 reach points — DOWNLOAD (§1.4; 9.6 MB, CC0)
-  brown_river_polygons/                 from the committed zip; rebuilt by step 2 only if NHD changes
-  brown_river_flowlines/                from the committed zip; rebuilt by step 2 only if NHD changes
+  waterFilledMedians2000_2023.geojson   Brown et al. 2026 reach points (§1.4; 9.6 MB, CC0)
+  brown_river_polygons/                 NHD wide channels of the 30 rivers (~160 MB; too big for git)
+  brown_river_flowlines/                NHD centre lines of the 30 rivers (~15 MB)
   NHD_extracted/Shape/                  USGS National Hydrography Dataset for Alaska, unzipped
                                         (NHDArea.shp, NHDFlowline_0..6.shp; the zip is ~5 GB) —
                                         download it only to rebuild the masks
@@ -224,23 +271,24 @@ inputs/river_ice_work/
 
 Set `FRICTION_LAYER_ROOT` to use a folder elsewhere instead.
 
-1. **Unpack the masks and download the points.** `python tools/extract_inputs.py`
-   unpacks `inputs/river_ice/river_ice_sources.zip` into the working directory
-   (and the waterway shapefile the mask builder needs). Then download the reach
-   points from the Arctic Data Center (§1.4) into
-   `inputs/river_ice_work/waterFilledMedians2000_2023.geojson`. With both in
-   place, skip to step 3.
-2. **Rebuild the river masks** only if NHD or the Brown reach set changes.
-   Download the NHD shapefile bundle (USGS National Map, "NHD Alaska, state,
-   shapefile") into `inputs/river_ice_work/NHD_extracted/Shape/`, then
+1. **Get the working directory.** Either fetch it from the deposit,
+   `python tools/fetch_archive.py --group river_ice_work` (reach points and
+   masks together), and skip to step 3; or download the reach points from the
+   Arctic Data Center (§1.4) into
+   `inputs/river_ice_work/waterFilledMedians2000_2023.geojson` and build the
+   masks in step 2.
+2. **Build the river masks** (also the way to rebuild them if NHD or the Brown
+   reach set changes). Download the NHD shapefile bundle (USGS National Map,
+   "NHD Alaska, state, shapefile") into
+   `inputs/river_ice_work/NHD_extracted/Shape/`, run
+   `python tools/extract_inputs.py` if you have not (the mask builder needs the
+   waterway shapefile to keep salt water out of the river mask), then
    ```bash
    python -m friction_surface.friction_preprocessing.build_brown_polygon_mask
    ```
    filters the statewide NHD to the thirty rivers Brown et al. observed and
-   rewrites `brown_river_polygons/` (wide channels) and
-   `brown_river_flowlines/` (centre lines). Re-zip the two folders without the
-   reach points or `NHD_extracted/` and update the checksums (`SOURCE.md`,
-   `MANIFEST.md`).
+   writes `brown_river_polygons/` (wide channels) and `brown_river_flowlines/`
+   (centre lines).
 3. **Interpolate the monthly ice probability** (ArcGIS Pro with Spatial
    Analyst, Windows). The land-cover raster from Step A must already be in
    `inputs/friction_rasters/`: it is the grid the output is aligned to.
@@ -304,11 +352,11 @@ facility table from §2, and the manual connections. **Ends with:**
 
 ### 4.1 Stage the raw sources
 
-`data/raw/` is a download-and-regenerate folder. It is populated either by `python
-tools/extract_inputs.py` from `inputs/network_raw.zip` (assembled on the owner's
-machine; committing it waits on the redistribution decision), or by
-downloading each dataset in §1.2–1.3 into the layout that the `SPEC` table in
-`workflows/02_network_build/00_normalize_raw.py` names file by file:
+`data/raw/` is never in the repository. It is populated either from the deposit,
+`python tools/fetch_archive.py --group network_raw` (the bundle assembled on the
+owner's machine, every member a public dataset from §1.2–1.3), or by
+downloading each dataset in §1.2–1.3 yourself into the layout that the `SPEC`
+table in `workflows/02_network_build/00_normalize_raw.py` names file by file:
 
 ```
 data/raw/connectivity/road/Roads_AKDOT/Roads_AKDOT.shp
@@ -378,8 +426,9 @@ On every run, `03_prep_manual_connections.py` splits
 
 ## 5. Network + friction + rates → the costed graph (workflows 03 and 04)
 
-**Starts from:** `final_network/` (committed), the friction stack from §3, and
-the dollar rates in `source_scripts/friction_surface/friction_costs.py`.
+**Starts from:** `final_network/` (committed), the friction stack from §3
+(built, or fetched with `python tools/fetch_archive.py --group friction_stack`),
+and the dollar rates in `source_scripts/friction_surface/friction_costs.py`.
 **Ends with:** `outputs/fuel_network.duckdb`.
 
 Run `bash workflows/03_multimodal_join/run_all.sh`:
@@ -411,10 +460,12 @@ database and the committed inputs by the scripts under `figure_scripts/`
 | `inputs/raw_facility_data/<release>/` snapshot, manifest, diff | In the repository | `00/01_ingest.py` | re-ingest the raw CSV (`SOURCE.md` has its sha256) |
 | `outputs/00_inventory_qc/<release>/facilities_clean.csv`, `qc_report.md`, `inventory_ledger.xlsx` | In the repository | `00/07_publish.py`, `00/08_ledger.py` | `bash workflows/00_inventory_qc/run_all.sh` |
 | other `outputs/00_inventory_qc/<release>/*` | Built by the pipeline | workflow 00 | same |
-| `inputs/bulk_fuel_data/`, `inputs/data_for_network_build/`, `inputs/region_and_census_data/`, `inputs/river_ice_work/` | Built by the pipeline (unzipped from a repository file) | `tools/extract_inputs.py` | `python tools/extract_inputs.py` |
-| `inputs/friction_rasters/` | Download and regenerate | §3.1 | Step A (GEE export + pad + align) and Step B (the ArcGIS river-ice pipeline on the committed reach points + masks); every file under its producer's name |
-| `outputs/01_friction_build/waterway_mask_150m.tif`, `friction_stack/` (14 TIFs) | Built by the pipeline | workflow 01 | `bash workflows/01_friction_build/run_all.sh`, or download the GEE mirror (§1.4) |
-| `data/raw/` | Download and regenerate | §4.1 | `inputs/network_raw.zip` or per-dataset download |
+| `inputs/bulk_fuel_data/`, `inputs/data_for_network_build/`, `inputs/region_and_census_data/` | Built by the pipeline (unzipped from a repository file) | `tools/extract_inputs.py` | `python tools/extract_inputs.py` |
+| `inputs/river_ice_work/` | In the Zenodo deposit | §3.1 Step B | `python tools/fetch_archive.py --group river_ice_work`, or download the reach points and build the masks |
+| `inputs/friction_rasters/` | In the Zenodo deposit | §3.1 | `python tools/fetch_archive.py --group friction_inputs`, or Step A (GEE export + pad + align) and Step B (the ArcGIS river-ice pipeline); every file under its producer's name |
+| `outputs/01_friction_build/friction_stack/` (14 TIFs) | Built by the pipeline · In the Zenodo deposit | workflow 01 | `bash workflows/01_friction_build/run_all.sh`, or `python tools/fetch_archive.py --group friction_stack` (also mirrored on GEE, §1.4) |
+| `outputs/01_friction_build/waterway_mask_150m.tif` | Built by the pipeline | `01/01_build_corridor_masks.py` | `bash workflows/01_friction_build/run_all.sh` (from the committed waterway shapefile) |
+| `data/raw/` | In the Zenodo deposit | §4.1 | `python tools/fetch_archive.py --group network_raw`, or per-dataset download |
 | `data/interim/`, `data/processed/`, `data/boundary.geojson`, `data/basemap/` | Built by the pipeline | `02/00–03` | `bash workflows/02_network_build/run_all.sh` |
 | `outputs/02_network_build/{output,reports}` | Built by the pipeline | `02/04_build_network.py` | same |
 | `final_network/*.zip`, `hub_members.csv`, `hub_snaps.csv`, `MANIFEST.sha256` | In the repository | `02/06_export_final_network.py` | `EXPORT_FINAL_NETWORK=1 …` — deliberate, see §4.3 |
@@ -432,4 +483,6 @@ database and the committed inputs by the scripts under `figure_scripts/`
   the whole workflow 00 chain read-only and fails if `facilities_clean.csv`
   would differ.
 - Git LFS is deliberately not used (`.gitattributes`): every committed file is a
-  plain blob under 50 MB, so a clone or a Zenodo archive is complete as is.
+  plain blob under 50 MB, so a clone is complete as is. Everything larger is in
+  the Zenodo deposit, and `tools/fetch_archive.py` verifies each download against
+  the md5 the deposit publishes for it before unpacking.

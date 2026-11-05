@@ -45,10 +45,13 @@ inputs that must be downloaded and regenerated. Each stage's `run_all.sh` gates
 on what is missing and names the section of `DATA.md` that explains how to get it.
 
 **`DATA.md` is the one description of every dataset:** where it comes from,
-whether it is in the repository or must be downloaded and regenerated, and
-which script turns it into the next product, from the original downloads to
-the DuckDB deliverable. The finished friction stack is also mirrored as Google
-Earth Engine assets (links in `DATA.md` §1.4).
+whether it is in the repository, in the companion Zenodo deposit, or must be
+downloaded and regenerated, and which script turns it into the next product.
+It opens with three ways to use the repository: use the finished products
+(nothing to download), rebuild from the deposit's intermediates
+(`python tools/fetch_archive.py --group …`, no ArcGIS or Earth Engine needed),
+or rebuild everything from the raw sources. The finished friction stack is
+also mirrored as Google Earth Engine assets (links in `DATA.md` §1.4).
 
 To run the test suite and linter, install the dev extra
 (`uv sync --extra dev`, then `uv run pytest tests/` and `uv run ruff check`),

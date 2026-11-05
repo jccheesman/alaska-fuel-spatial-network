@@ -101,10 +101,21 @@ replaces the network-of-record.
   `friction_paths.py` (`RASTER_NAMES`, `sea_ice_name`, `river_ice_name`); the GEE
   script and the arcpy script repeat them verbatim and
   `tests/test_friction_paths.py` fails if they drift. The river-ice scripts share
-  one working directory (`FRICTION_LAYER_ROOT`) and write straight into
-  `RASTER_DIR/river_ice/`; neither has a machine-specific default any more. The
-  GEE script exports only the friction rasters; the network layers moved to
-  `gee_network_layers_preview.js`, which nothing downstream reads.
+  one working directory (`inputs/river_ice_work/`, or `FRICTION_LAYER_ROOT`) and
+  write straight into `RASTER_DIR/river_ice/`; neither has a machine-specific
+  default any more. The GEE script exports only the friction rasters; the network
+  layers moved to `gee_network_layers_preview.js`, which nothing downstream reads.
+- **Large data lives in the Zenodo deposit, never in git (owner 2026-11-05).** The
+  rasters (friction inputs ~7 GB, the finished stack ~300 MB; even one river-ice
+  month is 25 MB compressed) and the river-ice working directory are fetched with
+  `tools/fetch_archive.py --group {friction_inputs,friction_stack,network_raw,river_ice_work}`,
+  which verifies each zip against the deposit's md5 and unpacks it where the
+  pipeline reads. `ZENODO_RECORD` in that file is the one place the DOI lives; it
+  is `None` until the deposit is published (the tool then exits 3 like a gate).
+  `DATA.md` is organised as three paths: use the finished products, rebuild from
+  the deposit's intermediates, rebuild from the raw sources. A committed zip under
+  `inputs/` is for data under 50 MB only; the plan to commit the river masks was
+  withdrawn (the polygon shapefile alone is 79 MB zipped).
 - **Synthetic connectors use a mode-based vocabulary (refine-synthetic-connectors,
   2026-09).** `pipeline.classify_connectors` names every synthetic connector by the
   modes at its endpoints: within-mode welds → `{Mode}Connector` (RoadConnector,

@@ -19,9 +19,10 @@ is the checkout holding this file. No environment overrides here — the
 friction pipeline keeps its own (``RASTER_DIR``, ``FRICTION_DIR``, ...) in
 ``friction_surface.friction_paths``, which takes its defaults from this module.
 
-Two scripts deliberately do NOT import this: ``run_all.py`` (it picks the
+Three scripts deliberately do NOT import this: ``run_all.py`` (it picks the
 interpreter, so it may run outside the project environment) and
-``tools/extract_inputs.py`` (stdlib-only, runs straight after cloning). The
+``tools/extract_inputs.py`` / ``tools/fetch_archive.py`` (stdlib-only, run
+straight after cloning). The
 ``mmnet`` engine doesn't either: it is region-agnostic and takes every path
 from ``profile.yaml``.
 """
@@ -56,8 +57,7 @@ INVENTORY_QC = INPUTS / "inventory_qc"                # QC config: schema, corre
 BULK_FUEL_DATA = INPUTS / "bulk_fuel_data"            # extracted 2022 bundle
 NETWORK_DATA = INPUTS / "data_for_network_build"      # extracted curated shapefiles
 FRICTION_RASTERS = INPUTS / "friction_rasters"        # canonical-grid rasters (not committed)
-RIVER_ICE_SOURCES = INPUTS / "river_ice" / "river_ice_sources.zip"  # Brown reach points + river masks (tracked)
-RIVER_ICE_WORK = INPUTS / "river_ice_work"            # the river-ice working directory (extracted; gitignored)
+RIVER_ICE_WORK = INPUTS / "river_ice_work"            # river-ice working directory (fetched or built; gitignored)
 AIR_INPUTS = INPUTS / "air"
 MANUAL_CONNECTIONS = INPUTS / "mannual_connections" / "mannual_connections.shp"
 TIGER_STATES = INPUTS / "region_and_census_data" / "tiger" / "cb_2023_us_state_500k.shp"
