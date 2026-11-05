@@ -60,7 +60,10 @@ def test_defaults_resolve_to_repo_root_from_fake_cwd(tmp_path):
         root / "outputs" / "01_friction_build" / "waterway_mask_150m.tif"
     )
     assert Path(r["NETWORK_DIR"]) == root / "inputs" / "data_for_network_build"
-    assert Path(r["lulc"]) == root / "inputs" / "friction_rasters" / "lulc.tif"
+    assert Path(r["lulc"]) == (
+        root / "inputs" / "friction_rasters"
+        / "dynamic_world_LULC_2022_2024_summer_mode_150m_EPSG3338.tif"
+    )
 
 
 def test_import_does_not_chdir(tmp_path):
@@ -75,7 +78,9 @@ def test_env_overrides_used_verbatim(tmp_path):
                                "FRICTION_DIR": str(tmp_path / "ff")})
     assert Path(r["RASTER_DIR"]) == tmp_path / "rr"
     assert Path(r["FRICTION_OUTPUT_DIR"]) == tmp_path / "ff"
-    assert Path(r["lulc"]) == tmp_path / "rr" / "lulc.tif"
+    assert Path(r["lulc"]) == (
+        tmp_path / "rr" / "dynamic_world_LULC_2022_2024_summer_mode_150m_EPSG3338.tif"
+    )
 
 
 def test_dead_constants_removed():
@@ -83,3 +88,67 @@ def test_dead_constants_removed():
     import friction_surface.friction_paths as fp
     for gone in ("ROAD_MASK_TIF", "ICE_ROAD_MASK_TIF", "FUEL_DELIVERY_METHOD_CSV"):
         assert not hasattr(fp, gone), f"{gone} should have been removed"
+
+
+# ---------------------------------------------------------------------------
+# The one-name rule: every input raster keeps its producer's name all the way
+# through the pipeline (owner, 2026-11-04). friction_paths is the only place
+# the names live; the two producers that cannot import it (the Earth Engine
+# script and the arcpy river-ice pipeline) repeat them verbatim, so pin that
+# the copies agree.
+# ---------------------------------------------------------------------------
+PREPROCESSING = REPO_ROOT / "source_scripts" / "friction_surface" / "friction_preprocessing"
+
+
+def test_raster_names_are_the_producers_names():
+    import friction_surface.friction_paths as fp
+    assert fp.RASTER_NAMES == {
+        "slope": "FABDEM_slope_150m_EPSG3338.tif",
+        "lulc": "dynamic_world_LULC_2022_2024_summer_mode_150m_EPSG3338.tif",
+        "permafrost": "permafrost_probability_150m_EPSG3338.tif",
+    }
+    assert fp.sea_ice_name(1) == "sea_ice_median_01_Jan_150m_EPSG3338.tif"
+    assert fp.sea_ice_name(12) == "sea_ice_median_12_Dec_150m_EPSG3338.tif"
+    assert fp.river_ice_name(7) == "river_ice_probability_07_150m_EPSG3338.tif"
+    assert fp.sea_ice_relpath(3).replace(os.sep, "/") == (
+        "sea_ice/sea_ice_median_03_Mar_150m_EPSG3338.tif"
+    )
+    assert fp.river_ice_relpath(3).replace(os.sep, "/") == (
+        "river_ice/river_ice_probability_03_150m_EPSG3338.tif"
+    )
+
+
+def test_gee_script_exports_the_pipeline_names():
+    """The Earth Engine script writes <prefix>_150m_EPSG3338.tif; the prefixes it
+    queues must produce exactly the names friction_paths expects."""
+    import friction_surface.friction_paths as fp
+    js = (PREPROCESSING / "gee_friction_layer_multi_data_processing.js").read_text(encoding="utf-8")
+    for key in ("slope", "permafrost"):
+        prefix = fp.RASTER_NAMES[key].removesuffix("_150m_EPSG3338.tif")
+        assert f"'{prefix}'" in js, f"GEE script no longer exports {prefix}"
+    assert f"fileNamePrefix: '{fp.RASTER_NAMES['lulc'].removesuffix('.tif')}'" in js
+    assert "'sea_ice_median_' + mm + '_' + name" in js
+    assert "'Jan','Feb','Mar','Apr','May','Jun'" in js
+    assert fp.MONTH_ABBR == ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                             "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+
+
+def test_arcpy_river_ice_pipeline_repeats_the_names_verbatim():
+    """river_ice_full_pipeline.py runs in ArcGIS Pro's Python and cannot import
+    friction_paths, so it carries copies of two names; they must not drift."""
+    import friction_surface.friction_paths as fp
+    src = (PREPROCESSING / "river_ice_full_pipeline.py").read_text(encoding="utf-8")
+    assert f'RIVER_ICE_NAME_FMT = "{fp.RIVER_ICE_NAME_FMT}"' in src
+    assert f'LULC_NAME          = "{fp.RASTER_NAMES["lulc"]}"' in src
+    # and no machine-specific default sneaks back in
+    assert "E:\\" not in src and "C:\\Users" not in src
+
+
+def test_run_drivers_gate_on_the_land_cover_name():
+    """Both run_all drivers gate workflow 01 on the grid anchor by its literal name
+    (bash cannot import friction_paths); keep the literal in step with the module."""
+    import friction_surface.friction_paths as fp
+    rel = "inputs/friction_rasters/" + fp.RASTER_NAMES["lulc"]
+    assert rel in (REPO_ROOT / "run_all.py").read_text(encoding="utf-8")
+    assert rel in (REPO_ROOT / "workflows" / "01_friction_build" / "run_all.sh").read_text(
+        encoding="utf-8")

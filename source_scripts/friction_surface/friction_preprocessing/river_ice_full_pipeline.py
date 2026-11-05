@@ -1,7 +1,8 @@
 """River Ice Probability — Full ArcGIS Pro Pipeline (standalone version).
 
 - End-to-end pipeline from waterFilledMedians2000_2023.geojson (Brown et al. 2026)
-to 12 monthly river-ice probability rasters at 150 m EPSG:3338. 
+to 12 monthly river-ice probability rasters at 150 m EPSG:3338, on the friction
+pipeline's canonical grid, written straight into the friction input folder.
 
 - Per-month value: p_ice = clamp(1 - areaPropMedWater, 0, 1), median across the
 3 periods (early/middle/late) per reach.
@@ -11,15 +12,44 @@ masked to NHDArea polygons union 200 m buffered NHDFlowline. Cells with no
 source at all are left NoData for the friction build to fill under its own
 distance cap -- see the note in process_data_month.
 
-Run with Pro's Python environment:
+Run with Pro's Python environment, from any directory:
+    set RASTER_DIR=C:\\path\\to\\repo\\inputs\\friction_rasters
     "C:\\Program Files\\ArcGIS\\Pro\\bin\\Python\\scripts\\propy.bat" river_ice_full_pipeline.py
 or, after `conda activate arcgispro-py3`:
     python river_ice_full_pipeline.py
 
-Edit the Configuration block before running.
+RASTER_DIR is required (there is no default: the original authoring machine's
+paths are nobody else's). The working directory defaults to the repo's
+inputs/river_ice_work/ beside it; set FRICTION_LAYER_ROOT to use another folder.
+
+WHAT YOU NEED IN IT (two things; friction_preprocessing/README.md describes both):
+  - the Brown et al. 2026 reach points: raw data, downloaded from
+    doi:10.18739/A2SB3X15X (9.6 MB) — they say HOW MUCH ice, per reach and month;
+  - the two river masks of the thirty Brown rivers (NHD polygons = wide channels,
+    NHD flowlines = centre lines): derived data — they say WHERE a river cell
+    exists and which cells share a polygon median. Fetch the whole working
+    directory from the Zenodo deposit (`python tools/fetch_archive.py --group
+    river_ice_work`) or rebuild the masks from the NHD download with
+    build_brown_polygon_mask.py.
+
+    <working directory>/
+      waterFilledMedians2000_2023.geojson           download (or in the deposit)
+      brown_river_polygons/brown_river_polygons.shp   deposit, or build_brown_polygon_mask.py
+      brown_river_flowlines/brown_river_flowlines.shp deposit, or build_brown_polygon_mask.py
+
+OUTPUTS (the friction pipeline reads these directly; nothing is renamed):
+
+    $RASTER_DIR/river_ice/river_ice_probability_{MM}_150m_EPSG3338.tif   x12
+    $RASTER_DIR/river_ice/provenance/provenance_{MM}.tif                  QA only
+    $RASTER_DIR/river_ice/provenance/river_ice_mosaic.gdb                 browse only
+
+The canonical grid is $RASTER_DIR/dynamic_world_LULC_2022_2024_summer_mode_150m_EPSG3338.tif
+(the land-cover export); it must be present, or Step 7 cannot align and the
+friction preflight will reject the output.
 """
 
 import os
+import sys
 import arcpy
 from arcpy.sa import (
     Idw, ZonalStatisticsAsTable, Con, IsNull, Raster, RadiusVariable,
@@ -29,29 +59,57 @@ from arcpy.sa import (
 # ---------------------------------------------------------------------------
 # Configuration
 # ---------------------------------------------------------------------------
-# Windows / ArcGIS Pro only (needs arcpy). Override the project root without
-# editing this file via the FRICTION_LAYER_ROOT env var; the literal below is
-# the fallback for the original authoring box.
-PROJECT_ROOT = os.getenv("FRICTION_LAYER_ROOT", r"E:\DOE\Friction_layer\FRICTION_LAYER")
+# Windows / ArcGIS Pro only (needs arcpy). This script cannot import the repo's
+# friction_paths module (it runs in Pro's own Python), so the two names it
+# shares with the pipeline are repeated here VERBATIM from
+# source_scripts/friction_surface/friction_paths.py. tests/test_friction_paths.py
+# fails if the two copies drift.
+LULC_NAME          = "dynamic_world_LULC_2022_2024_summer_mode_150m_EPSG3338.tif"
+RIVER_ICE_NAME_FMT = "river_ice_probability_{mm}_150m_EPSG3338.tif"
 
-# Inputs
+
+def _required_env(name, what):
+    value = os.getenv(name)
+    if not value:
+        sys.exit("ERROR: set the {} environment variable to {}. "
+                 "See the module docstring for the folder layout.".format(name, what))
+    return value
+
+
+RASTER_DIR   = _required_env("RASTER_DIR", "the repo's inputs/friction_rasters folder")
+# The working directory: FRICTION_LAYER_ROOT if set, else the repo's
+# inputs/river_ice_work/ next to RASTER_DIR (what tools/fetch_archive.py fills
+# from the Zenodo deposit, or build_brown_polygon_mask.py writes).
+PROJECT_ROOT = os.getenv("FRICTION_LAYER_ROOT") or os.path.join(
+    os.path.dirname(os.path.normpath(RASTER_DIR)), "river_ice_work")
+
+# Inputs (the working directory)
 GEOJSON_PATH = os.path.join(PROJECT_ROOT, "waterFilledMedians2000_2023.geojson")
-POLYGON_SHP  = os.path.join(PROJECT_ROOT, "brown_river_polygon",
+POLYGON_SHP  = os.path.join(PROJECT_ROOT, "brown_river_polygons",
                             "brown_river_polygons.shp")
-FLOWLINE_SHP = os.path.join(PROJECT_ROOT, "flowlines",
+FLOWLINE_SHP = os.path.join(PROJECT_ROOT, "brown_river_flowlines",
                             "brown_river_flowlines.shp")
 
-# Output: 12 filled 150 m TIFs
-OUT_DIR = os.path.join(PROJECT_ROOT, "AK_Stack_150m")
+# Outputs: the 12 filled 150 m TIFs go where the friction pipeline reads them;
+# the QA-only provenance rasters and the browse mosaic go one level down, in a
+# folder the grid checker ignores.
+OUT_DIR  = os.path.join(RASTER_DIR, "river_ice")
+PROV_DIR = os.path.join(OUT_DIR, "provenance")
+
+
+def river_ice_name(m):
+    """File name of month m's output (verbatim copy of friction_paths.river_ice_name)."""
+    return RIVER_ICE_NAME_FMT.format(mm="{:02d}".format(m))
+
 
 # Canonical grid reference. The friction pipeline (friction_surface) expects
-# every input raster to share the same origin / shape / extent as lulc.tif.
-# Pre-aligning here means friction_preflight reports OK and _load_ice takes
-# its same-grid path; the loader requires inputs already on the canonical
-# grid (no WarpedVRT fallback), so alignment is required. If this file is
-# missing, the alignment step is skipped with a warning and the output will
-# fail preflight downstream.
-CANONICAL_GRID_TIF = os.path.join(OUT_DIR, "lulc.tif")
+# every input raster to share the same origin / shape / extent as the
+# land-cover raster. Pre-aligning here means friction_preflight reports OK and
+# _load_ice takes its same-grid path; the loader requires inputs already on
+# the canonical grid (no WarpedVRT fallback), so alignment is required. If
+# this file is missing, the alignment step is skipped with a warning and the
+# output will fail preflight downstream.
+CANONICAL_GRID_TIF = os.path.join(RASTER_DIR, LULC_NAME)
 
 # Grid / spatial reference
 TARGET_CELL_SIZE  = 150
@@ -93,12 +151,20 @@ def setup_environment():
     arcpy.env.scratchWorkspace = arcpy.env.scratchFolder
     arcpy.env.workspace        = arcpy.env.scratchGDB
 
-    if not os.path.isdir(OUT_DIR):
-        os.makedirs(OUT_DIR)
+    for d in (OUT_DIR, PROV_DIR):
+        if not os.path.isdir(d):
+            os.makedirs(d)
+    print("Working dir:    ", PROJECT_ROOT)
+    for path, what in ((GEOJSON_PATH, "Brown reach points"),
+                       (POLYGON_SHP, "Brown river polygons (build_brown_polygon_mask.py)"),
+                       (FLOWLINE_SHP, "Brown river flowlines (build_brown_polygon_mask.py)")):
+        if not os.path.exists(path):
+            sys.exit("ERROR: {} not found: {}".format(what, path))
 
     print("Scratch GDB:    ", arcpy.env.scratchGDB)
     print("Scratch folder: ", arcpy.env.scratchFolder)
     print("Output dir:     ", OUT_DIR)
+    print("Provenance dir: ", PROV_DIR)
     return arcpy.env.scratchGDB
 
 
@@ -171,8 +237,8 @@ def clean_start(SCRATCH_GDB):
             except Exception as e:
                 print("  mask skip:  ", f, "-", e)
 
-    # 4. Delete previous mosaic and TIFs in OUT_DIR
-    mosaic_gdb_path = os.path.join(OUT_DIR, "river_ice_mosaic.gdb")
+    # 4. Delete previous mosaic and TIFs in OUT_DIR / PROV_DIR
+    mosaic_gdb_path = os.path.join(PROV_DIR, "river_ice_mosaic.gdb")
     if arcpy.Exists(mosaic_gdb_path):
         try:
             arcpy.management.Delete(mosaic_gdb_path)
@@ -180,12 +246,14 @@ def clean_start(SCRATCH_GDB):
         except Exception as e:
             print("  mosaic skip:  ", mosaic_gdb_path, "-", e)
 
-    if os.path.isdir(OUT_DIR):
-        for f in os.listdir(OUT_DIR):
+    for d in (OUT_DIR, PROV_DIR):
+        if not os.path.isdir(d):
+            continue
+        for f in os.listdir(d):
             if (f.startswith("river_ice_") or f.startswith("provenance_")) \
                     and f.lower().endswith(".tif"):
                 try:
-                    arcpy.management.Delete(os.path.join(OUT_DIR, f))
+                    arcpy.management.Delete(os.path.join(d, f))
                     print("  out delete:", f)
                 except Exception as e:
                     print("  out skip:  ", f, "-", e)
@@ -422,7 +490,7 @@ def process_data_month(m, SCRATCH_GDB, MASK_DIR,
     final_gdb = os.path.join(SCRATCH_GDB, "final_{}".format(mm))
     final.save(final_gdb)
 
-    out_tif = os.path.join(OUT_DIR, "river_ice_{}.tif".format(mm))
+    out_tif = os.path.join(OUT_DIR, river_ice_name(m))
     if arcpy.Exists(out_tif):
         arcpy.management.Delete(out_tif)
     arcpy.management.CopyRaster(
@@ -444,7 +512,7 @@ def process_data_month(m, SCRATCH_GDB, MASK_DIR,
     prov_gdb = os.path.join(SCRATCH_GDB, "prov_{}".format(mm))
     prov.save(prov_gdb)
 
-    prov_tif = os.path.join(OUT_DIR, "provenance_{}.tif".format(mm))
+    prov_tif = os.path.join(PROV_DIR, "provenance_{}.tif".format(mm))
     if arcpy.Exists(prov_tif):
         arcpy.management.Delete(prov_tif)
     arcpy.management.CopyRaster(
@@ -466,7 +534,7 @@ def process_summer_month(m, SCRATCH_GDB, river_mask_ras):
     final_gdb = os.path.join(SCRATCH_GDB, "final_{}".format(mm))
     final.save(final_gdb)
 
-    out_tif = os.path.join(OUT_DIR, "river_ice_{}.tif".format(mm))
+    out_tif = os.path.join(OUT_DIR, river_ice_name(m))
     if arcpy.Exists(out_tif):
         arcpy.management.Delete(out_tif)
     arcpy.management.CopyRaster(
@@ -482,7 +550,7 @@ def process_summer_month(m, SCRATCH_GDB, river_mask_ras):
 # ---------------------------------------------------------------------------
 # Step 7 — Align outputs to friction canonical grid
 # ---------------------------------------------------------------------------
-# Snaps every river_ice_MM.tif to the canonical lulc.tif grid (origin, cell
+# Snaps every monthly output to the canonical land-cover grid (origin, cell
 # size, shape, extent). Without this, friction_preflight raises FATAL on
 # river_ice (the friction loader requires inputs already on the canonical
 # grid, with no WarpedVRT fallback) and the pipeline will not run. Two-step
@@ -518,13 +586,13 @@ def align_to_canonical_grid():
     try:
         for m in range(1, 13):
             mm = "{:02d}".format(m)
-            src_tif = os.path.join(OUT_DIR, "river_ice_{}.tif".format(mm))
+            src_tif = os.path.join(OUT_DIR, river_ice_name(m))
             if not arcpy.Exists(src_tif):
                 print("  month {}: source missing — skipping".format(mm))
                 continue
 
-            proj_tif = os.path.join(OUT_DIR, "river_ice_{}_proj.tif".format(mm))
-            clip_tif = os.path.join(OUT_DIR, "river_ice_{}_aligned.tif".format(mm))
+            proj_tif = os.path.join(PROV_DIR, "river_ice_{}_proj.tif".format(mm))
+            clip_tif = os.path.join(PROV_DIR, "river_ice_{}_aligned.tif".format(mm))
             for tmp in (proj_tif, clip_tif):
                 if arcpy.Exists(tmp):
                     arcpy.management.Delete(tmp)
@@ -539,7 +607,7 @@ def align_to_canonical_grid():
                 cell_size=TARGET_CELL_SIZE,
             )
 
-            # 2. Force exact shape/extent match to lulc.tif. MAINTAIN_EXTENT
+            # 2. Force exact shape/extent match to the land-cover raster. MAINTAIN_EXTENT
             # pads with NoData where the river-mask raster is smaller than
             # the canonical extent.
             arcpy.management.Clip(
@@ -555,7 +623,7 @@ def align_to_canonical_grid():
             arcpy.management.Delete(src_tif)
             arcpy.management.Rename(clip_tif, src_tif)
             arcpy.management.Delete(proj_tif)
-            print("  aligned: river_ice_{}.tif".format(mm))
+            print("  aligned: {}".format(river_ice_name(m)))
     finally:
         arcpy.env.snapRaster = saved_snap
         arcpy.env.extent     = saved_extent
@@ -650,7 +718,7 @@ def build_validation_layers(SCRATCH_GDB, reach_points, poly_repaired):
 # excluded by the filename filter. Display stats are pinned to 0–1 so all
 # months render on the same stretch.
 def build_mosaic():
-    mosaic_gdb  = os.path.join(OUT_DIR, "river_ice_mosaic.gdb")
+    mosaic_gdb  = os.path.join(PROV_DIR, "river_ice_mosaic.gdb")
     mosaic_name = "river_ice_monthly"
     mosaic_path = os.path.join(mosaic_gdb, mosaic_name)
 
@@ -671,7 +739,7 @@ def build_mosaic():
         in_mosaic_dataset=mosaic_path,
         raster_type="Raster Dataset",
         input_path=[OUT_DIR],
-        filter="river_ice_*.tif",
+        filter="river_ice_probability_*.tif",
         update_cellsize_ranges="UPDATE_CELL_SIZES",
         update_boundary="UPDATE_BOUNDARY",
         update_overviews="NO_OVERVIEWS",
@@ -718,6 +786,7 @@ def main():
 
     arcpy.CheckInExtension("Spatial")
     print("\nDone. 12 rasters in", OUT_DIR)
+    print("Next: from the repo root, python workflows/01_friction_build/00_preflight_inputs.py")
 
 
 if __name__ == "__main__":

@@ -1,25 +1,25 @@
 """Plot per-pixel river-ice fill-stage provenance from the ArcGIS pipeline.
 
 Reads the provenance_MM.tif rasters written by river_ice_full_pipeline.py
-and renders a 3-panel matplotlib figure (Jan / Apr / Oct) matching the
-schema of outputs/idw_validation/figures/path_b_provenance.png:
+(in $RASTER_DIR/river_ice/provenance/) and renders a 3-panel matplotlib
+figure (Jan / Apr / Oct):
     1 = polygon-median (green)
     2 = IDW            (blue)
-    3 = NN-fallback    (orange)
+    3 = no source — left NoData for the friction build's capped fill (orange)
 
 Designed to run inside Pro's arcgispro-py3 environment alongside the
 pipeline. Uses arcpy (raster I/O + AK boundary), numpy, matplotlib, and
 scipy.ndimage (display dilation). No geopandas required.
 
-Run with Pro's Python:
+Run with Pro's Python, with the same environment variables as the pipeline
+(RASTER_DIR for the rasters; FRICTION_LAYER_ROOT optional, for the TIGER outline):
     "C:\\Program Files\\ArcGIS\\Pro\\bin\\Python\\scripts\\propy.bat" plot_river_ice_provenance.py
 or, after `conda activate arcgispro-py3`:
     python plot_river_ice_provenance.py
-
-Edit the Configuration block before running.
 """
 
 import os
+import sys
 import arcpy
 import numpy as np
 import matplotlib.pyplot as plt
@@ -30,24 +30,32 @@ from scipy.ndimage import distance_transform_edt
 
 
 # ---------------------------------------------------------------------------
-# Configuration — edit paths to match your ArcGIS box layout
+# Configuration — the same two environment variables as river_ice_full_pipeline.py
 # ---------------------------------------------------------------------------
-# Windows / ArcGIS Pro only (needs arcpy). Override the project root without
-# editing this file via the FRICTION_LAYER_ROOT env var; the literal below is
-# the fallback for the original authoring box.
-PROJECT_ROOT = os.getenv("FRICTION_LAYER_ROOT", r"E:\DOE\Friction_layer\FRICTION_LAYER")
+def _required_env(name, what):
+    value = os.getenv(name)
+    if not value:
+        sys.exit("ERROR: set the {} environment variable to {}.".format(name, what))
+    return value
 
-# Where river_ice_full_pipeline.py writes provenance_MM.tif and river_ice_MM.tif
-OUT_DIR = os.path.join(PROJECT_ROOT, "AK_Stack_150m")
+
+RASTER_DIR   = _required_env("RASTER_DIR", "the repo's inputs/friction_rasters folder")
+# The working directory: FRICTION_LAYER_ROOT if set, else the repo's
+# inputs/river_ice_work/ next to RASTER_DIR (what tools/fetch_archive.py fills
+# from the Zenodo deposit, or build_brown_polygon_mask.py writes).
+PROJECT_ROOT = os.getenv("FRICTION_LAYER_ROOT") or os.path.join(
+    os.path.dirname(os.path.normpath(RASTER_DIR)), "river_ice_work")
+
+# Where river_ice_full_pipeline.py writes provenance_MM.tif
+OUT_DIR = os.path.join(RASTER_DIR, "river_ice", "provenance")
 
 # TIGER cb_2023_us_state_500k shapefile (download once from
 # https://www2.census.gov/geo/tiger/GENZ2023/shp/cb_2023_us_state_500k.zip
-# and unzip somewhere local). Set to None to skip the AK boundary.
+# and unzip into $FRICTION_LAYER_ROOT/tiger/). The AK boundary is skipped if absent.
 TIGER_SHP = os.path.join(PROJECT_ROOT, "tiger", "cb_2023_us_state_500k.shp")
 
 # Where to save the figure
-FIG_OUT = os.path.join(PROJECT_ROOT, "AK_Stack_150m",
-                       "provenance_jan_apr_oct.png")
+FIG_OUT = os.path.join(OUT_DIR, "provenance_jan_apr_oct.png")
 
 EPSG = 3338
 MONTHS = [1, 4, 10]
@@ -63,7 +71,7 @@ CMAP_PROV = ListedColormap(["#ffffff00", "#9bd0a5", "#4b94c7", "#e07b3a"])
 
 PROV_LABELS = {1: "polygon-median fill",
                2: "IDW interpolation",
-               3: "NN-fallback (EucAllocation)"}
+               3: "no source (NoData; filled downstream)"}
 
 # River cells are 150 m, so they are sub-pixel on a statewide figure.
 # Dilating display-only by N pixels makes the network visible without

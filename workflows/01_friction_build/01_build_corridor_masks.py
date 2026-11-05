@@ -3,7 +3,8 @@
 """build_corridor_masks.py
 
 Rasterize a transport-corridor vector network into a 150 m binary mask
-aligned with the friction-pipeline grid (rasters/lulc.tif).
+aligned with the friction-pipeline grid (the land-cover raster,
+friction_paths.RASTER_NAMES['lulc']).
 
 Outputs (uint8, 1 = corridor, 0 = elsewhere):
     outputs/waterway_mask_150m.tif          every waterway segment

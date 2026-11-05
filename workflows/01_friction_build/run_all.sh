@@ -11,10 +11,14 @@ cd "$ROOT"
 . "$HERE/../_lib.sh"
 resolve_python
 
-if [ ! -f inputs/friction_rasters/lulc.tif ]; then
-  gate "inputs/friction_rasters/lulc.tif missing." \
-       "The friction rasters are not in the repository: download and regenerate them" \
-       "(GEE export + pad/align + river-ice pipeline), then re-run. See DATA.md section 3.1."
+# The land-cover raster is the grid anchor; its name is the producer's (GEE) name,
+# defined once in source_scripts/friction_surface/friction_paths.py (RASTER_NAMES).
+LULC="inputs/friction_rasters/dynamic_world_LULC_2022_2024_summer_mode_150m_EPSG3338.tif"
+if [ ! -f "$LULC" ]; then
+  gate "$LULC missing." \
+       "The friction rasters are not in the repository. Either fetch them from the Zenodo" \
+       "deposit:  $PY tools/fetch_archive.py --group friction_inputs   (DATA.md, path 2)" \
+       "or regenerate them (GEE export + pad/align + river-ice pipeline; DATA.md section 3.1)."
 fi
 if [ ! -d inputs/data_for_network_build ]; then
   gate "inputs/data_for_network_build/ not extracted." \

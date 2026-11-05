@@ -72,7 +72,10 @@ from .friction_config import (
     SLOPE_THRESHOLDS,
     WATER_FRICTION_BARGE,
 )
-from .friction_paths import WATERWAY_MASK_TIF, WATERWAY_RIVER_MASK_TIF
+from .friction_paths import (
+    RASTER_NAMES, WATERWAY_MASK_TIF, WATERWAY_RIVER_MASK_TIF,
+    river_ice_relpath, sea_ice_relpath,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -330,7 +333,7 @@ def _load_ice(
                 f"(src crs={src.crs} shape=({src.height},{src.width}) "
                 f"transform={src.transform}; "
                 f"ref crs={ref_crs} shape=({ref_height},{ref_width}) "
-                f"transform={ref_transform}). Re-export onto the lulc grid "
+                f"transform={ref_transform}). Re-export onto the land-cover grid "
                 "(sea_ice: GEE script's crsTransform; river_ice: arcpy "
                 "pipeline's Step 7 alignment in river_ice_full_pipeline.py)."
             )
@@ -618,10 +621,13 @@ def write_friction_stack(
 ) -> dict[tuple[str, int], Path]:
     """Build and write all mode-month friction surfaces.
 
-    Inputs expected under input_dir:
-      slope.tif, lulc.tif, permafrost.tif,
-      sea_ice/sea_ice_{01..12}.tif,
-      river_ice/river_ice_{01..12}.tif
+    Inputs expected under input_dir, under the producer's own names
+    (friction_paths.RASTER_NAMES / sea_ice_relpath / river_ice_relpath):
+      FABDEM_slope_150m_EPSG3338.tif,
+      dynamic_world_LULC_2022_2024_summer_mode_150m_EPSG3338.tif,
+      permafrost_probability_150m_EPSG3338.tif,
+      sea_ice/sea_ice_median_{MM}_{Mon}_150m_EPSG3338.tif,
+      river_ice/river_ice_probability_{MM}_150m_EPSG3338.tif
 
     Outputs under output_dir:
       barge_{MM}.tif for each month, plus a single overland.tif and
@@ -660,9 +666,9 @@ def write_friction_stack(
             months=months,
         )
 
-    slope_path = _resolve_path(input_dir, "slope.tif")
-    lulc_path = _resolve_path(input_dir, "lulc.tif")
-    permafrost_path = _resolve_path(input_dir, "permafrost.tif")
+    slope_path = _resolve_path(input_dir, RASTER_NAMES["slope"])
+    lulc_path = _resolve_path(input_dir, RASTER_NAMES["lulc"])
+    permafrost_path = _resolve_path(input_dir, RASTER_NAMES["permafrost"])
 
     static_base, slope_friction, water_mask, profile = build_static_base(
         slope_path, lulc_path
@@ -841,8 +847,8 @@ def write_friction_stack(
     fill_max_px = RIVER_ICE_FILL_MAX_KM * 1000.0 / pixel_m
 
     for month in months if monthly_modes else ():
-        sea_ice_path = _resolve_path(input_dir, f"sea_ice/sea_ice_{month:02d}.tif")
-        river_ice_path = _resolve_path(input_dir, f"river_ice/river_ice_{month:02d}.tif")
+        sea_ice_path = _resolve_path(input_dir, sea_ice_relpath(month))
+        river_ice_path = _resolve_path(input_dir, river_ice_relpath(month))
         sea_ice = _load_ice(sea_ice_path, reference_profile=profile)
         river_ice, river_ice_cov = _load_ice(
             river_ice_path, reference_profile=profile, return_coverage=True
@@ -907,16 +913,17 @@ def write_road_base(
     """Emit only the static road_base.tif (slope x permafrost, no LULC).
 
     Standalone regenerator so road_base can be rebuilt in seconds without
-    recomputing the 24 mode-month surfaces. Reads slope.tif + permafrost.tif
-    from input_dir, writes output_dir/road_base.tif. Same result as the
+    recomputing the 24 mode-month surfaces. Reads the slope and permafrost
+    rasters (friction_paths.RASTER_NAMES) from input_dir, writes
+    output_dir/road_base.tif. Same result as the
     road_base emitted inside write_friction_stack.
     """
     input_dir = Path(input_dir)
     output_dir = Path(output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    slope_path = _resolve_path(input_dir, "slope.tif")
-    permafrost_path = _resolve_path(input_dir, "permafrost.tif")
+    slope_path = _resolve_path(input_dir, RASTER_NAMES["slope"])
+    permafrost_path = _resolve_path(input_dir, RASTER_NAMES["permafrost"])
 
     slope_friction, profile = compute_slope_friction(slope_path)
     permafrost_mod = compute_permafrost_modifier(

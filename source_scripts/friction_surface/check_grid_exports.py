@@ -39,7 +39,7 @@ EXP_CRS = "EPSG:3338"
 class TargetGrid:
     """The grid every re-exported raster must sit on.
 
-    Derived either from lulc.tif (canonical) or from fallback constants.
+    Derived either from the land-cover raster (canonical) or from fallback constants.
     Bounds are computed from the transform + size so they can never drift
     from it. Passed explicitly to the checks — no module-level mutation.
     """
@@ -66,20 +66,27 @@ class TargetGrid:
         return self.ymax + self.height * self.transform.e
 
 
-# Fallback target when lulc.tif is not yet present. NOTE: GEE snaps the export one
-# column WEST of the requested -2130000, so it delivers origin -2130150 / width 28001.
-# When lulc.tif exists it is the canonical grid and overrides these (see resolve_target).
+# Fallback target when the land-cover raster is not yet present. NOTE: GEE snaps the
+# export one column WEST of the requested -2130000, so it delivers origin -2130150 /
+# width 28001. When the land-cover raster exists it is the canonical grid and overrides
+# these (see resolve_target).
 FALLBACK_GRID = TargetGrid(
     transform=Affine(150.0, 0.0, -2130150.0, 0.0, -150.0, 2595450.0),
     width=28001,
     height=16567,
-    source="target = fallback constants (lulc.tif not present yet)",
+    source="target = fallback constants (land-cover raster not present yet)",
 )
 
 
+import repo_paths as rp  # noqa: E402
+# Default to the pipeline's raster home (env-overridable via RASTER_DIR).
+from .friction_paths import RASTER_DIR as _RASTER_DIR, RASTER_NAMES  # noqa: E402
+DEFAULT_INPUTS = Path(_RASTER_DIR)
+
+
 def resolve_target(inputs_dir: Path) -> TargetGrid:
-    """If lulc.tif (the canonical reference) is present, adopt ITS grid as the target."""
-    lulc = inputs_dir / "lulc.tif"
+    """If the land-cover raster (the canonical reference) is present, adopt ITS grid."""
+    lulc = inputs_dir / RASTER_NAMES["lulc"]
     if not lulc.exists():
         return FALLBACK_GRID
     with rasterio.open(lulc) as ds:
@@ -87,13 +94,9 @@ def resolve_target(inputs_dir: Path) -> TargetGrid:
             transform=ds.transform,
             width=ds.width,
             height=ds.height,
-            source="target = lulc.tif (canonical reference grid)",
+            source=f"target = {RASTER_NAMES['lulc']} (canonical reference grid)",
         )
 
-import repo_paths as rp  # noqa: E402
-# Default to the pipeline's raster home (env-overridable via RASTER_DIR).
-from .friction_paths import RASTER_DIR as _RASTER_DIR  # noqa: E402
-DEFAULT_INPUTS = Path(_RASTER_DIR)
 NODES_SHP = rp.FINAL_NODES_SHP
 KEY_HUBS = {"Hub_21": "Adak", "Hub_275": "Atka"}   # the two western hubs the fix must cover
 
@@ -167,8 +170,9 @@ def main() -> int:
 
     target = resolve_target(args.inputs_dir)
     all_tifs = sorted(args.inputs_dir.rglob("*.tif"))
-    # Ignore archived small-grid, backup/provenance side-copies, and raw GEE
-    # sea-ice exports: the live inputs are the padded full-grid sea_ice_MM.tif.
+    # Ignore archived small-grid, backup/provenance side-copies, and the raw
+    # (unpadded) GEE sea-ice exports kept in sea_ice/gee_export/: the live
+    # inputs are the padded full-grid files of the same name one level up.
     tifs = [p for p in all_tifs
             if not any(part in ("small_grid", "_v1_backup", "provenance", "gee_export")
                        or ".bak" in part
@@ -182,10 +186,10 @@ def main() -> int:
     print(f"{target.source}")
     print(f"Target: {target.crs}  {target.width}x{target.height}  origin({target.transform.c:.0f}, {target.transform.f:.0f})  150 m")
     print(f"        X[{target.xmin:,.0f} → {target.xmax:,.0f}]  Y[{target.ymin:,.0f} → {target.ymax:,.0f}]")
-    print(f"Found {len(gate)} GEE-layer raster(s) to gate on"
+    print(f"Found {len(gate)} GEE-exported raster(s) to gate on"
           f" (+{len(river)} river_ice on the deferred track).\n")
     if not gate:
-        print("No GEE-layer .tif files found — nothing to gate on yet.")
+        print("No GEE-exported .tif files found — nothing to gate on yet.")
         return 1
 
     all_ok = True

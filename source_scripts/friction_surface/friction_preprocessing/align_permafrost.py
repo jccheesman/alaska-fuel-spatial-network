@@ -2,13 +2,13 @@
 """align_permafrost.py
 
 One-shot prep: snap a continuous-coverage permafrost raster to the friction
-canonical grid defined by lulc.tif.
+canonical grid defined by the land-cover raster (friction_paths.RASTER_NAMES).
 
 The Pastick et al. 2015 near-surface permafrost probability raster is the
 data source; IPA-convention thresholds (Brown et al. 1997) are applied
-downstream. Wherever the upstream rasterized permafrost.tif comes from
-(GEE Pastick export, or an already-continuous vendor product), this
-script reprojects + snaps it onto the lulc.tif grid. This alignment step
+downstream. Wherever the upstream permafrost raster comes from (the GEE
+Pastick export, or an already-continuous vendor product), this script
+reprojects + snaps it onto the land-cover grid. This alignment step
 is load-bearing: the friction-pipeline loaders require inputs already on
 the canonical grid (no WarpedVRT fallback) and raise on grid mismatch.
 
@@ -18,12 +18,18 @@ Do NOT switch to nearest: the upstream zone-code → coverage conversion has
 already been done; treating it as categorical here would just create stair-
 step artifacts at zone boundaries.
 
+One-name rule (friction_paths): with no arguments this aligns
+inputs/friction_rasters/permafrost_probability_150m_EPSG3338.tif IN PLACE, so the
+file keeps the name GEE gave it. The GEE export covers a smaller area than the
+land-cover grid (the Pastick AOI), so this step is always needed after an export.
+
 Run from the project root with the friction-surface Python env active:
     python -m friction_surface.friction_preprocessing.align_permafrost
 
 Or pass explicit paths:
     python -m friction_surface.friction_preprocessing.align_permafrost \\
-        --src /path/to/raw_permafrost.tif --out inputs/friction_rasters/permafrost.tif
+        --src /path/to/raw_permafrost.tif \\
+        --out inputs/friction_rasters/permafrost_probability_150m_EPSG3338.tif
 """
 
 from __future__ import annotations
@@ -36,7 +42,7 @@ import numpy as np
 import rasterio
 from rasterio.warp import Resampling, reproject
 
-from ..friction_paths import RASTER_DIR, RASTER_FILES
+from ..friction_paths import RASTER_FILES
 
 logger = logging.getLogger(__name__)
 
@@ -46,7 +52,7 @@ logger = logging.getLogger(__name__)
 # outside inputs/friction_rasters).
 SRC_DEFAULT = Path(RASTER_FILES["permafrost"])
 OUT_DEFAULT = Path(RASTER_FILES["permafrost"])
-TEMPLATE_DEFAULT = Path(RASTER_DIR) / "lulc.tif"
+TEMPLATE_DEFAULT = Path(RASTER_FILES["lulc"])
 
 # Float-NoData sentinel matching the rest of the friction stack
 # (friction_config.FRICTION_NODATA).

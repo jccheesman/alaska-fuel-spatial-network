@@ -22,10 +22,9 @@ def main() -> int:
         # Actual grid misalignment among GEE-named exports — hard stop.
         return rc
     if rc == 1:
-        # No GEE-named rasters found: normal once exports are renamed to the
-        # pipeline names (slope.tif etc.) — the full preflight below is the
-        # gate that matters. Informational only.
-        print("(no raw GEE-named exports to gate — continuing to the full preflight)\n")
+        # No rasters found at all: the full preflight below reports each
+        # missing file by name, which is the message that matters.
+        print("(no rasters to gate on yet — continuing to the full preflight)\n")
     target = sys.argv[1] if len(sys.argv) > 1 else get_raster_dir()
     reports = check_inputs(target)
     print(f"Preflight report for {target}:")

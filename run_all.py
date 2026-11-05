@@ -111,18 +111,18 @@ def run_step(label: str, *cmd: str, filt: str | None = None) -> None:
         raise StageFail(rc)
 
 
-def dir_nonempty(p: Path) -> bool:
-    """Mirror `[ -d p ] && [ -n "$(ls -A p)" ]`."""
-    return p.is_dir() and any(p.iterdir())
-
-
 def stage_01_friction_build(py: str) -> None:
     here = WORKFLOWS / "01_friction_build"
-    if not (ROOT / "inputs/friction_rasters/lulc.tif").is_file():
+    # The grid anchor, under its producer's (GEE) name — defined once in
+    # source_scripts/friction_surface/friction_paths.py (RASTER_NAMES); the
+    # bash twin carries the same literal.
+    lulc = "inputs/friction_rasters/dynamic_world_LULC_2022_2024_summer_mode_150m_EPSG3338.tif"
+    if not (ROOT / lulc).is_file():
         gate(
-            "inputs/friction_rasters/lulc.tif missing.",
-            "The friction rasters are not in the repository: download and regenerate them",
-            "(GEE export + pad/align + river-ice pipeline), then re-run. See DATA.md section 3.1.",
+            f"{lulc} missing.",
+            "The friction rasters are not in the repository. Either fetch them from the Zenodo",
+            f"deposit:  {py} tools/fetch_archive.py --group friction_inputs   (DATA.md, path 2)",
+            "or regenerate them (GEE export + pad/align + river-ice pipeline; DATA.md section 3.1).",
         )
     if not (ROOT / "inputs/data_for_network_build").is_dir():
         gate(
@@ -138,17 +138,43 @@ def stage_01_friction_build(py: str) -> None:
 
 def stage_02_network_build(py: str, profile: str) -> None:
     here = WORKFLOWS / "02_network_build"
-    if not dir_nonempty(ROOT / "data/raw"):
+    # Verbatim from workflows/02_network_build/run_all.sh (RAW_DOWNLOADS): the six
+    # public layers are downloads; the ice-road layer is placed by extract_inputs.
+    raw_downloads = [
+        "data/raw/connectivity/road/Roads_AKDOT/Roads_AKDOT.shp",
+        "data/raw/connectivity/barge/NWN_Waterway_Network_Lines/Waterway_Network.shp",
+        "data/raw/anchor_points/Ports_and_Harbors.geojson",
+        "data/raw/boundaries/tiger_places/tl_2022_02_place.shp",
+        "data/raw/boundaries/borough_census_area/Alaska_Borough_and_Census_Area_Boundaries.shp",
+        "data/raw/boundaries/Fuel_Delivery_Method.geojson",
+    ]
+    missing = [f for f in raw_downloads if not (ROOT / f).is_file()]
+    if missing:
         gate(
-            "data/raw is empty. Populate it first:",
-            f"{py} tools/extract_inputs.py   (needs inputs/network_raw.zip, or download the raw files — see DATA.md section 4.1)",
+            f"data/raw is missing {len(missing)} of the 6 public downloads:",
+            *missing,
+            "Download each from its source (DATA.md section 4.1 lists the file and the link), and run",
+            f"{py} tools/extract_inputs.py once for the ice-road layer.",
         )
 
-    if not dir_nonempty(ROOT / "data/interim"):
+    # Gate on the MANIFEST 00_normalize_raw writes LAST, not on mere non-emptiness:
+    # a crashed prep leaves a partial data/interim that would otherwise skip prep.
+    if not (ROOT / "data/interim/MANIFEST.md").is_file():
         out("######## 0-2. prep: normalize_raw -> prep_waterway -> prep_airways ########")
         run_step("00_normalize_raw", py, str(here / "00_normalize_raw.py"), filt=FILT_02)
         run_step("01_prep_waterway", py, str(here / "01_prep_waterway.py"), filt=FILT_02)
         run_step("02_prep_airways", py, str(here / "02_prep_airways.py"), filt=FILT_02)
+
+    # Manual connections: re-split EVERY build (outside the prep gate above) so edits
+    # to the shapefile take effect. Optional — skipped cleanly when absent.
+    manual_shp = "inputs/mannual_connections/mannual_connections.shp"
+    if (ROOT / manual_shp).is_file():
+        out()
+        out("######## 3. prep manual connections (split by mode) ########")
+        run_step("03_prep_manual_connections", py, str(here / "03_prep_manual_connections.py"),
+                 filt=FILT_02)
+    else:
+        out(f"SKIP 03_prep_manual_connections: no {manual_shp} (optional user layer).")
 
     out()
     out("######## 3-4. validate + build (mmnet 01->04 + reports) ########")
@@ -203,8 +229,9 @@ def stage_03_multimodal_join(py: str) -> None:
 
     if not (ROOT / "outputs/01_friction_build/friction_stack/road_base.tif").is_file():
         out("GATE: friction stack missing (outputs/01_friction_build/friction_stack/).")
-        out("  Stages 03-04 need workflow 01's rasters — regenerate via")
-        out("  bash workflows/01_friction_build/run_all.sh (see DATA.md section 3).")
+        out("  Stages 03-04 need workflow 01's rasters. Fetch the finished stack from the Zenodo")
+        out(f"  deposit:  {py} tools/fetch_archive.py --group friction_stack   (DATA.md, path 2)")
+        out("  or build it: bash workflows/01_friction_build/run_all.sh (DATA.md section 3).")
         out("  Stopping after the ingest stage (network_nodes + network_edges written).")
         raise StageSkip()
 

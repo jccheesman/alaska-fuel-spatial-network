@@ -10,10 +10,12 @@ below names its producer, its consumer(s), and what breaks if it drifts.
 | CRS | EPSG:3338 (NAD83 / Alaska Albers, meters) |
 | Resolution | 150 m |
 | Dimensions | 28,000 × 16,567 |
-| Anchor | `inputs/friction_rasters/lulc.tif` — every other raster must match its CRS, transform, and shape exactly |
+| Anchor | `inputs/friction_rasters/dynamic_world_LULC_2022_2024_summer_mode_150m_EPSG3338.tif` (the land-cover export) — every other raster must match its CRS, transform, and shape exactly |
 
 Producer: the GEE export + arcpy preprocessing. Consumers: everything in
-workflow 01. Enforced by `friction_preflight` (auto-run inside
+workflow 01. File names: each input keeps its producer's name; the names are
+defined once in `friction_paths.py` (`RASTER_NAMES`, `sea_ice_name`,
+`river_ice_name`) and listed in `DATA.md` §3.1. Enforced by `friction_preflight` (auto-run inside
 `write_friction_stack`) and `check_grid_exports.py`; the `align-to-ak-stack`
 skill snaps new rasters onto it. Drift ⇒ preflight FATAL, no build.
 

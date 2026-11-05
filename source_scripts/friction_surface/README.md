@@ -10,11 +10,15 @@ All inputs are assumed preprocessed to a common CRS (EPSG:3338 — NAD83 Alaska 
 
 | Path | Description | Units |
 |---|---|---|
-| `slope.tif` | Per-pixel slope from FabDEM | degrees, float32 |
-| `lulc.tif`  | Dynamic World modal class | int (0–8) |
-| `permafrost.tif` | Near-surface permafrost extent (Pastick et al., 2015) | 0–1 or 0–100; auto-normalized |
-| `sea_ice/sea_ice_{01..12}.tif` | AOOS Historical Sea Ice Atlas monthly climatology | 0–1 or 0–100; auto-normalized |
-| `river_ice/river_ice_{01..12}.tif` | Brown et al. (2026) river ice phenology monthly probability | 0–1 or 0–100; auto-normalized |
+| `FABDEM_slope_150m_EPSG3338.tif` | Per-pixel slope from FABDEM | degrees, float32 |
+| `dynamic_world_LULC_2022_2024_summer_mode_150m_EPSG3338.tif` | Dynamic World modal class; the grid anchor | int (0–8) |
+| `permafrost_probability_150m_EPSG3338.tif` | Near-surface permafrost probability (Pastick et al., 2015) | 0–1 or 0–100; auto-normalized |
+| `sea_ice/sea_ice_median_{MM}_{Mon}_150m_EPSG3338.tif` | Historical Sea Ice Atlas (UAF SNAP / AOOS) monthly climatology | 0–1 or 0–100; auto-normalized |
+| `river_ice/river_ice_probability_{MM}_150m_EPSG3338.tif` | Brown et al. (2026) river ice phenology monthly probability | 0–1 or 0–100; auto-normalized |
+
+Every file keeps the name its producer wrote (the "one name" rule); the names
+are defined once in `friction_paths.py` (`RASTER_NAMES`, `sea_ice_name`,
+`river_ice_name`) and every module reads them from there.
 
 Dynamic World class codes used:
 `0 water, 1 trees, 2 grass, 3 flooded_vegetation, 4 crops, 5 shrub_scrub, 6 built_area, 7 bare_ground, 8 snow_ice`.
@@ -23,8 +27,8 @@ The scripts and source data that produce these inputs live in
 `friction_preprocessing/`. GEE Code Editor scripts handle the
 slope/LULC/permafrost/sea-ice exports; the ArcGIS Pro pipeline
 `friction_preprocessing/river_ice_full_pipeline.py` produces the 12 monthly
-`river_ice/*.tif`. See `friction_preprocessing/README.md` for the pipeline
-details.
+`river_ice/*.tif`. See `friction_preprocessing/README.md` and `DATA.md` §3.1
+for the step-by-step procedure.
 
 ## Outputs
 
@@ -289,7 +293,7 @@ relative override is resolved against the current CWD.
 
 | Env var | Overrides | Default (relative to repo root) |
 |---|---|---|
-| `RASTER_DIR` | Preprocessed input rasters (`slope.tif`, `lulc.tif`, `permafrost.tif`, `sea_ice/`, `river_ice/`) | `inputs/friction_rasters` |
+| `RASTER_DIR` | Preprocessed input rasters (slope, land cover, permafrost, `sea_ice/`, `river_ice/`; names in `friction_paths.RASTER_NAMES`) | `inputs/friction_rasters` |
 | `FRICTION_DIR` | Friction-stack output dir | `outputs/01_friction_build/friction_stack` |
 | `NETWORK_DIR` | Network vector shapefiles | `inputs/data_for_network_build` |
 | `INPUTS_DIR` | Ice-road / fuel-delivery datasets | `inputs` |
@@ -345,8 +349,8 @@ the repo root, so it is invoked as a module from there.
 
 | Path | Purpose |
 |---|---|
-| `friction_preprocessing/` | Upstream pipelines that produce the inputs: GEE Code Editor scripts (slope, LULC, permafrost, sea ice) and the ArcGIS Pro river-ice pipeline. Source hydrography lives in `friction_preprocessing/data/`. |
-| `../../inputs/friction_rasters/` | Inputs consumed by this stage: `lulc.tif`, `slope.tif`, `permafrost.tif`, and the monthly `sea_ice/` and `river_ice/` stacks (not in the repository — download and regenerate, see `../../DATA.md` §3.1). |
+| `friction_preprocessing/` | Upstream pipelines that produce the inputs: the GEE Code Editor export script (slope, LULC, permafrost, sea ice), the pad/align scripts, and the ArcGIS Pro river-ice pipeline. The river-ice sources live in a working directory outside the repository (`FRICTION_LAYER_ROOT`). |
+| `../../inputs/friction_rasters/` | Inputs consumed by this stage: the slope, land-cover and permafrost rasters and the monthly `sea_ice/` and `river_ice/` stacks, under their producers' names (not in the repository — download and regenerate, see `../../DATA.md` §3.1). |
 | `../../outputs/01_friction_build/` | Generated friction stack in `friction_stack/` — 14 files (`overland.tif`, `barge_{MM}.tif`, `road_base.tif`) backing 24 logical `(mode, month)` entries — plus the waterway mask. |
 | `../../figure_scripts/` | Friction figure generators — `plot_friction_stack.py` (3×4 monthly raster grid PNG), `plot_combined_friction.py` (publication friction figures). |
 | `../../diagnostics/01_friction_build/` | Build-time checks and investigation plots (river-ice threshold histogram, marine leak, mask construction, sea-ice padding, LULC grid comparison) — one row each in `diagnostics/README.md`. |

@@ -27,9 +27,24 @@ resolve_python
 PROFILE="${1:-$HERE/profile.yaml}"
 FILT='Axes3D|warnings.warn|user_version|QStandardPaths|Application path'
 
-if [ ! -d data/raw ] || [ -z "$(ls -A data/raw 2>/dev/null)" ]; then
-  gate "data/raw is empty. Populate it first:" \
-       "$PY tools/extract_inputs.py   (needs inputs/network_raw.zip, or download the raw files — see DATA.md section 4.1)"
+# The six public layers of data/raw are downloads (DATA.md section 4.1); the ice-road
+# layer is placed by tools/extract_inputs.py. Gate on the downloads by name so a
+# partially staged folder is a clean skip, not a crash inside the build.
+RAW_DOWNLOADS=(
+  data/raw/connectivity/road/Roads_AKDOT/Roads_AKDOT.shp
+  data/raw/connectivity/barge/NWN_Waterway_Network_Lines/Waterway_Network.shp
+  data/raw/anchor_points/Ports_and_Harbors.geojson
+  data/raw/boundaries/tiger_places/tl_2022_02_place.shp
+  data/raw/boundaries/borough_census_area/Alaska_Borough_and_Census_Area_Boundaries.shp
+  data/raw/boundaries/Fuel_Delivery_Method.geojson
+)
+missing=()
+for f in "${RAW_DOWNLOADS[@]}"; do [ -f "$f" ] || missing+=("$f"); done
+if [ "${#missing[@]}" -gt 0 ]; then
+  gate "data/raw is missing ${#missing[@]} of the 6 public downloads:" \
+       "${missing[@]}" \
+       "Download each from its source (DATA.md section 4.1 lists the file and the link), and run" \
+       "$PY tools/extract_inputs.py once for the ice-road layer."
 fi
 
 # Gate on the MANIFEST 00_normalize_raw writes LAST, not on mere non-emptiness:

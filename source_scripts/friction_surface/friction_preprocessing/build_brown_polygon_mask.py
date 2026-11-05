@@ -24,18 +24,35 @@ Outputs:
 - brown_river_flowlines.shp: NHDFlowline filtered to the 30 Brown rivers
   by GNIS_Name. 
 
-Usage:
-    python build_brown_polygon_mask.py
-    python build_brown_polygon_mask.py --nhd-dir path/to/NHD/Shape \\
-                                       --reach-points path/to/reach.geojson
+Working directory (one folder, shared with river_ice_full_pipeline.py, which
+reads what this script writes). Default: inputs/river_ice_work/;
+FRICTION_LAYER_ROOT or --work-dir overrides it. The masks this script makes are
+in the project's Zenodo deposit (`python tools/fetch_archive.py --group
+river_ice_work`), so you only run it to REBUILD them after an NHD or reach-set
+change. What the masks are: friction_preprocessing/README.md.
+
+    <work-dir>/
+      waterFilledMedians2000_2023.geojson             Brown et al. 2026 reach points (download, 9.6 MB)
+      NHD_extracted/Shape/NHDArea.shp, NHDFlowline_*.shp   USGS NHD Alaska, unzipped (download, 5 GB)
+      brown_river_polygons/brown_river_polygons.shp     <- written here
+      brown_river_flowlines/brown_river_flowlines.shp   <- written here
+
+Usage (from the repo root, project environment active):
+    python -m friction_surface.friction_preprocessing.build_brown_polygon_mask
+    # or point at another working directory / the pieces explicitly:
+    python -m friction_surface.friction_preprocessing.build_brown_polygon_mask \\
+        --work-dir /path/to/river_ice_work [--nhd-dir ...] [--reach-points ...]
 """
 
 import argparse
+import os
 import sys
 from pathlib import Path
 
 import geopandas as gpd
 import pandas as pd
+
+import repo_paths as rp
 
 BROWN_RIVER_NAMES = [
     "Alsek River", "Buckland River", "Chena River", "Chitina River",
@@ -88,9 +105,8 @@ NHDAREA_KEEP_FTYPES = [460, 364]
 #                               edge still shares pixels with the network line
 #
 # Pass --no-marine-clip to reproduce the pre-fix mask.
-MARINE_CLIP_DEFAULT_WATERWAY = (
-    "../../../inputs/data_for_network_build/water_networks/"
-    "waterways_network_ak_albers.shp"
+MARINE_CLIP_DEFAULT_WATERWAY = str(
+    rp.NETWORK_DATA / "water_networks" / "waterways_network_ak_albers.shp"
 )
 
 
@@ -160,22 +176,29 @@ def drop_marine_polygons(polys, waterway_shp, verbose=True):
 
 
 def main():
-    parser = argparse.ArgumentParser(description=__doc__)
+    parser = argparse.ArgumentParser(
+        description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument(
-        "--nhd-dir", default="data/NHD_extracted/Shape",
-        help="Directory containing NHDArea.shp and NHDFlowline_*.shp",
+        "--work-dir", default=os.getenv("FRICTION_LAYER_ROOT") or str(rp.RIVER_ICE_WORK),
+        help="The river-ice working directory (default: $FRICTION_LAYER_ROOT, else "
+             f"{rp.RIVER_ICE_WORK}); the four paths below default to its layout",
     )
     parser.add_argument(
-        "--reach-points", default="data/waterFilledMedians2000_2023.geojson",
-        help="Brown reach points (drives polygon selection)",
+        "--nhd-dir", default=None,
+        help="Directory containing NHDArea.shp and NHDFlowline_*.shp "
+             "(default: <work-dir>/NHD_extracted/Shape)",
     )
     parser.add_argument(
-        "--output", default="data/brown_river_polygons.shp",
-        help="Polygon output shapefile path",
+        "--reach-points", default=None,
+        help="Brown reach points GeoJSON (default: <work-dir>/waterFilledMedians2000_2023.geojson)",
     )
     parser.add_argument(
-        "--flowlines-output", default="data/brown_river_flowlines.shp",
-        help="Flowline output shapefile path",
+        "--output", default=None,
+        help="Polygon output shapefile (default: <work-dir>/brown_river_polygons/brown_river_polygons.shp)",
+    )
+    parser.add_argument(
+        "--flowlines-output", default=None,
+        help="Flowline output shapefile (default: <work-dir>/brown_river_flowlines/brown_river_flowlines.shp)",
     )
     parser.add_argument(
         "--point-buffer-m", type=float, default=2000.0,
@@ -202,9 +225,8 @@ def main():
         "--waterway", default=MARINE_CLIP_DEFAULT_WATERWAY,
         help=(
             "NWN waterway shapefile used to identify marine segments for the "
-            "post-join marine clip (default resolves to "
-            "inputs/data_for_network_build/water_networks/ from this "
-            "script's directory)."
+            "post-join marine clip (default: the copy tools/extract_inputs.py "
+            "unpacks into inputs/data_for_network_build/water_networks/)."
         ),
     )
     parser.add_argument(
@@ -217,16 +239,23 @@ def main():
     parser.set_defaults(marine_clip=True)
     args = parser.parse_args()
 
+    work = Path(args.work_dir)
+    if args.nhd_dir is None:
+        args.nhd_dir = str(work / "NHD_extracted" / "Shape")
+    if args.reach_points is None:
+        args.reach_points = str(work / "waterFilledMedians2000_2023.geojson")
+    if args.output is None:
+        args.output = str(work / "brown_river_polygons" / "brown_river_polygons.shp")
+    if args.flowlines_output is None:
+        args.flowlines_output = str(work / "brown_river_flowlines" / "brown_river_flowlines.shp")
+
     if args.marine_clip and not Path(args.waterway).exists():
-        alt = Path(__file__).resolve().parent / MARINE_CLIP_DEFAULT_WATERWAY
-        if alt.exists():
-            args.waterway = str(alt)
-        else:
-            sys.exit(
-                f"ERROR: waterway shapefile not found at {args.waterway}. "
-                "Pass --waterway, or --no-marine-clip to build without it "
-                "(which reinstates the salt-water leak)."
-            )
+        sys.exit(
+            f"ERROR: waterway shapefile not found at {args.waterway}. "
+            "Run `python tools/extract_inputs.py` first, pass --waterway, or "
+            "--no-marine-clip to build without it (which reinstates the "
+            "salt-water leak)."
+        )
 
     nhd_dir = Path(args.nhd_dir)
     if not nhd_dir.exists():
@@ -352,22 +381,19 @@ def main():
             print(f"    {name}")
         print("  (these rely entirely on the buffered NHDFlowline + kernel fallback)")
 
+    Path(args.output).parent.mkdir(parents=True, exist_ok=True)
     out.to_file(args.output)
     print(f"\nWrote {args.output}  ({len(out):,} polygons)")
 
     # 6. Write Brown-filtered flowlines (loaded in step 3).
+    Path(args.flowlines_output).parent.mkdir(parents=True, exist_ok=True)
     fl_out = fl_brown[["gnis_name", "geometry"]].reset_index(drop=True)
     fl_out.to_file(args.flowlines_output)
     print(f"Wrote {args.flowlines_output}  ({len(fl_out):,} flowlines)")
 
-    print("\nNext steps:")
-    print(f"  1. Zip {args.output.rsplit('.', 1)[0]}.{{shp,shx,dbf,prj}}")
-    print(f"  2. Zip {args.flowlines_output.rsplit('.', 1)[0]}.{{shp,shx,dbf,prj}}")
-    print("  3. In river_ice_from_waterFilledMedians.js, set:")
-    print("       NHD_BROWN_POLYGONS_ASSET    = '<polygon asset id>'")
-    print("       NHD_FEATURECOLLECTION_ASSET = '<flowline asset id>'")
-    print("       RIVER_MASK_ASSET            = null")
-    print("       RIVER_MASK_SOURCE           = 'nhd_named'")
+    print("\nNext step: run river_ice_full_pipeline.py in ArcGIS Pro with "
+          "FRICTION_LAYER_ROOT pointing at this working directory "
+          "(friction_preprocessing/README.md).")
 
 
 if __name__ == "__main__":

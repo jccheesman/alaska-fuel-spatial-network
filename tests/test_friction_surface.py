@@ -240,12 +240,15 @@ def _make_stack_inputs(input_dir, iced_month: int = 1) -> None:
       - river_ice: ice-free (0.0) every month
     """
     from friction_surface.friction_config import LULC_WATER_CLASS
+    from friction_surface.friction_paths import (
+        RASTER_NAMES, river_ice_relpath, sea_ice_relpath,
+    )
 
     transform = from_origin(0.0, 0.0, RES, RES)
     shape = (8, 8)
 
     slope = np.ones(shape, dtype=np.float32)
-    _write_raster(input_dir / "slope.tif", slope, transform)
+    _write_raster(input_dir / RASTER_NAMES["slope"], slope, transform)
 
     lulc = np.full(shape, 5, dtype=np.uint8)  # LULC is an integer class raster
     lulc[:, 3] = int(LULC_WATER_CLASS)        # vertical river column
@@ -253,19 +256,19 @@ def _make_stack_inputs(input_dir, iced_month: int = 1) -> None:
         "driver": "GTiff", "height": shape[0], "width": shape[1], "count": 1,
         "dtype": "uint8", "crs": CRS, "transform": transform,
     }
-    with rasterio.open(input_dir / "lulc.tif", "w", **lulc_profile) as dst:
+    with rasterio.open(input_dir / RASTER_NAMES["lulc"], "w", **lulc_profile) as dst:
         dst.write(lulc, 1)
 
     permafrost = np.zeros(shape, dtype=np.float32)
-    _write_raster(input_dir / "permafrost.tif", permafrost, transform)
+    _write_raster(input_dir / RASTER_NAMES["permafrost"], permafrost, transform)
 
     (input_dir / "sea_ice").mkdir()
     (input_dir / "river_ice").mkdir()
     for m in range(1, 13):
         sea = np.full(shape, 1.0 if m == iced_month else 0.0, dtype=np.float32)
-        _write_raster(input_dir / "sea_ice" / f"sea_ice_{m:02d}.tif", sea, transform)
+        _write_raster(input_dir / sea_ice_relpath(m), sea, transform)
         river = np.zeros(shape, dtype=np.float32)
-        _write_raster(input_dir / "river_ice" / f"river_ice_{m:02d}.tif", river, transform)
+        _write_raster(input_dir / river_ice_relpath(m), river, transform)
 
 
 def test_write_friction_stack_end_to_end(tmp_path, monkeypatch):

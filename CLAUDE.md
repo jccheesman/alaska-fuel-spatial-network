@@ -67,7 +67,7 @@ replaces the network-of-record.
 | `07_publish.py` | The clean facility table + QC report, after the output-contract checks | `facilities_clean.csv` (tracked), `qc_report.md` | `inputs/inventory_qc/derived_columns.csv` (every non-schema column, declared) | Row reconciliation, reviewer+date, schema + declared-derived columns only (a missing or undeclared derived column fails), `facility_id` present/unique/never differs from the ledger, every located record has a region or an explicit `outside`, regression fixtures, determinism — never loosen one. The whole chain is one Python entry point: `validate_inventory.py [--publish]`; a returned review queue is recorded by `record_corrections.py` |
 | `08_ledger.py` | ONE tracked workbook per release: what a human approved, what a rule changed, what is pending/rejected/excluded, the open review queue (fill its yellow columns and hand it to `record_corrections.py`) | `inventory_ledger.xlsx` (tracked, byte-deterministic) | — | Generated from the CSVs on every run — never edit it; the CSVs stay the source of truth |
 | **01_friction_build** | | | | |
-| `00_preflight_inputs.py` | Grid + range gates on the friction rasters | pass/fail report | RASTER_DIR env | Every input must match `lulc.tif`'s 28,000×16,567 grid exactly |
+| `00_preflight_inputs.py` | Grid + range gates on the friction rasters | pass/fail report | RASTER_DIR env | Every input must match the land-cover raster's 28,000×16,567 grid exactly; inputs are read under their producers' names (`friction_paths.RASTER_NAMES`) |
 | `01_build_corridor_masks.py` | Rasterizes the waterway network (75 m buffer, all_touched) | `outputs/01_friction_build/waterway_mask_150m.tif` | `CORRIDOR_BUFFER_M` | **REQUIRED before stage 02** — a missing mask is a hard error in the stack build (maskless = ~18% of waterway edges severed; explicit opt-out for synthetic runs only) |
 | `02_build_friction_stack.py` | overland + road_base + barge_01..12 | `outputs/01_friction_build/friction_stack/` (14 TIFs / 24 logical surfaces) | `friction_config.py` | road_base is NoData-free by construction so land edges can't be accidentally severed |
 | `03_qa_friction_stack.py` | Hard post-build gates | exit code | — | Checks the 14-file contract, Jul>Jan barge pixels (ice gating direction), value floor |
@@ -91,6 +91,34 @@ replaces the network-of-record.
 
 ## Caution rows
 
+- **Input rasters keep their producers' names (owner 2026-11-04).** The friction
+  inputs are read as `FABDEM_slope_150m_EPSG3338.tif`,
+  `dynamic_world_LULC_2022_2024_summer_mode_150m_EPSG3338.tif`,
+  `permafrost_probability_150m_EPSG3338.tif`,
+  `sea_ice/sea_ice_median_{MM}_{Mon}_150m_EPSG3338.tif` and
+  `river_ice/river_ice_probability_{MM}_150m_EPSG3338.tif`; nothing is renamed
+  on disk and the pad/align steps work in place. The names live ONLY in
+  `friction_paths.py` (`RASTER_NAMES`, `sea_ice_name`, `river_ice_name`); the GEE
+  script and the arcpy script repeat them verbatim and
+  `tests/test_friction_paths.py` fails if they drift. The river-ice scripts share
+  one working directory (`inputs/river_ice_work/`, or `FRICTION_LAYER_ROOT`) and
+  write straight into `RASTER_DIR/river_ice/`; neither has a machine-specific
+  default any more. The GEE script exports only the friction rasters; the network
+  layers moved to `gee_network_layers_preview.js`, which nothing downstream reads.
+- **Large data lives in the Zenodo deposit, never in git (owner 2026-11-05).** The
+  rasters (friction inputs ~7 GB, the finished stack ~300 MB; even one river-ice
+  month is 25 MB compressed) and the river-ice working directory are fetched with
+  `tools/fetch_archive.py --group {friction_inputs,friction_stack,river_ice_work}`,
+  which verifies each zip against the deposit's md5 and unpacks it where the
+  pipeline reads. `ZENODO_RECORD` in that file is the one place the DOI lives; it
+  is `None` until the deposit is published (the tool then exits 3 like a gate).
+  `DATA.md` is organised as three paths: use the finished products, rebuild from
+  the deposit's intermediates, rebuild from the raw sources. A committed zip under
+  `inputs/` is for data under 50 MB only; the plan to commit the river masks was
+  withdrawn (the polygon shapefile alone is 79 MB zipped). Workflow 02 has no
+  deposit group (owner 2026-11-05): its two hand-edited layers (ice roads, manual
+  connections) are in git, `tools/extract_inputs.py` copies the ice roads into the
+  `data/raw` layout, and the six public layers are downloaded from their publishers.
 - **Synthetic connectors use a mode-based vocabulary (refine-synthetic-connectors,
   2026-09).** `pipeline.classify_connectors` names every synthetic connector by the
   modes at its endpoints: within-mode welds → `{Mode}Connector` (RoadConnector,

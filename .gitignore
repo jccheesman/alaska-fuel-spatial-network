@@ -80,6 +80,8 @@ inputs/raw_facility_data/**/Utilities_Bulk_Fuel_Inventory*.csv
 !inputs/inventory_qc/boundaries/*.zip
 !inputs/data_for_network_build.zip
 !inputs/region_and_census_data.zip
+# inputs/river_ice_work/ (the river-ice working directory) and the rasters are never committed:
+# they are fetched from the Zenodo deposit (python tools/fetch_archive.py) or rebuilt (DATA.md).
 # network_raw.zip is deliberately NOT negated: it stays out of the repository (license-gated,
 # see DATA.md §4.1) and was purged from git history on 2026-08-08.
 # Small tracked air CSVs (diffable plain text)
@@ -131,6 +133,9 @@ final_network/*/
 research/**/out/
 research/**/*.html
 research/**/*_files/
+
+# --- Zenodo downloads (tools/fetch_archive.py keeps the verified zips here for re-runs) ---
+.archive/
 
 # --- Logs (timestamped, written by friction_paths.setup_logging) ---
 *.log

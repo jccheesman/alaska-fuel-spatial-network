@@ -22,7 +22,8 @@ TRACKED = [
 ]
 
 # May locate themselves: they run before (or without) the project environment.
-SELF_LOCATING = {"run_all.py", "tools/extract_inputs.py", "source_scripts/repo_paths.py",
+SELF_LOCATING = {"run_all.py", "tools/extract_inputs.py", "tools/fetch_archive.py",
+                 "source_scripts/repo_paths.py",
                  "tests/test_friction_paths.py",   # an independent oracle for friction_paths
                  "source_scripts/mmnet/config.py"}  # region-agnostic engine's own default dir
 
