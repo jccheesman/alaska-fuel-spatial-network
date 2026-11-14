@@ -1,4 +1,10 @@
 record_id,detector,severity,detail,suggested_field,suggested_value,group_key,covered_by
+{199DCD38-B4D0-4C40-B569-F661EB0257D1},capacity_mismatch,high,total 17100 gal vs populated fuel sum 32000 gal (components exceed total),,,,
+{44244771-16B8-40ED-9FF2-2D77E405955A},capacity_mismatch,high,total 47100 gal vs populated fuel sum 80000 gal (components exceed total),,,,
+{4EA87B2D-C068-44CC-970C-0D53111ACA7E},capacity_mismatch,high,total 20000 gal vs populated fuel sum 175000 gal (components exceed total),,,,
+{57802F02-1FE2-4D07-A325-DC027155B116},capacity_mismatch,high,total 195840 gal vs populated fuel sum 200000 gal (components exceed total),,,,
+{9BA9AAC2-A297-4D86-BA33-73597A255D86},capacity_mismatch,high,total 22600 gal vs populated fuel sum 36000 gal (components exceed total),,,,
+{EDA71B0B-E7D6-4E52-BD75-CDA27756C3FE},capacity_mismatch,high,total 2000 gal vs populated fuel sum 4000 gal (components exceed total),,,,
 {32574618-B703-4A8E-85F9-35EC4E4EA4A9},one_digit_typo,high,31 km from the PILOT POINT cluster; editing one digit of longitude to -157.5539 lands within 3 km,longitude,-157.553900,,
 {509CF7C1-AE7E-4289-8EFE-3298B15AD90D},shared_farm_id,high,"farm 179 sits in AMBLER but this record is labelled Wales; position + total_capacity are the farm's, not Wales's. NO record labelled AMBLER: consider relabelling one row to keep the farm",latitude;longitude,,farm:179,
 {C9AFF599-4CD8-41B4-97E2-04CEFD79683A},shared_farm_id,high,"farm 179 sits in AMBLER but this record is labelled Holy Cross; position + total_capacity are the farm's, not Holy Cross's. NO record labelled AMBLER: consider relabelling one row to keep the farm",latitude;longitude,,farm:179,
@@ -28,6 +34,12 @@ record_id,detector,severity,detail,suggested_field,suggested_value,group_key,cov
 {EF7B6BA1-2FF6-404A-9A5F-01A83B09D969},shared_point_labels,high,same point as records labelled UNALASKA,,,point:-820756:509144,
 {24C9FD54-6B5B-4128-A231-C770333A63C0},shared_point_labels,high,same point as records labelled GALENA,,,point:388379:1870787,
 {F0FFCC8F-A5B7-4ADC-8C28-C7FC319FCDDB},shared_point_labels,high,same point as records labelled FORT YUKON,,,point:388379:1870787,
+{1F3E5119-0B67-402E-BCC6-A6FB3D649C1A},capacity_mismatch,medium,total 74500 gal vs populated fuel sum 60000 gal (components below total — breakdown may be incomplete),,,,
+{268070AA-D83E-449C-BB0D-3A25985D3464},capacity_mismatch,medium,total 124900 gal vs populated fuel sum 120000 gal (components below total — breakdown may be incomplete),,,,
+{60AC36FC-11A2-4126-B20C-4FC3BB51A21A},capacity_mismatch,medium,total 630000 gal vs populated fuel sum 568000 gal (components below total — breakdown may be incomplete),,,,
+{748B2C47-6F53-4F18-A713-48B459244BC0},capacity_mismatch,medium,total 380000 gal vs populated fuel sum 350000 gal (components below total — breakdown may be incomplete),,,,
+{96E5368E-7124-4460-A687-759DC084F019},capacity_mismatch,medium,total 102465 gal vs populated fuel sum 98000 gal (components below total — breakdown may be incomplete),,,,
+{ED4F5011-31F9-4D8C-88A0-EED50DDE9C4C},capacity_mismatch,medium,total 77400 gal vs populated fuel sum 75600 gal (components below total — breakdown may be incomplete),,,,
 {EE49D47C-9B92-431B-9D0B-77844BA21CF8},spelling_variants,medium,"community id {169CE60B-858B-4A5D-801B-CB9E3179349B} is spelled ['Arctic Village', 'Stevens Village']; most common: Stevens Village",community_name,Stevens Village,cid:{169CE60B-858B-4A5D-801B-CB9E3179349B},correction:approved
 {E8C7FE98-2833-47DB-A566-8D25750D48D2},spelling_variants,medium,"community id {16F1264E-DF67-4828-9E72-1AB821AB3F99} is spelled ['Kwethluk', 'Napakiak']; most common: Napakiak",community_name,Napakiak,cid:{16F1264E-DF67-4828-9E72-1AB821AB3F99},correction:approved
 {BDC6AEBD-A6BF-4D0C-929B-36D15018837C},spelling_variants,medium,"community id {3D0376C5-5127-4959-91EA-4BDA2B041AD6} is spelled ['Fort Wainwright', 'Seward']; most common: Fort Wainwright",community_name,Fort Wainwright,cid:{3D0376C5-5127-4959-91EA-4BDA2B041AD6},correction:approved
@@ -308,3 +320,12 @@ record_id,detector,severity,detail,suggested_field,suggested_value,group_key,cov
 {FE795A58-DA50-40C1-B72F-CD71CEDB3793},missing_fields,info,"missing: latitude, longitude, delivery_method, total_capacity",,,,
 {FEF19473-F330-472E-B4D7-1BFE5DAC285F},missing_fields,info,missing: community_name,,,,
 {FFF367B0-972E-4126-B5A7-31F3709A99A6},missing_fields,info,missing: community_name,,,,
+{24C9FD54-6B5B-4128-A231-C770333A63C0},placeholder_inspection_date,info,last_inspected 1899-12-30 is a pre-1900 placeholder; published blank,last_inspected,,,
+{67812973-1F5E-4F2F-9E8E-A8FEDA823FAF},placeholder_inspection_date,info,last_inspected 1899-12-30 is a pre-1900 placeholder; published blank,last_inspected,,,
+{6F583D81-6839-467F-9E95-2BFB4381CCB2},placeholder_inspection_date,info,last_inspected 1899-12-31 is a pre-1900 placeholder; published blank,last_inspected,,,
+{7A206A94-00D4-4121-BA0A-35593A0FADDC},placeholder_inspection_date,info,last_inspected 1899-12-30 is a pre-1900 placeholder; published blank,last_inspected,,,
+{8970B1E0-DE4E-4A98-8A1B-5C858F18F05A},placeholder_inspection_date,info,last_inspected 1899-12-30 is a pre-1900 placeholder; published blank,last_inspected,,,
+{A1ACAD7B-9BE0-491A-951F-BE7A6A70D642},placeholder_inspection_date,info,last_inspected 1899-12-31 is a pre-1900 placeholder; published blank,last_inspected,,,
+{DEF25DC7-2502-4A06-BE1A-12930080D395},placeholder_inspection_date,info,last_inspected 1899-12-31 is a pre-1900 placeholder; published blank,last_inspected,,,
+{E8C7FE98-2833-47DB-A566-8D25750D48D2},placeholder_inspection_date,info,last_inspected 1899-12-30 is a pre-1900 placeholder; published blank,last_inspected,,,correction:approved
+{F0FFCC8F-A5B7-4ADC-8C28-C7FC319FCDDB},placeholder_inspection_date,info,last_inspected 1899-12-30 is a pre-1900 placeholder; published blank,last_inspected,,,

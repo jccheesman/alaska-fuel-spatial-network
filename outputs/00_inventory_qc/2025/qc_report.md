@@ -1,13 +1,14 @@
 # Inventory QC report — release 2025
 
-Generated 2026-10-31T22:34:24+00:00 by workflows/00_inventory_qc/07_publish.py
+Generated 2026-11-14T16:51:39+00:00 by workflows/00_inventory_qc/07_publish.py
 
 - raw release: `Utilities_Bulk_Fuel_Inventory.csv` sha256 `3fbee569c63dccf813d6fa53e608820d53b92e415feb2c7f20556fc0bb0c30b0` (1830 rows, 1767 located)
-- clean table: `facilities_clean.csv` sha256 `3f79c74eec3c572c5adcaf13e9aa836bd8dc7a43f67036a0b2c6833c3e4eb9b5` (1803 rows, 1740 located)
+- clean table: `facilities_clean.csv` sha256 `259af502f5bde94a8ba117ef93bbdc0ec38818c7ce1f22f22f7a0e6be98d4308` (1803 rows, 1740 located)
 - excluded: 27 (see `excluded.csv`)
 - corrections: 80 applied · 8 pending · 0 rejected · 0 skipped
 - community keys: 272 · unlabelled records: 97
-- qc_status: 1768 clean · 35 pending_review (withheld from hubs by the build)
+- capacity_status: 1716 ok · 75 missing · 12 mismatch; placeholder inspection dates published blank: 9
+- qc_status: 1756 clean · 47 pending_review (withheld from hubs by the build)
 - facility_id: 1740 located records with an id (1160 AEA, 583 synthetic from the ledger); AEA regions: 1739 inside · 1 nearest · 0 outside
 
 ## Checks
@@ -30,7 +31,7 @@ Generated 2026-10-31T22:34:24+00:00 by workflows/00_inventory_qc/07_publish.py
 | fixture: no Kodiak-labelled record is in the open Pacific (lat < 56) | PASS |  |
 | fixture: no Coldfoot-labelled record is in Yukon, Canada (lon > -141) | PASS |  |
 | fixture: spelling variants resolved (no 'Saint Marys', 'Clarks Point', 'Dutch Harbor' labels) | PASS |  |
-| deterministic output | PASS | 3f79c74eec3c |
+| deterministic output | PASS | 259af502f5bd |
 
 ## Corrections applied
 
