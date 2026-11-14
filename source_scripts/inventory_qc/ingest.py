@@ -173,7 +173,10 @@ def diff_summary(d: pd.DataFrame) -> dict:
     ed = d[d["change"] == "edited"]
     isxy = ed["field"].isin(["map_x", "map_y"])
     jitter = pd.Series(False, index=ed.index)
-    jitter[isxy] = (pd.to_numeric(ed.loc[isxy, "old_value"]) - pd.to_numeric(ed.loc[isxy, "new_value"])).abs() <= MAP_JITTER_M
+    # .to_numpy(): assigning an index-aligned bool Series through a mask coerces the
+    # target to object dtype on pandas 2.2 (NaN for off-mask labels), breaking ~jitter
+    jitter.loc[isxy] = ((pd.to_numeric(ed.loc[isxy, "old_value"])
+                         - pd.to_numeric(ed.loc[isxy, "new_value"])).abs() <= MAP_JITTER_M).to_numpy()
     big = ed[~jitter]
     return {
         "removed": int((d["change"] == "removed").sum()),
