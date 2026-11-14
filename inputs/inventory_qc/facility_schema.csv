@@ -4,7 +4,6 @@ record_id,string,,yes,Stable per-source record id (AEA GlobalID); key for correc
 object_id,int,,no,Row id in the publisher's map service
 ast_facility_id,int,,no,AEA facility id (present on ~60% of rows); the harness facility_id
 aea_id,string,,no,AEA facility number
-uscg_id,string,,no,US Coast Guard id
 tank_farm_id,int,,no,AEA tank-farm id; drives the shared-farm-id detector
 tank_farm_evaluation_id,int,,no,AEA tank-farm assessment id
 community_id,string,,no,DCRA community GUID; matches City_Boundaries.CommunityI
@@ -26,5 +25,5 @@ number_of_tanks,int,,no,
 source,string,,no,Originating program: AEA / DEC / USCG
 report,string,,no,Assessment or report name
 inspected_by_uscg,bool,,no,
-last_inspected,date,,no,
+last_inspected,date,,no,"Published blank when pre-1900 (the Esri 1899-12-30 placeholder epoch, not an inspection; owner 2026-11-14) — raw value stays in the release snapshot"
 last_edited,datetime,,no,Publisher edit timestamp; shows which records changed between releases

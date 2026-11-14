@@ -2,7 +2,7 @@
   "source": "aea",
   "raw_file": "Utilities_Bulk_Fuel_Inventory.csv",
   "raw_sha256": "3fbee569c63dccf813d6fa53e608820d53b92e415feb2c7f20556fc0bb0c30b0",
-  "created_utc": "2026-10-06T21:30:29+00:00",
+  "created_utc": "2026-11-14T16:47:05+00:00",
   "rows": 1830,
   "rows_with_coordinates": 1767,
   "columns_kept": [
@@ -11,7 +11,6 @@
     "object_id",
     "ast_facility_id",
     "aea_id",
-    "uscg_id",
     "tank_farm_id",
     "tank_farm_evaluation_id",
     "community_id",
@@ -52,6 +51,7 @@
     "Location_of_Tanks",
     "Recommendations_by_AEA",
     "Tank_Category",
+    "USCG_ID",
     "created_date"
   ],
   "columns_never_read": [
@@ -76,10 +76,10 @@
   "folded_fills": {
     "Delivery_Methods": 1
   },
-  "column_map_sha256": "9232c380223b89e60236c24076bbb722c1b2f2337cf7bcfdf3c988aee4afb017",
-  "schema_sha256": "634c2ddc760ee6c91c0e4a72a5ef79f1c0f541571de5f501aae1b00294ba52ab",
+  "column_map_sha256": "6eb50748bcdb62d102474448a5a76b6e401bed562ef5a9ad85dd0f5c010ed04f",
+  "schema_sha256": "0845b929853b54ef6cf44504314d363ca6d7f8f4e2a204cf93997cbf9bd33c19",
   "snapshot_csv": "aea_inventory_2025.csv",
-  "snapshot_csv_sha256": "e83e5f35f1389f67c998d19e1898c829f24b871fae3f6af17b3948ff2ea571cb",
+  "snapshot_csv_sha256": "709ba99667153e85d484bc4a9980309ee2ccb7aabab1e35b050035dece09e1ef",
   "diff_from": "2022",
   "diff_file": "diff_2022_to_2025.csv",
   "diff_summary": {

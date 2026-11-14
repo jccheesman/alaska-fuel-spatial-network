@@ -18,6 +18,12 @@ labelled communities, confirming corrections we had proposed from the 2022 data.
 | 2022 | 1901 | 1838 | `132338fe0722…` | AEA/DCRA Bulk Fuel Inventory, last AEA edit 2022-12-29. The release both repositories were built from. |
 | 2025 | 1830 | 1767 | `3fbee569c63d…` | AEA/DCRA Bulk Fuel Inventory, last AEA edit 2025-12-16. 71 duplicate records removed; 5 records edited (3 map-point corrections). |
 
+**There is no newer release as of 2026-11.** A fresh download of the publisher's
+CSV made in late 2026 was byte-identical (SHA-256 `3fbee569c63d…`) to the 2025
+release — the folder year names the record currency, not the download date.
+Verify the SHA before re-ingesting the same bytes under a new label
+(independently confirmed by the 2026-11 Astra audit: `docs/astra_audit_2026-11.md`).
+
 ## Adding a release
 
 1. Download the AEA CSV; do not open it in anything that re-saves it. Do NOT add the CSV to git (the .gitignore blocks it).

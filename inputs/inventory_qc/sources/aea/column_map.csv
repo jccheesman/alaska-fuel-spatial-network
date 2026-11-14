@@ -3,7 +3,7 @@ GlobalID,record_id,string,,yes,,Stable AEA key on every row; corrections are key
 OBJECTID,object_id,int,,yes,,Row id in AEA's map service
 ASTFacilityID,ast_facility_id,int,,yes,,AEA facility id (61% of rows); harness facility_id
 AEA_ID,aea_id,string,,yes,,AEA facility number
-USCG_ID,uscg_id,string,,yes,,Coast Guard id
+USCG_ID,,string,,no,,Unused downstream; raw carries literal <Null> artifacts (owner 2026-11-14)
 Tank_Farm_ID,tank_farm_id,int,,yes,,Shared-farm-id check
 Tank_Farm_Evaluation_ID,tank_farm_evaluation_id,int,,yes,,Links record to its farm assessment
 CommunityID,community_id,string,,yes,,DCRA community GUID; matches City_Boundaries
