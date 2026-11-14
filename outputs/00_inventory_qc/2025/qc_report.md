@@ -1,14 +1,14 @@
 # Inventory QC report — release 2025
 
-Generated 2026-11-14T23:21:44+00:00 by workflows/00_inventory_qc/07_publish.py
+Generated 2026-11-14T23:31:14+00:00 by workflows/00_inventory_qc/07_publish.py
 
 - raw release: `Utilities_Bulk_Fuel_Inventory.csv` sha256 `3fbee569c63dccf813d6fa53e608820d53b92e415feb2c7f20556fc0bb0c30b0` (1830 rows, 1767 located)
-- clean table: `facilities_clean.csv` sha256 `e37fa312981e0eb89cd8940504c27b373d704fd0d175598c41270737794a0efe` (1797 rows, 1734 located)
+- clean table: `facilities_clean.csv` sha256 `20b54707985dc515cb7e907c15473f4b3d06e042ae902068d5c28750f72b1a23` (1797 rows, 1734 located)
 - excluded: 33 (see `excluded.csv`)
-- corrections: 118 applied · 9 pending · 11 rejected · 0 skipped
+- corrections: 120 applied · 9 pending · 11 rejected · 0 skipped
 - community keys: 273 · unlabelled records: 97
 - capacity_status: 1710 ok · 75 missing · 12 mismatch; placeholder inspection dates published blank: 7
-- qc_status: 1796 clean · 1 pending_review (withheld from hubs by the build)
+- qc_status: 1797 clean · 0 pending_review (withheld from hubs by the build)
 - facility_id: 1734 located records with an id (1160 AEA, 577 synthetic from the ledger); AEA regions: 1733 inside · 1 nearest · 0 outside
 
 ## Checks
@@ -18,7 +18,7 @@ Generated 2026-11-14T23:21:44+00:00 by workflows/00_inventory_qc/07_publish.py
 | no undeclared derived column was produced by a stage | PASS | undeclared=[] (declare it in inputs/inventory_qc/derived_columns.csv) |
 | row reconciliation | PASS | 1830 release = 1797 clean + 33 excluded |
 | every exclusion has a reason | PASS | 33 excluded |
-| every applied correction has reviewer + date | PASS | 118 applied |
+| every applied correction has reviewer + date | PASS | 120 applied |
 | only schema + derived columns; no contact columns | PASS | extra=[] contact=[] |
 | every declared derived column is present (derived_columns.csv) | PASS | missing=[] |
 | every located record has a facility_id | PASS | missing=0 |
@@ -31,7 +31,7 @@ Generated 2026-11-14T23:21:44+00:00 by workflows/00_inventory_qc/07_publish.py
 | fixture: no Kodiak-labelled record is in the open Pacific (lat < 56) | PASS |  |
 | fixture: no Coldfoot-labelled record is in Yukon, Canada (lon > -141) | PASS |  |
 | fixture: spelling variants resolved (no 'Saint Marys', 'Clarks Point', 'Dutch Harbor' labels) | PASS |  |
-| deterministic output | PASS | e37fa312981e |
+| deterministic output | PASS | 20b54707985d |
 
 ## Corrections applied
 
@@ -155,3 +155,5 @@ Generated 2026-11-14T23:21:44+00:00 by workflows/00_inventory_qc/07_publish.py
 | `{C9AFF599-4CD8-41B4-97E2-04CEFD79683A}` | longitude | -157.8567222 | -159.770274 | JC | 2026-11-14 |
 | `{E3EF8439-0613-41E1-B9C0-DC105BB3B3C0}` | latitude | 65.98050676 | 66.974977 | JC | 2026-11-14 |
 | `{E3EF8439-0613-41E1-B9C0-DC105BB3B3C0}` | longitude | -161.1384531 | -160.442084 | JC | 2026-11-14 |
+| `{D32639C4-3E15-4313-904F-B53FE9C4C207}` | latitude | 60.85685837 | 60.587261 | JC | 2026-11-14 |
+| `{D32639C4-3E15-4313-904F-B53FE9C4C207}` | longitude | -162.2765278 | -165.253153 | JC | 2026-11-14 |

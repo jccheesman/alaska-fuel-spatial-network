@@ -104,11 +104,15 @@ def test_outside_is_reported_but_never_reviewed(run):
     out = Bf[Bf["outcome"] == "outside"]
     assert len(out) and (out["priority"] == "info").all()
     assert not (Q["detector"] == "boundary_outside").any()
-    assert (Q["detector"] == "boundary_mismatch").any(), "far mismatches (inside another community) are still reviewed"
+    # every far mismatch is either queued or carries an owner decision (2026-11-14: all decided,
+    # so an EMPTY queue is the healthy end state — the flags remain as the record)
+    far = Bf[(Bf["outcome"] == "mismatch") & (Bf["priority"] == "review")]
+    uncovered = far[far["covered_by"].fillna("") == ""]
+    assert set(Q.loc[Q["detector"] == "boundary_mismatch", "record_id"]) == set(uncovered["record_id"])
     near = Bf[(Bf["outcome"] == "mismatch") & (Bf["own_boundary_km"].astype(float) <= qc.thresholds()["boundary_review_km"])]
     assert len(near) and (near["priority"] == "info").all(), "a neighbouring Census place is the same town"
     assert not set(Q.loc[Q["detector"] == "boundary_mismatch", "record_id"]) & set(near["record_id"])
-    assert set(Q.loc[Q["detector"] == "boundary_mismatch", "priority"]) == {"review"}
+    assert set(Q.loc[Q["detector"] == "boundary_mismatch", "priority"]) <= {"review"}
     assert set(Bd["outcome"]) == {"match", "mismatch", "outside", "untested"}
     assert Bd["record_id"].is_unique and len(Bd) == run["nfac"]["latitude"].notna().sum()
     assert set(Bd["community_relation"]) == {"inside", "adjacent", "remote", "elsewhere", "untested"}

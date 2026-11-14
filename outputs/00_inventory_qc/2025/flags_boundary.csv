@@ -120,7 +120,6 @@ record_id,community_name,outcome,priority,inside_boundary_of,own_boundary_km,lat
 {BACAEA02-40B4-467A-B3B9-39C3197CF50D},King Salmon,mismatch,review,King Salmon,520.88,58.683749,-156.672126,correction:approved,
 {056D0E34-0F8F-4089-8FD4-38E6687C1E94},Noorvik,mismatch,review,Kaltag,297.51,64.32290209,-158.7240535,correction:pending,
 {BFC59C95-ABE4-4959-BE52-7F09A5308991},Fort Yukon,mismatch,review,Fort Yukon,214.64,66.563958,-145.258792,correction:approved,
-{D32639C4-3E15-4313-904F-B53FE9C4C207},Tununak,mismatch,review,Atmautluak,150.17,60.85685837,-162.2765278,,
 {FE1C1D96-F623-4694-ADA9-82D02F405415},Newtok,mismatch,review,Kipnuk,115.36,59.93413657,-164.0381938,correction:pending,
 {C9E914FB-038D-497D-9C7E-7920E1429211},Eielson Afb,mismatch,review,Fort Greely,104.28,63.83333,-145.82217,exception:remote_site,
 {E6AB9F80-923B-43FA-B7E0-74FB0874B59A},Palmer,mismatch,review,Glacier View,76.36,61.788126,-147.675583,exception:remote_site,

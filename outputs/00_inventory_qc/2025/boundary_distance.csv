@@ -1415,7 +1415,7 @@ record_id,outcome,own_boundary_km,located_in_place,community_relation
 {D2B6AD33-B4EC-4CBE-8876-6A89A68C69DB},match,0.0,Atmautluak,inside
 {D2C6A9F9-037C-4AA8-8FDC-6D9CE0A36EEC},match,0.0,Healy,inside
 {D2C96C71-BCAE-424D-9393-241DF0F42EE0},match,0.0,Prudhoe Bay,inside
-{D32639C4-3E15-4313-904F-B53FE9C4C207},mismatch,150.17,Atmautluak,elsewhere
+{D32639C4-3E15-4313-904F-B53FE9C4C207},match,0.0,Tununak,inside
 {D32C5145-0F7B-4CCD-98DA-4F63C5C70400},match,0.0,Glennallen,inside
 {D33E9F72-38F5-4436-A633-27A623F29032},match,0.0,Napakiak,inside
 {D3AB658E-4DCD-4C78-969F-0BA4EA63EC9F},match,0.0,Russian Mission,inside

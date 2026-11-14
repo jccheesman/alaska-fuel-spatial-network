@@ -79,9 +79,10 @@ def write_xlsx(Q: pd.DataFrame, path) -> bool:
                 x.alignment = Alignment(wrap_text=(c == "detail"), vertical="top")
             if c in inputs:
                 x.fill = inp
-    dcol = get_column_letter(list(Q.columns).index("decision") + 1)
-    dv = DataValidation(type="list", formula1='"' + ",".join(DECISIONS) + '"', allow_blank=True)
-    dv.add(f"{dcol}2:{dcol}{len(Q)+1}"); ws.add_data_validation(dv)
+    if len(Q):   # an EMPTY queue (everything decided) still writes the headers; a P2:P1 range would crash
+        dcol = get_column_letter(list(Q.columns).index("decision") + 1)
+        dv = DataValidation(type="list", formula1='"' + ",".join(DECISIONS) + '"', allow_blank=True)
+        dv.add(f"{dcol}2:{dcol}{len(Q)+1}"); ws.add_data_validation(dv)
     ws.freeze_panes = "D2"; ws.auto_filter.ref = f"A1:{get_column_letter(len(Q.columns))}{len(Q)+1}"
     wb.save(path)
     return True
