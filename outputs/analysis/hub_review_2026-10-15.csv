@@ -1,0 +1,335 @@
+hub_id,status,km,snap_surface,reachable,communities,modes,cap,n
+Hub_1,placed,0.0,Road,True,Juneau,"Barge, Plane, Road",628800.0,29
+Hub_2,placed,0.3,IceRoad,True,Kasigluk,Barge,390000.0,7
+Hub_3,unplaced:beyond_cap,29.3,Road,False,"Fort Wainwright, Seward",Road,86670.0,3
+Hub_4,placed,4.1,Road,True,"Fairbanks, Fort Yukon","Barge, Plane, Road",669767.0,49
+Hub_5,placed,23.5,Waterway,True,Wainwright,Road,14100.0,9
+Hub_6,placed,0.2,Road,True,Emmonak,"Barge, Plane, Road",521500.0,8
+Hub_7,placed,0.8,Road,True,Homer,"Barge, Road",131500.0,13
+Hub_8,placed,9.0,Road,True,Kenai,Road,128734.0,16
+Hub_9,placed,0.1,Air+Road,True,Elim,"Barge, Road",274000.0,5
+Hub_10,placed,20.9,Waterway,True,,Barge,25000.0,1
+Hub_11,placed,3.0,Road,True,Anchorage,"Barge, Road",801812.0,61
+Hub_12,placed,6.1,Road,True,Fort Yukon,"Barge, Plane, Road",30000.0,13
+Hub_13,placed,0.1,Road,True,Venetie,Plane,31400.0,2
+Hub_14,placed,0.1,Road,True,Circle,Road,7000.0,1
+Hub_15,placed,0.1,Road,True,Anvik,"Barge, Plane",82500.0,6
+Hub_16,placed,23.4,Waterway,True,Grayling,"Barge, Plane",87600.0,6
+Hub_17,placed,13.5,Waterway,True,Holy Cross,"Barge, Plane",127500.0,4
+Hub_18,placed,5.1,Road,True,McGrath,"Barge, Road",469500.0,5
+Hub_19,placed,0.0,Road,True,Shageluk,Barge,36000.0,2
+Hub_20,placed,0.1,Road,True,Nikolai,Plane,1500.0,2
+Hub_21,placed,0.2,Road,True,Adak,"Barge, Road",112180.0,2
+Hub_22,placed,0.2,Road,False,Takotna,Road,22000.0,3
+Hub_23,placed,0.1,Road,True,Evansville,Road,15000.0,1
+Hub_24,placed,0.1,Road,True,Delta Junction,"Plane, Road",201500.0,9
+Hub_25,placed,13.9,Road,True,Healy,Road,31500.0,6
+Hub_26,placed,1.0,Road,True,North Pole,Road,84000.0,6
+Hub_27,unplaced:beyond_cap,44.8,Road,False,Bethel,Road,90250.0,14
+Hub_28,placed,2.2,Road,True,Big Lake,Road,1000.0,1
+Hub_29,placed,0.1,Road,True,Sitka,"Barge, Road",634829.0,12
+Hub_30,placed,11.2,Waterway,True,Cape Yakataga,Barge,14000.0,2
+Hub_31,unplaced:beyond_cap,78.5,Road,False,Chandalar,Road,2000.0,1
+Hub_32,placed,0.4,Road,True,Unalaska,Road,11218.0,4
+Hub_33,placed,21.0,Waterway,True,Galena,"Barge, Road",73000.0,12
+Hub_34,placed,0.1,Road,False,Cold Bay,Road,23000.0,6
+Hub_35,placed,22.1,Road,True,Cordova,"Barge, Plane, Road",132100.0,14
+Hub_36,placed,0.1,Road,True,Skagway,Road,94000.0,8
+Hub_37,placed,0.0,Road,False,Koliganek,Barge,52000.0,4
+Hub_38,placed,1.0,Road,True,King Salmon,"Barge, Road",29500.0,6
+Hub_39,placed,1.5,Road,True,Kodiak,Road,165350.0,23
+Hub_40,placed,0.1,Road,False,Lake Minchumina,"Plane, Road",3000.0,2
+Hub_41,placed,8.4,Road,True,Wrangell,"Barge, Plane, Road",177000.0,6
+Hub_42,placed,4.5,Road,True,Metlakatla,"Plane, Road",17000.0,7
+Hub_43,unplaced:beyond_cap,117.7,Road,False,,Barge,24000.0,3
+Hub_44,placed,22.8,Road,True,New Stuyahok,Barge,329600.0,4
+Hub_45,placed,1.1,Road,True,Nenana,Road,5000.0,2
+Hub_46,placed,0.8,Road,True,Nome,"Barge, Plane, Road",287900.0,17
+Hub_47,placed,0.6,Road,False,Port Heiden,Road,6000.0,5
+Hub_48,placed,0.4,Road,True,Saint Paul,"Barge, Road",26000.0,4
+Hub_49,placed,10.5,Road,False,,Barge,2000.0,1
+Hub_50,placed,2.7,Road,True,Aleknagik,Road,27000.0,5
+Hub_51,placed,1.2,Road,True,Saint Mary's,"Barge, Plane, Road",151500.0,7
+Hub_52,placed,0.7,Road,True,Talkeetna,Road,92000.0,6
+Hub_53,unplaced:beyond_cap,131.9,Road,False,Unalaska,Road,17100.0,7
+Hub_54,unplaced:beyond_cap,28.6,Road,False,Noorvik,Barge,316400.0,6
+Hub_55,placed,0.2,Road,False,Clark's Point,Barge,14000.0,6
+Hub_56,placed,0.1,Road,False,Hoonah,"Barge, Road",277100.0,10
+Hub_57,unplaced:beyond_cap,36.6,Road,False,Noatak,"Barge, Plane",145700.0,5
+Hub_58,placed,17.8,Road,True,Ketchikan,"Barge, Plane, Road",213267.0,17
+Hub_59,placed,0.3,Road,True,False Pass,"Barge, Road",301200.0,6
+Hub_60,placed,1.3,Road,True,,"Plane, Road",33000.0,3
+Hub_61,placed,0.8,IceRoad,True,,Road,4000.0,1
+Hub_62,placed,0.6,Road,False,Manokotak,Barge,59000.0,6
+Hub_63,placed,5.3,Road,True,,"Plane, Road",23000.0,3
+Hub_64,placed,2.7,Road,True,Valdez,"Barge, Plane, Road",192800.0,19
+Hub_65,placed,0.4,Road,True,Twin Hills,Barge,203200.0,5
+Hub_66,placed,15.9,Road,True,,Road,1000.0,1
+Hub_67,placed,20.0,Road,True,Livengood,"Plane, Road",26900.0,4
+Hub_68,placed,4.1,Road,True,,Plane,9000.0,1
+Hub_69,placed,2.8,Road,True,,Road,9000.0,1
+Hub_70,placed,0.8,Road,True,Togiak,"Barge, Plane",429000.0,6
+Hub_71,unplaced:beyond_cap,27.6,Road,False,,Plane,9000.0,1
+Hub_72,placed,23.7,Road,True,,Plane,9000.0,1
+Hub_73,unplaced:beyond_cap,34.7,Road,False,,Plane,9000.0,1
+Hub_74,unplaced:beyond_cap,44.2,Road,False,,Plane,9000.0,1
+Hub_75,placed,24.6,Road,True,,Plane,9000.0,1
+Hub_76,unplaced:beyond_cap,31.9,Road,False,,Plane,9000.0,1
+Hub_77,unplaced:beyond_cap,33.8,Road,False,,Plane,9000.0,1
+Hub_78,unplaced:beyond_cap,34.3,Road,False,,Plane,9000.0,1
+Hub_79,unplaced:beyond_cap,74.6,Road,False,,Plane,9000.0,1
+Hub_80,unplaced:beyond_cap,27.0,Road,False,,Plane,4500.0,1
+Hub_81,placed,16.5,Road,True,,Plane,4500.0,1
+Hub_82,unplaced:beyond_cap,60.7,Road,False,,Plane,9000.0,1
+Hub_83,unplaced:beyond_cap,35.4,Road,False,,Plane,9000.0,1
+Hub_84,placed,13.1,Road,True,Kiana,"Barge, Plane",298600.0,8
+Hub_85,placed,21.6,Road,False,,Barge,80000.0,1
+Hub_86,placed,8.0,Road,True,,Plane,9000.0,1
+Hub_87,unplaced:beyond_cap,68.6,Road,False,Unalakleet,"Barge, Plane, Road",688400.0,10
+Hub_88,placed,0.1,Road,True,Platinum,"Barge, Plane",11000.0,5
+Hub_89,placed,0.1,Road,True,Wasilla,Road,100000.0,6
+Hub_90,placed,0.3,Road,True,,Plane,20000.0,1
+Hub_91,placed,0.2,Road,True,Nikiski,Road,9500.0,1
+Hub_92,placed,0.1,Road,True,Ninilchik,Road,8800.0,3
+Hub_93,placed,1.7,Road,True,Chuathbaluk,"Barge, Road",39000.0,6
+Hub_94,placed,0.1,Road,True,Crooked Creek,Barge,67000.0,4
+Hub_95,placed,0.3,Road,True,Upper Kalskag,Barge,378000.0,3
+Hub_96,placed,0.0,Road,True,Sleetmute,Barge,52000.0,3
+Hub_97,placed,0.1,Road,True,Stony River,Barge,47000.0,4
+Hub_98,placed,0.0,Road,True,Denali National Park,Road,75200.0,1
+Hub_99,unplaced:beyond_cap,29.6,Road,False,Bettles Field,"Plane, Plane or Road, Road",34500.0,5
+Hub_100,placed,0.0,Road,True,Eagle,"Plane, Plane or Road, Road",67000.0,5
+Hub_101,placed,2.0,Road,False,Gustavus,"Barge, Road",20700.0,7
+Hub_102,unplaced:beyond_cap,41.2,Road,False,,Barge,47600.0,1
+Hub_103,placed,0.0,Road,True,Port Alsworth,"Plane, Road",28300.0,8
+Hub_104,placed,0.8,Road,True,Copper Center,Road,18100.0,1
+Hub_105,placed,0.0,Road,True,Kotzebue,"Barge, Road",285600.0,9
+Hub_106,placed,5.9,Road,True,Trapper Creek,Road,17000.0,2
+Hub_107,placed,0.3,Road,True,Anchor Point,Road,45100.0,2
+Hub_108,placed,0.1,Road,True,Bird Creek,Road,4000.0,1
+Hub_109,placed,0.4,Road,True,Soldotna,Road,124300.0,9
+Hub_110,placed,0.0,Road,True,Whittier,Road,224000.0,1
+Hub_111,placed,5.9,Road,True,Haines,"Plane, Road",66700.0,9
+Hub_112,placed,0.1,Road,True,Kasaan,Road,16000.0,4
+Hub_113,placed,0.0,Road,True,Chignik,Barge,201500.0,4
+Hub_114,placed,6.1,Road,True,Palmer,Road,58064.0,11
+Hub_115,placed,2.1,Road,False,Chignik Lagoon,Barge,103700.0,4
+Hub_116,placed,0.0,Road,False,Chignik Lake,Road,25100.0,2
+Hub_117,placed,0.1,Road,True,Egegik,"Barge, Road",94375.0,7
+Hub_118,placed,0.0,Road,True,Igiugig,Road,6000.0,2
+Hub_119,placed,19.7,Road,False,Ivanof Bay,Barge,20000.0,2
+Hub_120,placed,0.2,Road,False,Kokhanok,Road,47000.0,4
+Hub_121,placed,0.0,Road,True,Levelock,Road,12000.0,2
+Hub_122,placed,0.1,Road,True,Newhalen,Road,5000.0,3
+Hub_123,placed,0.0,Road,True,Nondalton,Plane,15400.0,4
+Hub_124,placed,0.0,Air+Road,True,Pedro Bay,"Plane, Road",85000.0,2
+Hub_125,placed,0.1,Road,True,Pelican,Plane,86000.0,3
+Hub_126,unplaced:beyond_cap,41.6,Road,False,Perryville,Barge,23400.0,3
+Hub_127,placed,0.1,Road,True,Pilot Point,Road,6000.0,2
+Hub_128,placed,0.0,Road,True,Shungnak,"Barge, Plane",119300.0,3
+Hub_129,placed,0.0,Road,True,Coffman Cove,Road,12000.0,5
+Hub_130,placed,0.8,Road,False,Edna Bay,Barge,34500.0,2
+Hub_131,placed,0.1,Road,True,Naukati Bay,Road,2000.0,1
+Hub_132,placed,0.1,Road,False,Angoon,"Barge, Road",63100.0,3
+Hub_133,placed,0.2,Road,True,Port Alexander,Barge,12000.0,3
+Hub_134,placed,17.3,IceRoad,True,Red Devil,Barge,18835.0,5
+Hub_135,unplaced:beyond_cap,54.0,Road,False,,Plane,4000.0,1
+Hub_136,placed,0.6,Road,True,Kake,"Barge, Plane, Road",253450.0,9
+Hub_137,placed,0.3,Road,True,Manley Hot Springs,Road,30000.0,4
+Hub_138,unplaced:beyond_cap,56.4,Road,False,Sand Point,"Barge, Road",56000.0,7
+Hub_139,placed,0.0,Road,True,Ambler,"Barge, Plane",60400.0,4
+Hub_140,placed,0.0,Road,True,Kivalina,"Barge, Plane",62100.0,5
+Hub_141,placed,0.0,Road,True,Kobuk,Barge,27500.0,2
+Hub_142,placed,0.1,Road,True,Klukwan,Road,3000.0,1
+Hub_143,unplaced:beyond_cap,29.0,Road,False,,Road,4000.0,1
+Hub_144,merged:Hub_61,18.9,IceRoad,True,Prudhoe Bay,"Plane, Road",158400.0,11
+Hub_145,placed,0.6,Road,True,Cantwell,Road,10000.0,4
+Hub_146,placed,4.9,Road,True,,Road,6000.0,2
+Hub_147,placed,7.2,Road,True,Selawik,"Barge, Plane, Road",186600.0,9
+Hub_148,placed,5.8,Waterway,True,Port Moller,Barge,330600.0,1
+Hub_149,placed,2.5,Road,True,Petersburg,"Plane, Road",30600.0,6
+Hub_150,placed,0.0,Road,True,Russian Mission,Barge,358200.0,5
+Hub_151,placed,1.9,IceRoad,True,,Road,5000.0,1
+Hub_152,placed,0.3,Road,True,Dot Lake,Road,10000.0,1
+Hub_153,placed,0.0,Road,True,Mentasta Lake,Road,10000.0,1
+Hub_154,placed,1.7,Road,True,Northway,Road,57000.0,5
+Hub_155,placed,0.1,Road,True,Tetlin,Road,13000.0,2
+Hub_156,placed,0.1,Road,True,Tok,Road,44700.0,5
+Hub_157,placed,4.4,Road,False,Akutan,"Barge, Road",141900.0,5
+Hub_158,unplaced:beyond_cap,37.9,Road,False,"King Cove, King Salmon",Road,6000.0,6
+Hub_159,placed,0.1,Road,True,Rampart,Plane,14000.0,3
+Hub_160,placed,0.2,Road,False,Ouzinkie,"Barge, Road",90500.0,5
+Hub_161,placed,0.1,Road,True,Kasilof,Road,15000.0,2
+Hub_162,placed,0.4,Road,True,Naknek,"Barge, Road",414620.0,11
+Hub_163,unplaced:beyond_cap,36.4,Road,False,,Road,6000.0,1
+Hub_164,placed,0.0,Road,True,Yakutat,Road,23000.0,2
+Hub_165,placed,12.4,Road,True,Moose Pass,Road,20000.0,1
+Hub_166,placed,0.4,Road,True,Saint George,Barge,142000.0,2
+Hub_167,placed,16.9,Road,True,,Road,6000.0,1
+Hub_168,placed,0.5,Road,True,Dillingham,"Barge, Road",37500.0,9
+Hub_169,placed,0.1,Road,True,Buckland,"Barge, Plane",107000.0,4
+Hub_170,placed,1.0,Road,True,Shaktoolik,Barge,110400.0,3
+Hub_171,placed,0.2,Waterway,True,Diomede,Barge,157900.0,1
+Hub_172,unplaced:beyond_cap,28.1,Road,False,Kipnuk,"Barge, Road",222000.0,5
+Hub_173,unplaced:beyond_cap,29.3,Road,False,,Road,6000.0,1
+Hub_174,placed,4.2,Road,True,Glennallen,"Plane, Road",254817.0,7
+Hub_175,placed,3.2,Road,True,Kenny Lake,Road,4000.0,1
+Hub_176,placed,21.1,Road,True,Slana,Road,23500.0,3
+Hub_177,unplaced:beyond_cap,34.5,Road,False,Stebbins,Barge,785000.0,8
+Hub_178,placed,0.3,Air+Road,True,Gambell,"Barge, Road",268500.0,7
+Hub_179,placed,24.6,Road,True,Saint Michael,"Barge, Road",190500.0,8
+Hub_180,placed,0.0,Road,True,Nulato,"Barge, Plane",237800.0,4
+Hub_181,placed,0.0,Road,True,Shishmaref,Barge,212100.0,6
+Hub_182,unplaced:beyond_cap,28.0,Road,False,,Plane,1000.0,1
+Hub_183,placed,13.6,Road,True,"Anchorage, Eielson Afb","Plane, Road",198575.0,8
+Hub_184,placed,9.4,Road,True,Kongiganak,"Barge, Road",128500.0,7
+Hub_185,placed,11.0,Road,True,Hooper Bay,"Barge, Road",762947.0,11
+Hub_186,placed,0.1,Road,True,Koyuk,"Barge, Road",204500.0,3
+Hub_187,placed,0.3,Road,True,Kwethluk,"Barge, Road",246500.0,6
+Hub_188,placed,0.1,Road,True,Mekoryuk,"Barge, Road",87500.0,6
+Hub_189,placed,14.8,Road,True,,Road,3000.0,5
+Hub_190,placed,0.1,Road,True,Quinhagak,Road,180600.0,6
+Hub_191,unplaced:beyond_cap,49.8,Road,False,,Plane,10000.0,1
+Hub_192,unplaced:beyond_cap,28.9,Road,False,Savoonga,"Plane, Road",222500.0,8
+Hub_193,unplaced:beyond_cap,30.8,Road,False,Wales,Barge,113200.0,4
+Hub_194,placed,0.0,Road,True,Brevig Mission,Barge,293000.0,5
+Hub_195,placed,0.4,Road,True,Teller,"Barge, Plane, Road",240400.0,11
+Hub_196,placed,0.0,Road,True,Golovin,Barge,407804.0,2
+Hub_197,placed,0.5,Road,True,Clear,Road,16000.0,1
+Hub_198,placed,0.2,Road,True,Larsen Bay,"Barge, Road",245000.0,3
+Hub_199,placed,0.2,Road,True,Barrow,Road,27700.0,5
+Hub_200,unplaced:beyond_cap,92.2,Road,False,Coldfoot,"Plane, Road",24500.0,3
+Hub_201,placed,3.6,IceRoad,True,,Road,20000.0,1
+Hub_202,placed,0.3,Road,True,Minto,"Plane, Road",84000.0,4
+Hub_203,placed,0.1,Road,True,,Road,20500.0,1
+Hub_204,placed,0.1,Road,True,,Road,5000.0,1
+Hub_205,placed,9.1,Road,True,,Road,11500.0,1
+Hub_206,placed,0.5,Road,True,Allakaket,Plane,81000.0,6
+Hub_207,placed,0.0,Road,True,Beaver,Plane,12350.0,2
+Hub_208,placed,0.1,Road,False,Birch Creek,Plane,1000.0,2
+Hub_209,placed,0.4,Road,True,Central,Plane,3260.0,1
+Hub_210,placed,0.0,Air+Road,True,Chalkyitsik,Plane,44900.0,5
+Hub_211,placed,0.1,Road,True,Seward,Road,97750.0,12
+Hub_212,placed,0.0,Road,True,Hughes,Plane,13000.0,3
+Hub_213,placed,9.1,Road,True,Kaltag,"Barge, Plane",241780.0,7
+Hub_214,unplaced:beyond_cap,49.4,Road,False,Koyukuk,"Barge, Plane",113000.0,4
+Hub_215,placed,0.3,Road,True,Huslia,"Barge, Road",291200.0,5
+Hub_216,placed,0.1,Road,True,Ruby,"Plane, Road",15000.0,5
+Hub_217,unplaced:beyond_cap,45.0,Road,False,Stevens Village,Plane,1000.0,3
+Hub_218,placed,0.1,Road,True,Tanana,"Barge, Plane, Road",261000.0,6
+Hub_219,placed,0.3,Road,True,Chitina,Road,7200.0,1
+Hub_220,unplaced:beyond_cap,29.9,Road,False,,Road,6000.0,1
+Hub_221,placed,0.4,Road,True,Gulkana,Road,4000.0,1
+Hub_222,placed,5.4,Road,True,Nelchina,Road,4500.0,1
+Hub_223,placed,1.0,Road,True,Paxson,"Plane, Road",24000.0,4
+Hub_224,placed,0.1,Road,True,Tazlina,Road,5500.0,1
+Hub_225,placed,3.8,Road,True,Chicken,Road,10000.0,2
+Hub_226,placed,15.2,Road,True,,Barge,2000.0,1
+Hub_227,placed,20.0,Road,True,,Road,6000.0,1
+Hub_228,placed,24.6,Road,True,,Road,10000.0,1
+Hub_229,placed,0.1,Road,True,Chugiak,Road,4000.0,1
+Hub_230,placed,0.1,Road,True,Girdwood,Road,7000.0,2
+Hub_231,placed,0.6,Road,True,Hope,Road,7000.0,1
+Hub_232,placed,0.2,Road,False,Chenega,Barge,41600.0,5
+Hub_233,placed,0.0,Road,True,Seldovia,"Barge, Road",360500.0,3
+Hub_234,placed,0.3,Road,True,Cooper Landing,Road,6000.0,1
+Hub_235,placed,0.4,Road,True,Crown Point,Road,8000.0,1
+Hub_236,placed,0.3,Road,True,,Road,6000.0,1
+Hub_237,placed,0.2,Road,True,Point Mackenzie,Road,1000.0,1
+Hub_238,placed,0.5,Road,True,Skwentna,Road,4000.0,1
+Hub_239,placed,0.1,Road,True,Willow,Road,6000.0,1
+Hub_240,placed,0.8,Road,True,Akiachak,"Barge, Road",402000.0,2
+Hub_241,placed,0.1,Road,True,Akiak,"Barge, Road",105800.0,6
+Hub_242,placed,0.4,IceRoad,True,Atmautluak,"Barge, Road",77000.0,3
+Hub_243,placed,18.6,Road,True,Chevak,"Barge, Road",132000.0,8
+Hub_244,placed,0.3,Road,True,Eek,"Plane, Road",28006.0,4
+Hub_245,placed,0.1,Road,True,Goodnews Bay,Road,93500.0,4
+Hub_246,placed,0.1,Road,True,Ekwok,Barge,3500.0,2
+Hub_247,placed,5.0,Road,True,Napakiak,Road,2100.0,5
+Hub_248,unplaced:beyond_cap,44.8,Road,False,Nightmute,Road,2000.0,7
+Hub_249,placed,0.6,Road,True,Nunapitchuk,"Barge, Road",69800.0,6
+Hub_250,placed,0.2,Road,True,Scammon Bay,"Barge, Road",408919.0,7
+Hub_251,unplaced:beyond_cap,50.4,Road,False,Toksook Bay,Road,380100.0,6
+Hub_252,placed,0.5,Road,True,Tuluksak,"Barge, Road",55937.0,4
+Hub_253,placed,15.3,Road,True,Tuntutuliak,Road,2000.0,4
+Hub_254,unplaced:beyond_cap,36.2,Road,False,Tununak,Road,2000.0,6
+Hub_255,placed,0.7,IceRoad,True,,Plane,152400.0,1
+Hub_256,placed,17.9,Road,True,Klawock,Road,13500.0,8
+Hub_257,placed,0.3,Road,True,Aniak,"Barge, Road",227500.0,12
+Hub_258,placed,0.1,Road,False,Atka,,2000.0,3
+Hub_259,placed,0.1,Road,True,Anaktuvuk Pass,Plane,4000.0,9
+Hub_260,placed,0.0,Road,False,Atqasuk,Road,5000.0,10
+Hub_261,placed,19.5,IceRoad,True,Kaktovik,Road,5000.0,14
+Hub_262,placed,2.4,IceRoad,True,Nuiqsut,Road,2500.0,15
+Hub_263,unplaced:beyond_cap,48.3,Road,False,Point Hope,Road,5000.0,8
+Hub_264,unplaced:beyond_cap,65.2,Road,False,Point Lay,Road,6000.0,9
+Hub_265,placed,4.4,Road,True,Fort Greely,Road,2000.0,1
+Hub_266,placed,0.8,Road,True,Akhiok,"Barge, Road",42200.0,2
+Hub_267,placed,0.2,Road,True,Chiniak,Road,3000.0,1
+Hub_268,placed,0.2,Road,True,Karluk,"Barge, Road",58000.0,3
+Hub_269,placed,0.2,Road,True,Port Lions,"Barge, Road",98000.0,4
+Hub_270,unplaced:beyond_cap,49.8,Road,False,,Plane,3000.0,1
+Hub_271,placed,0.5,Road,False,Nelson Lagoon,Barge,201000.0,3
+Hub_272,placed,0.2,Road,True,Birchwood,Road,1000.0,1
+Hub_273,placed,23.7,Road,False,,Road,18000.0,1
+Hub_274,placed,0.2,Road,True,Portage,Road,3000.0,1
+Hub_275,placed,16.4,Road,True,,Road,10000.0,1
+Hub_276,placed,1.1,Road,True,Craig,Road,37000.0,10
+Hub_277,placed,0.1,Road,True,Eagle River,Road,37700.0,5
+Hub_278,placed,0.4,Road,True,Fort Richardson,Road,1000.0,1
+Hub_279,placed,12.1,Road,True,White Mountain,Barge,53000.0,5
+Hub_280,placed,3.8,IceRoad,True,,Road,3000.0,1
+Hub_281,unplaced:beyond_cap,38.3,Road,False,Chistochina,Road,3000.0,1
+Hub_282,placed,4.1,Road,True,,Plane,6000.0,1
+Hub_283,unplaced:beyond_cap,56.4,Road,False,,Plane,6000.0,1
+Hub_284,unplaced:beyond_cap,60.4,Road,False,,Plane,61000.0,1
+Hub_285,placed,20.1,Road,True,,Plane,6000.0,1
+Hub_286,placed,0.9,Road,True,Hollis,Road,3000.0,1
+Hub_287,placed,0.1,Road,True,Hydaburg,Road,11000.0,4
+Hub_288,placed,0.3,Road,True,Naukati Bay,Road,4000.0,1
+Hub_289,placed,2.7,Road,True,,Plane,4000.0,1
+Hub_290,placed,0.0,Road,True,Thorne Bay,Road,4000.0,5
+Hub_291,placed,10.8,Road,True,,Plane,5000.0,1
+Hub_292,placed,0.1,Road,True,Whale Pass,Road,10000.0,1
+Hub_293,placed,6.0,IceRoad,True,Lower Kalskag,Barge,33000.0,4
+Hub_294,placed,0.3,Road,True,Houston,Road,30000.0,1
+Hub_295,placed,0.1,Road,True,Kotlik,Barge,207000.0,4
+Hub_296,placed,0.1,Road,True,Fritz Creek,Road,12000.0,1
+Hub_297,placed,0.4,Road,True,Alakanuk,Barge,129000.0,3
+Hub_298,placed,0.0,Road,True,Marshall,Barge,234900.0,3
+Hub_299,placed,0.1,Road,True,Mountain Village,Barge,698550.0,4
+Hub_300,placed,0.5,Road,True,Nunam Iqua,Barge,262000.0,3
+Hub_301,placed,0.1,Road,True,Pilot Station,Barge,254000.0,5
+Hub_302,placed,0.2,Road,True,,Plane,5000.0,1
+Hub_303,placed,0.1,Road,True,Tyonek,Road,1000.0,1
+Hub_304,placed,16.4,Road,True,Kwigillingok,Barge,224900.0,3
+Hub_305,placed,0.1,Road,True,Napaskiak,"Barge, Road",79800.0,3
+Hub_306,placed,9.6,Road,True,,Barge,155110.0,1
+Hub_307,placed,10.9,Road,True,Gakona,Road,37000.0,2
+Hub_308,placed,0.6,Waterway,True,Elfin Cove,Plane,4004.0,2
+Hub_309,placed,12.7,Road,False,,"Barge, Road",218520.0,2
+Hub_310,unplaced:beyond_cap,39.0,IceRoad,False,,Plane,5000.0,1
+Hub_311,unplaced:beyond_cap,43.0,Road,False,,Plane,5000.0,1
+Hub_312,unplaced:beyond_cap,55.2,Road,False,,Plane,11831.0,1
+Hub_313,unplaced:beyond_cap,44.7,Road,False,,Road,5204.0,1
+Hub_314,placed,19.2,Road,True,,Plane,49000.0,1
+Hub_315,placed,0.0,Road,True,Arctic Village,Plane,20000.0,4
+Hub_316,placed,0.1,Road,True,Old Harbor,,39300.0,2
+Hub_317,placed,0.1,Road,True,Tatitlek,Barge,10000.0,3
+Hub_318,placed,1.0,Road,True,Anderson,Road,6500.0,2
+Hub_319,placed,1.1,Road,True,Deering,Barge,96000.0,2
+Hub_320,placed,0.0,Air+Road,True,,,0.0,3
+Hub_321,placed,0.1,Road,True,,,0.0,1
+Hub_322,placed,0.2,Road,True,,,0.0,15
+Hub_323,placed,0.0,Road,True,,,0.0,3
+Hub_324,placed,0.0,Road,True,,,0.0,1
+Hub_325,placed,0.1,Road,True,,,0.0,5
+Hub_326,placed,0.6,Road,True,,,0.0,5
+Hub_327,placed,0.2,Road,True,,,0.0,4
+Hub_328,placed,0.0,Road,True,,,0.0,4
+Hub_329,placed,5.6,Road,True,,,0.0,1
+Hub_330,merged:Hub_329,2.1,Road,True,,,0.0,1
+Hub_331,unplaced:beyond_cap,57.3,Road,False,,,0.0,5
+Hub_332,placed,0.0,Road,True,,,0.0,2
+Hub_333,merged:Hub_293,5.5,IceRoad,True,,,0.0,5
+Hub_334,placed,0.0,Road,True,,,0.0,1
