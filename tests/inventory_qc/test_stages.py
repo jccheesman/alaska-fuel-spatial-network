@@ -121,7 +121,10 @@ def test_coordinate_sync_and_source(pipeline):
     located = clean["latitude"].notna() & clean["longitude"].notna()
     assert (clean.loc[~located, "coordinate_source"].fillna("") == "").all()
     corrected = clean[clean["coordinate_source"] == "owner_correction"]
-    assert len(corrected) == 8
+    # expected set derives from the register: approved lat/lon rows on records still published
+    reg = qc.corrections()
+    expect = set(reg[(reg["status"] == "approved") & reg["field"].isin(["latitude", "longitude"])]["record_id"])
+    assert set(corrected["record_id"]) == expect & set(clean["record_id"])
     to_map = Transformer.from_crs(4326, 3338, always_xy=True)
     for r in corrected.itertuples():
         x, y = to_map.transform(float(r.longitude), float(r.latitude))
@@ -129,7 +132,7 @@ def test_coordinate_sync_and_source(pipeline):
     log = pipeline["log"]
     sync = log[log["outcome"] == "applied-sync"]
     kept = log[log["outcome"] == "publisher-corroborates"]
-    assert len(sync) == 12 and set(sync["field"]) == {"map_x", "map_y"}
+    assert len(sync) == 2 * (len(corrected) - len(kept)) and set(sync["field"]) == {"map_x", "map_y"}
     assert len(kept) == 2, "Kodiak and Coldfoot: the map point was the correction's evidence"
     assert set(sync["record_id"]) | set(kept["record_id"]) == set(corrected["record_id"])
     assert sync["new_value"].ne(sync["old_value"]).all(), "a no-op sync would hide a stale guard"

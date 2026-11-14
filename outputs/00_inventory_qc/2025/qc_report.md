@@ -1,37 +1,37 @@
 # Inventory QC report — release 2025
 
-Generated 2026-11-14T22:14:47+00:00 by workflows/00_inventory_qc/07_publish.py
+Generated 2026-11-14T22:42:41+00:00 by workflows/00_inventory_qc/07_publish.py
 
 - raw release: `Utilities_Bulk_Fuel_Inventory.csv` sha256 `3fbee569c63dccf813d6fa53e608820d53b92e415feb2c7f20556fc0bb0c30b0` (1830 rows, 1767 located)
-- clean table: `facilities_clean.csv` sha256 `32fdc34a3b693127ff08c6c41e18f9abc5f219989c9c41276d717254d682080b` (1803 rows, 1740 located)
-- excluded: 27 (see `excluded.csv`)
-- corrections: 80 applied · 9 pending · 11 rejected · 0 skipped
+- clean table: `facilities_clean.csv` sha256 `9d0a6e43979a40f6f5036d0182062403b760dacfcc3a06a2403deb880f5e163b` (1802 rows, 1739 located)
+- excluded: 28 (see `excluded.csv`)
+- corrections: 91 applied · 9 pending · 11 rejected · 0 skipped
 - community keys: 272 · unlabelled records: 97
-- capacity_status: 1716 ok · 75 missing · 12 mismatch; placeholder inspection dates published blank: 9
-- qc_status: 1768 clean · 35 pending_review (withheld from hubs by the build)
-- facility_id: 1740 located records with an id (1160 AEA, 583 synthetic from the ledger); AEA regions: 1739 inside · 1 nearest · 0 outside
+- capacity_status: 1715 ok · 75 missing · 12 mismatch; placeholder inspection dates published blank: 9
+- qc_status: 1778 clean · 24 pending_review (withheld from hubs by the build)
+- facility_id: 1739 located records with an id (1160 AEA, 582 synthetic from the ledger); AEA regions: 1738 inside · 1 nearest · 0 outside
 
 ## Checks
 
 | check | result | detail |
 |---|---|---|
 | no undeclared derived column was produced by a stage | PASS | undeclared=[] (declare it in inputs/inventory_qc/derived_columns.csv) |
-| row reconciliation | PASS | 1830 release = 1803 clean + 27 excluded |
-| every exclusion has a reason | PASS | 27 excluded |
-| every applied correction has reviewer + date | PASS | 80 applied |
+| row reconciliation | PASS | 1830 release = 1802 clean + 28 excluded |
+| every exclusion has a reason | PASS | 28 excluded |
+| every applied correction has reviewer + date | PASS | 91 applied |
 | only schema + derived columns; no contact columns | PASS | extra=[] contact=[] |
 | every declared derived column is present (derived_columns.csv) | PASS | missing=[] |
 | every located record has a facility_id | PASS | missing=0 |
 | facility_id is unique across located records | PASS | shared=[] |
 | facility_id never differs from the ledger (facility_ids.csv) | PASS | moved=[] |
-| every located record has an AEA region or an explicit 'outside' relation | PASS | inside=1739 nearest=1 outside=0 |
+| every located record has an AEA region or an explicit 'outside' relation | PASS | inside=1738 nearest=1 outside=0 |
 | fixture: Bethel record f000283 is not above 66°N | PASS |  |
 | fixture: no Unalaska-labelled record sits on Norton Sound (lat > 60) | PASS |  |
 | fixture: no Unalakleet-labelled record sits in the Aleutians (lat < 60) | PASS |  |
 | fixture: no Kodiak-labelled record is in the open Pacific (lat < 56) | PASS |  |
 | fixture: no Coldfoot-labelled record is in Yukon, Canada (lon > -141) | PASS |  |
 | fixture: spelling variants resolved (no 'Saint Marys', 'Clarks Point', 'Dutch Harbor' labels) | PASS |  |
-| deterministic output | PASS | 32fdc34a3b69 |
+| deterministic output | PASS | 9d0a6e43979a |
 
 ## Corrections applied
 
@@ -117,3 +117,14 @@ Generated 2026-11-14T22:14:47+00:00 by workflows/00_inventory_qc/07_publish.py
 | `{4533136B-B178-4EEB-8F4E-1BBF21C03ABE}` | exclude | tank_farm_id=621 | true | JC | 2026-10-08 |
 | `{3758A00D-FA89-45EA-85FB-DE30F19E5DBC}` | exclude | tank_farm_id=706 | true | JC | 2026-10-08 |
 | `{83F3B425-DC65-4A0B-94B5-14D3D08E5901}` | exclude | tank_farm_id=830 | true | JC | 2026-10-08 |
+| `{878BC716-270E-4C3D-A08A-4C69C561E231}` | community_name | Kalskag | Upper Kalskag | JC | 2026-11-14 |
+| `{AEE8ACD5-5A8B-4579-B55C-5FDE743EBC66}` | community_name | St. George | Saint George | JC | 2026-11-14 |
+| `{F3E0DE08-0FD6-4919-BEE4-F765A692A71A}` | community_name | St. George | Saint George | JC | 2026-11-14 |
+| `{3DD9A650-CE44-4918-B034-D82AF417BEF1}` | community_name | St. Mary's | Saint Mary's | JC | 2026-11-14 |
+| `{31BBFA6C-90AD-4ACF-B8A0-A25868373F07}` | community_name | St. Paul | Saint Paul | JC | 2026-11-14 |
+| `{F82686D1-FA4A-47B8-84CD-E00DB30C843C}` | community_name | St. Paul | Saint Paul | JC | 2026-11-14 |
+| `{FA1F5BF7-9E47-47F2-97D1-CC25786A50B2}` | community_name | St. Paul | Saint Paul | JC | 2026-11-14 |
+| `{7DAF9711-C096-4FF4-9D11-1669A43A122B}` | exclude | tank_farm_id=173 | true | JC | 2026-11-14 |
+| `{32574618-B703-4A8E-85F9-35EC4E4EA4A9}` | longitude | -157.053889 | -157.553900 | JC | 2026-11-14 |
+| `{F0FFCC8F-A5B7-4ADC-8C28-C7FC319FCDDB}` | latitude | 66.564199 | 64.733565 | JC | 2026-11-14 |
+| `{F0FFCC8F-A5B7-4ADC-8C28-C7FC319FCDDB}` | longitude | -145.2576394 | -156.927471 | JC | 2026-11-14 |

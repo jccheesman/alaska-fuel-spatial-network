@@ -332,7 +332,7 @@ record_id,outcome,own_boundary_km,located_in_place,community_relation
 {31748366-F5A6-4B80-A966-0BEA4B94E1F7},match,0.0,Wales,inside
 {31AA9173-FC92-45FC-BE99-7FE4ACDC88A9},match,0.0,Fairbanks,inside
 {31AFC5F9-52E9-4580-9502-B9A75D6096CC},match,0.0,Larsen Bay,inside
-{32574618-B703-4A8E-85F9-35EC4E4EA4A9},mismatch,27.57,Ugashik,elsewhere
+{32574618-B703-4A8E-85F9-35EC4E4EA4A9},match,0.0,Pilot Point,inside
 {32598407-07A8-463F-A3C6-E55AC9BC9DDD},match,0.0,Crown Point,inside
 {3282A734-D7C0-4BDC-988C-4806E34D3B0F},match,0.23,Kalifornsky,inside
 {32A205AC-8EDE-4217-924B-F980C9601A08},untested,,,untested
@@ -806,7 +806,6 @@ record_id,outcome,own_boundary_km,located_in_place,community_relation
 {7D5A8BD8-2EC3-4F0D-B29C-8A0C58165A4B},match,0.0,Koliganek,inside
 {7D8DADC6-63EA-4BF0-A33B-AF25CB5B3CBF},match,0.0,Nelson Lagoon,inside
 {7D987B23-D133-42DE-B929-973C9C816886},match,0.0,Unalaska,inside
-{7DAF9711-C096-4FF4-9D11-1669A43A122B},match,0.0,Galena,inside
 {7DDAB030-F316-43A2-8F5A-E3D3249A6C49},match,0.0,Atqasuk,inside
 {7DEE60DC-CB05-47C2-A254-58789C9467D2},match,0.0,Ekwok,inside
 {7E0F11B3-4341-4BBB-BAD4-E3A3F00A110A},match,0.0,Marshall,inside
@@ -1640,7 +1639,7 @@ record_id,outcome,own_boundary_km,located_in_place,community_relation
 {F0DAA8B9-C1E9-4BD4-95C4-640F84ECCF64},match,0.0,Akutan,inside
 {F0DC7758-EFFA-4B91-84B0-2C2C02EBA419},match,0.0,Beaver,inside
 {F0E3811E-BDAC-4B95-A047-6232801A109E},match,0.0,Homer,inside
-{F0FFCC8F-A5B7-4ADC-8C28-C7FC319FCDDB},mismatch,564.71,Fort Yukon,elsewhere
+{F0FFCC8F-A5B7-4ADC-8C28-C7FC319FCDDB},match,0.0,Galena,inside
 {F1134CBD-470B-4F6C-9283-B5D4F61D0DF3},match,0.1,,inside
 {F121AA8F-FCE6-469A-AD26-98BD7D63BAEA},match,0.0,Noorvik,inside
 {F12EDD5E-D488-4E3E-9514-878127D92029},match,0.0,Aleknagik,inside

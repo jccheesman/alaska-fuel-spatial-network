@@ -118,7 +118,6 @@ record_id,community_name,outcome,priority,inside_boundary_of,own_boundary_km,lat
 {2B48564F-DF5A-4814-B2B3-21E3157048CA},Fairbanks,mismatch,review,Nome,838.67,64.51252,-165.4303,correction:pending,
 {9D56DBE7-1A09-4398-8622-73AF3113418C},Fairbanks,mismatch,review,Nome,838.67,64.51252,-165.4303,correction:pending,
 {E7B9AC7C-E3C6-4313-A350-5414BFE26A53},Noatak,mismatch,review,Marshall,630.48,61.87844406,-162.084732,,
-{F0FFCC8F-A5B7-4ADC-8C28-C7FC319FCDDB},Galena,mismatch,review,Fort Yukon,564.71,66.564199,-145.2576394,,
 {C9AFF599-4CD8-41B4-97E2-04CEFD79683A},Holy Cross,mismatch,review,Ambler,549.44,67.08767141,-157.8567222,,
 {39943186-EB34-4A7C-B510-E1F60F6E5B77},Iliamna,mismatch,review,Iliamna,543.34,59.75552294,-154.9021745,correction:approved,
 {BACAEA02-40B4-467A-B3B9-39C3197CF50D},King Salmon,mismatch,review,King Salmon,520.88,58.683749,-156.672126,correction:approved,
@@ -148,5 +147,4 @@ record_id,community_name,outcome,priority,inside_boundary_of,own_boundary_km,lat
 {E2EBBB67-58E8-4EED-B69B-A03B77169EB6},Wasilla,mismatch,review,Point MacKenzie,32.93,61.360181,-150.012503,,
 {65DFB897-7E85-4456-850D-913C7D010004},Wasilla,mismatch,review,Point MacKenzie,31.89,61.41665,-150.079139,,
 {E8C7FE98-2833-47DB-A566-8D25750D48D2},Kwethluk,mismatch,review,Kwethluk,30.63,60.8107704,-161.4225578,correction:approved,
-{32574618-B703-4A8E-85F9-35EC4E4EA4A9},Pilot Point,mismatch,review,Ugashik,27.57,57.578333,-157.053889,,
 {BA4EE9C3-1152-401B-9F6A-8BEA6C9A7894},Delta Junction,mismatch,review,Deltana,22.36,63.909763,-145.27708,,

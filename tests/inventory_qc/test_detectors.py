@@ -53,7 +53,7 @@ def test_guarded_exclusion_retires_when_farm_id_changes(run):
     """An exclude row with old_value 'tank_farm_id=N' is skipped (not applied) once upstream changes N."""
     corr = qc.corrections()
     ex = corr[(corr["field"] == "exclude") & corr["old_value"].str.startswith("tank_farm_id=")]
-    assert len(ex) == 27
+    assert len(ex) == 28   # 27 stack-rule copies (2026-10-08) + the Galena school duplicate (2026-11-14)
     fac = qc.read_release(LABEL).set_index("record_id")
     assert all(str(fac.at[r.record_id, "tank_farm_id"]) == r.old_value.split("=")[1] for r in ex.itertuples())
 
