@@ -39,6 +39,7 @@ out_prefix <- file.path(normalizePath(dirname(out_prefix), mustWork = FALSE), ba
 
 # Source ONLY the self-contained library (same dir as this script). No Alaska project, no cache.
 this <- sub("^--file=", "", commandArgs(FALSE)[grepl("^--file=", commandArgs(FALSE))])
+this <- gsub("~+~", " ", this, fixed = TRUE)   # Rscript encodes spaces in --file= as ~+~ (a path like ".../DOE Project/..." otherwise breaks)
 sys.source(file.path(dirname(this), "lib.R"), envir = globalenv())
 
 # --- Read the file contract --------------------------------------------------
