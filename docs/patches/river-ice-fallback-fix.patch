@@ -1,0 +1,222 @@
+--- a/source_scripts/friction_surface/friction_config.py
++++ b/source_scripts/friction_surface/friction_config.py
+@@ -344,23 +344,40 @@
+ # across watersheds. Both are load-bearing and they guard different failures.
+ RIVER_ICE_FILL_MAX_KM = 25.0
+ 
+-# Beyond the cap, p_ice is the MEDIAN OF COVERED CELLS IN THE SAME LATITUDE
+-# BAND rather than a borrowed neighbour or a bare zero.
++# Beyond the cap, p_ice is the MEDIAN OF THE K NEAREST COVERED CELLS.
+ #
+ # Zero was rejected: it means "never freezes", and the uncovered cells are
+-# regionally clustered rather than scattered — Egegik, Naknek and Ugashik are
+-# 100% uncovered and Nushagak 50% — so zero would open all of Bristol Bay to
+-# February barge traffic and manufacture cheap winter deliveries to exactly
+-# the high-cost communities this model exists to study.
++# regionally clustered rather than scattered — Egegik, Naknek and Ugashik have
++# no coverage at all — so zero would open all of Bristol Bay to February barge
++# traffic and manufacture cheap winter deliveries to exactly the high-cost
++# communities this model exists to study.
+ #
+-# A blanket seasonal window was rejected for the reason extend_ice_nearest
+-# already gives: it loses the north-south freeze gradient. A latitude-band
+-# median keeps that gradient — the same Brown product read as a regional
+-# climatology instead of a point lookup — while replacing an unbounded
+-# spatial reach with a bounded statistical one. +/-0.75 deg is ~165 km of
+-# northing: wide enough that every band has covered cells in it, narrow
+-# enough to preserve the freeze-date gradient across Alaska.
+-RIVER_ICE_BAND_HALF_DEG = 0.75
++# A LATITUDE BAND was tried first and FAILED in the field. The reasoning was
++# that Alaska's freeze gradient is north-south, so a +/-0.75 deg band would
++# preserve it. It is not: the maritime/continental gradient is at least as
++# strong. Measured against the real flowlines, Egegik's band (57.35-58.85N)
++# contained only Taku (1,339 km east), the mislabelled "Porcupine" polygon in
++# Chatham Strait (1,182 km) and Stikine (1,431 km) — every one a Southeast
++# Alaska rainforest river — because Kvichak (58.88N) and Nushagak (59.0N) sit
++# just above the band ceiling. Ugashik was worse: Stikine and "Porcupine"
++# only. The build that resulted had Egegik navigable in January, November and
++# December and Ugashik navigable in January and November.
++#
++# The irony is instructive: a fallback introduced to stop 227 km borrowing
++# reached 1,400 km instead. It merely did so as a median rather than a copy.
++#
++# K-nearest is bounded by geography on BOTH axes with no band to fall out of.
++# Verified source selection on the same data: Egegik now draws 100% from
++# Nushagak/Kvichak (median neighbour 89 km, same Bristol Bay regime), Ugashik
++# 100% from Nushagak/Kvichak (149 km), Naknek 100% from Kvichak (29 km), and
++# "Dahl Creek" 85% from Buckland River (228 km — the nearest real watercourse
++# to Port Clarence, and the right regime).
++#
++# K = 200 covered cells is ~4.5 km2 of river surface: large enough that one
++# anomalous reach cannot swing the median, small enough to stay inside one
++# drainage in every case measured. It is a statistical reach, not a spatial
++# one — that is the whole point of the tier.
++RIVER_ICE_FALLBACK_K = 200
+ 
+ # ---------------------------------------------------------------------------
+ # Hard seasonal windows
+--- a/source_scripts/friction_surface/friction_surface.py
++++ b/source_scripts/friction_surface/friction_surface.py
+@@ -63,7 +63,7 @@
+     MODES,
+     PERMAFROST_ZONE_BREAKS,
+     PERMAFROST_ZONE_MULTIPLIERS,
+-    RIVER_ICE_BAND_HALF_DEG,
++    RIVER_ICE_FALLBACK_K,
+     RIVER_ICE_FILL_MAX_KM,
+     RIVER_ICE_THRESHOLD,
+     ROAD_FRICTION,
+@@ -350,81 +350,49 @@
+     return arr
+ 
+ 
+-def _cell_latitude(
+-    rows: np.ndarray,
+-    cols: np.ndarray,
+-    transform,
+-    crs,
+-) -> np.ndarray:
+-    """WGS84 latitude of the given grid cells' centres.
+-
+-    Computed for listed cells only. A full-grid latitude array would be
+-    28,001 x 16,567 float32 = 1.85 GB; the callers need a few hundred
+-    thousand cells at most.
+-    """
+-    import pyproj  # local import: only the band fallback needs it
+-
+-    x = transform.c + (cols + 0.5) * transform.a
+-    y = transform.f + (rows + 0.5) * transform.e
+-    to_wgs = pyproj.Transformer.from_crs(crs, "EPSG:4326", always_xy=True)
+-    return to_wgs.transform(x, y)[1]
+-
+-
+-def fill_by_latitude_band(
++def fill_by_nearest_median(
+     ice: np.ndarray,
+     coverage: np.ndarray,
+     target_mask: np.ndarray,
+-    transform,
+-    crs,
+-    half_deg: float = RIVER_ICE_BAND_HALF_DEG,
+-    bin_deg: float = 0.05,
++    k: int = RIVER_ICE_FALLBACK_K,
+ ) -> np.ndarray:
+-    """Give unfillable river cells the median p_ice of their latitude band.
++    """Give unfillable river cells the median p_ice of their k nearest neighbours.
+ 
+     Third and last tier of the river-ice gate, for cells the IDW does not
+     cover AND that have no covered cell within RIVER_ICE_FILL_MAX_KM. Those
+     are regionally clustered — Egegik, Naknek and Ugashik have no coverage at
+     all — so leaving them at p_ice = 0 would open the whole of Bristol Bay in
+-    midwinter. Borrowing from the nearest covered cell is worse still: it
+-    reaches 90-227 km into another watershed, which is what the cap exists to
+-    forbid.
+-
+-    The band median is the same Brown product read as a regional climatology.
+-    It preserves the north-south freeze gradient that a blanket seasonal
+-    window would flatten, while the reach is statistical and bounded instead
+-    of spatial and unbounded.
+-
+-    Targets are binned to `bin_deg` before the median so the cost is one
+-    median per occupied bin (a few hundred) rather than one per cell.
+-    Cells whose band contains no covered cell keep their existing value.
++    midwinter, and borrowing the single nearest covered cell is what the cap
++    exists to forbid.
++
++    A k-nearest MEDIAN keeps the reach statistical rather than pointwise while
++    letting geography bound it on both axes. An earlier version of this
++    function used a latitude band instead and shipped a real defect: Egegik's
++    band contained only Taku, Stikine and the mislabelled "Porcupine" polygon
++    — all Southeast Alaska rainforest rivers 1,200-1,400 km east — because
++    Kvichak and Nushagak sit just above its ceiling. Egegik came out navigable
++    in January. Alaska's freeze gradient is not north-south enough for a band
++    to be safe. See RIVER_ICE_FALLBACK_K.
++
++    Cells keep their existing value if there is no coverage at all.
+     """
+     if not target_mask.any() or not coverage.any():
+         return ice
++    from scipy.spatial import cKDTree  # local import; scipy only needed here
+ 
+-    src_rows, src_cols = np.nonzero(coverage)
+-    src_lat = _cell_latitude(src_rows, src_cols, transform, crs)
+-    src_val = ice[src_rows, src_cols]
+-    order = np.argsort(src_lat, kind="stable")
+-    src_lat, src_val = src_lat[order], src_val[order]
+-
+-    tgt_rows, tgt_cols = np.nonzero(target_mask)
+-    tgt_lat = _cell_latitude(tgt_rows, tgt_cols, transform, crs)
+-
++    src_rc = np.argwhere(coverage)
++    src_val = ice[coverage]
++    kk = int(min(k, len(src_rc)))
++    tgt_rc = np.argwhere(target_mask)
++    _, idx = cKDTree(src_rc).query(tgt_rc, k=kk, workers=-1)
++    if kk == 1:
++        idx = idx[:, None]
+     out = ice.copy()
+-    keys = np.round(tgt_lat / bin_deg).astype(np.int64)
+-    for key in np.unique(keys):
+-        centre = key * bin_deg
+-        lo = np.searchsorted(src_lat, centre - half_deg, side="left")
+-        hi = np.searchsorted(src_lat, centre + half_deg, side="right")
+-        if hi <= lo:
+-            logger.warning(
+-                "latitude band %.2f+/-%.2f deg has no IDW-covered cell; "
+-                "%d river cell(s) keep p_ice=0 and will read as never frozen",
+-                centre, half_deg, int((keys == key).sum()),
+-            )
+-            continue
+-        sel = keys == key
+-        out[tgt_rows[sel], tgt_cols[sel]] = np.median(src_val[lo:hi])
++    out[tgt_rc[:, 0], tgt_rc[:, 1]] = np.median(src_val[idx], axis=1)
++    logger.info(
++        "river-ice fallback: %d cell(s) set to the median of their %d "
++        "nearest covered cells", len(tgt_rc), kk,
++    )
+     return out
+ 
+ 
+@@ -471,7 +439,7 @@
+ 
+     Returns (filled_ice, unfilled_mask). unfilled_mask marks target cells
+     with no covered cell inside the bound — the caller is expected to hand
+-    them to fill_by_latitude_band rather than leave them at zero, which would
++    them to fill_by_nearest_median rather than leave them at zero, which would
+     read as "never freezes".
+     """
+     from scipy.spatial import cKDTree  # local import; scipy only needed here
+@@ -502,7 +470,7 @@
+             logger.info(
+                 "river-ice nearest-fill map: %d covered cells -> %d target "
+                 "cells; %d filled within %.0f km, %d beyond the cap "
+-                "(handed to the latitude-band fallback)",
++                "(handed to the k-nearest-median fallback)",
+                 len(src_rc), len(tgt_rc), filled,
+                 bound * 0.15 if np.isfinite(bound) else float("inf"),
+                 len(tgt_rc) - filled,
+@@ -888,7 +856,7 @@
+             #   1. IDW value where the Brown product covers the cell.
+             #   2. nearest covered cell, but only within RIVER_ICE_FILL_MAX_KM
+             #      — tributaries freeze with their trunk stream.
+-            #   3. latitude-band median for what is left, so regionally
++            #   3. k-nearest median for what is left, so regionally
+             #      uncovered rivers (all of Bristol Bay) are not silently
+             #      read as never freezing.
+             river_ice, beyond_cap = extend_ice_nearest(
+@@ -896,13 +864,12 @@
+                 max_distance_px=fill_max_px,
+             )
+             if beyond_cap.any():
+-                river_ice = fill_by_latitude_band(
++                river_ice = fill_by_nearest_median(
+                     river_ice, river_ice_cov, beyond_cap,
+-                    profile["transform"], profile["crs"],
+                 )
+             logger.info(
+                 "month %02d river ice: %d IDW / %d nearest-filled / %d "
+-                "latitude-band",
++                "k-nearest-median",
+                 month,
+                 int((river_domain & river_ice_cov).sum()),
+                 int((river_domain & ~river_ice_cov).sum()) - int(beyond_cap.sum()),

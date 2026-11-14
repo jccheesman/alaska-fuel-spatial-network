@@ -108,3 +108,5 @@ python workflows/01_friction_build/00_preflight_inputs.py
 - `../README.md` — the friction surface itself: what consumes these rasters and how
 - `../../../docs/DATA_CONTRACTS.md` §1 — the canonical grid
 - `../../../.claude/skills/align-to-ak-stack/` — snapping any other raster onto the grid
+- `../../../docs/TEST_LOG.md` (2026-08-20) — the marine clip `build_brown_polygon_mask.py`
+  applies (four estuarine `ftype 364` polygons dropped) and why flowlines-only was rejected

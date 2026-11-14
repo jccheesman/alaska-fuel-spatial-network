@@ -204,3 +204,224 @@ zip sha256s unchanged against the CI pins).
   child script's nondeterministic dict-print ordering. **Windows/macOS proof
   is the first CI matrix run on the new remote** — if a lane fails, fix
   forward; do not delete the matrix.
+
+## 2026-08-20 — river-ice marine leak: diagnosis, fix, verification
+
+A defect found by inspecting winter routes, not by a failing test: **in
+February, 0 of 501,684 waterway cells statewide were navigable** — the Gulf of
+Alaska, the Inside Passage and Kodiak included, against year-round
+twice-weekly commercial barge service on those exact routes.
+
+### Root cause
+
+`friction_surface.extend_ice_nearest` filled river ice onto uncovered cells
+from the nearest covered cell with **no distance bound and no river/marine
+distinction**, targeting the whole waterway corridor. In winter every covered
+cell is frozen, so the entire marine network inherited a frozen p_ice. A
+second, independent path existed in the product itself: four NHDArea
+`ftype 364` Lake/Pond polygons put 396 marine cells inside the river-ice
+domain, so `river_ice_MM.tif` carried real interpolated values over Dry
+Strait, Kuskokwim Bay, Knik Arm and Chatham Strait.
+
+Evidence that isolated it: off-network open water beside the blocked network
+cells was navigable in the same month, so sea ice could not be the cause.
+February probes — open Gulf 100% open, but 0 of 714 network cells off Seward,
+0 of 951 at Ketchikan, 0 of 321 in the Inside Passage.
+
+### Fix — three tiers, both barriers load-bearing
+
+| tier | source | cells | share |
+|---|---|---|---|
+| 1 | Brown IDW value | 77,657 | 89.5% |
+| 2 | nearest covered cell within `RIVER_ICE_FILL_MAX_KM` = 25 km | 4,734 | 5.5% |
+| 3 | median of the `RIVER_ICE_FALLBACK_K` = 200 nearest covered cells | 4,398 | 5.1% |
+
+River ice is clipped to `waterway_river_mask_150m.tif` (24 reviewed NWN
+segments, 86,789 cells, 17.3% of the corridor) in BOTH the fill target and
+the gate. The gate clip is not redundant: it is what catches the 396 marine
+cells contaminated at source.
+
+The 25 km cap exists because the unbounded fill was two behaviours wearing one
+name — Yukon cells borrowed from 1.5 km away (interpolation), Ugashik from
+149.6 km and "Dahl Creek" from 227.5 km (fabrication across watersheds).
+
+### Gates and results
+
+| Gate | Result |
+|---|---|
+| River mask vs reviewed allowlist | PASS — 86,789 cells, 0 disagreement, strict subset of the waterway mask |
+| Marine cells in the river mask | PASS — 0 |
+| Marine cells blocked in the Gulf/SE, any winter month | PASS — 0 (the 3,753 still blocked are all river: Kvichak, Stikine, Susitna) |
+| `check_year_round_ports` | PASS — Ketchikan, Sitka, Juneau, Petersburg, Kodiak, Seward, Valdez, Whittier navigable 12/12 |
+| Seasonal control | PASS — Nome open Jun–Oct, Utqiagvik Aug–Oct, from the sea-ice climatology alone |
+| Bristol Bay tier-3 rivers | PASS after the k-nearest fix — Egegik/Ugashik/Naknek closed Jan, Feb, Dec |
+
+### Waterway passability by month (reference values, this build)
+
+**Read the length-weighted series.** The edge-count series is dominated by the
+dense interior river network: in February 33,075 short interior edges are
+blocked (mean centroid 64.46N 154.58W) against 1,024 long Gulf/SE edges
+passable (57.73N 138.15W), so by count February reads 0.030 while by length it
+is 0.511. The two answer different questions and only the second is
+comparable to cell-level figures.
+
+| month | by count | by length | (pre-fix, by count) |
+|---|---|---|---|
+| Jan | 0.141 | 0.530 | 0.130 |
+| Feb | 0.030 | 0.511 | 0.000 |
+| Mar | 0.030 | 0.511 | 0.000 |
+| Apr | 0.049 | 0.544 | 0.042 |
+| May | 0.878 | 0.748 | 0.878 |
+| Jun | 0.972 | 0.868 | 0.971 |
+| Jul | 0.999 | 0.908 | 0.999 |
+| Aug | 1.000 | 0.982 | 1.000 |
+| Sep | 1.000 | 0.982 | 0.999 |
+| Oct | 0.587 | 0.860 | 0.584 |
+| Nov | 0.133 | 0.689 | 0.126 |
+| Dec | 0.043 | 0.556 | 0.014 |
+
+The pre-fix `Feb 0.000 / Mar 0.000` in the 2026-08-06 entry above is the
+signature of this bug, not a reference value. Do not compare a fresh build
+against it.
+
+### A wrong turn worth recording
+
+Tier 3 was first implemented as a **latitude band** (median of covered cells
+within ±0.75°), on the reasoning that Alaska's freeze gradient is
+north-south. It is not — the maritime/continental gradient is at least as
+strong. Egegik's band contained only Taku, Stikine and a mislabelled
+"Porcupine" polygon in Chatham Strait, all Southeast rainforest rivers
+1,200–1,400 km east, because Kvichak (58.88N) and Nushagak (59.0N) sit just
+above its ceiling. The build shipped with **Egegik navigable in January,
+November and December** and Ugashik in January and November. A fallback added
+to stop 227 km borrowing had reached 1,400 km instead.
+
+Replaced with the k-nearest median. Verified source selection: Egegik now
+draws 100% from Nushagak/Kvichak at 89 km, Ugashik 100% at 149 km, Dahl Creek
+85% from Buckland at 228 km. Post-fix, every cell whose status changed across
+the four winter months was a river cell and none were marine; changed-cell
+centroids all sit at ~58N 158W.
+
+### Outstanding
+
+- **Kvichak opened** rather than closed under the k-nearest fallback (1,478
+  cells in January, 1,113 in December). Plausible — it drains Iliamna Lake and
+  large lake-fed rivers hold open water later — but unpredicted and therefore
+  unverified. Local knowledge of freeze-up near Levelock or Igiugig would
+  settle it cheaply.
+- **"DAHL CREEK, AK"** (740 cells) runs 65.28N 166.35W → 65.51N 165.48W, in
+  Port Clarence / Grantley Harbor on the Seward Peninsula — roughly 800 km
+  from Dahl Creek on the Kobuk. Probably a brackish lagoon route rather than
+  the creek it is named for. Currently classified river; low stakes because
+  Norton Sound sea ice closes it either way.
+- **"BUCKLAND RIVER"** NWN geometry sits mid-Kotzebue Sound, ~120 km from the
+  real mouth; rejected from the river allowlist on those grounds.
+- Marine-clip provenance: confirm `river_ice_*.tif` were regenerated after
+  `build_brown_polygon_mask.py` gained the clip. Measured downstream effect if
+  not: 9 cells on the Stikine.
+
+### Artifacts
+
+`outputs/analysis/`: `river_ice_marine_leak.png` (February classification map
++ monthly curve), `river_ice_coverage_gap.png` (the 18,478 cells outside the
+IDW), `waterway_river_mask.png` (the mask with SE Alaska and Bristol Bay
+insets), `brown_flowlines_and_polygons.png`,
+`waterway_river_marine_classification.csv` (all 320 NWN segments),
+`nwn_vs_brown_flowlines.csv` (NHD cross-check, 4 disagreements, all recall
+gaps). Regenerate the first with
+`diagnostics/01_friction_build/plot_river_ice_marine_leak.py`.
+
+---
+
+## 2026-08-21 — arcpy NN fallback truncates p_ice to 0 or 1
+
+Found while prototyping a pure-Python port of `river_ice_full_pipeline.py`.
+The port was built to answer a scoping question (can the arcpy and Python
+workflows be merged?); it instead surfaced a live defect in the arcpy stage.
+**Decision taken: keep both workflows for now, fix the defect in place.**
+Full write-up in `docs/FINDING_eucallocation_truncation.md`.
+
+### The defect
+
+`process_data_month` closed with `nn_fill = EucAllocation(clamped)`.
+`EucAllocation` is a *zone* tool — a float input is truncated to integer
+before allocation. Every stage-3 gap cell therefore inherited **0** (any
+neighbour below 1.0) or **1** (a neighbour at exactly 1.0), never the
+neighbour's actual p_ice.
+
+### Evidence, from arcpy's own two rasters
+
+`provenance_01.tif` marks the tier-3 cells; sample `river_ice_01.tif` there:
+
+| | |
+|---|---|
+| tier-3 cells, month 01 | 73,526 |
+| distinct values among them | **85** |
+| exactly 0.0 | 61,753 (84.0%) |
+| exactly 1.0 | 10,988 (14.9%) |
+| tier 1, distinct values (200k sample) | 9,921 |
+| tier 2, distinct values | 46,016 |
+
+A continuous field does not produce 85 distinct values over 73,526 cells.
+The few non-0/1 values are bilinear bleed from the Step 7 alignment. This
+measurement does not depend on the port at all.
+
+### Cost, on the NWN river corridor
+
+| | arcpy | true nearest (port) |
+|---|---|---|
+| tier-3 corridor cells | 4,898 | 4,898 |
+| exactly 0.0 | 4,880 (99.6%) | — |
+| mean p_ice | **0.0005** | **0.7780** |
+| below `RIVER_ICE_THRESHOLD` (0.15) | 4,894 | 4 |
+
+Those cells enter the friction build as tier-1 "measured" values, so nothing
+downstream flags them. This is the ~7% of tier 1 that the earlier provenance
+cross-tab showed arriving from the arcpy fallback.
+
+### What validated the comparison
+
+Port run on arcpy's **native** (pre-alignment) grid, read off
+`provenance_01.tif`, so no resampling is in the loop:
+
+| stage | agreement |
+|---|---|
+| river-mask membership | 99.98% — 18,802 python-only cells of 585k |
+| tier assignment 1/2/3 | 99.58% of shared cells |
+| tier 1 (polygon median) | mean abs diff **0.0032** |
+| tier 2 (IDW: power 2, 12 pts, 50 km) | mean abs diff **0.00065** |
+| tier 3 (EucAllocation) | mean abs diff **0.66**, 80% differ by >0.05 |
+
+The IDW row is the control: a `cKDTree` reimplementation reproduces arcpy's
+`Idw` to 6.5e-4. The divergence is confined to the one stage. Port kept as a
+diagnostic at `tools/river_ice_interp.py` — **not** wired into the pipeline.
+
+### The fix
+
+`EucAllocation` deleted; those cells are left NoData
+(`final = Con(~IsNull(mask_r), clamped)`). Nothing replaces it, because the
+friction build already has a better gap-filler: `extend_ice_nearest` capped at
+`RIVER_ICE_FILL_MAX_KM = 25 km` and clipped to the river mask, falling back to
+`fill_by_nearest_median` (K = 200). Two fill policies collapse to one, and the
+unbounded one is the one retired.
+
+Applied to `river_ice_full_pipeline.py` 2026-08-21. **Not yet run** — needs the
+ArcGIS machine. Before/after diff kept at `arcpy-eucallocation-fix.patch`.
+
+### Predictions to check on the next ArcGIS run
+
+- `river_ice_MM.tif` loses roughly 73k cells per winter month to NoData.
+- The friction build's three-tier split moves off 89.5 / 5.5 / 5.1: tier 1
+  should drop by ~4,900 corridor cells, tiers 2 and 3 absorbing them.
+- Those cells go from p_ice ≈ 0 to ≈ 0.78, so **more** river cells block in
+  winter, not fewer. Marine sites (Ketchikan, Juneau, Kodiak…) are unaffected;
+  `check_year_round_ports` must still pass 12/12 on all eight.
+
+### Caveats
+
+- One month (01) only, against the June/July 2026 arcpy output and the
+  pre-marine-clip 967-polygon mask — the same inputs that run consumed.
+- The port's mask carries ~3% more cells than arcpy's. Attributed to
+  cell-centre rasterisation differing at polygon boundaries; **not proven**.
+  It does not affect the tier-3 result, which is measured inside arcpy's own
+  mask.
