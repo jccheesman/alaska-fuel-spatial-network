@@ -830,7 +830,7 @@ record_id,outcome,own_boundary_km,located_in_place,community_relation
 {801CC974-B897-41D3-A9FB-A3B7C883E0FA},match,0.0,Old Harbor,inside
 {8036C5D7-767C-4593-A72A-15CA64AC8BD0},match,0.0,False Pass,inside
 {80449CC7-A8AC-4CA0-AD2A-2DD0B92CF5B9},match,0.0,Fairbanks,inside
-{807124A8-0A6D-42E6-98ED-616888004B49},mismatch,96.19,Beaver,elsewhere
+{807124A8-0A6D-42E6-98ED-616888004B49},match,0.0,Fort Yukon,inside
 {80AD0D72-EDDF-414A-AB9A-6958587FD3E6},match,0.0,Soldotna,inside
 {80B1E5C2-BB9E-4ADA-B223-19A86DAEE9E4},match,0.0,Russian Mission,inside
 {80B22708-BF6D-46B9-AEB3-1AF02C2A7D4F},match,0.0,Kaktovik,inside
@@ -1013,7 +1013,7 @@ record_id,outcome,own_boundary_km,located_in_place,community_relation
 {994105DB-6F36-41A1-B230-E0373F9E975F},match,0.0,Teller,inside
 {9942D7E8-9989-4E76-8408-2E10FCB167C8},match,0.0,McGrath,inside
 {995EFEC8-6A75-4544-A383-B1F0A2AB57A7},match,0.0,Anaktuvuk Pass,inside
-{996CA338-3112-43BA-964E-BAC877F58828},mismatch,170.17,Healy Lake,elsewhere
+{996CA338-3112-43BA-964E-BAC877F58828},match,0.0,Healy Lake,inside
 {997CADE8-A481-4A8A-A027-66C67951720C},match,0.0,Point Lay,inside
 {9986BFFD-064E-4BA2-A9BC-2E9146E041DE},match,0.0,Thorne Bay,inside
 {9989BDD2-2643-43C7-ADC1-42F7C69E5601},match,0.0,Nelson Lagoon,inside
@@ -1573,7 +1573,7 @@ record_id,outcome,own_boundary_km,located_in_place,community_relation
 {E77A8666-C3DB-4AE5-ABD7-A169FFB122E7},match,0.0,Kiana,inside
 {E77A942D-7D0A-45CD-8F29-13F7F85F71A3},match,0.0,Platinum,inside
 {E784CB11-693E-4ACD-99C8-A9E006782F07},match,0.0,Dillingham,inside
-{E7B9AC7C-E3C6-4313-A350-5414BFE26A53},mismatch,630.48,Marshall,elsewhere
+{E7B9AC7C-E3C6-4313-A350-5414BFE26A53},match,0.0,Noatak,inside
 {E7D371F4-1EF0-4BEC-B0F0-BDDE7CDEFF07},untested,,Fairbanks,untested
 {E7ECD652-D585-4837-8BEC-05FA96860368},match,0.0,Bethel,inside
 {E7F7C72E-3C31-4C85-AC61-D685DE531E55},match,0.0,Nome,inside

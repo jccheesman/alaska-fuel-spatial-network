@@ -114,6 +114,14 @@ record_id,field,old_value,new_value,status,reviewer,reviewed_on,outcome,note
 {F0FFCC8F-A5B7-4ADC-8C28-C7FC319FCDDB},longitude,-145.2576394,-156.927471,approved,JC,2026-11-14,applied,
 {EF7B6BA1-2FF6-404A-9A5F-01A83B09D969},latitude,53.896944,55.317390,approved,JC,2026-11-14,applied,
 {EF7B6BA1-2FF6-404A-9A5F-01A83B09D969},longitude,-166.54,-160.519858,approved,JC,2026-11-14,applied,
+{996CA338-3112-43BA-964E-BAC877F58828},community_name,Healy,Healy Lake,approved,JC,2026-11-14,applied,
+{464FE024-2A99-4A73-956B-AFDC49328212},community_name,Valdez,Cordova,approved,JC,2026-11-14,applied,
+{65DFB897-7E85-4456-850D-913C7D010004},community_name,Wasilla,Point MacKenzie,approved,JC,2026-11-14,applied,
+{E2EBBB67-58E8-4EED-B69B-A03B77169EB6},community_name,Wasilla,Point MacKenzie,approved,JC,2026-11-14,applied,
+{807124A8-0A6D-42E6-98ED-616888004B49},latitude,66.35966616,66.564636,approved,JC,2026-11-14,applied,
+{807124A8-0A6D-42E6-98ED-616888004B49},longitude,-147.3966131,-145.253272,approved,JC,2026-11-14,applied,
+{E7B9AC7C-E3C6-4313-A350-5414BFE26A53},latitude,61.87844406,67.568172,approved,JC,2026-11-14,applied,
+{E7B9AC7C-E3C6-4313-A350-5414BFE26A53},longitude,-162.084732,-162.970312,approved,JC,2026-11-14,applied,
 {5AEE4579-120C-418C-965A-911EFB7A4873},map_point,"95294.34149,866941.8446","95294.34149,866941.8446",derived,,,publisher-corroborates,publisher map point agrees with the corrected position within 100 m; kept verbatim as the authoritative geometry
 {D0D325AD-A296-437B-9213-8A2FD2F3621D},map_point,"161699.986,1928988.01","161699.986,1928988.01",derived,,,publisher-corroborates,publisher map point agrees with the corrected position within 100 m; kept verbatim as the authoritative geometry
 {8D408F52-5CE0-4A95-A586-79D54041D7C7},map_x,-329067.8276,-420077.3262,derived,,,applied-sync,map point still sat on the refuted position; recomputed from the corrected lat/lon (EPSG:3338); publisher original in the snapshot
@@ -134,3 +142,7 @@ record_id,field,old_value,new_value,status,reviewer,reviewed_on,outcome,note
 {F0FFCC8F-A5B7-4ADC-8C28-C7FC319FCDDB},map_y,1870795.151,1644414.9211,derived,,,applied-sync,map point still sat on the refuted position; recomputed from the corrected lat/lon (EPSG:3338); publisher original in the snapshot
 {EF7B6BA1-2FF6-404A-9A5F-01A83B09D969},map_x,-820751.0563,-413098.7040,derived,,,applied-sync,map point still sat on the refuted position; recomputed from the corrected lat/lon (EPSG:3338); publisher original in the snapshot
 {EF7B6BA1-2FF6-404A-9A5F-01A83B09D969},map_y,509159.8249,609749.0761,derived,,,applied-sync,map point still sat on the refuted position; recomputed from the corrected lat/lon (EPSG:3338); publisher original in the snapshot
+{807124A8-0A6D-42E6-98ED-616888004B49},map_x,295976.4358,388565.2026,derived,,,applied-sync,map point still sat on the refuted position; recomputed from the corrected lat/lon (EPSG:3338); publisher original in the snapshot
+{807124A8-0A6D-42E6-98ED-616888004B49},map_y,1837180.138,1870860.9586,derived,,,applied-sync,map point still sat on the refuted position; recomputed from the corrected lat/lon (EPSG:3338); publisher original in the snapshot
+{E7B9AC7C-E3C6-4313-A350-5414BFE26A53},map_x,-422800.8885,-383440.7647,derived,,,applied-sync,map point still sat on the refuted position; recomputed from the corrected lat/lon (EPSG:3338); publisher original in the snapshot
+{E7B9AC7C-E3C6-4313-A350-5414BFE26A53},map_y,1348151.866,1982540.5879,derived,,,applied-sync,map point still sat on the refuted position; recomputed from the corrected lat/lon (EPSG:3338); publisher original in the snapshot

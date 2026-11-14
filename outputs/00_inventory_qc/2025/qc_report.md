@@ -1,14 +1,14 @@
 # Inventory QC report — release 2025
 
-Generated 2026-11-14T22:49:41+00:00 by workflows/00_inventory_qc/07_publish.py
+Generated 2026-11-14T23:02:41+00:00 by workflows/00_inventory_qc/07_publish.py
 
 - raw release: `Utilities_Bulk_Fuel_Inventory.csv` sha256 `3fbee569c63dccf813d6fa53e608820d53b92e415feb2c7f20556fc0bb0c30b0` (1830 rows, 1767 located)
-- clean table: `facilities_clean.csv` sha256 `ce5e6f2d28db2b431e1ecf52a8ba0938f19225153dae1add37999607424cd443` (1802 rows, 1739 located)
+- clean table: `facilities_clean.csv` sha256 `828c45b1a820670792866721d0e63631c117715b119d3a9a072943671b6dba4f` (1802 rows, 1739 located)
 - excluded: 28 (see `excluded.csv`)
-- corrections: 93 applied · 9 pending · 11 rejected · 0 skipped
-- community keys: 272 · unlabelled records: 97
+- corrections: 101 applied · 9 pending · 11 rejected · 0 skipped
+- community keys: 273 · unlabelled records: 97
 - capacity_status: 1715 ok · 75 missing · 12 mismatch; placeholder inspection dates published blank: 9
-- qc_status: 1779 clean · 23 pending_review (withheld from hubs by the build)
+- qc_status: 1790 clean · 12 pending_review (withheld from hubs by the build)
 - facility_id: 1739 located records with an id (1160 AEA, 582 synthetic from the ledger); AEA regions: 1738 inside · 1 nearest · 0 outside
 
 ## Checks
@@ -18,7 +18,7 @@ Generated 2026-11-14T22:49:41+00:00 by workflows/00_inventory_qc/07_publish.py
 | no undeclared derived column was produced by a stage | PASS | undeclared=[] (declare it in inputs/inventory_qc/derived_columns.csv) |
 | row reconciliation | PASS | 1830 release = 1802 clean + 28 excluded |
 | every exclusion has a reason | PASS | 28 excluded |
-| every applied correction has reviewer + date | PASS | 93 applied |
+| every applied correction has reviewer + date | PASS | 101 applied |
 | only schema + derived columns; no contact columns | PASS | extra=[] contact=[] |
 | every declared derived column is present (derived_columns.csv) | PASS | missing=[] |
 | every located record has a facility_id | PASS | missing=0 |
@@ -31,7 +31,7 @@ Generated 2026-11-14T22:49:41+00:00 by workflows/00_inventory_qc/07_publish.py
 | fixture: no Kodiak-labelled record is in the open Pacific (lat < 56) | PASS |  |
 | fixture: no Coldfoot-labelled record is in Yukon, Canada (lon > -141) | PASS |  |
 | fixture: spelling variants resolved (no 'Saint Marys', 'Clarks Point', 'Dutch Harbor' labels) | PASS |  |
-| deterministic output | PASS | ce5e6f2d28db |
+| deterministic output | PASS | 828c45b1a820 |
 
 ## Corrections applied
 
@@ -130,3 +130,11 @@ Generated 2026-11-14T22:49:41+00:00 by workflows/00_inventory_qc/07_publish.py
 | `{F0FFCC8F-A5B7-4ADC-8C28-C7FC319FCDDB}` | longitude | -145.2576394 | -156.927471 | JC | 2026-11-14 |
 | `{EF7B6BA1-2FF6-404A-9A5F-01A83B09D969}` | latitude | 53.896944 | 55.317390 | JC | 2026-11-14 |
 | `{EF7B6BA1-2FF6-404A-9A5F-01A83B09D969}` | longitude | -166.54 | -160.519858 | JC | 2026-11-14 |
+| `{996CA338-3112-43BA-964E-BAC877F58828}` | community_name | Healy | Healy Lake | JC | 2026-11-14 |
+| `{464FE024-2A99-4A73-956B-AFDC49328212}` | community_name | Valdez | Cordova | JC | 2026-11-14 |
+| `{65DFB897-7E85-4456-850D-913C7D010004}` | community_name | Wasilla | Point MacKenzie | JC | 2026-11-14 |
+| `{E2EBBB67-58E8-4EED-B69B-A03B77169EB6}` | community_name | Wasilla | Point MacKenzie | JC | 2026-11-14 |
+| `{807124A8-0A6D-42E6-98ED-616888004B49}` | latitude | 66.35966616 | 66.564636 | JC | 2026-11-14 |
+| `{807124A8-0A6D-42E6-98ED-616888004B49}` | longitude | -147.3966131 | -145.253272 | JC | 2026-11-14 |
+| `{E7B9AC7C-E3C6-4313-A350-5414BFE26A53}` | latitude | 61.87844406 | 67.568172 | JC | 2026-11-14 |
+| `{E7B9AC7C-E3C6-4313-A350-5414BFE26A53}` | longitude | -162.084732 | -162.970312 | JC | 2026-11-14 |
