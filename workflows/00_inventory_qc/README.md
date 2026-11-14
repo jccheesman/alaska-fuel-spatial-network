@@ -45,6 +45,15 @@ as blank (the raw value stays in the snapshot) and adds the declared
 `capacity_status` column (`ok | missing | mismatch`) so capacity figures can
 filter or footnote unreliable totals.
 
+One canonical position (owner 2026-11-14, Option 2 of
+`docs/WORKFLOW_REASSESSMENT_2026-11.md`): a record whose lat/lon an approved
+correction moved also gets its publisher map point (`map_x/map_y`) recomputed
+from the corrected position in stage 02 (logged `applied-sync`; the publisher's
+original stays in the snapshot), so the published representations never
+disagree. `coordinate_source` (`publisher` | `owner_correction`) names each
+located record's position provenance, and `map_point_disagrees` runs on every
+located record — corrected ones included — as the sync's tripwire.
+
 ## Inputs
 
 Dataset sources and status (the AEA inventory, the DCRA boundaries, the AEA

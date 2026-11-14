@@ -36,6 +36,7 @@ its priority list largely re-derived decisions already in `inputs/inventory_qc/`
 | Capacity eligibility as an explicit dimension | One declared derived column `capacity_status` (`ok | missing | mismatch`) in `facilities_clean.csv`, so capacity figures can filter or footnote unreliable totals. Unknown stays unknown — never zero. |
 | Broad Alaska plausibility envelope | New detector `alaska_envelope` (lat 50–72, lon ≤ −129 or ≥ 170): flags nothing on the corrected release; exists so a future release's gross coordinate error cannot arrive silently. |
 | `<Null>` artifacts in `USCG_ID` | Owner 2026-11-14: the field is unused downstream — dropped from the clean schema entirely (`column_map.csv` keep=no); both release snapshots regenerated from raw and re-verified byte-identical under `--check`. |
+| "Synchronize coordinate representations; set one canonical position; record provenance" | Adopted as Option 2 of `docs/WORKFLOW_REASSESSMENT_2026-11.md` (owner 2026-11-14): stage 02 recomputes the publisher map point from a corrected lat/lon (logged `applied-sync`; originals in the snapshot), `coordinate_source` is published per record, and `map_point_disagrees` verifies agreement on every located record. |
 
 ## 3. Proposals NOT adopted, and why
 
