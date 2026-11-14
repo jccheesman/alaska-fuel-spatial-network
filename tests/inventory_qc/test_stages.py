@@ -110,8 +110,10 @@ def test_capacity_status_describes_never_repairs(pipeline):
 
 
 def test_coordinate_sync_and_source(pipeline):
-    """Option 2 (owner 2026-11-14): one canonical position. A lat/lon correction also recomputes
-    the publisher map point, logged as applied-sync; coordinate_source names the provenance."""
+    """Option 2 + map-first check (owner 2026-11-14): one canonical position. The publisher map
+    point is checked FIRST — where it corroborates the reviewed position (Kodiak, Coldfoot) it
+    is kept verbatim as the authoritative geometry; only a map point still on the refuted
+    position is recomputed. coordinate_source names the provenance."""
     from pyproj import Transformer
     import math
     clean = pd.read_csv(pipeline["clean"], dtype=str)
@@ -123,9 +125,16 @@ def test_coordinate_sync_and_source(pipeline):
     to_map = Transformer.from_crs(4326, 3338, always_xy=True)
     for r in corrected.itertuples():
         x, y = to_map.transform(float(r.longitude), float(r.latitude))
-        assert math.hypot(x - float(r.map_x), y - float(r.map_y)) < 1, r.community_name
+        assert math.hypot(x - float(r.map_x), y - float(r.map_y)) < 100, r.community_name
     log = pipeline["log"]
     sync = log[log["outcome"] == "applied-sync"]
-    assert len(sync) == 16 and set(sync["field"]) == {"map_x", "map_y"}
-    assert set(sync["record_id"]) == set(corrected["record_id"])
+    kept = log[log["outcome"] == "publisher-corroborates"]
+    assert len(sync) == 12 and set(sync["field"]) == {"map_x", "map_y"}
+    assert len(kept) == 2, "Kodiak and Coldfoot: the map point was the correction's evidence"
+    assert set(sync["record_id"]) | set(kept["record_id"]) == set(corrected["record_id"])
     assert sync["new_value"].ne(sync["old_value"]).all(), "a no-op sync would hide a stale guard"
+    # the corroborated records keep the publisher's map point VERBATIM (not a re-transform)
+    raw = qc.read_release(LABEL).set_index("record_id")
+    for rid in kept["record_id"]:
+        row = clean.set_index("record_id").loc[rid]
+        assert float(row["map_x"]) == float(raw.at[rid, "map_x"]) and float(row["map_y"]) == float(raw.at[rid, "map_y"])

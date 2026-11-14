@@ -177,3 +177,15 @@ def test_map_point_agrees_everywhere_after_sync(run):
     publisher moved a map point we haven't reviewed."""
     assert (run["ran"].loc[run["ran"]["detector"] == "map_point_disagrees", "status"] == "ran").all()
     assert not (run["F"]["detector"] == "map_point_disagrees").any()
+
+
+def test_publisher_map_moves_are_flagged_before_corrections_are_trusted(run):
+    """The publisher's known fixes were map-only moves (Hooper Bay, Noorvik, Point Lay). A map
+    move beyond export jitter is MEDIUM evidence that must surface for review — never silently
+    dropped, never steamrolled by an old correction. Today all three movers are owner-excluded
+    records, so the flags exist but are covered and never queue."""
+    F, Q = run["F"], run["Q"]
+    moves = F[(F["detector"] == "release_diff") & F["detail"].str.contains("MOVED")]
+    assert moves["record_id"].nunique() == 3 and (moves["severity"] == "medium").all()
+    assert (moves["covered_by"] != "").all()
+    assert not (Q["detector"] == "release_diff").any()

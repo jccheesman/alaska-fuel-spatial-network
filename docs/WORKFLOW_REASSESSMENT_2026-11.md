@@ -154,15 +154,23 @@ the snapshots from raw whenever the raw is present).
 1. **Coordinate universality:** Option 1 (label only), **Option 2 (label +
    synchronize map point on corrected records — recommended)**, or Option 3
    (publish one representation)?
-   → **DECIDED 2026-11-14: Option 2, implemented.** Stage 02 recomputes
-   `map_x/map_y` from a corrected lat/lon (16 `applied-sync` log rows on 8
-   records; publisher originals in the snapshot), `coordinate_source`
-   (`publisher` | `owner_correction`, blank when unlocated) is published, and
-   `map_point_disagrees` now runs on corrected records too as the sync's
-   tripwire. Grounding evidence: of the 8 corrected records, the map point was
-   right only for Kodiak and Coldfoot — the other six were wrong in BOTH
-   representations, agreeing to the meter, so neither raw column can be
-   universally authoritative; the reviewed correction is the only universal rule.
+   → **DECIDED 2026-11-14: Option 2, implemented — refined same day with a
+   map-first check (owner: "the map point should be checked before the user
+   correction").** Stage 02 checks the publisher map point first: where it
+   corroborates the reviewed position within 100 m (Kodiak, Coldfoot — whose
+   corrections CAME from the map point) it is kept verbatim as the
+   authoritative geometry (`publisher-corroborates` log rows); only a map
+   point still on the refuted position is recomputed (12 `applied-sync` rows
+   on the 6 both-wrong records). `coordinate_source` (`publisher` |
+   `owner_correction`, blank when unlocated) is published;
+   `map_point_disagrees` runs on corrected records too as the tripwire; and
+   `release_diff` now flags publisher map moves beyond export jitter as
+   MEDIUM instead of dropping them, so future publisher evidence surfaces for
+   review before an old correction is re-trusted. Grounding evidence: of the
+   8 corrected records the map point was right only for Kodiak and Coldfoot —
+   the other six were wrong in BOTH representations, agreeing to the meter —
+   so the map is authoritative *when it disagrees with the attributes or
+   corroborates a review*, never as a blanket rule.
 2. **Evidence vocabulary:** add a controlled `evidence_kind` column to
    `corrections.csv` (classify the existing 90 rows), or leave free-text
    evidence as is?

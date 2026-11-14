@@ -24,6 +24,7 @@ import pandas as pd
 from pyproj import Transformer
 
 from .core import OUT, QC, RELEASES, corrections, latest_release, read_csv, release_manifest, thresholds, write_csv
+from .ingest import MAP_JITTER_M
 
 TO_3338 = Transformer.from_crs("EPSG:4326", "EPSG:3338", always_xy=True)
 REGISTRY: list[tuple[str, tuple[str, ...], object]] = []     # (name, needs, fn)
@@ -262,14 +263,27 @@ def spelling_variants(f: pd.DataFrame, th: dict) -> list[dict]:
 @detector("release_diff", ("record_id",))
 def release_diff(f: pd.DataFrame, th: dict) -> list[dict]:
     """Records edited upstream since the previous release (from the ingest diff) — evidence,
-    e.g. a map-point move that confirms or retires a correction."""
+    e.g. a map-point move that confirms or retires a correction. The publisher's map is their
+    maintained surface (their known fixes were map-only moves), so a map move beyond the export
+    jitter is flagged MEDIUM: it must be reviewed BEFORE any old correction is re-trusted —
+    stage 02's sync never sees the publisher's new point, only the snapshot does (owner
+    2026-11-14: check the map point first)."""
     man = release_manifest(f.attrs["release"])
     if "diff_file" not in man:
         return []
     d = read_csv(RELEASES / f.attrs["release"] / man["diff_file"])
-    d = d[(d["change"] == "edited") & ~d["field"].isin(["map_x", "map_y", "last_edited"])]
-    return [_flag(r.record_id, "release_diff", "info", f"upstream edited {r.field}: {r.old_value!r} -> {r.new_value!r}")
-            for r in d.itertuples()]
+    d = d[(d["change"] == "edited") & (d["field"] != "last_edited")]
+    isxy = d["field"].isin(["map_x", "map_y"])
+    delta = (pd.to_numeric(d["old_value"], errors="coerce") - pd.to_numeric(d["new_value"], errors="coerce")).abs()
+    d = d[~isxy | (delta > MAP_JITTER_M)]
+    out = []
+    for r in d.itertuples():
+        moved = r.field in ("map_x", "map_y")
+        out.append(_flag(r.record_id, "release_diff", "medium" if moved else "info",
+                         (f"publisher MOVED the map point ({r.field}: {r.old_value!r} -> {r.new_value!r}) — "
+                          "review before trusting an existing correction on this record" if moved else
+                          f"upstream edited {r.field}: {r.old_value!r} -> {r.new_value!r}")))
+    return out
 
 
 # ----------------------------------------------------------------------------- run

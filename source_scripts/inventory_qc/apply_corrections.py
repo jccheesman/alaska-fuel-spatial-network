@@ -31,6 +31,7 @@ from .core import OUT, corrections, latest_release, read_release, write_csv
 
 COORD_FIELDS = {"latitude", "longitude"}
 TO_3338 = Transformer.from_crs("EPSG:4326", "EPSG:3338", always_xy=True)
+MAP_AGREE_M = 100.0   # same bar as 04_detect.map_point_disagrees: closer than this = same point
 
 
 def _close(a: str, b: str, tol: float = 1e-6) -> bool:
@@ -90,12 +91,17 @@ def apply(label: str) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
         entry["outcome"] = "applied"
         log.append(entry)
 
-    # One canonical position (owner 2026-11-14, Option 2): a record whose lat/lon a correction
-    # moved also gets its publisher map point recomputed from the corrected position, so the two
-    # representations never disagree in anything published. The publisher's original X/Y stays in
-    # the release snapshot; these synthetic log rows are the paper trail. Neither raw column is
-    # universally trustworthy (6 of the 8 corrected records were wrong in BOTH), so the reviewed
-    # correction wins and 04_detect's map_point_disagrees verifies the agreement afterwards.
+    # One canonical position (owner 2026-11-14, Option 2; map-first check 2026-11-14): a record
+    # whose lat/lon a correction moved has its publisher map point CHECKED FIRST. Where the map
+    # point already corroborates the reviewed position (within MAP_AGREE_M — the publisher's map
+    # is the maintained surface, and for Kodiak/Coldfoot it was the evidence the correction came
+    # from) it is kept verbatim as the authoritative geometry. Only a map point that still sits
+    # on the refuted position is recomputed, so the published representations never disagree.
+    # The publisher's original X/Y stays in the release snapshot either way; these synthetic log
+    # rows are the paper trail. Neither raw column is universally trustworthy (6 of the 8
+    # corrected records were wrong in BOTH), so the reviewed correction decides WHERE, the map
+    # point decides the exact geometry when it agrees, and 04_detect's map_point_disagrees plus
+    # release_diff's publisher-map-move flags catch anything that drifts later.
     for rid, fields in applied.items():
         if not COORD_FIELDS & set(fields) or rid in excluded_ids:
             continue
@@ -104,12 +110,22 @@ def apply(label: str) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
         except (TypeError, ValueError):
             continue
         x, y = TO_3338.transform(lon, lat)
+        try:
+            mx, my = float(fac.at[rid, "map_x"]), float(fac.at[rid, "map_y"])
+        except (TypeError, ValueError):
+            mx = my = None
+        if mx is not None and np.hypot(x - mx, y - my) <= MAP_AGREE_M:
+            log.append(dict(record_id=rid, field="map_point", old_value=f"{mx},{my}",
+                            new_value=f"{mx},{my}", status="derived", reviewer="", reviewed_on="",
+                            outcome="publisher-corroborates",
+                            note=f"publisher map point agrees with the corrected position within {MAP_AGREE_M:g} m; kept verbatim as the authoritative geometry"))
+            continue
         for field, new in (("map_x", f"{x:.4f}"), ("map_y", f"{y:.4f}")):
             old = fac.at[rid, field]
             log.append(dict(record_id=rid, field=field, old_value="" if pd.isna(old) else str(old),
                             new_value=new, status="derived", reviewer="", reviewed_on="",
                             outcome="applied-sync",
-                            note="map point recomputed from the corrected lat/lon (EPSG:3338); publisher original in the snapshot"))
+                            note="map point still sat on the refuted position; recomputed from the corrected lat/lon (EPSG:3338); publisher original in the snapshot"))
             fac.at[rid, field] = new
             applied[rid].append(field)
 

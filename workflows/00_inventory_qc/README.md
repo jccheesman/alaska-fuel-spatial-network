@@ -45,14 +45,19 @@ as blank (the raw value stays in the snapshot) and adds the declared
 `capacity_status` column (`ok | missing | mismatch`) so capacity figures can
 filter or footnote unreliable totals.
 
-One canonical position (owner 2026-11-14, Option 2 of
-`docs/WORKFLOW_REASSESSMENT_2026-11.md`): a record whose lat/lon an approved
-correction moved also gets its publisher map point (`map_x/map_y`) recomputed
-from the corrected position in stage 02 (logged `applied-sync`; the publisher's
-original stays in the snapshot), so the published representations never
+One canonical position, map point checked first (owner 2026-11-14, Option 2 of
+`docs/WORKFLOW_REASSESSMENT_2026-11.md`): on a record whose lat/lon an approved
+correction moved, stage 02 checks the publisher's map point FIRST — where it
+already corroborates the reviewed position (within 100 m: Kodiak, Coldfoot,
+whose corrections came from the map) it is kept verbatim as the authoritative
+geometry (`publisher-corroborates` log row); only a map point still on the
+refuted position is recomputed (`applied-sync`). The publisher's original X/Y
+stays in the snapshot either way, so the published representations never
 disagree. `coordinate_source` (`publisher` | `owner_correction`) names each
-located record's position provenance, and `map_point_disagrees` runs on every
-located record — corrected ones included — as the sync's tripwire.
+located record's position provenance; `map_point_disagrees` runs on every
+located record as the tripwire; and `release_diff` flags any publisher map move
+beyond export jitter as MEDIUM — new publisher evidence is reviewed before an
+old correction is re-trusted, never silently overwritten.
 
 ## Inputs
 
