@@ -1,7 +1,7 @@
 detector,status,records_flagged,note
 shared_farm_id,ran,12,
 within_farm_copies,ran,0,
-shared_point_labels,ran,14,
+shared_point_labels,ran,12,
 one_digit_typo,ran,0,
 map_point_disagrees,ran,0,
 missing_fields,ran,265,

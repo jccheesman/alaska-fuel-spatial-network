@@ -122,7 +122,6 @@ record_id,community_name,outcome,priority,inside_boundary_of,own_boundary_km,lat
 {39943186-EB34-4A7C-B510-E1F60F6E5B77},Iliamna,mismatch,review,Iliamna,543.34,59.75552294,-154.9021745,correction:approved,
 {BACAEA02-40B4-467A-B3B9-39C3197CF50D},King Salmon,mismatch,review,King Salmon,520.88,58.683749,-156.672126,correction:approved,
 {509CF7C1-AE7E-4289-8EFE-3298B15AD90D},Wales,mismatch,review,Ambler,485.46,67.08767141,-157.8567222,,
-{EF7B6BA1-2FF6-404A-9A5F-01A83B09D969},Sand Point,mismatch,review,Unalaska,415.34,53.896944,-166.54,,
 {056D0E34-0F8F-4089-8FD4-38E6687C1E94},Noorvik,mismatch,review,Kaltag,297.51,64.32290209,-158.7240535,correction:pending,
 {7A206A94-00D4-4121-BA0A-35593A0FADDC},Saint Michael,mismatch,review,Brevig Mission,289.32,65.33289523,-166.4864243,,
 {8970B1E0-DE4E-4A98-8A1B-5C858F18F05A},Savoonga,mismatch,review,Brevig Mission,262.61,65.33289523,-166.4864243,,

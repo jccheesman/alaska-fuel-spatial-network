@@ -1624,7 +1624,7 @@ record_id,outcome,own_boundary_km,located_in_place,community_relation
 {EF318649-1C9B-45B9-8616-DCC8F7FB4907},match,0.0,Saint Paul,inside
 {EF608B80-7931-4342-A64A-98E73B563C54},match,0.0,Shageluk,inside
 {EF799C7C-48D8-475B-816B-6D08F25BBB08},outside,2.05,,remote
-{EF7B6BA1-2FF6-404A-9A5F-01A83B09D969},mismatch,415.34,Unalaska,elsewhere
+{EF7B6BA1-2FF6-404A-9A5F-01A83B09D969},match,0.0,Sand Point,inside
 {EFA2FFD0-5E26-4F0B-AB88-C80C174ED85B},match,0.0,Unalaska,inside
 {EFB8BB07-4BF6-42EF-8860-505B1E26AE40},mismatch,3.07,Kalifornsky,adjacent
 {EFDF3393-228B-44BE-B646-0D8E1DD9AA52},match,0.0,Ekwok,inside

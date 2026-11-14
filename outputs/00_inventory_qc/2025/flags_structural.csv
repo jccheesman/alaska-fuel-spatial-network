@@ -29,8 +29,6 @@ record_id,detector,severity,detail,suggested_field,suggested_value,group_key,cov
 {67812973-1F5E-4F2F-9E8E-A8FEDA823FAF},shared_point_labels,high,"same point as records labelled SAVOONGA, ST MICHAEL",,,point:-578654:1762719,
 {7A206A94-00D4-4121-BA0A-35593A0FADDC},shared_point_labels,high,"same point as records labelled SAVOONGA, TELLER",,,point:-578654:1762719,
 {8970B1E0-DE4E-4A98-8A1B-5C858F18F05A},shared_point_labels,high,"same point as records labelled ST MICHAEL, TELLER",,,point:-578654:1762719,
-{8911BFBD-59A5-485A-86C4-7EA6C3180F66},shared_point_labels,high,same point as records labelled SAND POINT,,,point:-820756:509144,correction:approved
-{EF7B6BA1-2FF6-404A-9A5F-01A83B09D969},shared_point_labels,high,same point as records labelled UNALASKA,,,point:-820756:509144,
 {1F3E5119-0B67-402E-BCC6-A6FB3D649C1A},capacity_mismatch,medium,total 74500 gal vs populated fuel sum 60000 gal (components below total — breakdown may be incomplete),,,,correction:rejected
 {268070AA-D83E-449C-BB0D-3A25985D3464},capacity_mismatch,medium,total 124900 gal vs populated fuel sum 120000 gal (components below total — breakdown may be incomplete),,,,correction:rejected
 {60AC36FC-11A2-4126-B20C-4FC3BB51A21A},capacity_mismatch,medium,total 630000 gal vs populated fuel sum 568000 gal (components below total — breakdown may be incomplete),,,,correction:rejected
@@ -288,7 +286,7 @@ record_id,detector,severity,detail,suggested_field,suggested_value,group_key,cov
 {EC24F4B9-DE86-407E-A1E8-020A81196406},missing_fields,info,missing: community_name,,,,
 {EC3737B3-4DF5-43BE-B889-8854827FF5FA},missing_fields,info,missing: community_name,,,,
 {EE9F299B-7FBB-46A0-A9F0-61E7D1B5A1E7},missing_fields,info,missing: community_name,,,,
-{EF7B6BA1-2FF6-404A-9A5F-01A83B09D969},missing_fields,info,missing: delivery_method,,,,
+{EF7B6BA1-2FF6-404A-9A5F-01A83B09D969},missing_fields,info,missing: delivery_method,,,,correction:approved
 {F0062498-93C4-45AC-AB62-A5CBF508003C},missing_fields,info,missing: community_name,,,,
 {F0234DED-3087-44A2-B87A-59E8A8561D5E},missing_fields,info,missing: delivery_method,,,,
 {F04DC3EA-5855-4E10-91BD-CFE7A24D6FED},missing_fields,info,missing: community_name,,,,
