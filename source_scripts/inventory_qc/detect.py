@@ -164,11 +164,12 @@ def one_digit_typo(f: pd.DataFrame, th: dict) -> list[dict]:
 @detector("map_point_disagrees", ("map_x", "map_y", "latitude", "longitude"))
 def map_point_disagrees(f: pd.DataFrame, th: dict) -> list[dict]:
     """The publisher's map point and the lat/lon columns disagree by > 100 m (AEA edits the map
-    geometry without updating lat/lon — the map point is usually the corrected one)."""
+    geometry without updating lat/lon — the map point is usually the corrected one WHEN they
+    disagree; agreement proves nothing, 6 of the 8 corrected records were wrong in both).
+    Runs on corrected records too: stage 02 recomputes their map point from the corrected
+    lat/lon (owner 2026-11-14, Option 2), so a flag here on one would mean the sync failed."""
     out = []
     g = f.dropna(subset=["map_x", "map_y", "latitude", "longitude"])
-    if "corrections_applied" in g.columns:   # a reviewed lat/lon correction supersedes the publisher's stale map point
-        g = g[~g["corrections_applied"].fillna("").str.contains("latitude|longitude")]
     x, y = _xy(g)
     d = np.hypot(x - g["map_x"].astype(float), y - g["map_y"].astype(float))
     inv = Transformer.from_crs("EPSG:3338", "EPSG:4326", always_xy=True)

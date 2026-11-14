@@ -95,6 +95,12 @@ def publish(label: str) -> tuple[Path, list[tuple[str, bool, str]]]:
     total = fac["total_capacity"].astype(float)
     mismatch = comp.notna().any(axis=1) & ((comp.sum(axis=1) - total).abs() > thresholds()["capacity_mismatch_gal"])
     fac["capacity_status"] = np.where(total.isna(), "missing", np.where(mismatch, "mismatch", "ok"))
+    # coordinate_source (owner 2026-11-14, Option 2): the published position is either the
+    # publisher's or an approved owner correction (in which case stage 02 synchronized the map
+    # point to it). Blank when not located.
+    corrected_pos = fac["corrections_applied"].fillna("").str.contains("latitude|longitude")
+    fac["coordinate_source"] = np.where(fac["latitude"].isna() | fac["longitude"].isna(), "",
+                                        np.where(corrected_pos, "owner_correction", "publisher"))
     allowed = list(schema()["name"]) + DERIVED
     extra_before = [c for c in fac.columns if c not in allowed]
     fac = fac[[c for c in allowed if c in fac.columns]]

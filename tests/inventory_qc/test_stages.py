@@ -107,3 +107,25 @@ def test_capacity_status_describes_never_repairs(pipeline):
     raw = qc.read_release(LABEL).set_index("record_id")
     kept = clean.set_index("record_id")["total_capacity"].dropna()
     assert (raw.loc[kept.index, "total_capacity"].astype(float) == kept.astype(float)).all()
+
+
+def test_coordinate_sync_and_source(pipeline):
+    """Option 2 (owner 2026-11-14): one canonical position. A lat/lon correction also recomputes
+    the publisher map point, logged as applied-sync; coordinate_source names the provenance."""
+    from pyproj import Transformer
+    import math
+    clean = pd.read_csv(pipeline["clean"], dtype=str)
+    assert set(clean["coordinate_source"].fillna("")) == {"publisher", "owner_correction", ""}
+    located = clean["latitude"].notna() & clean["longitude"].notna()
+    assert (clean.loc[~located, "coordinate_source"].fillna("") == "").all()
+    corrected = clean[clean["coordinate_source"] == "owner_correction"]
+    assert len(corrected) == 8
+    to_map = Transformer.from_crs(4326, 3338, always_xy=True)
+    for r in corrected.itertuples():
+        x, y = to_map.transform(float(r.longitude), float(r.latitude))
+        assert math.hypot(x - float(r.map_x), y - float(r.map_y)) < 1, r.community_name
+    log = pipeline["log"]
+    sync = log[log["outcome"] == "applied-sync"]
+    assert len(sync) == 16 and set(sync["field"]) == {"map_x", "map_y"}
+    assert set(sync["record_id"]) == set(corrected["record_id"])
+    assert sync["new_value"].ne(sync["old_value"]).all(), "a no-op sync would hide a stale guard"

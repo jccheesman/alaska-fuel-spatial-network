@@ -25,10 +25,12 @@ import sys
 
 import numpy as np
 import pandas as pd
+from pyproj import Transformer
 
 from .core import OUT, corrections, latest_release, read_release, write_csv
 
 COORD_FIELDS = {"latitude", "longitude"}
+TO_3338 = Transformer.from_crs("EPSG:4326", "EPSG:3338", always_xy=True)
 
 
 def _close(a: str, b: str, tol: float = 1e-6) -> bool:
@@ -87,6 +89,29 @@ def apply(label: str) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
         applied.setdefault(r.record_id, []).append(r.field)
         entry["outcome"] = "applied"
         log.append(entry)
+
+    # One canonical position (owner 2026-11-14, Option 2): a record whose lat/lon a correction
+    # moved also gets its publisher map point recomputed from the corrected position, so the two
+    # representations never disagree in anything published. The publisher's original X/Y stays in
+    # the release snapshot; these synthetic log rows are the paper trail. Neither raw column is
+    # universally trustworthy (6 of the 8 corrected records were wrong in BOTH), so the reviewed
+    # correction wins and 04_detect's map_point_disagrees verifies the agreement afterwards.
+    for rid, fields in applied.items():
+        if not COORD_FIELDS & set(fields) or rid in excluded_ids:
+            continue
+        try:
+            lon, lat = float(fac.at[rid, "longitude"]), float(fac.at[rid, "latitude"])
+        except (TypeError, ValueError):
+            continue
+        x, y = TO_3338.transform(lon, lat)
+        for field, new in (("map_x", f"{x:.4f}"), ("map_y", f"{y:.4f}")):
+            old = fac.at[rid, field]
+            log.append(dict(record_id=rid, field=field, old_value="" if pd.isna(old) else str(old),
+                            new_value=new, status="derived", reviewer="", reviewed_on="",
+                            outcome="applied-sync",
+                            note="map point recomputed from the corrected lat/lon (EPSG:3338); publisher original in the snapshot"))
+            fac.at[rid, field] = new
+            applied[rid].append(field)
 
     fac["corrections_applied"] = fac.index.map(lambda i: ";".join(applied.get(i, [])) or np.nan)
     excl = fac.loc[list(excluded_ids)].copy()

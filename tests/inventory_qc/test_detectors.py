@@ -169,3 +169,11 @@ def test_alaska_envelope_is_clean_on_the_corrected_release(run):
     record is inside lat 50..72 / lon <= -129 or >= 170, so it must flag nothing."""
     assert (run["ran"].loc[run["ran"]["detector"] == "alaska_envelope", "status"] == "ran").all()
     assert not (run["F"]["detector"] == "alaska_envelope").any()
+
+
+def test_map_point_agrees_everywhere_after_sync(run):
+    """With stage 02 synchronizing corrected records' map points, map_point_disagrees runs on
+    EVERY located record (no skip) and must flag nothing — a flag means the sync failed or the
+    publisher moved a map point we haven't reviewed."""
+    assert (run["ran"].loc[run["ran"]["detector"] == "map_point_disagrees", "status"] == "ran").all()
+    assert not (run["F"]["detector"] == "map_point_disagrees").any()

@@ -13,8 +13,8 @@ street_address,string,,no,Facility street address (kept by owner decision 2026-1
 postal_code,zip,,no,Facility ZIP code
 latitude,float,degrees N,yes,Position used by both pipelines (EPSG:4326)
 longitude,float,degrees E,yes,Position used by both pipelines (EPSG:4326)
-map_x,float,m,no,Publisher map point easting (EPSG:3338); AEA's 2025 fixes changed only this
-map_y,float,m,no,Publisher map point northing (EPSG:3338)
+map_x,float,m,no,"Publisher map point easting (EPSG:3338); AEA's 2025 fixes changed only this. On a record with an approved lat/lon correction it is recomputed from the corrected position (owner 2026-11-14, Option 2) — publisher's original in the snapshot; see coordinate_source"
+map_y,float,m,no,"Publisher map point northing (EPSG:3338); synchronized like map_x on corrected records"
 delivery_method,string,,no,Delivery mode(s): Road / Barge / Plane / "Plane or Barge" / "Plane or Road"
 total_capacity,float,gallons,no,Tank-farm or facility total capacity
 gasoline_capacity,float,gallons,no,

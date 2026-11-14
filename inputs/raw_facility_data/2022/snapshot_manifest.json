@@ -2,7 +2,7 @@
   "source": "aea",
   "raw_file": "Utilities_Bulk_Fuel_Inventory.csv",
   "raw_sha256": "132338fe0722bb9338e8c96e53531be2761a1a0497a0dae734d009ba7e1fb5e1",
-  "created_utc": "2026-11-14T16:47:05+00:00",
+  "created_utc": "2026-11-14T17:27:59+00:00",
   "rows": 1901,
   "rows_with_coordinates": 1838,
   "columns_kept": [
@@ -77,7 +77,7 @@
     "Delivery_Methods": 1
   },
   "column_map_sha256": "6eb50748bcdb62d102474448a5a76b6e401bed562ef5a9ad85dd0f5c010ed04f",
-  "schema_sha256": "0845b929853b54ef6cf44504314d363ca6d7f8f4e2a204cf93997cbf9bd33c19",
+  "schema_sha256": "a4ad54034adf1e9bc3fc32640f6fa7b50413ec24cda505052a893490960c5602",
   "snapshot_csv": "aea_inventory_2022.csv",
   "snapshot_csv_sha256": "f8513b4a78a4278dc487e64873fea5d182ab8d6668e117eac159a7c76173d8d5"
 }
