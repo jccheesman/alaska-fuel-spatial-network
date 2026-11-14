@@ -11,7 +11,8 @@ flowchart LR
   subgraph IN["Inputs"]
     direction TB
     release[("inputs/raw_facility_data/<br/>&lt;release&gt;/ snapshots")]
-    zips[("inputs/*.zip<br/>bulk_fuel_data ·<br/>data_for_network_build ·<br/>region_and_census_data ·<br/>river_ice_sources")]
+    zips[("inputs/*.zip<br/>bulk_fuel_data ·<br/>data_for_network_build ·<br/>region_and_census_data")]
+    deposit[("Zenodo deposit<br/>tools/fetch_archive.py:<br/>friction_inputs · friction_stack ·<br/>network_raw · river_ice_work")]
     rasters[("inputs/friction_rasters/<br/>(external — see DATA.md §3.1)")]
     frozen[("final_network/*.zip<br/>frozen network-of-record<br/>(2026-10-15)")]
   end
@@ -41,6 +42,7 @@ flowchart LR
     p00 --> p01 --> p02 --> p03
   end
   rasters -.-> p00
+  deposit -.-> rasters
   p01 --> mask[("waterway_mask_150m.tif +<br/>waterway_river_mask_150m.tif")]
   mask --> p02
   p02 --> stack[("outputs/01_friction_build/<br/>friction_stack/<br/>14 TIFs / 24 surfaces")]
