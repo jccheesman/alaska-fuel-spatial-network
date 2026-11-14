@@ -522,7 +522,6 @@ record_id,outcome,own_boundary_km,located_in_place,community_relation
 {50539CE7-AE72-4BE5-B34B-5CFE5FD44568},match,0.0,Fort Yukon,inside
 {5071DA87-0E0C-4F44-A6F1-39C4A054DAC1},match,0.0,Nunapitchuk,inside
 {5080792E-6BE2-4D7A-BD57-AF8BF71FFF30},match,0.0,Manokotak,inside
-{509CF7C1-AE7E-4289-8EFE-3298B15AD90D},mismatch,485.46,Ambler,elsewhere
 {509F4BA3-BB26-4969-8300-CF3DFA06FAC2},match,0.0,Healy,inside
 {50B0DA07-CC55-4458-825A-5EAD7328F878},match,0.38,,inside
 {51417ED5-3E1D-4A90-98BE-EE63632631CB},match,0.0,Prudhoe Bay,inside
@@ -664,7 +663,6 @@ record_id,outcome,own_boundary_km,located_in_place,community_relation
 {66E08F69-68FD-40AD-99B3-7A2007C0697D},match,0.0,Saint Paul,inside
 {66EF6F7E-91BA-4537-8B1E-897ADBAE771C},match,0.0,Holy Cross,inside
 {6703BC9D-F2E8-4C08-A4D3-CEB43610384B},match,0.0,Aniak,inside
-{67812973-1F5E-4F2F-9E8E-A8FEDA823FAF},mismatch,9.26,Brevig Mission,adjacent
 {679C1FC6-00CF-4BC3-93B7-21630B847652},match,0.0,Birch Creek,inside
 {679E2DA1-DC50-426B-B1F2-F6DC8D2DB1AD},match,0.0,Gakona,inside
 {67A427B8-24AF-46E3-82E0-0740A89A2760},match,0.0,Akutan,inside
@@ -738,7 +736,6 @@ record_id,outcome,own_boundary_km,located_in_place,community_relation
 {72365B62-C5FD-4862-96DB-CC1CB42EF93F},match,0.0,Cordova,inside
 {72CC1CF3-EBE3-4E3B-9B08-97203635FA45},match,0.0,Chignik Lagoon,inside
 {72D561CA-BBAD-4D27-A4F4-0FC17DF9CAD6},match,0.0,Allakaket,inside
-{72E67206-F008-47E9-AE98-4C85EAD98765},mismatch,136.88,Atmautluak,elsewhere
 {72FC3FC4-C253-4EB8-92A4-8219876AD426},match,0.0,Kongiganak,inside
 {733759D7-CB44-4A5E-A706-DE653583CF62},match,0.0,Nuiqsut,inside
 {73551016-2EBE-4AB7-B7E5-ABD8942D3FD0},untested,,,untested
@@ -782,7 +779,6 @@ record_id,outcome,own_boundary_km,located_in_place,community_relation
 {79DEAD08-49F9-444F-9111-EFAC1EBFCDD1},match,0.06,,inside
 {7A04FB3B-C9C5-4C98-B74F-393C46715566},match,0.0,Marshall,inside
 {7A15F83D-F6C9-40A8-ACC1-4D1B644A5224},match,0.0,Hughes,inside
-{7A206A94-00D4-4121-BA0A-35593A0FADDC},mismatch,289.32,Brevig Mission,elsewhere
 {7A3D0B3B-5FC9-4B1B-A087-222C99BD5703},match,0.0,Koyukuk,inside
 {7A634204-0D42-424E-B19E-058E52FB63DB},match,0.0,Kasaan,inside
 {7AC691F0-663D-4947-B5B2-783A7B0ADA02},outside,48.95,,remote
@@ -1104,7 +1100,6 @@ record_id,outcome,own_boundary_km,located_in_place,community_relation
 {A4E5681F-EF6B-483C-AF08-BFC129E2D93D},match,0.0,Port Alsworth,inside
 {A5155750-38EC-47C7-B827-7975F4A90D3E},outside,2.38,,remote
 {A530462C-BE7E-4917-B358-72FCC00AFB68},match,0.0,Naukati Bay,inside
-{A5398AFB-3BA8-40B9-8A1A-2886C4335A54},mismatch,83.79,Buckland,elsewhere
 {A582CD1B-2461-42BC-AD24-4957D48F8D0C},outside,106.59,,remote
 {A588F617-E750-41C4-86BE-2B7559AFFFFE},match,0.0,Kwethluk,inside
 {A5E8D42A-4A72-4380-B9D4-5CC0084B55D2},match,0.0,Unalaska,inside

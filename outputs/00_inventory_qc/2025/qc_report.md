@@ -1,37 +1,37 @@
 # Inventory QC report — release 2025
 
-Generated 2026-11-14T23:02:41+00:00 by workflows/00_inventory_qc/07_publish.py
+Generated 2026-11-14T23:12:30+00:00 by workflows/00_inventory_qc/07_publish.py
 
 - raw release: `Utilities_Bulk_Fuel_Inventory.csv` sha256 `3fbee569c63dccf813d6fa53e608820d53b92e415feb2c7f20556fc0bb0c30b0` (1830 rows, 1767 located)
-- clean table: `facilities_clean.csv` sha256 `828c45b1a820670792866721d0e63631c117715b119d3a9a072943671b6dba4f` (1802 rows, 1739 located)
-- excluded: 28 (see `excluded.csv`)
-- corrections: 101 applied · 9 pending · 11 rejected · 0 skipped
+- clean table: `facilities_clean.csv` sha256 `3617a315f7e0cd26ed94aa77ccc6c7853b1c255dc65edf157f65e5233fec886a` (1797 rows, 1734 located)
+- excluded: 33 (see `excluded.csv`)
+- corrections: 106 applied · 9 pending · 11 rejected · 0 skipped
 - community keys: 273 · unlabelled records: 97
-- capacity_status: 1715 ok · 75 missing · 12 mismatch; placeholder inspection dates published blank: 9
-- qc_status: 1790 clean · 12 pending_review (withheld from hubs by the build)
-- facility_id: 1739 located records with an id (1160 AEA, 582 synthetic from the ledger); AEA regions: 1738 inside · 1 nearest · 0 outside
+- capacity_status: 1710 ok · 75 missing · 12 mismatch; placeholder inspection dates published blank: 7
+- qc_status: 1790 clean · 7 pending_review (withheld from hubs by the build)
+- facility_id: 1734 located records with an id (1160 AEA, 577 synthetic from the ledger); AEA regions: 1733 inside · 1 nearest · 0 outside
 
 ## Checks
 
 | check | result | detail |
 |---|---|---|
 | no undeclared derived column was produced by a stage | PASS | undeclared=[] (declare it in inputs/inventory_qc/derived_columns.csv) |
-| row reconciliation | PASS | 1830 release = 1802 clean + 28 excluded |
-| every exclusion has a reason | PASS | 28 excluded |
-| every applied correction has reviewer + date | PASS | 101 applied |
+| row reconciliation | PASS | 1830 release = 1797 clean + 33 excluded |
+| every exclusion has a reason | PASS | 33 excluded |
+| every applied correction has reviewer + date | PASS | 106 applied |
 | only schema + derived columns; no contact columns | PASS | extra=[] contact=[] |
 | every declared derived column is present (derived_columns.csv) | PASS | missing=[] |
 | every located record has a facility_id | PASS | missing=0 |
 | facility_id is unique across located records | PASS | shared=[] |
 | facility_id never differs from the ledger (facility_ids.csv) | PASS | moved=[] |
-| every located record has an AEA region or an explicit 'outside' relation | PASS | inside=1738 nearest=1 outside=0 |
+| every located record has an AEA region or an explicit 'outside' relation | PASS | inside=1733 nearest=1 outside=0 |
 | fixture: Bethel record f000283 is not above 66°N | PASS |  |
 | fixture: no Unalaska-labelled record sits on Norton Sound (lat > 60) | PASS |  |
 | fixture: no Unalakleet-labelled record sits in the Aleutians (lat < 60) | PASS |  |
 | fixture: no Kodiak-labelled record is in the open Pacific (lat < 56) | PASS |  |
 | fixture: no Coldfoot-labelled record is in Yukon, Canada (lon > -141) | PASS |  |
 | fixture: spelling variants resolved (no 'Saint Marys', 'Clarks Point', 'Dutch Harbor' labels) | PASS |  |
-| deterministic output | PASS | 828c45b1a820 |
+| deterministic output | PASS | 3617a315f7e0 |
 
 ## Corrections applied
 
@@ -138,3 +138,8 @@ Generated 2026-11-14T23:02:41+00:00 by workflows/00_inventory_qc/07_publish.py
 | `{807124A8-0A6D-42E6-98ED-616888004B49}` | longitude | -147.3966131 | -145.253272 | JC | 2026-11-14 |
 | `{E7B9AC7C-E3C6-4313-A350-5414BFE26A53}` | latitude | 61.87844406 | 67.568172 | JC | 2026-11-14 |
 | `{E7B9AC7C-E3C6-4313-A350-5414BFE26A53}` | longitude | -162.084732 | -162.970312 | JC | 2026-11-14 |
+| `{72E67206-F008-47E9-AE98-4C85EAD98765}` | exclude | tank_farm_id=710 | true | JC | 2026-11-14 |
+| `{67812973-1F5E-4F2F-9E8E-A8FEDA823FAF}` | exclude | tank_farm_id=694 | true | JC | 2026-11-14 |
+| `{7A206A94-00D4-4121-BA0A-35593A0FADDC}` | exclude | tank_farm_id=694 | true | JC | 2026-11-14 |
+| `{509CF7C1-AE7E-4289-8EFE-3298B15AD90D}` | exclude | tank_farm_id=179 | true | JC | 2026-11-14 |
+| `{A5398AFB-3BA8-40B9-8A1A-2886C4335A54}` | exclude | tank_farm_id=415 | true | JC | 2026-11-14 |

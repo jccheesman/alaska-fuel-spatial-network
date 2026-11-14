@@ -122,6 +122,11 @@ record_id,field,old_value,new_value,status,reviewer,reviewed_on,outcome,note
 {807124A8-0A6D-42E6-98ED-616888004B49},longitude,-147.3966131,-145.253272,approved,JC,2026-11-14,applied,
 {E7B9AC7C-E3C6-4313-A350-5414BFE26A53},latitude,61.87844406,67.568172,approved,JC,2026-11-14,applied,
 {E7B9AC7C-E3C6-4313-A350-5414BFE26A53},longitude,-162.084732,-162.970312,approved,JC,2026-11-14,applied,
+{72E67206-F008-47E9-AE98-4C85EAD98765},exclude,tank_farm_id=710,true,approved,JC,2026-11-14,applied,
+{67812973-1F5E-4F2F-9E8E-A8FEDA823FAF},exclude,tank_farm_id=694,true,approved,JC,2026-11-14,applied,
+{7A206A94-00D4-4121-BA0A-35593A0FADDC},exclude,tank_farm_id=694,true,approved,JC,2026-11-14,applied,
+{509CF7C1-AE7E-4289-8EFE-3298B15AD90D},exclude,tank_farm_id=179,true,approved,JC,2026-11-14,applied,
+{A5398AFB-3BA8-40B9-8A1A-2886C4335A54},exclude,tank_farm_id=415,true,approved,JC,2026-11-14,applied,
 {5AEE4579-120C-418C-965A-911EFB7A4873},map_point,"95294.34149,866941.8446","95294.34149,866941.8446",derived,,,publisher-corroborates,publisher map point agrees with the corrected position within 100 m; kept verbatim as the authoritative geometry
 {D0D325AD-A296-437B-9213-8A2FD2F3621D},map_point,"161699.986,1928988.01","161699.986,1928988.01",derived,,,publisher-corroborates,publisher map point agrees with the corrected position within 100 m; kept verbatim as the authoritative geometry
 {8D408F52-5CE0-4A95-A586-79D54041D7C7},map_x,-329067.8276,-420077.3262,derived,,,applied-sync,map point still sat on the refuted position; recomputed from the corrected lat/lon (EPSG:3338); publisher original in the snapshot

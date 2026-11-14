@@ -59,7 +59,6 @@ record_id,community_name,outcome,priority,inside_boundary_of,own_boundary_km,lat
 {835A9532-B50F-4307-8766-44E644F988D9},Kenai,mismatch,info,Nikiski,10.03,60.678540,-151.380010,correction:approved,inside a neighbouring place (same town)
 {9D2D53BE-A6BE-4C90-B542-326627B0F06A},Kenai,mismatch,info,Nikiski,10.02,60.678519,-151.383179,,inside a neighbouring place (same town)
 {B50C3F10-1576-41B3-84F8-FA0CA4542BC6},Paxson,outside,info,,9.57,63.256544,-145.650167,,"remote site, outside every boundary"
-{67812973-1F5E-4F2F-9E8E-A8FEDA823FAF},Teller,mismatch,info,Brevig Mission,9.26,65.33289523,-166.4864243,,inside a neighbouring place (same town)
 {591FEE4C-4EAA-4F0F-A6EE-B6FA2F107E7B},Fairbanks,mismatch,info,Fox,9.1,64.957606,-147.617087,,inside a neighbouring place (same town)
 {1A2F20D8-0EC8-48FB-BF8A-3CD11F54461A},Fairbanks,mismatch,info,Ester,9.04,64.844124,-148.010438,,inside a neighbouring place (same town)
 {0348C10F-900C-4DEE-B116-5841EADCA147},Unalakleet,outside,info,,8.89,63.9887,-160.883394,,"remote site, outside every boundary"
@@ -120,19 +119,15 @@ record_id,community_name,outcome,priority,inside_boundary_of,own_boundary_km,lat
 {C9AFF599-4CD8-41B4-97E2-04CEFD79683A},Holy Cross,mismatch,review,Ambler,549.44,67.08767141,-157.8567222,,
 {39943186-EB34-4A7C-B510-E1F60F6E5B77},Iliamna,mismatch,review,Iliamna,543.34,59.75552294,-154.9021745,correction:approved,
 {BACAEA02-40B4-467A-B3B9-39C3197CF50D},King Salmon,mismatch,review,King Salmon,520.88,58.683749,-156.672126,correction:approved,
-{509CF7C1-AE7E-4289-8EFE-3298B15AD90D},Wales,mismatch,review,Ambler,485.46,67.08767141,-157.8567222,,
 {056D0E34-0F8F-4089-8FD4-38E6687C1E94},Noorvik,mismatch,review,Kaltag,297.51,64.32290209,-158.7240535,correction:pending,
-{7A206A94-00D4-4121-BA0A-35593A0FADDC},Saint Michael,mismatch,review,Brevig Mission,289.32,65.33289523,-166.4864243,,
 {8970B1E0-DE4E-4A98-8A1B-5C858F18F05A},Savoonga,mismatch,review,Brevig Mission,262.61,65.33289523,-166.4864243,,
 {BFC59C95-ABE4-4959-BE52-7F09A5308991},Fort Yukon,mismatch,review,Fort Yukon,214.64,66.563958,-145.258792,correction:approved,
 {D32639C4-3E15-4313-904F-B53FE9C4C207},Tununak,mismatch,review,Atmautluak,150.17,60.85685837,-162.2765278,,
-{72E67206-F008-47E9-AE98-4C85EAD98765},Kipnuk,mismatch,review,Atmautluak,136.88,60.85685837,-162.2765278,,
 {AE061686-3F3E-4156-A901-5DDB6E3F0237},Nightmute,mismatch,review,Atmautluak,133.32,60.85685837,-162.2765278,,
 {5C01B036-AAC1-4876-BF5E-30428802A639},Chefornak,mismatch,review,Atmautluak,130.85,60.85685837,-162.2765278,,
 {FE1C1D96-F623-4694-ADA9-82D02F405415},Newtok,mismatch,review,Kipnuk,115.36,59.93413657,-164.0381938,correction:pending,
 {E3EF8439-0613-41E1-B9C0-DC105BB3B3C0},Kiana,mismatch,review,Buckland,114.18,65.98050676,-161.1384531,,
 {C9E914FB-038D-497D-9C7E-7920E1429211},Eielson Afb,mismatch,review,Fort Greely,104.28,63.83333,-145.82217,exception:remote_site,
-{A5398AFB-3BA8-40B9-8A1A-2886C4335A54},Selawik,mismatch,review,Buckland,83.79,65.98050676,-161.1384531,,
 {E6AB9F80-923B-43FA-B7E0-74FB0874B59A},Palmer,mismatch,review,Glacier View,76.36,61.788126,-147.675583,exception:remote_site,
 {14C061AA-262D-4039-AB9A-C4C93FF6ACD2},Fairbanks,mismatch,review,Harding-Birch Lakes,72.01,64.3795,-146.3972,exception:remote_site,
 {6E8C9118-7533-452B-9658-1DC4DFD6FA05},Glennallen,mismatch,review,Tonsina,65.71,61.5135,-145.029,exception:remote_site,

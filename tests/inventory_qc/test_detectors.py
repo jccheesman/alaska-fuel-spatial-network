@@ -38,12 +38,15 @@ def test_every_detector_ran(run):
 def test_shared_farm_ids_found_with_own_record_named(run):
     """Stack rule (owner 2026-10-08): a farm with a matching own record keeps that row and its
     same-capacity copies are excluded, so farms 108 (Aniak) and 377 (Brevig Mission) no longer
-    stack; the four orphan farms (no matching row) stay flagged for the decision queue."""
+    stack. Of the four orphan farms, the 2026-11-14 review excluded the copies with a separate
+    DEC record (Kipnuk, Teller, St Michael, Wales, Selawik), which collapsed farms 694/179/415
+    to a single surviving row each — only farm 710 (LKSD, four sole-representation villages)
+    still spans communities, pending owner-located positions."""
     F, n = run["F"], run["nfac"]
     s = F[F["detector"] == "shared_farm_id"]
     farms = set(s["group_key"])
-    assert {"farm:710", "farm:179", "farm:415", "farm:694"} <= farms          # orphan farms, undecided
-    assert not {"farm:108", "farm:377"} & farms                                 # resolved by exclusion
+    assert "farm:710" in farms                                                 # still spans 4 villages
+    assert not {"farm:108", "farm:377", "farm:694", "farm:179", "farm:415"} & farms
     assert (n["tank_farm_id"] == "108").sum() == 1 and n[n["tank_farm_id"] == "108"]["community_name"].iloc[0] == "Aniak"
     assert "NO record labelled" in " ".join(s[s["group_key"] == "farm:710"]["detail"])
     assert (s["severity"] == "info").sum() == 0, "no orphan farm has an own record"
@@ -53,7 +56,7 @@ def test_guarded_exclusion_retires_when_farm_id_changes(run):
     """An exclude row with old_value 'tank_farm_id=N' is skipped (not applied) once upstream changes N."""
     corr = qc.corrections()
     ex = corr[(corr["field"] == "exclude") & corr["old_value"].str.startswith("tank_farm_id=")]
-    assert len(ex) == 28   # 27 stack-rule copies (2026-10-08) + the Galena school duplicate (2026-11-14)
+    assert len(ex) == 33   # 27 stack-rule copies (2026-10-08) + the Galena school duplicate + 5 orphan-farm copies with a separate DEC record (2026-11-14)
     fac = qc.read_release(LABEL).set_index("record_id")
     assert all(str(fac.at[r.record_id, "tank_farm_id"]) == r.old_value.split("=")[1] for r in ex.itertuples())
 
@@ -163,7 +166,7 @@ def test_placeholder_inspection_dates_are_info_not_review(run):
     """The 9 surviving pre-1900 placeholder dates (Esri 1899-12-30 epoch) are recorded as info
     flags — the paper trail for 07_publish blanking them — and never become review items."""
     p = run["F"][run["F"]["detector"] == "placeholder_inspection_date"]
-    assert len(p) == 9 and (p["severity"] == "info").all()
+    assert len(p) == 7 and (p["severity"] == "info").all()   # 9 until 2026-11-14: Teller + St Michael (1899 dates) are now excluded copies
     assert p["detail"].str.contains("1899").all()
     assert not (run["Q"]["detector"] == "placeholder_inspection_date").any()
 
