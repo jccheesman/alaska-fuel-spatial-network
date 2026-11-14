@@ -121,3 +121,51 @@ def test_review_queue_excludes_decided_records(run):
     corr = qc.corrections()
     assert not set(Q["record_id"]) & set(corr["record_id"])
     assert set(Q["decision"].unique()) <= {""}
+
+
+# The 12 capacity discrepancies the 2026-11 Astra audit surfaced (owner 2026-11-14: all are
+# review items). Six where the populated fuel sum EXCEEDS the total (a physical contradiction)
+# and six where it falls short (possibly an incomplete breakdown).
+CAPACITY_EXCEEDS = {
+    "{EDA71B0B-E7D6-4E52-BD75-CDA27756C3FE}",   # Ambler temp airstrip storage: 2,000 vs 4,000
+    "{57802F02-1FE2-4D07-A325-DC027155B116}",   # Chevak Company Corp. store
+    "{199DCD38-B4D0-4C40-B569-F661EB0257D1}",   # City of Chuathbaluk
+    "{9BA9AAC2-A297-4D86-BA33-73597A255D86}",   # City of Clark's Point
+    "{44244771-16B8-40ED-9FF2-2D77E405955A}",   # Thomas Fuel Sales, Crooked Creek
+    "{4EA87B2D-C068-44CC-970C-0D53111ACA7E}",   # New Koliganek Village Council: 20,000 vs 175,000
+}
+CAPACITY_BELOW = {
+    "{96E5368E-7124-4460-A687-759DC084F019}",   # Elfin Cove Fuel Co.
+    "{748B2C47-6F53-4F18-A713-48B459244BC0}",   # Emmonak Corporation
+    "{60AC36FC-11A2-4126-B20C-4FC3BB51A21A}",   # Galena Power Plant
+    "{1F3E5119-0B67-402E-BCC6-A6FB3D649C1A}",   # Puvurnaq Power Company
+    "{268070AA-D83E-449C-BB0D-3A25985D3464}",   # Levelock Village Council
+    "{ED4F5011-31F9-4D8C-88A0-EED50DDE9C4C}",   # Annette Island Gas Service
+}
+
+
+def test_capacity_mismatch_finds_the_twelve_audit_cases(run):
+    """Components above the total are high, below are medium; every one reaches the owner's
+    queue (2026-11-14) and none carries a suggested value — never repaired by arithmetic."""
+    c = run["F"][run["F"]["detector"] == "capacity_mismatch"]
+    assert set(c.loc[c["severity"] == "high", "record_id"]) == CAPACITY_EXCEEDS
+    assert set(c.loc[c["severity"] == "medium", "record_id"]) == CAPACITY_BELOW
+    assert c["suggested_value"].fillna("").eq("").all()
+    q = run["Q"][run["Q"]["detector"] == "capacity_mismatch"]
+    assert set(q["record_id"]) == CAPACITY_EXCEEDS | CAPACITY_BELOW
+
+
+def test_placeholder_inspection_dates_are_info_not_review(run):
+    """The 9 surviving pre-1900 placeholder dates (Esri 1899-12-30 epoch) are recorded as info
+    flags — the paper trail for 07_publish blanking them — and never become review items."""
+    p = run["F"][run["F"]["detector"] == "placeholder_inspection_date"]
+    assert len(p) == 9 and (p["severity"] == "info").all()
+    assert p["detail"].str.contains("1899").all()
+    assert not (run["Q"]["detector"] == "placeholder_inspection_date").any()
+
+
+def test_alaska_envelope_is_clean_on_the_corrected_release(run):
+    """The envelope guard exists for FUTURE releases: on the corrected 2025 table every located
+    record is inside lat 50..72 / lon <= -129 or >= 170, so it must flag nothing."""
+    assert (run["ran"].loc[run["ran"]["detector"] == "alaska_envelope", "status"] == "ran").all()
+    assert not (run["F"]["detector"] == "alaska_envelope").any()

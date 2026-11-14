@@ -83,3 +83,27 @@ def test_regression_fixtures_fail_on_uncorrected_data():
     raw = qc.read_release(LABEL).dropna(subset=["latitude", "longitude"])
     results = [pred(raw) for _, pred in pub_mod.FIXTURES]
     assert not all(results), "every fixture passed on the UNCORRECTED release"
+
+
+def test_placeholder_dates_published_blank(pipeline):
+    """Pre-1900 inspection dates are database placeholders, published blank (owner 2026-11-14);
+    the raw values stay in the release snapshot."""
+    clean = pd.read_csv(pipeline["clean"], dtype=str)
+    li = clean["last_inspected"].dropna()
+    assert not (li.str[:4] < "1900").any()
+    raw = qc.read_release(LABEL)["last_inspected"].dropna()
+    assert (raw.str[:4] < "1900").any(), "the snapshot keeps the raw placeholder values"
+
+
+def test_capacity_status_describes_never_repairs(pipeline):
+    """capacity_status: ok | missing (unknown stays unknown, never zero) | mismatch (the 12
+    audit cases); total_capacity itself is untouched by the status."""
+    clean = pd.read_csv(pipeline["clean"], dtype=str)
+    assert set(clean["capacity_status"]) == {"ok", "missing", "mismatch"}
+    assert (clean["capacity_status"] == "mismatch").sum() == 12
+    missing = clean["total_capacity"].isna()
+    assert (clean.loc[missing, "capacity_status"] == "missing").all()
+    assert (clean.loc[~missing, "capacity_status"] != "missing").all()
+    raw = qc.read_release(LABEL).set_index("record_id")
+    kept = clean.set_index("record_id")["total_capacity"].dropna()
+    assert (raw.loc[kept.index, "total_capacity"].astype(float) == kept.astype(float)).all()

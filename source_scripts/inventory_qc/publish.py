@@ -25,7 +25,9 @@ from pathlib import Path
 
 import pandas as pd
 
-from .core import DERIVED, OUT, QC, RELEASES, corrections, latest_release, read_csv, release_manifest, schema, write_csv
+import numpy as np
+
+from .core import DERIVED, OUT, QC, RELEASES, corrections, latest_release, read_csv, release_manifest, schema, thresholds, write_csv
 
 LEDGER = QC / "facility_ids.csv"
 
@@ -81,6 +83,18 @@ def publish(label: str) -> tuple[Path, list[tuple[str, bool, str]]]:
     for col in ("aea_region", "aea_region_relation", "aea_region_distance_km"):
         fac[col] = fac["record_id"].map(R[col])
     fac["aea_region_relation"] = fac["aea_region_relation"].fillna("untested")
+    # A pre-1900 inspection date is a database placeholder (the Esri 1899-12-30 epoch), not an
+    # inspection: published blank (owner 2026-11-14). The raw value stays in the release snapshot;
+    # 04_detect's placeholder_inspection_date flag is the per-record paper trail.
+    placeholder_dates = fac["last_inspected"].notna() & (fac["last_inspected"].astype(str).str[:4] < "1900")
+    fac.loc[placeholder_dates, "last_inspected"] = np.nan
+    # capacity_status: whether total_capacity can be used as published. `mismatch` = the populated
+    # per-fuel sum contradicts it beyond capacity_mismatch_gal (04_detect flags the same rows);
+    # `missing` = no total reported (never zero). Describes, never repairs (owner 2026-11-14).
+    comp = fac[["gasoline_capacity", "diesel_capacity", "jet_fuel_capacity", "other_fuel_capacity"]].astype(float)
+    total = fac["total_capacity"].astype(float)
+    mismatch = comp.notna().any(axis=1) & ((comp.sum(axis=1) - total).abs() > thresholds()["capacity_mismatch_gal"])
+    fac["capacity_status"] = np.where(total.isna(), "missing", np.where(mismatch, "mismatch", "ok"))
     allowed = list(schema()["name"]) + DERIVED
     extra_before = [c for c in fac.columns if c not in allowed]
     fac = fac[[c for c in allowed if c in fac.columns]]
@@ -141,6 +155,10 @@ def publish(label: str) -> tuple[Path, list[tuple[str, bool, str]]]:
              f"{int((log['outcome']=='rejected').sum()) if len(log) else 0} rejected · "
              f"{int(log['outcome'].str.startswith('skipped').sum()) if len(log) else 0} skipped",
              f"- community keys: {fac['community_key'].nunique()} · unlabelled records: {int(fac['community_name'].isna().sum())}",
+             f"- capacity_status: {int((fac['capacity_status'] == 'ok').sum())} ok · "
+             f"{int((fac['capacity_status'] == 'missing').sum())} missing · "
+             f"{int((fac['capacity_status'] == 'mismatch').sum())} mismatch; "
+             f"placeholder inspection dates published blank: {int(placeholder_dates.sum())}",
              f"- qc_status: {int((fac['qc_status'] == 'clean').sum())} clean · {int((fac['qc_status'] == 'pending_review').sum())} pending_review (withheld from hubs by the build)",
              f"- facility_id: {int(fac['facility_id'].notna().sum())} located records with an id ({int(fac['ast_facility_id'].notna().sum())} AEA, "
              f"{int((fac['facility_id'].notna() & fac['ast_facility_id'].isna()).sum())} synthetic from the ledger); "

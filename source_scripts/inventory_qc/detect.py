@@ -192,6 +192,56 @@ def missing_fields(f: pd.DataFrame, th: dict) -> list[dict]:
     return out
 
 
+CAPACITY_COMPONENTS = ("gasoline_capacity", "diesel_capacity", "jet_fuel_capacity", "other_fuel_capacity")
+
+
+@detector("capacity_mismatch", ("total_capacity",) + CAPACITY_COMPONENTS)
+def capacity_mismatch(f: pd.DataFrame, th: dict) -> list[dict]:
+    """total_capacity vs the sum of the POPULATED per-fuel capacities (blank components are
+    omitted, not zero). Components above the total are a physical contradiction (high);
+    below may just be an incomplete breakdown (medium). Both are owner review items
+    (owner 2026-11-14: all go to the queue) — never repaired by arithmetic."""
+    out = []
+    tol = th["capacity_mismatch_gal"]
+    g = f.dropna(subset=["total_capacity"])
+    comp = g[list(CAPACITY_COMPONENTS)].astype(float)
+    total = g["total_capacity"].astype(float)
+    s = comp.sum(axis=1)                        # NaN components count as 0 = omitted
+    populated = comp.notna().any(axis=1)
+    bad = populated & ((s - total).abs() > tol)
+    for rid, t, c in zip(g.loc[bad, "record_id"], total[bad], s[bad]):
+        above = c > t
+        out.append(_flag(rid, "capacity_mismatch", "high" if above else "medium",
+                         f"total {t:g} gal vs populated fuel sum {c:g} gal "
+                         f"({'components exceed total' if above else 'components below total — breakdown may be incomplete'})"))
+    return out
+
+
+@detector("placeholder_inspection_date", ("last_inspected",))
+def placeholder_inspection_date(f: pd.DataFrame, th: dict) -> list[dict]:
+    """A pre-1900 inspection date is a database placeholder (the Esri 1899-12-30 epoch), not an
+    inspection. 07_publish blanks it in the clean table; this flag is the record of each one."""
+    g = f.dropna(subset=["last_inspected"])
+    old = g[g["last_inspected"].astype(str).str[:4] < "1900"]
+    return [_flag(r.record_id, "placeholder_inspection_date", "info",
+                  f"last_inspected {r.last_inspected} is a pre-1900 placeholder; published blank",
+                  field="last_inspected", value="")
+            for r in old.itertuples()]
+
+
+@detector("alaska_envelope", ("latitude", "longitude"))
+def alaska_envelope(f: pd.DataFrame, th: dict) -> list[dict]:
+    """Broad plausibility envelope: lat 50..72 N, lon <= -129 E or >= 170 E (the western
+    Aleutians cross the antimeridian). Expected to flag nothing on a corrected release —
+    it exists so a future release's gross coordinate error cannot arrive silently."""
+    g = f.dropna(subset=["latitude", "longitude"])
+    lat, lon = g["latitude"].astype(float), g["longitude"].astype(float)
+    bad = ~(lat.between(50, 72) & ((lon <= -129) | (lon >= 170)))
+    return [_flag(r.record_id, "alaska_envelope", "high",
+                  f"({r.latitude}, {r.longitude}) lies outside the broad Alaska envelope")
+            for r in g[bad].itertuples()]
+
+
 @detector("spelling_variants", ("community_id", "community_name"))
 def spelling_variants(f: pd.DataFrame, th: dict) -> list[dict]:
     """One publisher community id carrying several raw spellings (after aliases)."""
