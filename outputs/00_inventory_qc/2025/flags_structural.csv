@@ -5,14 +5,9 @@ record_id,detector,severity,detail,suggested_field,suggested_value,group_key,cov
 {57802F02-1FE2-4D07-A325-DC027155B116},capacity_mismatch,high,total 195840 gal vs populated fuel sum 200000 gal (components exceed total),,,,correction:rejected
 {9BA9AAC2-A297-4D86-BA33-73597A255D86},capacity_mismatch,high,total 22600 gal vs populated fuel sum 36000 gal (components exceed total),,,,correction:rejected
 {EDA71B0B-E7D6-4E52-BD75-CDA27756C3FE},capacity_mismatch,high,total 2000 gal vs populated fuel sum 4000 gal (components exceed total),,,,correction:rejected
-{5C01B036-AAC1-4876-BF5E-30428802A639},shared_farm_id,high,"farm 710 sits in ATMAUTLUAK but this record is labelled Chefornak; position + total_capacity are the farm's, not Chefornak's. NO record labelled ATMAUTLUAK: consider relabelling one row to keep the farm",latitude;longitude,,farm:710,
-{96705E92-63AB-41A0-B0E8-52639E90CEC8},shared_farm_id,high,"farm 710 sits in ATMAUTLUAK but this record is labelled Tuntutuliak; position + total_capacity are the farm's, not Tuntutuliak's. NO record labelled ATMAUTLUAK: consider relabelling one row to keep the farm",latitude;longitude,,farm:710,
-{AE061686-3F3E-4156-A901-5DDB6E3F0237},shared_farm_id,high,"farm 710 sits in ATMAUTLUAK but this record is labelled Nightmute; position + total_capacity are the farm's, not Nightmute's. NO record labelled ATMAUTLUAK: consider relabelling one row to keep the farm",latitude;longitude,,farm:710,
-{D32639C4-3E15-4313-904F-B53FE9C4C207},shared_farm_id,high,"farm 710 sits in ATMAUTLUAK but this record is labelled Tununak; position + total_capacity are the farm's, not Tununak's. NO record labelled ATMAUTLUAK: consider relabelling one row to keep the farm",latitude;longitude,,farm:710,
-{5C01B036-AAC1-4876-BF5E-30428802A639},shared_point_labels,high,"same point as records labelled NIGHTMUTE, TUNTUTULIAK, TUNUNAK",,,point:-446983:1236014,
-{96705E92-63AB-41A0-B0E8-52639E90CEC8},shared_point_labels,high,"same point as records labelled CHEFORNAK, NIGHTMUTE, TUNUNAK",,,point:-446983:1236014,
-{AE061686-3F3E-4156-A901-5DDB6E3F0237},shared_point_labels,high,"same point as records labelled CHEFORNAK, TUNTUTULIAK, TUNUNAK",,,point:-446983:1236014,
-{D32639C4-3E15-4313-904F-B53FE9C4C207},shared_point_labels,high,"same point as records labelled CHEFORNAK, NIGHTMUTE, TUNTUTULIAK",,,point:-446983:1236014,
+{96705E92-63AB-41A0-B0E8-52639E90CEC8},shared_farm_id,high,"farm 710 sits in CHEFORNAK but this record is labelled Tuntutuliak; position + total_capacity are the farm's, not Tuntutuliak's. farm's own record exists ({5C01B036-AAC1-4876-BF5E-30428802A639})",latitude;longitude,,farm:710,correction:approved
+{AE061686-3F3E-4156-A901-5DDB6E3F0237},shared_farm_id,high,"farm 710 sits in CHEFORNAK but this record is labelled Nightmute; position + total_capacity are the farm's, not Nightmute's. farm's own record exists ({5C01B036-AAC1-4876-BF5E-30428802A639})",latitude;longitude,,farm:710,correction:approved
+{D32639C4-3E15-4313-904F-B53FE9C4C207},shared_farm_id,high,"farm 710 sits in CHEFORNAK but this record is labelled Tununak; position + total_capacity are the farm's, not Tununak's. farm's own record exists ({5C01B036-AAC1-4876-BF5E-30428802A639})",latitude;longitude,,farm:710,
 {1F3E5119-0B67-402E-BCC6-A6FB3D649C1A},capacity_mismatch,medium,total 74500 gal vs populated fuel sum 60000 gal (components below total — breakdown may be incomplete),,,,correction:rejected
 {268070AA-D83E-449C-BB0D-3A25985D3464},capacity_mismatch,medium,total 124900 gal vs populated fuel sum 120000 gal (components below total — breakdown may be incomplete),,,,correction:rejected
 {60AC36FC-11A2-4126-B20C-4FC3BB51A21A},capacity_mismatch,medium,total 630000 gal vs populated fuel sum 568000 gal (components below total — breakdown may be incomplete),,,,correction:rejected
@@ -303,8 +298,9 @@ record_id,detector,severity,detail,suggested_field,suggested_value,group_key,cov
 {FFF367B0-972E-4126-B5A7-31F3709A99A6},missing_fields,info,missing: community_name,,,,
 {24C9FD54-6B5B-4128-A231-C770333A63C0},placeholder_inspection_date,info,last_inspected 1899-12-30 is a pre-1900 placeholder; published blank,last_inspected,,,
 {6F583D81-6839-467F-9E95-2BFB4381CCB2},placeholder_inspection_date,info,last_inspected 1899-12-31 is a pre-1900 placeholder; published blank,last_inspected,,,
-{8970B1E0-DE4E-4A98-8A1B-5C858F18F05A},placeholder_inspection_date,info,last_inspected 1899-12-30 is a pre-1900 placeholder; published blank,last_inspected,,,
+{8970B1E0-DE4E-4A98-8A1B-5C858F18F05A},placeholder_inspection_date,info,last_inspected 1899-12-30 is a pre-1900 placeholder; published blank,last_inspected,,,correction:approved
 {A1ACAD7B-9BE0-491A-951F-BE7A6A70D642},placeholder_inspection_date,info,last_inspected 1899-12-31 is a pre-1900 placeholder; published blank,last_inspected,,,
 {DEF25DC7-2502-4A06-BE1A-12930080D395},placeholder_inspection_date,info,last_inspected 1899-12-31 is a pre-1900 placeholder; published blank,last_inspected,,,
 {E8C7FE98-2833-47DB-A566-8D25750D48D2},placeholder_inspection_date,info,last_inspected 1899-12-30 is a pre-1900 placeholder; published blank,last_inspected,,,correction:approved
 {F0FFCC8F-A5B7-4ADC-8C28-C7FC319FCDDB},placeholder_inspection_date,info,last_inspected 1899-12-30 is a pre-1900 placeholder; published blank,last_inspected,,,correction:approved
+{5C01B036-AAC1-4876-BF5E-30428802A639},shared_farm_id,info,farm 710: this is the farm's own record (CHEFORNAK); 3 other label(s) share the id,,,farm:710,correction:approved

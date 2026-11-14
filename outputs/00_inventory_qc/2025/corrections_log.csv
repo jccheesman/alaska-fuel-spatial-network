@@ -127,6 +127,18 @@ record_id,field,old_value,new_value,status,reviewer,reviewed_on,outcome,note
 {7A206A94-00D4-4121-BA0A-35593A0FADDC},exclude,tank_farm_id=694,true,approved,JC,2026-11-14,applied,
 {509CF7C1-AE7E-4289-8EFE-3298B15AD90D},exclude,tank_farm_id=179,true,approved,JC,2026-11-14,applied,
 {A5398AFB-3BA8-40B9-8A1A-2886C4335A54},exclude,tank_farm_id=415,true,approved,JC,2026-11-14,applied,
+{5C01B036-AAC1-4876-BF5E-30428802A639},latitude,60.85685837,60.157694,approved,JC,2026-11-14,applied,
+{5C01B036-AAC1-4876-BF5E-30428802A639},longitude,-162.2765278,-164.281623,approved,JC,2026-11-14,applied,
+{AE061686-3F3E-4156-A901-5DDB6E3F0237},latitude,60.85685837,60.477113,approved,JC,2026-11-14,applied,
+{AE061686-3F3E-4156-A901-5DDB6E3F0237},longitude,-162.2765278,-164.721887,approved,JC,2026-11-14,applied,
+{96705E92-63AB-41A0-B0E8-52639E90CEC8},latitude,60.85685837,60.342757,approved,JC,2026-11-14,applied,
+{96705E92-63AB-41A0-B0E8-52639E90CEC8},longitude,-162.2765278,-162.676203,approved,JC,2026-11-14,applied,
+{8970B1E0-DE4E-4A98-8A1B-5C858F18F05A},latitude,65.33289523,63.692246,approved,JC,2026-11-14,applied,
+{8970B1E0-DE4E-4A98-8A1B-5C858F18F05A},longitude,-166.4864243,-170.491676,approved,JC,2026-11-14,applied,
+{C9AFF599-4CD8-41B4-97E2-04CEFD79683A},latitude,67.08767141,62.196938,approved,JC,2026-11-14,applied,
+{C9AFF599-4CD8-41B4-97E2-04CEFD79683A},longitude,-157.8567222,-159.770274,approved,JC,2026-11-14,applied,
+{E3EF8439-0613-41E1-B9C0-DC105BB3B3C0},latitude,65.98050676,66.974977,approved,JC,2026-11-14,applied,
+{E3EF8439-0613-41E1-B9C0-DC105BB3B3C0},longitude,-161.1384531,-160.442084,approved,JC,2026-11-14,applied,
 {5AEE4579-120C-418C-965A-911EFB7A4873},map_point,"95294.34149,866941.8446","95294.34149,866941.8446",derived,,,publisher-corroborates,publisher map point agrees with the corrected position within 100 m; kept verbatim as the authoritative geometry
 {D0D325AD-A296-437B-9213-8A2FD2F3621D},map_point,"161699.986,1928988.01","161699.986,1928988.01",derived,,,publisher-corroborates,publisher map point agrees with the corrected position within 100 m; kept verbatim as the authoritative geometry
 {8D408F52-5CE0-4A95-A586-79D54041D7C7},map_x,-329067.8276,-420077.3262,derived,,,applied-sync,map point still sat on the refuted position; recomputed from the corrected lat/lon (EPSG:3338); publisher original in the snapshot
@@ -151,3 +163,15 @@ record_id,field,old_value,new_value,status,reviewer,reviewed_on,outcome,note
 {807124A8-0A6D-42E6-98ED-616888004B49},map_y,1837180.138,1870860.9586,derived,,,applied-sync,map point still sat on the refuted position; recomputed from the corrected lat/lon (EPSG:3338); publisher original in the snapshot
 {E7B9AC7C-E3C6-4313-A350-5414BFE26A53},map_x,-422800.8885,-383440.7647,derived,,,applied-sync,map point still sat on the refuted position; recomputed from the corrected lat/lon (EPSG:3338); publisher original in the snapshot
 {E7B9AC7C-E3C6-4313-A350-5414BFE26A53},map_y,1348151.866,1982540.5879,derived,,,applied-sync,map point still sat on the refuted position; recomputed from the corrected lat/lon (EPSG:3338); publisher original in the snapshot
+{5C01B036-AAC1-4876-BF5E-30428802A639},map_x,-446981.0982,-566547.6760,derived,,,applied-sync,map point still sat on the refuted position; recomputed from the corrected lat/lon (EPSG:3338); publisher original in the snapshot
+{5C01B036-AAC1-4876-BF5E-30428802A639},map_y,1236015.375,1173870.9314,derived,,,applied-sync,map point still sat on the refuted position; recomputed from the corrected lat/lon (EPSG:3338); publisher original in the snapshot
+{AE061686-3F3E-4156-A901-5DDB6E3F0237},map_x,-446981.0982,-584858.1446,derived,,,applied-sync,map point still sat on the refuted position; recomputed from the corrected lat/lon (EPSG:3338); publisher original in the snapshot
+{AE061686-3F3E-4156-A901-5DDB6E3F0237},map_y,1236015.375,1212966.5227,derived,,,applied-sync,map point still sat on the refuted position; recomputed from the corrected lat/lon (EPSG:3338); publisher original in the snapshot
+{96705E92-63AB-41A0-B0E8-52639E90CEC8},map_x,-446981.0982,-475938.9021,derived,,,applied-sync,map point still sat on the refuted position; recomputed from the corrected lat/lon (EPSG:3338); publisher original in the snapshot
+{96705E92-63AB-41A0-B0E8-52639E90CEC8},map_y,1236015.375,1181758.4582,derived,,,applied-sync,map point still sat on the refuted position; recomputed from the corrected lat/lon (EPSG:3338); publisher original in the snapshot
+{8970B1E0-DE4E-4A98-8A1B-5C858F18F05A},map_x,-578652.5567,-805902.4431,derived,,,applied-sync,map point still sat on the refuted position; recomputed from the corrected lat/lon (EPSG:3338); publisher original in the snapshot
+{8970B1E0-DE4E-4A98-8A1B-5C858F18F05A},map_y,1762717.264,1625692.4480,derived,,,applied-sync,map point still sat on the refuted position; recomputed from the corrected lat/lon (EPSG:3338); publisher original in the snapshot
+{C9AFF599-4CD8-41B4-97E2-04CEFD79683A},map_x,-168358.097,-299040.0040,derived,,,applied-sync,map point still sat on the refuted position; recomputed from the corrected lat/lon (EPSG:3338); publisher original in the snapshot
+{C9AFF599-4CD8-41B4-97E2-04CEFD79683A},map_y,1908214.339,1370994.8967,derived,,,applied-sync,map point still sat on the refuted position; recomputed from the corrected lat/lon (EPSG:3338); publisher original in the snapshot
+{E3EF8439-0613-41E1-B9C0-DC105BB3B3C0},map_x,-324393.3157,-282148.5557,derived,,,applied-sync,map point still sat on the refuted position; recomputed from the corrected lat/lon (EPSG:3338); publisher original in the snapshot
+{E3EF8439-0613-41E1-B9C0-DC105BB3B3C0},map_y,1797729.384,1904507.7704,derived,,,applied-sync,map point still sat on the refuted position; recomputed from the corrected lat/lon (EPSG:3338); publisher original in the snapshot

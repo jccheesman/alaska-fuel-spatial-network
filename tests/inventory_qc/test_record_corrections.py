@@ -10,6 +10,24 @@ S = ROOT / ".claude" / "skills" / "record-facility-corrections" / "scripts" / "r
 spec = importlib.util.spec_from_file_location("rc", S); rc = importlib.util.module_from_spec(spec); spec.loader.exec_module(rc)
 LABEL = rc.qc.latest_release()
 Q = pd.read_csv(rp.INVENTORY_QC_OUT / LABEL / "review_queue.csv", dtype=str, keep_default_na=False)
+# The live queue shrinks as the owner decides (2 rows, one record, after the 2026-11-14 reviews);
+# the fixture needs six rows with DISTINCT records, so dedupe then pad with queue-shaped rows for
+# published records that carry no correction yet (plan() refuses already-decided (record, field)
+# pairs, and a duplicated record would make two decisions collide on one id).
+Q = Q.drop_duplicates("record_id").reset_index(drop=True)
+if len(Q) < 6:
+    _fac = pd.read_csv(rp.INVENTORY_QC_OUT / LABEL / "facilities_clean.csv", dtype=str, keep_default_na=False)
+    _fac = _fac[~_fac["record_id"].isin(set(rc.qc.corrections()["record_id"])) & ~_fac["record_id"].isin(set(Q["record_id"]))]
+    _pad = pd.DataFrame("", index=range(6 - len(Q)), columns=Q.columns)
+    _take = _fac.head(6 - len(Q)).reset_index(drop=True)
+    for _c in Q.columns:
+        if _c in _take.columns:
+            _pad[_c] = _take[_c]
+    _pad["source"] = "boundary"
+    _pad["detector"] = "boundary_mismatch"
+    _pad["priority"] = "review"
+    _pad["detail"] = "synthetic fixture row (see header comment)"
+    Q = pd.concat([Q, _pad], ignore_index=True)
 
 
 def _filled(**over):

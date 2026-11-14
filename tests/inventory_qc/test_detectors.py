@@ -45,11 +45,14 @@ def test_shared_farm_ids_found_with_own_record_named(run):
     F, n = run["F"], run["nfac"]
     s = F[F["detector"] == "shared_farm_id"]
     farms = set(s["group_key"])
-    assert "farm:710" in farms                                                 # still spans 4 villages
+    assert "farm:710" in farms                                                 # Tununak still pending
     assert not {"farm:108", "farm:377", "farm:694", "farm:179", "farm:415"} & farms
     assert (n["tank_farm_id"] == "108").sum() == 1 and n[n["tank_farm_id"] == "108"]["community_name"].iloc[0] == "Aniak"
-    assert "NO record labelled" in " ".join(s[s["group_key"] == "farm:710"]["detail"])
-    assert (s["severity"] == "info").sum() == 0, "no orphan farm has an own record"
+    # With three of the four farm-710 rows relocated to their villages (2026-11-14), the detector
+    # sees located rows and keeps flagging the id-sharing; the one undecided record (Tununak)
+    # must still be a non-info flag so it stays in the queue until its position is owner-located.
+    t = s[s["detail"].str.contains("Tununak")]
+    assert len(t) and (t["severity"] != "info").all()
 
 
 def test_guarded_exclusion_retires_when_farm_id_changes(run):

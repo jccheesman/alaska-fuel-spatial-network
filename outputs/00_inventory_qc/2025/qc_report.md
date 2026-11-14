@@ -1,14 +1,14 @@
 # Inventory QC report — release 2025
 
-Generated 2026-11-14T23:12:30+00:00 by workflows/00_inventory_qc/07_publish.py
+Generated 2026-11-14T23:21:44+00:00 by workflows/00_inventory_qc/07_publish.py
 
 - raw release: `Utilities_Bulk_Fuel_Inventory.csv` sha256 `3fbee569c63dccf813d6fa53e608820d53b92e415feb2c7f20556fc0bb0c30b0` (1830 rows, 1767 located)
-- clean table: `facilities_clean.csv` sha256 `3617a315f7e0cd26ed94aa77ccc6c7853b1c255dc65edf157f65e5233fec886a` (1797 rows, 1734 located)
+- clean table: `facilities_clean.csv` sha256 `e37fa312981e0eb89cd8940504c27b373d704fd0d175598c41270737794a0efe` (1797 rows, 1734 located)
 - excluded: 33 (see `excluded.csv`)
-- corrections: 106 applied · 9 pending · 11 rejected · 0 skipped
+- corrections: 118 applied · 9 pending · 11 rejected · 0 skipped
 - community keys: 273 · unlabelled records: 97
 - capacity_status: 1710 ok · 75 missing · 12 mismatch; placeholder inspection dates published blank: 7
-- qc_status: 1790 clean · 7 pending_review (withheld from hubs by the build)
+- qc_status: 1796 clean · 1 pending_review (withheld from hubs by the build)
 - facility_id: 1734 located records with an id (1160 AEA, 577 synthetic from the ledger); AEA regions: 1733 inside · 1 nearest · 0 outside
 
 ## Checks
@@ -18,7 +18,7 @@ Generated 2026-11-14T23:12:30+00:00 by workflows/00_inventory_qc/07_publish.py
 | no undeclared derived column was produced by a stage | PASS | undeclared=[] (declare it in inputs/inventory_qc/derived_columns.csv) |
 | row reconciliation | PASS | 1830 release = 1797 clean + 33 excluded |
 | every exclusion has a reason | PASS | 33 excluded |
-| every applied correction has reviewer + date | PASS | 106 applied |
+| every applied correction has reviewer + date | PASS | 118 applied |
 | only schema + derived columns; no contact columns | PASS | extra=[] contact=[] |
 | every declared derived column is present (derived_columns.csv) | PASS | missing=[] |
 | every located record has a facility_id | PASS | missing=0 |
@@ -31,7 +31,7 @@ Generated 2026-11-14T23:12:30+00:00 by workflows/00_inventory_qc/07_publish.py
 | fixture: no Kodiak-labelled record is in the open Pacific (lat < 56) | PASS |  |
 | fixture: no Coldfoot-labelled record is in Yukon, Canada (lon > -141) | PASS |  |
 | fixture: spelling variants resolved (no 'Saint Marys', 'Clarks Point', 'Dutch Harbor' labels) | PASS |  |
-| deterministic output | PASS | 3617a315f7e0 |
+| deterministic output | PASS | e37fa312981e |
 
 ## Corrections applied
 
@@ -143,3 +143,15 @@ Generated 2026-11-14T23:12:30+00:00 by workflows/00_inventory_qc/07_publish.py
 | `{7A206A94-00D4-4121-BA0A-35593A0FADDC}` | exclude | tank_farm_id=694 | true | JC | 2026-11-14 |
 | `{509CF7C1-AE7E-4289-8EFE-3298B15AD90D}` | exclude | tank_farm_id=179 | true | JC | 2026-11-14 |
 | `{A5398AFB-3BA8-40B9-8A1A-2886C4335A54}` | exclude | tank_farm_id=415 | true | JC | 2026-11-14 |
+| `{5C01B036-AAC1-4876-BF5E-30428802A639}` | latitude | 60.85685837 | 60.157694 | JC | 2026-11-14 |
+| `{5C01B036-AAC1-4876-BF5E-30428802A639}` | longitude | -162.2765278 | -164.281623 | JC | 2026-11-14 |
+| `{AE061686-3F3E-4156-A901-5DDB6E3F0237}` | latitude | 60.85685837 | 60.477113 | JC | 2026-11-14 |
+| `{AE061686-3F3E-4156-A901-5DDB6E3F0237}` | longitude | -162.2765278 | -164.721887 | JC | 2026-11-14 |
+| `{96705E92-63AB-41A0-B0E8-52639E90CEC8}` | latitude | 60.85685837 | 60.342757 | JC | 2026-11-14 |
+| `{96705E92-63AB-41A0-B0E8-52639E90CEC8}` | longitude | -162.2765278 | -162.676203 | JC | 2026-11-14 |
+| `{8970B1E0-DE4E-4A98-8A1B-5C858F18F05A}` | latitude | 65.33289523 | 63.692246 | JC | 2026-11-14 |
+| `{8970B1E0-DE4E-4A98-8A1B-5C858F18F05A}` | longitude | -166.4864243 | -170.491676 | JC | 2026-11-14 |
+| `{C9AFF599-4CD8-41B4-97E2-04CEFD79683A}` | latitude | 67.08767141 | 62.196938 | JC | 2026-11-14 |
+| `{C9AFF599-4CD8-41B4-97E2-04CEFD79683A}` | longitude | -157.8567222 | -159.770274 | JC | 2026-11-14 |
+| `{E3EF8439-0613-41E1-B9C0-DC105BB3B3C0}` | latitude | 65.98050676 | 66.974977 | JC | 2026-11-14 |
+| `{E3EF8439-0613-41E1-B9C0-DC105BB3B3C0}` | longitude | -161.1384531 | -160.442084 | JC | 2026-11-14 |

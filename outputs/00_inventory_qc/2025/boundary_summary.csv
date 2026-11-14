@@ -1,10 +1,10 @@
 outcome,records
 untested: no label,97
 untested: no boundary for this community,146
-match,1351
-mismatch,65
+match,1357
+mismatch,59
 outside,75
-flagged: review,25
-"flagged: review, not yet covered by a decision",7
+flagged: review,19
+"flagged: review, not yet covered by a decision",1
 "info: inside a neighbouring place <= review km (same town, not reviewed)",40
 "info: outside every boundary (remote site, not reviewed)",75

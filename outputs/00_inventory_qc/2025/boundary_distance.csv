@@ -583,7 +583,7 @@ record_id,outcome,own_boundary_km,located_in_place,community_relation
 {5BC6B33B-BBDA-455D-BEBA-624BEDA7F496},match,0.0,Bethel,inside
 {5BD9746B-58B7-4F77-8EED-A244DE54F62D},match,0.0,Ambler,inside
 {5BFB43F5-855A-4897-8C0E-293579F1C6C9},match,0.0,Russian Mission,inside
-{5C01B036-AAC1-4876-BF5E-30428802A639},mismatch,130.85,Atmautluak,elsewhere
+{5C01B036-AAC1-4876-BF5E-30428802A639},match,0.0,Chefornak,inside
 {5C421205-5987-413D-96B8-2DE9EBCF4A59},match,0.0,Aniak,inside
 {5C4B0813-680E-47D6-A697-FE76F3230475},outside,122.0,,remote
 {5C69DCCA-C3EA-4055-A242-C577155B97AB},match,0.0,Craig,inside
@@ -884,7 +884,7 @@ record_id,outcome,own_boundary_km,located_in_place,community_relation
 {8911BFBD-59A5-485A-86C4-7EA6C3180F66},match,0.0,Unalaska,inside
 {892AE18F-C639-4A7B-919E-5536BD309E88},match,0.0,Newtok,inside
 {894AC954-4844-4F69-B96A-3ED58FAA4D88},match,0.0,Prudhoe Bay,inside
-{8970B1E0-DE4E-4A98-8A1B-5C858F18F05A},mismatch,262.61,Brevig Mission,elsewhere
+{8970B1E0-DE4E-4A98-8A1B-5C858F18F05A},match,0.0,Savoonga,inside
 {89DA62E0-9930-40F0-B0CD-EFE4FCB70133},match,0.0,Napaskiak,inside
 {8A0AA12B-5E97-4768-80B0-F2E86C50DFDD},match,0.89,South Van Horn,inside
 {8A108F8E-4CF4-4400-BB47-FDB696592362},match,0.0,Point Hope,inside
@@ -985,7 +985,7 @@ record_id,outcome,own_boundary_km,located_in_place,community_relation
 {960DC572-560B-4542-95CD-B9560B68ECFC},match,0.0,Atqasuk,inside
 {96237B31-0C4F-486F-99F1-B7F39326C8FA},match,0.0,Valdez,inside
 {96591F9F-54A5-4054-B859-E0A7C8852D5A},match,0.0,Nunam Iqua,inside
-{96705E92-63AB-41A0-B0E8-52639E90CEC8},mismatch,43.97,Atmautluak,elsewhere
+{96705E92-63AB-41A0-B0E8-52639E90CEC8},match,0.0,Tuntutuliak,inside
 {96BB9651-60E8-4357-9DC1-C24D1519AF25},match,0.0,Sand Point,inside
 {96C86C0C-2A57-4A26-94E5-72600F5A5FCC},mismatch,5.02,Gateway,adjacent
 {96E5368E-7124-4460-A687-759DC084F019},match,0.0,Elfin Cove,inside
@@ -1169,7 +1169,7 @@ record_id,outcome,own_boundary_km,located_in_place,community_relation
 {ADA92A6C-1168-4113-9B0F-A9E279CD5BC0},match,0.0,Nome,inside
 {ADB712F1-7ED2-48F4-8513-9B6160732903},untested,,,untested
 {ADDAB7A9-008D-4294-A74F-B722E49B32DC},outside,64.05,,remote
-{AE061686-3F3E-4156-A901-5DDB6E3F0237},mismatch,133.32,Atmautluak,elsewhere
+{AE061686-3F3E-4156-A901-5DDB6E3F0237},match,0.0,Nightmute,inside
 {AE259A2D-93B6-4E34-AEE3-3F39B37685ED},outside,40.33,,remote
 {AE3A12BF-C938-4998-B176-94765EAE7B73},match,0.17,Salamatof,inside
 {AE4C81AC-F533-4FFF-B91D-80DD9CF22EF2},match,0.0,Tununak,inside
@@ -1353,7 +1353,7 @@ record_id,outcome,own_boundary_km,located_in_place,community_relation
 {C8DF6A5F-A2B8-4E05-A26C-E2CFB7A19B4D},untested,,,untested
 {C9115959-A754-41E2-9301-60F06A3FCABD},match,0.0,Point Lay,inside
 {C995496F-83BC-4D90-B7A0-8346CD6E515C},outside,18.33,,remote
-{C9AFF599-4CD8-41B4-97E2-04CEFD79683A},mismatch,549.44,Ambler,elsewhere
+{C9AFF599-4CD8-41B4-97E2-04CEFD79683A},match,0.0,Holy Cross,inside
 {C9BC00FA-491A-4D02-BFB8-B40977DA2016},match,0.79,,inside
 {C9C55A93-61A6-4764-B097-78DBF717D1B2},untested,,,untested
 {C9E914FB-038D-497D-9C7E-7920E1429211},mismatch,104.28,Fort Greely,elsewhere
@@ -1545,7 +1545,7 @@ record_id,outcome,own_boundary_km,located_in_place,community_relation
 {E2EF0E5B-287E-4122-A175-2E0B85FD9D17},match,0.0,Venetie,inside
 {E32D2921-8176-4468-A0AB-9AE351693922},mismatch,3.78,South Van Horn,adjacent
 {E3DA4A6D-2545-4031-85A7-7F30CDA34F87},untested,,,untested
-{E3EF8439-0613-41E1-B9C0-DC105BB3B3C0},mismatch,114.18,Buckland,elsewhere
+{E3EF8439-0613-41E1-B9C0-DC105BB3B3C0},match,0.08,,inside
 {E40F47E8-DDAF-49A1-933C-821B7401109C},untested,,,untested
 {E4218125-2B99-44D5-8CFD-349D1CAA389F},untested,,,untested
 {E440AFDF-429C-43EF-97E7-E99BC8872AF7},match,0.0,Valdez,inside
