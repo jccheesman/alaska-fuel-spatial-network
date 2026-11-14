@@ -78,6 +78,7 @@ DUCKDB = OUTPUTS / "fuel_network.duckdb"
 FIGURES = OUTPUTS / "figures"
 TABLES = OUTPUTS / "tables"
 NETWORK_PLOTS = OUTPUTS / "final_network_plots"
+ANALYSIS = OUTPUTS / "analysis"                   # investigation artifacts kept with the repo
 DIAGNOSTICS_OUT = OUTPUTS / "diagnostics"         # diagnostics/<stage>/ scripts write here
 
 # --- workflows/ ----------------------------------------------------------------

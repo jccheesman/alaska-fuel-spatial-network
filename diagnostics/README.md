@@ -27,6 +27,10 @@ Not to be confused with `analysis/` (questions asked *of* the finished network) 
 | `plot_mask_construction.py` | How the river-ice interpolation mask is built, panel by panel, and whether the arcpy rasters agree with it | `friction_preprocessing/README.md` | yes (needs `friction_preprocessing/data/` + river-ice rasters) |
 | `plot_sea_ice_padding.py` | Does padding the GEE sea-ice export to the full grid put zeros only where there is no data? | `friction_preprocessing/pad_sea_ice_to_grid.py` | yes (needs the raw + padded sea-ice rasters) |
 | `compare_lulc_grids.py` | How much did the fast LULC export (nearest sample) change classes vs the exact majority reference? | Its own report (overall + per-class agreement) | yes, given the two LULC rasters (`--new` / `--old`) |
+| `compare_river_ice_stacks.py` | Did the river-ice rebuild change exactly what the plan predicted — truncation gone, coverage delta = old NN footprint + the 4 clipped polygons, corridor flips frozen-ward only? | `outputs/analysis/FRICTION_STACK_COMPARISON.md`, `river_ice_new_vs_old.csv` | yes, given the pre-rebuild backup (`--old-dir`, default `river_ice.bak_pre_rebuild`) |
+| `nhd_river_marine_check.py` | Which NWN waterway segments are rivers according to NHD (and which FTypes can be trusted to say so)? | The `RIVER_SEGMENT_KEY_IDS` allowlist in `friction_config.py`; `docs/TEST_LOG.md` (2026-08-20) | yes (needs the ~5 GB NHD download under `inputs/river_ice_work/NHD_extracted/`) |
+| `extract_barge_waterway.py` | Compact helper: per-month barge navigability over the 501,684 waterway cells, so stack comparisons don't re-read 464M-cell rasters | `outputs/analysis/barge_waterway_new.npz`, consumed by the stack comparison | yes (needs the friction stack) |
+| `river_ice_interp.py` | Can the arcpy interpolation stages (polygon median → IDW → NN fallback) be reproduced in pure Python for parity checks? | `docs/TEST_LOG.md` (2026-08-21): a parity diagnostic, deliberately NOT wired into the pipeline | import-only module (no CLI) |
 
 ## 02_network_build
 

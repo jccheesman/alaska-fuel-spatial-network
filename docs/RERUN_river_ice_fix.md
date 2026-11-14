@@ -344,7 +344,7 @@ rm -rf outputs/01_friction_build.bak_preclip inputs/friction_rasters/river_ice.b
   cells in January, 1,113 in December). Plausible — it drains Iliamna Lake and
   large lake-fed rivers hold open water later — but unpredicted and therefore
   unverified.
-- **NHD membership check.** `tools/nhd_river_marine_check.py` has not been run
+- **NHD membership check.** `diagnostics/01_friction_build/nhd_river_marine_check.py` has not been run
   against the full NHD. It would settle Egegik / Ugashik / Naknek (no Brown
   coverage) and the two naming anomalies below.
 - **"Dahl Creek"** — the NWN segment sits at Port Clarence on the Seward
@@ -361,7 +361,7 @@ rm -rf outputs/01_friction_build.bak_preclip inputs/friction_rasters/river_ice.b
   assumed to be cell-centre rasterisation differing at polygon boundaries but
   not proven. It does not affect the truncation finding, which was measured
   inside arcpy's own mask — but it is the open question if
-  `tools/river_ice_interp.py` is ever revisited as a replacement rather than a
+  `diagnostics/01_friction_build/river_ice_interp.py` is ever revisited as a replacement rather than a
   diagnostic.
 - **`MARINE_LINEHAUL_SEASON_MONTHS`** is unused. Its Jun–Oct envelope describes
   western Alaska; wiring it in globally would close Southeast and Southcentral

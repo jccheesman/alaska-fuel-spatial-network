@@ -394,7 +394,7 @@ Port run on arcpy's **native** (pre-alignment) grid, read off
 
 The IDW row is the control: a `cKDTree` reimplementation reproduces arcpy's
 `Idw` to 6.5e-4. The divergence is confined to the one stage. Port kept as a
-diagnostic at `tools/river_ice_interp.py` — **not** wired into the pipeline.
+diagnostic at `diagnostics/01_friction_build/river_ice_interp.py` — **not** wired into the pipeline.
 
 ### The fix
 
