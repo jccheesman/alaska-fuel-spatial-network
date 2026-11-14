@@ -35,6 +35,16 @@ the row, never force it). Stage 05 never relabels — a site inside no boundary 
 a remote site (info), not a review item; only a mismatch inside *another*
 community past `boundary_review_km` is reviewable.
 
+From the 2026-11 Astra audit adoption (`docs/astra_audit_2026-11.md`): stage 04
+also checks `capacity_mismatch` (total vs populated per-fuel sum beyond
+`capacity_mismatch_gal`; above = high, below = medium — all owner review items,
+never repaired by arithmetic), `placeholder_inspection_date` (pre-1900 = the Esri
+1899-12-30 epoch; info) and `alaska_envelope` (gross-coordinate guard for future
+releases; expected to flag nothing). Stage 07 publishes pre-1900 inspection dates
+as blank (the raw value stays in the snapshot) and adds the declared
+`capacity_status` column (`ok | missing | mismatch`) so capacity figures can
+filter or footnote unreliable totals.
+
 ## Inputs
 
 Dataset sources and status (the AEA inventory, the DCRA boundaries, the AEA
