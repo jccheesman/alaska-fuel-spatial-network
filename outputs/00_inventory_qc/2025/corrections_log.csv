@@ -89,3 +89,19 @@ record_id,field,old_value,new_value,status,reviewer,reviewed_on,outcome,note
 {4533136B-B178-4EEB-8F4E-1BBF21C03ABE},exclude,tank_farm_id=621,true,approved,JC,2026-10-08,applied,
 {3758A00D-FA89-45EA-85FB-DE30F19E5DBC},exclude,tank_farm_id=706,true,approved,JC,2026-10-08,applied,
 {83F3B425-DC65-4A0B-94B5-14D3D08E5901},exclude,tank_farm_id=830,true,approved,JC,2026-10-08,applied,
+{5AEE4579-120C-418C-965A-911EFB7A4873},map_x,95294.34149,95294.5310,derived,,,applied-sync,map point recomputed from the corrected lat/lon (EPSG:3338); publisher original in the snapshot
+{5AEE4579-120C-418C-965A-911EFB7A4873},map_y,866941.8446,866942.1022,derived,,,applied-sync,map point recomputed from the corrected lat/lon (EPSG:3338); publisher original in the snapshot
+{D0D325AD-A296-437B-9213-8A2FD2F3621D},map_x,161699.986,161701.2101,derived,,,applied-sync,map point recomputed from the corrected lat/lon (EPSG:3338); publisher original in the snapshot
+{D0D325AD-A296-437B-9213-8A2FD2F3621D},map_y,1928988.01,1928988.5036,derived,,,applied-sync,map point recomputed from the corrected lat/lon (EPSG:3338); publisher original in the snapshot
+{8D408F52-5CE0-4A95-A586-79D54041D7C7},map_x,-329067.8276,-420077.3262,derived,,,applied-sync,map point recomputed from the corrected lat/lon (EPSG:3338); publisher original in the snapshot
+{8D408F52-5CE0-4A95-A586-79D54041D7C7},map_y,2001060.236,1225845.3428,derived,,,applied-sync,map point recomputed from the corrected lat/lon (EPSG:3338); publisher original in the snapshot
+{978F2CF3-F873-42E9-A4F4-4744D455FBA9},map_x,-303364.0296,-190605.5897,derived,,,applied-sync,map point recomputed from the corrected lat/lon (EPSG:3338); publisher original in the snapshot
+{978F2CF3-F873-42E9-A4F4-4744D455FBA9},map_y,1063863.31,1056425.4828,derived,,,applied-sync,map point recomputed from the corrected lat/lon (EPSG:3338); publisher original in the snapshot
+{A5E8D42A-4A72-4380-B9D4-5CC0084B55D2},map_x,-327220.5106,-821746.8385,derived,,,applied-sync,map point recomputed from the corrected lat/lon (EPSG:3338); publisher original in the snapshot
+{A5E8D42A-4A72-4380-B9D4-5CC0084B55D2},map_y,1563910.436,507726.1271,derived,,,applied-sync,map point recomputed from the corrected lat/lon (EPSG:3338); publisher original in the snapshot
+{621FCC2F-3A90-426E-A211-00250864F71E},map_x,-821742.6414,-327221.9917,derived,,,applied-sync,map point recomputed from the corrected lat/lon (EPSG:3338); publisher original in the snapshot
+{621FCC2F-3A90-426E-A211-00250864F71E},map_y,507740.4325,1563893.7678,derived,,,applied-sync,map point recomputed from the corrected lat/lon (EPSG:3338); publisher original in the snapshot
+{835A9532-B50F-4307-8766-44E644F988D9},map_x,293436.3088,142612.3327,derived,,,applied-sync,map point recomputed from the corrected lat/lon (EPSG:3338); publisher original in the snapshot
+{835A9532-B50F-4307-8766-44E644F988D9},map_y,1668708.05,1190994.1372,derived,,,applied-sync,map point recomputed from the corrected lat/lon (EPSG:3338); publisher original in the snapshot
+{6D4B4A33-4BA6-4F24-B682-8F598BC19947},map_x,60948.15754,1296722.9670,derived,,,applied-sync,map point recomputed from the corrected lat/lon (EPSG:3338); publisher original in the snapshot
+{6D4B4A33-4BA6-4F24-B682-8F598BC19947},map_y,1844160.683,821219.3656,derived,,,applied-sync,map point recomputed from the corrected lat/lon (EPSG:3338); publisher original in the snapshot
