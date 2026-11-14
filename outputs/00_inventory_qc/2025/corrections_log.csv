@@ -89,6 +89,18 @@ record_id,field,old_value,new_value,status,reviewer,reviewed_on,outcome,note
 {4533136B-B178-4EEB-8F4E-1BBF21C03ABE},exclude,tank_farm_id=621,true,approved,JC,2026-10-08,applied,
 {3758A00D-FA89-45EA-85FB-DE30F19E5DBC},exclude,tank_farm_id=706,true,approved,JC,2026-10-08,applied,
 {83F3B425-DC65-4A0B-94B5-14D3D08E5901},exclude,tank_farm_id=830,true,approved,JC,2026-10-08,applied,
+{EDA71B0B-E7D6-4E52-BD75-CDA27756C3FE},(no change),,,rejected,JC,2026-11-14,rejected,
+{57802F02-1FE2-4D07-A325-DC027155B116},(no change),,,rejected,JC,2026-11-14,rejected,
+{199DCD38-B4D0-4C40-B569-F661EB0257D1},(no change),,,rejected,JC,2026-11-14,rejected,
+{9BA9AAC2-A297-4D86-BA33-73597A255D86},(no change),,,rejected,JC,2026-11-14,rejected,
+{44244771-16B8-40ED-9FF2-2D77E405955A},(no change),,,rejected,JC,2026-11-14,rejected,
+{96E5368E-7124-4460-A687-759DC084F019},(no change),,,rejected,JC,2026-11-14,rejected,
+{748B2C47-6F53-4F18-A713-48B459244BC0},(no change),,,rejected,JC,2026-11-14,rejected,
+{60AC36FC-11A2-4126-B20C-4FC3BB51A21A},(no change),,,rejected,JC,2026-11-14,rejected,
+{1F3E5119-0B67-402E-BCC6-A6FB3D649C1A},(no change),,,rejected,JC,2026-11-14,rejected,
+{268070AA-D83E-449C-BB0D-3A25985D3464},(no change),,,rejected,JC,2026-11-14,rejected,
+{ED4F5011-31F9-4D8C-88A0-EED50DDE9C4C},(no change),,,rejected,JC,2026-11-14,rejected,
+{4EA87B2D-C068-44CC-970C-0D53111ACA7E},(undecided),,,pending,JC,2026-11-14,pending,
 {5AEE4579-120C-418C-965A-911EFB7A4873},map_point,"95294.34149,866941.8446","95294.34149,866941.8446",derived,,,publisher-corroborates,publisher map point agrees with the corrected position within 100 m; kept verbatim as the authoritative geometry
 {D0D325AD-A296-437B-9213-8A2FD2F3621D},map_point,"161699.986,1928988.01","161699.986,1928988.01",derived,,,publisher-corroborates,publisher map point agrees with the corrected position within 100 m; kept verbatim as the authoritative geometry
 {8D408F52-5CE0-4A95-A586-79D54041D7C7},map_x,-329067.8276,-420077.3262,derived,,,applied-sync,map point still sat on the refuted position; recomputed from the corrected lat/lon (EPSG:3338); publisher original in the snapshot

@@ -145,14 +145,18 @@ CAPACITY_BELOW = {
 
 
 def test_capacity_mismatch_finds_the_twelve_audit_cases(run):
-    """Components above the total are high, below are medium; every one reaches the owner's
-    queue (2026-11-14) and none carries a suggested value — never repaired by arithmetic."""
+    """Components above the total are high, below are medium; none carries a suggested value —
+    never repaired by arithmetic. The owner reviewed all 12 on 2026-11-14 (11 keep-as-published,
+    Koliganek ask-publisher), so every flag is covered by a correction row and none queues;
+    the flags themselves stay as the standing record of the arithmetic."""
     c = run["F"][run["F"]["detector"] == "capacity_mismatch"]
     assert set(c.loc[c["severity"] == "high", "record_id"]) == CAPACITY_EXCEEDS
     assert set(c.loc[c["severity"] == "medium", "record_id"]) == CAPACITY_BELOW
     assert c["suggested_value"].fillna("").eq("").all()
-    q = run["Q"][run["Q"]["detector"] == "capacity_mismatch"]
-    assert set(q["record_id"]) == CAPACITY_EXCEEDS | CAPACITY_BELOW
+    assert (c["covered_by"] != "").all(), "every capacity case carries an owner decision"
+    assert set(c.loc[c["covered_by"] == "correction:pending", "record_id"]) == {
+        "{4EA87B2D-C068-44CC-970C-0D53111ACA7E}"}, "Koliganek awaits the publisher's answer"
+    assert not (run["Q"]["detector"] == "capacity_mismatch").any()
 
 
 def test_placeholder_inspection_dates_are_info_not_review(run):
