@@ -131,20 +131,23 @@ replaces the network-of-record.
   BargeRoadTransfer 289 · BargeIceRoadTransfer 21 · IceRoadRoadTransfer 12 ·
   AirRoadTransfer 2 · BargeAirTransfer 2. The mode is
   spelled `IceRoad` (no space) everywhere in the profile.
-- **The network-of-record was re-exported 2026-10-15** (84,094 nodes / 93,049
-  edges / 329 hubs / 4 components): the first export carrying the phase-5 hub
-  builder, the corrected 2025 facility inventory (workflow 00 `facilities_clean.csv`),
-  the 25 km connect-to-giant / barge-transfer reach, and the 2 km snap-to-edge hub
-  fallback. It supersedes the 2026-09-15 AK-DOT-only export (84,089 / 92,978 / 385 /
-  5), which removed the GRIP4 Canada border-stitch (road source = 2026-09 AK DOT&PF);
-  that in turn superseded the 2026-09-12 and 2026-07-20 exports (all in git history).
-  The manual-connections layer is still included. A re-export is a NEW
-  network-of-record: regenerate the zips, the checksums (`inputs/MANIFEST.md`,
-  `final_network/README.md`, `.github/workflows/ci.yml`), the `EXPECTED` tripwire,
-  and the edge_id-keyed tables together. Do not re-export and commit without the
-  owner asking. **The downstream `edge_month_weights` / `edge_costs` DuckDB tables
-  were NOT regenerated with this export (they need the friction stack) — rerun
-  workflow 03 in full on a machine that has it before using the costed graph.**
+- **The network-of-record was re-exported 2026-11-15** (84,094 nodes / 93,049
+  edges / 337 hubs / 4 components): the fully adjudicated inventory (the review
+  queue was emptied 2026-11-14 — 13 facilities relocated, 6 more copies excluded,
+  0 records withheld from hubs, so hubs 329 → 337). Node/edge/edge-type totals
+  happen to equal the 2026-10-15 export but the bytes (hub attributes, moved edge
+  geometry, edge_ids) are new; **workflow 03 WAS rerun in full with this export**
+  (friction stack on the owner's machine) and the `edge_month_weights` /
+  `edge_costs` tables moved with it. It supersedes the 2026-10-15 export (phase-5
+  hub builder + first corrected inventory + 25 km reach / 2 km edge-snap, hubs
+  329), the 2026-09-15 AK-DOT-only export (84,089 / 92,978 / 385 / 5; road source
+  = 2026-09 AK DOT&PF, GRIP4 border-stitch removed), and the 2026-09-12 /
+  2026-07-20 exports (all in git history). The manual-connections layer is still
+  included. A re-export is a NEW network-of-record: regenerate the zips, the
+  checksums (`inputs/MANIFEST.md`, `final_network/README.md`,
+  `.github/workflows/ci.yml`), the `EXPECTED` tripwire, and the edge_id-keyed
+  tables together (rerun workflow 03 in full). Do not re-export and commit
+  without the owner asking.
 - **Strict NoData rule.** One NoData sample makes an edge impassable for the
   month. This is a design decision (auditable via nodata_frac), not a bug.
 - **The friction half WAS verified end-to-end on 2026-08-06** on the owner's

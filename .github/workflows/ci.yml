@@ -62,9 +62,9 @@ jobs:
           import hashlib, pathlib, sys
           EXPECTED = {
             "network_joined_edges.zip":
-              "2104767a4721c333d41a20fde095d86424b15ecf6a5bfa4c0d077249b85d4503",
+              "de00b11aa76c103b4a5a5b6944bf348205f7d71b9fbf193b0bbe8fc3e3729a82",
             "network_joined_nodes.zip":
-              "f6775915ca4d0d8c3ee796019755442e7bd98de9905d55c75650672d0f75f6c3",
+              "b12e348202e784cd52adb8f778cec4926312632de1df943c54a0c284925c3c40",
           }
           bad = []
           for name, want in EXPECTED.items():

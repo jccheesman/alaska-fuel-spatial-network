@@ -24,8 +24,8 @@ Raw inventory files (NOT tracked after 2022; contact fields). Verify a local cop
 | 2025 | `3fbee569c63dccf813d6fa53e608820d53b92e415feb2c7f20556fc0bb0c30b0` |
 | `inputs/data_for_network_build.zip` | `c11708c68da39b76a66511b735fa7983bfebac3d4167fde0fdf3c7ce5df0babf` |
 | `inputs/region_and_census_data.zip` | `e8c36f6329804b0378277a8c449de984c553ca4bba5bdfb4cbae68684d8e2eb3` |
-| `final_network/network_joined_nodes.zip` | `f6775915ca4d0d8c3ee796019755442e7bd98de9905d55c75650672d0f75f6c3` |
-| `final_network/network_joined_edges.zip` | `2104767a4721c333d41a20fde095d86424b15ecf6a5bfa4c0d077249b85d4503` |
+| `final_network/network_joined_nodes.zip` | `b12e348202e784cd52adb8f778cec4926312632de1df943c54a0c284925c3c40` |
+| `final_network/network_joined_edges.zip` | `de00b11aa76c103b4a5a5b6944bf348205f7d71b9fbf193b0bbe8fc3e3729a82` |
 
 | Pending | note |
 |---|---|
