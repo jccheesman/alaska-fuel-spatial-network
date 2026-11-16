@@ -144,6 +144,11 @@ replaces the network-of-record.
   previous build's inventory. Node `.shp`/`.shx` are unchanged;
   edge geometry/order moved, so edge_ids are new; **workflow 03 WAS rerun in
   full with this export** (2026-11-16, 1,116,552 rows, QA envelope reproduced).
+  A second export the same day (`81b2649`, hub-key re-export) changed only
+  `hub_members.csv` (the `hub_key` of six hubs: four take their DCRA community
+  key after the community-label review, two remote sites take their ledger
+  facility id) and the zip containers; every zip member is byte-identical, so
+  edge_ids and the edge_id-keyed tables stand.
   It supersedes the 2026-11-15 export (337 hubs, the 2026-11-14 review queue emptied), the
   2026-10-15 export (phase-5 hub builder + first corrected inventory + 25 km
   reach / 2 km edge-snap, hubs 329), the 2026-09-15 AK-DOT-only export (84,089 /

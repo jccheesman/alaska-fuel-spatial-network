@@ -26,6 +26,18 @@ checksummed below and must stay **byte-identical**.
 
 ## PROVENANCE — re-exported 2026-11-16 (the owner review of 2026-11-16)
 
+**Hub-key re-export, same day (`81b2649`).** A second export followed the
+community-label review (`docs/inventory_notes/community_label_review_2026-11-16.md`)
+and the hub-builder key fix. The network did not change: every zip member is
+byte-identical (so `edge_id` and every edge_id-keyed table stand), and
+`hub_snaps.csv` is unchanged. Only `hub_members.csv` differs, in the `hub_key` of
+six hubs (16 rows): `BARROW` → `UTQIAGVIK`, `BETTLES FIELD` → `BETTLES`,
+`DENALI NATIONAL PARK` → `DENALI PARK`, `FORT RICHARDSON` → `JOINT BASE
+ELMENDORF-RICHARDSON`, `remote:SYN-100` → `remote:1418` (Craig) and
+`remote:SYN-1081` → `remote:1692` (Noorvik). `hub_community`, the display label,
+is the inventory's name and did not change. The zip containers were rewritten by
+the export, so the two zip checksums below are new.
+
 This network was re-exported on **2026-11-16** by `06_export_final_network.py`
 after the owner review of that day (`docs/inventory_notes/owner_review_2026-11-16.md`).
 That review corrected 17 records, all manual owner approvals: the two FAA Nome
@@ -77,8 +89,8 @@ within-mode welds → `{Mode}Connector`, cross-mode handoffs → per-pair
 
 | Zip | sha256 |
 |---|---|
-| `network_joined_nodes.zip` | `0757b28283fd526e` … (full value in `inputs/MANIFEST.md`) |
-| `network_joined_edges.zip` | `c8333fa0c4bcda7c` … (full value in `inputs/MANIFEST.md`) |
+| `network_joined_nodes.zip` | `6ebb93fd2cf14e47` … (full value in `inputs/MANIFEST.md`) |
+| `network_joined_edges.zip` | `c61842d9df14ab90` … (full value in `inputs/MANIFEST.md`) |
 
 Members (md5; full sha256 per member in `final_network/MANIFEST.sha256` and
 `inputs/MANIFEST.md`):

@@ -13,7 +13,8 @@ from git with `git show <commit>:final_network/network_joined_edges.zip`.
 
 | Version | Commit | Nodes | Edges | Hubs | Components | Giant | edges.zip | nodes.zip |
 |---|---|---|---|---|---|---|---|---|
-| **2026-11-16** (current) | `412a20f` | 84,094 | 93,046 | 328 | 4 | 99.99% | `c8333fa0c4bcda7c` | `0757b28283fd526e` |
+| **2026-11-16 hub-key re-export** (current) | `81b2649` | 84,094 | 93,046 | 328 | 4 | 99.99% | `c61842d9df14ab90` | `6ebb93fd2cf14e47` |
+| 2026-11-16 | `412a20f` | 84,094 | 93,046 | 328 | 4 | 99.99% | `c8333fa0c4bcda7c` | `0757b28283fd526e` |
 | 2026-11-15 | `8509a86` | 84,094 | 93,049 | 337 | 4 | 99.99% | `de00b11aa76c103b` | `b12e348202e784cd` |
 | 2026-10-15 | `d7faf7a` | 84,094 | 93,049 | 329 | 4 | 99.99% | `2104767a4721c333` | `f6775915ca4d0d8c` |
 | 2026-09-29 re-bake | `4c89339` | 84,089 | 92,978 | 385 | 5 | 99.99% | `302bf150b690e760` | `1bcfdb5e21213e60` |
@@ -22,6 +23,16 @@ from git with `git show <commit>:final_network/network_joined_edges.zip`.
 | 2026-07-20 pre-fix freeze | `f455f0e` | 82,300 | 90,921 | 384 | 21 | 99.65% | `4b1ffe008b07049c` | `3f50dfb80b034f25` |
 
 ## Unreleased — takes effect at the next export
+
+Nothing pending.
+
+## 2026-11-16 hub-key re-export (`81b2649`)
+
+Same network: every zip member is byte-identical to the 2026-11-16 export, so
+`edge_id` and the edge_id-keyed tables are unchanged and workflow 03 reproduced
+them (1,116,552 rows). The zip containers were rewritten (new zip checksums) and
+`hub_members.csv` changes the `hub_key` of six hubs (16 rows); `hub_community`,
+the display label, stays the inventory's name. Two causes:
 
 - Remote-site hubs whose site has no AEA id are keyed by workflow 00's ledger
   `facility_id` (`remote:<facility_id>`, mapped as profile `inventory.facility_id`)
@@ -34,15 +45,18 @@ from git with `git show <commit>:final_network/network_joined_edges.zip`.
   other hub key moves. At the next export the two hubs keyed by a SYN number today
   are renamed once: `remote:SYN-100` → `remote:1418` (Craig, Alaska Power & Telephone,
   placed in Coffman Cove) and `remote:SYN-1081` → `remote:1692` (Noorvik, AVEC), both
-  still-pending owner review items; after that their keys hold.
+  still-pending owner review items; after that their keys hold. **Done in this export.**
 - Community labels to DCRA names (owner, 2026-11-16,
   `docs/inventory_notes/community_label_review_2026-11-16.md`): aliases fold
   Barrow → Utqiagvik, Bettles Field → Bettles (reversing the 2026-10-05 choice),
   Deadhorse → Prudhoe Bay, Denali National Park → Denali Park, Fort Richardson →
   Joint Base Elmendorf-Richardson and Sutton → Sutton-Alpine; Point McKenzie is
   spelled Point MacKenzie. Workflow 00 is republished (21 community keys, one
-  name); the hubs, which group by the community key, take the DCRA names at the
-  next export.
+  name). In this export four hubs take the DCRA name as their key: `BARROW` →
+  `UTQIAGVIK`, `BETTLES FIELD` → `BETTLES`, `DENALI NATIONAL PARK` → `DENALI PARK`,
+  `FORT RICHARDSON` → `JOINT BASE ELMENDORF-RICHARDSON`. The Deadhorse and Sutton
+  records are members of no hub, before or after, so their aliases change nothing
+  in the network.
 
 ## 2026-11-16 — the owner review of 2026-11-16
 

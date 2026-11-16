@@ -24,8 +24,8 @@ Raw inventory files (NOT tracked after 2022; contact fields). Verify a local cop
 | 2025 | `3fbee569c63dccf813d6fa53e608820d53b92e415feb2c7f20556fc0bb0c30b0` |
 | `inputs/data_for_network_build.zip` | `c11708c68da39b76a66511b735fa7983bfebac3d4167fde0fdf3c7ce5df0babf` |
 | `inputs/region_and_census_data.zip` | `e8c36f6329804b0378277a8c449de984c553ca4bba5bdfb4cbae68684d8e2eb3` |
-| `final_network/network_joined_nodes.zip` | `0757b28283fd526e3295e4aadef334095e410f6d7e7bd7715dcd4bc6dc51299c` |
-| `final_network/network_joined_edges.zip` | `c8333fa0c4bcda7c77940c346fcf2e9062e99efb57be02ee087b676e9986077e` |
+| `final_network/network_joined_nodes.zip` | `6ebb93fd2cf14e47fefad35512ad803015eb97455afb9ebf4cefff3ad7765855` |
+| `final_network/network_joined_edges.zip` | `c61842d9df14ab908c0bd6056f3b1816f451f161dfbfceeab68cafc1c5049d2e` |
 
 | Pending | note |
 |---|---|
@@ -39,6 +39,8 @@ that day (`docs/inventory_notes/owner_review_2026-11-16.md`, 17 records correcte
 by manual approval): ten remote-site hubs fold into their communities' and Healy
 Lake gets its own hub (hubs 337 → 328, edges 93,049 → 93,046, BargeRoadTransfer
 289 → 286; see `final_network/README.md`). Supersedes the 2026-11-15 export.
+The zips were repacked by the hub-key re-export of the same day (`81b2649`): every
+member below is byte-identical, only the zip containers and `hub_members.csv` changed.
 sha256 per member is also written to `final_network/MANIFEST.sha256`; `.cpg` and
 `.prj` are format-fixed and carry over unchanged.
 
