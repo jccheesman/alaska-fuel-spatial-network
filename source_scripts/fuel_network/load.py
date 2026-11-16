@@ -79,11 +79,11 @@ EXPECTED = {
     "giant_share": 0.9999,
     # Mode-based connector vocabulary (refine-synthetic-connectors, 2026-09):
     # welds -> {Mode}Connector, cross-mode handoffs -> per-pair {A}{B}Transfer.
-    # Re-exported 2026-11-16: first export where the review-queue relocations reach
-    # the build (the 2026-11-15 export had silently reused a stale data/interim
-    # inventory — commit 5a34dcc). The 13 relocated records fold out of their own
-    # remote_site hubs into their communities' (hubs 337 -> 328), dropping three
-    # BargeRoadTransfer handoffs (289 -> 286, edges 93,049 -> 93,046). Node geometry
+    # Re-exported 2026-11-16 after the owner review of that day
+    # (docs/inventory_notes/owner_review_2026-11-16.md, 17 records corrected by manual
+    # approval): ten remote_site hubs fold into their communities' and Healy Lake gets
+    # its own hub (hubs 337 -> 328), dropping three BargeRoadTransfer handoffs
+    # (289 -> 286, edges 93,049 -> 93,046). Node geometry
     # is unchanged; edge geometry/order moved, so edge_ids are new (final_network/README.md).
     "edge_types": {
         "Road": 55_539,

@@ -59,6 +59,7 @@ NETWORK_DATA = INPUTS / "data_for_network_build"      # extracted curated shapef
 FRICTION_RASTERS = INPUTS / "friction_rasters"        # canonical-grid rasters (not committed)
 RIVER_ICE_WORK = INPUTS / "river_ice_work"            # river-ice working directory (fetched or built; gitignored)
 AIR_INPUTS = INPUTS / "air"
+COMMUNITY_REFERENCE = INPUTS / "community_reference"  # DCRA community locations + Overview (tracked snapshots)
 MANUAL_CONNECTIONS = INPUTS / "mannual_connections" / "mannual_connections.shp"
 TIGER_STATES = INPUTS / "region_and_census_data" / "tiger" / "cb_2023_us_state_500k.shp"
 

@@ -54,9 +54,11 @@ def test_nothing_disappears_silently(pipeline):
 
 def test_normalise_collapses_known_variants(pipeline):
     keys = set(pipeline["nfac"]["community_key"].dropna())
-    for variant in ("DUTCH HARBOR", "ST PAUL ISLAND", "ST GEORGE ISLAND", "KALSKAG", "BETTLES"):
+    # Bettles: the owner reversed the alias on 2026-11-16 (DCRA's community is Bettles)
+    for variant in ("DUTCH HARBOR", "ST PAUL ISLAND", "ST GEORGE ISLAND", "KALSKAG", "BETTLES FIELD",
+                    "BARROW", "DEADHORSE", "SUTTON"):
         assert variant not in keys
-    assert {"UNALASKA", "ST PAUL", "ST MARYS", "CLARKS POINT", "BETTLES FIELD"} <= keys
+    assert {"UNALASKA", "ST PAUL", "ST MARYS", "CLARKS POINT", "BETTLES", "UTQIAGVIK"} <= keys
 
 
 def test_delivery_flags_parse(pipeline):

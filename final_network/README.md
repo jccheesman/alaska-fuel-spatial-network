@@ -24,23 +24,30 @@ to these bytes — a re-export, a repack that re-orders rows, even a
 `edge_month_weights`, and `edge_costs` together. That is why the members are
 checksummed below and must stay **byte-identical**.
 
-## PROVENANCE — re-exported 2026-11-16 (the adjudicated inventory actually reaches the build)
+## PROVENANCE — re-exported 2026-11-16 (the owner review of 2026-11-16)
 
-This network was re-exported on **2026-11-16** by `06_export_final_network.py`,
-the first export whose stage-02 rebuild **actually reads the adjudicated
-inventory**. The 2026-11-15 export claimed it, but workflow 02's prep gate
-silently reused the stale pre-adjudication `facilities.csv` in `data/interim`
-(found 2026-11-16 when a re-export came out byte-identical; fixed by commit
-`5a34dcc`, which re-normalizes the facilities entry on every build). With the
-corrected coordinates in effect, the 13 relocated facilities — which the stale
-inventory had stranded as their own `remote_site` hubs at the refuted positions
-— fold into their communities' hubs (e.g. the two FAA records into Nome, three
-records into Point MacKenzie): hubs 337 → **328**, and three barge handoffs
-those remote hubs needed disappear (BargeRoadTransfer 289 → 286, edges
-93,049 → 93,046). The 2026-11-16 owner-review follow-ups (FAA Nome relabel,
-community codes, Point MacKenzie spelling) are also carried. Road source
-(2026-09 AK DOT&PF), manual connections, the phase-5 hub builder and the
-25 km reach / 2 km edge-snap are unchanged.
+This network was re-exported on **2026-11-16** by `06_export_final_network.py`
+after the owner review of that day (`docs/inventory_notes/owner_review_2026-11-16.md`).
+That review corrected 17 records, all manual owner approvals: the two FAA Nome
+station tanks relabelled Fairbanks → Nome; the community code of eleven earlier
+relabels brought into line with their label (seven of them had been measured
+against their old community, 30 to 543 km away, so the `remote_site_km` rule had
+split each into its own hub); the Delta Junction tank relabelled Healy Lake; the
+Ketchikan facility moved to Ketchikan; the Point MacKenzie spelling; and the
+Newtok National Guard Armory excluded. In the network, ten remote-site hubs (eleven records, each measured against the wrong community or held at a refuted position) fold into their communities' hubs, and the Healy Lake power plant, which the 2026-11-15 build had merged into the remote tank labelled Delta Junction by a snap collision, now forms a Healy Lake hub with it (e.g. the two FAA
+records into Nome, three records into Point MacKenzie): hubs 337 → **328**, and
+three barge handoffs those remote hubs needed disappear (BargeRoadTransfer
+289 → 286, edges 93,049 → 93,046). Road source (2026-09
+AK DOT&PF), manual connections, the phase-5 hub builder and the 25 km reach /
+2 km edge-snap are unchanged.
+
+A pipeline fix was needed to get here: workflow 02's prep gate skipped
+`00_normalize_raw` whenever `data/interim` existed, so the first rebuild of
+2026-11-16 read the inventory copied in by the 2026-11-15 build and came out
+byte-identical. Commit `5a34dcc` re-normalizes the facilities entry on every
+build. The 2026-11-15 export itself was built from that day's inventory (1,677
+of its 1,679 hub members follow the 20 km rule on it, and the 2026-11-14
+relocations sit in their communities' hubs).
 
 A byte-level note worth recording: the node `.shp`/`.shx` are identical to the
 2026-11-15 (and 2026-10-15) export — relocations move hub assignments, not the
@@ -49,7 +56,7 @@ differ, so **every edge_id-keyed table moved** and workflow 03 was rerun in
 full on 2026-11-16 (`edge_month_weights` / `edge_costs`: 1,116,552 rows).
 
 It **supersedes** the 2026-11-15 export (84,094 / 93,049 / 4 components /
-337 hubs — the stale-inventory build described above), which superseded the
+337 hubs — the 2026-11-14 review queue emptied), which superseded the
 2026-10-15 export (same totals / 329 hubs — phase-5 hubs + the first corrected
 inventory + reach tuning), the 2026-09-15 AK-DOT-only export (84,089 / 92,978 /
 5 / 385), the 2026-09-12 manual-connections export and the 2026-07-20 pre-fix

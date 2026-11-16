@@ -85,6 +85,7 @@ inputs/raw_facility_data/**/Utilities_Bulk_Fuel_Inventory*.csv
 # network_raw.zip is deliberately NOT negated: it stays out of the repository (license-gated,
 # see DATA.md §4.1) and was purged from git history on 2026-08-08.
 # Small tracked air CSVs (diffable plain text)
+!inputs/community_reference/
 !inputs/air/
 inputs/air/*
 !inputs/air/airports_ak_dotpf.csv

@@ -162,6 +162,7 @@ record_id,field,old_value,new_value,status,reviewer,reviewed_on,outcome,note
 {996CA338-3112-43BA-964E-BAC877F58828},community_id,{8905A89B-A676-4C0A-BEB5-C17AD570F833},{093A0B52-9C15-4F33-8872-681E456A939D},approved,JC,2026-11-16,applied,
 {EE49D47C-9B92-431B-9D0B-77844BA21CF8},community_id,{169CE60B-858B-4A5D-801B-CB9E3179349B},{3FD9E5F5-DE1E-47BC-A8FC-ECEFCA7C2EA8},approved,JC,2026-11-16,applied,
 {97E77B03-20AE-4291-A9A5-15C73AA55976},community_name,Point Mackenzie,Point MacKenzie,approved,JC,2026-11-16,applied,
+{CD4AD297-08F9-487A-AF26-CA811742EFAE},community_name,Point McKenzie,Point MacKenzie,approved,JC,2026-11-16,applied,
 {5AEE4579-120C-418C-965A-911EFB7A4873},map_point,"95294.34149,866941.8446","95294.34149,866941.8446",derived,,,publisher-corroborates,publisher map point agrees with the corrected position within 100 m; kept verbatim as the authoritative geometry
 {D0D325AD-A296-437B-9213-8A2FD2F3621D},map_point,"161699.986,1928988.01","161699.986,1928988.01",derived,,,publisher-corroborates,publisher map point agrees with the corrected position within 100 m; kept verbatim as the authoritative geometry
 {8D408F52-5CE0-4A95-A586-79D54041D7C7},map_x,-329067.8276,-420077.3262,derived,,,applied-sync,map point still sat on the refuted position; recomputed from the corrected lat/lon (EPSG:3338); publisher original in the snapshot
