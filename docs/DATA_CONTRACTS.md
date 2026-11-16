@@ -73,10 +73,10 @@ LineString, EPSG:3338). `length_m` is DERIVED by the consumer
 (geometry.length — EPSG:3338 is meters).
 
 Inventory (the ingest's hard tripwire, `EXPECTED` in
-`source_scripts/fuel_network/load.py`): 84,094 nodes / 93,049 edges / 329 hubs / 4
+`source_scripts/fuel_network/load.py`): 84,094 nodes / 93,046 edges / 328 hubs / 4
 components / giant 0.9999 / Road 55,539 · Waterway 34,178 · Air 226 ·
 IceRoad 1,248 · RoadConnector 1,498 · IceRoadConnector 34 ·
-BargeRoadTransfer 289 · BargeIceRoadTransfer 21 · IceRoadRoadTransfer 12 ·
+BargeRoadTransfer 286 · BargeIceRoadTransfer 21 · IceRoadRoadTransfer 12 ·
 AirRoadTransfer 2 · BargeAirTransfer 2.
 
 ## 5. THE edge_id RULE (the contract everything hangs on)
@@ -120,17 +120,19 @@ via `TRANSFER_TYPE_TO_MODES`).
 | Table | Rows | Columns | Writer |
 |---|---|---|---|
 | `network_nodes` | 84,094 | node_id PK, is_hub, hub_id, deliv_meth, hub_type, hub_cap, snap_surf, component, is_giant, x, y | 03/02_load |
-| `network_edges` | 93,049 | edge_id PK, from_node, to_node, type, edge_class, source, join_gap_m, length_m | 03/02_load |
-| `edge_month_weights` | 1,116,588 | edge_id, month, mode, avg_friction, nodata_frac, passable | 03/03_weight |
-| `edge_costs` | 1,116,588 | edge_id, month, cost_per_gallon, passable | 03/04_assemble |
+| `network_edges` | 93,046 | edge_id PK, from_node, to_node, type, edge_class, source, join_gap_m, length_m | 03/02_load |
+| `edge_month_weights` | 1,116,552 | edge_id, month, mode, avg_friction, nodata_frac, passable | 03/03_weight |
+| `edge_costs` | 1,116,552 | edge_id, month, cost_per_gallon, passable | 03/04_assemble |
 | `hub_members` | one per (hub, raw record) | hub_id, hub_key, hub_community, hub_kind, delivery_method, hub_type, ast_facility_id, record_id, node_id, snap_status | 03/02_load from `final_network/hub_members.csv` (when present) |
 | `hub_snaps` | one per hub | hub_id, node_id, snap_dist_m, snap_surface, status | 03/02_load from `final_network/hub_snaps.csv` (when present) |
 
-Row counts are those for the 2026-10-15 network-of-record (93,049 edges × 12
-months). The weighted tables were not regenerated with that export: any
-`edge_month_weights` / `edge_costs` still on disk from before it hold the
-2026-09 network's 1,115,736 rows (92,978 × 12). Rerun workflow 03 in full, and
-never join tables from different exports.
+Row counts are those for the 2026-11-16 network-of-record (93,046 edges × 12
+months); the weighted tables were regenerated with it (workflow 03 rerun in
+full on 2026-11-16). An `edge_month_weights` / `edge_costs` still on disk from
+an earlier export holds that export's row count (e.g. 1,116,588 = 93,049 × 12
+for 2026-11-15, 1,115,736 = 92,978 × 12 for 2026-09); stage 02 refuses to load
+a network over mismatched weights. Rerun workflow 03 in full, and never join
+tables from different exports.
 
 `hub_members` is the writer the old "`hub_facility_map` — documented future
 work" note waited for: hub ↔ inventory record membership comes from stage 02's

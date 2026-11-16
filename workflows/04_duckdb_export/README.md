@@ -14,9 +14,9 @@ python 02_inspect_schema.py            # schema + row counts
 | Table | Rows | Purpose |
 |---|---|---|
 | `network_nodes` | 84,094 | node attributes + hub flags + coordinates |
-| `network_edges` | 93,049 | topology + type + edge_class + derived length_m |
-| `edge_month_weights` | 1,116,588 | environmental friction per (edge, month), strict passability |
-| `edge_costs` | 1,116,588 | $/gallon per (edge, month) from friction × rates (+ transfer fees) |
+| `network_edges` | 93,046 | topology + type + edge_class + derived length_m |
+| `edge_month_weights` | 1,116,552 | environmental friction per (edge, month), strict passability |
+| `edge_costs` | 1,116,552 | $/gallon per (edge, month) from friction × rates (+ transfer fees) |
 
 ## hub_members / hub_snaps — the hub handoff (replaces the hub_facility_map seam)
 

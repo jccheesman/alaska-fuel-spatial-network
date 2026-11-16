@@ -13,11 +13,46 @@ from git with `git show <commit>:final_network/network_joined_edges.zip`.
 
 | Version | Commit | Nodes | Edges | Hubs | Components | Giant | edges.zip | nodes.zip |
 |---|---|---|---|---|---|---|---|---|
-| **2026-10-15** (current) | `d7faf7a` | 84,094 | 93,049 | 329 | 4 | 99.99% | `2104767a4721c333` | `f6775915ca4d0d8c` |
+| **2026-11-16** (current) | pending | 84,094 | 93,046 | 328 | 4 | 99.99% | `c8333fa0c4bcda7c` | `0757b28283fd526e` |
+| 2026-11-15 | `8509a86` | 84,094 | 93,049 | 337 | 4 | 99.99% | `de00b11aa76c103b` | `b12e348202e784cd` |
+| 2026-10-15 | `d7faf7a` | 84,094 | 93,049 | 329 | 4 | 99.99% | `2104767a4721c333` | `f6775915ca4d0d8c` |
 | 2026-09-29 re-bake | `4c89339` | 84,089 | 92,978 | 385 | 5 | 99.99% | `302bf150b690e760` | `1bcfdb5e21213e60` |
 | 2026-09-15 | `d5cde1f` | 84,089 | 92,978 | 385 | 5 | 99.99% | `56c802470378a39b` | `b03ba3202ae9a4b2` |
 | 2026-09-12 | `a2e7a9e` | 82,412 | 91,087 | 384 | 6 | 99.98% | `558dfa5b88ad93b9` | `30808a7f0f6bf470` |
 | 2026-07-20 pre-fix freeze | `f455f0e` | 82,300 | 90,921 | 384 | 21 | 99.65% | `4b1ffe008b07049c` | `3f50dfb80b034f25` |
+
+## 2026-11-16 — the adjudicated inventory actually reaches the build
+
+- Workflow 02's prep gate had silently reused the stale pre-adjudication
+  `facilities.csv` in `data/interim` (found 2026-11-16 when a re-export came out
+  byte-identical to 2026-11-15; fixed by `5a34dcc`, which re-normalizes the
+  facilities entry on every build). With the corrected coordinates in effect, the
+  13 relocated facilities fold out of their own `remote_site` hubs into their
+  communities' (hubs 337 → 328) and three barge handoffs disappear
+  (BargeRoadTransfer 289 → 286, edges 93,049 → 93,046). Also carries the
+  2026-11-16 owner-review follow-ups (FAA Nome relabel, community codes,
+  Point MacKenzie spelling).
+- Node `.shp`/`.shx` are byte-identical to 2026-11-15; the edge `.shp`/`.shx`
+  and both `.dbf`s moved, so edge_ids are new.
+- The weighted tables were regenerated with this export (workflow 03 rerun in
+  full on 2026-11-16: 1,116,552 rows each) and reproduced the QA envelope
+  (Road friction within [1.0, 2.625], IceRoad Jan–Mar only, zero cost-free
+  passable edge-months).
+- Edge types: Road 55,539 · Waterway 34,178 · Air 226 · IceRoad 1,248 · RoadConnector 1,498 · IceRoadConnector 34 · BargeRoadTransfer 286 · BargeIceRoadTransfer 21 · IceRoadRoadTransfer 12 · AirRoadTransfer 2 · BargeAirTransfer 2.
+
+## 2026-11-15 — review queue emptied (built on a stale interim inventory)
+
+Commit `8509a86`.
+
+- Exported after the owner emptied the workflow-00 review queue on 2026-11-14
+  (13 facilities relocated, 6 more copies excluded, 0 records withheld), lifting
+  the 2026-10-15 build's 28 withheld records: hubs 329 → 337.
+- **Known defect, superseded next day:** the stage-02 rebuild reused the stale
+  `data/interim` inventory, so the 13 relocations never reached hub building —
+  each relocated record stayed a `remote_site` hub at its refuted position. The
+  withheld-records lift is the only inventory change this export really carries.
+- The weighted tables were regenerated with this export (1,116,588 rows).
+- Edge types: identical totals to 2026-10-15 (coincidence of counts, new bytes).
 
 ## 2026-10-15 — phase-5 hubs, corrected inventory, wider reach
 

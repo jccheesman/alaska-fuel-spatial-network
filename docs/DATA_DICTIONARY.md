@@ -31,7 +31,7 @@ baseline of 1.0. Months are 1–12 (January = 1).
 ## 2. Network edges
 
 `final_network/network_joined_edges.zip` (shapefile) and the DuckDB table
-`network_edges`. There is one row per graph edge (93,049).
+`network_edges`. There is one row per graph edge (93,046).
 
 | Field | Type | Unit / values | Meaning |
 |---|---|---|---|
@@ -81,7 +81,7 @@ modes they join. Same-mode connectors are `{Mode}Connector` (`RoadConnector`,
 
 ## 4. Monthly friction weights — `edge_month_weights`
 
-One row per (edge, month): 93,049 × 12.
+One row per (edge, month): 93,046 × 12.
 
 | Field | Type | Unit / values | Meaning |
 |---|---|---|---|
@@ -94,7 +94,7 @@ One row per (edge, month): 93,049 × 12.
 
 ## 5. Monthly costs — `edge_costs`
 
-One row per (edge, month): 93,049 × 12.
+One row per (edge, month): 93,046 × 12.
 
 | Field | Type | Unit | Meaning |
 |---|---|---|---|

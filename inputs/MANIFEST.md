@@ -24,8 +24,8 @@ Raw inventory files (NOT tracked after 2022; contact fields). Verify a local cop
 | 2025 | `3fbee569c63dccf813d6fa53e608820d53b92e415feb2c7f20556fc0bb0c30b0` |
 | `inputs/data_for_network_build.zip` | `c11708c68da39b76a66511b735fa7983bfebac3d4167fde0fdf3c7ce5df0babf` |
 | `inputs/region_and_census_data.zip` | `e8c36f6329804b0378277a8c449de984c553ca4bba5bdfb4cbae68684d8e2eb3` |
-| `final_network/network_joined_nodes.zip` | `b12e348202e784cd52adb8f778cec4926312632de1df943c54a0c284925c3c40` |
-| `final_network/network_joined_edges.zip` | `de00b11aa76c103b4a5a5b6944bf348205f7d71b9fbf193b0bbe8fc3e3729a82` |
+| `final_network/network_joined_nodes.zip` | `0757b28283fd526e3295e4aadef334095e410f6d7e7bd7715dcd4bc6dc51299c` |
+| `final_network/network_joined_edges.zip` | `c8333fa0c4bcda7c77940c346fcf2e9062e99efb57be02ee087b676e9986077e` |
 
 | Pending | note |
 |---|---|
@@ -34,25 +34,27 @@ Raw inventory files (NOT tracked after 2022; contact fields). Verify a local cop
 
 ## final_network zip members (the current network-of-record)
 
-Re-exported 2026-11-15 by `06_export_final_network.py` — the fully adjudicated
-2025 inventory (review queue emptied 2026-11-14: 13 facilities relocated, 6 more
-copies excluded, 0 records withheld, hubs 329 → 337) on the phase-5 hub builder
-(see `final_network/README.md`). Supersedes the 2026-10-15 export.
+Re-exported 2026-11-16 by `06_export_final_network.py` — the first export whose
+stage-02 rebuild actually reads the adjudicated inventory (commit `5a34dcc`
+fixed the prep gate silently reusing a stale `data/interim` copy): the 13
+relocated facilities leave their own `remote_site` hubs for their communities'
+(hubs 337 → 328, edges 93,049 → 93,046, BargeRoadTransfer 289 → 286; see
+`final_network/README.md`). Supersedes the 2026-11-15 export.
 sha256 per member is also written to `final_network/MANIFEST.sha256`; `.cpg` and
 `.prj` are format-fixed and carry over unchanged.
 
 | Member | sha256 | md5 |
 |---|---|---|
 | `final_network/network_joined_nodes.zip::network_joined_nodes/network_joined_nodes.cpg` | `3ad3031f5503a4404af825262ee8232cc04d4ea6683d42c5dd0a2f2a27ac9824` | `ae3b3df9970b49b6523e608759bc957d` |
-| `final_network/network_joined_nodes.zip::network_joined_nodes/network_joined_nodes.dbf` | `f439b6e4ed7e99a7c641cf2d23af920ed9328ebac21ba22adcb40b4d1fa0f02f` | `e17f1d08dcbfb976192a90d5a3691299` |
+| `final_network/network_joined_nodes.zip::network_joined_nodes/network_joined_nodes.dbf` | `87baaf959baf15f61747a50cd28100a54fc2a95a21b7481c979b25e14665ab31` | `539748833e8993da3d0f0fcedd574a22` |
 | `final_network/network_joined_nodes.zip::network_joined_nodes/network_joined_nodes.prj` | `b98ae059b6efe2c3d70a2fe5776e3394ae78ebee1754b2fed102dcf63e25916a` | `91cd91099bd22160267bfb88b8a3e4bf` |
 | `final_network/network_joined_nodes.zip::network_joined_nodes/network_joined_nodes.shp` | `a7d2e07bc4e7e034517e003652a9ce196ecc1d38befadba396e576c8da1a93df` | `ee75104dfa6b0c2845067d5cc4a3535f` |
 | `final_network/network_joined_nodes.zip::network_joined_nodes/network_joined_nodes.shx` | `6c1004650dee04ea0197874ea2a7bbb80643076bdc89953a4e5a14566896641a` | `f102775eb5ff2f21e02bf7e480ed9be9` |
 | `final_network/network_joined_edges.zip::network_joined_edges/network_joined_edges.cpg` | `3ad3031f5503a4404af825262ee8232cc04d4ea6683d42c5dd0a2f2a27ac9824` | `ae3b3df9970b49b6523e608759bc957d` |
-| `final_network/network_joined_edges.zip::network_joined_edges/network_joined_edges.dbf` | `09aa1fb5d33dd03b08f375638163f8e4e89910d16c7a1515088071910166908a` | `6a33045467208aa1731592c8a6461e78` |
+| `final_network/network_joined_edges.zip::network_joined_edges/network_joined_edges.dbf` | `879ba649d8c340ee079c47c69128ecccc5d2006a58ec84e740e6c267c3a82867` | `e74f3a39d00aee15b618c6b3c64715b4` |
 | `final_network/network_joined_edges.zip::network_joined_edges/network_joined_edges.prj` | `b98ae059b6efe2c3d70a2fe5776e3394ae78ebee1754b2fed102dcf63e25916a` | `91cd91099bd22160267bfb88b8a3e4bf` |
-| `final_network/network_joined_edges.zip::network_joined_edges/network_joined_edges.shp` | `04ad203e5d4f856d67f7f4f119107f5199662bb353241670ebf84360effd4e38` | `d4671522326eb5223a74c733c1df2248` |
-| `final_network/network_joined_edges.zip::network_joined_edges/network_joined_edges.shx` | `6d6177912bcd5fc5a9cc0a55d1ac0ae080b67401879b19e08fb1a99824940070` | `94a980f2ec7fc83085431dba7d3339d9` |
+| `final_network/network_joined_edges.zip::network_joined_edges/network_joined_edges.shp` | `223c933dabf34afb84900990bcde31aa6fc98c559ca10cad2aa58140e2906f33` | `8358e5088fbe113b7aa08c70aecb0121` |
+| `final_network/network_joined_edges.zip::network_joined_edges/network_joined_edges.shx` | `903453e8fcad853a6650f989f75c6db8e99ad1198067fe5a50717af37bfd2d29` | `99a265c3757adf66d343cc013edc7c05` |
 
 ## Tracked air CSVs
 

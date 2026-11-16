@@ -8,8 +8,8 @@ network. This folder contains a **frozen handoff**: workflow 02
 ingests it.
 
 - **Nodes:** `network_joined_nodes.zip` → `network_joined_nodes/…shp` — 84,094 points
-- **Edges:** `network_joined_edges.zip` → `network_joined_edges/…shp` — 93,049 lines (synthetic connectors are mode-typed: `{Mode}Connector` welds + per-pair `*Transfer` handoffs)
-- **Components:** 4 · **giant:** 99.99% of nodes · **fuel hubs:** 337
+- **Edges:** `network_joined_edges.zip` → `network_joined_edges/…shp` — 93,046 lines (synthetic connectors are mode-typed: `{Mode}Connector` welds + per-pair `*Transfer` handoffs)
+- **Components:** 4 · **giant:** 99.99% of nodes · **fuel hubs:** 328
 - **CRS:** EPSG:3338 — NAD83 / Alaska Albers (meters). The `.prj` reads as `NAD_1983_Alaska_Albers`.
 
 The zips are committed; the extracted shapefiles are gitignored
@@ -24,32 +24,36 @@ to these bytes — a re-export, a repack that re-orders rows, even a
 `edge_month_weights`, and `edge_costs` together. That is why the members are
 checksummed below and must stay **byte-identical**.
 
-## PROVENANCE — re-exported 2026-11-15 (fully adjudicated inventory)
+## PROVENANCE — re-exported 2026-11-16 (the adjudicated inventory actually reaches the build)
 
-This network was re-exported on **2026-11-15** by `06_export_final_network.py`
-from a full stage-02 rebuild carrying the **fully adjudicated facility
-inventory**: on 2026-11-14 the owner emptied the workflow-00 review queue
-(73 open rows → 0), which relocated 13 facilities — organizational copies
-returned to their real villages (Crowley Galena, AVEC Noatak, YFSD Fort Yukon,
-DOT&PF Sand Point and Pilot Point, four LKSD schools, the Savoonga BSSD
-school, AVEC Holy Cross, DOT&PF Kiana) — excluded 6 more copy rows,
-canonicalized 7 labels and relabelled 4 facilities to their physical
-communities. With the queue empty **no record is withheld from hubs** (the
-2026-10-15 build withheld 28), so placed hubs rise 329 → **337**. Road source
+This network was re-exported on **2026-11-16** by `06_export_final_network.py`,
+the first export whose stage-02 rebuild **actually reads the adjudicated
+inventory**. The 2026-11-15 export claimed it, but workflow 02's prep gate
+silently reused the stale pre-adjudication `facilities.csv` in `data/interim`
+(found 2026-11-16 when a re-export came out byte-identical; fixed by commit
+`5a34dcc`, which re-normalizes the facilities entry on every build). With the
+corrected coordinates in effect, the 13 relocated facilities — which the stale
+inventory had stranded as their own `remote_site` hubs at the refuted positions
+— fold into their communities' hubs (e.g. the two FAA records into Nome, three
+records into Point MacKenzie): hubs 337 → **328**, and three barge handoffs
+those remote hubs needed disappear (BargeRoadTransfer 289 → 286, edges
+93,049 → 93,046). The 2026-11-16 owner-review follow-ups (FAA Nome relabel,
+community codes, Point MacKenzie spelling) are also carried. Road source
 (2026-09 AK DOT&PF), manual connections, the phase-5 hub builder and the
-25 km reach / 2 km edge-snap are unchanged from October.
+25 km reach / 2 km edge-snap are unchanged.
 
-A byte-level note worth recording: the node `.shp`/`.shx` and every
-node/edge/edge-type TOTAL are identical to the 2026-10-15 export — the
-inventory work moved hubs and attributes, not the transport graph — but the
-`.dbf`s and the edge `.shp` differ, so **every edge_id-keyed table still
-moved** and workflow 03 was rerun in full.
+A byte-level note worth recording: the node `.shp`/`.shx` are identical to the
+2026-11-15 (and 2026-10-15) export — relocations move hub assignments, not the
+transport graph's node geometry — but the edge `.shp`/`.shx` and both `.dbf`s
+differ, so **every edge_id-keyed table moved** and workflow 03 was rerun in
+full on 2026-11-16 (`edge_month_weights` / `edge_costs`: 1,116,552 rows).
 
-It **supersedes** the 2026-10-15 export (84,094 / 93,049 / 4 components /
-329 hubs — phase-5 hubs + the first corrected inventory + reach tuning), which
-superseded the 2026-09-15 AK-DOT-only export (84,089 / 92,978 / 5 / 385), the
-2026-09-12 manual-connections export and the 2026-07-20 pre-fix freeze (all in
-git history).
+It **supersedes** the 2026-11-15 export (84,094 / 93,049 / 4 components /
+337 hubs — the stale-inventory build described above), which superseded the
+2026-10-15 export (same totals / 329 hubs — phase-5 hubs + the first corrected
+inventory + reach tuning), the 2026-09-15 AK-DOT-only export (84,089 / 92,978 /
+5 / 385), the 2026-09-12 manual-connections export and the 2026-07-20 pre-fix
+freeze (all in git history).
 
 - Any future re-export must regenerate, together: these zips, the `EXPECTED`
   inventory in `02_load_final_network.py`, the checksums here +
@@ -66,8 +70,8 @@ within-mode welds → `{Mode}Connector`, cross-mode handoffs → per-pair
 
 | Zip | sha256 |
 |---|---|
-| `network_joined_nodes.zip` | `b12e348202e784cd` … (full value in `inputs/MANIFEST.md`) |
-| `network_joined_edges.zip` | `de00b11aa76c103b` … (full value in `inputs/MANIFEST.md`) |
+| `network_joined_nodes.zip` | `0757b28283fd526e` … (full value in `inputs/MANIFEST.md`) |
+| `network_joined_edges.zip` | `c8333fa0c4bcda7c` … (full value in `inputs/MANIFEST.md`) |
 
 Members (md5; full sha256 per member in `final_network/MANIFEST.sha256` and
 `inputs/MANIFEST.md`):
@@ -75,11 +79,11 @@ Members (md5; full sha256 per member in `final_network/MANIFEST.sha256` and
 | Member | md5 |
 |---|---|
 | `network_joined_nodes/network_joined_nodes.shp` | `ee75104dfa6b0c2845067d5cc4a3535f` |
-| `network_joined_nodes/network_joined_nodes.dbf` | `e17f1d08dcbfb976192a90d5a3691299` |
+| `network_joined_nodes/network_joined_nodes.dbf` | `539748833e8993da3d0f0fcedd574a22` |
 | `network_joined_nodes/network_joined_nodes.shx` | `f102775eb5ff2f21e02bf7e480ed9be9` |
-| `network_joined_edges/network_joined_edges.shp` | `d4671522326eb5223a74c733c1df2248` |
-| `network_joined_edges/network_joined_edges.dbf` | `6a33045467208aa1731592c8a6461e78` |
-| `network_joined_edges/network_joined_edges.shx` | `94a980f2ec7fc83085431dba7d3339d9` |
+| `network_joined_edges/network_joined_edges.shp` | `8358e5088fbe113b7aa08c70aecb0121` |
+| `network_joined_edges/network_joined_edges.dbf` | `e74f3a39d00aee15b618c6b3c64715b4` |
+| `network_joined_edges/network_joined_edges.shx` | `99a265c3757adf66d343cc013edc7c05` |
 
 ## The hub handoff: `hub_members.csv` + `hub_snaps.csv`
 
@@ -131,7 +135,7 @@ shortened on export. Full mapping:
 
 Edge-type inventory (the ingest's hard tripwire): Road 55,539 · Waterway
 34,178 · Air 226 · IceRoad 1,248 · RoadConnector 1,498 · IceRoadConnector 34 ·
-BargeRoadTransfer 289 · BargeIceRoadTransfer 21 · IceRoadRoadTransfer 12 ·
+BargeRoadTransfer 286 · BargeIceRoadTransfer 21 · IceRoadRoadTransfer 12 ·
 AirRoadTransfer 2 · BargeAirTransfer 2. Synthetic connectors are named by the modes they join
 (`{Mode}Connector` welds, per-pair `{A}{B}Transfer` handoffs); `edge_class`
 mirrors `type`.

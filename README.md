@@ -39,7 +39,7 @@ because it is a review loop rather than a build (its outputs are committed, and
 a run that differs from them is a finding, not a product). On a fresh clone the
 three commands above succeed from committed data alone: step (0) in full, the
 ingest half of step (c) (extract the frozen network, load its 84,094 nodes /
-93,049 edges into DuckDB) and all of step (d). The weighting and costing stages
+93,046 edges into DuckDB) and all of step (d). The weighting and costing stages
 of (c) additionally need the friction stack from (a), and steps (a) and (b) need
 inputs that must be downloaded and regenerated. Each stage's `run_all.sh` gates
 on what is missing and names the section of `DATA.md` that explains how to get it.
@@ -104,7 +104,7 @@ every OS for stage (b): install R, then
 ## The handoff that holds it together
 
 `final_network/` is the network-of-record: the joined multimodal
-network (84,094 nodes / 93,049 edges / 329 fuel hubs / 4 components / 99.99%
+network (84,094 nodes / 93,046 edges / 328 fuel hubs / 4 components / 99.99%
 giant) exported by act (b) and ingested by act (c). Its shapefile **row order
 defines `edge_id`** for every DuckDB table, so the committed zips are
 checksummed (`inputs/MANIFEST.md`) and preserved byte-identical.

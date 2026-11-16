@@ -83,8 +83,8 @@ replaces the network-of-record.
 | **03_multimodal_join** | | | | |
 | `01_extract_network_handoff.py` | Unzips the frozen handoff | `final_network/*/` dirs | — | Fixes the fresh-clone FileNotFoundError; the old README claimed the loader extracted zips (it never did) |
 | `02_load_final_network.py` | Ingest + hard integrity tripwire + edge_class (logic: `fuel_network.load`) | `network_nodes`, `network_edges` | `EXPECTED` dict in `fuel_network/load.py` | edge_id = shapefile row order, derived here and ONLY here; `edge_class` mirrors the mode-based `type` (pass-through), only mapping a LEGACY frozen network's generic `Bridge` into the new vocabulary |
-| `03_weight_network_edges.py` | 75 m friction sampling per edge-month | `edge_month_weights` (1,116,588 rows) | `SAMPLE_SPACING_M`, `EDGE_TYPE_MAP` | Strict any-NoData ⇒ impassable; consumes `edge_class` from the DB (run stage 02 first) |
-| `04_assemble_weighted_graph.py` | $-rates × friction → costs + nx.MultiGraph | `edge_costs` (1,116,588 rows) | `friction_costs.py` | MultiGraph, not Graph — parallel node-pairs would silently collapse; each per-pair `*Transfer` type maps straight to its fee via `TRANSFER_TYPE_TO_MODES` |
+| `03_weight_network_edges.py` | 75 m friction sampling per edge-month | `edge_month_weights` (1,116,552 rows) | `SAMPLE_SPACING_M`, `EDGE_TYPE_MAP` | Strict any-NoData ⇒ impassable; consumes `edge_class` from the DB (run stage 02 first) |
+| `04_assemble_weighted_graph.py` | $-rates × friction → costs + nx.MultiGraph | `edge_costs` (1,116,552 rows) | `friction_costs.py` | MultiGraph, not Graph — parallel node-pairs would silently collapse; each per-pair `*Transfer` type maps straight to its fee via `TRANSFER_TYPE_TO_MODES` |
 | **04_duckdb_export** | | | | |
 | `01_run_validation_queries.py` | Monthly passability by mode | stdout | — | Barge passability should peak Jun–Oct; IceRoad rows exist only Jan–Mar |
 | `02_inspect_schema.py` | Schema/count dump | stdout | — | Also probes `hub_facility_map` — expected ABSENT (documented future work) |
@@ -127,27 +127,31 @@ replaces the network-of-record.
   The old flat `Bridge`/`Weld`/`Join`/generic-`Transfer` type labels are retired
   (provenance stays in `source`). Ice↔road connections are now a **priced Transfer**
   (`("overland","ice_road")` = $0.022/gal), not an ice-road line-haul. `EXPECTED`
-  counts (2026-10-15 network-of-record): RoadConnector 1,498 · IceRoadConnector 34 ·
-  BargeRoadTransfer 289 · BargeIceRoadTransfer 21 · IceRoadRoadTransfer 12 ·
+  counts (2026-11-16 network-of-record): RoadConnector 1,498 · IceRoadConnector 34 ·
+  BargeRoadTransfer 286 · BargeIceRoadTransfer 21 · IceRoadRoadTransfer 12 ·
   AirRoadTransfer 2 · BargeAirTransfer 2. The mode is
   spelled `IceRoad` (no space) everywhere in the profile.
-- **The network-of-record was re-exported 2026-11-15** (84,094 nodes / 93,049
-  edges / 337 hubs / 4 components): the fully adjudicated inventory (the review
-  queue was emptied 2026-11-14 — 13 facilities relocated, 6 more copies excluded,
-  0 records withheld from hubs, so hubs 329 → 337). Node/edge/edge-type totals
-  happen to equal the 2026-10-15 export but the bytes (hub attributes, moved edge
-  geometry, edge_ids) are new; **workflow 03 WAS rerun in full with this export**
-  (friction stack on the owner's machine) and the `edge_month_weights` /
-  `edge_costs` tables moved with it. It supersedes the 2026-10-15 export (phase-5
-  hub builder + first corrected inventory + 25 km reach / 2 km edge-snap, hubs
-  329), the 2026-09-15 AK-DOT-only export (84,089 / 92,978 / 385 / 5; road source
-  = 2026-09 AK DOT&PF, GRIP4 border-stitch removed), and the 2026-09-12 /
-  2026-07-20 exports (all in git history). The manual-connections layer is still
-  included. A re-export is a NEW network-of-record: regenerate the zips, the
-  checksums (`inputs/MANIFEST.md`, `final_network/README.md`,
-  `.github/workflows/ci.yml`), the `EXPECTED` tripwire, and the edge_id-keyed
-  tables together (rerun workflow 03 in full). Do not re-export and commit
-  without the owner asking.
+- **The network-of-record was re-exported 2026-11-16** (84,094 nodes / 93,046
+  edges / 328 hubs / 4 components): the first export whose stage-02 rebuild
+  actually reads the adjudicated inventory. The 2026-11-15 export claimed it,
+  but workflow 02's prep gate silently reused a stale `data/interim`
+  `facilities.csv` (found 2026-11-16 when a re-export came out byte-identical;
+  fixed by `5a34dcc` — the facilities entry is re-normalized on EVERY build
+  now). With the corrected coordinates in effect, the 13 relocated facilities
+  fold out of their own `remote_site` hubs into their communities' (hubs
+  337 → 328; BargeRoadTransfer 289 → 286). Node `.shp`/`.shx` are unchanged;
+  edge geometry/order moved, so edge_ids are new; **workflow 03 WAS rerun in
+  full with this export** (2026-11-16, 1,116,552 rows, QA envelope reproduced).
+  It supersedes the 2026-11-15 export (337 hubs, stale-inventory build), the
+  2026-10-15 export (phase-5 hub builder + first corrected inventory + 25 km
+  reach / 2 km edge-snap, hubs 329), the 2026-09-15 AK-DOT-only export (84,089 /
+  92,978 / 385 / 5; road source = 2026-09 AK DOT&PF, GRIP4 border-stitch
+  removed), and the 2026-09-12 / 2026-07-20 exports (all in git history; see
+  `docs/CHANGELOG.md`). The manual-connections layer is still included. A
+  re-export is a NEW network-of-record: regenerate the zips, the checksums
+  (`inputs/MANIFEST.md`, `final_network/README.md`, `.github/workflows/ci.yml`),
+  the `EXPECTED` tripwire, and the edge_id-keyed tables together (rerun
+  workflow 03 in full). Do not re-export and commit without the owner asking.
 - **Strict NoData rule.** One NoData sample makes an edge impassable for the
   month. This is a design decision (auditable via nodata_frac), not a bug.
 - **The friction half WAS verified end-to-end on 2026-08-06** on the owner's

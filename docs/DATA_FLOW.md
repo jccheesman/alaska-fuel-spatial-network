@@ -92,8 +92,8 @@ flowchart LR
   subgraph DB["outputs/fuel_network.duckdb"]
     direction TB
     tnodes[("network_nodes ·<br/>network_edges")]
-    tweights[("edge_month_weights<br/>1,116,588 rows")]
-    tcosts[("edge_costs<br/>1,116,588 rows")]
+    tweights[("edge_month_weights<br/>1,116,552 rows")]
+    tcosts[("edge_costs<br/>1,116,552 rows")]
   end
   j02 --> tnodes
   j03 --> tweights

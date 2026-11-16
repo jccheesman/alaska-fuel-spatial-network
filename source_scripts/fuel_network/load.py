@@ -73,16 +73,18 @@ DB_PATH = rp.DUCKDB
 # fail loudly here, not flow silently into the weighted graph.
 EXPECTED = {
     "n_nodes": 84_094,
-    "n_edges": 93_049,
-    "n_hubs": 337,
+    "n_edges": 93_046,
+    "n_hubs": 328,
     "n_components": 4,
     "giant_share": 0.9999,
     # Mode-based connector vocabulary (refine-synthetic-connectors, 2026-09):
     # welds -> {Mode}Connector, cross-mode handoffs -> per-pair {A}{B}Transfer.
-    # Re-exported 2026-11-15: the fully adjudicated inventory (review queue emptied
-    # 2026-11-14: 13 facilities relocated, 6 more copies excluded, 0 withheld — hubs
-    # 329 -> 337). Node/edge/type totals happen to equal the 2026-10-15 export, but
-    # the BYTES (hub attributes, moved geometry, edge_ids) are new (final_network/README.md).
+    # Re-exported 2026-11-16: first export where the review-queue relocations reach
+    # the build (the 2026-11-15 export had silently reused a stale data/interim
+    # inventory — commit 5a34dcc). The 13 relocated records fold out of their own
+    # remote_site hubs into their communities' (hubs 337 -> 328), dropping three
+    # BargeRoadTransfer handoffs (289 -> 286, edges 93,049 -> 93,046). Node geometry
+    # is unchanged; edge geometry/order moved, so edge_ids are new (final_network/README.md).
     "edge_types": {
         "Road": 55_539,
         "Waterway": 34_178,
@@ -90,7 +92,7 @@ EXPECTED = {
         "IceRoad": 1_248,
         "RoadConnector": 1_498,
         "IceRoadConnector": 34,
-        "BargeRoadTransfer": 289,
+        "BargeRoadTransfer": 286,
         "BargeIceRoadTransfer": 21,
         "IceRoadRoadTransfer": 12,
         "AirRoadTransfer": 2,
