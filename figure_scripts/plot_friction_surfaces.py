@@ -17,7 +17,7 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from matplotlib.colors import ListedColormap, BoundaryNorm
-from matplotlib.patches import Rectangle, FancyArrow
+from matplotlib.patches import Rectangle
 
 import repo_paths as rp
 

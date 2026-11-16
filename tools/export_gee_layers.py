@@ -105,7 +105,7 @@ def main() -> None:
     ew[ew["type"] == "Waterway"].to_file(GEE / "network_waterway.geojson", driver="GeoJSON")
 
     # ---- report ----
-    print(f"wrote -> {GEE.relative_to(ROOT)}/")
+    print(f"wrote -> {GEE.relative_to(rp.ROOT)}/")
     for f in sorted(GEE.glob("*.geojson")):
         print(f"  {f.name:28} {f.stat().st_size/1e6:6.1f} MB")
     prob = hubs[hubs["is_problem"] == 1]

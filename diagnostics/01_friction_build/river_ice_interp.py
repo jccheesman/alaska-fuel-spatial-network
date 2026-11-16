@@ -17,7 +17,6 @@ from __future__ import annotations
 
 import numpy as np
 import geopandas as gpd
-from affine import Affine
 from rasterio.features import rasterize
 from scipy.spatial import cKDTree
 from scipy.ndimage import distance_transform_edt  # noqa: F401  (parity notes)
