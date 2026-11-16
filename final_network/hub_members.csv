@@ -705,14 +705,14 @@ Hub_102,STONY RIVER,Stony River,community,Barge,Receiver,1165,{1F3399A7-FBC2-40C
 Hub_102,STONY RIVER,Stony River,community,Barge,Receiver,1224,{8DFD230E-C5E7-49E1-B2B1-F1DE440DAE7B},42480,placed
 Hub_102,STONY RIVER,Stony River,community,Barge,Receiver,SYN-1188,{0C9AC49C-C828-4A4E-96CF-F1D42D769F14},42480,placed
 Hub_102,STONY RIVER,Stony River,community,Barge,Receiver,SYN-1189,{2759C0BB-C0D5-4543-AED2-2BF2DC54F247},42480,placed
-Hub_103,DENALI NATIONAL PARK,Denali National Park,community,Road,Receiver,1166,{5B1AEAB7-BC9D-4F53-92E6-5C4E64F4BFD0},2043,placed
-Hub_104,BETTLES FIELD,Bettles Field,community,Plane or Road,Supplier,1167,{9FE4EA49-0ACD-4C6A-89BF-F196359859F6},43317,placed
-Hub_104,BETTLES FIELD,Bettles Field,community,Plane or Road,Supplier,284,{DA9AE6EB-3E04-4550-A71C-981B511781C4},43317,placed
-Hub_104,BETTLES FIELD,Bettles Field,community,Plane or Road,Supplier,SYN-714,{0C5BEC21-0D02-4217-BB25-11C53F2A57C2},43317,placed
-Hub_104,BETTLES FIELD,Bettles Field,community,Plane or Road,Supplier,SYN-715,{95BA79A7-EECB-4B9D-8F6C-82D0C48A0838},43317,placed
-Hub_104,BETTLES FIELD,Bettles Field,community,Plane or Road,Supplier,SYN-716,{4F994E16-6208-479F-B3B2-22194B179F84},43317,placed
-Hub_104,BETTLES FIELD,Bettles Field,community,Plane or Road,Supplier,SYN-718,{086531C1-92F4-4C8B-95C4-BA197AAAD587},43317,placed
-Hub_104,BETTLES FIELD,Bettles Field,community,Plane or Road,Supplier,SYN-721,{DFFEA010-C78E-4C70-A5A9-0089FFA544FA},43317,placed
+Hub_103,DENALI PARK,Denali National Park,community,Road,Receiver,1166,{5B1AEAB7-BC9D-4F53-92E6-5C4E64F4BFD0},2043,placed
+Hub_104,BETTLES,Bettles Field,community,Plane or Road,Supplier,1167,{9FE4EA49-0ACD-4C6A-89BF-F196359859F6},43317,placed
+Hub_104,BETTLES,Bettles Field,community,Plane or Road,Supplier,284,{DA9AE6EB-3E04-4550-A71C-981B511781C4},43317,placed
+Hub_104,BETTLES,Bettles Field,community,Plane or Road,Supplier,SYN-714,{0C5BEC21-0D02-4217-BB25-11C53F2A57C2},43317,placed
+Hub_104,BETTLES,Bettles Field,community,Plane or Road,Supplier,SYN-715,{95BA79A7-EECB-4B9D-8F6C-82D0C48A0838},43317,placed
+Hub_104,BETTLES,Bettles Field,community,Plane or Road,Supplier,SYN-716,{4F994E16-6208-479F-B3B2-22194B179F84},43317,placed
+Hub_104,BETTLES,Bettles Field,community,Plane or Road,Supplier,SYN-718,{086531C1-92F4-4C8B-95C4-BA197AAAD587},43317,placed
+Hub_104,BETTLES,Bettles Field,community,Plane or Road,Supplier,SYN-721,{DFFEA010-C78E-4C70-A5A9-0089FFA544FA},43317,placed
 Hub_105,EAGLE,Eagle,community,Plane or Road,Receiver,1168,{9F1EAB80-15AC-4B09-9B0B-09F30E3772F1},2321,placed
 Hub_105,EAGLE,Eagle,community,Plane or Road,Receiver,1249,{CDFDD706-0D5A-4E70-8BBE-5C6E499DC2C1},2321,placed
 Hub_105,EAGLE,Eagle,community,Plane or Road,Receiver,309,{AC79B6DF-37F4-4141-A2B0-20447B7A3E1C},2321,placed
@@ -1177,11 +1177,11 @@ Hub_213,LARSEN BAY,Larsen Bay,community,Barge or Road,Receiver,264,{6FFCF56E-AE3
 Hub_213,LARSEN BAY,Larsen Bay,community,Barge or Road,Receiver,507,{31AFC5F9-52E9-4580-9502-B9A75D6096CC},38412,placed
 Hub_213,LARSEN BAY,Larsen Bay,community,Barge or Road,Receiver,868,{05940B17-A438-4A05-A779-1DA030BFADD7},38412,placed
 Hub_213,LARSEN BAY,Larsen Bay,community,Barge or Road,Receiver,868,{FC7172A9-1AD9-4D0C-A042-488D9BE77C44},38412,placed
-Hub_214,BARROW,Barrow,community,Road,Receiver,265,{F681A2B1-247E-42A5-9190-DF9189FC6EDF},44859,placed
-Hub_214,BARROW,Barrow,community,Road,Receiver,469,{46458926-F688-4612-ABF5-300ABAE53C25},44859,placed
-Hub_214,BARROW,Barrow,community,Road,Receiver,605,{61590B3C-7B6F-4882-9598-3D11DCDC4FE5},44859,placed
-Hub_214,BARROW,Barrow,community,Road,Receiver,765,{AA46E999-9021-49E7-9F8E-58ADC5E2C929},44859,placed
-Hub_214,BARROW,Barrow,community,Road,Receiver,878,{A816C762-5E40-489E-89F9-BA4C1D7C7825},44859,placed
+Hub_214,UTQIAGVIK,Barrow,community,Road,Receiver,265,{F681A2B1-247E-42A5-9190-DF9189FC6EDF},44859,placed
+Hub_214,UTQIAGVIK,Barrow,community,Road,Receiver,469,{46458926-F688-4612-ABF5-300ABAE53C25},44859,placed
+Hub_214,UTQIAGVIK,Barrow,community,Road,Receiver,605,{61590B3C-7B6F-4882-9598-3D11DCDC4FE5},44859,placed
+Hub_214,UTQIAGVIK,Barrow,community,Road,Receiver,765,{AA46E999-9021-49E7-9F8E-58ADC5E2C929},44859,placed
+Hub_214,UTQIAGVIK,Barrow,community,Road,Receiver,878,{A816C762-5E40-489E-89F9-BA4C1D7C7825},44859,placed
 Hub_215,COLDFOOT,Coldfoot,community,Plane or Road,Receiver,267,{21EE8D6B-9546-4920-A291-30B520F15B15},2840,placed
 Hub_215,COLDFOOT,Coldfoot,community,Plane or Road,Receiver,770,{AEC3F544-FBA6-450A-BA4E-FC337AFB6FCA},2840,placed
 Hub_215,COLDFOOT,Coldfoot,community,Plane or Road,Receiver,770,{D0D325AD-A296-437B-9213-8A2FD2F3621D},2840,placed
@@ -1505,7 +1505,7 @@ Hub_295,EAGLE RIVER,Eagle River,community,Road,Receiver,579,{9DEFD06F-B6FE-479D-
 Hub_295,EAGLE RIVER,Eagle River,community,Road,Receiver,582,{8E477B32-9CAB-4D31-8463-F93B4E3FE70F},19311,placed
 Hub_295,EAGLE RIVER,Eagle River,community,Road,Receiver,585,{1E420A2D-EE4F-48E1-AC1D-C325E61CCE7A},19311,placed
 Hub_295,EAGLE RIVER,Eagle River,community,Road,Receiver,596,{709D5E3C-6F2B-4AB9-B183-AE95F5889E26},19311,placed
-Hub_296,FORT RICHARDSON,Fort Richardson,community,Road,Receiver,565,{1DC59D11-9BEB-49DC-9CE6-3A8DA28A5E39},11130,placed
+Hub_296,JOINT BASE ELMENDORF-RICHARDSON,Fort Richardson,community,Road,Receiver,565,{1DC59D11-9BEB-49DC-9CE6-3A8DA28A5E39},11130,placed
 Hub_297,WHITE MOUNTAIN,White Mountain,community,Barge,Receiver,6,{A9993CC3-DCF0-49EA-9210-B68096AC8937},43651,placed
 Hub_297,WHITE MOUNTAIN,White Mountain,community,Barge,Receiver,7,{4A73D3E0-116B-4AF8-A2F3-038C017E8809},43651,placed
 Hub_297,WHITE MOUNTAIN,White Mountain,community,Barge,Receiver,8,{0FEDC2D8-085A-43FE-B5FB-451D906348F4},43651,placed
@@ -1631,12 +1631,12 @@ Hub_360,DEERING,Deering,community,Barge or Road,Receiver,991,{77B9E568-6D73-4FF3
 Hub_360,DEERING,Deering,community,Barge or Road,Receiver,991,{DD445EE1-3F10-4146-A63C-843325C1AEA0},44090,placed
 Hub_360,DEERING,Deering,community,Barge or Road,Receiver,991,{F3E0843B-7A8E-4A0B-A1D2-E8B831675754},44090,placed
 Hub_360,DEERING,Deering,community,Barge or Road,Receiver,SYN-881,{BCD651E8-4423-42E9-8590-DAE2B2CE66E6},44090,placed
-Hub_361,remote:SYN-100,Craig,remote_site,Barge,Receiver,SYN-100,{5CE97A73-0D33-4600-836B-A3E084CE3826},35963,placed
+Hub_361,remote:1418,Craig,remote_site,Barge,Receiver,SYN-100,{5CE97A73-0D33-4600-836B-A3E084CE3826},35963,placed
 Hub_362,SOUTH NAKNEK,South Naknek,community,Barge,Receiver,SYN-1031,{A2EC8460-8ABE-4893-B4D3-7CEEDDC03597},40380,placed
 Hub_362,SOUTH NAKNEK,South Naknek,community,Barge,Receiver,SYN-1032,{531FCE13-5F37-4206-ABD6-E479328F3B28},40380,placed
 Hub_362,SOUTH NAKNEK,South Naknek,community,Barge,Receiver,SYN-1033,{0A1579D5-A92D-4837-B2EC-95B2608B962B},40380,placed
 Hub_363,ALATNA,Alatna,community,Plane,Receiver,SYN-1068,{73EF2225-6598-4DE7-AFC3-A4F4A4A8712F},43188,placed
-Hub_364,remote:SYN-1081,Noorvik,remote_site,Barge,Receiver,SYN-1081,{056D0E34-0F8F-4089-8FD4-38E6687C1E94},42734,placed
+Hub_364,remote:1692,Noorvik,remote_site,Barge,Receiver,SYN-1081,{056D0E34-0F8F-4089-8FD4-38E6687C1E94},42734,placed
 Hub_365,LIME VILLAGE,Lime Village,community,Barge or Plane,Receiver,SYN-1178,{364570AC-CE66-4B24-A88F-55A73DA9A405},42327,placed
 Hub_365,LIME VILLAGE,Lime Village,community,Barge or Plane,Receiver,SYN-1178,{875DCE4F-F3F0-4D9C-9E0D-2F07D38F6400},42327,placed
 Hub_365,LIME VILLAGE,Lime Village,community,Barge or Plane,Receiver,SYN-1179,{5E5BAF5F-E77E-438F-A387-FBAE0D5613C7},42327,placed
