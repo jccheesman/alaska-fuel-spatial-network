@@ -56,6 +56,14 @@ if [ ! -f data/interim/MANIFEST.md ]; then
   run_step "02_prep_airways"  "$PY" "$HERE/02_prep_airways.py"
 fi
 
+# The facility inventory is OWNER-EDITED (workflow 00 applies the corrections and republishes
+# outputs/00_inventory_qc/<release>/facilities_clean.csv), so re-normalize it EVERY build, outside
+# the prep gate above, exactly as the manual connections below are re-split every build. Without
+# this a rebuild over an existing data/interim silently used the inventory of the build that
+# created it (2026-11-16: a re-export after an owner review came out byte-identical). Cheap: one
+# CSV read; the downloaded map layers stay gated.
+run_step "00_normalize_raw (facilities)" "$PY" "$HERE/00_normalize_raw.py" --only facilities
+
 # Manual connections: user-authored line layer(s) that stitch disconnected hubs into the
 # network. Re-split EVERY build (outside the prep gate above) so edits to the shapefile take
 # effect. Optional — skipped cleanly when the authored shapefile is absent.
