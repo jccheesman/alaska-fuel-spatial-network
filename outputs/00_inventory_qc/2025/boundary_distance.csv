@@ -297,7 +297,7 @@ record_id,outcome,own_boundary_km,located_in_place,community_relation
 {2AF943FF-83E3-4FC5-B107-FB1FE63168A0},match,0.0,Stebbins,inside
 {2B1BB9DC-F56A-461B-A9C9-0BD7DCA2E0E5},match,0.0,Chignik Lagoon,inside
 {2B46951B-0771-4DA5-B85E-08528246F05C},outside,70.81,,remote
-{2B48564F-DF5A-4814-B2B3-21E3157048CA},mismatch,838.67,Nome,elsewhere
+{2B48564F-DF5A-4814-B2B3-21E3157048CA},match,0.0,Nome,inside
 {2B4C0A41-A893-4B32-A211-6203CA1A3E7E},match,0.0,Delta Junction,inside
 {2B8CA0EE-A6A3-426A-B347-A135F7B81054},match,0.0,Nunam Iqua,inside
 {2B9BCCF0-A8EA-4A79-A9A5-E5459C1CB96E},match,0.0,Atka,inside
@@ -372,7 +372,7 @@ record_id,outcome,own_boundary_km,located_in_place,community_relation
 {392D764D-71F7-45B2-BAE8-2F521955D788},untested,,,untested
 {3933D80F-39D4-48E4-B969-6CF6060FD916},match,0.0,Nuiqsut,inside
 {398E44E8-E70B-4752-9C5D-72E9B35CFE48},match,0.0,Kotlik,inside
-{39943186-EB34-4A7C-B510-E1F60F6E5B77},mismatch,543.34,Iliamna,elsewhere
+{39943186-EB34-4A7C-B510-E1F60F6E5B77},match,0.0,Iliamna,inside
 {39B31BE9-3E59-4729-89B1-63A59C31F2D7},match,0.0,Upper Kalskag,inside
 {39BED115-6EC9-4598-8396-F20395351B98},match,0.0,Chefornak,inside
 {39D03317-EED1-4E0E-B1CF-3A9479C9357E},match,0.0,Tanana,inside
@@ -462,7 +462,7 @@ record_id,outcome,own_boundary_km,located_in_place,community_relation
 {45F72F82-F146-48B7-8510-EC81B37616DD},match,0.0,Homer,inside
 {46458926-F688-4612-ABF5-300ABAE53C25},match,0.0,Utqiagvik,inside
 {4647BABE-15E4-4187-9385-1C62344CD6BC},match,0.0,Atmautluak,inside
-{464FE024-2A99-4A73-956B-AFDC49328212},mismatch,61.81,Cordova,elsewhere
+{464FE024-2A99-4A73-956B-AFDC49328212},match,0.0,Cordova,inside
 {465146AD-FB3B-45ED-AE32-8A6CC9625813},match,0.0,Igiugig,inside
 {4669A088-FDE7-4974-9B95-0EEA23C33FC4},outside,32.25,,remote
 {46B7841A-6BC9-41E3-A253-23EF7D0D8FC9},match,0.0,Atqasuk,inside
@@ -652,7 +652,7 @@ record_id,outcome,own_boundary_km,located_in_place,community_relation
 {6553CDC8-80FA-4178-8880-C3D596370C35},match,0.0,Napakiak,inside
 {655E73A8-FE86-45FD-98CC-00AD1AE0EB19},untested,,,untested
 {659310D0-09A0-45D3-AF45-AA1F2A9E1F62},match,0.0,Igiugig,inside
-{65DFB897-7E85-4456-850D-913C7D010004},mismatch,31.89,Point MacKenzie,elsewhere
+{65DFB897-7E85-4456-850D-913C7D010004},match,0.0,Point MacKenzie,inside
 {6640F7BB-49A4-49F4-A25C-85DF1B38168B},match,0.0,Iliamna,inside
 {664F9327-5294-4681-9F68-2784A1F806E8},untested,,,untested
 {6651A82C-CC4D-434F-9688-2F9309674D16},untested,,Prudhoe Bay,untested
@@ -1034,7 +1034,7 @@ record_id,outcome,own_boundary_km,located_in_place,community_relation
 {9D247D7F-51AC-49F0-89FD-59E47C2F2FC9},match,0.0,Emmonak,inside
 {9D2D53BE-A6BE-4C90-B542-326627B0F06A},mismatch,10.02,Nikiski,adjacent
 {9D3A72F4-AA05-49D7-B2C6-F108BFE5084F},match,0.0,Scammon Bay,inside
-{9D56DBE7-1A09-4398-8622-73AF3113418C},mismatch,838.67,Nome,elsewhere
+{9D56DBE7-1A09-4398-8622-73AF3113418C},match,0.0,Nome,inside
 {9D76FA1D-AF1E-40E9-8EA2-47C4C9B0D071},match,0.0,Cooper Landing,inside
 {9D8271CA-C47C-4335-86DB-840808B20357},match,0.0,Unalaska,inside
 {9D8422E9-699D-4E93-870C-660389356C64},match,0.0,King Salmon,inside
@@ -1268,7 +1268,7 @@ record_id,outcome,own_boundary_km,located_in_place,community_relation
 {B9F91E61-DD1A-4880-8347-A73C8957CBF9},untested,,Tok,untested
 {BA4EE9C3-1152-401B-9F6A-8BEA6C9A7894},mismatch,22.36,Deltana,elsewhere
 {BA85C1A4-F6AC-4ED4-82F8-22E205D1445F},match,0.0,Lake Minchumina,inside
-{BACAEA02-40B4-467A-B3B9-39C3197CF50D},mismatch,520.88,King Salmon,elsewhere
+{BACAEA02-40B4-467A-B3B9-39C3197CF50D},match,0.0,King Salmon,inside
 {BB305CE8-F6DD-43BD-84C8-0B5E833AF5C6},match,0.0,Unalakleet,inside
 {BB50F72C-CB36-4632-9736-BFCF1FD13E72},match,0.0,Hoonah,inside
 {BBA36534-3C4E-43D6-BD17-8021C056B7C1},match,0.0,Akhiok,inside
@@ -1292,8 +1292,8 @@ record_id,outcome,own_boundary_km,located_in_place,community_relation
 {BFB14370-94DF-41D5-859D-B21FCE998FE3},match,0.0,Ruby,inside
 {BFB7DB54-CA46-4BD6-9543-C377A3C476CC},outside,132.0,,remote
 {BFBBB1DE-3035-4277-A6A1-635A35EF1A6C},match,0.0,Mountain Village,inside
-{BFC59C95-ABE4-4959-BE52-7F09A5308991},mismatch,214.64,Fort Yukon,elsewhere
-{BFF9DB9E-CA56-440D-B966-058492E9DF73},outside,374.71,,remote
+{BFC59C95-ABE4-4959-BE52-7F09A5308991},match,0.0,Fort Yukon,inside
+{BFF9DB9E-CA56-440D-B966-058492E9DF73},match,0.0,Ketchikan,inside
 {BFFC22DE-8C43-473B-A696-5370C6EB2162},match,0.0,Takotna,inside
 {C0078B6F-6E82-4228-8A2C-24B01CE556CE},match,0.0,Unalakleet,inside
 {C0223FF5-B95B-4CF2-80C4-FB5DCC124ADC},match,0.0,Chevak,inside
@@ -1541,7 +1541,7 @@ record_id,outcome,own_boundary_km,located_in_place,community_relation
 {E2BF956B-CE4D-4E04-954E-9B2D99151089},match,0.0,Naknek,inside
 {E2C20C9D-DC5C-4D14-B512-E8C41312EA92},match,0.0,Shishmaref,inside
 {E2CFD171-4F72-4EE8-AA24-C3C8C233BAA9},match,0.0,Egegik,inside
-{E2EBBB67-58E8-4EED-B69B-A03B77169EB6},mismatch,32.93,Point MacKenzie,elsewhere
+{E2EBBB67-58E8-4EED-B69B-A03B77169EB6},match,0.0,Point MacKenzie,inside
 {E2EF0E5B-287E-4122-A175-2E0B85FD9D17},match,0.0,Venetie,inside
 {E32D2921-8176-4468-A0AB-9AE351693922},mismatch,3.78,South Van Horn,adjacent
 {E3DA4A6D-2545-4031-85A7-7F30CDA34F87},untested,,,untested
@@ -1552,7 +1552,7 @@ record_id,outcome,own_boundary_km,located_in_place,community_relation
 {E474BE21-EF86-4234-AB76-B32CE68F896D},match,0.0,Point Hope,inside
 {E4AB4D46-CF85-4C56-9B07-82B5AA1F0492},match,0.0,Fairbanks,inside
 {E4B7575E-9F3B-44DD-88D5-F0519B402055},match,0.0,Upper Kalskag,inside
-{E4CF3B9E-8613-49C3-94A8-E46B9248AE34},mismatch,44.98,Healy Lake,elsewhere
+{E4CF3B9E-8613-49C3-94A8-E46B9248AE34},match,0.0,Healy Lake,inside
 {E4EE10B6-0678-4598-BDAB-CF65C3FE1ABD},match,0.0,Napakiak,inside
 {E52F8BF1-0669-4629-8E08-E889F6CF8435},match,0.0,Saint Paul,inside
 {E53E0A9F-D574-4511-81AC-AF770008F760},match,0.0,Nuiqsut,inside
@@ -1574,7 +1574,7 @@ record_id,outcome,own_boundary_km,located_in_place,community_relation
 {E7F7C72E-3C31-4C85-AC61-D685DE531E55},match,0.0,Nome,inside
 {E854004D-0A4D-48A9-A6FE-DEC878FA235C},match,0.0,Nome,inside
 {E867DC72-3920-4177-BBB6-DA377D5FDC91},match,0.0,Point Lay,inside
-{E8C7FE98-2833-47DB-A566-8D25750D48D2},mismatch,30.63,Kwethluk,elsewhere
+{E8C7FE98-2833-47DB-A566-8D25750D48D2},match,0.0,Kwethluk,inside
 {E8D942CE-3386-4DE8-8667-2A8395EDE2F3},match,0.0,Skagway,inside
 {E8EBA337-4E99-462B-B598-48ACEC1CF721},untested,,,untested
 {E9120740-60FA-4B54-926C-BF402402BE41},untested,,,untested
@@ -1719,7 +1719,6 @@ record_id,outcome,own_boundary_km,located_in_place,community_relation
 {FDBC58AD-8866-43BC-880C-54DBF59C43F6},match,0.0,Naukati Bay,inside
 {FDD95CA1-7593-453A-B389-E07884735185},match,0.0,Nunam Iqua,inside
 {FDF3F3FC-28C1-46DD-AF3B-029C231E2328},match,0.0,Mekoryuk,inside
-{FE1C1D96-F623-4694-ADA9-82D02F405415},mismatch,115.36,Kipnuk,elsewhere
 {FE63D401-849B-48B1-8FAF-6B046322D185},match,0.0,Stebbins,inside
 {FE80FFE4-DA2A-4520-83FA-EBF49A90B09C},match,0.0,Upper Kalskag,inside
 {FEF19473-F330-472E-B4D7-1BFE5DAC285F},untested,,,untested

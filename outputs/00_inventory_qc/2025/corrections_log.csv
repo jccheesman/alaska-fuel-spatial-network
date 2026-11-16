@@ -7,7 +7,7 @@ record_id,field,old_value,new_value,status,reviewer,reviewed_on,outcome,note
 {8D408F52-5CE0-4A95-A586-79D54041D7C7},longitude,-161.7611,-161.761100,approved,JC,2026-10-07,applied,
 {978F2CF3-F873-42E9-A4F4-4744D455FBA9},latitude,59.4571,59.457100,approved,JC,2026-10-08,applied,
 {978F2CF3-F873-42E9-A4F4-4744D455FBA9},longitude,-159.3748,-157.374800,approved,JC,2026-10-08,applied,
-{E4CF3B9E-8613-49C3-94A8-E46B9248AE34},community_name,Delta Junction,Healy Lake,pending,JC,2026-10-05,pending,
+{E4CF3B9E-8613-49C3-94A8-E46B9248AE34},community_name,Delta Junction,Healy Lake,retired,JC,2026-10-05,retired,
 {A5E8D42A-4A72-4380-B9D4-5CC0084B55D2},latitude,63.89194,53.882740,approved,JC,2026-10-05,applied,
 {A5E8D42A-4A72-4380-B9D4-5CC0084B55D2},longitude,-160.6842,-166.550742,approved,JC,2026-10-05,applied,
 {621FCC2F-3A90-426E-A211-00250864F71E},latitude,53.88274,63.891940,approved,JC,2026-10-05,applied,
@@ -15,18 +15,18 @@ record_id,field,old_value,new_value,status,reviewer,reviewed_on,outcome,note
 {5CE97A73-0D33-4600-836B-A3E084CE3826},(undecided),,,pending,JC,2026-10-05,pending,
 {B15A52C6-6F30-470D-9BA8-5037E9F1F1EC},community_name,Eielson Afb,Anchorage,approved,JC,2026-10-05,applied,
 {BFC59C95-ABE4-4959-BE52-7F09A5308991},community_name,Fairbanks,Fort Yukon,approved,JC,2026-10-05,applied,
-{2B48564F-DF5A-4814-B2B3-21E3157048CA},(undecided),,,pending,JC,2026-10-05,pending,
-{9D56DBE7-1A09-4398-8622-73AF3113418C},(undecided),,,pending,JC,2026-10-05,pending,
+{2B48564F-DF5A-4814-B2B3-21E3157048CA},(undecided),,,retired,JC,2026-10-05,retired,
+{9D56DBE7-1A09-4398-8622-73AF3113418C},(undecided),,,retired,JC,2026-10-05,retired,
 {BDC6AEBD-A6BF-4D0C-929B-36D15018837C},community_name,Fort Wainwright,Seward,approved,JC,2026-10-05,applied,
-{BFF9DB9E-CA56-440D-B966-058492E9DF73},latitude,58.37542,55.353511,pending,JC,2026-10-05,pending,
-{BFF9DB9E-CA56-440D-B966-058492E9DF73},longitude,-134.574986,-131.684099,pending,JC,2026-10-05,pending,
+{BFF9DB9E-CA56-440D-B966-058492E9DF73},latitude,58.37542,55.353511,retired,JC,2026-10-05,retired,
+{BFF9DB9E-CA56-440D-B966-058492E9DF73},longitude,-134.574986,-131.684099,retired,JC,2026-10-05,retired,
 {BACAEA02-40B4-467A-B3B9-39C3197CF50D},community_name,King Cove,King Salmon,approved,JC,2026-10-05,applied,
 {EE49D47C-9B92-431B-9D0B-77844BA21CF8},community_name,Stevens Village,Arctic Village,approved,JC,2026-10-05,applied,
 {835A9532-B50F-4307-8766-44E644F988D9},latitude,64.856066,60.678540,approved,JC,2026-10-05,applied,
 {835A9532-B50F-4307-8766-44E644F988D9},longitude,-147.802751,-151.380010,approved,JC,2026-10-05,applied,
 {6D4B4A33-4BA6-4F24-B682-8F598BC19947},latitude,66.54924307,55.550680,approved,JC,2026-10-05,applied,
 {6D4B4A33-4BA6-4F24-B682-8F598BC19947},longitude,-152.6327214,-133.096710,approved,JC,2026-10-05,applied,
-{FE1C1D96-F623-4694-ADA9-82D02F405415},exclude,,true,pending,JC,2026-10-05,pending,
+{FE1C1D96-F623-4694-ADA9-82D02F405415},exclude,,true,retired,JC,2026-10-05,retired,
 {056D0E34-0F8F-4089-8FD4-38E6687C1E94},(undecided),,,pending,JC,2026-10-05,pending,
 {60E9F7B5-8A63-4781-81E6-69A693BAD37D},community_name,Clarks Point,Clark's Point,approved,JC,nan,applied,
 {4BEF8811-2274-4D00-AC1C-998D040903CB},community_name,Clarks Point,Clark's Point,approved,JC,nan,applied,
@@ -141,6 +141,22 @@ record_id,field,old_value,new_value,status,reviewer,reviewed_on,outcome,note
 {E3EF8439-0613-41E1-B9C0-DC105BB3B3C0},longitude,-161.1384531,-160.442084,approved,JC,2026-11-14,applied,
 {D32639C4-3E15-4313-904F-B53FE9C4C207},latitude,60.85685837,60.587261,approved,JC,2026-11-14,applied,
 {D32639C4-3E15-4313-904F-B53FE9C4C207},longitude,-162.2765278,-165.253153,approved,JC,2026-11-14,applied,
+{2B48564F-DF5A-4814-B2B3-21E3157048CA},community_name,Fairbanks,Nome,approved,JC,2026-11-16,applied,
+{9D56DBE7-1A09-4398-8622-73AF3113418C},community_name,Fairbanks,Nome,approved,JC,2026-11-16,applied,
+{2B48564F-DF5A-4814-B2B3-21E3157048CA},community_id,{7102AFBB-6F0A-4C7A-92FF-6F5A6D66AB18},{72E9842F-ABE0-4390-9A93-917EDB1CF17B},approved,JC,2026-11-16,applied,
+{9D56DBE7-1A09-4398-8622-73AF3113418C},community_id,{7102AFBB-6F0A-4C7A-92FF-6F5A6D66AB18},{72E9842F-ABE0-4390-9A93-917EDB1CF17B},approved,JC,2026-11-16,applied,
+{BFC59C95-ABE4-4959-BE52-7F09A5308991},community_id,{7102AFBB-6F0A-4C7A-92FF-6F5A6D66AB18},{641D75DC-10FB-4C68-9F27-A8720C97B6C0},approved,JC,2026-11-16,applied,
+{BACAEA02-40B4-467A-B3B9-39C3197CF50D},community_id,{E3FB0AD1-05D8-4D22-919A-F24830556C1F},{DEFFD70D-72D8-4A79-B7DF-81586E965AFF},approved,JC,2026-11-16,applied,
+{39943186-EB34-4A7C-B510-E1F60F6E5B77},community_id,{A83F4C9F-FA93-4FC6-974A-39BA917BA023},{5ADEA6FC-9615-4F6E-9B68-F73ADD743B06},approved,JC,2026-11-16,applied,
+{E8C7FE98-2833-47DB-A566-8D25750D48D2},community_id,{16F1264E-DF67-4828-9E72-1AB821AB3F99},{FF083E35-08C8-468F-B328-F69992F18FB7},approved,JC,2026-11-16,applied,
+{464FE024-2A99-4A73-956B-AFDC49328212},community_id,{BDF957A0-FB1E-48AC-835A-A24FB2DFE444},{3921BE55-50DD-4433-8958-D5D2F2D001AE},approved,JC,2026-11-16,applied,
+{65DFB897-7E85-4456-850D-913C7D010004},community_id,{8805779A-5590-497A-82CB-9053953A6555},{5736B8FC-BE6B-44A6-8A67-0A66F497EDC5},approved,JC,2026-11-16,applied,
+{E2EBBB67-58E8-4EED-B69B-A03B77169EB6},community_id,{8805779A-5590-497A-82CB-9053953A6555},{5736B8FC-BE6B-44A6-8A67-0A66F497EDC5},approved,JC,2026-11-16,applied,
+{E4CF3B9E-8613-49C3-94A8-E46B9248AE34},community_name,Delta Junction,Healy Lake,approved,JC,2026-11-16,applied,
+{E4CF3B9E-8613-49C3-94A8-E46B9248AE34},community_id,{763EEB4F-118C-4AEA-A931-D707FE999A12},{093A0B52-9C15-4F33-8872-681E456A939D},approved,JC,2026-11-16,applied,
+{BFF9DB9E-CA56-440D-B966-058492E9DF73},latitude,58.37542,55.353511,approved,JC,2026-11-16,applied,
+{BFF9DB9E-CA56-440D-B966-058492E9DF73},longitude,-134.574986,-131.684099,approved,JC,2026-11-16,applied,
+{FE1C1D96-F623-4694-ADA9-82D02F405415},exclude,,true,approved,JC,2026-11-16,applied,
 {5AEE4579-120C-418C-965A-911EFB7A4873},map_point,"95294.34149,866941.8446","95294.34149,866941.8446",derived,,,publisher-corroborates,publisher map point agrees with the corrected position within 100 m; kept verbatim as the authoritative geometry
 {D0D325AD-A296-437B-9213-8A2FD2F3621D},map_point,"161699.986,1928988.01","161699.986,1928988.01",derived,,,publisher-corroborates,publisher map point agrees with the corrected position within 100 m; kept verbatim as the authoritative geometry
 {8D408F52-5CE0-4A95-A586-79D54041D7C7},map_x,-329067.8276,-420077.3262,derived,,,applied-sync,map point still sat on the refuted position; recomputed from the corrected lat/lon (EPSG:3338); publisher original in the snapshot
@@ -179,3 +195,5 @@ record_id,field,old_value,new_value,status,reviewer,reviewed_on,outcome,note
 {E3EF8439-0613-41E1-B9C0-DC105BB3B3C0},map_y,1797729.384,1904507.7704,derived,,,applied-sync,map point still sat on the refuted position; recomputed from the corrected lat/lon (EPSG:3338); publisher original in the snapshot
 {D32639C4-3E15-4313-904F-B53FE9C4C207},map_x,-446981.0982,-611488.8880,derived,,,applied-sync,map point still sat on the refuted position; recomputed from the corrected lat/lon (EPSG:3338); publisher original in the snapshot
 {D32639C4-3E15-4313-904F-B53FE9C4C207},map_y,1236015.375,1229903.1931,derived,,,applied-sync,map point still sat on the refuted position; recomputed from the corrected lat/lon (EPSG:3338); publisher original in the snapshot
+{BFF9DB9E-CA56-440D-B966-058492E9DF73},map_x,1116856.237,1388382.8620,derived,,,applied-sync,map point still sat on the refuted position; recomputed from the corrected lat/lon (EPSG:3338); publisher original in the snapshot
+{BFF9DB9E-CA56-440D-B966-058492E9DF73},map_y,1095189.423,828965.0123,derived,,,applied-sync,map point still sat on the refuted position; recomputed from the corrected lat/lon (EPSG:3338); publisher original in the snapshot

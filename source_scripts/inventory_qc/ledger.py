@@ -68,8 +68,18 @@ def build(label: str) -> dict[str, pd.DataFrame]:
     corr = corrections()
     log = read_csv(out / "corrections_log.csv") if (out / "corrections_log.csv").exists() else pd.DataFrame()
     if len(log):
-        corr = corr.merge(log[["record_id", "field", "old_value", "outcome"]].rename(columns={"outcome": "last_run_outcome"}),
-                          on=["record_id", "field", "old_value"], how="left")
+        # Match on status too: a decision recorded as a retired pending row plus a new
+        # approved row (append-only history) shares record, field and old_value with
+        # its retired sibling, and without status each row picked up both outcomes and
+        # appeared twice in its tab (2026-11-16).
+        keys = ["record_id", "field", "old_value"] + (["status"] if "status" in log.columns else [])
+        # an unguarded exclusion has a blank old_value, read as "" on one side and NaN
+        # on the other; normalise so it still finds its outcome
+        log = log.assign(old_value=log["old_value"].fillna("").astype(str))
+        corr = corr.assign(_ov=corr["old_value"]).assign(old_value=corr["old_value"].fillna("").astype(str))
+        corr = corr.merge(log[keys + ["outcome"]].rename(columns={"outcome": "last_run_outcome"}),
+                          on=keys, how="left")
+        corr = corr.assign(old_value=corr["_ov"]).drop(columns="_ov")
     approved = corr[corr["status"] == "approved"]
     rule = approved[approved.apply(_is_rule, axis=1)]
     owner = approved.drop(index=rule.index)

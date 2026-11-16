@@ -21,16 +21,10 @@ record_id,detector,severity,detail,suggested_field,suggested_value,group_key,cov
 {5283F15A-66DA-4487-8444-EC1A2C43934D},release_diff,medium,publisher MOVED the map point (map_x: '-138955.3617' -> '-638103.3526') — review before trusting an existing correction on this record,,,,correction:approved
 {5283F15A-66DA-4487-8444-EC1A2C43934D},release_diff,medium,publisher MOVED the map point (map_y: '1644432.574' -> '1341712.351') — review before trusting an existing correction on this record,,,,correction:approved
 {EE49D47C-9B92-431B-9D0B-77844BA21CF8},spelling_variants,medium,"community id {169CE60B-858B-4A5D-801B-CB9E3179349B} is spelled ['Arctic Village', 'Stevens Village']; most common: Stevens Village",community_name,Stevens Village,cid:{169CE60B-858B-4A5D-801B-CB9E3179349B},correction:approved
-{E8C7FE98-2833-47DB-A566-8D25750D48D2},spelling_variants,medium,"community id {16F1264E-DF67-4828-9E72-1AB821AB3F99} is spelled ['Kwethluk', 'Napakiak']; most common: Napakiak",community_name,Napakiak,cid:{16F1264E-DF67-4828-9E72-1AB821AB3F99},correction:approved
 {BDC6AEBD-A6BF-4D0C-929B-36D15018837C},spelling_variants,medium,"community id {3D0376C5-5127-4959-91EA-4BDA2B041AD6} is spelled ['Fort Wainwright', 'Seward']; most common: Fort Wainwright",community_name,Fort Wainwright,cid:{3D0376C5-5127-4959-91EA-4BDA2B041AD6},correction:approved
-{BFC59C95-ABE4-4959-BE52-7F09A5308991},spelling_variants,medium,"community id {7102AFBB-6F0A-4C7A-92FF-6F5A6D66AB18} is spelled ['Fairbanks', 'Fort Yukon']; most common: Fairbanks",community_name,Fairbanks,cid:{7102AFBB-6F0A-4C7A-92FF-6F5A6D66AB18},correction:approved
-{65DFB897-7E85-4456-850D-913C7D010004},spelling_variants,medium,"community id {8805779A-5590-497A-82CB-9053953A6555} is spelled ['Point MacKenzie', 'Wasilla']; most common: Wasilla",community_name,Wasilla,cid:{8805779A-5590-497A-82CB-9053953A6555},correction:approved
-{E2EBBB67-58E8-4EED-B69B-A03B77169EB6},spelling_variants,medium,"community id {8805779A-5590-497A-82CB-9053953A6555} is spelled ['Point MacKenzie', 'Wasilla']; most common: Wasilla",community_name,Wasilla,cid:{8805779A-5590-497A-82CB-9053953A6555},correction:approved
+{97E77B03-20AE-4291-A9A5-15C73AA55976},spelling_variants,medium,"community id {5736B8FC-BE6B-44A6-8A67-0A66F497EDC5} is spelled ['Point MacKenzie', 'Point Mackenzie']; most common: Point MacKenzie",community_name,Point MacKenzie,cid:{5736B8FC-BE6B-44A6-8A67-0A66F497EDC5},
 {996CA338-3112-43BA-964E-BAC877F58828},spelling_variants,medium,"community id {8905A89B-A676-4C0A-BEB5-C17AD570F833} is spelled ['Healy', 'Healy Lake']; most common: Healy",community_name,Healy,cid:{8905A89B-A676-4C0A-BEB5-C17AD570F833},correction:approved
 {B15A52C6-6F30-470D-9BA8-5037E9F1F1EC},spelling_variants,medium,"community id {A74F371F-C334-4DC3-88A4-A4FCC1B1E8FD} is spelled ['Anchorage', 'Eielson Afb']; most common: Eielson Afb",community_name,Eielson Afb,cid:{A74F371F-C334-4DC3-88A4-A4FCC1B1E8FD},correction:approved
-{39943186-EB34-4A7C-B510-E1F60F6E5B77},spelling_variants,medium,"community id {A83F4C9F-FA93-4FC6-974A-39BA917BA023} is spelled ['Iliamna', 'Nightmute']; most common: Nightmute",community_name,Nightmute,cid:{A83F4C9F-FA93-4FC6-974A-39BA917BA023},correction:approved
-{464FE024-2A99-4A73-956B-AFDC49328212},spelling_variants,medium,"community id {BDF957A0-FB1E-48AC-835A-A24FB2DFE444} is spelled ['Cordova', 'Valdez']; most common: Valdez",community_name,Valdez,cid:{BDF957A0-FB1E-48AC-835A-A24FB2DFE444},correction:approved
-{BACAEA02-40B4-467A-B3B9-39C3197CF50D},spelling_variants,medium,"community id {E3FB0AD1-05D8-4D22-919A-F24830556C1F} is spelled ['King Cove', 'King Salmon']; most common: King Cove",community_name,King Cove,cid:{E3FB0AD1-05D8-4D22-919A-F24830556C1F},correction:approved
 {0068B24C-B0D6-4EEC-9C89-1E7A160A9EF3},missing_fields,info,missing: community_name,,,,
 {011B4712-6525-4B16-A4CB-ADE09BF9FAF9},missing_fields,info,"missing: latitude, longitude, delivery_method, total_capacity",,,,
 {01A9966D-C1DC-47AA-949A-89D610D1E56E},missing_fields,info,missing: delivery_method,,,,
@@ -291,7 +285,6 @@ record_id,detector,severity,detail,suggested_field,suggested_value,group_key,cov
 {FA312230-C0C1-4ED5-B3B1-1E14FDD7A61B},missing_fields,info,missing: delivery_method,,,,
 {FB96C24B-7E2D-41A4-BB41-17A5FC20670F},missing_fields,info,missing: delivery_method,,,,correction:approved
 {FCEC525F-001B-49F9-A011-4EBF4AE8918E},missing_fields,info,"missing: latitude, longitude, delivery_method, total_capacity",,,,
-{FE1C1D96-F623-4694-ADA9-82D02F405415},missing_fields,info,missing: total_capacity,,,,correction:pending
 {FE69B373-CEA6-404B-946F-69BC55AC0A15},missing_fields,info,"missing: latitude, longitude, delivery_method, total_capacity",,,,
 {FE795A58-DA50-40C1-B72F-CD71CEDB3793},missing_fields,info,"missing: latitude, longitude, delivery_method, total_capacity",,,,
 {FEF19473-F330-472E-B4D7-1BFE5DAC285F},missing_fields,info,missing: community_name,,,,

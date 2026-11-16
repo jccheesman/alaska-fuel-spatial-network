@@ -1,37 +1,37 @@
 # Inventory QC report — release 2025
 
-Generated 2026-11-14T23:31:14+00:00 by workflows/00_inventory_qc/07_publish.py
+Generated 2026-11-16T13:46:28+00:00 by workflows/00_inventory_qc/07_publish.py
 
 - raw release: `Utilities_Bulk_Fuel_Inventory.csv` sha256 `3fbee569c63dccf813d6fa53e608820d53b92e415feb2c7f20556fc0bb0c30b0` (1830 rows, 1767 located)
-- clean table: `facilities_clean.csv` sha256 `20b54707985dc515cb7e907c15473f4b3d06e042ae902068d5c28750f72b1a23` (1797 rows, 1734 located)
-- excluded: 33 (see `excluded.csv`)
-- corrections: 120 applied · 9 pending · 11 rejected · 0 skipped
+- clean table: `facilities_clean.csv` sha256 `b16e15cfd145ccd8a20cde67656dccfb225fc0d89a000da0e2bed640bceed6d6` (1796 rows, 1733 located)
+- excluded: 34 (see `excluded.csv`)
+- corrections: 136 applied · 3 pending · 11 rejected · 0 skipped
 - community keys: 273 · unlabelled records: 97
-- capacity_status: 1710 ok · 75 missing · 12 mismatch; placeholder inspection dates published blank: 7
-- qc_status: 1797 clean · 0 pending_review (withheld from hubs by the build)
-- facility_id: 1734 located records with an id (1160 AEA, 577 synthetic from the ledger); AEA regions: 1733 inside · 1 nearest · 0 outside
+- capacity_status: 1710 ok · 74 missing · 12 mismatch; placeholder inspection dates published blank: 7
+- qc_status: 1795 clean · 1 pending_review (withheld from hubs by the build)
+- facility_id: 1733 located records with an id (1160 AEA, 576 synthetic from the ledger); AEA regions: 1732 inside · 1 nearest · 0 outside
 
 ## Checks
 
 | check | result | detail |
 |---|---|---|
 | no undeclared derived column was produced by a stage | PASS | undeclared=[] (declare it in inputs/inventory_qc/derived_columns.csv) |
-| row reconciliation | PASS | 1830 release = 1797 clean + 33 excluded |
-| every exclusion has a reason | PASS | 33 excluded |
-| every applied correction has reviewer + date | PASS | 120 applied |
+| row reconciliation | PASS | 1830 release = 1796 clean + 34 excluded |
+| every exclusion has a reason | PASS | 34 excluded |
+| every applied correction has reviewer + date | PASS | 136 applied |
 | only schema + derived columns; no contact columns | PASS | extra=[] contact=[] |
 | every declared derived column is present (derived_columns.csv) | PASS | missing=[] |
 | every located record has a facility_id | PASS | missing=0 |
 | facility_id is unique across located records | PASS | shared=[] |
 | facility_id never differs from the ledger (facility_ids.csv) | PASS | moved=[] |
-| every located record has an AEA region or an explicit 'outside' relation | PASS | inside=1733 nearest=1 outside=0 |
+| every located record has an AEA region or an explicit 'outside' relation | PASS | inside=1732 nearest=1 outside=0 |
 | fixture: Bethel record f000283 is not above 66°N | PASS |  |
 | fixture: no Unalaska-labelled record sits on Norton Sound (lat > 60) | PASS |  |
 | fixture: no Unalakleet-labelled record sits in the Aleutians (lat < 60) | PASS |  |
 | fixture: no Kodiak-labelled record is in the open Pacific (lat < 56) | PASS |  |
 | fixture: no Coldfoot-labelled record is in Yukon, Canada (lon > -141) | PASS |  |
 | fixture: spelling variants resolved (no 'Saint Marys', 'Clarks Point', 'Dutch Harbor' labels) | PASS |  |
-| deterministic output | PASS | 20b54707985d |
+| deterministic output | PASS | b16e15cfd145 |
 
 ## Corrections applied
 
@@ -157,3 +157,19 @@ Generated 2026-11-14T23:31:14+00:00 by workflows/00_inventory_qc/07_publish.py
 | `{E3EF8439-0613-41E1-B9C0-DC105BB3B3C0}` | longitude | -161.1384531 | -160.442084 | JC | 2026-11-14 |
 | `{D32639C4-3E15-4313-904F-B53FE9C4C207}` | latitude | 60.85685837 | 60.587261 | JC | 2026-11-14 |
 | `{D32639C4-3E15-4313-904F-B53FE9C4C207}` | longitude | -162.2765278 | -165.253153 | JC | 2026-11-14 |
+| `{2B48564F-DF5A-4814-B2B3-21E3157048CA}` | community_name | Fairbanks | Nome | JC | 2026-11-16 |
+| `{9D56DBE7-1A09-4398-8622-73AF3113418C}` | community_name | Fairbanks | Nome | JC | 2026-11-16 |
+| `{2B48564F-DF5A-4814-B2B3-21E3157048CA}` | community_id | {7102AFBB-6F0A-4C7A-92FF-6F5A6D66AB18} | {72E9842F-ABE0-4390-9A93-917EDB1CF17B} | JC | 2026-11-16 |
+| `{9D56DBE7-1A09-4398-8622-73AF3113418C}` | community_id | {7102AFBB-6F0A-4C7A-92FF-6F5A6D66AB18} | {72E9842F-ABE0-4390-9A93-917EDB1CF17B} | JC | 2026-11-16 |
+| `{BFC59C95-ABE4-4959-BE52-7F09A5308991}` | community_id | {7102AFBB-6F0A-4C7A-92FF-6F5A6D66AB18} | {641D75DC-10FB-4C68-9F27-A8720C97B6C0} | JC | 2026-11-16 |
+| `{BACAEA02-40B4-467A-B3B9-39C3197CF50D}` | community_id | {E3FB0AD1-05D8-4D22-919A-F24830556C1F} | {DEFFD70D-72D8-4A79-B7DF-81586E965AFF} | JC | 2026-11-16 |
+| `{39943186-EB34-4A7C-B510-E1F60F6E5B77}` | community_id | {A83F4C9F-FA93-4FC6-974A-39BA917BA023} | {5ADEA6FC-9615-4F6E-9B68-F73ADD743B06} | JC | 2026-11-16 |
+| `{E8C7FE98-2833-47DB-A566-8D25750D48D2}` | community_id | {16F1264E-DF67-4828-9E72-1AB821AB3F99} | {FF083E35-08C8-468F-B328-F69992F18FB7} | JC | 2026-11-16 |
+| `{464FE024-2A99-4A73-956B-AFDC49328212}` | community_id | {BDF957A0-FB1E-48AC-835A-A24FB2DFE444} | {3921BE55-50DD-4433-8958-D5D2F2D001AE} | JC | 2026-11-16 |
+| `{65DFB897-7E85-4456-850D-913C7D010004}` | community_id | {8805779A-5590-497A-82CB-9053953A6555} | {5736B8FC-BE6B-44A6-8A67-0A66F497EDC5} | JC | 2026-11-16 |
+| `{E2EBBB67-58E8-4EED-B69B-A03B77169EB6}` | community_id | {8805779A-5590-497A-82CB-9053953A6555} | {5736B8FC-BE6B-44A6-8A67-0A66F497EDC5} | JC | 2026-11-16 |
+| `{E4CF3B9E-8613-49C3-94A8-E46B9248AE34}` | community_name | Delta Junction | Healy Lake | JC | 2026-11-16 |
+| `{E4CF3B9E-8613-49C3-94A8-E46B9248AE34}` | community_id | {763EEB4F-118C-4AEA-A931-D707FE999A12} | {093A0B52-9C15-4F33-8872-681E456A939D} | JC | 2026-11-16 |
+| `{BFF9DB9E-CA56-440D-B966-058492E9DF73}` | latitude | 58.37542 | 55.353511 | JC | 2026-11-16 |
+| `{BFF9DB9E-CA56-440D-B966-058492E9DF73}` | longitude | -134.574986 | -131.684099 | JC | 2026-11-16 |
+| `{FE1C1D96-F623-4694-ADA9-82D02F405415}` | exclude | nan | true | JC | 2026-11-16 |
