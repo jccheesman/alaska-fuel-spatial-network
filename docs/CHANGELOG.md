@@ -13,7 +13,7 @@ from git with `git show <commit>:final_network/network_joined_edges.zip`.
 
 | Version | Commit | Nodes | Edges | Hubs | Components | Giant | edges.zip | nodes.zip |
 |---|---|---|---|---|---|---|---|---|
-| **2026-11-16** (current) | pending | 84,094 | 93,046 | 328 | 4 | 99.99% | `c8333fa0c4bcda7c` | `0757b28283fd526e` |
+| **2026-11-16** (current) | `412a20f` | 84,094 | 93,046 | 328 | 4 | 99.99% | `c8333fa0c4bcda7c` | `0757b28283fd526e` |
 | 2026-11-15 | `8509a86` | 84,094 | 93,049 | 337 | 4 | 99.99% | `de00b11aa76c103b` | `b12e348202e784cd` |
 | 2026-10-15 | `d7faf7a` | 84,094 | 93,049 | 329 | 4 | 99.99% | `2104767a4721c333` | `f6775915ca4d0d8c` |
 | 2026-09-29 re-bake | `4c89339` | 84,089 | 92,978 | 385 | 5 | 99.99% | `302bf150b690e760` | `1bcfdb5e21213e60` |
