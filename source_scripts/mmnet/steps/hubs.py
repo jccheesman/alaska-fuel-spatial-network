@@ -257,7 +257,16 @@ def aggregate_hubs(facilities: gpd.GeoDataFrame, params: Params) -> gpd.GeoDataF
             far = pd.to_numeric(fac["community_distance_km"], errors="coerce") > rk
             far &= ~unplaced
             if far.any():
-                key[far] = "remote:" + fac.loc[far, "ast_facility_id"].astype(str)
+                # Name a remote site by a STABLE id: its AEA id where it has one, else its ledger
+                # facility_id (workflow 00). The SYN-<cluster_id> fallback is positional, so one
+                # site added or removed anywhere earlier renumbered it and the harness re-minted
+                # the hub's public id although the site had not changed (2026-11-16: remote:SYN-99
+                # -> SYN-100). AEA-id sites keep their key: for them the ledger id IS the AEA id.
+                site = fac["ast_facility_id"].astype(str)
+                if "facility_id" in fac.columns:
+                    synth = site.str.startswith("SYN-") & fac["facility_id"].notna()
+                    site = site.where(~synth, fac["facility_id"].astype(str))
+                key[far] = "remote:" + site[far]
                 kind[far] = "remote_site"
                 print(f"[hubs] {int(far.sum())} remote site(s) > {rk:.0f} km from their community form their own hub")
         fac["_community"] = key

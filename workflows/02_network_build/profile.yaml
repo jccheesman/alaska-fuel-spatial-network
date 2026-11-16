@@ -41,6 +41,7 @@ inventory:
   path: data/interim/facilities.csv
   id:              id
   record_id:       record_id
+  facility_id:     facility_id              # workflow 00's ledger id; names a remote-site hub without an AEA id (stable across rebuilds)
   community_key:   community_key            # canonical label (aliases folded) from workflow 00
   community_distance: community_distance_km # km to the labelled community's boundary (workflow 00)
   qc_status:       qc_status                 # clean | pending_review (open owner review item)

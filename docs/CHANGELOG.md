@@ -21,6 +21,21 @@ from git with `git show <commit>:final_network/network_joined_edges.zip`.
 | 2026-09-12 | `a2e7a9e` | 82,412 | 91,087 | 384 | 6 | 99.98% | `558dfa5b88ad93b9` | `30808a7f0f6bf470` |
 | 2026-07-20 pre-fix freeze | `f455f0e` | 82,300 | 90,921 | 384 | 21 | 99.65% | `4b1ffe008b07049c` | `3f50dfb80b034f25` |
 
+## Unreleased — takes effect at the next export
+
+- Remote-site hubs whose site has no AEA id are keyed by workflow 00's ledger
+  `facility_id` (`remote:<facility_id>`, mapped as profile `inventory.facility_id`)
+  instead of the positional `remote:SYN-<cluster_id>`. The SYN number follows the
+  consolidation's cluster numbering, so adding, removing or splitting any earlier
+  site renumbered it, and the harness, which fingerprints a hub by its key, re-minted
+  the hub's public id although the site had not changed (2026-11-16: the Craig-area
+  site went `remote:SYN-99` → `SYN-100`, harness `hub:h000646` → `hub:h000751`).
+  Sites with an AEA id keep `remote:<AEA id>` (their ledger id is that number), so no
+  other hub key moves. At the next export the two hubs keyed by a SYN number today
+  are renamed once: `remote:SYN-100` → `remote:1418` (Craig, Alaska Power & Telephone,
+  placed in Coffman Cove) and `remote:SYN-1081` → `remote:1692` (Noorvik, AVEC), both
+  still-pending owner review items; after that their keys hold.
+
 ## 2026-11-16 — the owner review of 2026-11-16
 
 - The owner review of 2026-11-16 (`docs/inventory_notes/owner_review_2026-11-16.md`,

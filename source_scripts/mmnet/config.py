@@ -284,6 +284,7 @@ class InventorySpec(_Strict):
     entity: Optional[str] = None
     type: Optional[str] = None
     record_id: Optional[str] = None      # stable per-record id; carried through consolidation as the site-member trail
+    facility_id: Optional[str] = None    # workflow 00's ledger facility_id (stable across releases); names a remote-site hub whose site has no AEA id
     community_key: Optional[str] = None  # canonical community key (aliases folded); hub grouping + cannot-link use it
     community_distance: Optional[str] = None  # km from the record to its labelled community (workflow 00); remote-site rule
     qc_status: Optional[str] = None      # workflow 00 qc_status column; pending_review records can be withheld from hubs
@@ -423,6 +424,8 @@ class RegionProfile(_Strict):
             facility_columns[inv.entity] = "entity_name"
         if inv.record_id:
             facility_columns[inv.record_id] = "record_id"
+        if inv.facility_id:
+            facility_columns[inv.facility_id] = "facility_id"
         if inv.community_key:
             facility_columns[inv.community_key] = "community_key"
         if inv.community_distance:

@@ -233,6 +233,13 @@ def consolidate_facilities(
         if "record_id" in grp.columns:
             rec["member_record_ids"] = ";".join(sorted(grp["record_id"].dropna().astype(str)))
             rec["n_members"] = int(len(grp))
+        # The site's stable identity (profile `inventory.facility_id`, workflow 00's ledger id): the
+        # smallest ledger id among its records. Unlike SYN-<cluster_id>, which follows the cluster
+        # numbering and shifts whenever an earlier site is added, removed or split, it moves only
+        # if the site's own membership does. The hub builder names remote sites by it.
+        if "facility_id" in grp.columns:
+            fids = pd.to_numeric(grp["facility_id"], errors="coerce").dropna()
+            rec["facility_id"] = str(int(fids.min())) if len(fids) else None
         for col in cap_cols:
             rec[col] = _max_or_nan(grp[col]) if col in grp.columns else np.nan
         if "community_distance_km" in grp.columns:

@@ -162,6 +162,52 @@ def test_remote_site_rule_off_by_default_and_without_distance():
     assert len(aggregate_hubs(g2, Params(group_by=["community"], remote_site_km=20))) == 1
 
 
+def test_remote_site_without_an_aea_id_is_named_by_its_ledger_facility_id():
+    """A remote site whose record has no AEA id used to be keyed remote:SYN-<cluster_id>, a
+    positional number; it is now keyed by workflow 00's ledger facility_id. A remote site WITH
+    an AEA id keeps remote:<AEA id> (its ledger id is that same number)."""
+    g = _tagged([(0, 0), (300_000, 0), (0, 300_000)], community_name=["Craig"] * 3,
+                community_distance_km=[0.0, 57.7, 80.0],
+                ast_facility_id=["1", "SYN-99", "1058"], facility_id=["1", "1418", "1058"])
+    keys = set(aggregate_hubs(g, Params(group_by=["community"], remote_site_km=20))["hub_key"])
+    assert keys == {"CRAIG", "remote:1418", "remote:1058"}, keys
+
+
+def test_remote_site_without_a_ledger_id_keeps_the_synthetic_name():
+    g = _tagged([(0, 0), (300_000, 0)], community_name=["Craig"] * 2, community_distance_km=[0.0, 57.7],
+                ast_facility_id=["1", "SYN-99"])
+    assert set(aggregate_hubs(g, Params(group_by=["community"], remote_site_km=20))["hub_key"]) == {"CRAIG", "remote:SYN-99"}
+
+
+def test_remote_hub_key_survives_removing_an_unrelated_site(tmp_path):
+    """End to end through consolidation: drop a site that sorts before the remote one and the
+    remote hub keeps its key (2026-11-16: remote:SYN-99 became SYN-100 and re-minted a hub)."""
+    from mmnet.config import PipelineConfig
+    from mmnet.steps.consolidate import consolidate_facilities
+    cols = {"id": "ast_facility_id", "community": "community_name", "delivery_method": "delivery_method",
+            "total_capacity": "total_capacity", "longitude": "longitude", "latitude": "latitude",
+            "record_id": "record_id", "facility_id": "facility_id", "community_distance_km": "community_distance_km"}
+    cfg = PipelineConfig(roots={}, layers=[], raw={}, facility_columns=cols, capacity_columns=["total_capacity"],
+                         routable_modes=["Road", "Barge"])
+    df = pd.DataFrame({
+        "id": ["", "", "2001", ""], "record_id": ["{a}", "{b}", "{c}", "{r}"],
+        "facility_id": [1300, 1301, 2001, 1418],
+        "community": ["Hydaburg", "Klawock", "Craig", "Craig"], "delivery_method": ["Barge"] * 4,
+        "total_capacity": [100, 200, 300, 21900],
+        "longitude": [-132.82, -133.09, -133.15, -132.828], "latitude": [55.20, 55.55, 55.47, 56.017],
+        "community_distance_km": [0.0, 0.0, 0.0, 57.65]})
+    def remote_keys(frame):
+        path = tmp_path / f"f{len(frame)}.csv"; frame.to_csv(path, index=False)
+        sites = consolidate_facilities(path, Params(), 4326, 3338, cfg)
+        sites["place_name"] = None; sites["region_name"] = "Southeast"
+        sites["assigned_community"] = sites["community_name"]
+        hubs = aggregate_hubs(sites, Params(group_by=["community"], remote_site_km=20))
+        return sorted(k for k in hubs["hub_key"] if k.startswith("remote:")), sorted(sites["ast_facility_id"])
+    full, full_sites = remote_keys(df)
+    fewer, fewer_sites = remote_keys(df.iloc[1:])          # the first site (Hydaburg) removed
+    assert full == fewer == ["remote:1418"], (full, fewer, full_sites, fewer_sites)
+
+
 # ----------------------------------------------------------------------------- withhold pending review
 def test_withhold_pending_review_is_an_on_off_flag(tmp_path):
     from mmnet.config import PipelineConfig
