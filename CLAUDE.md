@@ -132,17 +132,18 @@ replaces the network-of-record.
   AirRoadTransfer 2 · BargeAirTransfer 2. The mode is
   spelled `IceRoad` (no space) everywhere in the profile.
 - **The network-of-record was re-exported 2026-11-16** (84,094 nodes / 93,046
-  edges / 328 hubs / 4 components): the first export whose stage-02 rebuild
-  actually reads the adjudicated inventory. The 2026-11-15 export claimed it,
-  but workflow 02's prep gate silently reused a stale `data/interim`
-  `facilities.csv` (found 2026-11-16 when a re-export came out byte-identical;
-  fixed by `5a34dcc` — the facilities entry is re-normalized on EVERY build
-  now). With the corrected coordinates in effect, the 13 relocated facilities
-  fold out of their own `remote_site` hubs into their communities' (hubs
-  337 → 328; BargeRoadTransfer 289 → 286). Node `.shp`/`.shx` are unchanged;
+  edges / 328 hubs / 4 components) after the owner review of 2026-11-16
+  (`docs/inventory_notes/owner_review_2026-11-16.md`, 17 records corrected by
+  manual approval): ten `remote_site` hubs whose records were measured against
+  the wrong community or held at a refuted position fold into their
+  communities' hubs, and Healy Lake gets its own hub (hubs 337 → 328;
+  BargeRoadTransfer 289 → 286). Workflow 02 now re-normalizes
+  the facilities entry on EVERY build (`5a34dcc`): before, its prep gate skipped
+  that step whenever `data/interim` existed, so a rebuild silently used the
+  previous build's inventory. Node `.shp`/`.shx` are unchanged;
   edge geometry/order moved, so edge_ids are new; **workflow 03 WAS rerun in
   full with this export** (2026-11-16, 1,116,552 rows, QA envelope reproduced).
-  It supersedes the 2026-11-15 export (337 hubs, stale-inventory build), the
+  It supersedes the 2026-11-15 export (337 hubs, the 2026-11-14 review queue emptied), the
   2026-10-15 export (phase-5 hub builder + first corrected inventory + 25 km
   reach / 2 km edge-snap, hubs 329), the 2026-09-15 AK-DOT-only export (84,089 /
   92,978 / 385 / 5; road source = 2026-09 AK DOT&PF, GRIP4 border-stitch

@@ -34,12 +34,11 @@ Raw inventory files (NOT tracked after 2022; contact fields). Verify a local cop
 
 ## final_network zip members (the current network-of-record)
 
-Re-exported 2026-11-16 by `06_export_final_network.py` — the first export whose
-stage-02 rebuild actually reads the adjudicated inventory (commit `5a34dcc`
-fixed the prep gate silently reusing a stale `data/interim` copy): the 13
-relocated facilities leave their own `remote_site` hubs for their communities'
-(hubs 337 → 328, edges 93,049 → 93,046, BargeRoadTransfer 289 → 286; see
-`final_network/README.md`). Supersedes the 2026-11-15 export.
+Re-exported 2026-11-16 by `06_export_final_network.py` after the owner review of
+that day (`docs/inventory_notes/owner_review_2026-11-16.md`, 17 records corrected
+by manual approval): ten remote-site hubs fold into their communities' and Healy
+Lake gets its own hub (hubs 337 → 328, edges 93,049 → 93,046, BargeRoadTransfer
+289 → 286; see `final_network/README.md`). Supersedes the 2026-11-15 export.
 sha256 per member is also written to `final_network/MANIFEST.sha256`; `.cpg` and
 `.prj` are format-fixed and carry over unchanged.
 
