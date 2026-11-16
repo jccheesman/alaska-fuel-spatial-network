@@ -2,7 +2,12 @@ variant,canonical,basis,decided_on
 Dutch Harbor,Unalaska,same AEA CommunityID {F020D8C7-7FD0-4AFE-85DC-43D1C0A0B5F0}; owner approved 2026-10-05,2026-10-06
 Saint Paul Island,Saint Paul,same AEA CommunityID; owner approved 2026-10-05,2026-10-06
 Saint George Island,Saint George,same AEA CommunityID; owner approved 2026-10-05,2026-10-06
-Bettles,Bettles Field,same AEA CommunityID; owner chose Bettles Field 2026-10-05 (the ACEP gateway file uses Bettles),2026-10-06
+Bettles Field,Bettles,"MANUAL OWNER APPROVAL 2026-11-16 (community_label_review_2026-11-16.xlsx (owner, chat 2026-11-16)): Bettles is the DCRA community (2nd Class City, CommunityID {C4674250-987C-40CD-B550-D246607343D4}) and the code all 11 records carry; Bettles Field is the airfield. Reverses the owner's 2026-10-05 choice of Bettles Field (was: variant Bettles, canonical Bettles Field)",2026-11-16
 Naukati,Naukati Bay,same AEA CommunityID; owner approved 2026-10-05,2026-10-06
 Kalskag,Upper Kalskag,same AEA CommunityID; owner approved 2026-10-05,2026-10-06
 Eielson Afb,Eielson AFB,casing only; ACEP gateway file spelling,2026-10-06
+Barrow,Utqiagvik,"MANUAL OWNER APPROVAL 2026-11-16 (community_label_review_2026-11-16.xlsx (owner, chat 2026-11-16)): City renamed Utqiagvik in 2016 (DCRA spelling; CommunityID {2697EF3A-7387-4208-B455-A046543D1AA7}); all 5 records carry that code and sit inside its boundary",2026-11-16
+Deadhorse,Prudhoe Bay,"MANUAL OWNER APPROVAL 2026-11-16 (community_label_review_2026-11-16.xlsx (owner, chat 2026-11-16)): Deadhorse is the service camp of the Prudhoe Bay CDP (DCRA Place of Interest, CommunityID {A86C2FBC-0704-4117-9A7E-E4A3DD3415BD}); the one record sits inside its boundary",2026-11-16
+Denali National Park,Denali Park,"MANUAL OWNER APPROVAL 2026-11-16 (community_label_review_2026-11-16.xlsx (owner, chat 2026-11-16)): DCRA's CDP is Denali Park (CommunityID {10BA1AD9-39AC-440F-BCE9-40BC75DAD436}), the code the one record carries",2026-11-16
+Fort Richardson,Joint Base Elmendorf-Richardson,"MANUAL OWNER APPROVAL 2026-11-16 (community_label_review_2026-11-16.xlsx (owner, chat 2026-11-16)): DCRA lists Joint Base Elmendorf-Richardson as its own Place of Interest (CommunityID {3A66DA74-669C-477F-B7DF-732C814AA38A}), the code the one record carries",2026-11-16
+Sutton,Sutton-Alpine,"MANUAL OWNER APPROVAL 2026-11-16 (community_label_review_2026-11-16.xlsx (owner, chat 2026-11-16)): DCRA's CDP is Sutton-Alpine (CommunityID {126A149F-F9BD-42EC-8D66-E4883B8016E2}), the code the one record carries; it sits inside that CDP",2026-11-16

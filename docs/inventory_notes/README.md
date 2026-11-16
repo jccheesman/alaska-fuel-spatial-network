@@ -14,3 +14,4 @@ Referenced from the inventory-QC skills as `[[note_name]]`.
 | [relabel_keeps_community_id](relabel_keeps_community_id.md) | 14 relabelled (all fixed 2026-11-16) | a `community_id` correction beside every relabel |
 
 Owner review records (manual decisions, not defects): [owner_review_2026-11-16](owner_review_2026-11-16.md).
+Review sheets: [community_label_review_2026-11-16](community_label_review_2026-11-16.md) — labels that are not DCRA community names (decided 2026-11-16: six aliases, one spelling).

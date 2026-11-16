@@ -219,7 +219,7 @@ record_id,detector,severity,detail,suggested_field,suggested_value,group_key,cov
 {CA9377E2-F045-4E12-899E-A00B06C00908},missing_fields,info,missing: delivery_method,,,,
 {CD097E8A-4E3A-4726-A8A1-A9E1F06AE093},missing_fields,info,missing: delivery_method,,,,
 {CD1EA217-9CF2-47B5-94D1-728942BB55A6},missing_fields,info,missing: delivery_method,,,,
-{CD4AD297-08F9-487A-AF26-CA811742EFAE},missing_fields,info,"missing: latitude, longitude, delivery_method, total_capacity",,,,
+{CD4AD297-08F9-487A-AF26-CA811742EFAE},missing_fields,info,"missing: latitude, longitude, delivery_method, total_capacity",,,,correction:approved
 {CEFEF0C0-D1C6-4A0B-ABF5-66311BFEFFF9},missing_fields,info,missing: delivery_method,,,,
 {CF093664-3A16-4A3C-9347-0A6A8D6A81B2},missing_fields,info,missing: total_capacity,,,,
 {CFEEF21E-22F1-43C9-9C18-375689F362A6},missing_fields,info,missing: delivery_method,,,,

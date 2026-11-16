@@ -35,6 +35,14 @@ from git with `git show <commit>:final_network/network_joined_edges.zip`.
   are renamed once: `remote:SYN-100` → `remote:1418` (Craig, Alaska Power & Telephone,
   placed in Coffman Cove) and `remote:SYN-1081` → `remote:1692` (Noorvik, AVEC), both
   still-pending owner review items; after that their keys hold.
+- Community labels to DCRA names (owner, 2026-11-16,
+  `docs/inventory_notes/community_label_review_2026-11-16.md`): aliases fold
+  Barrow → Utqiagvik, Bettles Field → Bettles (reversing the 2026-10-05 choice),
+  Deadhorse → Prudhoe Bay, Denali National Park → Denali Park, Fort Richardson →
+  Joint Base Elmendorf-Richardson and Sutton → Sutton-Alpine; Point McKenzie is
+  spelled Point MacKenzie. Workflow 00 is republished (21 community keys, one
+  name); the hubs, which group by the community key, take the DCRA names at the
+  next export.
 
 ## 2026-11-16 — the owner review of 2026-11-16
 

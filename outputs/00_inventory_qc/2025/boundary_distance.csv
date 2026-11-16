@@ -468,7 +468,7 @@ record_id,outcome,own_boundary_km,located_in_place,community_relation
 {46B7841A-6BC9-41E3-A253-23EF7D0D8FC9},match,0.0,Atqasuk,inside
 {470F1396-C8AE-477E-848A-7BE1F18CBBC7},match,0.0,Kotzebue,inside
 {473D6546-4125-4228-8C36-95B76AA0FC27},match,0.0,Hoonah,inside
-{4761D598-634E-4003-8E83-42DBC3154C8B},untested,,Prudhoe Bay,untested
+{4761D598-634E-4003-8E83-42DBC3154C8B},match,0.0,Prudhoe Bay,inside
 {4772434D-F5AF-48B9-8585-F49B2EDACA93},match,0.0,Tatitlek,inside
 {47AEF73D-6FD9-41C6-AA25-FEB3B53DFC9A},match,0.0,Fort Yukon,inside
 {47D2944D-42AD-431F-975F-E10C14A3CAC9},match,0.0,Hooper Bay,inside
@@ -576,7 +576,7 @@ record_id,outcome,own_boundary_km,located_in_place,community_relation
 {5ADE8F5D-F009-4DF3-B60C-41E1F96A0566},untested,,,untested
 {5AEE4579-120C-418C-965A-911EFB7A4873},match,0.0,Kodiak,inside
 {5B0C866F-F775-4190-B09B-985A2B276D31},match,0.0,Shishmaref,inside
-{5B1AEAB7-BC9D-4F53-92E6-5C4E64F4BFD0},untested,,,untested
+{5B1AEAB7-BC9D-4F53-92E6-5C4E64F4BFD0},match,1.79,,inside
 {5B3A4427-3CF1-47FE-8D8F-D47DD33BE928},match,0.0,Tok,inside
 {5B6D7E1C-3FCD-4202-88E8-14F202F1FE92},outside,43.25,,remote
 {5BA42C76-D40B-475E-BE1F-1AC1210A7126},match,0.0,Slana,inside
@@ -1589,7 +1589,7 @@ record_id,outcome,own_boundary_km,located_in_place,community_relation
 {EA679999-727C-4A29-8C51-BD75D33F8B4C},match,0.0,Atka,inside
 {EA8037D3-7189-4248-9499-E94F9DEB1ECB},match,0.0,Red Devil,inside
 {EA99F3E6-95C7-4A2D-B594-6959266E71F9},match,0.0,Gambell,inside
-{EA9E93F1-9EBE-4EE2-8F15-4B90BEAFEAE5},untested,,Sutton-Alpine,untested
+{EA9E93F1-9EBE-4EE2-8F15-4B90BEAFEAE5},match,0.0,Sutton-Alpine,inside
 {EA9FD404-2758-49CB-81A4-82A43AF09848},match,0.0,Fairbanks,inside
 {EAEFD0BA-2E87-4EE1-AE9D-B356943D2788},match,0.0,Cold Bay,inside
 {EB31C6E5-4774-40D4-BFE5-5D80850118C3},untested,,,untested

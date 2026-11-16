@@ -17,6 +17,12 @@ Rules (enforced in part by `tests/test_standalone_scripts.py`):
 Not to be confused with `analysis/` (questions asked *of* the finished network) or
 `figure_scripts/` (generators of the committed figures and tables).
 
+## 00_inventory_qc
+
+| Script | Question it answered | Where the answer lives | Runs? |
+|---|---|---|---|
+| `community_label_review.py` | Which inventory community labels are not DCRA community names, and what is each one? | `docs/inventory_notes/community_label_review_2026-11-16.md` + its sheet (written there with `--out`; open for the owner) | yes (needs the published table and `inputs/community_reference/`) |
+
 ## 01_friction_build
 
 | Script | Question it answered | Where the answer lives | Runs? |
