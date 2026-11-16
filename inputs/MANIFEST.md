@@ -62,3 +62,11 @@ sha256 per member is also written to `final_network/MANIFEST.sha256`; `.cpg` and
 | `inputs/air/airports_ak_dotpf.csv` | `046facdcf4f4a2cfc143d1803f5ef4ef7ef2e68003f699e80fdfeed5697ceca2` |
 | `inputs/air/flight_paths_combined.csv` | `0f4229e04b9e2c3b1a1dc697d099ec75f80420cd27fe49531433f11f626d735b` |
 | `inputs/air/flight_paths.xlsx` | `c7734ec0b1173da46786c09752b040463ab5c2b9de0ffed9065c16324ebbfcd6` |
+
+## Tracked community reference (DCRA; see `inputs/community_reference/SOURCE.md`)
+
+| File | sha256 |
+|---|---|
+| `inputs/community_reference/dcra_community_locations.csv` | `87163f3577a65ade014a4e4185d98779a1cb316508f4e7d52f15be20dbe15d59` |
+| `inputs/community_reference/dcra_community_overview.csv` | `9a045c2b2710b35d48d4c46d87d38d277328c031971964c86b2e6f47de19a81b` |
+| `inputs/community_reference/dcra_community_reference.csv` | `aaddb20cb53df7aab22638851ad7f6933322ea6d432f4bd0ad83fb46a2b37d2c` |
