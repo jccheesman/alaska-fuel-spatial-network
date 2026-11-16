@@ -157,6 +157,11 @@ record_id,field,old_value,new_value,status,reviewer,reviewed_on,outcome,note
 {BFF9DB9E-CA56-440D-B966-058492E9DF73},latitude,58.37542,55.353511,approved,JC,2026-11-16,applied,
 {BFF9DB9E-CA56-440D-B966-058492E9DF73},longitude,-134.574986,-131.684099,approved,JC,2026-11-16,applied,
 {FE1C1D96-F623-4694-ADA9-82D02F405415},exclude,,true,approved,JC,2026-11-16,applied,
+{B15A52C6-6F30-470D-9BA8-5037E9F1F1EC},community_id,{A74F371F-C334-4DC3-88A4-A4FCC1B1E8FD},{41989645-CCA3-466B-9817-909C7EBD3FF1},approved,JC,2026-11-16,applied,
+{BDC6AEBD-A6BF-4D0C-929B-36D15018837C},community_id,{3D0376C5-5127-4959-91EA-4BDA2B041AD6},{86E9E60C-762A-4D26-A7CC-57DC74916D5B},approved,JC,2026-11-16,applied,
+{996CA338-3112-43BA-964E-BAC877F58828},community_id,{8905A89B-A676-4C0A-BEB5-C17AD570F833},{093A0B52-9C15-4F33-8872-681E456A939D},approved,JC,2026-11-16,applied,
+{EE49D47C-9B92-431B-9D0B-77844BA21CF8},community_id,{169CE60B-858B-4A5D-801B-CB9E3179349B},{3FD9E5F5-DE1E-47BC-A8FC-ECEFCA7C2EA8},approved,JC,2026-11-16,applied,
+{97E77B03-20AE-4291-A9A5-15C73AA55976},community_name,Point Mackenzie,Point MacKenzie,approved,JC,2026-11-16,applied,
 {5AEE4579-120C-418C-965A-911EFB7A4873},map_point,"95294.34149,866941.8446","95294.34149,866941.8446",derived,,,publisher-corroborates,publisher map point agrees with the corrected position within 100 m; kept verbatim as the authoritative geometry
 {D0D325AD-A296-437B-9213-8A2FD2F3621D},map_point,"161699.986,1928988.01","161699.986,1928988.01",derived,,,publisher-corroborates,publisher map point agrees with the corrected position within 100 m; kept verbatim as the authoritative geometry
 {8D408F52-5CE0-4A95-A586-79D54041D7C7},map_x,-329067.8276,-420077.3262,derived,,,applied-sync,map point still sat on the refuted position; recomputed from the corrected lat/lon (EPSG:3338); publisher original in the snapshot

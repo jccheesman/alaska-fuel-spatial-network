@@ -89,6 +89,37 @@ still sat on the refuted one. That is the pipeline's standing sync rule (owner
 2026-11-14, "Option 2 + map-first"), logged in `corrections_log.csv` as
 `applied-sync` with status `derived`.
 
+## 4. Follow-up the same day: four more community codes and the Point MacKenzie spelling
+
+The owner approved the two questions this review raised.
+
+**Community codes** (decided_in `owner review 2026-11-16 (chat): community codes
+for earlier relabels`). Four more relabelled records kept their old community's
+code. Their relation already read correctly (the old community is a census
+place with no city boundary, so the boundary check fell back to the label), but
+the stored code was wrong. New code = the community's DCRA CommunityID.
+
+| Facility | Relabel (original decision) | Old code (old community) | New code |
+|---|---|---|---|
+| 51 Doyon Utilities JBER-R | Eielson Afb → Anchorage (2026-10-05) | Eielson AFB | Anchorage `{41989645-CCA3-466B-9817-909C7EBD3FF1}` |
+| 104 U.S. Army Garrison FWA – Seward Military Resort | Fort Wainwright → Seward (2026-10-05) | Fort Wainwright | Seward `{86E9E60C-762A-4D26-A7CC-57DC74916D5B}` |
+| 632 Alaska Power & Telephone – Healy Lake Power Generation | Healy → Healy Lake (2026-11-14) | Healy | Healy Lake `{093A0B52-9C15-4F33-8872-681E456A939D}` |
+| 1858 Yukon Flats School District | Stevens Village → Arctic Village (2026-10-05) | Stevens Village | Arctic Village `{3FD9E5F5-DE1E-47BC-A8FC-ECEFCA7C2EA8}` |
+
+**Point MacKenzie spelling** (decided_in `owner review 2026-11-16 (chat): Point
+MacKenzie spelling`). The owner asked for an alias `Point Mackenzie → Point
+MacKenzie`. An alias would change nothing here: aliases map community KEYS, and
+both spellings already share the key `POINT MACKENZIE`, while the
+`spelling_variants` detector compares the raw names. The same decision was
+therefore recorded as a name correction on the one record spelled otherwise:
+
+| Facility | Field | Old | New |
+|---|---|---|---|
+| 384 Goose Bay Airport Maintenance Station | community_name | Point Mackenzie | Point MacKenzie (DCRA's spelling) |
+
+Record 384 is `clean` again (it had become `pending_review`, which the next
+build would have withheld from hubs) and the review queue is empty.
+
 ## Code changed in this review (reporting only; not a decision)
 
 `source_scripts/inventory_qc/ledger.py`, which writes `inventory_ledger.xlsx`,
@@ -98,32 +129,20 @@ approved row) each such row appeared twice in its tab, once marked "retired",
 and the unguarded Newtok exclusion showed no outcome (a blank old value read as
 "" on one side and missing on the other). It now also matches on status and
 normalises blanks. No correction, published value or gate changed; the ledger
-now lists exactly one line per row: 103 approved by owner (all applied), 33
-applied by rule, 3 pending, 19 rejected or retired.
+now lists exactly one line per row (after section 4: 108 approved by owner, all
+applied; 33 applied by rule; 3 pending; 19 rejected or retired).
 
 ## Result (workflow 00 republished; every gate passes)
 
 | | Before | After |
 |---|---|---|
 | Records kept / excluded | 1,797 / 33 | 1,796 / 34 |
-| Corrections approved / pending / retired | 120 / 9 / 2 | 136 / 3 / 8 |
-| Records changed by these decisions | — | 11 kept records (1058, 1060, 754, 898, 1680, 1654, 322, 592, 595, 1197, 797) and the Newtok exclusion |
-| Side effect (not a decision) | — | record 384 now `pending_review` (see the Point MacKenzie spelling question below) |
+| Corrections approved / pending / retired | 120 / 9 / 2 | 141 / 3 / 8 |
+| Records changed by these decisions | — | 16 kept records (1058, 1060, 754, 898, 1680, 1654, 322, 592, 595, 1197, 797, 51, 104, 632, 1858, 384) and the Newtok exclusion |
+| Open review-queue items | — | 0 |
 
-## Not decided here (questions for the owner)
+## Still open
 
-- **Spelling of Point MacKenzie.** Correcting the two prisons' code gave
-  `{5736B8FC-…}` two spellings: "Point MacKenzie" (the owner's relabel, and
-  DCRA's official name) and "Point Mackenzie" on record 384 (Goose Bay Airport
-  Maintenance Station). The `spelling_variants` detector now flags 384, which
-  is `pending_review` and would be withheld from hubs at the next build. The
-  usual fix is an `aliases.csv` row, `Point Mackenzie → Point MacKenzie`.
-- **Four more relabels with the old community's code**, found in the same
-  check. Today they do no harm (the old community is a census place with no city
-  boundary, so the check falls back to the label and reports them correctly),
-  but the stored code is still wrong: 51 Anchorage (carries Eielson AFB), 104
-  Seward (Fort Wainwright), 632 Healy Lake power plant (Healy), 1858 Arctic
-  Village (Stevens Village).
 - **Haines.** Nine records labelled Haines carry the Haines Borough code: a
   publisher convention, no correction involved; noted only.
 - **Still pending:** Craig (a record placed in Coffman Cove; no value decided),

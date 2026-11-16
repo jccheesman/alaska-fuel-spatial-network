@@ -96,7 +96,7 @@ record_id,community_name,outcome,priority,inside_boundary_of,own_boundary_km,lat
 {AEC3F544-FBA6-450A-BA4E-FC337AFB6FCA},Coldfoot,outside,info,,3.36,67.278,-150.269,,"remote site, outside every boundary"
 {D0D325AD-A296-437B-9213-8A2FD2F3621D},Coldfoot,outside,info,,3.36,67.278080,-150.268770,correction:approved,"remote site, outside every boundary"
 {8DD95CDF-8767-4EB6-B07F-09F075FC7FEB},Kasilof,mismatch,info,Kalifornsky,3.3,60.383435,-151.28357,,inside a neighbouring place (same town)
-{97E77B03-20AE-4291-A9A5-15C73AA55976},Point Mackenzie,mismatch,info,Knik-Fairview,3.3,61.3974,-149.8444,,inside a neighbouring place (same town)
+{97E77B03-20AE-4291-A9A5-15C73AA55976},Point MacKenzie,mismatch,info,Knik-Fairview,3.3,61.3974,-149.8444,correction:approved,inside a neighbouring place (same town)
 {EFB8BB07-4BF6-42EF-8860-505B1E26AE40},Soldotna,mismatch,info,Kalifornsky,3.07,60.44592,-151.109737,,inside a neighbouring place (same town)
 {7E123490-F0E5-496F-86D3-91FDF4B5F41F},Fairbanks,mismatch,info,South Van Horn,2.92,64.8176545,-147.8679336,,inside a neighbouring place (same town)
 {0FA216D2-7ACC-4EFF-AA2B-EEB5F7C95A78},Fairbanks,mismatch,info,South Van Horn,2.81,64.81086015,-147.8480595,,inside a neighbouring place (same town)

@@ -11,6 +11,6 @@ Referenced from the inventory-QC skills as `[[note_name]]`.
 | [aea_unalaska_unalakleet_swap](aea_unalaska_unalakleet_swap.md) | 2 | corrections (approved 2026-10-05) |
 | [aea_map_point_vs_latlon](aea_map_point_vs_latlon.md) | 12 | `map_point_disagrees` detector |
 | [gateway_drops_unlisted_communities](gateway_drops_unlisted_communities.md) | ~130 | gateway file is evidence only |
-| [relabel_keeps_community_id](relabel_keeps_community_id.md) | 14 relabelled (10 fixed 2026-11-16, 4 open) | a `community_id` correction beside every relabel |
+| [relabel_keeps_community_id](relabel_keeps_community_id.md) | 14 relabelled (all fixed 2026-11-16) | a `community_id` correction beside every relabel |
 
 Owner review records (manual decisions, not defects): [owner_review_2026-11-16](owner_review_2026-11-16.md).

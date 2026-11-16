@@ -30,4 +30,7 @@ it with every relabel. Check for leftovers by comparing each published record's
 |---|---|
 | 1058, 1060 (Fairbanks → Nome) and 7 earlier relabels (754, 898, 1680, 1654, 322, 592, 595) | corrections approved 2026-11-16 ([owner_review_2026-11-16](owner_review_2026-11-16.md)) |
 | 1197 (Delta Junction → Healy Lake) | with its relabel, 2026-11-16 |
-| 51, 104, 632, 1858 (old community a census place; relation already right) | open question for the owner |
+| 51, 104, 632, 1858 (old community a census place; relation already right) | corrections approved 2026-11-16, same review (section 4) |
+
+After 2026-11-16 every published record's code matches its label's DCRA code except the nine
+Haines records, which carry the Haines Borough code (publisher convention, not a relabel).
