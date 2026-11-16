@@ -4,9 +4,9 @@
 Renders Plane / Road / IceRoad / Barge on both axes and marks every synthetic
 connector and priced transfer that actually exists in the network-of-record.
 A traced "route" line threads Plane -> Road -> IceRoad -> Barge to show, at a
-glance, that Road is the universal hub: every mode reaches the rest of the
-network only through Road (the sole non-Road interface, Barge<->IceRoad, is
-never traversable because ice roads and barges never share a month).
+glance, that Road is the hub nearly every mode reaches the network through:
+the two non-Road interfaces are Barge<->IceRoad (never traversable because ice
+roads and barges never share a month) and the two Barge<->Plane connectors.
 
 Counts are the EXPECTED tripwire values (CLAUDE.md / stage-02 load); fees are
 the INTERMODAL_TRANSFER_FEES totals in friction_costs.py. Both are restated as
@@ -52,11 +52,12 @@ MODE_COLOR = {
 #   latent    priced handoff that exists but is never traversed
 CONNECTIONS = [
     ("Road",    "Road",    1498, None,   "weld",     "RoadConnector"),
-    ("IceRoad", "IceRoad",   35, None,   "weld",     "IceRoadConnector"),
-    ("Barge",   "Road",     234, 0.24,   "transfer", "BargeRoadTransfer"),
+    ("IceRoad", "IceRoad",   34, None,   "weld",     "IceRoadConnector"),
+    ("Barge",   "Road",     286, 0.24,   "transfer", "BargeRoadTransfer"),
     ("IceRoad", "Road",      12, 0.022,  "transfer", "IceRoadRoadTransfer"),
     ("Plane",   "Road",       2, 0.025,  "transfer", "AirRoadTransfer"),
-    ("IceRoad", "Barge",     11, 0.011,  "latent",   "BargeIceRoadTransfer"),
+    ("Plane",   "Barge",      2, 0.24,   "transfer", "BargeAirTransfer"),
+    ("IceRoad", "Barge",     21, 0.011,  "latent",   "BargeIceRoadTransfer"),
 ]
 
 KIND_COLOR = {
@@ -165,7 +166,7 @@ def build() -> plt.Figure:
                         bbox=dict(boxstyle="round,pad=0.18", fc="white",
                                   ec=route["color"], lw=1.0))
 
-    # Faint dashed thread for the only non-Road interface (never traversed).
+    # Faint dashed thread for the never-traversed non-Road interface.
     bx, by = xy("Barge", "IceRoad")
     ix, iy = xy("IceRoad", "Barge")
     ax.plot([bx, ix], [by, iy], color=KIND_COLOR["latent"], lw=1.6,
