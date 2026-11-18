@@ -13,7 +13,7 @@ from git with `git show <commit>:final_network/network_joined_edges.zip`.
 
 | Version | Commit | Nodes | Edges | Hubs | Components | Giant | edges.zip | nodes.zip |
 |---|---|---|---|---|---|---|---|---|
-| **2026-11-18 waterway + nearshore barge** (current) | see branch `waterway-network-updates` | 84,110 | 93,061 | 328 | 4 | 99.99% | `8e88919ee8993128` | `a46585acb1606027` |
+| **2026-11-18 waterway + nearshore barge** (current) | `8614dd1` | 84,110 | 93,061 | 328 | 4 | 99.99% | `8e88919ee8993128` | `a46585acb1606027` |
 | 2026-11-16 hub-key re-export | `81b2649` | 84,094 | 93,046 | 328 | 4 | 99.99% | `c61842d9df14ab90` | `6ebb93fd2cf14e47` |
 | 2026-11-16 | `412a20f` | 84,094 | 93,046 | 328 | 4 | 99.99% | `c8333fa0c4bcda7c` | `0757b28283fd526e` |
 | 2026-11-15 | `8509a86` | 84,094 | 93,049 | 337 | 4 | 99.99% | `de00b11aa76c103b` | `b12e348202e784cd` |
@@ -27,7 +27,7 @@ from git with `git show <commit>:final_network/network_joined_edges.zip`.
 
 Nothing pending.
 
-## 2026-11-18 — owner-curated waterway + nearshore barge access (branch waterway-network-updates)
+## 2026-11-18 — owner-curated waterway + nearshore barge access (`8614dd1`)
 
 Exported 2026-11-18 after the full verification run in `docs/TEST_LOG.md`;
 workflow 03 rerun in full the same day (`edge_month_weights` / `edge_costs`:
