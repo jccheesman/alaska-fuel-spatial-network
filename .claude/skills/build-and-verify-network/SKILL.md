@@ -70,8 +70,23 @@ reading/verifying the result.
    hub is a village with no ground surface within `hubs.max_snap_dist_m` — report it, do not raise
    the cap to hide it), and `02_hub_members.csv` + `01_site_members.csv` (hub → site → inventory
    record, so every hub's capacity is traceable to AEA records).
-7. **Report** the final numbers (nodes/edges/components/giant %/hubs placed, unplaced, merged,
-   conflicts) + the proof result.
+7. **Review the site stubs** in `output/02_site_stubs.csv` (one row per hub that drew one; the rule is
+   `hubs.site_stub_km` in the profile: a barge-served hub none of whose sites has a road or ice road
+   within that distance gets a short stub of the road layer at its own point, so it lands on its own
+   site and takes a barge landing). The build creates the stubs; the review is yours:
+   - every row has `status = placed` and `snap_dist_m` of 0 (the hub landed on its own stub; the
+     build prints a WARNING for any that did not), and the same hubs read `snap_surface = SiteStub`
+     in `02_hub_snaps.csv`;
+   - each stub hub's node has exactly ONE barge landing edge (`type` ending in `Transfer`, `source`
+     `barge_hubs`); none means the hub is cut off from the barge network, two means a neighbour's
+     landing reached it;
+   - compare the hub list with the previous build's. A hub that appears or disappears is a change to
+     explain (an inventory correction moved a site, a road was added, the waterway moved), never to
+     accept unread. Report the count and the differences.
+   A town with tanks on a road must never be in the list: the rule looks at each of the hub's sites,
+   not at its average point. If one is, that is a defect to report, not a threshold to tune.
+8. **Report** the final numbers (nodes/edges/components/giant %/hubs placed, unplaced, merged,
+   conflicts, site stubs) + the proof result.
 
 ## What NOT to do
 
@@ -80,6 +95,8 @@ reading/verifying the result.
 - Do NOT loosen a `max_dist`/threshold just to make the proof pass — justify every change with the
   measured gap.
 - Do NOT hand-edit the built GeoPackages; change the `profile.yaml` and rebuild.
+- Do NOT hand-draw a road stub for a hub with no road, and do NOT change `hubs.site_stub_km` to add or
+  drop one hub: the rule is general, and a hub it gets wrong is a finding for the owner.
 
 ## Related
 

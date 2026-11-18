@@ -78,6 +78,13 @@ mode — a village whose road reaches its airport passes with no barge route at 
 
 ## What NOT to do
 
+- No ROAD stubs by hand. This skill draws water lines only. A barge hub with no road of its own (no
+  road or ice road within `hubs.site_stub_km` of any of its sites) gets a short road stub at its own
+  site from the build itself, so that it lands there and takes a barge landing; eight such stubs were
+  hand-drawn on 2026-11-18 and replaced by the rule the same day. If a hub needs a stub and did not
+  get one, or got one it should not have, report it (`output/02_site_stubs.csv`; review procedure in
+  `build-and-verify-network`). What this skill can still do for such a hub is shorten a long landing:
+  a barge line that ends a few km off its shore, as for any other nearshore hub.
 - No lines, review items or recommendations for inland or river hubs, however barge-flagged.
 - No NWN edits, no friction/mask/threshold edits, no cost-rate edits (`friction_costs.py` is
   out of bounds; the label feeds the cost split but this skill never touches rates).
