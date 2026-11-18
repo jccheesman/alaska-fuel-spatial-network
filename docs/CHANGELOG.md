@@ -13,7 +13,8 @@ from git with `git show <commit>:final_network/network_joined_edges.zip`.
 
 | Version | Commit | Nodes | Edges | Hubs | Components | Giant | edges.zip | nodes.zip |
 |---|---|---|---|---|---|---|---|---|
-| **2026-11-18 waterway + nearshore barge** (current) | `8614dd1` | 84,110 | 93,061 | 328 | 4 | 99.99% | `8e88919ee8993128` | `a46585acb1606027` |
+| **2026-11-18 landing fixes + site stubs** (current) | `c196a73` | 84,134 | 93,080 | 328 | 4 | 99.99% | `dacf1a7622d082a5` | `6976a7cf9cce3f84` |
+| 2026-11-18 waterway + nearshore barge | `8614dd1` | 84,110 | 93,061 | 328 | 4 | 99.99% | `8e88919ee8993128` | `a46585acb1606027` |
 | 2026-11-16 hub-key re-export | `81b2649` | 84,094 | 93,046 | 328 | 4 | 99.99% | `c61842d9df14ab90` | `6ebb93fd2cf14e47` |
 | 2026-11-16 | `412a20f` | 84,094 | 93,046 | 328 | 4 | 99.99% | `c8333fa0c4bcda7c` | `0757b28283fd526e` |
 | 2026-11-15 | `8509a86` | 84,094 | 93,049 | 337 | 4 | 99.99% | `de00b11aa76c103b` | `b12e348202e784cd` |
@@ -23,9 +24,23 @@ from git with `git show <commit>:final_network/network_joined_edges.zip`.
 | 2026-09-12 | `a2e7a9e` | 82,412 | 91,087 | 384 | 6 | 99.98% | `558dfa5b88ad93b9` | `30808a7f0f6bf470` |
 | 2026-07-20 pre-fix freeze | `f455f0e` | 82,300 | 90,921 | 384 | 21 | 99.65% | `4b1ffe008b07049c` | `3f50dfb80b034f25` |
 
-## Unreleased — takes effect at the next export
+## 2026-11-18 — landing fixes + site stubs (`c196a73`)
 
-Three changes found while the harness adopted the 2026-11-18 network (branch `barge-landing-fixes`):
+Exported 2026-11-18 (second export of the day) after the full verification
+run in `docs/TEST_LOG.md`; workflow 03 rerun in full the same day
+(`edge_month_weights` / `edge_costs`: 1,116,960 rows each;
+`edge_water_class`: 34,179 rows; `edge_landing_class`: 309 rows). The
+site-stub simulation was confirmed exactly at the rebuild: 12 hubs, the
+four co-located Gustavus-area records consolidating as site 1089. Two
+harbour anchors re-land on the new stubs (`ports` landings at Elfin Cove —
+its first — and at the blob:53 stub), so those two stub nodes carry two
+landings each. September cheapest paths from Anchorage with two consecutive
+landing edges fell 24 → 0 of 316 (February 181 → 8 of 272, all at river
+nodes, none at the Port of Anchorage); Diomede now pays its coastal-village
+landing ($0.37 → $1.02 from Anchorage, in line with Wales).
+
+Four changes, found while the harness adopted the first 2026-11-18 network
+(branch `barge-landing-fixes`):
 
 - **A barge landing at a shared road-and-airport node is a road landing.** Airports are snapped onto road
   nodes, so the node carries Road and Air; the connector namer took the first two of three modes and typed four
@@ -58,7 +73,7 @@ Three changes found while the harness adopted the 2026-11-18 network (branch `ba
   is not picked: no waterway node is within 25 km of it. Eight hand-drawn road stubs were committed first
   (`cce7c81`) and are removed here, since the rule covers the same eight hubs.
 
-Not done here: the rebuild, the export and the workflow 03 rerun (owner's machine).
+Rebuilt, exported and workflow 03 rerun 2026-11-18 (`c196a73`, this version).
 
 ## 2026-11-18 — owner-curated waterway + nearshore barge access (`8614dd1`)
 

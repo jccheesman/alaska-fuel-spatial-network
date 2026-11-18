@@ -1,5 +1,52 @@
 # TEST LOG — end-to-end verification runs
 
+## 2026-11-18 (second run) — barge-landing-fixes at `d2c0483`: landing fixes + site stubs
+
+Full workflow-02 rebuild + export, workflow 03 in full, workflow 04, on the
+8 GB machine. Causes: the landing-class naming rule, the Port MacKenzie
+anchor exclusion, the facility-56 (Weaver Bros.) correction, and the
+site-stub rule — all owner decisions of 2026-11-18.
+
+### Gates and results
+
+| Gate | Result |
+|---|---|
+| `validate_inventory.py` (read-only) | PASS — all gating steps; committed `facilities_clean.csv` identical |
+| `qa/00_check_manual_barge` | PASS (1 accepted exception: Skwentna) |
+| Port MacKenzie exclusion | applied — `ports` 147 → 146 anchors, log line printed |
+| site stubs | 12 hubs, all `placed` on their own stub (≤ 0.6 m), no warning |
+| `05_verify_north_slope` | PASS (all five checks; waterway 100% connected) |
+| `qa/06_barge_hub_access` | PASS (18 known exceptions, 0 new) |
+| Stage 03 → 04 | 16 components → 4, giant 99.99% |
+| Workflow 03 | `edge_month_weights` / `edge_costs` 1,116,960 rows (93,080 × 12); `edge_water_class` 34,179 (1,202 marine / 32,977 river); `edge_landing_class` 309 |
+| `06_qa_barge_passability` | PASS (same 17 known hubs; closed edges re-keyed only) |
+| Workflow 04 validation | PASS |
+| Full pytest suite | 227 passed, 1 skipped |
+
+### Changes vs the first 2026-11-18 export (verified edge by edge)
+
+| Quantity | first 2026-11-18 | this export | Δ |
+|---|---|---|---|
+| Nodes | 84,110 | 84,134 | +24 (12 stubs × 2 nodes) |
+| Edges (joined) | 93,061 | 93,080 | +19 |
+| Road | 55,539 | 55,551 | +12 (one 100 m stub edge per stub hub) |
+| BargeRoadTransfer | 298 | 309 | +4 renamed from BargeAirTransfer (identical geometry) · −1 Port MacKenzie · Anchorage landing moved · +12 stub landings · −5 former stub-hub landings · +1 first-ever Elfin Cove ports landing · 1 ports landing re-routed to the blob:53 stub |
+| BargeAirTransfer | 4 | 0 | type retired (Gambell, Elim, Kwigillingok, Kongiganak are road landings) |
+| Hubs / components / unplaced | 328 / 4 / 41 | 328 / 4 / 41 | 0 — only Anchorage (12.9 km) and the 12 stub hubs changed node |
+
+Dock-crossing audit: September cheapest paths from Anchorage with two
+consecutive landing edges fell 24 → 0 of 316; February 181 → 8 of 272, none
+at the Port of Anchorage (all four shared water nodes are river nodes:
+Kuskokwim ×3, Tanana ×1). Spot costs from Anchorage, September: Nome
+$0.4711 (unchanged), Diomede $1.0239 (was $0.37 — now pays its
+coastal-village landing), Wales $1.0202 (unchanged).
+
+Known deviations, reported not fixed: the Hub_53 (blob:53) and Hub_331
+(Elfin Cove) stub nodes each carry a second, `ports`-sourced landing — two
+harbour anchors re-landed on the new stubs; Elfin Cove's is its first
+landing. Coldfoot's road is still a 0.7 km island (2 nodes), not joined to
+the Dalton Highway.
+
 ## 2026-11-18 — waterway-network-updates branch: full rebuild from committed state
 
 Fresh workflow-02 run (prep regenerated from scratch: `data/interim` manifest
