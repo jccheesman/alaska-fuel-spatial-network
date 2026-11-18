@@ -43,9 +43,12 @@ for rates. Status words are defined in `CONVENTIONS.md`.
 
 ## What is not settled
 
-1. **The landing table is proposed, not approved.** `inputs/network_qc/landing_classes.csv` lists ten places as
-   hubs (rows marked `proposed`; proposed rows are applied). The owner reviews it: set `status` to `approved` or
-   `rejected` and fill `reviewer`. Naknek has no document behind it.
+1. **The landing table was reviewed by the owner on 2026-11-18** (`inputs/network_qc/landing_classes.csv`, twelve
+   approved rows). Hubs: Nome, Bethel, Kotzebue, Dillingham, Naknek, Unalaska, Ketchikan, Sitka, Klawock, Kodiak
+   and Juneau. Road port by table: Seward. Naknek and Sitka rest on the owner's knowledge that their fuel arrives
+   by a large marine vessel; Juneau on its State contract premium (about $0.29 per gallon, below the village
+   charge). Other Southeast towns (Petersburg, Wrangell, Haines, Skagway, Craig and others) are still classed as
+   coastal villages for lack of evidence either way.
 2. **Three verdicts overturn earlier values on one verifier's reading** (plane, the 0.24 fee, the 0.011 river
    rate) and have not had a second independent review.
 3. **Two rates are Provisional and one is Assumed.** Report results that depend on them with the range.

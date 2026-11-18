@@ -63,6 +63,9 @@ workflow 03 is next run. Record: `docs/cost_derivation/2026-11/`.
   runs stage 05 before stage 04 and gates on the water-class label.
 - Barge landings are priced by landing class (`fuel_network/landings.py`,
   `inputs/network_qc/landing_classes.csv`, audit table `edge_landing_class`).
+  The table was reviewed by the owner on 2026-11-18: eleven hubs (Nome, Bethel,
+  Kotzebue, Dillingham, Naknek, Unalaska, Ketchikan, Sitka, Klawock, Kodiak,
+  Juneau) and Seward as a road port.
 - The cost toolkit's CPI table is updated (2025 = 321.943, 2026 = 332.243) and
   its self-test rewritten to the new derivation; the invariant checker gained
   status and landing-class checks; `combined_friction_tables.xlsx` Table 3 is
