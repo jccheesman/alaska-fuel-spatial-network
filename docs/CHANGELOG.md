@@ -42,6 +42,16 @@ Three changes found while the harness adopted the 2026-11-18 network (branch `ba
   `inputs/network_qc/excluded_anchors.csv`, applied by `00_normalize_raw.py`): its nearest waterway node is
   Anchorage's dock across Knik Arm, so its landing joined the two shores without a barge edge. `ports` is now
   re-normalized on every build.
+- **Road stubs for hubs with barge fuel and no road** (owner, 2026-11-18): eight hand-drawn `Road` lines of 100 to
+  470 m in `inputs/mannual_connections/mannual_connections.shp` (rows 26 to 33; evidence in `PROVENANCE.csv`), from
+  each site to the shore: Cape Yakataga, two remote sites labelled Cordova, Diomede, Elfin Cove, Port Moller and two
+  unlabelled sites north of Kodiak Island. With no road or ice road within 25 km, seven of these hubs were placed
+  ON a waterway node, so the build made no landing edge and they paid no landing fee (Diomede 0.37 per gallon from
+  Anchorage against 1.02 for Wales); the eighth was on another place's road 21.6 km away. With a stub the hub snaps
+  to its own site and the barge-hub rule adds the landing. To verify at the rebuild: one new `BargeRoadTransfer`
+  per hub and no other hub moving (checked beforehand against the hub points: none within 25 km would re-snap).
+  Four of the landings will be long (11 to 21 km to the nearest waterway node); a barge line extension would
+  shorten them.
 
 Not done here: the rebuild, the export and the workflow 03 rerun (owner's machine).
 
