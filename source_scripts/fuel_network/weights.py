@@ -103,6 +103,10 @@ EDGE_TYPE_MAP: dict[str, tuple[str | None, str]] = {
     # road_base surface so it inherits the ice time-penalty + Jan-Mar gate.
     "RoadConnector":    (None,        "Road"),
     "IceRoadConnector": ("road_base", "IceRoad"),
+    # Barge-barge shore weld (first appears in the 2026-11-18 export): a
+    # fabricated stitch like RoadConnector — unsampled flat 1.0 (sampling could
+    # land it on the very NoData gap it exists to bridge), barge line-haul rate.
+    "BargeConnector":   (None,        "Barge"),
     # per-pair intermodal transfers — unsampled; priced by INTERMODAL_TRANSFER_FEES.
     "BargeRoadTransfer":    (None, "Transfer"),
     "BargeIceRoadTransfer": (None, "Transfer"),

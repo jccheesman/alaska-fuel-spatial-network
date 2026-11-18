@@ -24,8 +24,8 @@ Raw inventory files (NOT tracked after 2022; contact fields). Verify a local cop
 | 2025 | `3fbee569c63dccf813d6fa53e608820d53b92e415feb2c7f20556fc0bb0c30b0` |
 | `inputs/data_for_network_build.zip` | `c11708c68da39b76a66511b735fa7983bfebac3d4167fde0fdf3c7ce5df0babf` |
 | `inputs/region_and_census_data.zip` | `e8c36f6329804b0378277a8c449de984c553ca4bba5bdfb4cbae68684d8e2eb3` |
-| `final_network/network_joined_nodes.zip` | `6ebb93fd2cf14e47fefad35512ad803015eb97455afb9ebf4cefff3ad7765855` |
-| `final_network/network_joined_edges.zip` | `c61842d9df14ab908c0bd6056f3b1816f451f161dfbfceeab68cafc1c5049d2e` |
+| `final_network/network_joined_nodes.zip` | `a46585acb160602c7c52bc54e2979ff2e7db2471011a9a1683d3ac9ec8416f61` |
+| `final_network/network_joined_edges.zip` | `8e88919ee89931286788439767b8285e62a278f51839daa8489a2b51eca7fe2d` |
 
 | Pending | note |
 |---|---|
@@ -34,28 +34,29 @@ Raw inventory files (NOT tracked after 2022; contact fields). Verify a local cop
 
 ## final_network zip members (the current network-of-record)
 
-Re-exported 2026-11-16 by `06_export_final_network.py` after the owner review of
-that day (`docs/inventory_notes/owner_review_2026-11-16.md`, 17 records corrected
-by manual approval): ten remote-site hubs fold into their communities' and Healy
-Lake gets its own hub (hubs 337 → 328, edges 93,049 → 93,046, BargeRoadTransfer
-289 → 286; see `final_network/README.md`). Supersedes the 2026-11-15 export.
-The zips were repacked by the hub-key re-export of the same day (`81b2649`): every
-member below is byte-identical, only the zip containers and `hub_members.csv` changed.
+Re-exported 2026-11-18 by `06_export_final_network.py` on branch
+`waterway-network-updates` (`docs/CHANGELOG.md`): the waterway source is the
+owner-curated layer (one geometry with the corridor masks — reopens the 8
+all-year-closed ports) and the manual layer grows to 19 Barge lines (5 coastal
+redraws + 12 new nearshore hubs). Nodes 84,094 → 84,110, edges 93,046 → 93,061
+(BargeRoadTransfer 286 → 298, BargeAirTransfer 2 → 4, BargeConnector appears);
+hubs 328 and components 4 unchanged. Supersedes the 2026-11-16 hub-key
+re-export.
 sha256 per member is also written to `final_network/MANIFEST.sha256`; `.cpg` and
 `.prj` are format-fixed and carry over unchanged.
 
 | Member | sha256 | md5 |
 |---|---|---|
 | `final_network/network_joined_nodes.zip::network_joined_nodes/network_joined_nodes.cpg` | `3ad3031f5503a4404af825262ee8232cc04d4ea6683d42c5dd0a2f2a27ac9824` | `ae3b3df9970b49b6523e608759bc957d` |
-| `final_network/network_joined_nodes.zip::network_joined_nodes/network_joined_nodes.dbf` | `87baaf959baf15f61747a50cd28100a54fc2a95a21b7481c979b25e14665ab31` | `539748833e8993da3d0f0fcedd574a22` |
+| `final_network/network_joined_nodes.zip::network_joined_nodes/network_joined_nodes.dbf` | `d0f9161df4ca8d5cf26b6765c168b6d8a9217ad2f4cefe04e184cd02ef3d4df4` | `37cc21839b63b7a3691274a70e1b5064` |
 | `final_network/network_joined_nodes.zip::network_joined_nodes/network_joined_nodes.prj` | `b98ae059b6efe2c3d70a2fe5776e3394ae78ebee1754b2fed102dcf63e25916a` | `91cd91099bd22160267bfb88b8a3e4bf` |
-| `final_network/network_joined_nodes.zip::network_joined_nodes/network_joined_nodes.shp` | `a7d2e07bc4e7e034517e003652a9ce196ecc1d38befadba396e576c8da1a93df` | `ee75104dfa6b0c2845067d5cc4a3535f` |
-| `final_network/network_joined_nodes.zip::network_joined_nodes/network_joined_nodes.shx` | `6c1004650dee04ea0197874ea2a7bbb80643076bdc89953a4e5a14566896641a` | `f102775eb5ff2f21e02bf7e480ed9be9` |
+| `final_network/network_joined_nodes.zip::network_joined_nodes/network_joined_nodes.shp` | `48649e30f699a07e74c065fedd8ecc0d3f174fa98fee7e05b4cf82b6e0b31cbc` | `7bfb40ac1051d6d6e5bb170e207cd153` |
+| `final_network/network_joined_nodes.zip::network_joined_nodes/network_joined_nodes.shx` | `e8b085b2352e909ee5d699e540b0a47383b9fa14aa02f9f85abcea0e0deee02c` | `fffbba3316e33014b2cbd5aabdc8613e` |
 | `final_network/network_joined_edges.zip::network_joined_edges/network_joined_edges.cpg` | `3ad3031f5503a4404af825262ee8232cc04d4ea6683d42c5dd0a2f2a27ac9824` | `ae3b3df9970b49b6523e608759bc957d` |
-| `final_network/network_joined_edges.zip::network_joined_edges/network_joined_edges.dbf` | `879ba649d8c340ee079c47c69128ecccc5d2006a58ec84e740e6c267c3a82867` | `e74f3a39d00aee15b618c6b3c64715b4` |
+| `final_network/network_joined_edges.zip::network_joined_edges/network_joined_edges.dbf` | `fcf67419c734ef8be598c32af51ee904824dfe6fb001928f5fc799ea3d8b18c9` | `2ff0d52530fc49adba88d22d74f9e420` |
 | `final_network/network_joined_edges.zip::network_joined_edges/network_joined_edges.prj` | `b98ae059b6efe2c3d70a2fe5776e3394ae78ebee1754b2fed102dcf63e25916a` | `91cd91099bd22160267bfb88b8a3e4bf` |
-| `final_network/network_joined_edges.zip::network_joined_edges/network_joined_edges.shp` | `223c933dabf34afb84900990bcde31aa6fc98c559ca10cad2aa58140e2906f33` | `8358e5088fbe113b7aa08c70aecb0121` |
-| `final_network/network_joined_edges.zip::network_joined_edges/network_joined_edges.shx` | `903453e8fcad853a6650f989f75c6db8e99ad1198067fe5a50717af37bfd2d29` | `99a265c3757adf66d343cc013edc7c05` |
+| `final_network/network_joined_edges.zip::network_joined_edges/network_joined_edges.shp` | `50e9157b0392be874d3b1498480cf96ea8186f27032fb07ebe734ec4dd068e23` | `8ceb1d5160f67c855b3902fc0199df1c` |
+| `final_network/network_joined_edges.zip::network_joined_edges/network_joined_edges.shx` | `acb8f920fa09a955ffe5d2930a7591f069d86e6a1a63cd3c854cca90e94c6969` | `74fccdee514af2fbb15e2a8e1ba942ea` |
 
 ## Tracked air CSVs
 

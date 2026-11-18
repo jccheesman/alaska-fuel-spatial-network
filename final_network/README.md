@@ -7,8 +7,8 @@ network. This folder contains a **frozen handoff**: workflow 02
 (`01_extract_network_handoff.py` → `02_load_final_network.py`) extracts and
 ingests it.
 
-- **Nodes:** `network_joined_nodes.zip` → `network_joined_nodes/…shp` — 84,094 points
-- **Edges:** `network_joined_edges.zip` → `network_joined_edges/…shp` — 93,046 lines (synthetic connectors are mode-typed: `{Mode}Connector` welds + per-pair `*Transfer` handoffs)
+- **Nodes:** `network_joined_nodes.zip` → `network_joined_nodes/…shp` — 84,110 points
+- **Edges:** `network_joined_edges.zip` → `network_joined_edges/…shp` — 93,061 lines (synthetic connectors are mode-typed: `{Mode}Connector` welds + per-pair `*Transfer` handoffs)
 - **Components:** 4 · **giant:** 99.99% of nodes · **fuel hubs:** 328
 - **CRS:** EPSG:3338 — NAD83 / Alaska Albers (meters). The `.prj` reads as `NAD_1983_Alaska_Albers`.
 
@@ -24,7 +24,33 @@ to these bytes — a re-export, a repack that re-orders rows, even a
 `edge_month_weights`, and `edge_costs` together. That is why the members are
 checksummed below and must stay **byte-identical**.
 
-## PROVENANCE — re-exported 2026-11-16 (the owner review of 2026-11-16)
+## PROVENANCE — re-exported 2026-11-18 (waterway-network-updates)
+
+Exported on branch `waterway-network-updates` (`docs/CHANGELOG.md` "Unreleased"
+→ this version). Two causes, both verified in `docs/TEST_LOG.md` (2026-11-18)
+before exporting:
+
+- **The waterway source is the owner-curated layer**
+  (`waterways_network_ak_albers.shp`, ArcGIS-edited so every route avoids land
+  pixels and flows on water) — the same file the barge corridor masks are
+  rasterised from, so the network and the friction surface share one waterway
+  geometry. This reopens the 8 ports whose harbour approaches the raw-NWN
+  routing closed in all 12 months (Kodiak, Unalaska, Akutan, Port Lions, Saint
+  George, Saint Paul, Point Hope, Kaktovik).
+- **The manual-connections layer grows to 19 Barge lines**: 5 coastal redraws
+  (Larsen Bay, Karluk, Sand Point, Nikolski, Akhiok — village ends moved 2–5 km
+  offshore) and 12 new nearshore hub lines (Savoonga, Golovin, White Mountain,
+  Shaktoolik, Unalakleet, Stebbins, Saint Michael, Kongiganak, Kwigillingok,
+  Kipnuk, Nightmute, Chefornak), each passing the July barge-surface + marine-
+  only checks with evidence in `inputs/mannual_connections/PROVENANCE.csv`.
+
+Vs 2026-11-16: nodes 84,094 → **84,110**, edges 93,046 → **93,061**
+(Waterway 34,178 → 34,179, BargeRoadTransfer 286 → 298, BargeAirTransfer
+2 → 4, `BargeConnector` appears with 1, RoadConnector 1,498 → 1,497); hubs
+**328** and components **4** unchanged. Every edge_id-keyed table moved;
+workflow 03 was rerun in full on 2026-11-18.
+
+## Prior provenance — re-exported 2026-11-16 (the owner review of 2026-11-16)
 
 **Hub-key re-export, same day (`81b2649`).** A second export followed the
 community-label review (`docs/inventory_notes/community_label_review_2026-11-16.md`)
@@ -67,7 +93,8 @@ transport graph's node geometry — but the edge `.shp`/`.shx` and both `.dbf`s
 differ, so **every edge_id-keyed table moved** and workflow 03 was rerun in
 full on 2026-11-16 (`edge_month_weights` / `edge_costs`: 1,116,552 rows).
 
-It **supersedes** the 2026-11-15 export (84,094 / 93,049 / 4 components /
+This 2026-11-16 export is superseded by the 2026-11-18 export above. It
+superseded the 2026-11-15 export (84,094 / 93,049 / 4 components /
 337 hubs — the 2026-11-14 review queue emptied), which superseded the
 2026-10-15 export (same totals / 329 hubs — phase-5 hubs + the first corrected
 inventory + reach tuning), the 2026-09-15 AK-DOT-only export (84,089 / 92,978 /
@@ -89,20 +116,20 @@ within-mode welds → `{Mode}Connector`, cross-mode handoffs → per-pair
 
 | Zip | sha256 |
 |---|---|
-| `network_joined_nodes.zip` | `6ebb93fd2cf14e47` … (full value in `inputs/MANIFEST.md`) |
-| `network_joined_edges.zip` | `c61842d9df14ab90` … (full value in `inputs/MANIFEST.md`) |
+| `network_joined_nodes.zip` | `a46585acb1606027` … (full value in `inputs/MANIFEST.md`) |
+| `network_joined_edges.zip` | `8e88919ee8993128` … (full value in `inputs/MANIFEST.md`) |
 
 Members (md5; full sha256 per member in `final_network/MANIFEST.sha256` and
 `inputs/MANIFEST.md`):
 
 | Member | md5 |
 |---|---|
-| `network_joined_nodes/network_joined_nodes.shp` | `ee75104dfa6b0c2845067d5cc4a3535f` |
-| `network_joined_nodes/network_joined_nodes.dbf` | `539748833e8993da3d0f0fcedd574a22` |
-| `network_joined_nodes/network_joined_nodes.shx` | `f102775eb5ff2f21e02bf7e480ed9be9` |
-| `network_joined_edges/network_joined_edges.shp` | `8358e5088fbe113b7aa08c70aecb0121` |
-| `network_joined_edges/network_joined_edges.dbf` | `e74f3a39d00aee15b618c6b3c64715b4` |
-| `network_joined_edges/network_joined_edges.shx` | `99a265c3757adf66d343cc013edc7c05` |
+| `network_joined_nodes/network_joined_nodes.shp` | `7bfb40ac1051d6d6e5bb170e207cd153` |
+| `network_joined_nodes/network_joined_nodes.dbf` | `37cc21839b63b7a3691274a70e1b5064` |
+| `network_joined_nodes/network_joined_nodes.shx` | `fffbba3316e33014b2cbd5aabdc8613e` |
+| `network_joined_edges/network_joined_edges.shp` | `8ceb1d5160f67c855b3902fc0199df1c` |
+| `network_joined_edges/network_joined_edges.dbf` | `2ff0d52530fc49adba88d22d74f9e420` |
+| `network_joined_edges/network_joined_edges.shx` | `74fccdee514af2fbb15e2a8e1ba942ea` |
 
 ## The hub handoff: `hub_members.csv` + `hub_snaps.csv`
 

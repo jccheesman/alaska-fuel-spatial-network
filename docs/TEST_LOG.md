@@ -37,6 +37,13 @@ Deterministic: identical counts to the two prior builds of the same inputs.
 | RoadConnector | 1,498 | 1,497 | −1 |
 | Road / IceRoad / Air / other transfers | — | — | unchanged |
 
+EXPORT EXECUTED 2026-11-18 (same day, this branch): the table above held
+exactly — zip sha256 `8e88919ee8993128…` (edges) / `a46585acb1606027…`
+(nodes); EXPECTED updated (incl. `BargeConnector`); workflow 03 full rerun
+(1,116,732 edge-month rows; EXPECTED tripwire green on first load of the new
+zips); workflow 04 validation green; no-summer-path hubs 41 → 17; closed
+Waterway edges 57 → 37; exceptions 45 → 21 rows; suite 210 passed.
+
 Newly barge-reachable at the export: the 8 harbour-closure ports (Kodiak,
 Unalaska, Akutan, Port Lions, Saint George, Saint Paul, Point Hope, Kaktovik —
 all approaches sample 0 NoData on the EXISTING barge surface) and the 17 hubs

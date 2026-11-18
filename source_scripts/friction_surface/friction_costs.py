@@ -206,6 +206,7 @@ FEE_MODE = {
     "Waterway": "barge",
     "Road": "overland",
     "RoadConnector": "overland",
+    "BargeConnector": "barge",
     "IceRoad": "ice_road",
     "IceRoadConnector": "ice_road",
     "Air": "plane",

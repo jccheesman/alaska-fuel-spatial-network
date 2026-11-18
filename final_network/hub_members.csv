@@ -131,7 +131,7 @@ Hub_9,ELIM,Elim,community,Barge or Road,Receiver,260,{540E628D-EFC5-404A-8464-20
 Hub_9,ELIM,Elim,community,Barge or Road,Receiver,990,{88B8198F-E3E4-4060-94E8-60F4A41385FA},43589,placed
 Hub_9,ELIM,Elim,community,Barge or Road,Receiver,SYN-1156,{08F52340-FE40-4C20-B7D8-2922E0841D71},43589,placed
 Hub_9,ELIM,Elim,community,Barge or Road,Receiver,SYN-1158,{C5239287-43F6-4C25-8984-4C975E90503E},43589,placed
-Hub_10,blob:29,blob:29,blob,Barge,Receiver,1008,{B4AA41CA-3A16-4E05-A060-1882D5DF320D},74374,placed
+Hub_10,blob:29,blob:29,blob,Barge,Receiver,1008,{B4AA41CA-3A16-4E05-A060-1882D5DF320D},74354,placed
 Hub_11,ANCHORAGE,Anchorage,community,Barge or Road,Supplier,1010,{6D5FB766-9E15-45A9-A918-04328EFE0E7F},20756,placed
 Hub_11,ANCHORAGE,Anchorage,community,Barge or Road,Supplier,1021,{4A58F3C3-208C-4D95-BCC3-667BF010941C},20756,placed
 Hub_11,ANCHORAGE,Anchorage,community,Barge or Road,Supplier,1032,{DA84F06B-802C-4550-9C22-FE03979714E2},20756,placed
@@ -318,10 +318,10 @@ Hub_30,SEWARD,Seward,community,Road,Supplier,696,{6D2C0D30-6E8C-4094-B60B-FE6B27
 Hub_30,SEWARD,Seward,community,Road,Supplier,760,{95F72083-EED7-4AD1-B7BC-434444DFE20A},5457,placed
 Hub_30,SEWARD,Seward,community,Road,Supplier,822,{1949D4CD-4AE9-4857-B85C-60F9E7B4E24A},5457,placed
 Hub_30,SEWARD,Seward,community,Road,Supplier,870,{F568A4A6-B0FA-414A-9577-CF79370E1A1A},5457,placed
-Hub_31,CAPE YAKATAGA,Cape Yakataga,community,Barge,Receiver,1043,{75230271-32F6-4C6D-BA8E-F99D7D6D6098},82172,placed
-Hub_31,CAPE YAKATAGA,Cape Yakataga,community,Barge,Receiver,1043,{98694E28-FA3A-4F54-951D-F78AD96C9F88},82172,placed
-Hub_31,CAPE YAKATAGA,Cape Yakataga,community,Barge,Receiver,1043,{DBCFD06D-526C-4AAD-BD2A-072EA1EFBE48},82172,placed
-Hub_31,CAPE YAKATAGA,Cape Yakataga,community,Barge,Receiver,1045,{5CDF6E80-B781-482B-B1CD-42F5BC36719E},82172,placed
+Hub_31,CAPE YAKATAGA,Cape Yakataga,community,Barge,Receiver,1043,{75230271-32F6-4C6D-BA8E-F99D7D6D6098},82150,placed
+Hub_31,CAPE YAKATAGA,Cape Yakataga,community,Barge,Receiver,1043,{98694E28-FA3A-4F54-951D-F78AD96C9F88},82150,placed
+Hub_31,CAPE YAKATAGA,Cape Yakataga,community,Barge,Receiver,1043,{DBCFD06D-526C-4AAD-BD2A-072EA1EFBE48},82150,placed
+Hub_31,CAPE YAKATAGA,Cape Yakataga,community,Barge,Receiver,1045,{5CDF6E80-B781-482B-B1CD-42F5BC36719E},82150,placed
 Hub_32,CHANDALAR,Chandalar,community,Road,Receiver,1047,{D720738D-2DD8-45E6-B817-894344848C7F},,unplaced:beyond_cap
 Hub_33,UNALASKA,Unalaska,community,Barge or Road,Receiver,1049,{F1376769-3624-43A5-9248-CADA5B67B566},39741,placed
 Hub_33,UNALASKA,Unalaska,community,Barge or Road,Receiver,1096,{A5E8D42A-4A72-4380-B9D4-5CC0084B55D2},39741,placed
@@ -404,8 +404,8 @@ Hub_39,SKAGWAY,Skagway,community,Road,Supplier,435,{3A778B46-748E-42C0-9547-3C3B
 Hub_39,SKAGWAY,Skagway,community,Road,Supplier,436,{83932FE5-91EE-4880-BB83-A9D1757E16E1},3171,placed
 Hub_39,SKAGWAY,Skagway,community,Road,Supplier,642,{E8D942CE-3386-4DE8-8667-2A8395EDE2F3},3171,placed
 Hub_39,SKAGWAY,Skagway,community,Road,Supplier,859,{BF854CB0-CF80-43E3-A809-F6B36D83690B},3171,placed
-Hub_40,remote:1062,Cordova,remote_site,Barge,Receiver,1062,{0FA60D29-5FDB-45C0-8C23-DBEF952F6C70},52957,placed
-Hub_40,remote:1062,Cordova,remote_site,Barge,Receiver,1062,{AE259A2D-93B6-4E34-AEE3-3F39B37685ED},52957,placed
+Hub_40,remote:1062,Cordova,remote_site,Barge,Receiver,1062,{0FA60D29-5FDB-45C0-8C23-DBEF952F6C70},52955,placed
+Hub_40,remote:1062,Cordova,remote_site,Barge,Receiver,1062,{AE259A2D-93B6-4E34-AEE3-3F39B37685ED},52955,placed
 Hub_41,KOLIGANEK,Koliganek,community,Barge,Receiver,107,{95DF95A0-6956-4D5C-9D73-51AD61ADE160},41029,placed
 Hub_41,KOLIGANEK,Koliganek,community,Barge,Receiver,405,{7D5A8BD8-2EC3-4F0D-B29C-8A0C58165A4B},41029,placed
 Hub_41,KOLIGANEK,Koliganek,community,Barge,Receiver,SYN-980,{4EA87B2D-C068-44CC-970C-0D53111ACA7E},41029,placed
@@ -927,7 +927,7 @@ Hub_153,SELAWIK,Selawik,community,Barge or Plane or Road,Receiver,954,{DC60B9F5-
 Hub_153,SELAWIK,Selawik,community,Barge or Plane or Road,Receiver,SYN-863,{1D1891A5-BB40-4550-944B-3437313732A5},44158,placed
 Hub_153,SELAWIK,Selawik,community,Barge or Plane or Road,Receiver,SYN-865,{B343C91A-25D7-42DF-B513-17A326BD56A4},44158,placed
 Hub_153,SELAWIK,Selawik,community,Barge or Plane or Road,Receiver,SYN-868,{76FC16FB-A51A-44A4-BBB0-138C892695CB},44158,placed
-Hub_154,PORT MOLLER,Port Moller,community,Barge,Receiver,1256,{0F542138-8AC9-4FCA-84D7-E15C2511E8AA},79123,placed
+Hub_154,PORT MOLLER,Port Moller,community,Barge,Receiver,1256,{0F542138-8AC9-4FCA-84D7-E15C2511E8AA},79102,placed
 Hub_155,PETERSBURG,Petersburg,community,Plane or Road,Receiver,1257,{1DFE0049-CD5E-4363-8E45-9C1BD35E298B},36244,placed
 Hub_155,PETERSBURG,Petersburg,community,Plane or Road,Receiver,547,{0C8FE23A-EFDE-4FF0-8A74-D3F9F8D2A0F7},36244,placed
 Hub_155,PETERSBURG,Petersburg,community,Plane or Road,Receiver,814,{855FBE7C-9B33-45BC-8C4D-2394A0C95208},36244,placed
@@ -1021,7 +1021,7 @@ Hub_178,SHAKTOOLIK,Shaktoolik,community,Barge,Receiver,188,{B18E95A5-0733-4D86-A
 Hub_178,SHAKTOOLIK,Shaktoolik,community,Barge,Receiver,188,{C89DCAD2-C6AE-44E9-A966-0697EE252D72},43548,placed
 Hub_178,SHAKTOOLIK,Shaktoolik,community,Barge,Receiver,191,{011468FB-129F-4341-B443-F20118579BB5},43548,placed
 Hub_178,SHAKTOOLIK,Shaktoolik,community,Barge,Receiver,SYN-1152,{C60251DB-41AE-4DAB-AC00-F999EA235D54},43548,placed
-Hub_179,DIOMEDE,Diomede,community,Barge,Receiver,19,{8BE7431D-D7DE-4CE3-9A08-EF985487928F},79118,placed
+Hub_179,DIOMEDE,Diomede,community,Barge,Receiver,19,{8BE7431D-D7DE-4CE3-9A08-EF985487928F},79097,placed
 Hub_180,KIPNUK,Kipnuk,community,Barge or Road,Supplier,193,{645417DA-4F8B-4031-A517-C48025BF221B},41449,placed
 Hub_180,KIPNUK,Kipnuk,community,Barge or Road,Supplier,193,{A3B3F429-09A4-455B-893A-2952BC47D69B},41449,placed
 Hub_180,KIPNUK,Kipnuk,community,Barge or Road,Supplier,193,{CAC8C78D-3D19-4C6F-A779-DE02FB53C120},41449,placed
@@ -1257,7 +1257,7 @@ Hub_232,TANANA,Tanana,community,Barge or Plane or Road,Receiver,824,{39D03317-EE
 Hub_232,TANANA,Tanana,community,Barge or Plane or Road,Receiver,SYN-1074,{A919E785-7508-4B03-B79B-5726EAAEF7FC},42981,placed
 Hub_232,TANANA,Tanana,community,Barge or Plane or Road,Receiver,SYN-1075,{A41AD6AE-236E-4BD3-9AB7-77691DD47DA1},42981,placed
 Hub_233,CHITINA,Chitina,community,Road,Receiver,300,{6F0B4405-777D-4F6C-A85C-D26FEB5C8373},607,placed
-Hub_234,blob:48,blob:48,blob,Road,Receiver,301,{FEF19473-F330-472E-B4D7-1BFE5DAC285F},84090,placed
+Hub_234,blob:48,blob:48,blob,Road,Receiver,301,{FEF19473-F330-472E-B4D7-1BFE5DAC285F},84106,placed
 Hub_235,GULKANA,Gulkana,community,Road,Receiver,302,{49254AE2-8D43-4937-AF5B-27770C31B4DB},1435,placed
 Hub_236,NELCHINA,Nelchina,community,Road,Receiver,303,{228185AD-273F-4302-A688-10350338C49D},849,placed
 Hub_237,PAXSON,Paxson,community,Plane or Road,Receiver,304,{E2092758-6B1B-4406-9634-61C15D25036D},1447,placed
@@ -1513,7 +1513,7 @@ Hub_297,WHITE MOUNTAIN,White Mountain,community,Barge,Receiver,8,{34A3BF09-BB74-
 Hub_297,WHITE MOUNTAIN,White Mountain,community,Barge,Receiver,8,{70BB636F-D062-4A27-A409-C97B7E62A741},43651,placed
 Hub_297,WHITE MOUNTAIN,White Mountain,community,Barge,Receiver,SYN-1162,{16F606AE-A8A1-4DC1-A796-D156260875C4},43651,placed
 Hub_298,blob:31,blob:31,blob,Road,Receiver,619,{C4B4BE90-2902-41BA-BF4B-93E1FAD0149D},49518,placed
-Hub_299,CHISTOCHINA,Chistochina,community,Road,Receiver,623,{8FC5ECEA-A6F5-475B-977C-54D1FBDC9365},84092,placed
+Hub_299,CHISTOCHINA,Chistochina,community,Road,Receiver,623,{8FC5ECEA-A6F5-475B-977C-54D1FBDC9365},84108,placed
 Hub_300,blob:56,blob:56,blob,Plane,Receiver,627,{6F3F14B7-DE1D-4467-A722-FE33DE5C3456},36205,placed
 Hub_301,blob:54,blob:54,blob,Plane,Receiver,628,{F04DC3EA-5855-4E10-91BD-CFE7A24D6FED},,unplaced:beyond_cap
 Hub_302,blob:20,blob:20,blob,Plane,Supplier,63,{5924466F-88D5-4EC0-A530-3F0D08E841C6},,unplaced:beyond_cap
@@ -1580,19 +1580,19 @@ Hub_324,blob:23,blob:23,blob,Barge,Receiver,75,{0C0D7C65-C6C5-4293-A58D-8DB8A9E3
 Hub_325,GAKONA,Gakona,community,Road,Receiver,755,{5DEC0033-91A2-4B58-93E2-945AFDAA8725},1437,merged:Hub_184
 Hub_325,GAKONA,Gakona,community,Road,Receiver,783,{679E2DA1-DC50-426B-B1F2-F6DC8D2DB1AD},1437,merged:Hub_184
 Hub_326,remote:759,Fairbanks,remote_site,Road,Receiver,759,{D4DC4358-AD2A-4F62-A059-4266EFCD6437},2772,placed
-Hub_327,remote:761,Fairbanks,remote_site,Road,Receiver,761,{27836AC8-344A-4140-8EBE-9B551A586869},84093,placed
+Hub_327,remote:761,Fairbanks,remote_site,Road,Receiver,761,{27836AC8-344A-4140-8EBE-9B551A586869},84109,placed
 Hub_328,remote:767,Bettles Field,remote_site,Plane,Receiver,767,{D99442DA-9542-41C2-88DE-A2C473548FDD},,unplaced:beyond_cap
 Hub_329,remote:768,Bettles Field,remote_site,Plane,Receiver,768,{ADDAB7A9-008D-4294-A74F-B722E49B32DC},,unplaced:beyond_cap
 Hub_330,remote:773,Delta Junction,remote_site,Plane,Receiver,773,{23438583-E320-48B3-8C36-733AAA636B53},28569,placed
-Hub_331,ELFIN COVE,Elfin Cove,community,Barge or Plane,Receiver,776,{FFFE3140-EE71-41D1-A6C0-CAE8A0D5466C},56760,placed
-Hub_331,ELFIN COVE,Elfin Cove,community,Barge or Plane,Receiver,SYN-218,{96E5368E-7124-4460-A687-759DC084F019},56760,placed
+Hub_331,ELFIN COVE,Elfin Cove,community,Barge or Plane,Receiver,776,{FFFE3140-EE71-41D1-A6C0-CAE8A0D5466C},56754,placed
+Hub_331,ELFIN COVE,Elfin Cove,community,Barge or Plane,Receiver,SYN-218,{96E5368E-7124-4460-A687-759DC084F019},56754,placed
 Hub_332,remote:778,Fairbanks,remote_site,Plane,Receiver,778,{8C45602F-E138-4FFD-8E8B-C5CA68675B72},2587,placed
 Hub_333,remote:779,Fairbanks,remote_site,Plane,Receiver,779,{267D2EF2-63DA-4FEA-ABB6-EB7BFB60BF26},2831,placed
 Hub_334,EXCURSION INLET,Excursion Inlet,community,Barge or Road,Receiver,78,{4C120687-7512-4E08-BC90-9674A4F4C54C},37017,placed
 Hub_334,EXCURSION INLET,Excursion Inlet,community,Barge or Road,Receiver,854,{0C0656F7-A4B6-48AB-9431-BCB107F78864},37017,placed
 Hub_335,remote:780,Fairbanks,remote_site,Plane,Receiver,780,{14C061AA-262D-4039-AB9A-C4C93FF6ACD2},1276,placed
 Hub_336,remote:786,Glennallen,remote_site,Road,Receiver,786,{6E8C9118-7533-452B-9658-1DC4DFD6FA05},604,placed
-Hub_337,remote:787,Glennallen,remote_site,Plane,Receiver,787,{F495099F-BE9E-49DE-BD7B-1C31183F8BDE},84091,placed
+Hub_337,remote:787,Glennallen,remote_site,Plane,Receiver,787,{F495099F-BE9E-49DE-BD7B-1C31183F8BDE},84107,placed
 Hub_338,remote:800,Livengood,remote_site,Plane,Receiver,800,{2B46951B-0771-4DA5-B85E-08528246F05C},45551,merged:Hub_218
 Hub_339,remote:806,Metlakatla,remote_site,Plane,Receiver,806,{7AC691F0-663D-4947-B5B2-783A7B0ADA02},,unplaced:beyond_cap
 Hub_340,remote:812,Palmer,remote_site,Road,Receiver,812,{E6AB9F80-923B-43FA-B7E0-74FB0874B59A},1087,placed
@@ -1601,7 +1601,7 @@ Hub_342,remote:817,Prudhoe Bay,remote_site,Plane,Receiver,817,{4669A088-FDE7-497
 Hub_343,remote:820,Prudhoe Bay,remote_site,Road,Receiver,820,{F5EA86DC-3AD5-4EBB-9B32-1E3296DE10A4},8881,placed
 Hub_344,blob:37,blob:37,blob,Plane,Receiver,825,{1C90A3F0-FA24-4549-B39D-A7D68691CD55},,unplaced:beyond_cap
 Hub_345,blob:33,blob:33,blob,Plane,Receiver,826,{88EB0B7B-A644-419C-A1A0-A28C818B9BEA},,unplaced:beyond_cap
-Hub_346,remote:832,Valdez,remote_site,Plane,Receiver,832,{3E126E10-1FB3-4698-B4A2-1CE1635F721D},84089,placed
+Hub_346,remote:832,Valdez,remote_site,Plane,Receiver,832,{3E126E10-1FB3-4698-B4A2-1CE1635F721D},84105,placed
 Hub_347,blob:22,blob:22,blob,Plane,Receiver,839,{664F9327-5294-4681-9F68-2784A1F806E8},,unplaced:beyond_cap
 Hub_348,blob:45,blob:45,blob,Road,Receiver,840,{AC3EBB88-FB69-40A7-BB5C-3C789CD4B663},,unplaced:beyond_cap
 Hub_349,remote:852,Haines,remote_site,Road,Receiver,852,{5B6D7E1C-3FCD-4202-88E8-14F202F1FE92},2993,placed
@@ -1610,7 +1610,7 @@ Hub_351,blob:14,blob:14,blob,Plane,Receiver,855,{3B53A2C4-6794-4EE7-8E79-1CE7CB9
 Hub_352,remote:857,Haines,remote_site,Road,Receiver,857,{984C8F00-5900-483B-B4A1-43D255646FAC},2954,placed
 Hub_353,remote:880,Cordova,remote_site,Barge,Receiver,880,{A582CD1B-2461-42BC-AD24-4957D48F8D0C},,unplaced:beyond_cap
 Hub_354,remote:881,Cordova,remote_site,Barge,Receiver,881,{5C4B0813-680E-47D6-A697-FE76F3230475},,unplaced:beyond_cap
-Hub_355,remote:884,Cordova,remote_site,Barge,Receiver,884,{1FF7A1D5-A8B5-49A0-BF91-D7BC0D3F5FB3},55408,placed
+Hub_355,remote:884,Cordova,remote_site,Barge,Receiver,884,{1FF7A1D5-A8B5-49A0-BF91-D7BC0D3F5FB3},55400,placed
 Hub_356,ARCTIC VILLAGE,Arctic Village,community,Barge or Plane,Receiver,903,{08FBA8A0-92C4-4FCE-A99B-AF2EAE8B1E3B},44492,placed
 Hub_356,ARCTIC VILLAGE,Arctic Village,community,Barge or Plane,Receiver,903,{B7E68FA8-CBBD-45FD-8AAC-B95EF13A029A},44492,placed
 Hub_356,ARCTIC VILLAGE,Arctic Village,community,Barge or Plane,Receiver,903,{F84F522D-6A01-40D7-9D01-97D1EF0E401B},44492,placed

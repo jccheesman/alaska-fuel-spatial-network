@@ -82,8 +82,8 @@ bash run_all.sh                                         # steps (a)-(d), as far 
 because it is a review loop rather than a build (its outputs are committed, and
 a run that differs from them is a finding, not a product). On a fresh clone the
 three commands above succeed from committed data alone: step (0) in full, the
-ingest half of step (c) (extract the frozen network, load its 84,094 nodes /
-93,046 edges into DuckDB) and all of step (d). The weighting and costing stages
+ingest half of step (c) (extract the frozen network, load its 84,110 nodes /
+93,061 edges into DuckDB) and all of step (d). The weighting and costing stages
 of (c) additionally need the friction stack from (a), and steps (a) and (b) need
 inputs that must be downloaded and regenerated. Each stage's `run_all.sh` gates
 on what is missing and names the section of `DATA.md` that explains how to get it.

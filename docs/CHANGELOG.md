@@ -13,7 +13,8 @@ from git with `git show <commit>:final_network/network_joined_edges.zip`.
 
 | Version | Commit | Nodes | Edges | Hubs | Components | Giant | edges.zip | nodes.zip |
 |---|---|---|---|---|---|---|---|---|
-| **2026-11-16 hub-key re-export** (current) | `81b2649` | 84,094 | 93,046 | 328 | 4 | 99.99% | `c61842d9df14ab90` | `6ebb93fd2cf14e47` |
+| **2026-11-18 waterway + nearshore barge** (current) | see branch `waterway-network-updates` | 84,110 | 93,061 | 328 | 4 | 99.99% | `8e88919ee8993128` | `a46585acb1606027` |
+| 2026-11-16 hub-key re-export | `81b2649` | 84,094 | 93,046 | 328 | 4 | 99.99% | `c61842d9df14ab90` | `6ebb93fd2cf14e47` |
 | 2026-11-16 | `412a20f` | 84,094 | 93,046 | 328 | 4 | 99.99% | `c8333fa0c4bcda7c` | `0757b28283fd526e` |
 | 2026-11-15 | `8509a86` | 84,094 | 93,049 | 337 | 4 | 99.99% | `de00b11aa76c103b` | `b12e348202e784cd` |
 | 2026-10-15 | `d7faf7a` | 84,094 | 93,049 | 329 | 4 | 99.99% | `2104767a4721c333` | `f6775915ca4d0d8c` |
@@ -23,6 +24,22 @@ from git with `git show <commit>:final_network/network_joined_edges.zip`.
 | 2026-07-20 pre-fix freeze | `f455f0e` | 82,300 | 90,921 | 384 | 21 | 99.65% | `4b1ffe008b07049c` | `3f50dfb80b034f25` |
 
 ## Unreleased — takes effect at the next export
+
+Nothing pending.
+
+## 2026-11-18 — owner-curated waterway + nearshore barge access (branch waterway-network-updates)
+
+Exported 2026-11-18 after the full verification run in `docs/TEST_LOG.md`;
+workflow 03 rerun in full the same day (`edge_month_weights` / `edge_costs`:
+1,116,732 rows each; `edge_water_class`: 34,179 rows). Barge-coded hubs with
+no open Jun–Oct path to Anchorage fell 41 → 17 (the 8 reopened ports + 16
+line-served hubs clear; the remaining 17 are the 8 coastal gaps awaiting
+lines, Buckland and Selawik — owner-excluded — and 7 inland/ice-road hubs).
+All-year-closed Waterway edges fell 57 → 37 (Skwentna's river segments and
+other authored river reaches; every one listed in
+`outputs/tables/barge_passability_closed_edges.csv`). The accepted-exception
+list dropped 45 → 21 rows. Details of both changes below (they were the
+"Unreleased" entry of this file until this export):
 
 **2026-11-17 nearshore barge access (owner session).** The manual-connections
 layer grows 14 → 26 features: the five coastal Barge lines that were closed all

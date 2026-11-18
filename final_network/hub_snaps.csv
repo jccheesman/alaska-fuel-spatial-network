@@ -8,7 +8,7 @@ Hub_6,42256.0,213.2,Road,placed
 Hub_7,39262.0,6525.1,Road,placed
 Hub_8,47127.0,585.4,Road,placed
 Hub_9,43589.0,91.0,Air+Road,placed
-Hub_10,74374.0,20926.4,Waterway,placed
+Hub_10,74354.0,20926.4,Waterway,placed
 Hub_11,20756.0,2751.3,Road,placed
 Hub_12,43232.0,31.0,Road,placed
 Hub_13,43349.0,51.0,Road,placed
@@ -29,7 +29,7 @@ Hub_27,41634.0,410.0,Road,placed
 Hub_28,20515.0,2185.8,Road,placed
 Hub_29,36483.0,122.7,Road,placed
 Hub_30,5457.0,145.2,Road,placed
-Hub_31,82172.0,11249.3,Waterway,placed
+Hub_31,82150.0,11249.3,Waterway,placed
 Hub_32,,78507.0,Road,unplaced:beyond_cap
 Hub_33,39741.0,547.6,Road,placed
 Hub_34,42806.0,437.3,Road,placed
@@ -38,7 +38,7 @@ Hub_36,39938.0,85.9,Road,placed
 Hub_37,39294.0,1043.6,Road,placed
 Hub_38,46984.0,627.5,Road,placed
 Hub_39,3171.0,136.5,Road,placed
-Hub_40,52957.0,12855.5,Waterway,placed
+Hub_40,52955.0,12855.5,Waterway,placed
 Hub_41,41029.0,4.5,Road,placed
 Hub_42,40288.0,853.9,Road,placed
 Hub_43,38842.0,455.7,Road,placed
@@ -152,7 +152,7 @@ Hub_150,2843.0,2170.9,Road,placed
 Hub_151,47618.0,649.6,Road,placed
 Hub_152,2277.0,4940.0,Road,placed
 Hub_153,44158.0,48.5,Road,placed
-Hub_154,79123.0,5778.1,Waterway,placed
+Hub_154,79102.0,5778.1,Waterway,placed
 Hub_155,36244.0,1992.9,Road,placed
 Hub_156,42083.0,32.2,Road,placed
 Hub_157,49932.0,1903.9,IceRoad,placed
@@ -177,7 +177,7 @@ Hub_175,38647.0,16866.3,Road,placed
 Hub_176,40697.0,549.7,Road,placed
 Hub_177,44101.0,71.2,Road,placed
 Hub_178,43548.0,967.8,Road,placed
-Hub_179,79118.0,178.4,Waterway,placed
+Hub_179,79097.0,178.4,Waterway,placed
 Hub_180,41449.0,238.8,Road,placed
 Hub_181,,29268.7,Road,unplaced:beyond_cap
 Hub_182,945.0,437.8,Road,placed
@@ -232,7 +232,7 @@ Hub_230,42770.0,115.6,Road,placed
 Hub_231,43054.0,370.0,Road,placed
 Hub_232,42981.0,58.0,Road,placed
 Hub_233,607.0,314.4,Road,placed
-Hub_234,84090.0,81.0,Road,placed
+Hub_234,84106.0,81.0,Road,placed
 Hub_235,1435.0,414.0,Road,placed
 Hub_236,849.0,5368.4,Road,placed
 Hub_237,1447.0,996.9,Road,placed
@@ -297,7 +297,7 @@ Hub_295,19311.0,51.2,Road,placed
 Hub_296,11130.0,359.5,Road,placed
 Hub_297,43651.0,47.5,Road,placed
 Hub_298,49518.0,3836.3,IceRoad,placed
-Hub_299,84092.0,345.6,Road,placed
+Hub_299,84108.0,345.6,Road,placed
 Hub_300,36205.0,4147.3,Road,placed
 Hub_301,,56424.5,Road,unplaced:beyond_cap
 Hub_302,,60354.0,Road,unplaced:beyond_cap
@@ -325,17 +325,17 @@ Hub_323,41610.0,97.2,Road,placed
 Hub_324,47124.0,9602.7,Road,placed
 Hub_325,1437.0,10875.6,Road,merged:Hub_184
 Hub_326,2772.0,416.8,Road,placed
-Hub_327,84093.0,1392.6,Road,placed
+Hub_327,84109.0,1392.6,Road,placed
 Hub_328,,27333.1,Road,unplaced:beyond_cap
 Hub_329,,31598.7,IceRoad,unplaced:beyond_cap
 Hub_330,28569.0,23059.6,Road,placed
-Hub_331,56760.0,583.0,Waterway,placed
+Hub_331,56754.0,583.0,Waterway,placed
 Hub_332,2587.0,13051.9,Road,placed
 Hub_333,2831.0,10653.1,Road,placed
 Hub_334,37017.0,12693.7,Road,placed
 Hub_335,1276.0,10235.3,Road,placed
 Hub_336,604.0,22761.2,Road,placed
-Hub_337,84091.0,295.2,Road,placed
+Hub_337,84107.0,295.2,Road,placed
 Hub_338,45551.0,8596.6,Road,merged:Hub_218
 Hub_339,,45691.9,Road,unplaced:beyond_cap
 Hub_340,1087.0,28.0,Road,placed
@@ -344,7 +344,7 @@ Hub_342,,35160.9,IceRoad,unplaced:beyond_cap
 Hub_343,8881.0,6307.4,Road,placed
 Hub_344,,38967.5,IceRoad,unplaced:beyond_cap
 Hub_345,,42958.4,Road,unplaced:beyond_cap
-Hub_346,84089.0,1823.6,Road,placed
+Hub_346,84105.0,1823.6,Road,placed
 Hub_347,,55182.6,Road,unplaced:beyond_cap
 Hub_348,,44741.3,Road,unplaced:beyond_cap
 Hub_349,2993.0,320.2,Road,placed
@@ -353,7 +353,7 @@ Hub_351,42491.0,19155.8,Road,placed
 Hub_352,2954.0,7545.6,Road,placed
 Hub_353,,45150.8,Road,unplaced:beyond_cap
 Hub_354,,41667.3,Road,unplaced:beyond_cap
-Hub_355,55408.0,12209.1,Waterway,placed
+Hub_355,55400.0,12209.1,Waterway,placed
 Hub_356,44492.0,19.2,Road,placed
 Hub_357,38378.0,62.6,Road,placed
 Hub_358,39461.0,93.1,Road,placed

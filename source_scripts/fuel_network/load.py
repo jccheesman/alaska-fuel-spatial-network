@@ -72,31 +72,35 @@ DB_PATH = rp.DUCKDB
 # Expected inventory per final_network/README.md — a changed export should
 # fail loudly here, not flow silently into the weighted graph.
 EXPECTED = {
-    "n_nodes": 84_094,
-    "n_edges": 93_046,
+    "n_nodes": 84_110,
+    "n_edges": 93_061,
     "n_hubs": 328,
     "n_components": 4,
     "giant_share": 0.9999,
     # Mode-based connector vocabulary (refine-synthetic-connectors, 2026-09):
     # welds -> {Mode}Connector, cross-mode handoffs -> per-pair {A}{B}Transfer.
-    # Re-exported 2026-11-16 after the owner review of that day
-    # (docs/inventory_notes/owner_review_2026-11-16.md, 17 records corrected by manual
-    # approval): ten remote_site hubs fold into their communities' and Healy Lake gets
-    # its own hub (hubs 337 -> 328), dropping three BargeRoadTransfer handoffs
-    # (289 -> 286, edges 93,049 -> 93,046). Node geometry
-    # is unchanged; edge geometry/order moved, so edge_ids are new (final_network/README.md).
+    # Re-exported 2026-11-18 (waterway-network-updates, docs/CHANGELOG.md):
+    # the waterway source is the owner-curated layer (one geometry with the
+    # corridor masks — reopens the 8 all-year-closed ports) and the manual
+    # layer grows to 19 Barge lines (5 coastal redraws + 12 new nearshore
+    # hubs). Vs 2026-11-16: nodes 84,094 -> 84,110, edges 93,046 -> 93,061;
+    # BargeRoadTransfer 286 -> 298, BargeAirTransfer 2 -> 4 (Kongiganak and
+    # Kwigillingok land on shared airport-road nodes), BargeConnector appears
+    # (one barge-barge shore weld), RoadConnector 1,498 -> 1,497, Waterway
+    # 34,178 -> 34,179. Edge_ids are new (final_network/README.md).
     "edge_types": {
         "Road": 55_539,
-        "Waterway": 34_178,
+        "Waterway": 34_179,
         "Air": 226,
         "IceRoad": 1_248,
-        "RoadConnector": 1_498,
+        "RoadConnector": 1_497,
         "IceRoadConnector": 34,
-        "BargeRoadTransfer": 286,
+        "BargeConnector": 1,
+        "BargeRoadTransfer": 298,
         "BargeIceRoadTransfer": 21,
         "IceRoadRoadTransfer": 12,
         "AirRoadTransfer": 2,
-        "BargeAirTransfer": 2,
+        "BargeAirTransfer": 4,
     },
 }
 
