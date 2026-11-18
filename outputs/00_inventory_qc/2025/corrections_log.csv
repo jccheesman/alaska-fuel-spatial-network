@@ -163,6 +163,8 @@ record_id,field,old_value,new_value,status,reviewer,reviewed_on,outcome,note
 {EE49D47C-9B92-431B-9D0B-77844BA21CF8},community_id,{169CE60B-858B-4A5D-801B-CB9E3179349B},{3FD9E5F5-DE1E-47BC-A8FC-ECEFCA7C2EA8},approved,JC,2026-11-16,applied,
 {97E77B03-20AE-4291-A9A5-15C73AA55976},community_name,Point Mackenzie,Point MacKenzie,approved,JC,2026-11-16,applied,
 {CD4AD297-08F9-487A-AF26-CA811742EFAE},community_name,Point McKenzie,Point MacKenzie,approved,JC,2026-11-16,applied,
+{777BD506-2C38-4DFA-9680-7F5305C23F7B},latitude,66.5,61.221854,approved,JC,2026-11-18,applied,
+{777BD506-2C38-4DFA-9680-7F5305C23F7B},longitude,-161.03,-149.838867,approved,JC,2026-11-18,applied,
 {5AEE4579-120C-418C-965A-911EFB7A4873},map_point,"95294.34149,866941.8446","95294.34149,866941.8446",derived,,,publisher-corroborates,publisher map point agrees with the corrected position within 100 m; kept verbatim as the authoritative geometry
 {D0D325AD-A296-437B-9213-8A2FD2F3621D},map_point,"161699.986,1928988.01","161699.986,1928988.01",derived,,,publisher-corroborates,publisher map point agrees with the corrected position within 100 m; kept verbatim as the authoritative geometry
 {8D408F52-5CE0-4A95-A586-79D54041D7C7},map_x,-329067.8276,-420077.3262,derived,,,applied-sync,map point still sat on the refuted position; recomputed from the corrected lat/lon (EPSG:3338); publisher original in the snapshot
@@ -203,3 +205,5 @@ record_id,field,old_value,new_value,status,reviewer,reviewed_on,outcome,note
 {D32639C4-3E15-4313-904F-B53FE9C4C207},map_y,1236015.375,1229903.1931,derived,,,applied-sync,map point still sat on the refuted position; recomputed from the corrected lat/lon (EPSG:3338); publisher original in the snapshot
 {BFF9DB9E-CA56-440D-B966-058492E9DF73},map_x,1116856.237,1388382.8620,derived,,,applied-sync,map point still sat on the refuted position; recomputed from the corrected lat/lon (EPSG:3338); publisher original in the snapshot
 {BFF9DB9E-CA56-440D-B966-058492E9DF73},map_y,1095189.423,828965.0123,derived,,,applied-sync,map point still sat on the refuted position; recomputed from the corrected lat/lon (EPSG:3338); publisher original in the snapshot
+{777BD506-2C38-4DFA-9680-7F5305C23F7B},map_x,-313380.1477,222605.9177,derived,,,applied-sync,map point still sat on the refuted position; recomputed from the corrected lat/lon (EPSG:3338); publisher original in the snapshot
+{777BD506-2C38-4DFA-9680-7F5305C23F7B},map_y,1854667.874,1255925.0094,derived,,,applied-sync,map point still sat on the refuted position; recomputed from the corrected lat/lon (EPSG:3338); publisher original in the snapshot

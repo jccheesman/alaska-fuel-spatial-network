@@ -1,11 +1,11 @@
 # Inventory QC report — release 2025
 
-Generated 2026-11-16T18:16:40+00:00 by workflows/00_inventory_qc/07_publish.py
+Generated 2026-11-18T22:14:08+00:00 by workflows/00_inventory_qc/07_publish.py
 
 - raw release: `Utilities_Bulk_Fuel_Inventory.csv` sha256 `3fbee569c63dccf813d6fa53e608820d53b92e415feb2c7f20556fc0bb0c30b0` (1830 rows, 1767 located)
-- clean table: `facilities_clean.csv` sha256 `be74d29fed6a4902618b3b571a48739b9f084c69df40d23a723f324581664d78` (1796 rows, 1733 located)
+- clean table: `facilities_clean.csv` sha256 `333d141ccb63d356233738bc8e680b58800493e6a4c719803073cf9e8d35bc20` (1796 rows, 1733 located)
 - excluded: 34 (see `excluded.csv`)
-- corrections: 142 applied · 3 pending · 11 rejected · 0 skipped
+- corrections: 144 applied · 3 pending · 11 rejected · 0 skipped
 - community keys: 271 · unlabelled records: 97
 - capacity_status: 1710 ok · 74 missing · 12 mismatch; placeholder inspection dates published blank: 7
 - qc_status: 1796 clean · 0 pending_review (withheld from hubs by the build)
@@ -18,7 +18,7 @@ Generated 2026-11-16T18:16:40+00:00 by workflows/00_inventory_qc/07_publish.py
 | no undeclared derived column was produced by a stage | PASS | undeclared=[] (declare it in inputs/inventory_qc/derived_columns.csv) |
 | row reconciliation | PASS | 1830 release = 1796 clean + 34 excluded |
 | every exclusion has a reason | PASS | 34 excluded |
-| every applied correction has reviewer + date | PASS | 142 applied |
+| every applied correction has reviewer + date | PASS | 144 applied |
 | only schema + derived columns; no contact columns | PASS | extra=[] contact=[] |
 | every declared derived column is present (derived_columns.csv) | PASS | missing=[] |
 | every located record has a facility_id | PASS | missing=0 |
@@ -31,7 +31,7 @@ Generated 2026-11-16T18:16:40+00:00 by workflows/00_inventory_qc/07_publish.py
 | fixture: no Kodiak-labelled record is in the open Pacific (lat < 56) | PASS |  |
 | fixture: no Coldfoot-labelled record is in Yukon, Canada (lon > -141) | PASS |  |
 | fixture: spelling variants resolved (no 'Saint Marys', 'Clarks Point', 'Dutch Harbor' labels) | PASS |  |
-| deterministic output | PASS | be74d29fed6a |
+| deterministic output | PASS | 333d141ccb63 |
 
 ## Corrections applied
 
@@ -179,3 +179,5 @@ Generated 2026-11-16T18:16:40+00:00 by workflows/00_inventory_qc/07_publish.py
 | `{EE49D47C-9B92-431B-9D0B-77844BA21CF8}` | community_id | {169CE60B-858B-4A5D-801B-CB9E3179349B} | {3FD9E5F5-DE1E-47BC-A8FC-ECEFCA7C2EA8} | JC | 2026-11-16 |
 | `{97E77B03-20AE-4291-A9A5-15C73AA55976}` | community_name | Point Mackenzie | Point MacKenzie | JC | 2026-11-16 |
 | `{CD4AD297-08F9-487A-AF26-CA811742EFAE}` | community_name | Point McKenzie | Point MacKenzie | JC | 2026-11-16 |
+| `{777BD506-2C38-4DFA-9680-7F5305C23F7B}` | latitude | 66.5 | 61.221854 | JC | 2026-11-18 |
+| `{777BD506-2C38-4DFA-9680-7F5305C23F7B}` | longitude | -161.03 | -149.838867 | JC | 2026-11-18 |
