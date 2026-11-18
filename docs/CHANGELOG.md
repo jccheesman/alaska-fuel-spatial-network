@@ -67,11 +67,16 @@ workflow 03 is next run. Record: `docs/cost_derivation/2026-11/`.
   its self-test rewritten to the new derivation; the invariant checker gained
   status and landing-class checks; `combined_friction_tables.xlsx` Table 3 is
   regenerated with the sources register as its panel (c).
-- Scale check on a scratch copy of the 2026-11-16 network with a stand-in water
-  class (not the project's label): 1,116,552 rows, no zero-cost passable
-  edge-month; September from Anchorage: Nome $1.85 → $0.47 (by sea), Bethel
-  $1.86 → $0.49, Koyuk $1.95 → $1.02, Tanana $0.92 → $1.00, Ketchikan $1.46 →
-  $0.38. Not yet run on the owner's machine with the real label.
+- Scale check (branch, pre-merge) used a scratch 2026-11-16 network with a
+  stand-in water class; September-from-Anchorage examples there: Nome
+  $1.85 → $0.47 (by sea), Bethel $1.86 → $0.49, Ketchikan $1.46 → $0.38.
+- APPLIED FOR REAL 2026-11-18, post-merge, on the 2026-11-18 network-of-record
+  with the project's own water label: `edge_costs` 1,116,732 rows, zero
+  zero-cost passable edge-months; 302 barge landings classified
+  (163 coastal_village / 75 river_village / 46 hub by the reviewed table /
+  18 road_port), fees 0.65 / 0.50 / 0.12 / 0.01 applied per class; the one
+  `BargeConnector` prices at ocean line-haul over its 4.63 km. Workflow-04
+  validation green; suite 220 passed.
 
 **2026-11-17 nearshore barge access (owner session).** The manual-connections
 layer grows 14 → 26 features: the five coastal Barge lines that were closed all
