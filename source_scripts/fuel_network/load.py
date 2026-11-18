@@ -72,35 +72,37 @@ DB_PATH = rp.DUCKDB
 # Expected inventory per final_network/README.md — a changed export should
 # fail loudly here, not flow silently into the weighted graph.
 EXPECTED = {
-    "n_nodes": 84_110,
-    "n_edges": 93_061,
+    "n_nodes": 84_134,
+    "n_edges": 93_080,
     "n_hubs": 328,
     "n_components": 4,
     "giant_share": 0.9999,
     # Mode-based connector vocabulary (refine-synthetic-connectors, 2026-09):
     # welds -> {Mode}Connector, cross-mode handoffs -> per-pair {A}{B}Transfer.
-    # Re-exported 2026-11-18 (waterway-network-updates, docs/CHANGELOG.md):
-    # the waterway source is the owner-curated layer (one geometry with the
-    # corridor masks — reopens the 8 all-year-closed ports) and the manual
-    # layer grows to 19 Barge lines (5 coastal redraws + 12 new nearshore
-    # hubs). Vs 2026-11-16: nodes 84,094 -> 84,110, edges 93,046 -> 93,061;
-    # BargeRoadTransfer 286 -> 298, BargeAirTransfer 2 -> 4 (Kongiganak and
-    # Kwigillingok land on shared airport-road nodes), BargeConnector appears
-    # (one barge-barge shore weld), RoadConnector 1,498 -> 1,497, Waterway
-    # 34,178 -> 34,179. Edge_ids are new (final_network/README.md).
+    # Re-exported 2026-11-18 (barge-landing-fixes, docs/CHANGELOG.md), second
+    # export of the day: the landing-class review names a barge landing at a
+    # shared road-and-airport node a ROAD landing (BargeAirTransfer 4 -> 0 at
+    # Gambell, Elim, Kwigillingok, Kongiganak — retired from the vocabulary
+    # until one reappears), the Port MacKenzie anchor exclusion removes its
+    # ports landing, the Weaver Bros. inventory correction moves the
+    # Anchorage hub and its landing to Anchorage city, and 12 Barge hubs
+    # with no road of their own land on 100 m site stubs (Road 55,539 ->
+    # 55,551; two harbour anchors re-land on the Elfin Cove and blob:53
+    # stubs, the Elfin Cove one landing for the first time). Vs the earlier
+    # 2026-11-18 export: nodes 84,110 -> 84,134, edges 93,061 -> 93,080,
+    # BargeRoadTransfer 298 -> 309. Edge_ids are new (final_network/README.md).
     "edge_types": {
-        "Road": 55_539,
+        "Road": 55_551,
         "Waterway": 34_179,
         "Air": 226,
         "IceRoad": 1_248,
         "RoadConnector": 1_497,
         "IceRoadConnector": 34,
         "BargeConnector": 1,
-        "BargeRoadTransfer": 298,
+        "BargeRoadTransfer": 309,
         "BargeIceRoadTransfer": 21,
         "IceRoadRoadTransfer": 12,
         "AirRoadTransfer": 2,
-        "BargeAirTransfer": 4,
     },
 }
 

@@ -7,8 +7,8 @@ network. This folder contains a **frozen handoff**: workflow 02
 (`01_extract_network_handoff.py` → `02_load_final_network.py`) extracts and
 ingests it.
 
-- **Nodes:** `network_joined_nodes.zip` → `network_joined_nodes/…shp` — 84,110 points
-- **Edges:** `network_joined_edges.zip` → `network_joined_edges/…shp` — 93,061 lines (synthetic connectors are mode-typed: `{Mode}Connector` welds + per-pair `*Transfer` handoffs)
+- **Nodes:** `network_joined_nodes.zip` → `network_joined_nodes/…shp` — 84,134 points
+- **Edges:** `network_joined_edges.zip` → `network_joined_edges/…shp` — 93,080 lines (synthetic connectors are mode-typed: `{Mode}Connector` welds + per-pair `*Transfer` handoffs)
 - **Components:** 4 · **giant:** 99.99% of nodes · **fuel hubs:** 328
 - **CRS:** EPSG:3338 — NAD83 / Alaska Albers (meters). The `.prj` reads as `NAD_1983_Alaska_Albers`.
 
@@ -24,7 +24,41 @@ to these bytes — a re-export, a repack that re-orders rows, even a
 `edge_month_weights`, and `edge_costs` together. That is why the members are
 checksummed below and must stay **byte-identical**.
 
-## PROVENANCE — re-exported 2026-11-18 (waterway-network-updates)
+## PROVENANCE — re-exported 2026-11-18, second export (barge-landing-fixes)
+
+Exported on branch `barge-landing-fixes` at `d2c0483` (`docs/CHANGELOG.md`
+"Unreleased" → this version). Four causes, all owner decisions of 2026-11-18:
+
+- **Landing-class naming**: a barge landing at a shared road-and-airport node
+  is a ROAD landing — the four `BargeAirTransfer` edges (Gambell, Elim,
+  Kwigillingok, Kongiganak) become `BargeRoadTransfer` with identical
+  geometry; the type is retired from the vocabulary until one reappears.
+- **Anchor exclusion** (`inputs/network_qc/excluded_anchors.csv`): the Port
+  MacKenzie port anchor is dropped, removing the `ports` landing that tied
+  Point MacKenzie's roads to the Port of Anchorage's dock.
+- **Inventory correction** (facility 56, Weaver Bros. Anchorage Terminal,
+  refuted position 806 km away): the Anchorage hub moves 12.9 km back into
+  Anchorage city (61.179 N, −149.854 W) and its 6.9 km landing re-forms from
+  there. Node geometry gains no points from this; hub attributes move.
+- **Site stubs by rule** (profile `hubs.site_stub_km: 10`): 12 Barge hubs
+  none of whose sites is within 10 km of a road — Cape Yakataga, two Cordova
+  remote sites (1062, 884), Diomede, Elfin Cove, Port Moller, Ivanof Bay,
+  Excursion Inlet, and four unlabelled blobs (sites 1008, 114, 31, 1089) —
+  each get a 100 m road stub at their own point and land on it with one
+  `barge_hubs` landing. Seven previously sat on a waterway node (no landing,
+  no fee); five sat on another place's road (those five landings are
+  removed). Two harbour anchors re-land on the new stubs (`ports` landings
+  at Elfin Cove — its first — and at the blob:53 stub), so those two stub
+  nodes carry two landings each.
+
+Vs the first 2026-11-18 export: nodes 84,110 → **84,134** (+24: 12 stubs ×
+2 nodes), edges 93,061 → **93,080** (Road 55,539 → 55,551,
+BargeRoadTransfer 298 → **309**, BargeAirTransfer 4 → **0**); hubs **328**,
+components **4**, unplaced **41** unchanged. Only Anchorage and the 12 stub
+hubs changed node. Every edge_id-keyed table moved; workflow 03 rerun in
+full on 2026-11-18.
+
+## Prior provenance — re-exported 2026-11-18 (waterway-network-updates)
 
 Exported on branch `waterway-network-updates` (`docs/CHANGELOG.md` "Unreleased"
 → this version). Two causes, both verified in `docs/TEST_LOG.md` (2026-11-18)
@@ -116,20 +150,20 @@ within-mode welds → `{Mode}Connector`, cross-mode handoffs → per-pair
 
 | Zip | sha256 |
 |---|---|
-| `network_joined_nodes.zip` | `a46585acb1606027` … (full value in `inputs/MANIFEST.md`) |
-| `network_joined_edges.zip` | `8e88919ee8993128` … (full value in `inputs/MANIFEST.md`) |
+| `network_joined_nodes.zip` | `6976a7cf9cce3f84` … (full value in `inputs/MANIFEST.md`) |
+| `network_joined_edges.zip` | `dacf1a7622d082a5` … (full value in `inputs/MANIFEST.md`) |
 
 Members (md5; full sha256 per member in `final_network/MANIFEST.sha256` and
 `inputs/MANIFEST.md`):
 
 | Member | md5 |
 |---|---|
-| `network_joined_nodes/network_joined_nodes.shp` | `7bfb40ac1051d6d6e5bb170e207cd153` |
-| `network_joined_nodes/network_joined_nodes.dbf` | `37cc21839b63b7a3691274a70e1b5064` |
-| `network_joined_nodes/network_joined_nodes.shx` | `fffbba3316e33014b2cbd5aabdc8613e` |
-| `network_joined_edges/network_joined_edges.shp` | `8ceb1d5160f67c855b3902fc0199df1c` |
-| `network_joined_edges/network_joined_edges.dbf` | `2ff0d52530fc49adba88d22d74f9e420` |
-| `network_joined_edges/network_joined_edges.shx` | `74fccdee514af2fbb15e2a8e1ba942ea` |
+| `network_joined_nodes/network_joined_nodes.shp` | `1bb6bb46a8b779fbbcd6241043e833b3` |
+| `network_joined_nodes/network_joined_nodes.dbf` | `320c016d7882ee3503bbe634ec7a7fdf` |
+| `network_joined_nodes/network_joined_nodes.shx` | `2c11ee9811d16db1f0ed4c85d8f5e5a8` |
+| `network_joined_edges/network_joined_edges.shp` | `be39fb20d22711bbb710dd14018028b9` |
+| `network_joined_edges/network_joined_edges.dbf` | `57db8c6e712832fdafa95706633971aa` |
+| `network_joined_edges/network_joined_edges.shx` | `15c8cf7626fd7472581ecc4dd7026e42` |
 
 ## The hub handoff: `hub_members.csv` + `hub_snaps.csv`
 
@@ -175,14 +209,14 @@ shortened on export. Full mapping:
 | shapefile field | meaning |
 |---|---|
 | `from`, `to` | endpoint `node_id`s |
-| `type`       | Road · Waterway · Air · IceRoad · RoadConnector · IceRoadConnector · BargeRoadTransfer · BargeIceRoadTransfer · IceRoadRoadTransfer · AirRoadTransfer · BargeAirTransfer |
+| `type`       | Road · Waterway · Air · IceRoad · RoadConnector · IceRoadConnector · BargeConnector · BargeRoadTransfer · BargeIceRoadTransfer · IceRoadRoadTransfer · AirRoadTransfer |
 | `source`     | provenance (e.g. `Road`, `ports`, `barge_hubs`, `weld:*`, `bridge:*`, `shore:*`, `join:to-giant`) |
 | `join_gap_m` | for stage-04 join connectors, the straight-line gap (m) that was closed; NULL/0 otherwise |
 
-Edge-type inventory (the ingest's hard tripwire): Road 55,539 · Waterway
-34,178 · Air 226 · IceRoad 1,248 · RoadConnector 1,498 · IceRoadConnector 34 ·
-BargeRoadTransfer 286 · BargeIceRoadTransfer 21 · IceRoadRoadTransfer 12 ·
-AirRoadTransfer 2 · BargeAirTransfer 2. Synthetic connectors are named by the modes they join
+Edge-type inventory (the ingest's hard tripwire): Road 55,551 · Waterway
+34,179 · Air 226 · IceRoad 1,248 · RoadConnector 1,497 · IceRoadConnector 34 ·
+BargeConnector 1 · BargeRoadTransfer 309 · BargeIceRoadTransfer 21 ·
+IceRoadRoadTransfer 12 · AirRoadTransfer 2. Synthetic connectors are named by the modes they join
 (`{Mode}Connector` welds, per-pair `{A}{B}Transfer` handoffs); `edge_class`
 mirrors `type`.
 
