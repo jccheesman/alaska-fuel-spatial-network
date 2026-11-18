@@ -42,16 +42,21 @@ Three changes found while the harness adopted the 2026-11-18 network (branch `ba
   `inputs/network_qc/excluded_anchors.csv`, applied by `00_normalize_raw.py`): its nearest waterway node is
   Anchorage's dock across Knik Arm, so its landing joined the two shores without a barge edge. `ports` is now
   re-normalized on every build.
-- **Road stubs for hubs with barge fuel and no road** (owner, 2026-11-18): eight hand-drawn `Road` lines of 100 to
-  470 m in `inputs/mannual_connections/mannual_connections.shp` (rows 26 to 33; evidence in `PROVENANCE.csv`), from
-  each site to the shore: Cape Yakataga, two remote sites labelled Cordova, Diomede, Elfin Cove, Port Moller and two
-  unlabelled sites north of Kodiak Island. With no road or ice road within 25 km, seven of these hubs were placed
-  ON a waterway node, so the build made no landing edge and they paid no landing fee (Diomede 0.37 per gallon from
-  Anchorage against 1.02 for Wales); the eighth was on another place's road 21.6 km away. With a stub the hub snaps
-  to its own site and the barge-hub rule adds the landing. To verify at the rebuild: one new `BargeRoadTransfer`
-  per hub and no other hub moving (checked beforehand against the hub points: none within 25 km would re-snap).
-  Four of the landings will be long (11 to 21 km to the nearest waterway node); a barge line extension would
-  shorten them.
+- **Site stubs: a barge hub with no road of its own lands on its own site** (owner, 2026-11-18; profile
+  `hubs.site_stub_km: 10`, `site_stub_len_m: 100`; `mmnet.build.site_stubs`). A hub whose delivery includes Barge
+  and none of whose sites is within 10 km of a road or ice road gets a 100 m stub of the road layer at its own
+  point, toward the nearest waterway node, provided one is within the barge-hub transfer reach (25 km). It then
+  snaps to its own point and the barge-hub rule gives it a landing. Before: with no road within 25 km the hub fell
+  back ONTO a waterway node, where no landing edge can form, so it paid no landing fee (Diomede 0.37 per gallon
+  from Anchorage against 1.02 for Wales); with another place's road 10 to 25 km away it sat on that road (Ivanof
+  Bay on Perryville's). Reported as `snap_surface = SiteStub` in the hub placement trail and listed in
+  `output/02_site_stubs.csv`. Judged by the hub's SITES, not its average point: Wrangell's point is 12 km from any
+  road because half its records are 37 to 43 km from town, yet it has four tanks on its roads.
+  Expected on the 2026-11-18 inventory (simulated on that network, to confirm at the rebuild): 12 hubs. Seven
+  were on a waterway node (Cape Yakataga, two remote sites labelled Cordova, Diomede, Elfin Cove, Port Moller, an
+  unlabelled site); five were on another place's road (Ivanof Bay, Excursion Inlet, three unlabelled sites). Newtok
+  is not picked: no waterway node is within 25 km of it. Eight hand-drawn road stubs were committed first
+  (`cce7c81`) and are removed here, since the rule covers the same eight hubs.
 
 Not done here: the rebuild, the export and the workflow 03 rerun (owner's machine).
 

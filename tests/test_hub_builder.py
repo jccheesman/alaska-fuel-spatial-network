@@ -296,3 +296,80 @@ def test_edge_snap_respects_the_tolerance():
     _, _, s = connect_multimodal(road, hub, {"Road"}, [], {},
                                  max_snap_dist=25_000, snap_to_edge_tol=2000)
     assert s["hub_snaps"].loc[0, "status"] == "unplaced:beyond_cap", "no overreach beyond the tol"
+
+
+# ----------------------------------------------------------------------------- site stubs (2026-11)
+def _stub_world():
+    road = gpd.GeoDataFrame({"type": ["Road"]}, geometry=[LineString([(0, 0), (1000, 0)])], crs=CRS)
+    water = gpd.GeoDataFrame({"type": ["Waterway"]},
+                             geometry=[LineString([(0, 60_000), (20_000, 60_000), (40_000, 60_000)])], crs=CRS)
+    hubs = _pts([(500, 300), (20_000, 45_000), (20_000, 20_000), (300_000, 0), (30_000, 45_000)],
+                hub_id=["OnRoad", "NoRoad", "FarWater", "Nowhere", "PlaneOnly"],
+                delivery_method=["Barge", "Barge or Plane", "Barge", "Barge", "Plane"],
+                hub_type=["Receiver"] * 5, total_hub_capacity=[1.0] * 5)
+    return road, water, hubs
+
+
+def test_site_stub_goes_only_to_barge_hubs_with_no_road_and_water_in_reach():
+    from mmnet.build import site_stubs
+    road, water, hubs = _stub_world()
+    stubs, trail = site_stubs(hubs, road, water, "Road", stub_km=10, stub_len_m=100, reach_m=25_000)
+    # OnRoad has a road 300 m away; FarWater is 40 km from the water (no landing could form);
+    # Nowhere has neither; PlaneOnly is not barge-served. Only NoRoad qualifies.
+    assert list(trail["hub_id"]) == ["NoRoad"] and len(stubs) == 1
+    line = stubs.geometry.iloc[0]
+    assert list(stubs["type"]) == ["Road"] and abs(line.length - 100) < 1e-6
+    (x0, y0), (x1, y1) = line.coords
+    assert (x0, y0) == (20_000, 45_000), "the stub starts at the hub's own point"
+    assert x1 == 20_000 and y1 > y0, "and points at the nearest waterway vertex (due north here)"
+    assert trail.iloc[0]["waterway_km"] == 15.0 and pd.isna(trail.iloc[0]["ground_km"]), "no road within 10 km at all"
+    # off by default, and a nearer water vertex shortens the stub to half the gap
+    assert len(site_stubs(hubs, road, water, "Road", stub_km=0, stub_len_m=100, reach_m=25_000)[0]) == 0
+    near = _pts([(20_000, 59_940)], hub_id=["AtShore"], delivery_method=["Barge"])
+    assert abs(site_stubs(near, road, water, "Road", 10, 100, 25_000)[0].geometry.iloc[0].length - 30) < 1e-6
+
+
+def test_site_stub_is_decided_by_the_hubs_sites_not_its_average_point():
+    from mmnet.build import site_stubs
+    road, water, _ = _stub_world()
+    # a town with two tanks on the road and two far-off sites under the same label: its average
+    # point is 20 km from the road, but it has a road. A hub whose sites are ALL far has none.
+    sites = _pts([(400, 100), (600, 100), (20_000, 50_000), (60_000, 30_000), (20_000, 46_000), (22_000, 46_000)],
+                 ast_facility_id=["t1", "t2", "t3", "t4", "v1", "v2"])
+    hubs = _pts([(20_250, 20_050), (21_000, 46_000)], hub_id=["Town", "Village"], delivery_method=["Barge", "Barge"],
+                member_site_ids=["t1;t2;t3;t4", "v1;v2"])
+    by_point, _ = site_stubs(hubs, road, water, "Road", 10, 100, 60_000)
+    assert len(by_point) == 2, "judged by the average point alone, the town would be taken off its road"
+    stubs, trail = site_stubs(hubs, road, water, "Road", 10, 100, 60_000, sites=sites)
+    assert list(trail["hub_id"]) == ["Village"]
+
+
+def test_site_stub_hub_lands_on_its_own_point_and_takes_a_barge_landing():
+    from mmnet.assemble import classify_connectors
+    from mmnet.build import site_stubs
+    road, water, hubs = _stub_world()
+    kw = dict(snap_types={"Road"}, waterway=water, waterway_label="Waterway", max_snap_dist=25_000,
+              snap_modes={"Road": "Road", "Waterway": "Barge"}, snap_fallback_types={"Waterway"})
+    barge_hubs = hubs[hubs["delivery_method"].str.contains("Barge")].reset_index(drop=True)
+    rule = [{"from_type": "Road", "to_type": "Waterway", "anchor": "barge_hubs", "max_dist": 25_000.0}]
+
+    # without the rule: the hub falls back onto a waterway node and no landing edge can form
+    _, e0, s0 = connect_multimodal(road, hubs, {"Road"}, rule, {"barge_hubs": barge_hubs}, **kw)
+    before = s0["hub_snaps"].set_index("hub_id")
+    assert before.loc["NoRoad", "snap_surface"] == "Waterway"
+    hub_node = int(before.loc["NoRoad", "node_id"])
+    assert not ((e0["type"] == "Transfer") & ((e0["from"] == hub_node) | (e0["to"] == hub_node))).any()
+
+    # with it: placed on its own point, and one transfer joins that node to the waterway
+    stubs, _ = site_stubs(hubs, road, water, "Road", stub_km=10, stub_len_m=100, reach_m=25_000)
+    edges_in = gpd.GeoDataFrame(pd.concat([road, stubs], ignore_index=True), geometry="geometry", crs=CRS)
+    _, e1, s1 = connect_multimodal(edges_in, hubs, {"Road"}, rule, {"barge_hubs": barge_hubs}, **kw)
+    after = s1["hub_snaps"].set_index("hub_id")
+    assert after.loc["NoRoad", "status"] == "placed" and after.loc["NoRoad", "snap_dist_m"] == 0.0
+    assert after.loc["NoRoad", "snap_surface"] == "Road"          # build_network then reports it as SiteStub
+    node = int(after.loc["NoRoad", "node_id"])
+    typed = classify_connectors(e1, {"Road": "Road", "Waterway": "Barge"}, {"Barge": 0, "Road": 3})
+    landing = typed[(typed["source"] == "barge_hubs") & ((typed["from"] == node) | (typed["to"] == node))]
+    assert list(landing["type"]) == ["BargeRoadTransfer"], "exactly one barge landing at the hub's own node"
+    # the hub that already had a road is where it was
+    assert after.loc["OnRoad", "node_id"] == before.loc["OnRoad", "node_id"]

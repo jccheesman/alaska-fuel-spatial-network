@@ -255,6 +255,8 @@ class Params(_Strict):
     remote_site_km: float = 0.0
     withhold_pending_review: bool = False
     snap_to_edge_tol_m: float = 0.0
+    site_stub_km: float = 0.0
+    site_stub_len_m: float = 100.0
 
 
 # --------------------------------------------------------------------------- RegionProfile
@@ -354,6 +356,16 @@ class HubParams(_Strict):
     # alone wrongly drops it. Rescue-only: runs only for hubs that would otherwise be unplaced.
     # 0 = off. Keep small (~2 km) so a hub near a road it is not served by does not weld.
     snap_to_edge_tol_m: float = 0.0
+    # SITE STUBS (2026-11). A barge-served hub with no snap-target line (road, ice road) within this
+    # many km of its own point has no road of its own: the nearest one belongs to another place, or
+    # there is none in reach and the hub falls back onto a waterway node, where no landing edge can
+    # form (a transfer joins a ground node to a water node). Such a hub gets a short stub of the
+    # road layer at its own point, toward the nearest waterway node, so it lands on its own site and
+    # the barge-hub transfer rule gives it a landing like every other barge hub. Only where a waterway
+    # node is within the barge-hub transfer reach, so a stub is never left without a landing.
+    # 0 = off. The hub is reported as snap_surface "SiteStub" and listed in output/02_site_stubs.csv.
+    site_stub_km: float = 0.0
+    site_stub_len_m: float = 100.0
 
 
 class TopologyParams(_Strict):
@@ -493,6 +505,8 @@ class RegionProfile(_Strict):
             remote_site_km=h.remote_site_km,
             withhold_pending_review=h.withhold_pending_review,
             snap_to_edge_tol_m=h.snap_to_edge_tol_m,
+            site_stub_km=h.site_stub_km,
+            site_stub_len_m=h.site_stub_len_m,
         )
 
 

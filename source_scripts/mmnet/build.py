@@ -346,6 +346,90 @@ def _snap_airways_to_road(r_edges: gpd.GeoDataFrame, from_label: str, to_label: 
     return out, n
 
 
+SITE_STUB_SURFACE = "SiteStub"      # hub_snaps.snap_surface of a hub that landed on its own stub
+
+
+def site_stubs(hubs: gpd.GeoDataFrame, ground: gpd.GeoDataFrame, waterway: gpd.GeoDataFrame | None,
+               road_label: str, stub_km: float, stub_len_m: float, reach_m: float,
+               served_mode: str = "Barge", sites: gpd.GeoDataFrame | None = None,
+               site_id_col: str = "ast_facility_id") -> tuple[gpd.GeoDataFrame, pd.DataFrame]:
+    """Stub edges for the hubs that have barge fuel and no road of their own.
+
+    A hub qualifies when its delivery method includes `served_mode`, no `ground` line (the
+    snap-target layers: road, ice road) is within `stub_km` km of ANY of its member sites, and a
+    waterway vertex is within `reach_m` of its point (the barge-hub transfer reach), so the stub is
+    sure to get a landing. The stub is one `road_label` edge of `stub_len_m` metres from the hub's
+    point toward that waterway vertex (half the gap when the water is nearer than the stub is long).
+
+    "Any member site", not the hub's own point: a hub's point is the average of its sites, and a town
+    whose label also carries a few far-off sites has a point out in the country (Wrangell, 2026-11:
+    four tanks on the town's roads, four more 37 to 43 km away, the average 12 km from any road). A
+    town with tanks on a road has a road. `sites` are the consolidated sites with `site_id_col`,
+    matched through the hubs' `member_site_ids`; without them the hub's own point is used.
+
+    Returns (stub edges with `type` + geometry, a trail with one row per stub). Pure geometry, no
+    region knowledge: which hubs, and how far is "no road of its own", come from the profile.
+    """
+    import numpy as np
+    from scipy.spatial import cKDTree
+    from shapely.geometry import LineString
+
+    crs = hubs.crs if hubs is not None else None
+    empty = (gpd.GeoDataFrame({"type": []}, geometry=[], crs=crs),
+             pd.DataFrame(columns=["hub_id", "ground_km", "waterway_km", "stub_len_m"]))
+    if hubs is None or not len(hubs) or stub_km <= 0 or waterway is None or not len(waterway) \
+            or "delivery_method" not in hubs.columns:
+        return empty
+    # every waterway vertex becomes a node (connect_multimodal splits a line at each vertex), and a
+    # landing goes to the nearest waterway NODE, so the reach is measured to vertices, not to lines.
+    wpts = np.array([c[:2] for g in waterway.geometry if g is not None and not g.is_empty
+                     for ln in ([g] if g.geom_type == "LineString" else list(g.geoms)) for c in ln.coords], dtype=float)
+    if not len(wpts):
+        return empty
+    wtree = cKDTree(wpts)
+    ground = ground[ground.geometry.notna() & ~ground.geometry.is_empty] if ground is not None else None
+    gidx = ground.sindex if ground is not None and len(ground) else None
+
+    def atoms(dm) -> set:
+        if dm is None or (isinstance(dm, float) and np.isnan(dm)):
+            return set()
+        return {a.strip() for a in str(dm).replace(" and ", " or ").split(" or ") if a.strip()}
+
+    site_pt: dict = {}
+    if sites is not None and len(sites) and site_id_col in sites.columns:
+        site_pt = {str(i): g for i, g in zip(sites[site_id_col], sites.geometry) if g is not None and not g.is_empty}
+    members = hubs["member_site_ids"] if "member_site_ids" in hubs.columns else pd.Series([None] * len(hubs), index=hubs.index)
+
+    def ground_dist(pt) -> float:
+        if gidx is None:
+            return float("inf")
+        near = gidx.query(pt.buffer(stub_km * 1000.0))
+        return float(ground.geometry.iloc[near].distance(pt).min()) if len(near) else float("inf")
+
+    rows, geoms = [], []
+    for hid, dm, pt, mem in zip(hubs["hub_id"], hubs["delivery_method"], hubs.geometry, members):
+        if served_mode not in atoms(dm) or pt is None or pt.is_empty:
+            continue
+        own = [site_pt[i] for i in str(mem).split(";") if i in site_pt] if mem is not None and not pd.isna(mem) else []
+        ground_m = min(ground_dist(q) for q in (own or [pt]))
+        if ground_m <= stub_km * 1000.0:
+            continue                                      # one of its sites is on or near a road: it has one
+        water_m, wi = wtree.query([pt.x, pt.y])
+        if water_m > reach_m:
+            continue                                      # no landing could form: leave it as it is
+        length = min(float(stub_len_m), water_m / 2.0) if water_m > 0 else float(stub_len_m)
+        if length < 1.0:
+            continue                                      # the hub is already on the water vertex
+        ux, uy = ((wpts[wi][0] - pt.x) / water_m, (wpts[wi][1] - pt.y) / water_m) if water_m > 0 else (1.0, 0.0)
+        geoms.append(LineString([(pt.x, pt.y), (pt.x + ux * length, pt.y + uy * length)]))
+        rows.append({"hub_id": hid, "ground_km": None if ground_m == float("inf") else round(ground_m / 1000.0, 1),
+                     "waterway_km": round(float(water_m) / 1000.0, 1), "stub_len_m": round(length, 1)})
+    if not rows:
+        return empty
+    return (gpd.GeoDataFrame({"type": [road_label] * len(geoms)}, geometry=geoms, crs=crs),
+            pd.DataFrame(rows, columns=["hub_id", "ground_km", "waterway_km", "stub_len_m"]))
+
+
 def build_network(layers: list[str], out_prefix: str | Path, hubs: gpd.GeoDataFrame,
                   max_snap_dist: float = 0.0, snap_to_edge_tol: float = 0.0,
                   timeout_s: int = 1800) -> NetworkTables:
@@ -420,6 +504,34 @@ def build_network(layers: list[str], out_prefix: str | Path, hubs: gpd.GeoDataFr
     snap_fallback = {s.edge_label for s in line_specs if getattr(s, "snap_fallback", False)}
     snap_modes = {s.edge_label: s.mode for s in line_specs}
 
+    # 2-stub. site stubs: a barge-served hub with no road of its own gets a short stub of the road
+    #     layer at its own point (profile hubs.site_stub_km), so it lands on its own site and takes a
+    #     barge landing like any other barge hub. Appended to R's noded edges: a stub touches nothing
+    #     (no ground line within site_stub_km), so it needs no noding.
+    stub_trail = None
+    sp = load_params()
+    if float(sp.site_stub_km) > 0 and ww_specs:
+        barge_mode = ww_specs[0].mode
+        # the ground layer a barge hub's landing joins, and how far that landing reaches: the first
+        # virtual-anchor (barge hub) transfer rule between the barge mode and a snap-target layer.
+        rules = [(label_by_mode.get(t.from_mode if t.to_mode == barge_mode else t.to_mode), float(t.max_dist))
+                 for t in cfg.transfers
+                 if t.anchor in VIRTUAL_ANCHORS and barge_mode in (t.from_mode, t.to_mode)
+                 and t.from_mode in label_by_mode and t.to_mode in label_by_mode]
+        rules = [(lab, d) for lab, d in rules if lab in snap_types]
+        if rules:
+            ground_label, reach = rules[0]
+            hubs_t = hubs.to_crs(cfg.crs.target) if hubs is not None and len(hubs) else hubs
+            stubs, stub_trail = site_stubs(hubs_t, r_edges[r_edges["type"].isin(snap_types)], waterway, ground_label,
+                                           float(sp.site_stub_km), float(sp.site_stub_len_m), reach,
+                                           served_mode=barge_mode, sites=_tagged_for_contract().to_crs(cfg.crs.target))
+            if len(stubs):
+                r_edges = gpd.GeoDataFrame(pd.concat([r_edges, stubs.to_crs(r_edges.crs)], ignore_index=True),
+                                           geometry="geometry", crs=r_edges.crs)
+            print(f"[build] site stubs: {len(stubs)} {barge_mode}-served hub(s) with no ground line within "
+                  f"{sp.site_stub_km:g} km got a {sp.site_stub_len_m:g} m {ground_label} stub at their own point "
+                  f"(waterway within {reach / 1000:g} km)")
+
     # 2a. airport snap-to-road: move each air-leg airport endpoint onto its nearest road node (a SHARED
     #     node, no transfer edge) before the connect.
     for s in cfg.snaps:
@@ -459,6 +571,23 @@ def build_network(layers: list[str], out_prefix: str | Path, hubs: gpd.GeoDataFr
     if hs is not None:
         out_prefix = Path(out_prefix)
         out_prefix.parent.mkdir(parents=True, exist_ok=True)
+        if stub_trail is not None and len(stub_trail):
+            # say what the hub landed on: its own stub, not a road. A hub that drew a stub and still
+            # landed more than a metre from its own point is reported, never silently accepted.
+            on_stub = hs["hub_id"].isin(set(stub_trail["hub_id"])) & (hs["status"] == "placed")
+            hs.loc[on_stub, "snap_surface"] = SITE_STUB_SURFACE
+            stub_nodes = set(hs.loc[on_stub, "node_id"].dropna().astype(int))
+            if "snap_surface" in nodes.columns and stub_nodes:
+                nodes.loc[nodes["node_id"].astype(int).isin(stub_nodes), "snap_surface"] = SITE_STUB_SURFACE
+            placed = hs.set_index("hub_id")
+            stub_trail = stub_trail.assign(
+                status=[placed["status"].get(h) for h in stub_trail["hub_id"]],
+                snap_dist_m=[placed["snap_dist_m"].get(h) for h in stub_trail["hub_id"]])
+            stub_trail.to_csv(out_prefix.parent / "02_site_stubs.csv", index=False, lineterminator="\n")
+            astray = stub_trail[(stub_trail["status"] != "placed") | (stub_trail["snap_dist_m"].astype(float) > 1.0)]
+            if len(astray):
+                print(f"[build] WARNING: {len(astray)} site-stub hub(s) did not land on their own stub: "
+                      f"{', '.join(astray['hub_id'].astype(str))} (see 02_site_stubs.csv)")
         hs.to_csv(out_prefix.parent / "02_hub_snaps.csv", index=False, lineterminator="\n")
 
     net = NetworkTables.from_parts(nodes, edges)

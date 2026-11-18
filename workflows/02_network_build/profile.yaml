@@ -231,6 +231,12 @@ hubs:
                                         # edge at the projection (AK-DOT roads are noded as long edges; a mid-edge village is
                                         # metres from the LINE but far from any NODE). Small, so it never welds to a road it is not on
   withhold_pending_review: true         # ON/OFF: records with an open owner review item take no part in hubs (output/01_withheld.csv)
+  site_stub_km: 10                      # a Barge hub with no road or ice road within this many km of its own point has no road of
+                                        # its own (owner 2026-11-18): it gets a short stub of the road layer at its site, so it lands
+                                        # there and takes a barge landing, instead of sitting on another place's road or on a waterway
+                                        # node with no landing edge. Only where a waterway node is within the barge-hub transfer reach.
+                                        # Reported as snap_surface "SiteStub" + output/02_site_stubs.csv. 0 = off
+  site_stub_len_m: 100                  # length of that stub (toward the nearest waterway node)
 
 # The only noding knob the gold pipeline consumes: the R planar-cleaning precision (meters).
 topology:
