@@ -1,0 +1,46 @@
+kind,key,reason,date
+line,12,"Skwentna river line (Susitna/Yentna): out of the nearshore scope; riparian pixels fail the barge surface by design (river narrower than the 150 m vote); left as authored",2026-11-17
+hub,Akutan,"NWN edge 76697 was closed by the raw-NWN routing crossing shore pixels; RESOLVED by adopting the owner-curated waterway (2026-11-17) — clears at the next re-export",2026-11-17
+hub,Kodiak,"NWN edges 81416-81418 (harbour approach) was closed by the raw-NWN routing; RESOLVED by the owner-curated waterway (2026-11-17), clears at the next re-export",2026-11-17
+hub,Port Lions,"NWN edge 81404 was closed by the raw-NWN routing; RESOLVED by the owner-curated waterway (2026-11-17), clears at the next re-export",2026-11-17
+hub,Kaktovik,"NWN edge 79368 was closed by the raw-NWN routing; RESOLVED by the owner-curated waterway (2026-11-17), clears at the next re-export (rest of its path stays correctly sea-ice gated Aug-Oct)",2026-11-17
+hub,Unalaska,"NWN edge 89850 was closed by the raw-NWN routing; RESOLVED by the owner-curated waterway (2026-11-17), clears at the next re-export",2026-11-17
+hub,Point Hope,"NWN edge 89224 was closed by the raw-NWN routing; RESOLVED by the owner-curated waterway (2026-11-17), clears at the next re-export",2026-11-17
+hub,Saint Paul,"NWN edge 86803 was closed by the raw-NWN routing; RESOLVED by the owner-curated waterway (2026-11-17), clears at the next re-export",2026-11-17
+hub,Saint George,"NWN edge 80343 was closed by the raw-NWN routing; RESOLVED by the owner-curated waterway (2026-11-17), clears at the next re-export",2026-11-17
+hub,Chenega,"coastal gap: no waterway line near the village yet (in scope, awaiting a line)",2026-11-17
+hub,Deering,"coastal gap: no waterway line near the village yet (in scope, awaiting a line)",2026-11-17
+hub,Goodnews Bay,"coastal gap: no waterway line near the village yet (in scope, awaiting a line)",2026-11-17
+hub,Newtok,"coastal gap: no waterway line near the village yet (in scope, awaiting a line)",2026-11-17
+hub,Platinum,"coastal gap: no waterway line near the village yet (in scope, awaiting a line)",2026-11-17
+hub,Mekoryuk,"coastal gap: no waterway line near the village yet (in scope, awaiting a line)",2026-11-17
+hub,Quinhagak,"coastal gap: no waterway line near the village yet (in scope, awaiting a line)",2026-11-17
+hub,Kotlik,"coastal gap: no waterway line near the village yet (in scope, awaiting a line)",2026-11-17
+hub,Shaktoolik,"served by a working-tree manual line (2026-11-17); clears from the frozen-network reports at the next re-export",2026-11-17
+hub,Golovin,"served by a working-tree manual line (2026-11-17); clears at the next re-export",2026-11-17
+hub,White Mountain,"served by a working-tree manual line (2026-11-17, owner decision under the marine-water rule); clears at the next re-export",2026-11-17
+hub,Saint Michael,"served by a working-tree manual line (2026-11-17); clears at the next re-export",2026-11-17
+hub,Stebbins,"served by a working-tree manual line (2026-11-17); clears at the next re-export",2026-11-17
+hub,Unalakleet,"served by a working-tree manual line (2026-11-17); clears at the next re-export",2026-11-17
+hub,Savoonga,"served by a working-tree manual line (2026-11-17); clears at the next re-export",2026-11-17
+hub,Larsen Bay,"manual line redrawn in the working tree (2026-11-17); clears at the next re-export",2026-11-17
+hub,Karluk,"manual line redrawn in the working tree (2026-11-17); clears at the next re-export",2026-11-17
+hub,Sand Point,"manual line redrawn in the working tree (2026-11-17); clears at the next re-export",2026-11-17
+hub,Nikolski,"manual line redrawn in the working tree (2026-11-17); clears at the next re-export",2026-11-17
+hub,Kongiganak,"served by a working-tree manual line (owner yes 2026-11-17); clears at the next re-export",2026-11-17
+hub,Kwigillingok,"served by a working-tree manual line (owner yes 2026-11-17); clears at the next re-export",2026-11-17
+hub,Kipnuk,"served by a working-tree manual line (owner yes 2026-11-17); clears at the next re-export",2026-11-17
+hub,Nightmute,"served by a working-tree manual line (owner yes 2026-11-17); clears at the next re-export",2026-11-17
+hub,Chefornak,"served by a working-tree manual line (owner yes 2026-11-17); clears at the next re-export",2026-11-17
+hub,Wainwright,"sea-ice gating, open Aug-Oct — correct as it is",2026-11-17
+hub,Buckland,"owner 2026-11-17: outside the marine-water rule (marine at ~19.6 km); not assessed further",2026-11-17
+hub,Selawik,"owner 2026-11-17: outside the marine-water rule (marine at ~57.6 km); not assessed further",2026-11-17
+hub,Arctic Village,"not assessed (inland or river)",2026-11-17
+hub,Lime Village,"not assessed (inland or river)",2026-11-17
+hub,Nikolai,"not assessed (inland or river)",2026-11-17
+hub,Nunapitchuk,"not assessed (inland or river)",2026-11-17
+hub,Atmautluak,"not assessed (inland or river)",2026-11-17
+hub,Kasigluk,"not assessed (inland or river)",2026-11-17
+hub,Atqasuk,"not assessed (inland or river)",2026-11-17
+hub,Homer,"coastal gap FOUND BY the new access report 2026-11-17 (road connectivity hid it from the path audit): barge-coded, marine at ~0.5 km, but no waterway node or transfer within reach; awaiting a line",2026-11-17
+hub,Aleknagik,"not assessed (inland lake — marine at ~30 km); flagged by the new access report 2026-11-17",2026-11-17
