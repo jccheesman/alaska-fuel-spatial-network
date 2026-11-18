@@ -37,6 +37,12 @@ RAW = rp.RAW
 INTERIM = rp.INTERIM
 QC_OUT = rp.INVENTORY_QC_OUT
 QC_DERIVED = rp.INVENTORY_QC / "derived_columns.csv"
+# Owner-reviewed anchor points that take no part in the build (layer, column, value, reason, ...).
+# The landing rules are universal (every port and barge hub gets a transfer to the nearest
+# waterway node within reach); where one anchor makes a link that is not real, the fix is a
+# reviewed row here, not a change to the rule.
+EXCLUDED_ANCHORS = rp.INPUTS / "network_qc" / "excluded_anchors.csv"
+EXCLUSION_STATUSES = ("approved", "retired")
 
 
 def _derived_columns() -> list[str]:
@@ -130,6 +136,43 @@ def _select_rename_vec(g: gpd.GeoDataFrame, rename: dict) -> gpd.GeoDataFrame:
     return gpd.GeoDataFrame(out, geometry="geometry", crs=g.crs)
 
 
+def load_anchor_exclusions(path: Path | None = None) -> dict[str, list[tuple[str, str]]]:
+    """layer -> [(column, value)] of the APPROVED rows. Absent file = no exclusions.
+    A row needs a reason, a reviewer and a date; `retired` rows are kept as history and ignored."""
+    import csv
+    path = EXCLUDED_ANCHORS if path is None else path
+    out: dict[str, list[tuple[str, str]]] = {}
+    if not path.exists():
+        return out
+    with open(path, newline="", encoding="utf-8") as f:
+        for i, row in enumerate(csv.DictReader(f), start=2):
+            status = (row.get("status") or "").strip().lower()
+            if status not in EXCLUSION_STATUSES:
+                raise SystemExit(f"{path.name} line {i}: status {status!r} is not one of {EXCLUSION_STATUSES}")
+            if not all((row.get(k) or "").strip() for k in ("layer", "column", "value", "reason", "reviewer", "date")):
+                raise SystemExit(f"{path.name} line {i}: layer, column, value, reason, reviewer and date are all required")
+            if status == "approved":
+                out.setdefault(row["layer"].strip(), []).append((row["column"].strip(), row["value"].strip()))
+    return out
+
+
+def apply_anchor_exclusions(g: gpd.GeoDataFrame, layer: str, exclusions: dict | None = None) -> tuple[gpd.GeoDataFrame, list[str]]:
+    """Drop the reviewed anchors of `layer`. A row that matches nothing stops the stage: the
+    publisher renamed or removed the anchor, so the row is stale and must be retired, not ignored."""
+    exclusions = load_anchor_exclusions() if exclusions is None else exclusions
+    dropped: list[str] = []
+    for col, val in exclusions.get(layer, []):
+        if col not in g.columns:
+            raise SystemExit(f"excluded_anchors.csv: layer {layer!r} has no column {col!r} (columns: {list(g.columns)})")
+        hit = g[col].astype(str).str.strip() == val
+        if not hit.any():
+            raise SystemExit(f"excluded_anchors.csv: no {layer} anchor has {col} = {val!r}; "
+                             "retire the row (status=retired) if the publisher changed it")
+        dropped.append(f"{col}={val} ({int(hit.sum())})")
+        g = g[~hit]
+    return g.reset_index(drop=True), dropped
+
+
 def normalize_entry(e: dict) -> dict:
     src, name, kind = e["src"], e["name"], e["kind"]
     if not src.exists():
@@ -159,9 +202,14 @@ def normalize_entry(e: dict) -> dict:
             g = g[g.geometry.geom_type.isin(["Point", "MultiPoint"])]
         g = _select_rename_vec(g, e["rename"]).reset_index(drop=True)
 
+    excluded: list[str] = []
+    if kind == "point":
+        g, excluded = apply_anchor_exclusions(g, name)
+        if excluded:
+            print(f"   {name}: excluded by inputs/network_qc/excluded_anchors.csv: {', '.join(excluded)}")
     out = INTERIM / f"{name}.gpkg"
     g.to_file(out, driver="GPKG")
-    return {**e, "rows": len(g), "out": out, "src_crs": src_crs, "columns": list(g.columns)}
+    return {**e, "rows": len(g), "out": out, "src_crs": src_crs, "columns": list(g.columns), "excluded": excluded}
 
 
 def _refresh_manifest_rows(rows: list[dict]) -> None:
@@ -204,6 +252,15 @@ def main(argv: list[str] | None = None) -> None:
             print(f"    ! {FACILITIES_HINT}")
         rows.append(r)
     if args.only:
+        # A layer asked for by name is one whose owner-edited inputs must reach this build. If its raw
+        # source is gone while an earlier data/interim copy is still there, the build would quietly use
+        # that copy, without the reviewed exclusions. Stop instead.
+        stale = [r["name"] for r in rows if not r["out"] and r["name"] != "facilities"
+                 and load_anchor_exclusions().get(r["name"])]
+        if stale:
+            raise SystemExit(f"--only {' '.join(stale)}: the raw source is missing, so the reviewed exclusions in "
+                             f"{EXCLUDED_ANCHORS.relative_to(ROOT)} cannot be applied; restore data/raw "
+                             "(tools/extract_inputs.py) before building")
         _refresh_manifest_rows(rows)
         print(f"\nrefreshed {', '.join(args.only)} in {INTERIM.relative_to(ROOT)}/")
         return

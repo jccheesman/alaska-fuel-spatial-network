@@ -25,7 +25,25 @@ from git with `git show <commit>:final_network/network_joined_edges.zip`.
 
 ## Unreleased — takes effect at the next export
 
-Nothing pending.
+Three changes found while the harness adopted the 2026-11-18 network (branch `barge-landing-fixes`):
+
+- **A barge landing at a shared road-and-airport node is a road landing.** Airports are snapped onto road
+  nodes, so the node carries Road and Air; the connector namer took the first two of three modes and typed four
+  landings `BargeAirTransfer` (Gambell, Elim, Kwigillingok, Kongiganak). It now leaves out a carrier that is
+  snapped onto another mode's node. Exactly those four edges become `BargeRoadTransfer`; their cost is unchanged.
+  `EXPECTED` moves with the rebuild (BargeRoadTransfer +4, BargeAirTransfer gone).
+- **Inventory correction, facility 56** (owner, 2026-11-18): "Weaver Bros., Inc. Anchorage Terminal", 2230 Spar
+  Avenue, was published at 66.5 N, 161.03 W. That one record pulled the Anchorage hub 13 km north-west, onto the
+  Point MacKenzie side of Knik Arm, so every route from Anchorage began by crossing the Port of Anchorage's dock
+  on two landing edges. Corrected to the address; workflow 00 republished (one record changes; its AEA region
+  becomes Railbelt). No check had flagged it: Anchorage has no city or census-place boundary, so its 76 records
+  are `untested` (303 records statewide are).
+- **Port MacKenzie is excluded as a barge anchor** (owner, 2026-11-18; new reviewed table
+  `inputs/network_qc/excluded_anchors.csv`, applied by `00_normalize_raw.py`): its nearest waterway node is
+  Anchorage's dock across Knik Arm, so its landing joined the two shores without a barge edge. `ports` is now
+  re-normalized on every build.
+
+Not done here: the rebuild, the export and the workflow 03 rerun (owner's machine).
 
 ## 2026-11-18 — owner-curated waterway + nearshore barge access (`8614dd1`)
 

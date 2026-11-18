@@ -64,7 +64,10 @@ fi
 # this a rebuild over an existing data/interim silently used the inventory of the build that
 # created it (2026-11-16: a re-export after an owner review came out byte-identical). Cheap: one
 # CSV read; the downloaded map layers stay gated.
-run_step "00_normalize_raw (facilities)" "$PY" "$HERE/00_normalize_raw.py" --only facilities
+# The ports layer is re-normalized every build for the same reason: its reviewed exclusions
+# (inputs/network_qc/excluded_anchors.csv) are owner-edited, and a row added after data/interim
+# exists would otherwise never reach the build.
+run_step "00_normalize_raw (facilities, ports)" "$PY" "$HERE/00_normalize_raw.py" --only facilities ports
 
 # Manual connections: user-authored line layer(s) that stitch disconnected hubs into the
 # network. Re-split EVERY build (outside the prep gate above) so edits to the shapefile take

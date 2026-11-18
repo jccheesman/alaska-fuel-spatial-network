@@ -168,8 +168,10 @@ def stage_02_network_build(py: str, profile: str) -> None:
     # The facility inventory is OWNER-EDITED (workflow 00 republishes it), so re-normalize it
     # EVERY build, outside the prep gate (2026-11-16: a rebuild over an existing data/interim
     # used the previous build's inventory and re-exported a byte-identical network).
-    run_step("00_normalize_raw (facilities)", py, str(here / "00_normalize_raw.py"),
-             "--only", "facilities", filt=FILT_02)
+    # The ports layer too: its reviewed exclusions (inputs/network_qc/excluded_anchors.csv) are
+    # owner-edited and must reach a build over an existing data/interim.
+    run_step("00_normalize_raw (facilities, ports)", py, str(here / "00_normalize_raw.py"),
+             "--only", "facilities", "ports", filt=FILT_02)
 
     # Manual connections: re-split EVERY build (outside the prep gate above) so edits
     # to the shapefile take effect. Optional — skipped cleanly when absent.

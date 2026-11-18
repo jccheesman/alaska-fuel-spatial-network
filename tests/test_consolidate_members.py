@@ -74,3 +74,59 @@ def test_normalize_raw_reads_published_table_with_profile_columns(tmp_path):
     df = pd.read_csv(r["out"], dtype=str)
     assert r["rows"] == len(pd.read_csv(CLEAN[-1], dtype=str))             # one row per published record
     assert not {"phone", "email", "contact"} & {c.lower() for c in df.columns}
+
+
+# --------------------------------------------------------------------------
+# reviewed anchor exclusions (inputs/network_qc/excluded_anchors.csv)
+# --------------------------------------------------------------------------
+def _normalize_module():
+    spec = importlib.util.spec_from_file_location("nr_excl", rp.WORKFLOWS / "02_network_build" / "00_normalize_raw.py")
+    nr = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(nr)
+    return nr
+
+
+def test_anchor_exclusion_drops_the_reviewed_port_and_only_it(tmp_path, monkeypatch):
+    import geopandas as gpd
+    from shapely.geometry import Point
+
+    nr = _normalize_module()
+    src = tmp_path / "ports.geojson"
+    gpd.GeoDataFrame({"Facility": ["Port of Anchorage", "Port MacKenzie", "Nome Harbor"], "Location": ["a", "b", "c"]},
+                     geometry=[Point(-149.88, 61.24), Point(-149.92, 61.27), Point(-165.4, 64.5)], crs=4326).to_file(src, driver="GeoJSON")
+    table = tmp_path / "excluded_anchors.csv"
+    table.write_text("layer,column,value,reason,evidence,reviewer,date,status\n"
+                     "ports,facility,Port MacKenzie,no barge landing,owner,JC,2026-11-18,approved\n"
+                     "ports,facility,Nome Harbor,was wrong,owner,JC,2026-11-18,retired\n")
+    monkeypatch.setattr(nr, "INTERIM", tmp_path)
+    monkeypatch.setattr(nr, "EXCLUDED_ANCHORS", table)
+    r = nr.normalize_entry({"name": "ports", "kind": "point", "status": "used", "src": src,
+                            "rename": {"Location": "location", "Facility": "facility"}})
+    kept = gpd.read_file(r["out"])
+    assert sorted(kept["facility"]) == ["Nome Harbor", "Port of Anchorage"]      # the retired row excludes nothing
+    assert r["rows"] == 2 and r["excluded"] == ["facility=Port MacKenzie (1)"]
+
+
+def test_a_stale_anchor_exclusion_stops_the_stage(tmp_path, monkeypatch):
+    import geopandas as gpd
+    import pytest
+    from shapely.geometry import Point
+
+    nr = _normalize_module()
+    g = gpd.GeoDataFrame({"facility": ["Port of Anchorage"]}, geometry=[Point(0, 0)], crs=3338)
+    with pytest.raises(SystemExit, match="retire the row"):
+        nr.apply_anchor_exclusions(g, "ports", {"ports": [("facility", "Port MacKenzie")]})
+    with pytest.raises(SystemExit, match="no column"):
+        nr.apply_anchor_exclusions(g, "ports", {"ports": [("name", "x")]})
+    bad = tmp_path / "excluded_anchors.csv"
+    bad.write_text("layer,column,value,reason,evidence,reviewer,date,status\nports,facility,X,why,ev,,2026-11-18,approved\n")
+    with pytest.raises(SystemExit, match="required"):
+        nr.load_anchor_exclusions(bad)
+
+
+def test_the_tracked_anchor_exclusions_are_valid_and_name_real_layers():
+    nr = _normalize_module()
+    excl = nr.load_anchor_exclusions()
+    points = {e["name"] for e in nr.SPEC if e["kind"] == "point"}
+    assert set(excl) <= points, f"excluded_anchors.csv names layers that are not point layers: {set(excl) - points}"
+    assert ("facility", "Port MacKenzie") in excl.get("ports", [])
