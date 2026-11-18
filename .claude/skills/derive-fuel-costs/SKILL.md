@@ -48,15 +48,22 @@ before proceeding.
    the derivation is not ready. Record point, range, confidence, and what
    the figure includes/excludes.
 
-5. **Transfer fees bill only uncounted handling.** Fees are atomic
-   modal-boundary crossings, storage-free (no storage/drum pseudo-modes
-   until hub storage becomes a graph node in Phase 6). The Barge, Plane,
-   and IceRoad per-mile rates are ALL-IN (each already carries its own
-   side's handling); the Road rate is CARRIAGE-ONLY. So a fee bills only
-   the road-carriage-side handling — including an all-in side's handling
-   in a fee is a double-count (the bug the 2026-07-28 re-derivation
-   removed). Where no road mode is incident, the fee collapses to a thin
-   facility-interface residual.
+5. **Transfer fees bill only uncounted handling; no handling is billed twice.**
+   Fees are atomic modal-boundary crossings, storage-free (no storage/drum
+   pseudo-modes until hub storage becomes a graph node in Phase 6). Since the
+   2026-11 re-derivation the split is:
+   - `Barge` (ocean line-haul) is TRANSPORTATION ONLY: vessel time alongside is
+     in it, port and terminal handling are not.
+   - `BargeRiver` is carriage only; its fixed part per delivery is the
+     `river_village` landing fee.
+   - A barge landing is priced by place type (`LANDING_CLASS_FEES`): road-system
+     port, hub or dock-served port, coastal village, river village. The village
+     classes are delivery charges that already include discharge at the village
+     header, so no separate village fee is added; hub discharge is billed once.
+   - Plane and IceRoad are ALL-IN (each carries its own side's handling); Road is
+     CARRIAGE-ONLY, so road-incident fees bill the road-carriage side.
+   A fixed part fitted from delivered prices already contains landing handling:
+   never add a fee on top of it.
 
 6. **No costless edge.** Every modal boundary that can appear as a Transfer
    edge must key a fee entry (either key order; never both).
@@ -74,11 +81,36 @@ before proceeding.
    multiplier or vice versa. Per-mode operational factors (fuel price,
    labor, fleet) are cost; environmental traversability is friction.
 
+9. **Every rate carries an evidence status.** `RATE_STATUS` and the `status`
+   key of each landing class say `derived` (three or more independent methods
+   within ~3×, inputs checked in documents), `provisional` (evidence short of
+   that; carried with a wide range) or `assumed` (no tariff, contract or
+   invoice; earlier value kept). A figure that is not ready still gets a number;
+   the status says how far to trust it. Never raise a status without the
+   evidence, and report results that rest on a provisional or assumed figure
+   with the range.
+
+10. **The barge rate is split by water class, never blended.** Waterway edges
+   take the ocean or the river rate from `edge_water_class` (workflow 03 stage
+   05, which now runs before stage 04). A single blended barge rate above about
+   0.0005 routes Nome's fuel down the Yukon; do not reintroduce one.
+
 ## Where the canonical values live
 
 - `source_scripts/friction_surface/friction_costs.py`
-  - `BASELINE_RATES_PER_GALLON_MILE` + `BASELINE_RATE_RANGES` — the four
-    modality rates and their documented bands
+  - `BASELINE_RATES_PER_GALLON_MILE` + `BASELINE_RATE_RANGES` + `RATE_STATUS` —
+    the modality rates (`Road`, `Barge` = ocean line-haul, `BargeRiver`, `Plane`,
+    `IceRoad`), their documented bands and evidence status; `RATE_VARIANTS`
+    declares rate keys that price one mode on different surfaces
+  - `LANDING_CLASS_FEES` — the barge landing fee by place type
+    (`total`/`counts`/`range`/`status`); `infer_transfer_fees(edges,
+    landing_class)` applies it, falling back to the `("barge","overland")` entry
+- `source_scripts/fuel_network/landings.py` — assigns each barge landing edge
+  its class (reviewed table, then the road-system rule, then the river share at
+  the water node); `inputs/network_qc/landing_classes.csv` is the reviewed table
+  (owner-approved rows; one evidence line and source per place)
+- `source_scripts/fuel_network/graph.py` — `waterway_rates()` and
+  `build_edge_costs()` consume all of the above
   - `INTERMODAL_TRANSFER_FEES` — one entry per modal boundary
     (`total`/`counts`/`range`); routing reads only `total`
   - `VEHICLE_MILE_RATES_REFERENCE` — raw carrier-tariff inputs (traceability
@@ -94,6 +126,17 @@ before proceeding.
   (the old verbatim copy there was deleted in the two-repo merge)
 
 ## Source registry
+
+**Current record: `docs/cost_derivation/2026-11/`** (the 2026-11 re-derivation):
+`README.md` (what is applied and how), `SUMMARY.md`, one `addendum_*.md` per
+segment with a derived-versus-assumed table for every input,
+`supplement_*_2026-11-18.md`, `SOURCES.md` (every source: file, publisher, date,
+link and its basis, where cited), `errata.md`, `DECISION_LOG.md`,
+`CONVENTIONS.md`, `index_basis_2026-11-17.md`. The third-party source documents
+and the working files are in the private harness repository
+(`cost_derivation_resources/` on branch `cost-sources`;
+`blind_derivations/working_2026-11-17/`). The earlier chapters, described next,
+are superseded where the 2026-11 record says so (`errata.md`).
 
 Derivation documents (the paper trail every value must trace to). The
 `supplementary/` folder was removed from the working tree on 2026-08-14 and
@@ -170,10 +213,12 @@ provenance:
    If the selftest fails because the documented method inputs changed,
    update its method constants to the new documented derivation — never
    loosen a tolerance to make a stale derivation "pass".
-6. **Update the derivation record**: append a dated addendum to the
-   relevant `supplementary/cost-derivations/` chapter and rebuild the PDF.
+6. **Update the derivation record**: add a dated addendum or supplement under
+   `docs/cost_derivation/` (status, result, methods, a derived-versus-assumed
+   table for every input, scope, gaps), add any new document to `SOURCES.md`,
+   and say in the folder's `README.md` what was applied.
 7. **Refresh downstream artifacts**: rerun
-   `outputs/tables/make_modality_cost_table.py` (workbook),
+   `figure_scripts/tables/build_combined_friction_tables.py` (workbook; Table 3 and its sources panel),
    `workflows/03_multimodal_join/04_assemble_weighted_graph.py` (edge_costs), and `plot_cost_equation.py`
    if the cost-equation figure shows the changed value.
 8. **Validate against revealed prices**: sanity-check a modeled route

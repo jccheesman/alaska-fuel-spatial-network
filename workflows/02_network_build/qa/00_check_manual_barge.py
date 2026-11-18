@@ -34,7 +34,7 @@ from shapely.geometry import LineString
 
 import repo_paths as rp
 from fuel_network.weights import SAMPLE_SPACING_M, build_sample_arrays, edge_weighted_stats, sample_raster
-from friction_surface.friction_config import FRICTION_NODATA, WATER_CLASS_MARINE
+from friction_surface.friction_config import WATER_CLASS_MARINE
 from friction_surface.friction_paths import FRICTION_OUTPUT_DIR, WATER_CLASS_TIF
 
 GATE_EXIT = 3

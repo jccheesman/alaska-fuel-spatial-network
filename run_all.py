@@ -253,14 +253,19 @@ def stage_03_multimodal_join(py: str) -> None:
         raise StageSkip()
 
     run_step("03_weight_network_edges", py, str(here / "03_weight_network_edges.py"))
+
+    # Stage 04 prices each Waterway edge as ocean or river barge by its marine/river
+    # class and each barge landing by its landing class (2026-11 cost split), so the
+    # water-class label and stage 05 are now REQUIRED before stage 04.
+    if not (ROOT / "outputs/01_friction_build/water_class_150m.tif").is_file():
+        out("GATE: water-class label missing (outputs/01_friction_build/water_class_150m.tif).")
+        out("  Stage 04 needs the marine/river class of every Waterway edge to price ocean and river barge.")
+        out(f"  Build it: {py} workflows/01_friction_build/04_build_water_class.py (needs the friction inputs).")
+        out("  Stopping after the weighting stage (edge_month_weights written; edge_costs NOT updated).")
+        raise StageSkip()
+    run_step("05_edge_water_class", py, str(here / "05_edge_water_class.py"))
     run_step("04_assemble_weighted_graph", py, str(here / "04_assemble_weighted_graph.py"))
 
-    # Marine/river class per Waterway edge (needs workflow 01's water-class label).
-    if (ROOT / "outputs/01_friction_build/water_class_150m.tif").is_file():
-        run_step("05_edge_water_class", py, str(here / "05_edge_water_class.py"))
-    else:
-        out("SKIP 05_edge_water_class: water_class_150m.tif absent "
-            "(run workflow 01's 04_build_water_class.py).")
     run_step("06_qa_barge_passability", py, str(here / "06_qa_barge_passability.py"))
     out("Done. Tables in outputs/fuel_network.duckdb.")
 

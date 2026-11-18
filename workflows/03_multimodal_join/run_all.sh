@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 # Workflow 03 — join network + friction into weighted multimodal edges.
 # Stages 01-02 run from COMMITTED data alone (the frozen final_network zips);
-# stages 03-04 additionally need the friction stack from workflow 01.
+# stages 03-06 additionally need the friction stack from workflow 01, and stage 04
+# needs workflow 01's water-class label (stage 05 runs BEFORE stage 04).
 # Usage:  bash workflows/03_multimodal_join/run_all.sh
 set -e
 HERE="$(cd "$(dirname "$0")" && pwd)"
@@ -23,15 +24,20 @@ if [ ! -f outputs/01_friction_build/friction_stack/road_base.tif ]; then
 fi
 
 run_step "03_weight_network_edges"    "$PY" "$HERE/03_weight_network_edges.py"
+
+# Stage 04 prices each Waterway edge as ocean or river barge by its marine/river
+# class and each barge landing by its landing class (2026-11 cost split), so the
+# water-class label and stage 05 are now REQUIRED before stage 04.
+if [ ! -f outputs/01_friction_build/water_class_150m.tif ]; then
+  echo "GATE: water-class label missing (outputs/01_friction_build/water_class_150m.tif)."
+  echo "  Stage 04 needs the marine/river class of every Waterway edge to price ocean and river barge."
+  echo "  Build it: $PY workflows/01_friction_build/04_build_water_class.py (needs the friction inputs)."
+  echo "  Stopping after the weighting stage (edge_month_weights written; edge_costs NOT updated)."
+  exit "$GATE_EXIT"
+fi
+run_step "05_edge_water_class"        "$PY" "$HERE/05_edge_water_class.py"
 run_step "04_assemble_weighted_graph" "$PY" "$HERE/04_assemble_weighted_graph.py"
 
-# Marine/river class per Waterway edge (needs workflow 01's water-class label;
-# guarded here so a stack-only machine still completes the weighting above).
-if [ -f outputs/01_friction_build/water_class_150m.tif ]; then
-  run_step "05_edge_water_class" "$PY" "$HERE/05_edge_water_class.py"
-else
-  echo "SKIP 05_edge_water_class: water_class_150m.tif absent (run workflow 01's 04_build_water_class.py)."
-fi
 # Barge passability by hub — the check that would have caught Kodiak/Unalaska.
 # A NEW no-summer-path barge hub fails; known ones live in
 # inputs/network_qc/accepted_barge_exceptions.csv.

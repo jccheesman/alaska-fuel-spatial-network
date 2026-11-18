@@ -9,16 +9,25 @@ environmental, every dollar comes from friction_costs):
 
     line-haul:  cost_per_gallon = (length_m / METERS_PER_MILE)
                                   x avg_friction
-                                  x BASELINE_RATES_PER_GALLON_MILE[mode]
+                                  x BASELINE_RATES_PER_GALLON_MILE[rate key]
+                Waterway edges take the rate of their marine / river class
+                (edge_water_class, workflow 03 stage 05): marine -> "Barge"
+                (ocean line-haul), river -> "BargeRiver", a mixed edge the
+                length-weighted blend. Every other mode uses its mode rate.
     Transfer:   cost_per_gallon = INTERMODAL_TRANSFER_FEES[(mode_a, mode_b)]
-                                  ["total"]  (per gallon, distance-free)
+                                  ["total"]  (per gallon, distance-free);
+                barge landings (BargeRoadTransfer, BargeAirTransfer) are priced
+                by LANDING CLASS instead (LANDING_CLASS_FEES: road_port, hub,
+                coastal_village, river_village; fuel_network.landings).
 
-Transfer fee keying: a Transfer edge's (mode_a, mode_b) is inferred from
-the line-haul edge classes incident to its endpoints (Waterway->barge,
-Road/Weld/Join->overland, IceRoad/IceRoadConnector->ice_road, Air->plane).
-Current inventory: 205 barge x overland + 8 barge x ice_road — both keyed
-in INTERMODAL_TRANSFER_FEES. An unkeyable pair is a hard error (the
-edge-cost completeness rule: no edge type is costless).
+Transfer fee keying: a Transfer edge's (mode_a, mode_b) is named by its edge
+class (BargeRoadTransfer -> barge x overland ...); a legacy generic Transfer is
+inferred from the line-haul classes incident to its endpoints. An unkeyable pair
+is a hard error (the edge-cost completeness rule: no edge type is costless).
+
+Stage order (workflow 03): 03 weights -> 05 edge_water_class -> 04 this stage.
+build_edge_costs needs the edge_water_class table and fails with a clear message
+without it; pass require_water_class=False only for synthetic networks.
 
 Output table:
 
@@ -55,6 +64,7 @@ import pandas as pd
 # the canonical home for every dollar (audited by the derive-fuel-costs
 # skill). The verbatim copies that used to sit here are deleted so the two
 # implementations can never drift.
+from fuel_network.landings import compute_landing_classes, summary as landing_summary
 from friction_surface.friction_costs import (
     BASELINE_RATES_PER_GALLON_MILE,
     FEE_MODE,  # noqa: F401 (re-exported for callers that imported it from here)
@@ -73,11 +83,35 @@ DB_PATH = rp.DUCKDB
 # edge_costs
 # ---------------------------------------------------------------------------
 
-def build_edge_costs(db_path: str | Path = DB_PATH) -> pd.DataFrame:
+def waterway_rates(marine_frac: pd.Series, river_frac: pd.Series) -> pd.Series:
+    """Per-gallon-mile rate of Waterway edges from their marine / river share.
+
+    marine -> BASELINE_RATES["Barge"] (ocean line-haul), river -> ["BargeRiver"], a mixed
+    edge the length-weighted blend. An edge with no water samples (both shares NaN) is
+    priced as marine and counted by the caller.
+    """
+    ocean = BASELINE_RATES_PER_GALLON_MILE["Barge"]
+    river = BASELINE_RATES_PER_GALLON_MILE["BargeRiver"]
+    m = marine_frac.fillna(1.0).clip(0, 1)
+    r = river_frac.fillna(0.0).clip(0, 1)
+    total = (m + r).where((m + r) > 0, 1.0)
+    return (m * ocean + r * river) / total
+
+
+def build_edge_costs(db_path: str | Path = DB_PATH, landings: pd.DataFrame | None = None,
+                     require_water_class: bool = True) -> pd.DataFrame:
     """Compute the edge_costs frame (one row per edge-month).
 
-    Line-haul rows use the Phase 2 weights (avg_friction, passable);
-    Transfer rows get the inferred per-gallon fee, all months passable.
+    Line-haul rows use the Phase 2 weights (avg_friction, passable); Waterway rows take the
+    marine / river rate of their edge_water_class. Transfer rows get the inferred per-gallon
+    fee (barge landings by landing class), all months passable.
+
+    Args:
+        landings: edge_id -> landing class frame from fuel_network.landings (computed from the
+            database when None).
+        require_water_class: when False and edge_water_class is absent, Waterway edges are all
+            priced at the ocean rate and barge landings use the single-key fallback fee.
+            For synthetic networks only; the production stage requires the table.
     """
     con = duckdb.connect(str(db_path), read_only=True)
     try:
@@ -90,16 +124,41 @@ def build_edge_costs(db_path: str | Path = DB_PATH) -> pd.DataFrame:
         edges = con.execute("""
             SELECT edge_id, from_node, to_node, edge_class FROM network_edges
         """).df()
+        have = {r[0] for r in con.execute("SELECT table_name FROM information_schema.tables").fetchall()}
+        water = (con.execute("SELECT edge_id, marine_frac, river_frac FROM edge_water_class").df()
+                 if "edge_water_class" in have else None)
     finally:
         con.close()
 
+    if water is None and require_water_class:
+        raise RuntimeError(
+            "edge_water_class is missing from the database: the barge cost split needs the marine / "
+            "river class of every Waterway edge. Run workflows/03_multimodal_join/05_edge_water_class.py "
+            "(needs workflow 01's water_class_150m.tif) before this stage.")
+
     rates = df["mode"].map(BASELINE_RATES_PER_GALLON_MILE)
+    is_water = df["edge_class"] == "Waterway"
+    if water is not None:
+        wc = df.loc[is_water, ["edge_id"]].merge(water, on="edge_id", how="left")
+        wr = waterway_rates(wc["marine_frac"], wc["river_frac"])
+        rates.loc[is_water] = wr.to_numpy()
+        wedges = df.loc[is_water, "edge_id"].drop_duplicates()
+        classified = water.loc[water["marine_frac"].notna() | water["river_frac"].notna(), "edge_id"]
+        missing = int((~wedges.isin(classified)).sum())
+        logger.info("waterway rates: %d Waterway edges; %d with no water samples priced as marine; "
+                    "mean rate %.5f", len(wedges), missing, float(wr.mean()))
     df["cost_per_gallon"] = (
         (df["length_m"] / METERS_PER_MILE) * df["avg_friction"] * rates
     )
 
     is_transfer = df["edge_class"].str.endswith("Transfer")
-    fee_by_edge = infer_transfer_fees(edges)
+    landing_class = None
+    if water is not None:
+        if landings is None:
+            landings = compute_landing_classes(db_path)
+        landing_class = landings.set_index("edge_id")["landing_class"].to_dict()
+        logger.info(landing_summary(landings))
+    fee_by_edge = infer_transfer_fees(edges, landing_class)
     df.loc[is_transfer, "cost_per_gallon"] = (
         df.loc[is_transfer, "edge_id"].map(fee_by_edge)
     )
@@ -123,6 +182,16 @@ def build_edge_costs(db_path: str | Path = DB_PATH) -> pd.DataFrame:
             )
 
     return df[["edge_id", "month", "cost_per_gallon", "passable"]]
+
+
+def write_landing_classes(landings: pd.DataFrame, db_path: str | Path = DB_PATH) -> None:
+    """Record which landing class priced each barge landing (audit table edge_landing_class)."""
+    con = duckdb.connect(str(db_path))
+    try:
+        con.register("landings_df", landings)
+        con.execute("CREATE OR REPLACE TABLE edge_landing_class AS SELECT * FROM landings_df")
+    finally:
+        con.close()
 
 
 def write_edge_costs(df: pd.DataFrame, db_path: str | Path = DB_PATH) -> None:
@@ -317,12 +386,14 @@ def main() -> None:
 
     logging.basicConfig(level=logging.INFO, format="%(levelname)s %(message)s")
 
-    df = build_edge_costs(args.db)
+    landings = compute_landing_classes(args.db)
+    df = build_edge_costs(args.db, landings=landings)
     qa_report(df, args.db)
     if args.dry_run:
         logger.info("dry run: skipping DuckDB write (%d rows computed)", len(df))
         return
     write_edge_costs(df, args.db)
+    write_landing_classes(landings, args.db)
 
     if args.smoke_dijkstra:
         g = load_weighted_multigraph(args.db)
