@@ -30,9 +30,11 @@ FILT='Axes3D|warnings.warn|user_version|QStandardPaths|Application path'
 # The six public layers of data/raw are downloads (DATA.md section 4.1); the ice-road
 # layer is placed by tools/extract_inputs.py. Gate on the downloads by name so a
 # partially staged folder is a clean skip, not a crash inside the build.
+# (The waterway is NOT in this list since 2026-11-17: 01_prep_waterway reads the
+# owner-curated layer from the committed data_for_network_build.zip, not the raw
+# NWN download. The raw NWN stays under data/raw as the upstream reference only.)
 RAW_DOWNLOADS=(
   data/raw/connectivity/road/Roads_AKDOT/Roads_AKDOT.shp
-  data/raw/connectivity/barge/NWN_Waterway_Network_Lines/Waterway_Network.shp
   data/raw/anchor_points/Ports_and_Harbors.geojson
   data/raw/boundaries/tiger_places/tl_2022_02_place.shp
   data/raw/boundaries/borough_census_area/Alaska_Borough_and_Census_Area_Boundaries.shp
@@ -41,7 +43,7 @@ RAW_DOWNLOADS=(
 missing=()
 for f in "${RAW_DOWNLOADS[@]}"; do [ -f "$f" ] || missing+=("$f"); done
 if [ "${#missing[@]}" -gt 0 ]; then
-  gate "data/raw is missing ${#missing[@]} of the 6 public downloads:" \
+  gate "data/raw is missing ${#missing[@]} of the public downloads:" \
        "${missing[@]}" \
        "Download each from its source (DATA.md section 4.1 lists the file and the link), and run" \
        "$PY tools/extract_inputs.py once for the ice-road layer."
@@ -70,6 +72,16 @@ run_step "00_normalize_raw (facilities)" "$PY" "$HERE/00_normalize_raw.py" --onl
 MANUAL_SHP="inputs/mannual_connections/mannual_connections.shp"
 if [ -f "$MANUAL_SHP" ]; then
   echo; echo "######## 3. prep manual connections (split by mode) ########"
+  # BEFORE the split: every authored Barge line must sit on valid MARINE barge
+  # pixels in July (qa/00; known exceptions live in
+  # inputs/network_qc/accepted_barge_exceptions.csv). Needs the friction stack,
+  # so it is guarded here like the other optional inputs — the build itself
+  # does not need the rasters (the script's own gate covers standalone runs).
+  if [ -f outputs/01_friction_build/friction_stack/barge_07.tif ]; then
+    run_step "qa/00_check_manual_barge" "$PY" "$HERE/qa/00_check_manual_barge.py"
+  else
+    echo "SKIP qa/00_check_manual_barge: friction stack absent (fetch or build workflow 01)."
+  fi
   run_step "03_prep_manual_connections" "$PY" "$HERE/03_prep_manual_connections.py"
 else
   echo "SKIP 03_prep_manual_connections: no $MANUAL_SHP (optional user layer)."
@@ -80,6 +92,10 @@ run_step "04_build_network" "$PY" "$HERE/04_build_network.py" "$PROFILE"
 
 echo; echo "######## 5. verify the expected connected network ########"
 run_step "05_verify_north_slope" "$PY" "$HERE/05_verify_north_slope.py"
+# Topology-only barge-hub access report (no rasters): every barge-coded hub
+# needs a barge transfer or a waterway node within the profile reach; a NEW
+# unreachable hub fails the stage, known ones are listed in the exceptions CSV.
+run_step "qa/06_barge_hub_access" "$PY" "$HERE/qa/06_barge_hub_access.py"
 
 echo; echo "######## 6. QGIS projects + components + figures ########"
 run_step "viz/export_qgis" "$PY" "$HERE/viz/export_qgis.py"

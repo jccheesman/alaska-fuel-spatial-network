@@ -1,15 +1,28 @@
 #!/usr/bin/env python3
 """Build the full Alaska waterway line layer for the mmnet build.
 
-The build's old waterway input was only a facility-bbox CLIP of the National Waterway Network
-(282 edges) — too sparse to connect the coastal/Arctic communities that reach the network only by
-sea. This script extracts the REAL Alaska marine network from the raw NWN (Gulf of Alaska, Cook
-Inlet, Bering Sea, Arctic Ocean spines) and writes it as the `waterways` layer the profile reads,
-so the Stage-03 assembler can connect road + ice to the giant BY SEA (ports + barge hubs) and join
-the North Slope at its coastal barge landing.
+SOURCE (owner 2026-11-17): the OWNER-CURATED NWN derivative
+`inputs/data_for_network_build/water_networks/waterways_network_ak_albers.shp`
+— converted and edited by the owner in ArcGIS Pro so that every route avoids
+land pixels and flows on water (harbour approaches round the headlands instead
+of clipping docks/islands: Kodiak channel, the Akutan line that the published
+NWN runs straight across Akutan Island, the Bering Sea Access family, Point
+Hope, Kaktovik). This is also the file the barge corridor masks are rasterised
+from (`friction_paths.py` "waterways"), so the network and the friction
+surface share ONE waterway geometry by construction.
 
-The AK-only filter (lat/lon bounds on the raw 4269 geometries) mirrors the validated waterway
-research step. Output is one connected marine network (~316 lines, ~31,903 km) in EPSG:3338.
+History: the build's first waterway input was a facility-bbox CLIP of the NWN
+(282 edges, too sparse); 2026-09 replaced it with a full-Alaska extraction of
+the RAW NWN download; 2026-11-17 the extraction was repointed at the owner's
+curated layer after a measured comparison (land-crossing 0-0.8% vs 1.5-2.3% of
+samples at the eight closed harbour approaches; all 14 all-year-closed NWN
+edges clean on the existing barge surface; full rebuild PASS). The raw NWN
+download stays under data/raw as the upstream reference and is no longer read
+by the build.
+
+The AK-only filter (lat/lon bounds, mirrored from the validated waterway
+research step) runs on 4269 geometries, so the curated 3338 layer round-trips
+through 4269 for the filter. Output ~315 lines, ~30,617 km in EPSG:3338.
 
 Outputs (regenerable; data/interim is gitignored):
     data/interim/ak_waterway.gpkg   — full Alaska waterway lines (EPSG:3338)
@@ -26,7 +39,8 @@ import networkx as nx
 
 import repo_paths as rp
 ROOT = rp.ROOT
-RAW = rp.RAW / "connectivity/barge/NWN_Waterway_Network_Lines/Waterway_Network.shp"
+# The owner-curated waterway (see module docstring). NOT the raw NWN download.
+CURATED = rp.NETWORK_DATA / "water_networks" / "waterways_network_ak_albers.shp"
 OUT = rp.INTERIM / "ak_waterway.gpkg"
 
 TARGET = 3338            # NAD83 / Alaska Albers (meters) — the profile's crs.target
@@ -71,9 +85,13 @@ def tag_components(gdf: gpd.GeoDataFrame, tol: float = NODE_TOL) -> gpd.GeoDataF
 
 
 def main() -> None:
-    if not RAW.exists():
-        raise SystemExit(f"raw NWN not found: {RAW}")
-    raw = gpd.read_file(RAW)
+    if not CURATED.exists():
+        raise SystemExit(
+            f"curated waterway not found: {CURATED} "
+            "(extract inputs/data_for_network_build.zip: python tools/extract_inputs.py)")
+    cur = gpd.read_file(CURATED)
+    # the AK filter works on lon/lat bounds; the curated layer is 3338 already
+    raw = cur.to_crs(4269)
     ak = ak_only(raw)
     ak, n_comps = tag_components(ak)
     OUT.parent.mkdir(parents=True, exist_ok=True)

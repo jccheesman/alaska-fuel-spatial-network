@@ -196,6 +196,36 @@ ICEROAD_TIME_PENALTY = 2.0
 CORRIDOR_BUFFER_M = 75.0            # half-pixel buffer on corridor LineStrings (ice_road, road, waterway) for 150 m grid connectivity
 
 # ---------------------------------------------------------------------------
+# Marine / river water-class label (water_class_150m.tif)
+# ---------------------------------------------------------------------------
+# One generic label over every water pixel of the project grid: marine (water
+# connected to the open sea, seaward of river mouths) vs river/inland. Built
+# by workflows/01_friction_build/04_build_water_class.py as: an ocean flood
+# fill through LULC-water | waterway-corridor pixels, where
+#   - the fill may not enter water within WATER_CLASS_RIVER_ZONE_M of the
+#     reviewed river corridor (RIVER_SEGMENT_KEY_IDS rasterised) — the zone
+#     spans the full channel at every mapped river mouth, so it is the dam
+#     that stops "marine" running up the Yukon or Kuskokwim;
+#   - the fill may not pass through channels narrower than about
+#     2 x WATER_CLASS_MIN_CHANNEL_PX pixels (stops rivers the NWN does not
+#     map, e.g. the Fish River above Golovnin Lagoon);
+#   - the reviewed MARINE corridor is a permitted conduit regardless of width
+#     (carries the fill through barrier-lagoon entrances and SE narrows);
+#   - the result then grows WATER_CLASS_FRINGE_GROW_PX back into adjacent
+#     narrow water (shore fringe, breakwater basins), never across the river
+#     zone. 13 px ~= 2.0 km, owner 2026-11-17: fixes the sheltered
+#     small-boat-harbour under-inclusion measured against the AK DOT ports
+#     layer, at the cost of the lowest ~2 km of unmapped river mouths.
+# Values: 0 = not water, 1 = marine, 2 = river/inland (lakes fall under 2 —
+# owner 2026-11-17; revisit if the cost split ever needs them apart).
+WATER_CLASS_NOT_WATER = 0
+WATER_CLASS_MARINE = 1
+WATER_CLASS_RIVER = 2
+WATER_CLASS_RIVER_ZONE_M = 5_000.0
+WATER_CLASS_MIN_CHANNEL_PX = 2      # erosion steps: fill needs ~600 m of open water
+WATER_CLASS_FRINGE_GROW_PX = 13     # ~2.0 km shore-fringe growth (owner 2026-11-17)
+
+# ---------------------------------------------------------------------------
 # Freshwater vs. salt water on the waterway network
 # ---------------------------------------------------------------------------
 # River ice is a RIVER phenomenon. The Brown et al. river-ice product covers

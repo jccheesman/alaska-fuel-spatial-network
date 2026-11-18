@@ -24,7 +24,52 @@ from git with `git show <commit>:final_network/network_joined_edges.zip`.
 
 ## Unreleased — takes effect at the next export
 
-Nothing pending.
+**2026-11-17 nearshore barge access (owner session).** The manual-connections
+layer grows 14 → 26 features: the five coastal Barge lines that were closed all
+12 months by shore pixels are redrawn to end 2–5 km offshore (Larsen Bay,
+Karluk, Sand Point, Nikolski, Akhiok), and twelve new Barge lines serve
+previously unlinked nearshore hubs — eastern Norton Sound + St. Lawrence pilot
+(Savoonga, Golovin, White Mountain, Shaktoolik, Unalakleet, Stebbins, Saint
+Michael) and the owner-approved borderline hubs (Kongiganak, Kwigillingok,
+Kipnuk, Nightmute, Chefornak). Every line passes the barge-surface sampler
+(July required, Jun–Oct reported) and runs through marine pixels of the new
+water-class label only; evidence per line in
+`inputs/mannual_connections/PROVENANCE.csv`. Verified rebuild (no export):
+84,104 nodes / 93,092 edges / 328 hubs / 4 joined components — vs the frozen
+record exactly +34 Waterway, +10 BargeRoadTransfer, +2 BargeAirTransfer (the
+Kongiganak and Kwigillingok landings arrive at shared airport-road nodes).
+At the export: the 28 "served by a working-tree line" / "redrawn" rows in
+`inputs/network_qc/accepted_barge_exceptions.csv` come off the list.
+
+**Waterway source repointed to the owner's curated layer (2026-11-17).**
+`01_prep_waterway.py` now reads `waterways_network_ak_albers.shp` (the owner's
+ArcGIS-edited NWN derivative: routes avoid land pixels and flow on water)
+instead of the raw NWN download — the same file the barge corridor masks have
+always been rasterised from, so the network and the friction surface now share
+one waterway geometry. Measured basis: at the eight all-year-closed harbour
+approaches the curated routes cross 0–0.8% land pixels vs the raw NWN's
+1.5–2.3% (the raw Akutan line crosses Akutan Island); on the curated network
+every one of those approaches samples 0 NoData on the EXISTING barge surface,
+and the full rebuild passes (North Slope gate, waterway 100%, 4 joined
+components, all manual-line welds, access report green). This resolves the
+closed-port finding without touching the friction stack, any mask, or the
+strict NoData rule. Takes effect in the network at the next export (new
+edge_ids; ~315 waterway lines / 30,617 km replace 316 / 31,903 km; a
+`BargeConnector` edge type appears). The raw NWN download stays under
+`data/raw` as the upstream reference and no longer gates the build.
+
+New, export-independent products of the same session: the marine/river
+water-class label (`04_build_water_class.py`, owner-adopted 2 km fringe), the
+`edge_water_class` DuckDB table (`05_edge_water_class.py`), the manual-barge
+line check and barge-hub access report in workflow 02 `qa/`, the barge
+passability check (`06_qa_barge_passability.py`), and the
+`connect-nearshore-barge-hubs` skill. Known, still-open findings: the barge
+corridor mask is built from a different waterway layer than the network's NWN
+extraction (closes 14 NWN edges / 562 km at harbour approaches — Kodiak,
+Unalaska, Akutan, Port Lions, Saint George, Saint Paul, Point Hope, Kaktovik;
+fix belongs to the friction pipeline), and the access report's first run found
+Homer and Aleknagik barge-coded with no waterway link (hidden from path audits
+by their road connectivity).
 
 ## 2026-11-16 hub-key re-export (`81b2649`)
 

@@ -24,4 +24,16 @@ fi
 
 run_step "03_weight_network_edges"    "$PY" "$HERE/03_weight_network_edges.py"
 run_step "04_assemble_weighted_graph" "$PY" "$HERE/04_assemble_weighted_graph.py"
+
+# Marine/river class per Waterway edge (needs workflow 01's water-class label;
+# guarded here so a stack-only machine still completes the weighting above).
+if [ -f outputs/01_friction_build/water_class_150m.tif ]; then
+  run_step "05_edge_water_class" "$PY" "$HERE/05_edge_water_class.py"
+else
+  echo "SKIP 05_edge_water_class: water_class_150m.tif absent (run workflow 01's 04_build_water_class.py)."
+fi
+# Barge passability by hub — the check that would have caught Kodiak/Unalaska.
+# A NEW no-summer-path barge hub fails; known ones live in
+# inputs/network_qc/accepted_barge_exceptions.csv.
+run_step "06_qa_barge_passability" "$PY" "$HERE/06_qa_barge_passability.py"
 echo "Done. Tables in outputs/fuel_network.duckdb."

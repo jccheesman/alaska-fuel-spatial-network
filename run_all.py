@@ -133,6 +133,7 @@ def stage_01_friction_build(py: str) -> None:
     run_step("01_build_corridor_masks", py, str(here / "01_build_corridor_masks.py"))
     run_step("02_build_friction_stack", py, str(here / "02_build_friction_stack.py"))
     run_step("03_qa_friction_stack", py, str(here / "03_qa_friction_stack.py"))
+    run_step("04_build_water_class", py, str(here / "04_build_water_class.py"))
     out("Done. Friction stack in outputs/01_friction_build/friction_stack/.")
 
 
@@ -142,7 +143,6 @@ def stage_02_network_build(py: str, profile: str) -> None:
     # public layers are downloads; the ice-road layer is placed by extract_inputs.
     raw_downloads = [
         "data/raw/connectivity/road/Roads_AKDOT/Roads_AKDOT.shp",
-        "data/raw/connectivity/barge/NWN_Waterway_Network_Lines/Waterway_Network.shp",
         "data/raw/anchor_points/Ports_and_Harbors.geojson",
         "data/raw/boundaries/tiger_places/tl_2022_02_place.shp",
         "data/raw/boundaries/borough_census_area/Alaska_Borough_and_Census_Area_Boundaries.shp",
@@ -151,7 +151,7 @@ def stage_02_network_build(py: str, profile: str) -> None:
     missing = [f for f in raw_downloads if not (ROOT / f).is_file()]
     if missing:
         gate(
-            f"data/raw is missing {len(missing)} of the 6 public downloads:",
+            f"data/raw is missing {len(missing)} of the public downloads:",
             *missing,
             "Download each from its source (DATA.md section 4.1 lists the file and the link), and run",
             f"{py} tools/extract_inputs.py once for the ice-road layer.",
@@ -177,6 +177,14 @@ def stage_02_network_build(py: str, profile: str) -> None:
     if (ROOT / manual_shp).is_file():
         out()
         out("######## 3. prep manual connections (split by mode) ########")
+        # BEFORE the split: every authored Barge line must sit on valid MARINE
+        # barge pixels in July (guarded like the other optional inputs — the
+        # build itself does not need the rasters).
+        if (ROOT / "outputs/01_friction_build/friction_stack/barge_07.tif").is_file():
+            run_step("qa/00_check_manual_barge", py, str(here / "qa/00_check_manual_barge.py"),
+                     filt=FILT_02)
+        else:
+            out("SKIP qa/00_check_manual_barge: friction stack absent (fetch or build workflow 01).")
         run_step("03_prep_manual_connections", py, str(here / "03_prep_manual_connections.py"),
                  filt=FILT_02)
     else:
@@ -189,6 +197,9 @@ def stage_02_network_build(py: str, profile: str) -> None:
     out()
     out("######## 5. verify the expected connected network ########")
     run_step("05_verify_north_slope", py, str(here / "05_verify_north_slope.py"), filt=FILT_02)
+    # Topology-only barge-hub access report; a NEW unreachable barge hub fails,
+    # known ones live in inputs/network_qc/accepted_barge_exceptions.csv.
+    run_step("qa/06_barge_hub_access", py, str(here / "qa/06_barge_hub_access.py"), filt=FILT_02)
 
     out()
     out("######## 6. QGIS projects + components + figures ########")
@@ -243,6 +254,14 @@ def stage_03_multimodal_join(py: str) -> None:
 
     run_step("03_weight_network_edges", py, str(here / "03_weight_network_edges.py"))
     run_step("04_assemble_weighted_graph", py, str(here / "04_assemble_weighted_graph.py"))
+
+    # Marine/river class per Waterway edge (needs workflow 01's water-class label).
+    if (ROOT / "outputs/01_friction_build/water_class_150m.tif").is_file():
+        run_step("05_edge_water_class", py, str(here / "05_edge_water_class.py"))
+    else:
+        out("SKIP 05_edge_water_class: water_class_150m.tif absent "
+            "(run workflow 01's 04_build_water_class.py).")
+    run_step("06_qa_barge_passability", py, str(here / "06_qa_barge_passability.py"))
     out("Done. Tables in outputs/fuel_network.duckdb.")
 
 

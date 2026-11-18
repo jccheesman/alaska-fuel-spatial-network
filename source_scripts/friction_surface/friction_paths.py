@@ -161,6 +161,17 @@ WATERWAY_MASK_TIF = os.path.join(OUTPUTS_DIR, "01_friction_build",
 WATERWAY_RIVER_MASK_TIF = os.path.join(OUTPUTS_DIR, "01_friction_build",
                                        "waterway_river_mask_150m.tif")
 
+# Marine / river water-class label (built by workflows/01_friction_build/
+# 04_build_water_class.py from the land-cover water class + the two corridor
+# masks above; rules in friction_config WATER_CLASS_*). uint8 on the project
+# grid: 0 = not water, 1 = marine, 2 = river/inland. Consumers: the manual
+# barge line rules (lines run through marine pixels only), the barge-hub
+# access reports, and the barge cost split (line-haul vs lightering vs river
+# barge). NOT part of the 14-file friction-stack contract; it changes no
+# friction value and no gating.
+WATER_CLASS_TIF = os.path.join(OUTPUTS_DIR, "01_friction_build",
+                               "water_class_150m.tif")
+
 
 # ---------------------------------------------------------------------------
 # Accessors
