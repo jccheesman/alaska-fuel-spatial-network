@@ -163,7 +163,7 @@ def test_cross_mode_is_deterministic_under_row_permutation():
 # --------------------------------------------------------------------------
 # classify_connectors — mode-based connector/transfer naming
 # --------------------------------------------------------------------------
-def _classify(rows):
+def _classify(rows, shared=None):
     import geopandas as gpd
     from shapely.geometry import LineString
 
@@ -175,7 +175,7 @@ def _classify(rows):
     )
     tokens = {"Road": "Road", "IceRoad": "IceRoad", "Waterway": "Barge", "Air": "Air"}
     order = {"Barge": 0, "IceRoad": 1, "Air": 2, "Road": 3}
-    return list(classify_connectors(g, tokens, order)["type"])
+    return list(classify_connectors(g, tokens, order, shared)["type"])
 
 
 def test_classify_connectors_same_and_cross_mode():
@@ -207,6 +207,27 @@ def test_classify_connectors_three_mode_uses_declared_pair():
         (1, 2, "IceRoadConnector", "bridge:IceRoad→Road"),
     ]
     assert _classify(rows)[-1] == "IceRoadRoadTransfer"
+
+
+def test_classify_connectors_barge_landing_at_a_road_and_airport_node_is_a_road_landing():
+    # node 1 is a road node an airport was snapped onto (road + air); the barge-hub
+    # transfer declares no pair in its source. Air is a snapped-on carrier, so the
+    # landing joins barge and ROAD.
+    rows = [
+        (0, 1, "Road", "Road"),
+        (1, 9, "Air", "Air"),
+        (4, 5, "Waterway", "Waterway"),
+        (1, 4, "Transfer", "barge_hubs"),
+    ]
+    assert _classify(rows)[-1] == "BargeAirTransfer", "without the snap rule: the old name"
+    assert _classify(rows, shared={"Air"})[-1] == "BargeRoadTransfer"
+    # an airport with NO road at its node still gets a barge-to-air landing
+    rows = [(1, 9, "Air", "Air"), (4, 5, "Waterway", "Waterway"), (1, 4, "Transfer", "barge_hubs")]
+    assert _classify(rows, shared={"Air"})[-1] == "BargeAirTransfer"
+    # a declared pair still wins over the snap rule
+    rows = [(0, 1, "Road", "Road"), (1, 9, "Air", "Air"), (2, 3, "IceRoad", "IceRoad"),
+            (1, 2, "IceRoadConnector", "bridge:IceRoad→Road")]
+    assert _classify(rows, shared={"Air"})[-1] == "IceRoadRoadTransfer"
 
 
 # --------------------------------------------------------------------------

@@ -415,7 +415,8 @@ def _union_modes(a, b) -> str:
 
 
 def classify_connectors(edges: gpd.GeoDataFrame, token_by_label: dict,
-                        order: dict | None = None) -> gpd.GeoDataFrame:
+                        order: dict | None = None,
+                        shared_node_tokens: set | None = None) -> gpd.GeoDataFrame:
     """Re-type every synthetic connector by the modes it actually joins.
 
     A **line-haul** edge kept its mode's edge_label as its `source` (see
@@ -436,7 +437,13 @@ def classify_connectors(edges: gpd.GeoDataFrame, token_by_label: dict,
     A rare junction can put 3+ modes at a connector's endpoints (e.g. an ice↔road
     bridge landing where an air leg also lands). The connector's own rule declares
     its two modes in `source` (``bridge:IceRoad→Road``), so we parse those to break
-    the tie; absent a declaration we take the two highest-precedence tokens.
+    the tie; absent a declaration we take the two highest-precedence tokens, leaving
+    out the `shared_node_tokens`: carriers whose legs are SNAPPED onto another mode's
+    node (profile `snaps:` — airports land on a road node, so that node carries Air and
+    Road). A barge landing at such a node hands fuel to the ROAD the airport sits on,
+    not to a plane: it is a BargeRoadTransfer, and naming it BargeAirTransfer (2026-11:
+    Gambell, Elim, Kwigillingok, Kongiganak) put those landings in a type of their own
+    that downstream grouping by type did not expect.
 
     Idempotent: a re-typed connector still has ``source != type`` and reclassifies
     to the same name. Returns a copy with `type` rewritten (line-haul untouched).
@@ -444,6 +451,7 @@ def classify_connectors(edges: gpd.GeoDataFrame, token_by_label: dict,
     import re
 
     order = order or {}
+    shared = set(shared_node_tokens or ())
     from_id = edges["from"].astype(int).tolist()
     to_id = edges["to"].astype(int).tolist()
     etype = edges["type"].tolist()
@@ -479,7 +487,11 @@ def classify_connectors(edges: gpd.GeoDataFrame, token_by_label: dict,
         tokens = sorted({_tok(l) for l in labels}, key=_order_key)
         if len(tokens) >= 3:                       # 3-mode junction — use the rule's declared pair
             decl = sorted({_tok(l) for l in _declared_labels(esrc[i])}, key=_order_key)
-            tokens = decl if len(decl) == 2 else tokens[:2]
+            if len(decl) == 2:
+                tokens = decl
+            else:
+                own = [t for t in tokens if t not in shared]     # a snapped-on carrier is not a party
+                tokens = own[:2] if len(own) >= 2 else tokens[:2]
         if not tokens:                             # no line-haul neighbour — leave as-is
             continue
         if len(tokens) == 1:

@@ -32,6 +32,15 @@ def _connector_tokens(cfg) -> dict:
     """edge_label -> carrier word used in synthetic-connector type names."""
     line_specs = [s for s in cfg.layers if s.kind == "line"]
     return {s.edge_label: _CARRIER_ALIAS.get(s.mode, s.mode) for s in line_specs}
+
+
+def _shared_node_tokens(cfg) -> set:
+    """Carrier words of the modes the profile SNAPS onto another mode's nodes (`snaps:`): their
+    legs share a node with that mode and are never a party to a connector there unless the
+    connector's own rule says so."""
+    return {_CARRIER_ALIAS.get(s.from_mode, s.from_mode) for s in getattr(cfg, "snaps", [])}
+
+
 from .io_writers import output_dir, write_gdf
 from .network import NetworkTables
 from .steps.consolidate import consolidate_facilities
@@ -115,7 +124,8 @@ def run_pipeline(profile_path: str | Path, project_dir: str | Path | None = None
     # {Mode}Connector, two modes -> per-pair Transfer). Rewrites 03_network so the
     # report + stage 04 + export all speak one mode-based vocabulary.
     tokens = _connector_tokens(cfg)
-    net = NetworkTables.from_parts(net.nodes, classify_connectors(net.edges, tokens, _TOKEN_ORDER))
+    shared = _shared_node_tokens(cfg)
+    net = NetworkTables.from_parts(net.nodes, classify_connectors(net.edges, tokens, _TOKEN_ORDER, shared))
     net.to_gpkg(output_dir() / "03_network")
 
     # connectivity report — per-mode + fuel-hub reachability (and, where an Air mode exists, its marginal
@@ -134,7 +144,7 @@ def run_pipeline(profile_path: str | Path, project_dir: str | Path | None = None
         jn, je, jsum = join_components_to_giant(net.nodes, net.edges, jc)
         # the stage-04 join edges are raw "Join" — classify them (and re-confirm
         # the rest) so cross-mode joins become the right per-pair Transfer.
-        je = classify_connectors(je, tokens, _TOKEN_ORDER)
+        je = classify_connectors(je, tokens, _TOKEN_ORDER, shared)
         joined = NetworkTables.from_parts(jn, je)
         joined.to_gpkg(output_dir() / "04_network_joined")
         print(f"[04] joined {jsum['n_joined']} components (≤ {jc:.0f} m) in {jsum['rounds']} round(s); "
