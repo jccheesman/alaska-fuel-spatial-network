@@ -45,30 +45,15 @@ def hub_exceptions() -> set[str]:
 
 
 def marine_distance_km(xs, ys):
-    """Distance to the nearest marine pixel, windowed search; NaN without the label."""
-    import rasterio
+    """Distance to the nearest marine pixel (fuel_network.geo_checks);
+    NaN without the label."""
+    from fuel_network.geo_checks import nearest_class_distance
+    from friction_surface.friction_config import WATER_CLASS_MARINE
     wc = Path(WATER_CLASS_TIF)
     if not wc.exists():
         return [np.nan] * len(xs)
-    out = []
-    with rasterio.open(wc) as src:
-        for x, y in zip(xs, ys):
-            r, c = rasterio.transform.rowcol(src.transform, x, y)
-            d = np.nan
-            for half in (67, 134, 334, 667, 2000):
-                r0, c0 = max(0, r - half), max(0, c - half)
-                win = rasterio.windows.Window(c0, r0,
-                                              min(src.width, c + half + 1) - c0,
-                                              min(src.height, r + half + 1) - r0)
-                blk = src.read(1, window=win)
-                mr, mc = np.nonzero(blk == 1)
-                if len(mr):
-                    dd = np.hypot(mr + r0 - r, mc + c0 - c) * abs(src.transform.a)
-                    if dd.min() <= half * abs(src.transform.a):
-                        d = float(dd.min()) / 1000
-                        break
-            out.append(d)
-    return out
+    return [nearest_class_distance(wc, x, y, WATER_CLASS_MARINE)[0]
+            for x, y in zip(xs, ys)]
 
 
 def tier(d):

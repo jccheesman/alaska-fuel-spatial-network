@@ -58,18 +58,24 @@ edge_ids; ~315 waterway lines / 30,617 km replace 316 / 31,903 km; a
 `BargeConnector` edge type appears). The raw NWN download stays under
 `data/raw` as the upstream reference and no longer gates the build.
 
+Shared geospatial check primitives (`fuel_network/geo_checks.py`: the
+pipeline-identical sampler wrapper, NoData cause classification, windowed
+nearest-class distance, grid identity, weld distances; unit-tested with
+synthetic rasters) and the general route checker
+`diagnostics/01_friction_build/check_route_against_surface.py` + the
+`check-route-against-surface` skill — any line layer vs any surface, with
+cause diagnosis and the optional marine-class rule.
+
 New, export-independent products of the same session: the marine/river
 water-class label (`04_build_water_class.py`, owner-adopted 2 km fringe), the
 `edge_water_class` DuckDB table (`05_edge_water_class.py`), the manual-barge
 line check and barge-hub access report in workflow 02 `qa/`, the barge
 passability check (`06_qa_barge_passability.py`), and the
-`connect-nearshore-barge-hubs` skill. Known, still-open findings: the barge
-corridor mask is built from a different waterway layer than the network's NWN
-extraction (closes 14 NWN edges / 562 km at harbour approaches — Kodiak,
-Unalaska, Akutan, Port Lions, Saint George, Saint Paul, Point Hope, Kaktovik;
-fix belongs to the friction pipeline), and the access report's first run found
-Homer and Aleknagik barge-coded with no waterway link (hidden from path audits
-by their road connectivity).
+`connect-nearshore-barge-hubs` skill. The session's one still-open finding:
+the access report's first run found Homer and Aleknagik barge-coded with no
+waterway link (hidden from path audits by their road connectivity). The
+closed-port finding (14 NWN edges / 562 km at harbour approaches) is resolved
+by the waterway-source repoint above.
 
 ## 2026-11-16 hub-key re-export (`81b2649`)
 
