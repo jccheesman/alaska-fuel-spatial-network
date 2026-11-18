@@ -16,9 +16,10 @@ model. Run it again after changing either module.
   Table 3 (sheet 'Table 3'), stacked panels:
     (a) Per-mode delivery cost rates ($/gallon-mile)
     (b) Intermodal transfer fees ($/gallon)
-  Values mirror friction_surface/friction_costs.py (the verified 2026-07-17
-  rate set; supersedes the earlier ISER-only derivations in
-  modality_cost_rates.xlsx).
+    (c) Sources, read from docs/cost_derivation/2026-11/SOURCES.md
+  Values mirror friction_surface/friction_costs.py (the 2026-11 re-derivation:
+  ocean and river barge rates, barge landing fees by place type, each with its
+  evidence status; supersedes the 2026-07-17 rate set).
 
 Every Table 1 panel is three columns wide: land cover fills the left block,
 permafrost and slope stack in the right block (separated by a spacer column),
@@ -39,8 +40,11 @@ from openpyxl.styles import Alignment, Border, Font, Side
 # every rate and fee from friction_costs.py, so this workbook can never drift.
 from friction_surface import friction_config as fc
 from friction_surface.friction_costs import (
+    BASELINE_RATE_RANGES as RANGES,
     BASELINE_RATES_PER_GALLON_MILE as RATES,
     INTERMODAL_TRANSFER_FEES as FEES,
+    LANDING_CLASS_FEES as LANDING,
+    RATE_STATUS,
     TRANSFER_TYPE_TO_MODES,
 )
 from fuel_network.load import EXPECTED   # edge-type counts of the network-of-record
@@ -63,8 +67,28 @@ def _n_edges(a: str, b: str) -> str:
     return f"{n:,}"
 
 
-# Where the derivation chapters live since supplementary/ left the working tree.
-DERIVATIONS = "supplementary/cost-derivations/ (git history, commit b35b730)"
+def _range(mode_key: str) -> str:
+    lo, hi = RANGES[mode_key]
+    return f"{lo:g}–{hi:g}"
+
+
+def _status(mode_key: str) -> str:
+    return RATE_STATUS[mode_key].capitalize()
+
+
+def _landing(key: str) -> str:
+    return "%g" % LANDING[key]["total"]
+
+
+def _landing_range(key: str) -> str:
+    lo, hi = LANDING[key]["range"]
+    return f"{lo:g}–{hi:g}"
+
+
+# Where the derivation record lives (the 2026-11 re-derivation). The earlier chapters it
+# corrects are in the private harness repository and in this repo's git history (b35b730).
+DERIVATIONS = "docs/cost_derivation/2026-11/"
+SOURCES_MD = "docs/cost_derivation/2026-11/SOURCES.md"
 NOT_REDISTRIBUTED = "third-party PDF, not redistributed with the repo"
 
 
@@ -247,233 +271,141 @@ T3_NCOLS = 4
 RATE_HEADERS = ("Mode", "Rate ($/gal-mi)", "Season (model)", "Derivation / source")
 RATE_ROWS = [
     ("Road", _rate("Road", 4), "Year-round",
-     "Highway-tanker carriage incl. empty backhaul. Econ One transport map "
-     "(Valdez–Fairbanks $0.20/gal over 364 mi; CPI 2015→26), ATRI cost "
-     "build-up, and an 11-point state-contract distance regression "
-     "(slope 0.00067, R² ≈ 0.75) converge at 0.0007. Range 0.00045–0.0011; "
-     "Dalton corridor ≈ 0.0012–0.0015."),
-    ("Barge", _rate("Barge", 4), "Ice-free months (monthly ice gating)",
-     "Blended all-in rate at Bethel-type distance. Decomposition if "
-     "linehaul/river legs ever split: ocean linehaul 0.00023 (ISER market "
-     "rate $0.19–0.22/gal over the 1,276-statute-mile Anchorage–Bethel "
-     "route), river distribution 0.011 (DEC 2007 invoice $0.007/gal per map "
-     "mile); lightering/terminal $0.8–1.2/gal fixed component currently "
-     "blended into the rate. Operators run Jun–Oct in western and northern "
-     "Alaska; Gulf and Southeast routes are year-round, so the model gates "
-     "each waterway cell by its monthly sea- and river-ice cover, not by a "
-     "calendar window."),
+     f"Status: {_status('Road')}. Range {_range('Road')}. Highway-tanker carriage incl. empty "
+     "backhaul. Three methods of different kinds agree within 1.25×: Econ One "
+     "Valdez–Fairbanks truck leg ($0.20/gal over ~364 mi, 2016$) = 0.00076 [S04]; "
+     "ATRI tank-carrier build-up = 0.00085 [S13]; State heating-oil contract "
+     "gradient = 0.00068 [S35, not re-opened in 2026-11]. Confirmed, unchanged."),
+    ("Barge, ocean line-haul", _rate("Barge", 5), "Ice-free months (monthly ice gating)",
+     f"Status: {_status('Barge')}. Range {_range('Barge')}. Transportation only, no fixed "
+     "part; applies to MARINE waterway edges (edge_water_class). Two published "
+     "charges agree within 1%: ISER 2010 charged rate $0.19–0.22/gal over the "
+     "1,527-mile mean model distance = 0.000205 [S02]; Econ One 2016 25 cpg over "
+     "~1,669 mi = 0.000207 [S04]; a weak third, the lightering guide's tanker "
+     "range = 0.00013 [S05]. Replaces the blended 0.0010, which routed Nome's fuel "
+     "by river."),
+    ("Barge, river", _rate("BargeRiver", 4), "Ice-free months (monthly ice gating)",
+     f"Status: {_status('BargeRiver')}. Range {_range('BargeRiver')}. Per CHANNEL mile, carriage "
+     "only; applies to RIVER waterway edges; its fixed part is the river-village "
+     "landing fee in panel (b). The total for a 164-mile haul agrees across three "
+     "methods (1.8×): State contracts [S01], DEC 2007 invoice rate [S03], ISER 2010 "
+     "build [S02]; the per-mile part does not (0.0044 / 0.0011 / 0.0014, 3.9×). "
+     "The earlier 0.011 river figure is overturned (a per-map-mile average at "
+     "~100 miles, not a marginal rate)."),
     ("Plane", _rate("Plane", 3), "Year-round",
-     "Charter-equivalent DC-6/C-46 cost at typical 130–350 mi stage "
-     "lengths. Revealed retail premiums (DCRA Jan 2026 vs. the $3.60 "
-     "Fairbanks wholesale anchor), DC-6 cost build-up, ISER 2010 benchmark, "
-     "and a federal charter award converge at 0.025 (range 0.015–0.042). "
-     "Underprices short (<75 mi) shuttles (~0.1–0.2 real)."),
+     f"Status: {_status('Plane')}. Range {_range('Plane')}. Per one-way statute air mile, "
+     "no fixed part. Two verified independent methods agree within 1.4×: published "
+     "statements, DEC 2007 and ISER 2010 = 0.0190 [S03, S02]; the November 2007 "
+     "Fairbanks–Allakaket delivery = 0.0136 [S01]. Lowered from 0.025, which "
+     "implied $4.54/gal to Allakaket against a FY2025 ceiling of $3.48–3.70 [S15]. "
+     "General-freight tariffs are a ceiling only [S16, S17]. Small aircraft "
+     "(150–200 gal) cost 0.05–0.11 and are not represented."),
     ("Ice road", _rate("IceRoad", 3), "Winter (Jan–Mar)",
-     "Single rate spanning two verified regimes (no regime split): "
-     "engineered ice road with tanker ≈ 0.004 (Nuiqsut, Kuskokwim) vs. "
-     "tundra snow-trail cat-train ≈ 0.02 (Atqasuk, Anaktuvuk Pass); traffic "
-     "split ≈ 50/50 (PCE FY2025 gallons). Known bias ≈ 2× high for "
-     "engineered edges, ≈ 2× low for trail edges."),
+     f"Status: {_status('IceRoad')}. Range {_range('IceRoad')}. Kept: no tariff, contract or "
+     "invoice for an Alaska winter fuel haul exists. Two regimes ~3.8× apart: "
+     "truck on an ice road ≈ 0.007 (build-up) [S13]; snow tractor and sled ≈ 0.026 "
+     "(Noatak request build-up [S24]; Atqasuk price difference [S15]; gravel-haul "
+     "check [S25]). One statewide rate by owner decision."),
 ]
 RATE_NOTE = (
-    "(a) Rates in USD per gallon-mile (2026$), mirroring friction_costs.py. "
-    "Each rate survived three verification rounds — blind multi-method "
-    "derivation, web primary-source verification, and local-document "
-    "verification (ATRI, Econ One, PCE FY2025, NSB, Noatak) — documented in "
-    f"the blind-derivation chapters ({DERIVATIONS}). Gallon-mile normalization makes modes "
-    "comparable despite a ~1,000× capacity spread (3,000-gal ice-road truck "
-    "vs. 3M-gal linehaul barge). Rates are operational costs kept strictly "
-    "separate from the environmental friction surface (baseline 1.0); "
-    "seasonal availability is enforced by the friction rasters and "
-    "edge-month weights, not by the rates."
+    "(a) Rates in USD per gallon-mile, 2026$ at CPI-U 332.243, mirroring "
+    "friction_costs.py; re-derived 2026-11-17/18 from owner-supplied documents: "
+    "blind derivations, then one adversarial verifier per rate "
+    f"({DERIVATIONS}; one addendum per rate with a derived-versus-assumed table "
+    "for every input). Status: Derived = three or more independent methods "
+    "within ~3×, inputs checked in the documents; Provisional = best estimate on "
+    "evidence that falls short, carried with a wide range; Assumed = no source "
+    "evidence, earlier value kept. Bracketed IDs refer to panel (c). Rates are "
+    "operational costs kept strictly separate from the environmental friction "
+    "surface (baseline 1.0); seasonal availability is enforced by the friction "
+    "rasters and edge-month weights, not by the rates."
 )
 
 FEE_HEADERS = ("Transfer (from ↔ to)", "Fee ($/gal)", "What it counts / note")
 FEE_SPANS = [(1, 1), (2, 2), (3, 4)]
 FEE_ROWS = [
-    ("barge ↔ overland", _fee("barge", "overland"),
-     "Road-side truck-rack out-loading only (Crowley Bethel rack $0.276 "
-     "CPI-2026, shaded for margin); barge marine-header intake excluded as "
-     "already in the all-in barge rate. "
-     f"Prices {_n_edges('barge', 'overland')} edges (BargeRoadTransfer + "
-     "BargeAirTransfer). Was 0.40."),
+    ("barge landing: road-system port", _landing("road_port"),
+     f"Provisional. Range {_landing_range('road_port')}. Loading at a road-system port: "
+     "wharfage 20.49¢/bbl + valve-yard transfer 6.08¢/bbl + modernization surcharge "
+     "$0.14/bbl, Port of Alaska Tariff 10.2 [S09]. Class rule: the landing is on "
+     "the Anchorage road system."),
+    ("barge landing: hub or dock-served port", _landing("hub"),
+     f"Provisional. Range {_landing_range('hub')}. Line-haul discharge at the distributor's own "
+     "terminal: Bethel wharfage $0.06 + fuel transfer $0.06 [S07]; Nome inbound "
+     "wharfage $0.05 [S08]; ISER 2010 shore labour [S02]. Class rule: the place is "
+     "listed in inputs/network_qc/landing_classes.csv."),
+    ("barge landing: coastal village", _landing("coastal_village"),
+     f"Provisional, ASSEMBLED. Range {_landing_range('coastal_village')}. Small-barge delivery "
+     "incl. discharge to the village header. Derived form $0.45 per delivery + "
+     "0.0010 per sailing mile [S02, S15, S03]; the network has no edge for the "
+     "sailing leg, so it is carried flat: 0.45 + 0.0010 × ~250 mi − the ocean "
+     "line-haul already paid over those miles ≈ 0.65. Class rule: mostly marine "
+     "water at the landing."),
+    ("barge landing: river village", _landing("river_village"),
+     f"Provisional. Range {_landing_range('river_village')}. The river fixed part per delivery, "
+     "incl. discharge [S01, S03, S02]. Class rule: mostly river water at the "
+     "landing."),
+    ("barge ↔ overland (fallback)", _fee("barge", "overland"),
+     "Provisional. Used only where a landing has no class. Single-key value: "
+     "gallon-mix average of the classes, per crossing. "
+     f"The four landing classes price the {_n_edges('barge', 'overland')} "
+     "BargeRoadTransfer + BargeAirTransfer edges. Was 0.24 at every crossing "
+     "(a truck-rack list price [S12], billed at both ends of a barge route)."),
     ("plane ↔ overland", _fee("plane", "overland"),
-     "Road-side tarmac receiving labor + fittings only; aircraft pump and "
-     "crew excluded as already in the all-in plane charter rate. "
-     f"Prices {_n_edges('plane', 'overland')} edges. Was 0.157."),
+     "Assumed, unchanged: no source prices this event. Road-side tarmac "
+     "receiving labor + fittings. "
+     f"Prices {_n_edges('plane', 'overland')} edges."),
     ("overland ↔ ice road", _fee("overland", "ice_road"),
-     "Road-carriage side of a continuous truck↔ice-road-truck pumped "
-     "changeover; ice-road pump-in dwell excluded (in the +20% adder). "
-     f"Prices {_n_edges('overland', 'ice_road')} edges. Was 0.25."),
+     "Assumed, unchanged: no source prices this event. Road-carriage side of a "
+     "truck↔ice-road-truck pumped changeover. "
+     f"Prices {_n_edges('overland', 'ice_road')} edges."),
     ("barge ↔ ice road", _fee("barge", "ice_road"),
-     "Thin facility-interface residual only (both incident modes all-in). "
-     f"Prices {_n_edges('barge', 'ice_road')} edges at North Slope hubs, "
-     "expected never to be traversed: ice roads run Jan–Mar, barges only in "
-     "the summer ice-free window (operators Jun–Oct). Zero month overlap was "
-     "verified on the 8 such edges of an earlier network; recheck when "
-     "workflow 03 is rerun. Completeness only. Was 0.40."),
+     "Assumed, unchanged. Thin facility-interface residual. "
+     f"Prices {_n_edges('barge', 'ice_road')} edges, expected never to be "
+     "traversed: ice roads run Jan–Mar, barges only in the ice-free window. "
+     "Completeness only."),
 ]
 FEE_NOTE = (
-    "(b) Storage-free, rate-aware connection fees in USD per gallon "
-    f"(blind re-derivation, 06_connection_costs.md in {DERIVATIONS}), applied "
-    "once per modal handoff, direction-insensitive. Each fee bills only "
-    "handling with no home in a per-mile rate — the road-carriage side, since "
-    "Road is carriage-only — and excludes the all-in side (barge intake, "
-    "aircraft pump/crew, ice-road +20% load/unload adder) to avoid "
-    "double-counting; hub storage is excluded entirely (never a graph node). "
-    "The retired storage-leg fees are documented in 05_transfer_fees.md (same place). "
-    "Total path cost ($/gal) = Σ(mode rate × miles) + the matching fee at "
-    "every modal handoff."
+    "(b) Fees in USD per gallon per crossing, 2026$ (tariff figures are 2026 "
+    f"actuals), re-derived 2026-11 ({DERIVATIONS}addendum_transfer_fees.md and "
+    "the barge addenda). A barge-to-land crossing is priced by the kind of place "
+    "the barge lands at (fuel_network.landings; the class used for each edge is "
+    "the edge_landing_class table). Rules that prevent double counting: no "
+    "separate village fee where a delivery charge applies; hub discharge is "
+    "billed once; the ocean rate carries no fixed part. Total path cost ($/gal) "
+    "= Σ(rate × miles × friction) + the fee at every modal handoff."
 )
 
 # Panel (c): full citations for every source behind the rates and the fees.
 SOURCE_HEADERS = ("Source", "Full citation + link / locator")
 SOURCE_SPANS = [(1, 1), (2, 4)]           # A | B:D
-SOURCE_ROWS = [
-    ("Blind derivations",
-     "The compiled report fuel_cost_blind_derivations.pdf and its chapters "
-     "supplementary/cost-derivations/*.md, removed from the working tree on "
-     "2026-08-14 and kept in git history at commit b35b730: four blind "
-     "per-mode rate derivations (01_road, 02_barge, "
-     "03_plane, 04_ice_road) with dated verification addenda, plus the "
-     "transfer-fee chapters 05_transfer_fees.md (through-storage) and "
-     "06_connection_costs.md (storage-free, rate-aware). Values encoded in "
-     "source_scripts/friction_surface/friction_costs.py."),
-    ("ATRI 2025",
-     "American Transportation Research Institute (2025). An Analysis of the "
-     "Operational Costs of Trucking: 2025 Update. Road-rate build-up (Tables "
-     "8/11: $2.260 average / $2.32 specialized per vehicle-mile); Tables 8/9 "
-     "verified carriage-only (no rack / terminal / loading line) — the basis "
-     "for keeping road-side handling in the connection fees."),
-    ("Econ One",
-     "Econ One Research (B. Pulliam), The State of Alaska's Refining Industry "
-     "(Alaska DEC / RCA filing). Road rate: Valdez–Fairbanks truck transport "
-     "$0.20/gal over 364 mi (CPI 2015→2026)."),
-    ("State fuel contracts",
-     "State of Alaska FY25/FY26 term fuel-supply contracts (heating-oil / "
-     "ULSD delivered-price lists). 11-point within-vendor distance regression "
-     "for the road rate (slope $0.00067/gal-mi, R² ≈ 0.75); delivered-price "
-     "adders used to validate the modeled $/gal."),
-    ("ISER 2010",
-     "Szymoniak, N., Fay, G., Villalobos-Melendez, A., Charon, J., Smith, M. "
-     "(2010). Components of Alaska Fuel Costs: An Analysis of the Market "
-     "Factors and Characteristics that Influence Rural Fuel Prices. UAA "
-     "Institute of Social and Economic Research, for the Alaska State "
-     "Legislature, Senate Finance Committee. Barge linehaul market rate "
-     "$0.19–0.22/gal; shore-side offload-labor and terminal-handling bands "
-     "($0.04–0.06/gal) for the connection-fee cost build."),
-    ("NOAA port distances",
-     "NOAA Office of Coast Survey, Distances Between United States Ports. "
-     "Anchorage–Bethel 1,109 nm = 1,276 statute mi — the barge route-distance "
-     "basis."),
-    ("DEC 2007 / DCCED 2005",
-     "Alaska Dept. of Environmental Conservation (2007) and Dept. of "
-     "Commerce, Community and Economic Development (2005) rural bulk-fuel "
-     "transport studies. River-distribution invoice rate $0.007/gal per map "
-     "mile."),
-    ("PCE FY2025",
-     "Alaska Energy Authority, Power Cost Equalization Program: Statistical "
-     "Report by Community, FY2025 (final, 2026-03-01). Margin-free utility "
-     "fuel prices and delivered gallons by community; plane revealed-premium "
-     "anchor and ice-road ~50/50 regime split (Nuiqsut 279,232 vs Atqasuk "
-     "274,877 gal)."),
-    ("DCRA Jan 2026",
-     "Alaska DCCED Division of Community and Regional Affairs, Alaska Fuel "
-     "Price Report (Winter / January 2026) and the state ArcGIS community "
-     "fuel-price service. Plane revealed delivered-price premiums vs the "
-     "$3.60/gal road-served wholesale anchor."),
-    ("Air tariffs & awards",
-     "Everts Air Cargo tariff (verified 2026-07-15; 26% fuel surcharge); "
-     "Wright Air Service and Northern Air Cargo tariffs (within 0–6%); "
-     "USAspending.gov federal fuel-charter award ($11,792.50 for 1,400 gal). "
-     "DC-6 / C-46 charter-equivalent plane rate."),
-    ("Ice-road operations",
-     "UIC Oil & Gas Support account of the Feb–Mar 2026 Anaktuvuk Pass "
-     "emergency fuel haul (uicalaska.com); Northwest Arctic Borough / Native "
-     "Village of Noatak Winter Fuel Haul System proposal (2012 legislative "
-     "grant TPS 58673v1: $425K tracked tractor, 3,000–5,000 gal/trip, ~200 "
-     "trips/season); ASTAR (Arctic Strategic Transportation and Resources) "
-     "trail study; North Slope Borough FY26-27 budget; Ontario and NWT "
-     "winter-road analogs incl. Tibbitt-to-Contwoyto."),
-    ("Crowley Bethel tariff",
-     "Crowley Fuels LLC, Schedule of Terminal Storage and Throughput Rates — "
-     "Bethel, Alaska (eff. 2022-08-10): Marine Header throughput $0.1500/gal "
-     "and Truck Rack $0.2500/gal (storage billed separately), CPI-adjusted to "
-     "2026$. Basis for the barge↔overland connection fee (road-side rack "
-     "leg)."),
-    ("Port tariffs",
-     "Port of Bethel Terminal Tariff #5 §206(D) inbound-petroleum wharfage "
-     "($0.06/gal, 2026 column); Port of Nome Tariff No. 16.5 §05.020 "
-     "bulk-liquid wharfage ($0.048/gal) and §05.035 header-crew labor "
-     "($115/hr); Port of Alaska Tariff Item 260 fuel-transfer rate. Municipal "
-     "wharfage / facility-interface cross-checks for the connection fees."),
-    ("AK DOL Pamphlet 600",
-     "Alaska Dept. of Labor & Workforce Development, Laborers' & Mechanics' "
-     "Minimum Rates of Pay (Pamphlet 600, Issue 52). Fully-loaded Alaska "
-     "labor rates for the operational build-up of the ice-road and tarmac "
-     "connection fees (e.g. Material Handler $52.66/hr, Fueler / Oil "
-     "Distributor Truck operator $84.34/hr)."),
-    ("Bristol Bay Borough",
-     "Bristol Bay Borough assembly records: aviation tarmac fuel-pumping fee "
-     "($550 flat per service event), the prior anchor for the plane↔overland "
-     "handoff (now scoped to the road-side receiving portion)."),
-]
-# Link / locator per source: verified URLs where one appears in the vetted
-# derivation chapters, in-repo file paths for the local source PDFs, and an
-# explicit "no stable public URL" where none exists (no fabricated links).
-SOURCE_LINKS = {
-    "Blind derivations":
-        "git show b35b730:supplementary/cost-derivations/<chapter>.md ; "
-        "b35b730:supplementary/cost-verification/fuel_cost_blind_derivations.pdf",
-    "ATRI 2025":
-        f"ATRI-Operational-Costs-of-Trucking-07-2025.pdf ({NOT_REDISTRIBUTED})",
-    "Econ One":
-        f"6_barry_pulliam-_econ_one_-_the_state_of_alaskas_refining_industry.pdf ({NOT_REDISTRIBUTED})",
-    "State fuel contracts":
-        "https://oppm.doa.alaska.gov/media/1337/08-heating-oil.pdf ; "
-        "https://oppm.doa.alaska.gov/media/1339/08-marine-diesel-fuels.pdf",
-    "ISER 2010":
-        "https://iseralaska.org/static/legacy_publication_links/componentsoffuel3.pdf",
-    "NOAA port distances":
-        "NOAA OCS, Distances Between United States Ports (no stable public URL)",
-    "DEC 2007 / DCCED 2005":
-        "Alaska DEC/DCCED rural fuel-transport studies (no stable public URL)",
-    "PCE FY2025":
-        "2026.03.01 FY2025 PCE Statistical Report by Community (Final).pdf "
-        f"({NOT_REDISTRIBUTED})",
-    "DCRA Jan 2026":
-        "https://www.commerce.alaska.gov/web/Portals/4/pub/RA/Fuel_price_report/"
-        "Alaska%20Fuel%20Price%20Report%20-%20January%202026.pdf ; ArcGIS: "
-        "https://maps.commerce.alaska.gov/server/rest/services/Services/CDO_Utilities/MapServer",
-    "Air tariffs & awards":
-        "https://evertsair.com/cargo/rates ; https://wrightairservice.com/freight-prices/ ; "
-        "https://www.nac.aero/rates/ ; "
-        "https://www.usaspending.gov/award/CONT_AWD_140P9725F0047_1443_140P9725A0010_1443",
-    "Ice-road operations":
-        "https://www.uicalaska.com/2026/04/15/uicogs-emergency-fuel-haul-to-anaktuvuk-pass/ ; "
-        "Northwest_Arctic_Borough_Noatak_Winter_Fuel_Haul_System.pdf ; "
-        f"NorthSlopeBorough-Budget-Book-FY26-27-FINAL-1.pdf ({NOT_REDISTRIBUTED})",
-    "Crowley Bethel tariff":
-        "Crowley Fuels Bethel terminal rate sheet (external); figures recorded "
-        f"in 05_transfer_fees.md & 06_connection_costs.md ({DERIVATIONS})",
-    "Port tariffs":
-        "Port of Bethel Tariff #5 / Port of Nome Tariff 16.5 / Port of Alaska "
-        f"Item 260 (external); figures recorded in chapters 05–06 ({DERIVATIONS})",
-    "AK DOL Pamphlet 600":
-        "Alaska DOL, Laborers' & Mechanics' Minimum Rates of Pay, Pamphlet 600 "
-        "Issue 52 (labor.alaska.gov)",
-    "Bristol Bay Borough":
-        "Bristol Bay Borough assembly records (external; no stable public URL)",
-}
+def _load_sources() -> list[tuple[str, str]]:
+    """(ID, citation + file + link) rows parsed from the tracked sources register."""
+    import re
+    rows = []
+    for line in (rp.ROOT / SOURCES_MD).read_text().splitlines():
+        if not re.match(r"^\| S\d\d \|", line):
+            continue
+        sid, doc, pub, link, _cited = [c.strip() for c in line.strip().strip("|").split("|")]
+        title, _, fname = doc.partition("<br>")
+        link = re.sub(r"<br>", " ", link).replace("<", "").replace(">", "")
+        fname = fname.replace("`", "")
+        where = (fname if fname.startswith("(") else
+                 f"{fname} ({NOT_REDISTRIBUTED}; held in the private harness repository)")
+        rows.append((sid, f"{title}. {pub}.\nFile: {where}\nLink: {link}"))
+    return rows
+
+
+SOURCE_ROWS = _load_sources()
+SOURCE_LINKS: dict[str, str] = {}      # links are inside each row since the 2026-11 register
 SOURCE_NOTE = (
-    "(c) Full citations, each with a link or locator (a verified public URL, "
-    "a path in this repo's git history, a third-party file that is not "
-    "redistributed, or an explicit 'no stable public URL'). The rate "
-    "sources support the four per-gallon-mile rates; the Crowley, port, "
-    "Pamphlet-600, ISER and Bristol Bay entries additionally support the "
-    "storage-free connection fees. Convergence between independent methods — "
-    "not any single source — is the evidence standard; per-figure page cites "
-    f"live in the derivation chapters ({DERIVATIONS})."
+    f"(c) The sources register of the 2026-11 re-derivation, read from {SOURCES_MD} "
+    "(which also lists the addenda that cite each source). Third-party documents "
+    "are not redistributed with this repository. Link basis is given for each "
+    "link: printed in the document, from the project's notes, or from a web "
+    "search result; no link was opened from the analysis session. Agreement "
+    "between independent methods, not any single source, is the evidence "
+    f"standard; per-figure page cites are in the addenda ({DERIVATIONS})."
 )
 
 

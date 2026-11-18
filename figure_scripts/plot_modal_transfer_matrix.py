@@ -11,7 +11,11 @@ roads and barges never share a month) and the two Barge<->Plane connectors.
 Counts are the EXPECTED tripwire values (CLAUDE.md / stage-02 load); fees are
 the INTERMODAL_TRANSFER_FEES totals in friction_costs.py. Both are restated as
 literals here so the figure is a standalone artifact -- update alongside a
-re-export.
+re-export. Since the 2026-11 cost split a barge landing is priced by landing
+class (LANDING_CLASS_FEES: road port 0.01, hub 0.12, coastal village 0.65, river
+village 0.50); the 0.04 shown for the barge connectors is the single-key
+fallback only. The committed figure files predate that change until this
+script is rerun.
 
 Outputs (outputs/final_network_plots/):
     modal_transfer_matrix.pdf   vector, for the paper
@@ -53,10 +57,10 @@ MODE_COLOR = {
 CONNECTIONS = [
     ("Road",    "Road",    1498, None,   "weld",     "RoadConnector"),
     ("IceRoad", "IceRoad",   34, None,   "weld",     "IceRoadConnector"),
-    ("Barge",   "Road",     286, 0.24,   "transfer", "BargeRoadTransfer"),
+    ("Barge",   "Road",     286, 0.04,   "transfer", "BargeRoadTransfer"),
     ("IceRoad", "Road",      12, 0.022,  "transfer", "IceRoadRoadTransfer"),
     ("Plane",   "Road",       2, 0.025,  "transfer", "AirRoadTransfer"),
-    ("Plane",   "Barge",      2, 0.24,   "transfer", "BargeAirTransfer"),
+    ("Plane",   "Barge",      2, 0.04,   "transfer", "BargeAirTransfer"),
     ("IceRoad", "Barge",     21, 0.011,  "latent",   "BargeIceRoadTransfer"),
 ]
 

@@ -41,6 +41,38 @@ other authored river reaches; every one listed in
 list dropped 45 → 21 rows. Details of both changes below (they were the
 "Unreleased" entry of this file until this export):
 
+## 2026-11-18 — cost re-derivation applied (owner decision; merged from `cost-rederivation`)
+
+Not a network change: no node, edge or edge_id moves. `edge_costs` changes when
+workflow 03 is next run. Record: `docs/cost_derivation/2026-11/`.
+
+| | Was | Now | Status |
+|---|---|---|---|
+| Ocean line-haul barge (`Barge`), per gallon-mile | 0.0010 blended | 0.00021 (0.00013–0.00028) | Derived |
+| River barge (`BargeRiver`, new), per channel mile | 0.0010 blended | 0.0013 (0.0009–0.0044) | Provisional |
+| Road | 0.0007 | 0.0007 (0.00045–0.0011) | Derived |
+| Plane | 0.025 | 0.016 (0.013–0.024) | Provisional |
+| Ice road | 0.010 (0.004–0.025) | 0.010 (0.004–0.030) | Assumed |
+| Barge landing, road-system port | 0.24 | 0.01 (0.00–0.03) | Provisional |
+| Barge landing, hub or dock-served port | 0.24 | 0.12 (0.05–0.20) | Provisional |
+| Barge landing, coastal village | 0.24 | 0.65 (0.40–1.15), assembled | Provisional |
+| Barge landing, river village | 0.24 | 0.50 (0.20–0.80) | Provisional |
+| Barge↔ice road, road↔ice road, plane↔road fees | 0.011, 0.022, 0.025 | unchanged | Assumed |
+
+- Waterway edges are priced ocean or river by `edge_water_class`; workflow 03
+  runs stage 05 before stage 04 and gates on the water-class label.
+- Barge landings are priced by landing class (`fuel_network/landings.py`,
+  `inputs/network_qc/landing_classes.csv`, audit table `edge_landing_class`).
+- The cost toolkit's CPI table is updated (2025 = 321.943, 2026 = 332.243) and
+  its self-test rewritten to the new derivation; the invariant checker gained
+  status and landing-class checks; `combined_friction_tables.xlsx` Table 3 is
+  regenerated with the sources register as its panel (c).
+- Scale check on a scratch copy of the 2026-11-16 network with a stand-in water
+  class (not the project's label): 1,116,552 rows, no zero-cost passable
+  edge-month; September from Anchorage: Nome $1.85 → $0.47 (by sea), Bethel
+  $1.86 → $0.49, Koyuk $1.95 → $1.02, Tanana $0.92 → $1.00, Ketchikan $1.46 →
+  $0.38. Not yet run on the owner's machine with the real label.
+
 **2026-11-17 nearshore barge access (owner session).** The manual-connections
 layer grows 14 → 26 features: the five coastal Barge lines that were closed all
 12 months by shore pixels are redrawn to end 2–5 km offshore (Larsen Bay,

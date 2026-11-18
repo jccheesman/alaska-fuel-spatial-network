@@ -28,6 +28,11 @@ Checks (FAIL = exit 1; WARN/SKIP never fail the run):
      rather than the latent-key comment. SKIPs if the db is absent.
   7. Published workbook freshness: WARN if modality_cost_rates.xlsx is
      older than friction_costs.py (regenerate via make_modality_cost_table).
+  8. Evidence status and landing classes (2026-11): every rate has a
+     RATE_STATUS in {derived, provisional, assumed}; every rate key is a mode's
+     rate key or a declared variant (RATE_VARIANTS); LANDING_CLASS_FEES has
+     total/counts/range/status with total inside range; every class named in
+     inputs/network_qc/landing_classes.csv is a LANDING_CLASS_FEES key.
 """
 from __future__ import annotations
 
@@ -92,9 +97,15 @@ def check_fee_schema():
 def check_mode_metadata():
     meta = fc.MODE_METADATA
     rate_keys = {m["rate_key"] for m in meta.values()}
+    variants = {k for keys in fc.RATE_VARIANTS.values() for k in keys}
     check("meta.rate_keys_cover_rates",
-          rate_keys == set(fc.BASELINE_RATES_PER_GALLON_MILE),
-          f"{sorted(rate_keys)}")
+          rate_keys | variants == set(fc.BASELINE_RATES_PER_GALLON_MILE)
+          and rate_keys <= set(fc.BASELINE_RATES_PER_GALLON_MILE),
+          f"mode keys {sorted(rate_keys)} + variants {sorted(variants - rate_keys)}")
+    check("meta.rate_variants_name_modes",
+          set(fc.RATE_VARIANTS) <= set(meta)
+          and all(meta[m]["rate_key"] in keys for m, keys in fc.RATE_VARIANTS.items()),
+          f"{fc.RATE_VARIANTS}")
     check("meta.modes_canonical", set(meta) == CANONICAL_MODES, f"{sorted(meta)}")
     check("meta.method_to_mode_roundtrip",
           all(fc.METHOD_TO_MODE[m["facility_method"]] == mode
@@ -193,10 +204,42 @@ def check_workbook_freshness():
         record("PASS", "workbook.freshness", "workbook newer than source")
 
 
+# --- 8. evidence status and landing classes ---------------------------------
+
+def check_status_and_landings():
+    statuses = {"derived", "provisional", "assumed"}
+    check("status.covers_rates", set(fc.RATE_STATUS) == set(fc.BASELINE_RATES_PER_GALLON_MILE),
+          f"{sorted(fc.RATE_STATUS)}")
+    check("status.vocabulary", set(fc.RATE_STATUS.values()) <= statuses,
+          f"{sorted(set(fc.RATE_STATUS.values()))} within {sorted(statuses)}")
+    for key, entry in fc.LANDING_CLASS_FEES.items():
+        check(f"landing.{key}.schema", {"total", "counts", "range", "status"} <= set(entry),
+              "has total/counts/range/status")
+        lo, hi = entry["range"]
+        check(f"landing.{key}.in_range", lo <= entry["total"] <= hi and entry["total"] > 0,
+              f"{entry['total']} in ({lo}, {hi}) and > 0")
+    try:
+        from fuel_network.landings import TABLE_PATH, load_landing_table
+        table = load_landing_table()
+        check("landing.table_classes_known", set(table.values()) <= set(fc.LANDING_CLASS_FEES),
+              f"{len(table)} place(s) in {TABLE_PATH.name}: {sorted(set(table.values()))}")
+    except ValueError as exc:
+        check("landing.table_classes_known", False, str(exc))
+    fee = fc.infer_transfer_fees
+    import pandas as pd
+    e = pd.DataFrame({"edge_id": [1, 2], "from_node": [0, 0], "to_node": [1, 1],
+                      "edge_class": ["BargeRoadTransfer", "BargeAirTransfer"]})
+    got = fee(e, {1: "hub"}).to_dict()
+    check("landing.fee_inference", got == {1: fc.LANDING_CLASS_FEES["hub"]["total"],
+                                           2: fc.INTERMODAL_TRANSFER_FEES[("barge", "overland")]["total"]},
+          f"classed landing -> class fee, unclassed -> fallback: {got}")
+
+
 def main() -> int:
     for fn in (check_rate_ranges, check_fee_schema, check_mode_metadata,
                check_derived_constants, check_chain_cost,
-               check_graph_coverage, check_workbook_freshness):
+               check_graph_coverage, check_workbook_freshness,
+               check_status_and_landings):
         fn()
     fails = [r for r in RESULTS if r[0] == "FAIL"]
     warns = [r for r in RESULTS if r[0] == "WARN"]

@@ -35,17 +35,21 @@ import sys
 # CPI (dollar-year discipline)
 # ===========================================================================
 # CPI-U annual averages (U.S. city average, all items, BLS series
-# CUUR0000SA0). 2025 is a preliminary annual average; 2026 is a projection
-# (~2.5% over 2025) — the project's canonical 2010->2026 factor is x1.51
-# (see friction_costs.py barge comment), which this table reproduces
-# (330.0 / 218.056 = 1.514). When BLS publishes finals, update here ONLY.
+# CUUR0000SA0). Updated 2026-11-18 from a downloaded copy of the series
+# (docs/cost_derivation/2026-11/index_basis_2026-11-17.md): 2025 is the
+# 11-month average (October 2025 was not published); 2026 is the
+# January-September 2026 average, 332.243, the index basis of the 2026-11
+# re-derivation (it replaces the projected 330.0; 2010->2026 is x1.5237).
+# The series used is a public mirror of the BLS table; when the BLS file is
+# in hand, update here ONLY.
 CPI_U_ANNUAL = {
+    2003: 183.958, 2004: 188.883,
     2005: 195.3,   2006: 201.6,   2007: 207.342, 2008: 215.303,
     2009: 214.537, 2010: 218.056, 2011: 224.939, 2012: 229.594,
     2013: 232.957, 2014: 236.736, 2015: 237.017, 2016: 240.007,
     2017: 245.120, 2018: 251.107, 2019: 255.657, 2020: 258.811,
     2021: 270.970, 2022: 292.655, 2023: 304.702, 2024: 313.689,
-    2025: 322.6,   2026: 330.0,
+    2025: 321.943, 2026: 332.243,
 }
 
 
@@ -180,9 +184,8 @@ def _load_costs():
 def selftest() -> int:
     """Re-derive each applied rate/fee from documented inputs; return #failures.
 
-    Method inputs are cited from
-    supplementary/cost-derivations/00_executive_summary.md and the
-    friction_costs.py comment blocks. A failure means the code
+    Method inputs are cited from docs/cost_derivation/2026-11/ (the addenda of the
+    2026-11 re-derivation) and the friction_costs.py comment blocks. A failure means the code
     value and its documented derivation have drifted apart — fix the
     documentation or re-derive, never silently retune the number.
     """
@@ -197,63 +200,115 @@ def selftest() -> int:
         if not ok:
             failures.append(name)
 
-    # --- Road: three convergent methods bracket the applied 0.0007 ---------
+    status = fc.RATE_STATUS
+    landing = fc.LANDING_CLASS_FEES
+
+    # Inputs below are the documented figures of the 2026-11 re-derivation
+    # (docs/cost_derivation/2026-11/addendum_*.md); source-year dollars are
+    # restated with cpi_adjust so the index basis lives in one place.
+
+    # --- Road: three methods of different kinds; applied 0.0007 confirmed ---
     road_methods = {
-        "econ_one_valdez_fbx": cpi_adjust(0.20, 2015) / 364,       # $0.20/gal, 364 mi
-        "contract_regression_slope": 0.00067,                       # 11 pts, R2~0.75
-        "tariff_midpoint": gallon_mile_rate(4.75, 9000),            # AK heavy transport
+        "econ_one_valdez_fbx": cpi_adjust(0.20, 2016) / 364,            # 20 cpg, ~364 mi (Econ One 2016)
+        "state_contract_gradient": 0.00068,                              # 11 points, FY27 fees (not re-opened 2026-11)
+        "atri_tank_carrier_buildup": cpi_adjust(4.001, 2024) * 2 / 10_000,  # $4.001/mi revenue, empty return, 10,000 gal (payload assumed)
     }
     conv = convergence(road_methods)
     r = rates["Road"]
     check("road.methods_bracket_applied",
-          conv["min"][1] <= r <= conv["max"][1] * 1.05,
+          conv["min"][1] * 0.95 <= r <= conv["max"][1] * 1.05,
           f"applied {r} vs methods [{conv['min'][1]:.6f}, {conv['max'][1]:.6f}]")
+    check("road.spread_within_3x", conv["spread_ratio"] <= 3.0,
+          f"spread {conv['spread_ratio']:.2f} across {conv['n_methods']} methods")
     check("road.in_documented_range", ranges["Road"][0] <= r <= ranges["Road"][1],
           f"{r} in {ranges['Road']}")
 
-    # --- Barge: decomposition endpoints reproduce; blend sits between ------
-    linehaul = per_gallon_over_distance(0.29, nm_to_statute(1109))  # ANC->Bethel
-    river = cpi_adjust(0.007, 2007)                                 # DEC 2007 invoice
+    # --- Barge (ocean line-haul): two clean published charges + a weak third --
+    ocean_methods = {
+        "iser_2010_charged_rate": cpi_adjust(0.205, 2010) / 1526.9,     # $0.19-0.22/gal midpoint, mean model miles to 5 hubs
+        "econ_one_2016_long_leg": cpi_adjust(0.25, 2016) / 1669,         # 25 cpg, ~1,669 sm (distance assumed)
+        "osro_tanker_midpoint": 0.00013,                                 # West Coast $0.15-0.29, route and year undocumented
+    }
+    conv = convergence(ocean_methods)
     b = rates["Barge"]
-    check("barge.linehaul_reproduces", abs(linehaul - 0.00023) / 0.00023 < 0.05,
-          f"0.29/gal over {nm_to_statute(1109):.0f} sm = {linehaul:.6f} (doc 0.00023)")
-    check("barge.river_reproduces", abs(river - 0.011) / 0.011 < 0.05,
-          f"$0.007/gal-mi (2007$) x CPI = {river:.4f} (doc 0.011)")
-    check("barge.blend_between_endpoints", linehaul < b < river,
-          f"blended {b} between linehaul {linehaul:.6f} and river {river:.4f}")
-    check("barge.in_documented_range", ranges["Barge"][0] <= b <= ranges["Barge"][1],
+    clean = math.sqrt(ocean_methods["iser_2010_charged_rate"] * ocean_methods["econ_one_2016_long_leg"])
+    check("barge_ocean.matches_clean_methods", abs(b - clean) / clean < 0.05,
+          f"applied {b} vs geometric mean of the two clean methods {clean:.6f}")
+    check("barge_ocean.spread_within_3x", conv["spread_ratio"] <= 3.0,
+          f"spread {conv['spread_ratio']:.2f} across {conv['n_methods']} methods")
+    check("barge_ocean.in_documented_range", ranges["Barge"][0] <= b <= ranges["Barge"][1],
           f"{b} in {ranges['Barge']}")
+    check("barge_ocean.not_the_retired_blend", b < 0.0005,
+          f"applied {b}; the blended 0.0010 is retired (any single barge rate above ~0.00052 routes Nome by river)")
 
-    # --- Plane: charter award reproduces the applied rate at stage length --
-    charter_per_gal = 11792.50 / 1400          # exact federal charter award
+    # --- BargeRiver: total at a short haul converges, per-mile part does not --
+    river_slopes = {"state_contract_slope": 0.0044, "iser_2010_day_cost": 0.0011, "fy2025_price_slope": 0.0014}
+    conv = convergence(river_slopes)
+    br = rates["BargeRiver"]
+    median = sorted(river_slopes.values())[1]
+    check("barge_river.near_median_slope", abs(br - median) / median < 0.10,
+          f"applied {br} vs median of three slopes {median}")
+    check("barge_river.status_matches_spread",
+          (conv["spread_ratio"] > 3.0) == (status["BargeRiver"] != "derived"),
+          f"per-mile spread {conv['spread_ratio']:.2f} -> status {status['BargeRiver']!r}")
+    tanana_methods = {"contract_net_of_truck": 0.61, "dec_2007_invoice_rate": 1.10, "iser_2010_build": 0.63}
+    tanana = landing["river_village"]["total"] + br * 164          # 164 channel miles from Nenana
+    conv = convergence(tanana_methods)
+    check("barge_river.short_haul_total_inside_methods",
+          conv["min"][1] <= tanana <= conv["max"][1] and conv["spread_ratio"] <= 3.0,
+          f"fixed + per-mile at Tanana = {tanana:.2f} $/gal vs methods {sorted(tanana_methods.values())} (spread {conv['spread_ratio']:.2f})")
+    check("barge_river.in_documented_range", ranges["BargeRiver"][0] <= br <= ranges["BargeRiver"][1],
+          f"{br} in {ranges['BargeRiver']}")
+
+    # --- Plane: two verified methods; price ceiling at Allakaket ------------
+    plane_methods = {"published_statements": 0.0190, "nov_2007_allakaket_delivery": 0.0136}
+    conv = convergence(plane_methods)
     p = rates["Plane"]
-    lo = per_gallon_over_distance(charter_per_gal, 350)   # long stage
-    hi = per_gallon_over_distance(charter_per_gal, 130)   # short stage
-    check("plane.charter_award_brackets",
-          lo * 0.95 <= p <= hi,
-          f"${charter_per_gal:.2f}/gal over 130-350 mi -> [{lo:.4f}, {hi:.4f}], applied {p}")
+    check("plane.near_geometric_mean", abs(p - conv["geometric_mean"]) / conv["geometric_mean"] < 0.05,
+          f"applied {p} vs geometric mean {conv['geometric_mean']:.4f} of {conv['n_methods']} methods")
+    check("plane.status_matches_method_count",
+          (conv["n_methods"] < 3) == (status["Plane"] != "derived"),
+          f"{conv['n_methods']} verified methods -> status {status['Plane']!r}")
+    check("plane.under_allakaket_ceiling", per_gallon_over_distance(3.70, 181.7) >= p,
+          f"applied {p} <= FY2025 ceiling $3.70/gal over 181.7 mi = {per_gallon_over_distance(3.70, 181.7):.4f}")
     check("plane.in_documented_range", ranges["Plane"][0] <= p <= ranges["Plane"][1],
           f"{p} in {ranges['Plane']}")
 
-    # --- Ice road: 50/50 regime blend per PCE FY2025 gallons ---------------
+    # --- Ice road: assumed; kept between the two regimes --------------------
     i = rates["IceRoad"]
-    regime_blend = blend([(0.004, 279_232), (0.02, 274_877)])  # Nuiqsut / Atqasuk
-    check("iceroad.between_regimes", 0.004 <= i <= 0.02,
-          f"applied {i} between engineered 0.004 and cat-train 0.02")
-    check("iceroad.near_traffic_blend", abs(i - regime_blend) / regime_blend < 0.25,
-          f"applied {i} vs PCE-weighted blend {regime_blend:.4f} (known ~2x per-regime bias)")
+    truck, sled = 0.0068, 0.0256
+    check("iceroad.between_regimes", truck <= i <= sled,
+          f"applied {i} between truck regime {truck} and sled regime {sled}")
+    check("iceroad.status_assumed", status["IceRoad"] == "assumed",
+          f"regimes differ {sled / truck:.1f}x and no tariff exists -> status {status['IceRoad']!r}")
     check("iceroad.in_documented_range", ranges["IceRoad"][0] <= i <= ranges["IceRoad"][1],
           f"{i} in {ranges['IceRoad']}")
 
-    # --- Transfer fees: totals inside documented ranges; rack fee <= CPI'd -
+    # --- Transfer fees and landing classes ---------------------------------
     for key, entry in fees.items():
         lo, hi = entry["range"]
         check(f"fee.{key}.in_range", lo <= entry["total"] <= hi,
               f"total {entry['total']} in ({lo}, {hi})")
-    rack_2026 = 0.276  # Crowley Bethel rack $0.25 CPI-adjusted (doc value)
+    for key, entry in landing.items():
+        lo, hi = entry["range"]
+        check(f"landing.{key}.in_range", lo <= entry["total"] <= hi,
+              f"total {entry['total']} in ({lo}, {hi})")
+    port = (20.49 + 6.08 + 14.0) / 100 / 42          # Port of Alaska Tariff 10.2, cents per barrel -> $/gal
+    check("landing.road_port.reproduces", abs(landing["road_port"]["total"] - port) < 0.005,
+          f"wharfage + valve yard + surcharge = {port:.4f} $/gal vs applied {landing['road_port']['total']}")
+    check("landing.hub.reproduces", abs(landing["hub"]["total"] - (0.06 + 0.06)) < 1e-9,
+          f"Bethel wharfage 0.06 + fuel transfer 0.06 = 0.12 vs applied {landing['hub']['total']}")
+    assembled = 0.45 + 0.0010 * 250 - rates["Barge"] * 250
+    check("landing.coastal_village.assembly_reproduces",
+          abs(landing["coastal_village"]["total"] - assembled) < 0.01,
+          f"0.45 + 0.0010 x 250 mi - ocean rate x 250 mi = {assembled:.3f} vs applied {landing['coastal_village']['total']}")
+    mix = (0.21 * (landing["road_port"]["total"] + landing["hub"]["total"]) + 0.79 * 0.055) / 2
     fee_bo = fees[("barge", "overland")]["total"]
-    check("fee.barge_overland.shaded_below_rack", fee_bo <= rack_2026,
-          f"{fee_bo} <= CPI-adjusted rack {rack_2026} (sole-provider shading)")
+    check("fee.barge_overland.fallback_reproduces", abs(fee_bo - mix) / mix < 0.20,
+          f"single-key fallback {fee_bo} vs gallon-mix value {mix:.3f} per crossing")
+    rack_2026 = cpi_adjust(0.25, 2022)       # Crowley Bethel truck rack, list price
+    check("fee.truck_rack_not_base_case", fee_bo < rack_2026 and landing["hub"]["total"] < rack_2026,
+          f"no landing fee equals the truck-rack list price {rack_2026:.3f} (it prices a different event)")
 
     print(f"\n{len(failures)} failure(s)" if failures else "\nAll derivations reproduce.")
     return len(failures)

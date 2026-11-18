@@ -88,8 +88,8 @@ replaces the network-of-record.
 | `01_extract_network_handoff.py` | Unzips the frozen handoff | `final_network/*/` dirs | — | Fixes the fresh-clone FileNotFoundError; the old README claimed the loader extracted zips (it never did) |
 | `02_load_final_network.py` | Ingest + hard integrity tripwire + edge_class (logic: `fuel_network.load`) | `network_nodes`, `network_edges` | `EXPECTED` dict in `fuel_network/load.py` | edge_id = shapefile row order, derived here and ONLY here; `edge_class` mirrors the mode-based `type` (pass-through), only mapping a LEGACY frozen network's generic `Bridge` into the new vocabulary |
 | `03_weight_network_edges.py` | 75 m friction sampling per edge-month | `edge_month_weights` (1,116,552 rows) | `SAMPLE_SPACING_M`, `EDGE_TYPE_MAP` | Strict any-NoData ⇒ impassable; consumes `edge_class` from the DB (run stage 02 first) |
-| `04_assemble_weighted_graph.py` | $-rates × friction → costs + nx.MultiGraph | `edge_costs` (1,116,552 rows) | `friction_costs.py` | MultiGraph, not Graph — parallel node-pairs would silently collapse; each per-pair `*Transfer` type maps straight to its fee via `TRANSFER_TYPE_TO_MODES` |
-| `05_edge_water_class.py` | Marine / river class per Waterway edge (same 75 m midpoint samples as the weights, against `water_class_150m.tif`) | `edge_water_class` table (edge_id, marine/river/notwater fracs, class) | `PURE=0.9` | A SIBLING table — `edge_month_weights` and `edge_class` untouched. The barge cost split (line-haul vs lightering vs river barge) reads this. 2026-11-16 network: 1,166 marine / 33,009 river / 3 no-water edges (by length 26,000 km marine / 6,000 km river) |
+| `05_edge_water_class.py` | Marine / river class per Waterway edge (same 75 m midpoint samples as the weights, against `water_class_150m.tif`) | `edge_water_class` table (edge_id, marine/river/notwater fracs, class) | `PURE=0.9` | **Runs BEFORE stage 04 since the 2026-11 cost split** (stage 04 needs it; the driver gates on the water-class label). A SIBLING table — `edge_month_weights` and `edge_class` untouched. 2026-11-16 network: 1,166 marine / 33,009 river / 3 no-water edges (by length 26,000 km marine / 6,000 km river) |
+| `04_assemble_weighted_graph.py` | $-rates × friction → costs + nx.MultiGraph; **Waterway edges priced ocean (`Barge` 0.00021) or river (`BargeRiver` 0.0013) by `edge_water_class`, a mixed edge by the blend; barge landings priced by landing class** (`fuel_network/landings.py`: reviewed table → on the Anchorage road system → river share at the water node) | `edge_costs` (1,116,552 rows), `edge_landing_class` (which class priced each landing) | `friction_costs.py` (`LANDING_CLASS_FEES`, `RATE_STATUS`), `inputs/network_qc/landing_classes.csv` | MultiGraph, not Graph — parallel node-pairs would silently collapse. Fails with a clear message if `edge_water_class` is absent. On the 2026-11-16 network (with a stand-in water class): 18 road-port, 45 hub, 150 coastal-village and 75 river-village landings; Anchorage→Nome $0.47/gal by sea (was $1.85 by river) |
 | `06_qa_barge_passability.py` | Every barge-coded hub with no open Jun–Oct barge path to Anchorage (month-gated components), + every Waterway edge closed all 12 months (min NoData over the year separates land from ice) | `outputs/tables/barge_passability_{hubs,closed_edges}.csv` + exit code | the exceptions CSV | The check that would have caught Kodiak and Unalaska. A NEW no-summer-path hub fails the stage |
 | **04_duckdb_export** | | | | |
 | `01_run_validation_queries.py` | Monthly passability by mode | stdout | — | Barge passability should peak Jun–Oct; IceRoad rows exist only Jan–Mar |
@@ -174,6 +174,25 @@ replaces the network-of-record.
   channel 705 m apart; 100% of bad samples on all 14 all-year-closed NWN edges
   beyond 80 m of the mask source) closed 8 ports in every month. Never point
   one half of the pipeline at a different waterway file than the other.
+- **Costs were re-derived and split in 2026-11 (owner 2026-11-18; record in
+  `docs/cost_derivation/2026-11/`, start at its `README.md`).** The blended barge
+  rate (0.0010) is retired: `Barge` now means ocean line-haul (0.00021, Derived)
+  and `BargeRiver` is the river rate (0.0013 per channel mile, Provisional);
+  Plane 0.025 → 0.016 (Provisional); Road 0.0007 confirmed (Derived); IceRoad
+  0.010 kept (Assumed, range to 0.030). The flat $0.24 barge↔road fee, which was
+  billed at both ends of every barge route, is replaced by a fee per landing
+  class: road port 0.01, hub 0.12, coastal village 0.65 (ASSEMBLED from the
+  derived $0.45 + 0.0010/mi), river village 0.50. Every figure carries its range
+  and a status (`RATE_STATUS`; Derived / Provisional / Assumed) — a figure that is
+  not ready still has a number, and results resting on it are reported with the
+  range. `inputs/network_qc/landing_classes.csv` (which places are hubs) is
+  PROPOSED and applied; the owner approves or rejects its rows. Three verdicts
+  (plane, the 0.24 fee, the 0.011 river rate) rest on one verifier each.
+  **`edge_costs` in any existing DuckDB still holds the old costs until workflow
+  03 is rerun** (stage order is now 03 → 05 → 04 → 06), and the harness then
+  needs an adoption that knows the new rate key and the landing classes. Never
+  reintroduce a single barge rate: any value above ~0.0005 sends Nome's fuel
+  down the Yukon.
 - **Strict NoData rule.** One NoData sample makes an edge impassable for the
   month. This is a design decision (auditable via nodata_frac), not a bug.
 - **The friction half WAS verified end-to-end on 2026-08-06** on the owner's
