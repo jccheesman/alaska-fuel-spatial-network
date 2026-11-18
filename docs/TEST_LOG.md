@@ -1,5 +1,51 @@
 # TEST LOG — end-to-end verification runs
 
+## 2026-11-18 — waterway-network-updates branch: full rebuild from committed state
+
+Fresh workflow-02 run (prep regenerated from scratch: `data/interim` manifest
+removed first) on branch `waterway-network-updates`: the owner-curated waterway
+as the network source, the 26-feature manual layer (19 Barge lines), and the
+new QA checks wired into the driver. Everything the branch will change at the
+next export, verified before exporting anything.
+
+### Gates and results
+
+| Gate | Result |
+|---|---|
+| `qa/00_check_manual_barge` (July + marine-only) | PASS (1 accepted exception: Skwentna, river line) |
+| `01_prep_waterway` (curated source) | 315/320 lines, 30,617 km, 4 raw components |
+| mmnet build + welds | PASS — 13 manual-barge endpoints welded |
+| `05_verify_north_slope` | PASS (all five checks; waterway 100% connected) |
+| `qa/06_barge_hub_access` | PASS (18 known exceptions, 0 new) |
+| Stage 03 → 04 | 16 components → 4, giant 100.0% |
+| Full pytest suite | 210 passed, 1 skipped |
+
+Deterministic: identical counts to the two prior builds of the same inputs.
+
+### Expected changes vs the frozen 2026-11-16 network-of-record (at the next export)
+
+| Quantity | 2026-11-16 (frozen) | This build | Δ |
+|---|---|---|---|
+| Nodes | 84,094 | 84,110 | +16 |
+| Edges (joined) | 93,046 | 93,061 | +15 |
+| Hubs | 328 | 328 | 0 |
+| Components (joined) | 4 | 4 | 0 |
+| Waterway | 34,178 | 34,179 | +1 (curated lines re-segment; 17 manual lines added) |
+| BargeRoadTransfer | 286 | 298 | +12 (new barge-hub landings) |
+| BargeAirTransfer | 2 | 4 | +2 (Kongiganak, Kwigillingok land at shared airport-road nodes) |
+| BargeConnector | 0 | 1 | +1 (new type: a barge-barge shore weld) |
+| RoadConnector | 1,498 | 1,497 | −1 |
+| Road / IceRoad / Air / other transfers | — | — | unchanged |
+
+Newly barge-reachable at the export: the 8 harbour-closure ports (Kodiak,
+Unalaska, Akutan, Port Lions, Saint George, Saint Paul, Point Hope, Kaktovik —
+all approaches sample 0 NoData on the EXISTING barge surface) and the 17 hubs
+served by manual lines. The export additionally requires: new `EXPECTED` in
+`fuel_network/load.py` (incl. the `BargeConnector` type), full workflow-03
+rerun, zips + checksums, and clearing 36 rows of
+`inputs/network_qc/accepted_barge_exceptions.csv`.
+
+
 ## 2026-08-06 — mode-A end-to-end (owner's machine, conda `akful`, macOS)
 
 First full run of the merged repo on real data. Mode A = everything rebuilt

@@ -64,7 +64,7 @@ file only says what the words mean.
 | **Act / step / stage / workflow** | Four words for the same thing in different documents: the five numbered folders under `workflows/`. Workflow 00 is the inventory QC; workflows 01–04 are acts (a)–(d) in the README. "Stage" is also used for the numbered scripts inside a workflow. |
 | **Canonical grid, grid anchor** | The one raster grid every friction input must sit on: EPSG:3338, 150 m, 28,000 × 16,567 pixels, defined by the land-cover raster's transform and shape. |
 | **Connector, transfer** | Synthetic edges the build adds. A *connector* welds two pieces of the same mode (`RoadConnector`); a *transfer* joins two modes and carries a dollar fee (`BargeRoadTransfer`). |
-| **Corridor mask** | A 150 m raster of the waterway lines buffered 75 m. Without it, rivers narrower than a pixel disappear from the barge surface. |
+| **Corridor mask** | A 150 m raster of the waterway lines buffered 75 m. Without it, rivers narrower than a pixel disappear from the barge surface. Rasterised from the SAME owner-curated waterway the network is built from (one geometry, owner 2026-11-17). |
 | **Corrections, aliases, ledger** | The owner's recorded decisions about the facility inventory: value corrections with evidence, alternative community spellings, and the append-only table that gives every facility a permanent id. |
 | **edge_id** | The row number of an edge in the exported shapefile. Every DuckDB table is keyed by it, which is why the exported zips must stay byte-identical. |
 | **Edge class, mode** | Each edge belongs to one mode (Road, IceRoad, Barge, Plane) or is a connector or transfer; `edge_class` names which. |
@@ -72,6 +72,9 @@ file only says what the words mean.
 | **Friction stack** | The fourteen rasters workflow 01 writes: `overland.tif`, `road_base.tif` and `barge_01..12.tif`, read as 24 (mode, month) surfaces. |
 | **Gate, exit code 3** | A run script's check for a documented input. When the input is absent the script prints what is missing and where `DATA.md` explains it, and exits 3: a skip, not a failure. |
 | **Giant component** | The largest connected piece of the network. The build must put nearly every node in it. |
+| **Marine-water rule, nearshore rule** | The scope rule for hand-drawn barge lines: a hub qualifies when marine water (water-class label = 1) comes within 15 km; lines run only through marine pixels, start on the waterway network, and end 2–5 km offshore within the 25 km transfer reach. Inland and river hubs are listed, never connected. |
+| **Water-class label** | `water_class_150m.tif` (workflow 01): every pixel 0 = not water, 1 = marine (connected to the open sea, seaward of river mouths), 2 = river/inland. Built by an ocean flood fill dammed by a 5 km zone around the reviewed river corridor, a 600 m width rule, and a 2 km shore fringe (constants `friction_config.WATER_CLASS_*`). |
+| **Accepted barge exceptions** | `inputs/network_qc/accepted_barge_exceptions.csv`: the reviewed list of barge-coded hubs (and manual-line rows) the access/passability checks may report without failing the stage. A NEW failure not on the list fails the build. |
 | **Handoff, network-of-record** | The frozen, checksummed export in `final_network/` that workflow 02 writes and workflow 03 reads. Re-exporting it creates a new network-of-record and invalidates every edge_id-keyed table. |
 | **Harness** | The companion analysis repository that consumes the published facility table and the DuckDB deliverable. It derives nothing from raw data. |
 | **Hub** | A community's fuel facilities grouped into one network node and snapped onto the nearest transport edge. 329 in the current network. |

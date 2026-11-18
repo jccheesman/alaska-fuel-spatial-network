@@ -24,6 +24,50 @@ and the `friction_surface` builders/config/costs). The friction surface encodes
 `source_scripts/friction_surface/friction_costs.py` — that separation is enforced
 throughout.
 
+## Barge access: the nearshore procedure, its QA, and the shared geo checks
+
+A hub whose facilities are barge-served must be reachable by barge in summer — and
+until 2026-11 nothing checked that (a village whose road reaches its airport passed
+the connectivity gate with no barge route at all). The branch of work documented in
+`docs/CHANGELOG.md` ("Unreleased") adds the pieces; `CLAUDE.md` carries a pipeline-table
+row for each:
+
+- **One waterway geometry.** The network build and the barge corridor masks both read
+  the owner-curated `waterways_network_ak_albers.shp` (ArcGIS-edited so every route
+  avoids land pixels; see the `01_prep_waterway.py` docstring for the measured basis).
+- **The marine/river water-class label** (`workflows/01_friction_build/04_build_water_class.py`
+  → `water_class_150m.tif`: 0 not water / 1 marine / 2 river-inland; rules in
+  `friction_config.WATER_CLASS_*`). Barge lines may run only through marine pixels; the
+  barge cost split reads the per-edge classes (`edge_water_class` in DuckDB).
+- **Hand-drawn barge lines** live in `inputs/mannual_connections/` with per-line evidence
+  in `PROVENANCE.csv`; every line must pass the pre-build check
+  (`workflows/02_network_build/qa/00_check_manual_barge.py`: valid July barge pixels AND
+  marine-only, with the pipeline's own sampler).
+- **Access + passability reports** (`qa/06_barge_hub_access.py`, topology;
+  `workflows/03_multimodal_join/06_qa_barge_passability.py`, month-gated): a NEW
+  unreachable barge hub fails the stage; known cases live in
+  `inputs/network_qc/accepted_barge_exceptions.csv` until fixed.
+- **Skills** (`.claude/skills/`): `connect-nearshore-barge-hubs` (the end-to-end
+  procedure: scope rule, evidence standard, drafting rules, rebuild + verify) and
+  `check-route-against-surface` (test any route against any surface and diagnose WHY
+  samples fail).
+
+The shared primitives live in `source_scripts/fuel_network/geo_checks.py` (unit-tested
+in `tests/test_geo_checks.py`):
+
+| Function | Does |
+|---|---|
+| `sample_along(geoms, owners, raster)` | Pipeline-identical samples (`fuel_network.weights` segmentize-at-75 m midpoints — never approximate positions) |
+| `per_feature_nodata(...)` | Length-weighted mean + NoData fraction per feature, exactly as `edge_month_weights` computes them |
+| `classify_nodata_cause(xy)` | Why is a sample NoData: `off_grid`, `land_cover:<class>`, `sea_ice`, `river_ice_domain` |
+| `nearest_class_distance(raster, x, y, value)` | Windowed distance to the nearest pixel of a class (e.g. hub → nearest marine pixel) |
+| `grid_matches(raster, anchor)` | CRS + transform + shape identity against the grid anchor |
+| `endpoint_distances(points, targets)` | Endpoint → nearest node distances (the weld / snap check) |
+
+The runnable general check is
+`diagnostics/01_friction_build/check_route_against_surface.py` (any line layer vs any
+surface, `--causes`, `--require-class marine`).
+
 ## Quickstart
 
 ```bash
